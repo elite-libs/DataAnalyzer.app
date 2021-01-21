@@ -1,0 +1,136 @@
+.App {
+  text-align: left;
+}
+
+.popover, .popover-wrapper {
+  z-index: 10;
+}
+
+form.generator {
+  display: flex;
+  flex-direction: row;
+}
+
+.progress-message {
+  text-align: center;
+  font-size: 1.8rem;
+  margin: 0 auto;
+  padding: 1.5rem 1rem;
+}
+
+.options-ui {
+  .form-group {
+    margin-bottom: 0.5rem;
+  }
+}
+
+.input-data,
+.output-data {
+  width: 40vw;
+  display: flex;
+  align-items: stretch;
+  flex-direction: column;
+  /* d-flex align-items-stretch flex-column */
+  /* margin: 0 auto; */
+}
+
+.output-ui {
+  width: 20vw;
+}
+.output-ui > div {
+  flex-direction: column;
+}
+.output-ui button {
+  min-width: 125px;
+  width: 96%;
+  max-width: 140px;
+  margin-bottom: 1.4rem;
+  padding: 1.125rem;
+  font-size: 1.2rem;
+}
+
+@media only screen and (max-width: 600px) {
+  form.generator {
+    flex-direction: column;
+  }
+  .output-ui > div {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .output-ui button {
+    max-width: 175px;
+  }
+  .output-ui,
+  .input-data,
+  .output-data {
+    width: 100%;
+    /* margin: 0 auto; */
+  }
+}
+
+.output-data textarea,
+.input-data textarea {
+  width: 100%;
+  height: 33vh;
+  /* overscroll-behavior-y: none; */
+}
+
+.input-data textarea {
+  max-height: 270px;
+}
+.output-data textarea {
+  min-height: 500px;
+}
+
+form .field-name {
+  display: block;
+  font-size: 1.15rem;
+}
+
+.output-ui button svg {
+  max-width: 50px;
+  margin: 1rem 1.4rem;
+}
+
+.schema-app-nav ul {
+  flex-direction: row;
+}
+.schema-app-nav li {
+  padding: auto 1.5rem;
+  margin: 0 1.25rem;
+}
+
+.main-panel {
+  min-height: 40vh;
+  .panel {
+    min-height: 140px !important;
+    // h6: {
+    //   margin: 1rem 0 !important;
+    // }
+  }
+}
+
+.schema-options {
+  legend {
+    font-size: 1.3rem;
+  }
+}
+
+.field-overlay {
+  transition: opacity 0.25s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  pointer-events: none;
+}
+.appears-valid {
+  .success-message {
+    pointer-events: all;
+    & :hover {
+      pointer-events: all;
+      opacity: 0.5 !important;
+    }
+    opacity: 0.975 !important;
+  }
+  .help-message {
+    pointer-events: none;
+    opacity: 1;
+  }
+}

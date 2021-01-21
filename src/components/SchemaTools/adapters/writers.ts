@@ -1,5 +1,5 @@
-import mongooseWriter from './writer.mongoose.js'
-import knexWriter from './writer.knex.js'
+import mongooseWriter from './writer.mongoose'
+import knexWriter from './writer.knex'
 
 const writers = {
   mongoose: mongooseWriter,

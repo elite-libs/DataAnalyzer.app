@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 import camelcase from 'lodash.camelcase'
 
 export default {

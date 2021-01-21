@@ -1,26 +1,53 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
+// import Header from './components/Header'
+// import NavBar from './components/NavBar'
+import GeneratorForm from './components/GeneratorForm'
+// import SchemaExplorer from './components/SchemaExplorer'
+// import AdvancedOptionsForm from './components/AdvancedOptionsForm'
+import SchemaTools from './components/SchemaTools'
+// import PopoverWrapper from './components/PopoverWrapper'
 
-function App() {
+export default function App () {
+  const [options, setOptions] = useState({
+    strictMatching: true,
+    enumMinimumRowCount: 100,
+    enumAbsoluteLimit: 10,
+    enumPercentThreshold: 0.01,
+    nullableRowsThreshold: 0.02,
+    uniqueRowsThreshold: 1.0
+  })
+  const [schema, setSchema] = useState('')
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App container'>
+      <SchemaTools />
+      {/* <NavBar />  */}
+      {/* <Header /> */}
+      {/* <AdvancedOptionsForm
+        onSave={options => {
+          setOptions(options)
+        }}
+        options={options}
+        className='options-ui'
+      />
+      <GeneratorForm className='generator-form' options={options} onSchema={(schema, title) => setSchema(schema)} />
+      <SchemaExplorer schemaResults={schema} /> */}
     </div>
-  );
+  )
 }
 
-export default App;
+// const typesList = [
+//   'Unknown',
+//   'ObjectId',
+//   'UUID',
+//   'Boolean',
+//   'Date',
+//   'Timestamp',
+//   'Currency',
+//   'Float',
+//   'Number',
+//   'Email',
+//   'String',
+//   'Array',
+//   'Object',
+//   'Null'
+// ]

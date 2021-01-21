@@ -2,7 +2,7 @@ import React from 'react'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
 // import { parse } from './adapters/readers.js'
-import { render } from '../adapters/writers.js'
+import { render } from '../adapters/writers'
 import { useParams, useHistory } from 'react-router-dom'
 
 export default function CodeGenerator ({

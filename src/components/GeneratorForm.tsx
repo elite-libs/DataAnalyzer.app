@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { schemaBuilder } from 'schema-analyzer'
-import { parse } from '../adapters/readers.js'
-import { render } from '../adapters/writers.js'
+import { schemaAnalyzer } from 'schema-analyzer'
+import { parse } from '../adapters/readers'
+import { render } from '../adapters/writers'
 import CodeViewer from './CodeViewer'
 import { PostgresIcon, MongoDbIcon } from './SchemaTools/AppIcons.js'
 
@@ -22,7 +22,7 @@ export default function GeneratorForm ({ options = {}, onSchema }) {
   const generateSchema = outputMode => {
     return Promise.resolve(inputData)
       .then(parse)
-      .then(data => schemaBuilder(data, { onProgress }))
+      .then(data => schemaAnalyzer(schemaName, data, { onProgress }))
       .then(onSchemaCallback)
       .then(render({ schemaName, options, writer: outputMode }))
       .then(setSchemaOutput)

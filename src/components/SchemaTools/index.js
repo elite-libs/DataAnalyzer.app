@@ -6,9 +6,9 @@ import {
   Link as RouteLink
 } from 'react-router-dom'
 
-import { schemaBuilder } from 'schema-analyzer'
-import { parse } from './adapters/readers.js'
-import { render } from './adapters/writers.js'
+import { schemaAnalyzer } from 'schema-analyzer'
+import { parse } from './adapters/readers'
+import { render } from './adapters/writers'
 import Breadcrumbs from '@material-ui/core/Breadcrumbs'
 import Typography from '@material-ui/core/Typography'
 import Link from '@material-ui/core/Link'
@@ -96,7 +96,7 @@ export default function SchemaTools ({}) {
     return hasInputData &&
       Promise.resolve(inputData)
         .then(parse)
-        .then(data => schemaBuilder(data, { onProgress: () => ({}), ...options }))
+        .then(data => schemaAnalyzer(schemaName, data, { onProgress: () => ({}), ...options }))
         .then(value => console.log(value) || value)
         .then(setSchemaResults)
         .then((results) => {
