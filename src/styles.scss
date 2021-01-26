@@ -134,3 +134,16 @@ form .field-name {
     opacity: 1;
   }
 }
+
+
+a.unlocked {
+  cursor: pointer;
+  color: #469408;
+  font-weight: 500;
+}
+a.locked {
+  cursor: not-allowed;
+  color: #77777766;
+  font-weight: 200;
+  text-decoration: none;
+}

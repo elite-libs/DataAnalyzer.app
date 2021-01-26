@@ -1,26 +1,26 @@
-import csvParse from 'csv-parse'
+import csvParse from 'csv-parse';
 
 export default {
-  shouldParse (content) {
+  shouldParse(content) {
     const sample =
-      (content && content.length > 500 ? content.slice(0, 500) : content) || ''
-    return sample.split(',').length > 5
+      (content && content.length > 500 ? content.slice(0, 500) : content) || '';
+    return sample.split(',').length > 5;
   },
 
-  parse (content) {
+  parse(content) {
     return new Promise((resolve, reject) => {
       csvParse(
         content,
         {
           columns: true,
           trim: true,
-          skip_empty_lines: true
+          skip_empty_lines: true,
         },
         (err, results, info) => {
-          if (err) return reject(err)
-          resolve(results)
-        }
-      )
-    })
-  }
-}
+          if (err) return reject(err);
+          resolve(results);
+        },
+      );
+    });
+  },
+};

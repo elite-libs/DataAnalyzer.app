@@ -25,18 +25,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
- const tileData = [
-   {
-     img: image,
-     title: 'Image',
-     author: 'author',
-   },
-   {
+const tileData = [
+  {
+    img: image,
+    title: 'Image',
+    author: 'author',
+  },
+  {},
+];
 
-   },
- ];
-
- export default function TitlebarGridList() {
+export default function TitlebarGridList() {
   const classes = useStyles();
 
   return (
@@ -52,7 +50,10 @@ const useStyles = makeStyles((theme) => ({
               title={tile.title}
               subtitle={<span>by: {tile.author}</span>}
               actionIcon={
-                <IconButton aria-label={`info about ${tile.title}`} className={classes.icon}>
+                <IconButton
+                  aria-label={`info about ${tile.title}`}
+                  className={classes.icon}
+                >
                   <InfoIcon />
                 </IconButton>
               }

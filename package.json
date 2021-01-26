@@ -42,7 +42,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "npx prettier -w \"{app,src,__{tests,mocks}__}/**/*.{ts,js}\""
   },
   "eslintConfig": {
     "extends": [
@@ -64,6 +65,17 @@
   },
   "devDependencies": {
     "@types/debug": "^4.1.5",
-    "@types/lodash.snakecase": "^4.1.6"
+    "@types/lodash.camelcase": "^4.3.6",
+    "@types/lodash.snakecase": "^4.1.6",
+    "@types/react-router-dom": "^5.1.7"
+  },
+  "jest": {
+    "transformIgnorePatterns": []
+  },
+  "prettier": {
+    "trailingComma": "all",
+    "tabWidth": 2,
+    "semi": true,
+    "singleQuote": true
   }
 }
