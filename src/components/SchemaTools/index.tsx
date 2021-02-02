@@ -8,12 +8,10 @@ import {
 
 import {
   FieldInfo,
-  FieldTypeSummary,
   schemaAnalyzer,
   TypeSummary,
 } from '../../schema-analyzer/index';
 import { parse } from './adapters/readers';
-import { render } from './adapters/writers';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
@@ -27,7 +25,7 @@ import CodeViewer from './ResultsView/CodeViewer';
 import Button from '@material-ui/core/Button';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 
-export default function SchemaTools({}) {
+export default function SchemaTools() {
   const [
     schemaResults,
     setSchemaResults,
