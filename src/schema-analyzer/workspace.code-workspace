@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"name": "data-step-io",
+			"path": "../data-step-io"
+		},
+		{
+			"name": "schema-detector",
+			"path": "."
+		}
+	],
+	"settings": {}
+}
