@@ -1,6 +1,6 @@
 /* eslint-disable import/first */
 
-import { schemaAnalyzer, helpers } from 'schema-analyzer/index';
+import { schemaAnalyzer, helpers, FieldTypeSummary, TypeSummary } from 'schema-analyzer/index';
 
 const flattenTypes = helpers.flattenTypes;
 import knex from './writer.knex';
@@ -27,7 +27,7 @@ const usersCsv: Promise<any[]> = parseCsv(
   ),
 );
 
-const flattenWrapper = (result) => {
+const flattenWrapper = (result: TypeSummary<any>) => {
   result = flattenTypes(result, {
     nullableRowsThreshold: 0.0001,
     targetValue: 'p99',
@@ -39,7 +39,7 @@ const flattenWrapper = (result) => {
   return result;
 };
 
-function parseCsv(content): Promise<any[]> {
+function parseCsv(content: any): Promise<any[]> {
   return new Promise((resolve, reject) => {
     csvParse(
       content,

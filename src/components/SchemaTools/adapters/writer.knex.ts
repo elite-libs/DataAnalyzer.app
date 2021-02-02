@@ -11,7 +11,7 @@ import {
   TypeNameStringDecimal,
   ScalarFieldInfo,
   CombinedFieldInfo,
-} from 'schema-analyzer/index';
+} from '../../../schema-analyzer/index';
 import { IDataStepWriter, IRenderArgs } from './writers';
 const log = debug('writer:knex');
 

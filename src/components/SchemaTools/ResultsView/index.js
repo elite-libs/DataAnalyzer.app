@@ -1,7 +1,6 @@
 import React from 'react';
 import SchemaExplorer from './SchemaExplorer';
 import CodeViewer from './CodeViewer';
-import { schemaBuilder } from 'schema-analyzer';
 import { parse } from '../adapters/readers.js';
 import { render } from '../adapters/writers.js';
 

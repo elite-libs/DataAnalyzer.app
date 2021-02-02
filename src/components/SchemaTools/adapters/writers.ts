@@ -6,7 +6,8 @@ import {
   TypeSummary,
   helpers,
   CombinedFieldInfo,
-} from 'schema-analyzer/index';
+  FieldInfo,
+} from '../../../schema-analyzer/index';
 
 export interface IDataStepWriter {
   render(options: IRenderArgs): string;
@@ -24,7 +25,7 @@ const writers = {
 
 export type AdapterNames = keyof typeof writers;
 
-export const render = ({
+export function render({
   schemaName,
   options,
   writer,
@@ -32,13 +33,15 @@ export const render = ({
   schemaName: string;
   options: ISchemaAnalyzerOptions;
   writer: AdapterNames;
-}) => (results: TypeSummary) => {
-  const renderer = writers[writer];
-  if (!renderer) throw new Error(`Invalid Render Adapter Specified: ${writer}`);
-
-  return renderer.render({
-    schemaName,
-    options,
-    results: helpers.flattenTypes(results),
-  });
-};
+}) {
+  return (results: TypeSummary<FieldInfo>) => {
+    const renderer = writers[writer];
+    if (!renderer) throw new Error(`Invalid Render Adapter Specified: ${writer}`);
+  
+    return renderer.render({
+      schemaName,
+      options,
+      results: helpers.flattenTypes(results),
+    });
+  };
+}

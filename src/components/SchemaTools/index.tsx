@@ -11,7 +11,7 @@ import {
   FieldTypeSummary,
   schemaAnalyzer,
   TypeSummary,
-} from 'schema-analyzer/index';
+} from '../../schema-analyzer/index';
 import { parse } from './adapters/readers';
 import { render } from './adapters/writers';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
@@ -23,7 +23,7 @@ import SchemaExplorer from './ResultsView/SchemaExplorer.js';
 import ChooseInput from './ChooseInput';
 import AdvancedOptionsForm from './AdvancedOptionsForm';
 import InputProcessor from './InputProcessor.js';
-import CodeViewer from './ResultsView/CodeViewer.js';
+import CodeViewer from './ResultsView/CodeViewer';
 import Button from '@material-ui/core/Button';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 
@@ -163,6 +163,7 @@ export default function SchemaTools({}) {
         onClick: (e: any) => e.preventDefault(),
       };
 
+
   return (
     <main className="shadow-lg p-3 m-5 bg-white rounded">
       <Router>
@@ -221,12 +222,7 @@ export default function SchemaTools({}) {
           </Route>
 
           <Route path="/results/code/:adapter?">
-            <CodeViewer
-              options={{}}
-              schemaName={schemaName}
-              schemaResults={schemaResults}
-              resultsTimestamp={resultsTimestamp}
-            >
+            <CodeViewer>
               {schemaResults
                 ? null
                 : '// No code to view, please check your settings.'}

@@ -9,14 +9,10 @@ const writer: IDataStepWriter = {
 
     const fieldString = fieldNames
       .map((f) => {
-        const types = Object.entries(
-          f.typeInfo,
-        ).sort(([typeName1, typeCount1], [typeName2, typeCount2]) =>
-          typeCount1 > typeCount2 ? -1 : typeCount1 === typeCount2 ? 0 : 1,
-        );
-        console.log(f.fieldName, types);
-        return `  ${camelcase(f.fieldName)}: {
-    type: ${types[0][0]},
+        const field = fields[f];
+        // console.log(f, field.type);
+        return `  ${camelcase(f)}: {
+    type: ${field.type},
     default: null
   }`;
       })

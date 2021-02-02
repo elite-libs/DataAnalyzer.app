@@ -1,13 +1,13 @@
 import csvParse from 'csv-parse';
 
-export default {
-  shouldParse(content) {
+const csvReader = {
+  shouldParse(content: any) {
     const sample =
       (content && content.length > 500 ? content.slice(0, 500) : content) || '';
     return sample.split(',').length > 5;
   },
 
-  parse(content) {
+  parse(content: string) {
     return new Promise((resolve, reject) => {
       csvParse(
         content,
@@ -24,3 +24,5 @@ export default {
     });
   },
 };
+
+export default csvReader;

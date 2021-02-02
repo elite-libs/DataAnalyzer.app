@@ -4,9 +4,9 @@ import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import ListSubheader from '@material-ui/core/ListSubheader';
-import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/IconButton';
 import InfoIcon from '@material-ui/icons/Info';
-import tileData from './tileData';
+// import tileData from './tileData';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
 
 const tileData = [
   {
-    img: image,
+    img: '',
     title: 'Image',
     author: 'author',
   },
@@ -50,12 +50,12 @@ export default function TitlebarGridList() {
               title={tile.title}
               subtitle={<span>by: {tile.author}</span>}
               actionIcon={
-                <IconButton
+                <Button
                   aria-label={`info about ${tile.title}`}
                   className={classes.icon}
                 >
                   <InfoIcon />
-                </IconButton>
+                </Button>
               }
             />
           </GridListTile>

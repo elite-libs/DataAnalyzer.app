@@ -1,22 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, MouseEvent } from 'react';
 import Popover from '@material-ui/core/Popover';
 import Button from '@material-ui/core/Button';
-import { makeStyles } from '@material-ui/core/styles';
+// import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles((theme) => ({
-  typography: {
-    padding: theme.spacing(2),
-  },
-}));
+// const useStyles = makeStyles((theme) => ({
+//   typography: {
+//     padding: theme.spacing(2),
+//   },
+// }));
 
 export default function PopoverWrapper({
   buttonLabel = 'Open Menu',
+  // @ts-ignore
   children,
 } = {}) {
-  const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  // const classes = useStyles();
+  const [anchorEl, setAnchorEl] = React.useState<null | Element | ((element: Element) => Element)>(null);
 
-  const handleClick = (event) => {
+  const handleClick = (event: React.MouseEvent) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -45,7 +46,6 @@ export default function PopoverWrapper({
         anchorEl={anchorEl}
         onClose={handleClose}
         className="popover"
-        classes="popover"
         anchorOrigin={{
           vertical: 'bottom',
           horizontal: 'center',

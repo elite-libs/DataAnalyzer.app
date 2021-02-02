@@ -1,12 +1,20 @@
 import React, { useState } from 'react';
-import { schemaAnalyzer } from 'schema-analyzer';
-import { parse } from '../adapters/readers';
-import { render } from '../adapters/writers';
-import CodeViewer from './CodeViewer';
+import { ISchemaAnalyzerOptions, schemaAnalyzer } from '../schema-analyzer';
+import { parse } from './SchemaTools/adapters/readers';
+import { AdapterNames, render } from './SchemaTools/adapters/writers';
+import CodeViewer from './SchemaTools/ResultsView/CodeViewer';
 import { PostgresIcon, MongoDbIcon } from './SchemaTools/AppIcons.js';
 
-export default function GeneratorForm({ options = {}, onSchema }) {
-  const [schemaName, setSchemaName] = useState('User');
+type GeneratorFormArgs<T> = {
+  options: ISchemaAnalyzerOptions & { 
+    schemaName: string,
+    [key: string]: any
+  };
+  onSchema: (data: T, schemaName: string) => any
+}
+
+export default function GeneratorForm({ options = { schemaName: 'user'}, onSchema }: GeneratorFormArgs<any>) {
+  const [schemaName, setSchemaName] = useState(options?.schemaName || 'user');
   const [inputData, setInputData] = useState('');
   const [schemaOutput, setSchemaOutput] = useState('');
   const [progress, setProgress] = useState({
@@ -15,16 +23,16 @@ export default function GeneratorForm({ options = {}, onSchema }) {
     percent: '0',
   });
 
-  const onProgress = ({ totalRows, currentRow, columns }) => {
+  const onProgress = ({ totalRows, currentRow, columns }: any) => {
     const percent = ((currentRow / totalRows) * 100.0).toFixed(2);
     setProgress({ totalRows, currentRow, percent });
   };
   const onSchemaCallback =
     onSchema && onSchema instanceof Function
-      ? (value) => void onSchema(value, schemaName) || value
-      : (value) => value;
+      ? (value: any) => void onSchema(value, schemaName) || value
+      : (value: any) => value;
 
-  const generateSchema = (outputMode) => {
+  const generateSchema = (outputMode: AdapterNames) => {
     return Promise.resolve(inputData)
       .then(parse)
       .then((data) => schemaAnalyzer(schemaName, data, { onProgress }))
@@ -42,13 +50,14 @@ export default function GeneratorForm({ options = {}, onSchema }) {
 
   const scrollToOutput = () => {
     const output = document.querySelector('.output-data');
-    output.scrollIntoView({ block: 'start', behavior: 'smooth' });
+    if (output) output.scrollIntoView({ block: 'start', behavior: 'smooth' });
   };
 
-  const updateSchemaOutput = (schemaResults) => {
-    onSchemaCallback(schemaResults);
-    setSchemaOutput(schemaResults);
-  };
+  // @ts-ignore
+  // const updateSchemaOutput = (schemaResults) => {
+  //   onSchemaCallback(schemaResults, schemaName);
+  //   setSchemaOutput(schemaResults);
+  // };
 
   return (
     <form className="form generator w-100" onSubmit={(e) => e.preventDefault()}>
@@ -78,7 +87,7 @@ export default function GeneratorForm({ options = {}, onSchema }) {
           <select
             className="rounded w-100"
             defaultValue=""
-            onChange={(e) => loadData(e.target.value)}
+            onChange={(e) => console.log('needs loadData():', e.target.value)}
           >
             <option value="">[Or, choose sample data to load]</option>
             <option value="users">Generated/Fake Users</option>
@@ -106,7 +115,7 @@ export default function GeneratorForm({ options = {}, onSchema }) {
             className="btn btn-info mx-auto"
           >
             <div>
-              <PostgresIcon style={{ width: '50px' }} />
+              <PostgresIcon />
             </div>
             Generate Postgres
             <br />
