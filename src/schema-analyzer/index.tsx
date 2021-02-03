@@ -150,14 +150,19 @@ export type SimpleFieldInfo = {
 }
 
 export type NumericFieldInfo =  SimpleFieldInfo & {
-  type: TypeNameStringDecimal
+  /** TypeNameStringDecimal types */
+  type: 'Date' | 'Timestamp' | 'Currency' | 'Float' | 'Number'
+  max: number
+  min: number
   scale: number
   precision: number
 }
 
 export type ScalarFieldInfo = SimpleFieldInfo & {
-  type: TypeNameStringComposite
+  /** TypeNameStringScalar types */
+  type: 'String' | 'Email' | 'Array'
   length: number
+  max: number
 }
 
 export type CombinedFieldInfo = NumericFieldInfo | ScalarFieldInfo | SimpleFieldInfo
@@ -668,7 +673,7 @@ function condenseFieldSizes(
   const aggregateSummary: { [k in TypeNameString]?: FieldTypeSummary } = {}
   log('Starting condenseFieldSizes()')
   Object.keys(pivotedDataByType).map(
-    (typeName: string, idx: number, arr: any[]) => {
+    (typeName: TypeNameString | string, idx: number, arr: any[]) => {
       aggregateSummary[typeName] = {
         // typeName,
         // rank: typeRankings[typeName] || -42,
@@ -720,8 +725,8 @@ function getFieldMetadata({
   value,
   strictMatching,
 }: {
-  value: any
-  strictMatching: boolean
+  value?: any
+  strictMatching?: boolean
 }) {
   // Get initial pass at the data with the TYPE_* `.check()` methods.
   const typeGuesses = detectTypes(value, strictMatching)

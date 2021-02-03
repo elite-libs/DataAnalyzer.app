@@ -24,16 +24,29 @@ import CodeViewer from './ResultsView/CodeViewer';
 import Button from '@material-ui/core/Button';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import { CallbackFn } from 'types';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from 'store/rootReducer';
+import {
+  setInputData,
+  setSchemaName,
+  setResults,
+  setSchema,
+} from 'store/analysisSlice';
+import { setStatusMessage } from 'store/appStateSlice';
 
 export default function SchemaTools() {
-  const [
-    schemaResults,
-    setSchemaResults,
-  ] = React.useState<TypeSummary<FieldInfo>>();
-  const [schemaName, setSchemaName] = React.useState('Users');
-  const [inputData, setInputData] = React.useState('');
-  const [statusMessage, setStatusMessage] = React.useState('');
-  const [resultsTimestamp, setResultsTimestamp] = React.useState('');
+  const dispatch = useDispatch();
+  const { inputData, results, schema, schemaName } = useSelector(
+    (state: RootState) => state.analysisFeature,
+  );
+
+  // const [schemaResults, setResults] = React.useState<
+  //   TypeSummary<FieldInfo>
+  // >();
+  // const [schemaName, setSchemaName] = React.useState('Users');
+  // const [inputData, setInputData] = React.useState('');
+  // const [statusMessage, setStatusMessage] = React.useState('');
+  // const [resultsTimestamp, setResultsTimestamp] = React.useState('');
 
   const [options, setOptions] = React.useState({
     strictMatching: true,
@@ -63,32 +76,36 @@ export default function SchemaTools() {
       name = 'users';
     }
     if (!filePath) {
-      setStatusMessage('');
-      setInputData('');
+      dispatch(setStatusMessage(''));
+      dispatch(setInputData(''));
       return;
     }
-    setInputData('');
-    setStatusMessage(`One moment...\nImporting ${name} dataset...`);
+    dispatch(setInputData(''));
+    dispatch(setStatusMessage(`One moment...\nImporting ${name} dataset...`));
     return fetch(filePath)
       .then((response) => response.text())
       .then((data) => {
-        setSchemaName(name);
-        setInputData(data);
-        setStatusMessage('Loaded Sample Dataset 🎉');
+        // setSchemaName(name);
+        // setInputData(data);
+        dispatch(setInputData(data));
+        dispatch(setSchemaName(name));
+        dispatch(setStatusMessage('Loaded Sample Dataset 🎉'));
       })
       .catch((error) => {
         console.error('ERROR:', error);
-        setStatusMessage(`Oh noes! Failed to load the ${name} dataset.
-          Please file an issue on the project's GitHub Issues.`);
+        dispatch(setStatusMessage(`Oh noes! Failed to load the ${name} dataset.
+          Please file an issue on the project's GitHub Issues.`));
       });
   };
 
-  const hasSchemaResults = !!(schemaResults != null && schemaResults?.fields);
+  const hasSchemaResults = !!(results != null && results?.fields);
   const hasInputData: boolean =
     inputData != null &&
     (String(inputData).length > 40 || String(inputData).split('\n').length > 5);
 
-  const displayStatusOverlay = (onComplete: CallbackFn<TypeSummary<FieldInfo>, any>) => {
+  const displayStatusOverlay = (
+    onComplete: CallbackFn<TypeSummary<FieldInfo>, any>,
+  ) => {
     if (hasInputData) {
       return (
         <Button
@@ -116,20 +133,22 @@ export default function SchemaTools() {
     );
   };
 
-  const updateSchemaResults = (onComplete: CallbackFn<TypeSummary<FieldInfo>, any>) => {
+  const updateSchemaResults = (
+    onComplete: CallbackFn<TypeSummary<FieldInfo>, any>,
+  ) => {
     return (
       hasInputData &&
-      Promise.resolve(inputData)
+      Promise.resolve(inputData!)
         .then(parse)
         .then((data) =>
-          schemaAnalyzer(schemaName, data, {
+          schemaAnalyzer(schemaName!, data, {
             onProgress: () => ({}),
             ...options,
           }),
         )
         // .then((value) => console.log(value) || value)
-        .then(results => {
-          setSchemaResults(results)
+        .then((results) => {
+          setResults(results);
           return results;
         })
         .then((results) => {
@@ -141,9 +160,9 @@ export default function SchemaTools() {
           return results;
         })
         .catch((error) => {
-          setStatusMessage(
+          dispatch(setStatusMessage(
             `Oh noes! We ran into a problem!\n\n  ${error.message}`,
-          );
+          ));
           console.error(error);
         })
     );
@@ -165,7 +184,6 @@ export default function SchemaTools() {
         className: 'locked disabled',
         onClick: (e: any) => e.preventDefault(),
       };
-
 
   return (
     <main className="shadow-lg p-3 m-5 bg-white rounded">
@@ -203,28 +221,23 @@ export default function SchemaTools() {
         </nav>
 
         <Switch>
-          <Route exact path="/">
+          <Route path="">
             <h4 className="my-3">Choose an Option Below</h4>
             <ChooseInput
               onSelect={loadData}
               reset={() => {
-                setInputData('');
-                setSchemaResults(undefined);
+                dispatch(setInputData(''));
+                setResults(undefined);
               }}
             />
-          </Route>
-          <Route path="/input/:source?">
+          
             <InputProcessor
               displayStatus={displayStatusOverlay}
-              inputData={inputData}
-              setInputData={setInputData}
-              setStatusMessage={setStatusMessage}
-              setSchemaName={setSchemaName}
+              inputData={inputData!}
               hasInputData={hasInputData}
             />
-          </Route>
+          
 
-          <Route path="/results/code/:adapter?">
             <CodeViewer>
               {schemaResults
                 ? null

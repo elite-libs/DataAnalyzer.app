@@ -1,35 +1,38 @@
 import React from 'react';
 import Paper from '@material-ui/core/Paper';
-import { Link, useParams, useHistory } from 'react-router-dom';
+// import { Link, useParams, useHistory } from 'react-router-dom';
 // import Button from '@material-ui/core/Button'
-import Typography from '@material-ui/core/Typography';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import { CallbackFn } from 'types';
 import { FieldInfo, TypeSummary } from 'schema-analyzer';
 import { JsxElement } from 'typescript';
-// import ChevronRight from '@material-ui/icons/ChevronRightOutlined'
+import { useDispatch } from 'react-redux';
+// import { RootState } from 'store/rootReducer';
+import {
+  setInputData,
+  setSchemaName,
+} from 'store/analysisSlice';
+import { setStatusMessage } from 'store/appStateSlice';
 
 type Props = {
   hasInputData: boolean;
   displayStatus: CallbackFn<TypeSummary<FieldInfo> | undefined, JsxElement | any>;
   inputData: string;
   className?: string;
-  setInputData: (s: string) => void;
-  setStatusMessage: (s: string) => void;
-  setSchemaName: (s: string) => void;
 }
 
 export default function InputProcessor({
   hasInputData,
   displayStatus,
   inputData = '',
-  setInputData,
-  setStatusMessage,
-  setSchemaName,
   className = '',
 }: Props) {
-  // const { source: name } = useParams()
-  const history = useHistory();
+  const dispatch = useDispatch();
+  // const { inputData, results, schema, schemaName } = useSelector(
+  //   (state: RootState) => state.analysisFeature,
+  // );
+
+  // const history = useHistory();
 
   const loadData = (name: string) => {
     let filePath = '';
@@ -50,18 +53,18 @@ export default function InputProcessor({
       name = 'users';
     }
     if (!filePath) return '';
-    setSchemaName(name);
-    setStatusMessage(`One moment...\nImporting ${name} dataset...`);
+    dispatch(setSchemaName(name));
+    dispatch(setStatusMessage(`One moment...\nImporting ${name} dataset...`));
     return fetch(filePath)
       .then((response) => response.text())
       .then((data) => {
         // setSchemaName(name)
-        setInputData(data);
+        dispatch(setInputData(data));
       })
       .catch((error) => {
         console.error('ERROR:', error);
-        setStatusMessage(`Oh noes! Failed to load the ${name} dataset.
-            Please file an issue on the project's GitHub Issues.`);
+        dispatch(setStatusMessage(`Oh noes! Failed to load the ${name} dataset.
+            Please file an issue on the project's GitHub Issues.`));
       });
   };
 
@@ -75,21 +78,17 @@ export default function InputProcessor({
   }
   return (
     <Paper elevation={3} className={className}>
-      <section className="position-relative w-100 h-100 d-flex flex-column align-items-center justify-content-center ">
+      <section className="position-relative w-100 d-flex flex-column align-items-center justify-content-center ">
         {displayStatus(() => console.log('/results/code/knex'))}
 
         <TextareaAutosize
-          className="w-100 h-100 border-0 m-1 p-1"
+          className="col s12 l12 border-0 m-1 p-1"
           aria-label="Input or Paste your CSV or JSON data"
           placeholder='Paste your data here, or click "Start Here" to choose a Sample Data Set'
           value={inputData}
-          onChange={(e) => setInputData(e.target.value)}
+          onChange={(e) => dispatch(setInputData(e.target.value))}
           {...textareaOpts}
         />
-        {/* <textarea
-        className='muted w-100 h-100'
-
-      /> */}
         {/* {children} */}
       </section>
     </Paper>

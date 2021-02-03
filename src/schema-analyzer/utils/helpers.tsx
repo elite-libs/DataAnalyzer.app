@@ -11,6 +11,8 @@ import {
   ScalarFieldInfo,
   NumericFieldInfo,
   SimpleFieldInfo,
+  TypedFieldObject,
+  FieldTypeSummary,
 } from '..'
 
 const log = debug('schema-builder:helpers')
@@ -63,7 +65,9 @@ function _simplifyFieldInfo(
   fieldInfo: FieldInfo,
   options: IHelperOptions,
 ): CombinedFieldInfo {
-  let arrayOfTypes = Object.entries(fieldInfo.types) //as [n: TypeNameString, summary?: FieldTypeSummary][]
+  // fieldInfo.types
+  // @ts-ignore
+  let arrayOfTypes = Object.entries<FieldTypeSummary>(fieldInfo.types) //as [n: TypeNameString, summary?: FieldTypeSummary][]
   arrayOfTypes = arrayOfTypes
     .slice(0)
     .filter((f) => f[0] !== 'Null' && f[0] !== 'Unknown')
