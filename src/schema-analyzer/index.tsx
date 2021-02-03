@@ -373,7 +373,7 @@ function schemaAnalyzer(
       }
     })
 
-  function nestedSchemaAnalyzer(nestedData) {
+  function nestedSchemaAnalyzer(nestedData: { [s: string]: unknown } | ArrayLike<unknown>) {
     return Object.entries(nestedData).reduce(
       async (nestedTypeSummaries, [fullTypeName, data]) => {
         const nameParts = fullTypeName.split('.')
@@ -401,7 +401,7 @@ const _pivotRowsGroupedByType = ({
   nestedData,
   strictMatching,
   onProgress,
-}) =>
+}: any) =>
   function pivotRowsGroupedByType(docs: any[]) {
     const detectedSchema = {
       uniques: isEnumEnabled ? {} : null,
@@ -433,7 +433,7 @@ const _evaluateSchemaLevel = ({
   nestedData,
   strictMatching,
   onProgress,
-}) =>
+}: any) =>
   function evaluateSchemaLevel(
     schema: {
       totalRows: number
@@ -543,7 +543,7 @@ const _evaluateSchemaLevel = ({
  * }
  * ```
  */
-function condenseFieldData({ enumAbsoluteLimit, isEnumEnabled }) {
+function condenseFieldData({ enumAbsoluteLimit, isEnumEnabled }: { enumAbsoluteLimit: number, isEnumEnabled: boolean}) {
   return (schema: {
     fieldsData: {
       [x: string]: TypedFieldObject<InternalFieldTypeData>[]
@@ -708,10 +708,7 @@ function condenseFieldSizes(
         aggregateSummary[typeName] &&
         ['Timestamp', 'Date'].indexOf(typeName) > -1
       ) {
-        aggregateSummary[typeName].value! = formatRangeStats(
-          <any>aggregateSummary[typeName]!.value!,
-          parseDate,
-        )
+        aggregateSummary[typeName].value! = formatRangeStats(aggregateSummary[typeName]!.value! as any, parseDate)
       }
     },
   )
@@ -755,7 +752,9 @@ function getFieldMetadata({
           analysis[typeGuess] = {
             ...analysis[typeGuess],
             count,
+            // @ts-ignore
             precision,
+            // @ts-ignore
             scale,
           }
         }
@@ -778,6 +777,7 @@ function getFieldMetadata({
       }
       if (typeGuess === 'String' || typeGuess === 'Email') {
         length = String(value).length
+        // @ts-ignore
         analysis[typeGuess] = { ...analysis[typeGuess], count, length, value }
       }
       return analysis

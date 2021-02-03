@@ -17,19 +17,19 @@ import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import SchemaExplorer from './ResultsView/SchemaExplorer.js';
-
 import ChooseInput from './ChooseInput';
 import AdvancedOptionsForm from './AdvancedOptionsForm';
-import InputProcessor from './InputProcessor.js';
+import InputProcessor from './InputProcessor';
 import CodeViewer from './ResultsView/CodeViewer';
 import Button from '@material-ui/core/Button';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import { CallbackFn } from 'types';
 
 export default function SchemaTools() {
   const [
     schemaResults,
     setSchemaResults,
-  ] = React.useState<TypeSummary<FieldInfo> | null>();
+  ] = React.useState<TypeSummary<FieldInfo>>();
   const [schemaName, setSchemaName] = React.useState('Users');
   const [inputData, setInputData] = React.useState('');
   const [statusMessage, setStatusMessage] = React.useState('');
@@ -84,11 +84,11 @@ export default function SchemaTools() {
   };
 
   const hasSchemaResults = !!(schemaResults != null && schemaResults?.fields);
-  const hasInputData =
-    inputData &&
+  const hasInputData: boolean =
+    inputData != null &&
     (String(inputData).length > 40 || String(inputData).split('\n').length > 5);
 
-  const displayStatusOverlay = (onComplete: any) => {
+  const displayStatusOverlay = (onComplete: CallbackFn<TypeSummary<FieldInfo>, any>) => {
     if (hasInputData) {
       return (
         <Button
@@ -116,7 +116,7 @@ export default function SchemaTools() {
     );
   };
 
-  const updateSchemaResults = (onComplete: any) => {
+  const updateSchemaResults = (onComplete: CallbackFn<TypeSummary<FieldInfo>, any>) => {
     return (
       hasInputData &&
       Promise.resolve(inputData)
@@ -128,12 +128,17 @@ export default function SchemaTools() {
           }),
         )
         // .then((value) => console.log(value) || value)
-        .then(setSchemaResults)
+        .then(results => {
+          setSchemaResults(results)
+          return results;
+        })
         .then((results) => {
           setResultsTimestamp(Date.now().toString());
           setTimeout(() => {
+            console.log(results);
             if (onComplete) onComplete(results);
           }, 50);
+          return results;
         })
         .catch((error) => {
           setStatusMessage(
@@ -166,7 +171,7 @@ export default function SchemaTools() {
     <main className="shadow-lg p-3 m-5 bg-white rounded">
       <Router>
         <nav className="row w-100 ">
-          <h1 className="col-11">Dan's Schema Generator</h1>
+          <h1 className="col-11">DataStep.io</h1>
           <aside className="col-1 text-right">
             <AdvancedOptionsForm
               options={options}
@@ -204,7 +209,7 @@ export default function SchemaTools() {
               onSelect={loadData}
               reset={() => {
                 setInputData('');
-                setSchemaResults(null);
+                setSchemaResults(undefined);
               }}
             />
           </Route>

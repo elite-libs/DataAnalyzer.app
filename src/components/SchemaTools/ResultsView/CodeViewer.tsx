@@ -23,7 +23,7 @@ export default function CodeGenerator({
   //   console.warn('Request denied, reloads not supported.');
   //   history.push('/');
   // }
-
+  console.log(arguments, children)
   return (
     <SyntaxHighlighter language={language} style={atomDark}>
       {children}

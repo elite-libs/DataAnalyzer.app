@@ -4,7 +4,20 @@ import { Link, useParams, useHistory } from 'react-router-dom';
 // import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
+import { CallbackFn } from 'types';
+import { FieldInfo, TypeSummary } from 'schema-analyzer';
+import { JsxElement } from 'typescript';
 // import ChevronRight from '@material-ui/icons/ChevronRightOutlined'
+
+type Props = {
+  hasInputData: boolean;
+  displayStatus: CallbackFn<TypeSummary<FieldInfo> | undefined, JsxElement | any>;
+  inputData: string;
+  className?: string;
+  setInputData: (s: string) => void;
+  setStatusMessage: (s: string) => void;
+  setSchemaName: (s: string) => void;
+}
 
 export default function InputProcessor({
   hasInputData,
@@ -14,11 +27,11 @@ export default function InputProcessor({
   setStatusMessage,
   setSchemaName,
   className = '',
-}) {
+}: Props) {
   // const { source: name } = useParams()
   const history = useHistory();
 
-  const loadData = (name) => {
+  const loadData = (name: string) => {
     let filePath = '';
     if (/products/i.test(name)) {
       filePath = 'products-3000.csv';
@@ -63,7 +76,7 @@ export default function InputProcessor({
   return (
     <Paper elevation={3} className={className}>
       <section className="position-relative w-100 h-100 d-flex flex-column align-items-center justify-content-center ">
-        {displayStatus(() => history.push('/results/code/knex'))}
+        {displayStatus(() => console.log('/results/code/knex'))}
 
         <TextareaAutosize
           className="w-100 h-100 border-0 m-1 p-1"
