@@ -10,6 +10,7 @@ import {
   FieldInfo,
   schemaAnalyzer,
   TypeSummary,
+  helpers
 } from '../../schema-analyzer/index';
 import { parse } from './adapters/readers';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
@@ -17,7 +18,7 @@ import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import SchemaExplorer from './ResultsView/SchemaExplorer.js';
-import ChooseInput from './ChooseInput';
+// import ChooseInput from './ChooseInput';
 import AdvancedOptionsForm from './AdvancedOptionsForm';
 import InputProcessor from './InputProcessor';
 import CodeViewer from './ResultsView/CodeViewer';
@@ -33,6 +34,7 @@ import {
   setSchema,
 } from 'store/analysisSlice';
 import { setStatusMessage } from 'store/appStateSlice';
+import DropdownMenu from './DropdownMenu';
 
 export default function SchemaTools() {
   const dispatch = useDispatch();
@@ -85,16 +87,16 @@ export default function SchemaTools() {
     return fetch(filePath)
       .then((response) => response.text())
       .then((data) => {
-        // setSchemaName(name);
-        // setInputData(data);
         dispatch(setInputData(data));
         dispatch(setSchemaName(name));
         dispatch(setStatusMessage('Loaded Sample Dataset 🎉'));
       })
       .catch((error) => {
         console.error('ERROR:', error);
-        dispatch(setStatusMessage(`Oh noes! Failed to load the ${name} dataset.
-          Please file an issue on the project's GitHub Issues.`));
+        dispatch(
+          setStatusMessage(`Oh noes! Failed to load the ${name} dataset.
+          Please file an issue on the project's GitHub Issues.`),
+        );
       });
   };
 
@@ -148,11 +150,10 @@ export default function SchemaTools() {
         )
         // .then((value) => console.log(value) || value)
         .then((results) => {
-          setResults(results);
+          dispatch(setSchema(results));
           return results;
         })
         .then((results) => {
-          setResultsTimestamp(Date.now().toString());
           setTimeout(() => {
             console.log(results);
             if (onComplete) onComplete(results);
@@ -160,9 +161,11 @@ export default function SchemaTools() {
           return results;
         })
         .catch((error) => {
-          dispatch(setStatusMessage(
-            `Oh noes! We ran into a problem!\n\n  ${error.message}`,
-          ));
+          dispatch(
+            setStatusMessage(
+              `Oh noes! We ran into a problem!\n\n  ${error.message}`,
+            ),
+          );
           console.error(error);
         })
     );
@@ -202,20 +205,14 @@ export default function SchemaTools() {
             className="col-12 pb-2 pl-4"
           >
             <Link component={RouteLink} color="inherit" to="/">
-              Start Here
-            </Link>
-            <Link component={RouteLink} color="inherit" to="/input">
-              1. Input Data
-            </Link>
-            <Link component={RouteLink} {...schemaLinkProps} to="/results/code">
-              2. Generate Code
+              Input &amp; Code Generator
             </Link>
             <Link
               component={RouteLink}
               {...schemaLinkProps}
               to="/results/explorer"
             >
-              3. Charts &amp; Summary
+              Data Visualization
             </Link>
           </Breadcrumbs>
         </nav>
@@ -223,29 +220,31 @@ export default function SchemaTools() {
         <Switch>
           <Route path="">
             <h4 className="my-3">Choose an Option Below</h4>
-            <ChooseInput
+            <DropdownMenu
+              buttonTextOverride="Demo: Choose a Dataset"
               onSelect={loadData}
-              reset={() => {
-                dispatch(setInputData(''));
-                setResults(undefined);
-              }}
+              options={[
+                'Sample Users JSON',
+                'Sample People JSON',
+                'Sample Listings JSON',
+                'Sample Products CSV',
+              ]}
             />
-          
+
             <InputProcessor
               displayStatus={displayStatusOverlay}
               inputData={inputData!}
               hasInputData={hasInputData}
             />
-          
 
             <CodeViewer>
-              {schemaResults
+              {results
                 ? null
                 : '// No code to view, please check your settings.'}
             </CodeViewer>
           </Route>
           <Route path="/results/explorer">
-            <SchemaExplorer schemaResults={schemaResults} />
+            <SchemaExplorer schemaResults={results} />
           </Route>
         </Switch>
       </Router>

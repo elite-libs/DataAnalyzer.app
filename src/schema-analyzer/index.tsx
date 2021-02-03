@@ -152,8 +152,6 @@ export type SimpleFieldInfo = {
 export type NumericFieldInfo =  SimpleFieldInfo & {
   /** TypeNameStringDecimal types */
   type: 'Date' | 'Timestamp' | 'Currency' | 'Float' | 'Number'
-  max: number
-  min: number
   scale: number
   precision: number
 }
@@ -162,7 +160,6 @@ export type ScalarFieldInfo = SimpleFieldInfo & {
   /** TypeNameStringScalar types */
   type: 'String' | 'Email' | 'Array'
   length: number
-  max: number
 }
 
 export type CombinedFieldInfo = NumericFieldInfo | ScalarFieldInfo | SimpleFieldInfo

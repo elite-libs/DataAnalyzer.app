@@ -7,7 +7,7 @@ import ButtonGroup from '@material-ui/core/ButtonGroup';
 // import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import SampleDataMenu from './SampleDataMenu';
+import DropdownMenu from './DropdownMenu';
 import { useHistory } from 'react-router-dom';
 
 export default function ChooseInput({ text = '', onSelect, reset }) {
@@ -41,7 +41,7 @@ export default function ChooseInput({ text = '', onSelect, reset }) {
         <Typography variant="h6" className="mb-3">
           Option #2: Playground &amp; Sample Data
         </Typography>
-        <SampleDataMenu
+        <DropdownMenu
           onSelect={wrapSelect}
           options={[
             'Sample Users JSON',

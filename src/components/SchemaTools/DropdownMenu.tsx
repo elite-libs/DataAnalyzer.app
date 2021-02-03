@@ -12,18 +12,20 @@ import MenuList from '@material-ui/core/MenuList';
 // const options = ['Create a merge commit', 'Squash and merge', 'Rebase and merge'];
 
 interface Props<T> {
-  options: Array<T | string>,
-  onSelect: (value: T | unknown | any, index?: number) => void | null | any,
-  className?: string
+  buttonTextOverride?: string | null;
+  options: Array<T | string>;
+  onSelect: (value: T | unknown | any, index?: number) => void | null | any;
+  className?: string;
 }
 
-export default function SampleDataMenu<T>({
+export default function DropdownMenu<T>({
+  buttonTextOverride,
   options,
   onSelect = (value: any, index: any) => {},
   className,
 }: Props<T>) {
   const [open, setOpen] = React.useState(false);
-  const [selectedIndex, setSelectedIndex] = React.useState(1);
+  const [selectedIndex, setSelectedIndex] = React.useState(-1);
   const anchorRef = React.useRef<HTMLAnchorElement>(null);
 
   const handleClick = (index: number) => {
@@ -33,7 +35,10 @@ export default function SampleDataMenu<T>({
     console.info(`You clicked ${options[selectedIndex]}`);
   };
 
-  const handleMenuItemClick = (event: React.MouseEvent<HTMLLIElement, MouseEvent>, index: number) => {
+  const handleMenuItemClick = (
+    event: React.MouseEvent<HTMLLIElement, MouseEvent>,
+    index: number,
+  ) => {
     setSelectedIndex(index);
     setOpen(false);
     handleClick(index);
@@ -43,18 +48,17 @@ export default function SampleDataMenu<T>({
     setOpen((prevOpen) => !prevOpen);
   };
 
-  const handleClose = (event: { target: any; }) => {
-    if (anchorRef && anchorRef!.current && anchorRef.current!.contains!(event.target)) {
+  const handleClose = (event: { target: any }) => {
+    if (
+      anchorRef &&
+      anchorRef!.current &&
+      anchorRef.current!.contains!(event.target)
+    ) {
       return;
     }
-
     setOpen(false);
   };
 
-  // <Grid container direction="column" alignItems="center">
-  //   <Grid item xs={12}>
-  //   </Grid>
-  // </Grid>
   if (!options || options.length === 0)
     options = ['[Warn] No options provided.'];
 
@@ -62,13 +66,15 @@ export default function SampleDataMenu<T>({
     <>
       <ButtonGroup
         variant="contained"
-        color="primary"
+        color="secondary"
         ref={anchorRef}
         aria-label="split button"
         className={className}
-        component={"a"}
+        component={'a'}
       >
-        <Button onClick={handleToggle}>{options[selectedIndex]}</Button>
+        <Button onClick={handleToggle}>
+          {buttonTextOverride || options[selectedIndex]}
+        </Button>
         <Button
           color="primary"
           size="small"
@@ -101,7 +107,7 @@ export default function SampleDataMenu<T>({
                 <MenuList id="split-button-menu">
                   {options.map((option, index) => (
                     <MenuItem
-                      key={JSON.stringify(option)}
+                      key={index}
                       selected={index === selectedIndex}
                       onClick={(event) => handleMenuItemClick(event, index)}
                     >

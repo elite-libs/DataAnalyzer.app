@@ -12,7 +12,7 @@ export type ICodeGeneratorArgs = {
 }
 
 export default function CodeGenerator({
-  language = 'javascript',
+  language = 'typescript',
   children
 }: ICodeGeneratorArgs) {
   // const [generatedCode, setGeneratedCode] = React.useState('');
@@ -23,7 +23,7 @@ export default function CodeGenerator({
   //   console.warn('Request denied, reloads not supported.');
   //   history.push('/');
   // }
-  console.log(arguments, children)
+  // console.log(arguments, children)
   return (
     <SyntaxHighlighter language={language} style={atomDark}>
       {children}

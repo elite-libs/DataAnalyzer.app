@@ -1,35 +1,77 @@
-/* eslint-disable import/no-anonymous-default-export */
-import camelcase from 'lodash.camelcase';
-import { IDataStepWriter, IRenderArgs } from './writers';
-
+import { camelCase, startCase } from 'lodash';
+import {
+  NumericFieldInfo,
+  TypeNameStringComposite,
+  TypeNameStringDecimal,
+} from '../../../schema-analyzer';
+import { properCase, removeBlankLines } from '../helpers';
+import type { IDataStepWriter, IRenderArgs } from './writers';
 const writer: IDataStepWriter = {
   render({ results, options, schemaName }: IRenderArgs) {
+    const hasNestedTypes = results.nestedTypes && Object.keys(results.nestedTypes!).length > 0
     const { fields } = results;
-    const fieldNames = Object.keys(fields);
-
-    const fieldString = fieldNames
-      .map((f) => {
-        const field = fields[f];
-        // console.log(f, field.type);
-        return `  ${camelcase(f)}: {
-    type: ${field.type},
-    default: null
+    const getFields = () => {
+      return (
+        `const ${properCase(schemaName)} = new Schema({\n` +
+        Object.entries(fields)
+          .map(([fieldName, fieldInfo]) => {
+            return `  ${camelCase(fieldName)}: {
+    type: "${fieldInfo.type}",
+    ${fieldInfo.unique ? 'unique: true,' : ''}
+    ${fieldInfo.nullable ? '' : 'required: true,'}
+    ${
+    fieldInfo.value && TypeNameStringDecimal.includes(fieldInfo.type)
+      ? 'max: ' + (fieldInfo as NumericFieldInfo).value + ','
+      : ''}
+    ${
+    fieldInfo.value && TypeNameStringComposite.includes(fieldInfo.type)
+      ? 'maxLength: ' + fieldInfo.value + ','
+      : ''}
+    ${
+    Array.isArray(fieldInfo.enum) && fieldInfo.enum.length > 0
+      ? 'enum: ["' + fieldInfo.enum.join('", "') + '"],'
+      : ''}
   }`;
-      })
-      .join(',\n');
+          })
+          .join(',\n') +
+        `});
 
-    return `const mongoose = require("mongoose");
-const {Schema} = mongoose;
+const ${camelCase(schemaName)}Model = mongoose.model("${camelCase(
+          schemaName,
+        )}", ${properCase(schemaName)});
+    
+module.exports.${properCase(schemaName)} = ${camelCase(schemaName)}Model;\n`
+      );
+    };
 
-const schema = new Schema({
-${fieldString.replace(/\\n/gms, '\n')}
-});
-
-const model = mongoose.model("${schemaName}", schema);
-
-module.exports = model;
-`;
+    const getRecursive = () => {
+      if (
+        !options?.disableNestedTypes &&
+        hasNestedTypes
+      ) {
+        
+        return Object.entries(results.nestedTypes!).map(
+          ([nestedName, results]) => {
+            console.log('nested mongoose schema:', nestedName);
+            return this.render({
+              schemaName: nestedName,
+              results,
+              options: { disableNestedTypes: false },
+            });
+          },
+        );
+      }
+      return '';
+    };
+    return getHeader() + removeBlankLines(getFields() + getRecursive());
   },
 };
 
 export default writer;
+
+const getHeader = () => {
+  return `const mongoose = require("mongoose");
+const {Schema, Model, Types} = mongoose;
+
+`;
+};

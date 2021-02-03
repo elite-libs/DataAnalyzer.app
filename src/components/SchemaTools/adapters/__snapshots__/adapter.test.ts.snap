@@ -32,7 +32,7 @@ exports[`knex writer can emit knex migration for nested user json 1`] = `
 "// More info: http://knexjs.org/#Schema-createTable
 
     exports.up = function up(knex) {
-      return knex.schema.createTable(\\"test\\", (table) => {
+      return knex.schema.createTable(\\"users_sparse\\", (table) => {
         table.increments(\\"id\\");
         table.string(\\"name\\", 20).notNull();
         table.text(\\"notes\\"); // TODO: add references: users.notes;
@@ -40,7 +40,7 @@ exports[`knex writer can emit knex migration for nested user json 1`] = `
     };
 
     exports.down = function down(knex) {
-      return knex.schema.dropTableIfExists(\\"test\\");
+      return knex.schema.dropTableIfExists(\\"users_sparse\\");
     };
 
     "
@@ -50,7 +50,7 @@ exports[`knex writer can emit knex migration for people json 1`] = `
 "// More info: http://knexjs.org/#Schema-createTable
 
     exports.up = function up(knex) {
-      return knex.schema.createTable(\\"test\\", (table) => {
+      return knex.schema.createTable(\\"people\\", (table) => {
         table.string(\\"name\\", 40).notNull().unique();
         table.integer(\\"height\\");
         table.integer(\\"mass\\");
@@ -72,8 +72,256 @@ exports[`knex writer can emit knex migration for people json 1`] = `
     };
 
     exports.down = function down(knex) {
-      return knex.schema.dropTableIfExists(\\"test\\");
+      return knex.schema.dropTableIfExists(\\"people\\");
     };
 
     "
+`;
+
+exports[`mongoose writer can emit correct mongoose migration 1`] = `
+"const mongoose = require(\\"mongoose\\");
+const {Schema, Model, Types} = mongoose;
+
+const Users = new Schema({
+  id: {
+    type: \\"UUID\\",
+    unique: true,
+    required: true,
+  },
+  email: {
+    type: \\"String\\",
+    required: true,
+  },
+  firstName: {
+    type: \\"String\\",
+    required: true,
+  },
+  lastName: {
+    type: \\"String\\",
+    required: true,
+  },
+  isActive: {
+    type: \\"Boolean\\",
+    required: true,
+  },
+  createdAt: {
+    type: \\"Date\\",
+    required: true,
+  },
+  modifiedAt: {
+    type: \\"Date\\",
+    required: true,
+  },
+  catchPhrase: {
+    type: \\"String\\",
+    required: true,
+  },
+  companyName: {
+    type: \\"String\\",
+    required: true,
+  },
+  credits: {
+    type: \\"Number\\",
+    required: true,
+    enum: [\\"1\\", \\"15\\", \\"20\\", \\"10\\", \\"11\\", \\"7\\", \\"9\\"],
+  },
+  salesScore: {
+    type: \\"Float\\",
+    required: true,
+    enum: [\\"1.75129\\", \\"15.75129\\", \\"11.453456\\", \\"10.75129\\", \\"11.75129\\", \\"20.75129\\", \\"20.65545\\", \\"20.9877865\\", \\"7.75129\\", \\"9.75129\\"],
+  },
+  location: {
+    type: \\"String\\",
+    required: true,
+    enum: [\\"nyc\\", \\"remote\\", \\"denver\\"],
+  },
+  profile: {
+    type: \\"String\\",
+    unique: true,
+  }});
+
+const usersModel = mongoose.model(\\"users\\", Users);
+module.exports.Users = usersModel;
+"
+`;
+
+exports[`mongoose writer can emit mongoose migration for nested user json 1`] = `
+"const mongoose = require(\\"mongoose\\");
+const {Schema, Model, Types} = mongoose;
+
+const UsersSparse = new Schema({
+  id: {
+    type: \\"Number\\",
+    unique: true,
+    required: true,
+  },
+  name: {
+    type: \\"String\\",
+    required: true,
+  },
+  notes: {
+    type: \\"Array\\",
+    required: true,
+  }});
+
+const usersSparseModel = mongoose.model(\\"usersSparse\\", UsersSparse);
+module.exports.UsersSparse = usersSparseModel;
+const mongoose = require(\\"mongoose\\");
+const {Schema, Model, Types} = mongoose;
+
+const UsersNotes = new Schema({
+  id: {
+    type: \\"Number\\",
+    unique: true,
+    required: true,
+  },
+  text: {
+    type: \\"String\\",
+    required: true,
+  }});
+
+const usersNotesModel = mongoose.model(\\"usersNotes\\", UsersNotes);
+module.exports.UsersNotes = usersNotesModel;
+"
+`;
+
+exports[`mongoose writer can emit mongoose migration for people json 1`] = `
+"const mongoose = require(\\"mongoose\\");
+const {Schema, Model, Types} = mongoose;
+
+const People = new Schema({
+  name: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  height: {
+    type: \\"Number\\",
+  },
+  mass: {
+    type: \\"Number\\",
+  },
+  hairColor: {
+    type: \\"String\\",
+    required: true,
+  },
+  skinColor: {
+    type: \\"String\\",
+  },
+  eyeColor: {
+    type: \\"String\\",
+    required: true,
+    enum: [\\"blue\\", \\"yellow\\", \\"red\\", \\"brown\\", \\"blue-gray\\", \\"black\\", \\"orange\\", \\"hazel\\"],
+  },
+  birthYear: {
+    type: \\"String\\",
+  },
+  gender: {
+    type: \\"String\\",
+    required: true,
+    enum: [\\"male\\", \\"n/a\\", \\"female\\", \\"hermaphrodite\\", \\"none\\"],
+  },
+  homeworld: {
+    type: \\"String\\",
+    required: true,
+  },
+  films: {
+    type: \\"Array\\",
+    required: true,
+  },
+  species: {
+    type: \\"Array\\",
+    required: true,
+  },
+  vehicles: {
+    type: \\"Array\\",
+    required: true,
+  },
+  starships: {
+    type: \\"Array\\",
+    required: true,
+  },
+  created: {
+    type: \\"Date\\",
+    unique: true,
+    required: true,
+  },
+  edited: {
+    type: \\"Date\\",
+    unique: true,
+    required: true,
+  },
+  url: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  id: {
+    type: \\"Number\\",
+    unique: true,
+    required: true,
+  }});
+
+const peopleModel = mongoose.model(\\"people\\", People);
+module.exports.People = peopleModel;
+"
+`;
+
+exports[`typescript writer can emit correct typescript migration 1`] = `
+"export interface Users {
+  id: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  isActive: boolean;
+  createdAt: Date;
+  modifiedAt: Date;
+  catchPhrase: string;
+  companyName: string;
+  credits: \\"1\\" | \\"15\\" | \\"20\\" | \\"10\\" | \\"11\\" | \\"7\\" | \\"9\\";
+  salesScore: \\"1.75129\\" | \\"15.75129\\" | \\"11.453456\\" | \\"10.75129\\" | \\"11.75129\\" | \\"20.75129\\" | \\"20.65545\\" | \\"20.9877865\\" | \\"7.75129\\" | \\"9.75129\\";
+  location: \\"nyc\\" | \\"remote\\" | \\"denver\\";
+  profile?: string  | null;
+};
+
+"
+`;
+
+exports[`typescript writer can emit typescript migration for nested user json 1`] = `
+"export interface UsersSparse {
+  id: number;
+  name: string;
+  notes: UsersNotes[];
+};
+
+export interface UsersNotes {
+  id: number;
+  text: string;
+};
+
+"
+`;
+
+exports[`typescript writer can emit typescript migration for people json 1`] = `
+"export interface People {
+  name: string;
+  height?: number  | null;
+  mass?: number  | null;
+  hairColor: string;
+  skinColor?: string  | null;
+  eyeColor: \\"blue\\" | \\"yellow\\" | \\"red\\" | \\"brown\\" | \\"blue-gray\\" | \\"black\\" | \\"orange\\" | \\"hazel\\";
+  birthYear?: string  | null;
+  gender: \\"male\\" | \\"n/a\\" | \\"female\\" | \\"hermaphrodite\\" | \\"none\\";
+  homeworld: string;
+  films: any[];
+  species: any[];
+  vehicles: any[];
+  starships: any[];
+  created: Date;
+  edited: Date;
+  url: string;
+  id: number;
+};
+
+"
 `;

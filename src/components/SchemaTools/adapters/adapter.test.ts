@@ -4,6 +4,8 @@ import { schemaAnalyzer, helpers, FieldTypeSummary, TypeSummary } from 'schema-a
 
 const flattenTypes = helpers.flattenTypes;
 import knex from './writer.knex';
+import typescript from './writer.typescript';
+import mongoose from './writer.mongoose';
 import users from '../../../../public/users.example.json';
 import usersSparse from '../../../../public/user_sparse-subtypes.json';
 import people from '../../../../public/swapi-people.json';
@@ -87,7 +89,7 @@ describe('knex writer', () => {
       nullableRowsThreshold: 0.001,
     });
     const code = knex.render({
-      schemaName: 'test',
+      schemaName: 'people',
       results: flatResult,
       options,
     });
@@ -106,7 +108,7 @@ describe('knex writer', () => {
       nullableRowsThreshold: 0.001,
     });
     const code = knex.render({
-      schemaName: 'test',
+      schemaName: 'usersSparse',
       results: flatResult,
       options,
     });
@@ -114,3 +116,121 @@ describe('knex writer', () => {
     expect(code).toMatchSnapshot();
   });
 });
+
+describe('mongoose writer', () => {
+  it('can emit correct mongoose migration', async () => {
+    const options = { strictMatching: false };
+    const results = await schemaAnalyzer('users', users, options);
+    const flatResult = helpers.flattenTypes(results, {
+      targetLength: 'p99',
+      targetPrecision: 'p99',
+      targetScale: 'p99',
+      targetValue: 'p99',
+      nullableRowsThreshold: 0.001,
+    });
+    const code = mongoose.render({
+      schemaName: 'users',
+      results: flatResult,
+      options,
+    });
+
+    expect(code).toMatchSnapshot();
+  });
+
+  it('can emit mongoose migration for people json', async () => {
+    const options = { strictMatching: false };
+    const results = await schemaAnalyzer('people', people, options);
+    const flatResult = helpers.flattenTypes(results, {
+      targetLength: 'p99',
+      targetPrecision: 'p99',
+      targetScale: 'p99',
+      targetValue: 'p99',
+      nullableRowsThreshold: 0.001,
+    });
+    const code = mongoose.render({
+      schemaName: 'people',
+      results: flatResult,
+      options,
+    });
+
+    expect(code).toMatchSnapshot();
+  });
+
+  it('can emit mongoose migration for nested user json', async () => {
+    const options = { strictMatching: false };
+    const results = await schemaAnalyzer('users', usersSparse, options);
+    const flatResult = helpers.flattenTypes(results, {
+      targetLength: 'p99',
+      targetPrecision: 'p99',
+      targetScale: 'p99',
+      targetValue: 'p99',
+      nullableRowsThreshold: 0.001,
+    });
+    const code = mongoose.render({
+      schemaName: 'usersSparse',
+      results: flatResult,
+      options,
+    });
+
+    expect(code).toMatchSnapshot();
+  });
+})
+
+describe('typescript writer', () => {
+  it('can emit correct typescript migration', async () => {
+    const options = { strictMatching: false };
+    const results = await schemaAnalyzer('users', users, options);
+    const flatResult = helpers.flattenTypes(results, {
+      targetLength: 'p99',
+      targetPrecision: 'p99',
+      targetScale: 'p99',
+      targetValue: 'p99',
+      nullableRowsThreshold: 0.001,
+    });
+    const code = typescript.render({
+      schemaName: 'users',
+      results: flatResult,
+      options,
+    });
+
+    expect(code).toMatchSnapshot();
+  });
+
+  it('can emit typescript migration for people json', async () => {
+    const options = { strictMatching: false };
+    const results = await schemaAnalyzer('people', people, options);
+    const flatResult = helpers.flattenTypes(results, {
+      targetLength: 'p99',
+      targetPrecision: 'p99',
+      targetScale: 'p99',
+      targetValue: 'p99',
+      nullableRowsThreshold: 0.001,
+    });
+    const code = typescript.render({
+      schemaName: 'people',
+      results: flatResult,
+      options,
+    });
+
+    expect(code).toMatchSnapshot();
+  });
+
+  it('can emit typescript migration for nested user json', async () => {
+    const options = { strictMatching: false };
+    const results = await schemaAnalyzer('users', usersSparse, options);
+    const flatResult = helpers.flattenTypes(results, {
+      targetLength: 'p99',
+      targetPrecision: 'p99',
+      targetScale: 'p99',
+      targetValue: 'p99',
+      nullableRowsThreshold: 0.001,
+    });
+    const code = typescript.render({
+      schemaName: 'usersSparse',
+      results: flatResult,
+      options,
+    });
+
+    expect(code).toMatchSnapshot();
+  });
+})

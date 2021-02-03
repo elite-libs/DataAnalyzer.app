@@ -3,7 +3,8 @@
   "version": "2.0.0",
   "description": "Heuristic \"column\" type & size analysis w/ enumeration detection.",
   "type": "commonjs",
-  "main": "dist/schema-analyzer.bundle.js",
+  "module": "index.tsx",
+  "main": "index.tsx",
   "browser": "dist/schema-analyzer.bundle.js",
   "files": [
     "dist",

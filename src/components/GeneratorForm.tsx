@@ -12,7 +12,10 @@ type GeneratorFormArgs<T> = {
   };
   onSchema: (data: T, schemaName: string) => any
 }
-
+/**
+ * 
+ * @deprecated
+ */
 export default function GeneratorForm({ options = { schemaName: 'user'}, onSchema }: GeneratorFormArgs<any>) {
   const [schemaName, setSchemaName] = useState(options?.schemaName || 'user');
   const [inputData, setInputData] = useState('');

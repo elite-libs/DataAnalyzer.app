@@ -73,6 +73,11 @@
     "forceConsistentCasingInFileNames": true  /* Disallow inconsistently-cased references to the same file. */
   },
   "files": ["./index.ts"],
-  "include": ["./**/*.test.{ts,js,tsx,jsx}", "./utils/*.ts"],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.js",
+    "src/**/*.jsx"
+  ],
   "exclude": ["node_modules/@types/eslint/index.d.ts"]
 }
