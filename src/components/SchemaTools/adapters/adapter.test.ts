@@ -1,6 +1,6 @@
 /* eslint-disable import/first */
 
-import { schemaAnalyzer, helpers, FieldTypeSummary, TypeSummary } from 'schema-analyzer/index';
+import { schemaAnalyzer, helpers, FieldTypeSummary, TypeSummary } from '../../../schema-analyzer/index';
 
 const flattenTypes = helpers.flattenTypes;
 import knex from './writer.knex';
@@ -58,8 +58,8 @@ function parseCsv(content: any): Promise<any[]> {
   });
 }
 
-describe('knex writer', () => {
-  it('can emit correct knex migration', async () => {
+describe('#knex', () => {
+  it('can emit migration', async () => {
     const options = { strictMatching: false };
     const results = await schemaAnalyzer('users', users, options);
     const flatResult = helpers.flattenTypes(results, {
@@ -78,7 +78,7 @@ describe('knex writer', () => {
     expect(code).toMatchSnapshot();
   });
 
-  it('can emit knex migration for people json', async () => {
+  it('can emit migration for people json', async () => {
     const options = { strictMatching: false };
     const results = await schemaAnalyzer('people', people, options);
     const flatResult = helpers.flattenTypes(results, {
@@ -97,7 +97,7 @@ describe('knex writer', () => {
     expect(code).toMatchSnapshot();
   });
 
-  it('can emit knex migration for nested user json', async () => {
+  it('can emit migration for nested type', async () => {
     const options = { strictMatching: false };
     const results = await schemaAnalyzer('users', usersSparse, options);
     const flatResult = helpers.flattenTypes(results, {
@@ -115,10 +115,33 @@ describe('knex writer', () => {
 
     expect(code).toMatchSnapshot();
   });
+
+  it.skip('can emit migration with bigInteger id', async () => {
+    const options = { strictMatching: false };
+    let localData = usersSparse.map(u => ({ ...u }));
+    localData[0].id = '2147483648'
+    localData[1].id = '2147483649'
+    const results = await schemaAnalyzer('users', localData, options);
+    const flatResult = helpers.flattenTypes(results, {
+      targetLength: 'max',
+      targetPrecision: 'max',
+      targetScale: 'max',
+      targetValue: 'max',
+      nullableRowsThreshold: 0.001,
+    });
+
+    const code = knex.render({
+      schemaName: 'usersBigInt',
+      results: flatResult,
+      options,
+    });
+
+    expect(code).toMatchSnapshot();
+  });
 });
 
-describe('mongoose writer', () => {
-  it('can emit correct mongoose migration', async () => {
+describe('#mongoose', () => {
+  it('can emit schema', async () => {
     const options = { strictMatching: false };
     const results = await schemaAnalyzer('users', users, options);
     const flatResult = helpers.flattenTypes(results, {
@@ -137,7 +160,7 @@ describe('mongoose writer', () => {
     expect(code).toMatchSnapshot();
   });
 
-  it('can emit mongoose migration for people json', async () => {
+  it('can emit schema for people json', async () => {
     const options = { strictMatching: false };
     const results = await schemaAnalyzer('people', people, options);
     const flatResult = helpers.flattenTypes(results, {
@@ -156,7 +179,7 @@ describe('mongoose writer', () => {
     expect(code).toMatchSnapshot();
   });
 
-  it('can emit mongoose migration for nested user json', async () => {
+  it('can emit schema with nested types', async () => {
     const options = { strictMatching: false };
     const results = await schemaAnalyzer('users', usersSparse, options);
     const flatResult = helpers.flattenTypes(results, {
@@ -176,8 +199,8 @@ describe('mongoose writer', () => {
   });
 })
 
-describe('typescript writer', () => {
-  it('can emit correct typescript migration', async () => {
+describe('#typescript', () => {
+  it('can emit interface(s)', async () => {
     const options = { strictMatching: false };
     const results = await schemaAnalyzer('users', users, options);
     const flatResult = helpers.flattenTypes(results, {
@@ -196,7 +219,7 @@ describe('typescript writer', () => {
     expect(code).toMatchSnapshot();
   });
 
-  it('can emit typescript migration for people json', async () => {
+  it('can emit interface for people json', async () => {
     const options = { strictMatching: false };
     const results = await schemaAnalyzer('people', people, options);
     const flatResult = helpers.flattenTypes(results, {
@@ -215,7 +238,7 @@ describe('typescript writer', () => {
     expect(code).toMatchSnapshot();
   });
 
-  it('can emit typescript migration for nested user json', async () => {
+  it('can emit interface for nested types', async () => {
     const options = { strictMatching: false };
     const results = await schemaAnalyzer('users', usersSparse, options);
     const flatResult = helpers.flattenTypes(results, {

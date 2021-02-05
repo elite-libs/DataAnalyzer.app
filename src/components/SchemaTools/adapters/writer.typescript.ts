@@ -1,14 +1,8 @@
 import { camelCase, startCase } from 'lodash';
 import { CombinedFieldInfo, TypeNameString } from '../../../schema-analyzer';
 import { properCase, removeBlankLines } from '../helpers';
-// import {
-//   NumericFieldInfo,
-//   ScalarFieldInfo,
-//   TypeNameStringComposite,
-//   TypeNameStringDecimal,
-// } from 'schema-analyzer/index';
 import { IDataStepWriter, IRenderArgs } from './writers';
-const typeMap: { [k: TypeNameString]: string } = {
+const typeMap: { [k: string]: string } = {
   '$ref': 'string',
   'Unknown': 'string',
   'ObjectId': 'Types.ObjectId',
@@ -57,7 +51,7 @@ const writer: IDataStepWriter = {
 
         return Object.entries(results.nestedTypes!).map(
           ([nestedName, results]) => {
-            console.log('nested typescript schema:', nestedName);
+            // console.log('nested typescript schema:', nestedName);
             return this.render({
               schemaName: nestedName,
               results,

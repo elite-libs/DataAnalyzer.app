@@ -1,84 +1,122 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`knex writer can emit correct knex migration 1`] = `
+exports[`#knex can emit migration 1`] = `
 "// More info: http://knexjs.org/#Schema-createTable
 
-    exports.up = function up(knex) {
-      return knex.schema.createTable(\\"test\\", (table) => {
-        table.uuid(\\"id\\").primary();
-        table.string(\\"email\\", 40).notNull();
-        table.string(\\"first_name\\", 20).notNull();
-        table.string(\\"last_name\\", 20).notNull();
-        table.boolean(\\"is_active\\").notNull();
-        table.datetime(\\"created_at\\").notNull();
-        table.datetime(\\"modified_at\\").notNull();
-        table.string(\\"catch_phrase\\", 60).notNull();
-        table.string(\\"company_name\\", 20).notNull();
-        table.integer(\\"credits\\").enum('1', '15', '20', '10', '11', '7', '9').notNull();
-        table.decimal(\\"sales_score\\", 10, 8).enum('1.75129', '15.75129', '11.453456', '10.75129', '11.75129', '20.75129', '20.65545', '20.9877865', '7.75129', '9.75129').notNull();
-        table.string(\\"location\\", 20).enum('nyc', 'remote', 'denver').notNull();
-        table.string(\\"profile\\", 400).unique();
-      });
-    };
+exports.up = async function up(knex) {
+  /* Note: no nested types detected */
 
-    exports.down = function down(knex) {
-      return knex.schema.dropTableIfExists(\\"test\\");
-    };
+  return knex.schema.createTable(\\"test\\", (table) => {
+    table.uuid(\\"id\\").notNullable().primary();
+    table.string(\\"email\\", 40).notNullable();
+    table.string(\\"first_name\\", 20).notNullable();
+    table.string(\\"last_name\\", 20).notNullable();
+    table.boolean(\\"is_active\\").notNullable();
+    table.datetime(\\"created_at\\").notNullable();
+    table.datetime(\\"modified_at\\").notNullable();
+    table.string(\\"catch_phrase\\", 60).notNullable();
+    table.string(\\"company_name\\", 20).notNullable();
+    table.integer(\\"credits\\").enum('1', '15', '20', '10', '11', '7', '9').notNullable();
+    table.decimal(\\"sales_score\\", 10, 8).enum('1.75129', '15.75129', '11.453456', '10.75129', '11.75129', '20.75129', '20.65545', '20.9877865', '7.75129', '9.75129').notNullable();
+    table.string(\\"location\\", 20).enum('nyc', 'remote', 'denver').notNullable();
+    table.string(\\"profile\\", 400).unique();
+})
 
-    "
+};
+
+exports.down = async function down(knex) {
+  await knex.schema.dropTableIfExists(\\"test\\");
+};
+"
 `;
 
-exports[`knex writer can emit knex migration for nested user json 1`] = `
+exports[`#knex can emit migration for nested type 1`] = `
 "// More info: http://knexjs.org/#Schema-createTable
 
-    exports.up = function up(knex) {
-      return knex.schema.createTable(\\"users_sparse\\", (table) => {
-        table.increments(\\"id\\");
-        table.string(\\"name\\", 20).notNull();
-        table.text(\\"notes\\"); // TODO: add references: users.notes;
-      });
-    };
+exports.up = async function up(knex) {
+  await knex.schema.createTable(\\"users_notes\\", (table) => {
+    table.increments(\\"id\\");
+    table.string(\\"text\\", 20).notNullable();
+})
+;
 
-    exports.down = function down(knex) {
-      return knex.schema.dropTableIfExists(\\"users_sparse\\");
-    };
 
-    "
+  return knex.schema.createTable(\\"users_sparse\\", (table) => {
+    table.increments(\\"id\\");
+    table.string(\\"name\\", 20).notNullable();
+    table.integer(\\"notes\\").references('id').inTable('users_notes');
+})
+
+};
+
+exports.down = async function down(knex) {
+  await knex.schema.dropTableIfExists(\\"users_notes\\");
+  await knex.schema.dropTableIfExists(\\"users_sparse\\");
+};
+"
 `;
 
-exports[`knex writer can emit knex migration for people json 1`] = `
+exports[`#knex can emit migration for people json 1`] = `
 "// More info: http://knexjs.org/#Schema-createTable
 
-    exports.up = function up(knex) {
-      return knex.schema.createTable(\\"people\\", (table) => {
-        table.string(\\"name\\", 40).notNull().unique();
-        table.integer(\\"height\\");
-        table.integer(\\"mass\\");
-        table.string(\\"hair_color\\", 20).notNull();
-        table.string(\\"skin_color\\", 20);
-        table.string(\\"eye_color\\", 20).enum('blue', 'yellow', 'red', 'brown', 'blue-gray', 'black', 'orange', 'hazel').notNull();
-        table.string(\\"birth_year\\", 20);
-        table.string(\\"gender\\", 20).enum('male', 'n/a', 'female', 'hermaphrodite', 'none').notNull();
-        table.string(\\"homeworld\\", 40).notNull();
-        table.json(\\"films\\").notNull();
-        table.json(\\"species\\").notNull();
-        table.json(\\"vehicles\\").notNull();
-        table.json(\\"starships\\").notNull();
-        table.datetime(\\"created\\").notNull();
-        table.datetime(\\"edited\\").notNull();
-        table.string(\\"url\\", 40).notNull().unique();
-        table.increments(\\"id\\");
-      });
-    };
+exports.up = async function up(knex) {
+  /* Note: no nested types detected */
 
-    exports.down = function down(knex) {
-      return knex.schema.dropTableIfExists(\\"people\\");
-    };
+  return knex.schema.createTable(\\"people\\", (table) => {
+    table.string(\\"name\\", 40).notNullable().unique();
+    table.integer(\\"height\\");
+    table.integer(\\"mass\\");
+    table.string(\\"hair_color\\", 20).notNullable();
+    table.string(\\"skin_color\\", 20);
+    table.string(\\"eye_color\\", 20).enum('blue', 'yellow', 'red', 'brown', 'blue-gray', 'black', 'orange', 'hazel').notNullable();
+    table.string(\\"birth_year\\", 20);
+    table.string(\\"gender\\", 20).enum('male', 'n/a', 'female', 'hermaphrodite', 'none').notNullable();
+    table.string(\\"homeworld\\", 40).notNullable();
+    table.json(\\"films\\").notNullable();
+    table.json(\\"species\\").notNullable();
+    table.json(\\"vehicles\\").notNullable();
+    table.json(\\"starships\\").notNullable();
+    table.datetime(\\"created\\").notNullable();
+    table.datetime(\\"edited\\").notNullable();
+    table.string(\\"url\\", 40).notNullable().unique();
+    table.increments(\\"id\\");
+})
 
-    "
+};
+
+exports.down = async function down(knex) {
+  await knex.schema.dropTableIfExists(\\"people\\");
+};
+"
 `;
 
-exports[`mongoose writer can emit correct mongoose migration 1`] = `
+exports[`#knex can emit migration with bigInteger id 1`] = `
+"// More info: http://knexjs.org/#Schema-createTable
+
+exports.up = async function up(knex) {
+  await knex.schema.createTable(\\"users_notes\\", (table) => {
+    table.increments(\\"id\\");
+    table.string(\\"text\\", 20).notNullable();
+})
+;
+
+
+  return knex.schema.createTable(\\"users_big_int\\", (table) => {
+    table.increments(\\"id\\");
+    table.string(\\"name\\", 20).notNullable();
+    table.integer(\\"notes\\").references('id').inTable('users_notes');
+})
+
+};
+
+exports.down = async function down(knex) {
+  await knex.schema.dropTableIfExists(\\"users_notes\\");
+  await knex.schema.dropTableIfExists(\\"users_big_int\\");
+};
+"
+`;
+
+exports[`#mongoose can emit schema 1`] = `
 "const mongoose = require(\\"mongoose\\");
 const {Schema, Model, Types} = mongoose;
 
@@ -145,47 +183,7 @@ module.exports.Users = usersModel;
 "
 `;
 
-exports[`mongoose writer can emit mongoose migration for nested user json 1`] = `
-"const mongoose = require(\\"mongoose\\");
-const {Schema, Model, Types} = mongoose;
-
-const UsersSparse = new Schema({
-  id: {
-    type: \\"Number\\",
-    unique: true,
-    required: true,
-  },
-  name: {
-    type: \\"String\\",
-    required: true,
-  },
-  notes: {
-    type: \\"Array\\",
-    required: true,
-  }});
-
-const usersSparseModel = mongoose.model(\\"usersSparse\\", UsersSparse);
-module.exports.UsersSparse = usersSparseModel;
-const mongoose = require(\\"mongoose\\");
-const {Schema, Model, Types} = mongoose;
-
-const UsersNotes = new Schema({
-  id: {
-    type: \\"Number\\",
-    unique: true,
-    required: true,
-  },
-  text: {
-    type: \\"String\\",
-    required: true,
-  }});
-
-const usersNotesModel = mongoose.model(\\"usersNotes\\", UsersNotes);
-module.exports.UsersNotes = usersNotesModel;
-"
-`;
-
-exports[`mongoose writer can emit mongoose migration for people json 1`] = `
+exports[`#mongoose can emit schema for people json 1`] = `
 "const mongoose = require(\\"mongoose\\");
 const {Schema, Model, Types} = mongoose;
 
@@ -267,27 +265,47 @@ module.exports.People = peopleModel;
 "
 `;
 
-exports[`typescript writer can emit correct typescript migration 1`] = `
-"export interface Users {
-  id: string;
-  email: string;
-  firstName: string;
-  lastName: string;
-  isActive: boolean;
-  createdAt: Date;
-  modifiedAt: Date;
-  catchPhrase: string;
-  companyName: string;
-  credits: \\"1\\" | \\"15\\" | \\"20\\" | \\"10\\" | \\"11\\" | \\"7\\" | \\"9\\";
-  salesScore: \\"1.75129\\" | \\"15.75129\\" | \\"11.453456\\" | \\"10.75129\\" | \\"11.75129\\" | \\"20.75129\\" | \\"20.65545\\" | \\"20.9877865\\" | \\"7.75129\\" | \\"9.75129\\";
-  location: \\"nyc\\" | \\"remote\\" | \\"denver\\";
-  profile?: string  | null;
-};
+exports[`#mongoose can emit schema with nested types 1`] = `
+"const mongoose = require(\\"mongoose\\");
+const {Schema, Model, Types} = mongoose;
 
+const UsersSparse = new Schema({
+  id: {
+    type: \\"Number\\",
+    unique: true,
+    required: true,
+  },
+  name: {
+    type: \\"String\\",
+    required: true,
+  },
+  notes: {
+    type: \\"Array\\",
+    required: true,
+  }});
+
+const usersSparseModel = mongoose.model(\\"usersSparse\\", UsersSparse);
+module.exports.UsersSparse = usersSparseModel;
+const mongoose = require(\\"mongoose\\");
+const {Schema, Model, Types} = mongoose;
+
+const UsersNotes = new Schema({
+  id: {
+    type: \\"Number\\",
+    unique: true,
+    required: true,
+  },
+  text: {
+    type: \\"String\\",
+    required: true,
+  }});
+
+const usersNotesModel = mongoose.model(\\"usersNotes\\", UsersNotes);
+module.exports.UsersNotes = usersNotesModel;
 "
 `;
 
-exports[`typescript writer can emit typescript migration for nested user json 1`] = `
+exports[`#typescript can emit interface for nested types 1`] = `
 "export interface UsersSparse {
   id: number;
   name: string;
@@ -302,7 +320,7 @@ export interface UsersNotes {
 "
 `;
 
-exports[`typescript writer can emit typescript migration for people json 1`] = `
+exports[`#typescript can emit interface for people json 1`] = `
 "export interface People {
   name: string;
   height?: number  | null;
@@ -321,6 +339,26 @@ exports[`typescript writer can emit typescript migration for people json 1`] = `
   edited: Date;
   url: string;
   id: number;
+};
+
+"
+`;
+
+exports[`#typescript can emit interface(s) 1`] = `
+"export interface Users {
+  id: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  isActive: boolean;
+  createdAt: Date;
+  modifiedAt: Date;
+  catchPhrase: string;
+  companyName: string;
+  credits: \\"1\\" | \\"15\\" | \\"20\\" | \\"10\\" | \\"11\\" | \\"7\\" | \\"9\\";
+  salesScore: \\"1.75129\\" | \\"15.75129\\" | \\"11.453456\\" | \\"10.75129\\" | \\"11.75129\\" | \\"20.75129\\" | \\"20.65545\\" | \\"20.9877865\\" | \\"7.75129\\" | \\"9.75129\\";
+  location: \\"nyc\\" | \\"remote\\" | \\"denver\\";
+  profile?: string  | null;
 };
 
 "

@@ -4,7 +4,7 @@ import Paper from '@material-ui/core/Paper';
 // import Button from '@material-ui/core/Button'
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import { CallbackFn } from 'types';
-import { FieldInfo, TypeSummary } from 'schema-analyzer';
+import { FieldInfo, TypeSummary } from '../../schema-analyzer';
 import { JsxElement } from 'typescript';
 import { useDispatch } from 'react-redux';
 // import { RootState } from 'store/rootReducer';

@@ -1,4 +1,3 @@
-/* eslint-disable import/no-anonymous-default-export */
 import { mapValues } from 'lodash';
 import snakecase from 'lodash.snakecase';
 import debug from 'debug';
@@ -15,7 +14,7 @@ import {
 import { IDataStepWriter, IRenderArgs } from './writers';
 const log = debug('writer:knex');
 
-const BIG_INTEGER_MIN = 2147483647;
+const BIG_INTEGER_MIN = 2147483647n;
 
 const getFieldLengthArg = (fieldName: string, maxLength: number) => {
   if (maxLength > 4000) return 8000;
@@ -31,38 +30,6 @@ const getFieldLengthArg = (fieldName: string, maxLength: number) => {
   if (maxLength > 40) return 60;
   if (maxLength > 20) return 40;
   return 20;
-};
-
-/**
-
-Determine a "best guess" maximum field size, use the 90th percentile when
-the distance between it and the maximum exceeds 30 percent (of the max value)
-
-@example
-
-Situation: A `City` field normally has a size range of 3-15 characters.
-A glitch at our vendor swapped `City` with a huge text field in 1 record!
-
-We don't want to set the limit way bigger than
-necessary, as it'd be confusing and impact performance.
-
-Reduced example - `very sparse` data: [3, 4, 5, 7, 9, 231429]
-*/
-const correctForErroneousMaximum = (
-  threshold = 0.1,
-  ninetiethPct: number,
-  maximum: number,
-) => {
-  const gapLimit = threshold * maximum;
-  const topTenPercentileRange = maximum - ninetiethPct;
-  if (topTenPercentileRange > gapLimit) {
-    log('Correcting for erroneous maximum field value:', {
-      ninetiethPct,
-      maximum,
-    });
-    return ninetiethPct;
-  }
-  return maximum;
 };
 
 /**
@@ -84,15 +51,12 @@ const correctForErroneousMaximum = (
 // }
 const writer: IDataStepWriter = {
   render({ results, options, schemaName }: IRenderArgs) {
-    // const {  } = options || {}
-
-    const fieldSummary = results.fields;
-    // const uniqueCounts = results.uniques
-    // const rowCount = results.rowCount
-
-    const fieldPairs: string[] = Object.entries<CombinedFieldInfo>(
-      fieldSummary,
-    ).map(([fieldName, fieldInfo]) => {
+    const hasNestedTypes = results.nestedTypes && Object.keys(results.nestedTypes!).length > 0
+    
+    const getCreateTableCode = ({schemaName, results}: IRenderArgs) => `knex.schema.createTable("${schemaName}", (table) => {\n`
+     + Object
+    .entries<CombinedFieldInfo>(results.fields)
+    .map(([fieldName, fieldInfo]) => {
       const name = snakecase(fieldName);
       const {
         type,
@@ -113,14 +77,6 @@ const writer: IDataStepWriter = {
       if ('scale' in fieldInfo) scale = fieldInfo.scale;
       if ('precision' in fieldInfo) precision = fieldInfo.precision;
 
-      // console.log(
-      //   'typeStats',
-      //   fieldName,
-      //   type,
-      //   { length, scale, precision, value, enumData, typeCount },
-      //   JSON.stringify(fieldInfo),
-      // )
-
       let appendChain = '';
 
       let sizePart =
@@ -134,7 +90,7 @@ const writer: IDataStepWriter = {
       }
 
       // likely a not-null type of field
-      if (!nullable) appendChain += '.notNull()';
+      if (!nullable) appendChain += '.notNullable()';
 
       if ('precision' in fieldInfo && 'scale' in fieldInfo) {
         const p = fieldInfo.precision!;
@@ -143,7 +99,7 @@ const writer: IDataStepWriter = {
         return `    table.decimal("${name}"${sizePart})${appendChain};`;
       }
       if (identity && type === 'Number') {
-        if (value && value > BIG_INTEGER_MIN) {
+        if (value && BigInt(value) >= BIG_INTEGER_MIN) {
           return `    table.bigIncrements("${name}");`;
         } else {
           return `    table.increments("${name}");`;
@@ -164,11 +120,12 @@ const writer: IDataStepWriter = {
       }
       if (identity) {
         // Override any possible redundant 'unique' method from above
-        appendChain = '.primary()';
+        // console.warn('invalid identity field detected: unsupported identity column type', name, type, fieldInfo)
+        appendChain += '.primary()';
       }
 
       if (typeRef)
-        return `    table.text("${name}"); // TODO: add references: ${typeRef};`;
+        return `    table.integer("${name}").references('id').inTable('${snakecase(typeRef)}');`;
 
       if (type === 'Unknown')
         return `    table.text("${name}"${sizePart})${appendChain};`;
@@ -202,21 +159,55 @@ const writer: IDataStepWriter = {
         `    table.text("${name}")${appendChain}; // ` +
         JSON.stringify(fieldInfo)
       );
-    });
+    }).join('\n') + `\n})\n`;
+
     schemaName = snakecase(schemaName);
+
+    const getAllDropTables = () => {
+      if (
+        !options?.disableNestedTypes &&
+        hasNestedTypes
+      ) {
+        return [...Object.keys(results.nestedTypes!).map(snakecase), schemaName]
+      }
+      return [schemaName]
+    }
+    const getRecursive = () => {
+      if (
+        !options?.disableNestedTypes &&
+        hasNestedTypes
+      ) {
+        // console.log('nested schema detected', schemaName);
+
+        return Object.entries(results.nestedTypes!).map(
+          ([nestedName, results]) => {
+            // console.log('nested knex schema:', nestedName);
+            return getCreateTableCode({
+              schemaName: snakecase(nestedName),
+              results,
+              options: { disableNestedTypes: false }, // possible needs to be true?
+            });
+          },
+        );
+      }
+      return [''];
+    };
+    
     return `// More info: http://knexjs.org/#Schema-createTable
 
-    exports.up = function up(knex) {
-      return knex.schema.createTable("${schemaName}", (table) => {
-    ${fieldPairs.join('\n    ')}
-      });
-    };
+exports.up = async function up(knex) {
+${hasNestedTypes 
+    ? `  await ${getRecursive().join(';\n  await')};\n`
+    : `  /* Note: no nested types detected */`}
 
-    exports.down = function down(knex) {
-      return knex.schema.dropTableIfExists("${schemaName}");
-    };
+  return ${getCreateTableCode({schemaName, results})}
+};
 
-    `;
+exports.down = async function down(knex) {
+${getAllDropTables().map(tableName => `  await knex.schema.dropTableIfExists("${tableName}")`)
+.join(';\n')};
+};
+`;
   },
 };
 

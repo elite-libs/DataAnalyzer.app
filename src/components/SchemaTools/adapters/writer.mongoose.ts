@@ -52,7 +52,7 @@ module.exports.${properCase(schemaName)} = ${camelCase(schemaName)}Model;\n`
         
         return Object.entries(results.nestedTypes!).map(
           ([nestedName, results]) => {
-            console.log('nested mongoose schema:', nestedName);
+            // console.log('nested mongoose schema:', nestedName);
             return this.render({
               schemaName: nestedName,
               results,
