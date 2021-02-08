@@ -2,35 +2,32 @@ import React from 'react';
 import Paper from '@material-ui/core/Paper';
 // import { Link, useParams, useHistory } from 'react-router-dom';
 // import Button from '@material-ui/core/Button'
-import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import { CallbackFn } from 'types';
 import { FieldInfo, TypeSummary } from '../../schema-analyzer';
 import { JsxElement } from 'typescript';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 // import { RootState } from 'store/rootReducer';
 import {
   setInputData,
   setSchemaName,
 } from 'store/analysisSlice';
 import { setStatusMessage } from 'store/appStateSlice';
+import { RootState } from 'store/rootReducer';
 
 type Props = {
   hasInputData: boolean;
-  displayStatus: CallbackFn<TypeSummary<FieldInfo> | undefined, JsxElement | any>;
   inputData: string;
   className?: string;
 }
 
 export default function InputProcessor({
   hasInputData,
-  displayStatus,
-  inputData = '',
   className = '',
 }: Props) {
   const dispatch = useDispatch();
-  // const { inputData, results, schema, schemaName } = useSelector(
-  //   (state: RootState) => state.analysisFeature,
-  // );
+  const { inputData, results, schema, schemaName } = useSelector(
+    (state: RootState) => state.analysisFeature,
+  );
 
   // const history = useHistory();
 
@@ -77,18 +74,20 @@ export default function InputProcessor({
     className += ' appears-valid';
   }
   return (
-    <Paper elevation={3} className={className}>
-      <section className="position-relative w-100 d-flex flex-column align-items-center justify-content-center ">
-        {displayStatus(() => console.log('/results/code/knex'))}
+    <Paper elevation={3} className={className} style={{display: 'flex',
+      justifyContent: 'stretch'}}>
+      <section className="position-relative w-100 d-flex flex-column align-items-center" style={{justifyContent: 'stretch'}}>
 
-        <TextareaAutosize
-          className="col s12 l12 border-0 m-1 p-1"
+        <textarea
+          style={{flexGrow: 1}}
+          className="w-100 border-0 m-1 p-1"
           aria-label="Input or Paste your CSV or JSON data"
-          placeholder='Paste your data here, or click "Start Here" to choose a Sample Data Set'
-          value={inputData}
+          placeholder='👉 Paste data here!&#160;👈'
           onChange={(e) => dispatch(setInputData(e.target.value))}
           {...textareaOpts}
-        />
+        >
+          {inputData}
+        </textarea>
         {/* {children} */}
       </section>
     </Paper>

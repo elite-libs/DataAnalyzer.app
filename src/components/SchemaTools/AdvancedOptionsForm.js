@@ -17,6 +17,8 @@ import SaveIcon from '@material-ui/icons/Save';
 import CloseIcon from '@material-ui/icons/Close';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import SettingsIcon from '@material-ui/icons/Settings';
+import { useDispatch } from 'react-redux';
+import { setOptions, setStatusMessage } from 'store/optionsSlice';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -118,9 +120,8 @@ export default function AdvancedOptionsForm({
     uniqueRowsThreshold: 1.0,
   },
   className = '',
-  onSave = (opts) =>
-    console.log('TODO: Add onSave handler to options form', opts),
 }) {
+  const dispatch = useDispatch();
   const classes = useStyles();
   const methods = useForm({ defaultValues: options });
   const { handleSubmit, control, reset, register, watch } = methods;
@@ -132,7 +133,7 @@ export default function AdvancedOptionsForm({
     };
     console.log('Saved Options', updatedOptions);
 
-    if (onSave) onSave(updatedOptions);
+    dispatch(setOptions(updatedOptions));
     setExpanded(false);
   };
 
@@ -171,7 +172,7 @@ export default function AdvancedOptionsForm({
             onSubmit={handleSubmit(onSubmit)}
           >
             <Paper elevation={3}>
-              <CardContent className={`px-3 ${classes.panelContent}`}>
+              <CardContent className={`px-3 bg-white ${classes.panelContent}`}>
                 <fieldset className="form-group">
                   <legend className="mb-1">Global Rules</legend>
                   <section className="input-group d-flex justify-content-between">
@@ -259,7 +260,7 @@ export default function AdvancedOptionsForm({
               </CardContent>
               <CardActions
                 disableSpacing
-                className="d-flex justify-content-between align-items-center"
+                className="d-flex justify-content-between align-items-center button-section"
               >
                 <ButtonGroup size="small" className="py-1">
                   <Button

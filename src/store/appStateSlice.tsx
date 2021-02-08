@@ -9,7 +9,7 @@ let initialState: State = {
 };
 
 const slice = createSlice({
-  name: 'analysis',
+  name: 'appState',
   initialState,
   reducers: {
     setStatusMessage(state, action: PayloadAction<string>) {

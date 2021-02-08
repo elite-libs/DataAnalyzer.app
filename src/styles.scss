@@ -1,5 +1,32 @@
 .App {
   text-align: left;
+  main {
+    min-height: 80vh;
+    height: 80vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    > section {
+      width: 100%;
+      height: calc( 80vh - 120px );
+      display: flex;
+      justify-content: stretch;
+      flex-direction: column;
+
+      > div, > pre {
+        flex-grow: 1;
+      }
+    }
+  }
+}
+
+.row-block {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.button-section {
+  margin-top: 0.2rem;
+  padding-top: 2.2rem;
 }
 
 .popover, .popover-wrapper {
@@ -100,6 +127,20 @@ form .field-name {
   margin: 0 1.25rem;
 }
 
+.demo-menu {
+  position: relative;
+  z-index: 20;
+  ul {
+    position: relative;
+    z-index: 20;
+    li {
+      position: relative;
+      z-index: 20;
+    }
+
+  }
+}
+
 .main-panel {
   min-height: 40vh;
   .panel {
@@ -118,8 +159,9 @@ form .field-name {
 
 .field-overlay {
   transition: opacity 0.25s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  pointer-events: fill;
+  pointer-events: none;
 }
+
 .appears-valid {
   .success-message {
     pointer-events: all;

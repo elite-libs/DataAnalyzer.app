@@ -10,7 +10,7 @@ import {
   FieldInfo,
   schemaAnalyzer,
   TypeSummary,
-  helpers
+  helpers,
 } from '../../schema-analyzer/index';
 import { parse } from './adapters/readers';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
@@ -35,11 +35,25 @@ import {
 } from 'store/analysisSlice';
 import { setStatusMessage } from 'store/appStateSlice';
 import DropdownMenu from './DropdownMenu';
+import { render } from './adapters/writers';
+import {
+  PostgresIcon,
+  MongoDbIcon,
+  TypeScriptIcon,
+  KnexIcon,
+} from './AppIcons.js';
+import { setOptions } from 'store/optionsSlice';
+
+import './index.scss';
 
 export default function SchemaTools() {
   const dispatch = useDispatch();
   const { inputData, results, schema, schemaName } = useSelector(
     (state: RootState) => state.analysisFeature,
+  );
+  const options = useSelector((state: RootState) => state.optionsActions);
+  const { statusMessage } = useSelector(
+    (state: RootState) => state.appStateActions,
   );
 
   // const [schemaResults, setResults] = React.useState<
@@ -49,15 +63,6 @@ export default function SchemaTools() {
   // const [inputData, setInputData] = React.useState('');
   // const [statusMessage, setStatusMessage] = React.useState('');
   // const [resultsTimestamp, setResultsTimestamp] = React.useState('');
-
-  const [options, setOptions] = React.useState({
-    strictMatching: true,
-    enumMinimumRowCount: 100,
-    enumAbsoluteLimit: 10,
-    enumPercentThreshold: 0.01,
-    nullableRowsThreshold: 0.02,
-    uniqueRowsThreshold: 1.0,
-  });
 
   const loadData = (name: string) => {
     let filePath = '';
@@ -100,40 +105,10 @@ export default function SchemaTools() {
       });
   };
 
-  const hasSchemaResults = !!(results != null && results?.fields);
+  const hasSchemaResults = !!(schema != null && schema?.fields);
   const hasInputData: boolean =
     inputData != null &&
     (String(inputData).length > 40 || String(inputData).split('\n').length > 5);
-
-  const displayStatusOverlay = (
-    onComplete: CallbackFn<TypeSummary<FieldInfo>, any>,
-  ) => {
-    if (hasInputData) {
-      return (
-        <Button
-          className="field-overlay success-message position-absolute"
-          onClick={() => updateSchemaResults(onComplete)}
-        >
-          <CheckCircleIcon
-            style={{
-              color: '#339999',
-              transform: 'scale(5) translateX(-8px)',
-            }}
-          />
-          Click to Process this Data
-        </Button>
-      );
-    }
-    return (
-      <Typography
-        style={{ height: 60 }}
-        variant="h3"
-        className="field-overlay help-message position-absolute w-100 text-center flex-shrink-1"
-      >
-        👉 Paste data here!&#160;👈
-      </Typography>
-    );
-  };
 
   const updateSchemaResults = (
     onComplete: CallbackFn<TypeSummary<FieldInfo>, any>,
@@ -155,6 +130,16 @@ export default function SchemaTools() {
         })
         .then((results) => {
           setTimeout(() => {
+            dispatch(
+              setResults(
+                render({
+                  schemaName: schemaName!,
+                  options,
+                  writer: options.outputAdapter || 'knex',
+                })(results),
+              ),
+            );
+            dispatch(setStatusMessage(`Success!`));
             console.log(results);
             if (onComplete) onComplete(results);
           }, 50);
@@ -191,13 +176,22 @@ export default function SchemaTools() {
   return (
     <main className="shadow-lg p-3 m-5 bg-white rounded">
       <Router>
-        <nav className="row w-100 ">
-          <h1 className="col-11">DataStep.io</h1>
-          <aside className="col-1 text-right">
-            <AdvancedOptionsForm
-              options={options}
-              onSave={(opts) => setOptions(opts)}
+        <nav className="row row-block w-100">
+          <h1 className="col-6">DataStep.io</h1>
+          <div className="col-5 text-right">
+            <DropdownMenu
+              buttonTextOverride="Demo: Choose a Dataset"
+              onSelect={loadData}
+              options={[
+                'Sample Users JSON',
+                'Sample People JSON',
+                'Sample Listings JSON',
+                'Sample Products CSV',
+              ]}
             />
+          </div>
+          <aside className="col-1 text-right">
+            <AdvancedOptionsForm options={options} />
           </aside>
           <Breadcrumbs
             separator={<NavigateNextIcon />}
@@ -218,33 +212,79 @@ export default function SchemaTools() {
         </nav>
 
         <Switch>
-          <Route path="">
-            <h4 className="my-3">Choose an Option Below</h4>
-            <DropdownMenu
-              buttonTextOverride="Demo: Choose a Dataset"
-              onSelect={loadData}
-              options={[
-                'Sample Users JSON',
-                'Sample People JSON',
-                'Sample Listings JSON',
-                'Sample Products CSV',
-              ]}
-            />
+          <Route path="/" exact>
+            <section>
+              <InputProcessor
+                inputData={inputData!}
+                hasInputData={hasInputData}
+              />
+              <aside className="output-buttons" style={{ height: '80px' }}>
+                <div className="d-flex justify-content-between m-2">
+                  <Button
+                    onClick={() =>
+                      dispatch(
+                        setOptions({ ...options, outputAdapter: 'typescript' }),
+                      )
+                    }
+                    variant="outlined"
+                    size="medium"
+                    color="primary"
+                  >
+                    <TypeScriptIcon />
+                    <div>TypeScript</div>
+                  </Button>
 
-            <InputProcessor
-              displayStatus={displayStatusOverlay}
-              inputData={inputData!}
-              hasInputData={hasInputData}
-            />
-
-            <CodeViewer>
-              {results
-                ? null
-                : '// No code to view, please check your settings.'}
-            </CodeViewer>
+                  <button
+                    onClick={() =>
+                      dispatch(
+                        setOptions({ ...options, outputAdapter: 'mongoose' }),
+                      )
+                    }
+                    className="btn btn-success mx-auto"
+                  >
+                    <MongoDbIcon />
+                    <div>
+                      MongoDB
+                      <br />
+                      Mongoose
+                    </div>
+                  </button>
+                  <button
+                    onClick={() =>
+                      dispatch(
+                        setOptions({ ...options, outputAdapter: 'knex' }),
+                      )
+                    }
+                    className="btn btn-info mx-auto"
+                  >
+                    <KnexIcon />
+                    <div>Knex</div>
+                  </button>
+                  <button
+                    onClick={() =>
+                      dispatch(
+                        setOptions({ ...options, outputAdapter: 'knex' }),
+                      )
+                    }
+                    className="btn btn-info mx-auto"
+                  >
+                    <PostgresIcon />
+                    <div>SQL</div>
+                  </button>
+                </div>
+              </aside>
+              <CodeViewer>
+                {results
+                  ? results
+                  : '// No code to view, please check your settings.'}
+              </CodeViewer>
+              <footer>{statusMessage}</footer>
+            </section>
           </Route>
           <Route path="/results/explorer">
-            <SchemaExplorer schemaResults={results} />
+            <section>
+              <SchemaExplorer schemaResults={results} />
+            </section>
           </Route>
         </Switch>
       </Router>

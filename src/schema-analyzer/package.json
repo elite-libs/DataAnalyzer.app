@@ -5,7 +5,7 @@
   "type": "commonjs",
   "module": "index.tsx",
   "main": "index.tsx",
-  "browser": "dist/schema-analyzer.bundle.js",
+  "browser": "index.tsx",
   "files": [
     "dist",
     "build/index.d.ts",

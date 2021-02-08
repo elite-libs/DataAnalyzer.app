@@ -1,3 +1,4 @@
+import typescriptWriter from './writer.typescript';
 import mongooseWriter from './writer.mongoose';
 import knexWriter from './writer.knex';
 import {
@@ -21,6 +22,7 @@ export interface IRenderArgs {
 const writers = {
   mongoose: mongooseWriter,
   knex: knexWriter,
+  typescript: typescriptWriter,
 };
 
 export type AdapterNames = keyof typeof writers;

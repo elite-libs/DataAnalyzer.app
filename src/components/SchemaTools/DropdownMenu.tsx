@@ -9,8 +9,6 @@ import Popper from '@material-ui/core/Popper';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 
-// const options = ['Create a merge commit', 'Squash and merge', 'Rebase and merge'];
-
 interface Props<T> {
   buttonTextOverride?: string | null;
   options: Array<T | string>;
@@ -22,7 +20,7 @@ export default function DropdownMenu<T>({
   buttonTextOverride,
   options,
   onSelect = (value: any, index: any) => {},
-  className,
+  className = 'demo-menu',
 }: Props<T>) {
   const [open, setOpen] = React.useState(false);
   const [selectedIndex, setSelectedIndex] = React.useState(-1);
@@ -65,11 +63,11 @@ export default function DropdownMenu<T>({
   return (
     <>
       <ButtonGroup
-        variant="contained"
+        variant="outlined"
         color="secondary"
         ref={anchorRef}
         aria-label="split button"
-        className={className}
+        className={className }
         component={'a'}
       >
         <Button onClick={handleToggle}>
@@ -104,7 +102,7 @@ export default function DropdownMenu<T>({
           >
             <Paper>
               <ClickAwayListener onClickAway={handleClose}>
-                <MenuList id="split-button-menu">
+                <MenuList className="demo-menu" id="split-button-menu">
                   {options.map((option, index) => (
                     <MenuItem
                       key={index}

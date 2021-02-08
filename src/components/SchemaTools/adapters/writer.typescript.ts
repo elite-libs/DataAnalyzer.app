@@ -26,7 +26,7 @@ const getTSTypeExpression = (fieldInfo: CombinedFieldInfo) => {
   if (fieldInfo.typeRef) return  properCase(fieldInfo.typeRef) + `[] ${fieldInfo.nullable ? ' | null' : ''}`;
   return `${tsType} ${fieldInfo.nullable ? ' | null' : ''}`
 }
-const writer: IDataStepWriter = {
+const typescriptWriter: IDataStepWriter = {
   render({ results, options, schemaName }: IRenderArgs) {
     const hasNestedTypes = results.nestedTypes && Object.keys(results.nestedTypes!).length > 0
     const { fields } = results;
@@ -66,6 +66,6 @@ const writer: IDataStepWriter = {
   },
 };
 
-export default writer;
+export default typescriptWriter;
 
 
