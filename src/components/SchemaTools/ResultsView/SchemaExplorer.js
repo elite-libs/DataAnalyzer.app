@@ -6,15 +6,14 @@ const getFieldNames = (schemaResults) => {
 };
 
 const getTypeCounts = (schemaResults) => {
-  const typeCounts = {};
-  Object.entries(schemaResults.fields).map(([fieldName, typeInfo]) => {
-    const { types, enum: enumData, unique, nullable } = typeInfo;
+  return Object.entries(schemaResults.fields).reduce((typeCounts, [fieldName, typeInfo]) => {
+    const { types } = typeInfo;
     Object.keys(types).forEach((typeName) => {
       typeCounts[typeName] = typeCounts[typeName] || 0;
       typeCounts[typeName]++;
     });
-  });
-  return typeCounts;
+    return typeCounts
+  }, {});
 };
 
 const getFieldLabeledData = (schemaResults) => {

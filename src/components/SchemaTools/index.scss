@@ -1,18 +1,32 @@
 .output-buttons {
+  // explicitly will not expand:
   flex-grow: 0;
+  // create flexbox for children
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: row;
+
   svg {
+    height: 35px;
+    width: 35px;
     max-height: 50px;
     max-width: 50px;
   }
   .MuiButtonBase-root {
     height: 66px;
     line-height: 1.2rem;
+    margin-right: 2rem;
+    width: 165px;
   }
   .MuiButton-label {
-    max-width: 125px;
+    max-width: 135px;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    > div {
+      margin: 0 0.25rem;
+    }
   }
 }

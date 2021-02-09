@@ -12,10 +12,25 @@
       justify-content: stretch;
       flex-direction: column;
 
-      > div, > pre {
-        flex-grow: 1;
+      > div {
+        flex-grow: 0;
+      }
+      > pre {
+        flex-grow: 2;
       }
     }
+  }
+}
+
+.demo-data-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  label {
+    margin: 0;
+    line-height: 24px;
+    height: 24px;
+    font-weight: 500;
   }
 }
 

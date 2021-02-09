@@ -3,18 +3,21 @@ import { FieldInfo, TypeSummary } from '../schema-analyzer';
 
 type State = {
   inputData?: string | null;
-  schema?: TypeSummary<FieldInfo> | null;
+  inputTimestamp?: string | null;
   results?: string | null;
+  resultsTimestamp?: string | null;
   schemaName: string | null;
-  updatedDate?: Date | null;
+  schema?: TypeSummary<FieldInfo> | null;
+  schemaTimestamp?: string | null;
 };
 
 let initialState: State = {
   inputData: '',
   schema: null,
   schemaName: '',
+  schemaTimestamp: null,
   results: '',
-  updatedDate: null
+  resultsTimestamp: null
 };
 
 const slice = createSlice({
@@ -23,20 +26,31 @@ const slice = createSlice({
   reducers: {
     setInputData(state, action: PayloadAction<string | undefined | null>) {
       const { payload } = action;
+      if (payload === state.inputData) return;
       state.inputData = payload;
+      state.inputTimestamp = new Date().toISOString();
+      state.schema = null;
+      state.schemaTimestamp = null;
+      state.results = null;
+      state.resultsTimestamp = null;
     },
     setSchemaName(state, action: PayloadAction<string | undefined | null>) {
       const { payload } = action;
       state.schemaName = payload || 'SchemaName';
+      state.results = null;
+      state.resultsTimestamp = null;
     },
     setSchema(state, action: PayloadAction<TypeSummary<FieldInfo>>) {
       const { payload } = action;
       state.schema = payload;
+      state.schemaTimestamp = new Date().toISOString();
+      state.results = null;
+      state.resultsTimestamp = null;
     },
     setResults(state, action: PayloadAction<string | undefined | null>) {
       const { payload } = action;
       state.results = payload;
-      state.updatedDate = new Date();
+      state.resultsTimestamp = new Date().toISOString();
     },
   },
 });

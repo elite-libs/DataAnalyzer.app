@@ -5,7 +5,7 @@ type State = {
 };
 
 let initialState: State = {
-  statusMessage: '',
+  statusMessage: '© 2020-2021. All trademarks, service marks and company names are the property of their respective owners.',
 };
 
 const slice = createSlice({

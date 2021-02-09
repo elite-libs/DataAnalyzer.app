@@ -6,12 +6,8 @@ import {
   CombinedFieldInfo,
   TypeNameString,
   TypeSummary,
-  TypeNameStringComposite,
-  TypeNameStringDecimal,
   ScalarFieldInfo,
   NumericFieldInfo,
-  SimpleFieldInfo,
-  TypedFieldObject,
   FieldTypeSummary,
 } from '..'
 

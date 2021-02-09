@@ -1,24 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
 // import PropTypes from 'prop-types';
-import { withStyles, makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
-import Slider from '@material-ui/core/Slider';
 // import Input from '@material-ui/core/Input'
 import Checkbox from '@material-ui/core/Checkbox';
 import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Collapse from '@material-ui/core/Collapse';
 import SaveIcon from '@material-ui/icons/Save';
 import CloseIcon from '@material-ui/icons/Close';
-import RefreshIcon from '@material-ui/icons/Refresh';
 import SettingsIcon from '@material-ui/icons/Settings';
 import { useDispatch } from 'react-redux';
-import { setOptions, setStatusMessage } from 'store/optionsSlice';
+import { setOptions } from 'store/optionsSlice';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -124,7 +121,7 @@ export default function AdvancedOptionsForm({
   const dispatch = useDispatch();
   const classes = useStyles();
   const methods = useForm({ defaultValues: options });
-  const { handleSubmit, control, reset, register, watch } = methods;
+  const { handleSubmit, control, register, watch } = methods;
   const onSubmit = (data) => {
     const updatedOptions = {
       ...data,

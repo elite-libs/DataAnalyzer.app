@@ -1,5 +1,5 @@
 import debug from 'debug'
-import { detectTypes, MetaChecks, typeRankings } from './utils/type-helpers'
+import { detectTypes, MetaChecks } from './utils/type-helpers'
 import * as helpers from './utils/helpers'
 
 export { helpers }
@@ -37,8 +37,8 @@ export type TypeNameString =
   | 'Object'
   | 'Null'
 
-export const TypeNameStringComposite = ['String', 'Email', 'Array']
 export type TypeNameStringComposite = 'String' | 'Email' | 'Array'
+export const TypeNameStringComposite = ['String', 'Email', 'Array']
 export const TypeNameStringDecimal = [
   'Date',
   'Timestamp',
@@ -150,14 +150,12 @@ export type SimpleFieldInfo = {
 }
 
 export type NumericFieldInfo =  SimpleFieldInfo & {
-  /** TypeNameStringDecimal types */
   type: 'Date' | 'Timestamp' | 'Currency' | 'Float' | 'Number'
   scale: number
   precision: number
 }
 
 export type ScalarFieldInfo = SimpleFieldInfo & {
-  /** TypeNameStringScalar types */
   type: 'String' | 'Email' | 'Array'
   length: number
 }

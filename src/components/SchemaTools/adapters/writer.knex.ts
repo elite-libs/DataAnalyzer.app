@@ -1,18 +1,11 @@
-import { mapValues } from 'lodash';
+// import { mapValues } from 'lodash';
 import snakecase from 'lodash.snakecase';
-import debug from 'debug';
+// import debug from 'debug';
 import {
-  TypeSummary,
-  ISchemaAnalyzerOptions,
-  SimpleFieldInfo,
-  TypeNameString,
-  FieldTypeSummary,
-  TypeNameStringDecimal,
-  ScalarFieldInfo,
   CombinedFieldInfo,
 } from '../../../schema-analyzer/index';
 import { IDataStepWriter, IRenderArgs } from './writers';
-const log = debug('writer:knex');
+// const log = debug('writer:knex');
 
 const BIG_INTEGER_MIN = 2147483647n;
 
