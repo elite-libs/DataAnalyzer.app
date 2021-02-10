@@ -90,7 +90,6 @@ export default function DropdownMenu<T>({
         anchorEl={anchorRef.current}
         role={undefined}
         transition
-        disablePortal
       >
         {({ TransitionProps, placement }) => (
           <Grow

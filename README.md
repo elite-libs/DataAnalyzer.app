@@ -4,6 +4,8 @@
 
 > An Open Source joint by [Dan Levy](https://danlevy.net/) ✨
 
+This project has 2 main parts:
+
 ## 1. Analyze column type & size from any input JSON array!
 ## 2. Generate magical auto-typed code & database interfaces!
 
@@ -16,7 +18,8 @@ The primary goal is to support any input JSON/CSV and infer as much as possible.
 
 - [x] Heuristic type analysis for arrays of objects.
 - [x] Nested data structure & multi-table relational output.
-- [x] Browser-based (local, no server used)
+- [x] Browser-based (local, no server used.)
+- [ ] Render output using [handlebars templates.](https://handlebarsjs.com/guide/)
 - [x] Automatic type detection:
     - [x] ID - Identifier column, by name and unique Integer check (detects BigInteger)
     - [x] ObjectId (MongoDB's 96 bit/12 Byte ID. 32bit timestamp + 24bit MachineID + 16bit ProcessID + 24bit Counter)

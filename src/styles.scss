@@ -26,6 +26,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
+  z-index: -1;
+
   label {
     margin: 0;
     line-height: 24px;
@@ -37,11 +40,13 @@
 .row-block {
   margin-left: 0;
   margin-right: 0;
+  position: relative;
+  z-index: 100;
 }
 
 .button-section {
   margin-top: 0.2rem;
-  padding-top: 2.2rem;
+  padding: 0.8rem;
 }
 
 .popover, .popover-wrapper {

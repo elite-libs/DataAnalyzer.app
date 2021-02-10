@@ -14,18 +14,21 @@ import Collapse from '@material-ui/core/Collapse';
 import SaveIcon from '@material-ui/icons/Save';
 import CloseIcon from '@material-ui/icons/Close';
 import SettingsIcon from '@material-ui/icons/Settings';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setOptions } from 'store/optionsSlice';
+// import { RootState } from 'store/rootReducer';
+
+import './AdvancedOptionsForm.scss';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    transform: 'scale(1.25)',
-    margin: '0',
-    width: '42px',
-    minWidth: '0',
-    maxWidth: '42px',
-    marginRight: '-30px',
-    marginTop: '-10px',
+    // transform: 'scale(1.25)',
+    // margin: '0',
+    // width: '42px',
+    // minWidth: '0',
+    // maxWidth: '42px',
+    // marginRight: '-23px',
+    // marginTop: '-10px',
     zIndex: 10,
   },
   // header: {
@@ -37,11 +40,11 @@ const useStyles = makeStyles((theme) => ({
     height: theme.spacing(3),
   },
   expand: {
-    transform: 'rotate(0deg)',
-    marginLeft: 'auto',
-    transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest,
-    }),
+    // transform: 'rotate(0deg)',
+    // marginLeft: 'auto',
+    // transition: theme.transitions.create('transform', {
+    //   duration: theme.transitions.duration.shortest,
+    // }),
   },
   expandOpen: {
     transform: 'rotate(180deg)',
@@ -58,7 +61,8 @@ const useStyles = makeStyles((theme) => ({
     position: 'absolute',
     background:
       'linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(245,245,245,0.98) 25%, rgba(245,245,245,0.98) 75%, rgba(255,255,255,1) 100%)' /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */,
-    zIndex: 10,
+    zIndex: 10000,
+    overflowY: 'hidden',
   },
   panelContent: {
     position: 'relative',
@@ -108,17 +112,12 @@ const formatPercent = (number) =>
   number != null && Number(percentFormatter.format(number)).toFixed(2);
 
 export default function AdvancedOptionsForm({
-  options = {
-    strictMatching: true,
-    enumMinimumRowCount: 100,
-    enumAbsoluteLimit: 10,
-    enumPercentThreshold: 0.01,
-    nullableRowsThreshold: 0.02,
-    uniqueRowsThreshold: 1.0,
-  },
   className = '',
 }) {
   const dispatch = useDispatch();
+  const options = useSelector(
+    (state) => state.optionsActions,
+  );
   const classes = useStyles();
   const methods = useForm({ defaultValues: options });
   const { handleSubmit, control, register, watch } = methods;
@@ -153,17 +152,16 @@ export default function AdvancedOptionsForm({
         className={classes.root + ' py-2'}
         aria-label="open settings panel"
         onClick={handleExpandClick}
-        disableRipple
         title="Advanced Options"
       >
         {expanded ? (
-          <CloseIcon aria-label="Close" />
+          <CloseIcon aria-label="Close" fontSize="large" color="error" />
         ) : (
-          <SettingsIcon aria-label="Open Advanced Options" />
+          <SettingsIcon fontSize="large" color="primary" aria-label="Open Advanced Options" />
         )}
       </Button>
-      <Card raised={false} style={{ marginLeft: '-300px' }}>
-        <Collapse in={expanded} className={classes.panel} timeout="auto">
+      <Card raised={false} style={{ marginLeft: '-200px', zIndex: 5500, position: 'relative' }}>
+        <section style={{height: expanded ? 'auto' : '0', zIndex: 5500}} className={classes.panel}>
           <form
             className={'schema-options ' + className + ' ' + classes.form}
             onSubmit={handleSubmit(onSubmit)}
@@ -254,7 +252,7 @@ export default function AdvancedOptionsForm({
                     <span>{displayUniqueRowsThreshold}%</span>
                   </label>
                 </fieldset>
-              </CardContent>
+                </CardContent>
               <CardActions
                 disableSpacing
                 className="d-flex justify-content-between align-items-center button-section"
@@ -278,10 +276,10 @@ export default function AdvancedOptionsForm({
                 >
                   Save
                 </Button>
-              </CardActions>
+                </CardActions>
             </Paper>
           </form>
-        </Collapse>
+        </section>
       </Card>
     </>
   );

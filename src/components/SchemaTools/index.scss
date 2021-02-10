@@ -7,6 +7,8 @@
   justify-content: space-evenly;
   flex-direction: row;
 
+  margin-top: 0.65rem;
+
   svg {
     height: 35px;
     width: 35px;
@@ -29,4 +31,8 @@
       margin: 0 0.25rem;
     }
   }
+}
+
+.icon-button-box {
+  transform: translateX(30px) translateY(-15px);
 }

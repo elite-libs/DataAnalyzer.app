@@ -53,7 +53,7 @@ export const OutputButtons = () => {
       };
   return (
     <aside className="col-12" style={{ maxHeight: '80px' }}>
-      <div className="output-buttons col-12 d-inline-flex text-left">
+      <div className="output-buttons col-12 text-left">
         {outputOptions.map(([adapter, label, icon]) => {
           return (
             <Button

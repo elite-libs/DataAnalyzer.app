@@ -3,6 +3,8 @@ import SchemaExplorer from './SchemaExplorer';
 import CodeViewer from './CodeViewer';
 import { parse } from '../adapters/readers.js';
 import { render } from '../adapters/writers.js';
+import SchemaFieldsList from './SchemaFieldsList';
+import { Typography } from '@material-ui/core';
 
 export default function ResultsView({
   options = {},
