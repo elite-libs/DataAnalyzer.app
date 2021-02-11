@@ -1,14 +1,12 @@
-# DataStep.io
-
-
+# DataAnalyzer.app
 
 > An Open Source joint by [Dan Levy](https://danlevy.net/) ✨
 
 This project has 2 main parts:
 
 ## 1. Analyze column type & size from any input JSON array!
-## 2. Generate magical auto-typed code & database interfaces!
 
+## 2. Generate magical auto-typed code & database interfaces!
 
 Schema **Analyzer** is the core library behind Dan's [Schema **Generator**](https://github.com/justsml/schema-generator).
 
@@ -16,28 +14,43 @@ Schema **Analyzer** is the core library behind Dan's [Schema **Generator**](http
 
 The primary goal is to support any input JSON/CSV and infer as much as possible. More data will generally yield better results.
 
+##### TODO
+
+- **Better code generator support**
+- [ ] Render output using [handlebars templates](https://handlebarsjs.com/guide/).
+- [ ] Support multiple output files.
+- **Type inferencing**
+- [ ] BigInteger/BigNumber
+- [ ] Latitude & Longitude (Coordinate pairs)
+- **Web App Interface**
+- [ ] Migrate leftover Bootstrap utility classes to Material.
+- [ ] [Fix options & overall menu](https://material-ui.com/components/drawers/#mini-variant-drawer)
+- [ ] [Add App Bar](https://material-ui.com/components/app-bar/)
+- [ ] Make the Input and Output sections collapse/toggleable.
+- [ ] Complete Web Worker for Background Processing.
+- [ ] Add confirmation for processing lots of data. (Rows and raw MB limit?)
+
+##### Completed
+
 - [x] Heuristic type analysis for arrays of objects.
 - [x] Nested data structure & multi-table relational output.
 - [x] Browser-based (local, no server used.)
-- [ ] Render output using [handlebars templates.](https://handlebarsjs.com/guide/)
-- [x] Automatic type detection:
-    - [x] ID - Identifier column, by name and unique Integer check (detects BigInteger)
-    - [x] ObjectId (MongoDB's 96 bit/12 Byte ID. 32bit timestamp + 24bit MachineID + 16bit ProcessID + 24bit Counter)
-    - [x] UUID/GUID (Common 128 bit/16 Byte ID. Stored as a hex string, dash delimited in parts: 8, 4, 4, 4, 12)
-    - [x] Boolean (detects obvious strings `true`, `false`, `Y`, `N`)
-    - [x] Date (Smart detection via comprehensive regex pattern)
-    - [x] Timestamp (integer, number of milliseconds since unix epoch)
-    - [x] Currency (62 currency symbols supported)
-    - [x] Float (w/ scale & precision measurements)
-    - [x] Number (Integers)
-    - [ ] BigInteger/BigNumber
-    - [x] Null (sparse column data helps w/ certain inferences)
-    - [x] String (big text and varchar awareness)
-    - [x] Array (includes min/max/avg length)
-    - [x] Object
-    - **Specialty Types**
-    - [ ] Latitude & Longitude (Coordinate pairs)
-    - [x] Email (falls back to string)
+- [x] Automatic type detection for:
+  - [x] ID - Identifier column, by name and unique Integer check (detects BigInteger)
+  - [x] ObjectId (MongoDB's 96 bit/12 Byte ID. 32bit timestamp + 24bit MachineID + 16bit ProcessID + 24bit Counter)
+  - [x] UUID/GUID (Common 128 bit/16 Byte ID. Stored as a hex string, dash delimited in parts: 8, 4, 4, 4, 12)
+  - [x] Boolean (detects obvious strings `true`, `false`, `Y`, `N`)
+  - [x] Date (Smart detection via comprehensive regex pattern)
+  - [x] Timestamp (integer, number of milliseconds since unix epoch)
+  - [x] Currency (62 currency symbols supported)
+  - [x] Float (w/ scale & precision measurements)
+  - [x] Number (Integers)
+  - [x] Null (sparse column data helps w/ certain inferences)
+  - [x] String (big text and varchar awareness)
+  - [x] Array (includes min/max/avg length)
+  - [x] Object
+  - **Specialty Types**
+  - [x] Email (falls back to string)
 - [x] Detects column size minimum, maximum and average
 - [x] Includes data points at the 30th, 60th and 90th percentiles (for detecting outliers and enum types!)
 - [x] Handles some error/outliers
@@ -45,12 +58,9 @@ The primary goal is to support any input JSON/CSV and infer as much as possible.
 - [x] Identify `enum` Fields w/ Values
 - [x] Identify `Not Null` fields
 - [x] _Normalize_ structured JSON into flat typed objects.
+- > An Open Source joint by [Dan Levy](https://danlevy.net/) ✨
 
-
-
-> An Open Source joint by [Dan Levy](https://danlevy.net/) ✨
-
-This project ([DataStep.io](https://github.com/justsml/data-step-io)) is a web app with usage example for it's sibling library [Schema **Analyzer**](https://github.com/justsml/schema-analyzer).
+This project ([DataAnalyzer.app](https://github.com/justsml/DataAnalyzer.app)) is a web app with usage example for it's sibling library [Schema **Analyzer**](https://github.com/justsml/schema-analyzer).
 
 The _Analyzer_ library provides an automatic data type analysis on any given array of objects.
 
@@ -58,9 +68,9 @@ The components included here support **JSON/CSV data!**
 
 ## Mini Demo
 
-![./demo_80.gif](./demo_80.gif "using built-in sample analysis")
+![./demo_80.gif](./demo_80.gif 'using built-in sample analysis')
 
-### Features
+### Project Goals
 
 The primary goal is to support any input JSON/CSV and infer as much as possible. More data will generally yield better results.
 
@@ -76,7 +86,6 @@ The primary goal is to support any input JSON/CSV and infer as much as possible.
 - [x] Extensible design, add new output/target with ease!
 - [x] Nested data structure & multi-table relational output!
 
-
 ### Output Support
 
 - [x] Mongoose Schema definition - https://mongoosejs.com/
@@ -90,7 +99,9 @@ The primary goal is to support any input JSON/CSV and infer as much as possible.
 - [ ] JPA
 - [ ] Models/Ruby
 
+======================================
 
+## For developers wishing to use the underlying library!
 
 ### Using the Library
 
@@ -114,17 +125,15 @@ It consists of a few top-level properties:
 - `nestedTypes: { [typeAlias: string]: TypeSummary }` - a nested dictionary of sub-types
 - `totalRows` - # of rows analyzed.
 
-
 #### Example Dataset
 
-| id | name            | role      | email                        | createdAt  | accountConfirmed |
-|----|-----------------|-----------|------------------------------|------------|------------------|
-| 1  | Eve             | poweruser | `eve@example.com`            | 01/20/2020 | undefined        |
-| 2  | Alice           | user      | `ali@example.com`            | 02/02/2020 | true             |
-| 3  | Bob             | user      | `robert@example.com`         | 12/31/2019 | true             |
-| 4  | Elliot Alderson | admin     | `falkensmaze@protonmail.com` | 01/01/2001 | false            |
-| 5  | Sam Sepiol      | admin     | `falkensmaze@hotmail.com`    | 9/9/99     | true             |
-
+| id  | name            | role      | email                        | createdAt  | accountConfirmed |
+| --- | --------------- | --------- | ---------------------------- | ---------- | ---------------- |
+| 1   | Eve             | poweruser | `eve@example.com`            | 01/20/2020 | undefined        |
+| 2   | Alice           | user      | `ali@example.com`            | 02/02/2020 | true             |
+| 3   | Bob             | user      | `robert@example.com`         | 12/31/2019 | true             |
+| 4   | Elliot Alderson | admin     | `falkensmaze@protonmail.com` | 01/01/2001 | false            |
+| 5   | Sam Sepiol      | admin     | `falkensmaze@hotmail.com`    | 9/9/99     | true             |
 
 #### Analysis Results
 
@@ -138,11 +147,31 @@ It consists of a few top-level properties:
       "types": {
         "Number": {
           "count": 5,
-          "value": { "min": 1, "mean": 3, "max": 5, "p25": 2, "p33": 2, "p50": 3, "p66": 4, "p75": 4, "p99": 5 }
+          "value": {
+            "min": 1,
+            "mean": 3,
+            "max": 5,
+            "p25": 2,
+            "p33": 2,
+            "p50": 3,
+            "p66": 4,
+            "p75": 4,
+            "p99": 5
+          }
         },
         "String": {
           "count": 5,
-          "length": { "min": 1, "mean": 1, "max": 1, "p25": 1, "p33": 1, "p50": 1, "p66": 1, "p75": 1, "p99": 1 }
+          "length": {
+            "min": 1,
+            "mean": 1,
+            "max": 1,
+            "p25": 1,
+            "p33": 1,
+            "p50": 1,
+            "p66": 1,
+            "p75": 1,
+            "p99": 1
+          }
         }
       }
     },
@@ -150,7 +179,17 @@ It consists of a few top-level properties:
       "types": {
         "String": {
           "count": 5,
-          "length": { "min": 3, "mean": 7.2, "max": 15, "p25": 3, "p33": 3, "p50": 5, "p66": 10, "p75": 10, "p99": 15 }
+          "length": {
+            "min": 3,
+            "mean": 7.2,
+            "max": 15,
+            "p25": 3,
+            "p33": 3,
+            "p50": 5,
+            "p66": 10,
+            "p75": 10,
+            "p99": 15
+          }
         }
       }
     },
@@ -158,7 +197,17 @@ It consists of a few top-level properties:
       "types": {
         "String": {
           "count": 5,
-          "length": { "min": 4, "mean": 5.4, "max": 9, "p25": 4, "p33": 4, "p50": 5, "p66": 5, "p75": 5, "p99": 9 }
+          "length": {
+            "min": 4,
+            "mean": 5.4,
+            "max": 9,
+            "p25": 4,
+            "p33": 4,
+            "p50": 5,
+            "p66": 5,
+            "p75": 5,
+            "p99": 9
+          }
         }
       }
     },
@@ -166,7 +215,17 @@ It consists of a few top-level properties:
       "types": {
         "Email": {
           "count": 5,
-          "length": { "min": 15, "mean": 19.4, "max": 26, "p25": 15, "p33": 15, "p50": 18, "p66": 23, "p75": 23, "p99": 26 }
+          "length": {
+            "min": 15,
+            "mean": 19.4,
+            "max": 26,
+            "p25": 15,
+            "p33": 15,
+            "p50": 18,
+            "p66": 23,
+            "p75": 23,
+            "p99": 26
+          }
         }
       }
     },
@@ -174,11 +233,31 @@ It consists of a few top-level properties:
       "types": {
         "Date": {
           "count": 4,
-          "value": { "min": "2001-01-01T00:00:00.000Z", "mean": "2015-04-14T18:00:00.000Z", "max": "2020-02-02T00:00:00.000Z", "p25": "2020-02-02T00:00:00.000Z", "p33": "2020-02-02T00:00:00.000Z", "p50": "2019-12-31T00:00:00.000Z", "p66": "2019-12-31T00:00:00.000Z", "p75": "2001-01-01T00:00:00.000Z", "p99": "2001-01-01T00:00:00.000Z" }
+          "value": {
+            "min": "2001-01-01T00:00:00.000Z",
+            "mean": "2015-04-14T18:00:00.000Z",
+            "max": "2020-02-02T00:00:00.000Z",
+            "p25": "2020-02-02T00:00:00.000Z",
+            "p33": "2020-02-02T00:00:00.000Z",
+            "p50": "2019-12-31T00:00:00.000Z",
+            "p66": "2019-12-31T00:00:00.000Z",
+            "p75": "2001-01-01T00:00:00.000Z",
+            "p99": "2001-01-01T00:00:00.000Z"
+          }
         },
         "String": {
           "count": 1,
-          "length": { "min": 6, "mean": 6, "max": 6, "p25": 6, "p33": 6, "p50": 6, "p66": 6, "p75": 6, "p99": 6 }
+          "length": {
+            "min": 6,
+            "mean": 6,
+            "max": 6,
+            "p25": 6,
+            "p33": 6,
+            "p50": 6,
+            "p66": 6,
+            "p75": 6,
+            "p99": 6
+          }
         }
       }
     },
@@ -189,7 +268,17 @@ It consists of a few top-level properties:
         },
         "String": {
           "count": 1,
-          "length": { "min": 9, "mean": 9, "max": 9, "p25": 9, "p33": 9, "p50": 9, "p66": 9, "p75": 9, "p99": 9 }
+          "length": {
+            "min": 9,
+            "mean": 9,
+            "max": 9,
+            "p25": 9,
+            "p33": 9,
+            "p50": 9,
+            "p66": 9,
+            "p75": 9,
+            "p99": 9
+          }
         },
         "Boolean": {
           "count": 4
@@ -200,7 +289,6 @@ It consists of a few top-level properties:
   "nestedTypes": {}
 }
 ```
-
 
 #### `AggregateSummary`
 
@@ -239,7 +327,6 @@ Range data for a `Date` fields `value`:
 }
 ```
 
-
 ## Notes
 
 We recommend you provide at least 100+ rows. Accuracy increases greatly with 1,000+ rows.
@@ -268,7 +355,6 @@ The following features require a certain minimum # of records:
 - `Array`
 - `Object`
 - `Null`
-
 
 ## Similar/Alternative Projects
 

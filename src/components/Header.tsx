@@ -5,7 +5,7 @@ export default function Header() {
     <div className="jumbotron jumbotron-fluid">
       <div className="container d-flex justify-content-between align-items-center">
         <div className="head-text" style={{ flexGrow: 2 }}>
-          <h1 className="display-4">DataStep.io</h1>
+          <h1 className="display-4">DataAnalyzer.app</h1>
         </div>
       </div>
       <div className="container">

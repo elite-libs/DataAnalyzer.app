@@ -13,7 +13,7 @@
       flex-direction: column;
 
       > div {
-        flex-grow: 0;
+        flex-grow: 1;
       }
       > pre {
         flex-grow: 2;
@@ -216,4 +216,19 @@ a.locked {
   color: #77777766;
   font-weight: 200;
   text-decoration: none;
+}
+
+.animate-spin {
+  animation: animate-spin 2s linear infinite;
+}
+.animate-pulse {
+  animation: animate-spin 1s steps(8) infinite;
+}
+@keyframes animate-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(1turn);
+  }
 }

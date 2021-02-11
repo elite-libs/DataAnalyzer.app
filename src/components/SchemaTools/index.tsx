@@ -5,9 +5,10 @@ import { useSnackbar } from 'notistack';
 
 import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined';
 import AssessmentOutlinedIcon from '@material-ui/icons/AssessmentOutlined';
+import AnnouncementIcon from '@material-ui/icons/Announcement';
 import FindInPageOutlinedIcon from '@material-ui/icons/FindInPageOutlined';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
-import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+// import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import GitHubIcon from '@material-ui/icons/GitHub';
 
 import Button from '@material-ui/core/Button';
@@ -31,14 +32,10 @@ import type { RootState } from 'store/rootReducer';
 import type { Dictionary } from 'types';
 
 import './index.scss';
-import type SchemaExplorer from './ResultsView/SchemaExplorer';
+import TooltipWrapper from 'components/TooltipWrapper';
 
 const CodeViewer = lazy(() => import('./ResultsView/CodeViewer'));
-const SchemaExplorerComponent = lazy<any>(() =>
-  import('./ResultsView/SchemaExplorer').then((SchemaExplorer) => {
-    return SchemaExplorer;
-  }),
-);
+const SchemaExplorerComponent = lazy<any>(() => import('./ResultsView/SchemaExplorer'));
 const AboutPage = lazy(() => import('../../AboutPage'));
 
 export default function SchemaTools() {
@@ -49,7 +46,6 @@ export default function SchemaTools() {
   );
   const options = useSelector((state: RootState) => state.optionsActions);
   // const { statusMessage } = useSelector((state: RootState) => state.appStateActions);
-  const [parsedInputData, setParsedInputData] = React.useState<Dictionary<any>[] | null>(null);
 
   React.useEffect(() => {
     enqueueSnackbar(
@@ -63,18 +59,15 @@ export default function SchemaTools() {
   // 2. Process the structured data into Schema analysis
   // 3. Convert Schema analysis to flattend types
   async function parseRawText() {
-    setParsedInputData(null);
     try {
       if (inputData && inputData.length < 3) {
         enqueueSnackbar(`Check your input. Must be valid JSON or CSV.`, { variant: 'warning' });
-        setParsedInputData(null);
         return null;
       }
       if (inputData != null && (inputData[0] === '[' || inputData[0] === '{')) {
         try {
           // json likely, fast path test using compiled JSON.parse
           const jsonData = JSON.parse(inputData);
-          setParsedInputData(jsonData as any[]);
           return jsonData;
         } catch (error) {
           enqueueSnackbar(`Data appears to be invalid JSON. Check input and try again.`, {
@@ -85,7 +78,6 @@ export default function SchemaTools() {
       }
       // try CSV
       const csvData = await parseCsv(inputData); //.catch(() => null);
-      if (csvData != null) setParsedInputData(csvData);
       return csvData;
     } catch (error) {
       enqueueSnackbar(`Check your input. Must be valid JSON or CSV. ${error.message}`, {
@@ -94,7 +86,6 @@ export default function SchemaTools() {
       console.log(`Parsing error:`, error);
     }
     enqueueSnackbar(`Check your input. Must be valid JSON or CSV.`, { variant: 'warning' });
-    setParsedInputData(null);
     return null;
     //throw Error('Invalid data');
   }
@@ -147,18 +138,40 @@ export default function SchemaTools() {
         onClick: (e: any) => e.preventDefault(),
       };
 
+  // Create any labels & user instructions
+  const Messages = {
+    inputDataMissing:
+      inputData == null ? (
+        <div>
+          <AnnouncementIcon />
+          <b>No input data.</b>
+          <br />
+          Either use the Sample Dataset buttons, OR paste your own data in the textbox.
+        </div>
+      ) : null,
+    schemaNeeded:
+      schemaTimestamp == null ? (
+        <div>
+          <AnnouncementIcon />
+          <b>Choose a Formatter</b>
+          <br />
+          Click on one of the code formatter buttons to continue!
+        </div>
+      ) : null,
+  };
+
   return (
     <>
       <main className="shadow-lg p-3 m-5 bg-white rounded">
         <Router>
           <nav className="row row-block w-100">
-            <h1 className="col-9">DataStep.io</h1>
+            <h1 className="col-9">DataAnalyzer.app</h1>
             <aside className="icon-button-box col-3 text-right">
-              <Button className={'py-2'}>
-                <InfoOutlinedIcon fontSize="small" color="primary" />
-              </Button>
+              <Link className={'py-2'} component={RouteLink} to="/about">
+                <InfoOutlinedIcon fontSize="small" color="action" />
+              </Link>
               <Button className={'py-2 mr-2'}>
-                <GitHubIcon fontSize="small" color="primary" />
+                <GitHubIcon fontSize="small" color="action" />
               </Button>
               <AdvancedOptionsForm />
             </aside>
@@ -168,8 +181,12 @@ export default function SchemaTools() {
                 Code Generator
               </Link>
               <Link component={RouteLink} {...schemaLinkProps} to="/results/explorer">
-                <AssessmentOutlinedIcon />
-                Data Visualization
+                <TooltipWrapper tooltipContent={Messages.schemaNeeded}>
+                  <div>
+                    <AssessmentOutlinedIcon />
+                    Data Visualization
+                  </div>
+                </TooltipWrapper>
               </Link>
             </Breadcrumbs>
             <DemoDataMenu />
@@ -181,9 +198,11 @@ export default function SchemaTools() {
                 <section>
                   <InputProcessor />
                   <OutputButtons onChange={handleAdapterSelected} />
-                  <CodeViewer>
-                    {results || '// No code to view, please check your settings.'}
-                  </CodeViewer>
+                  {results != null && results.length >= 1 && (
+                    <CodeViewer>
+                      {results || '// No code to view, please check your settings.'}
+                    </CodeViewer>
+                  )}
                 </section>
               </Route>
               <Route path="/about" exact>

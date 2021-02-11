@@ -1,7 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { setInputData, setSchemaName } from 'store/analysisSlice';
-import { setStatusMessage } from 'store/appStateSlice';
 // import { RootState } from 'store/rootReducer';
 import Chip from '@material-ui/core/Chip';
 import SyncIcon from '@material-ui/icons/Sync';

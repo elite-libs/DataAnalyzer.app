@@ -313,7 +313,7 @@ function schemaAnalyzer(
     .then(condenseFieldData({ enumAbsoluteLimit, isEnumEnabled }))
     .then(async (schema) => {
       // #debug: log'Built summary from Field Type data.')
-      // console.// #debug: log'Schema', JSON.stringify(schema, null, 2))
+      // console.log'Schema', JSON.stringify(schema, null, 2))
 
       const fields = Object.keys(schema.fields).reduce(
         (fieldTypesResults, fieldName) => {
@@ -569,8 +569,8 @@ function condenseFieldData({
 
     const fieldSummary: { [key: string]: FieldInfo } = {}
     // #debug: log
-      `Pre-condenseFieldSizes(fields[fieldName]) for ${fieldNames.length} columns`,
-    )
+    //   `Pre-condenseFieldSizes(fields[fieldName]) for ${fieldNames.length} columns`,
+    // )
     fieldNames.forEach((fieldName) => {
       const pivotedData = pivotFieldDataByType(fieldsData[fieldName]!)
       fieldSummary[fieldName] = fieldSummary[fieldName] || { types: {} }

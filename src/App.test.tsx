@@ -10,6 +10,6 @@ test('renders learn react link', () => {
       <App />
     </Provider>,
   );
-  const linkElement = screen.getByText(/DataStep.io/i);
+  const linkElement = screen.getByText(/DataAnalyzer.app/i);
   expect(linkElement).toBeInTheDocument();
 });

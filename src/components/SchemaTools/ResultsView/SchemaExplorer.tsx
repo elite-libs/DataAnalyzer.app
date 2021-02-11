@@ -29,9 +29,9 @@ const getFieldLabeledData = (schemaResults: TypeSummary<FieldInfo>) => {
         console.log(
           'fields[fieldName].types[type]',
           fields[fieldName],
-          fields[fieldName].types[type],
+          fields[fieldName]!.types[type],
         );
-        return fields[fieldName].types[type] ? fields[fieldName].types[type].count : 0;
+        return fields[fieldName]!.types[type] ? fields[fieldName]!.types[type].count : 0;
       }),
     };
   });

@@ -5,8 +5,8 @@ import {
   TypeNameStringDecimal,
 } from '../../../schema-analyzer';
 import { properCase, removeBlankLines } from '../helpers';
-import type { IDataStepWriter, IRenderArgs } from './writers';
-const writer: IDataStepWriter = {
+import type { IDataAnalyzerWriter, IRenderArgs } from './writers';
+const writer: IDataAnalyzerWriter = {
   render({ results, options, schemaName }: IRenderArgs) {
     const hasNestedTypes = results.nestedTypes && Object.keys(results.nestedTypes!).length > 0
     const { fields } = results;
