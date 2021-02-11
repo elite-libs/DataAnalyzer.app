@@ -1,14 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { FieldInfo, TypeSummary } from '../schema-analyzer';
+import type { FieldInfo, TypeSummary } from '../schema-analyzer';
 
 type State = {
   inputData?: string | null;
-  inputTimestamp?: string | null;
+  inputTimestamp?: number | null;
   results?: string | null;
-  resultsTimestamp?: string | null;
+  resultsTimestamp?: number | null;
   schemaName: string | null;
   schema?: TypeSummary<FieldInfo> | null;
-  schemaTimestamp?: string | null;
+  schemaTimestamp?: number | null;
 };
 
 let initialState: State = {
@@ -17,7 +17,7 @@ let initialState: State = {
   schemaName: '',
   schemaTimestamp: null,
   results: '',
-  resultsTimestamp: null
+  resultsTimestamp: null,
 };
 
 const slice = createSlice({
@@ -28,7 +28,7 @@ const slice = createSlice({
       const { payload } = action;
       if (payload === state.inputData) return;
       state.inputData = payload;
-      state.inputTimestamp = new Date().toISOString();
+      state.inputTimestamp = Date.now();
       state.schema = null;
       state.schemaTimestamp = null;
       state.results = null;
@@ -40,21 +40,31 @@ const slice = createSlice({
       state.results = null;
       state.resultsTimestamp = null;
     },
-    setSchema(state, action: PayloadAction<TypeSummary<FieldInfo>>) {
+    setSchema(state, action: PayloadAction<TypeSummary<FieldInfo> | null>) {
       const { payload } = action;
       state.schema = payload;
-      state.schemaTimestamp = new Date().toISOString();
+      state.schemaTimestamp = Date.now();
       state.results = null;
       state.resultsTimestamp = null;
     },
     setResults(state, action: PayloadAction<string | undefined | null>) {
       const { payload } = action;
       state.results = payload;
-      state.resultsTimestamp = new Date().toISOString();
+      state.resultsTimestamp = Date.now();
+    },
+    resetAnalysis(state) {
+      state = { ...initialState };
+      return state;
     },
   },
 });
 
-export const { setInputData, setResults, setSchema, setSchemaName } = slice.actions;
+export const {
+  setInputData,
+  setResults,
+  setSchema,
+  setSchemaName,
+  resetAnalysis,
+} = slice.actions;
 
 export default slice.reducer;

@@ -1,95 +1,112 @@
-import React, { useEffect } from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link as RouteLink,
-} from 'react-router-dom';
+import React, { Suspense, Fragment, lazy } from 'react';
+import { BrowserRouter as Router, Switch, Route, Link as RouteLink } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
-// import { parse } from './adapters/readers';
-import Breadcrumbs from '@material-ui/core/Breadcrumbs';
-import Link from '@material-ui/core/Link';
+import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined';
+import AssessmentOutlinedIcon from '@material-ui/icons/AssessmentOutlined';
+import FindInPageOutlinedIcon from '@material-ui/icons/FindInPageOutlined';
+import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
-import SchemaExplorer from './ResultsView/SchemaExplorer.js';
-// import ChooseInput from './ChooseInput';
+import GitHubIcon from '@material-ui/icons/GitHub';
+
+import Button from '@material-ui/core/Button';
+import Link from '@material-ui/core/Link';
+import Breadcrumbs from '@material-ui/core/Breadcrumbs';
+
+import { parseCsv } from 'helpers/parseCsv';
+
 import AdvancedOptionsForm from './AdvancedOptionsForm';
 import InputProcessor from './InputProcessor';
-import CodeViewer from './ResultsView/CodeViewer';
-// import { CallbackFn } from 'types';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from 'store/rootReducer';
-// import {
-//   // setInputData,
-//   // setSchemaName,
-//   // setResults,
-//   // setSchema,
-// } from 'store/analysisSlice';
-// import { setStatusMessage } from 'store/appStateSlice';
-// import DropdownMenu from './DropdownMenu';
-// import { render } from './adapters/writers';
 
-import './index.scss';
 import { OutputButtons } from '../../components/OutputButtons';
 import { DemoDataMenu } from '../../components/DemoDataMenu';
-import AboutPage from '../../AboutPage';
-// import { GitHubIcon } from './AppIcons.js';
-import { InfoOutlined, GitHub } from '@material-ui/icons';
-import Button from '@material-ui/core/Button';
-import { render } from './adapters/writers.js';
+import { AdapterNames, render } from './adapters/writers';
 import { schemaAnalyzer } from '../../schema-analyzer/index';
-import { setResults, setSchema } from 'store/analysisSlice.js';
+
+import { setResults, setSchema } from 'store/analysisSlice';
+import { setStatusMessage } from 'store/appStateSlice';
+
+import type { RootState } from 'store/rootReducer';
+import type { Dictionary } from 'types';
+
+import './index.scss';
+
+const CodeViewer = lazy(() => import('./ResultsView/CodeViewer'));
+const SchemaExplorer = lazy(() => import('./ResultsView/SchemaExplorer.js'));
+const AboutPage = lazy(() => import('../../AboutPage'));
 
 export default function SchemaTools() {
   const dispatch = useDispatch();
-  const { inputData, inputTimestamp, results, schemaTimestamp, schemaName } = useSelector(
+  const { inputData, inputTimestamp, results, schemaTimestamp, schemaName, schema } = useSelector(
     (state: RootState) => state.analysisFeature,
+  );
+  const options = useSelector((state: RootState) => state.optionsActions);
+  const { statusMessage } = useSelector((state: RootState) => state.appStateActions);
+  const [parsedInputData, setParsedInputData] = React.useState<Dictionary<any>[] | null>(null);
+
+  // Once user selects a template / output script...
+  // 1. Process the inputData into structured data with parseCsv() or JSON.parse
+  // 2. Process the structured data into Schema analysis
+  // 3. Convert Schema analysis to flattend types
+  async function parseRawText(inputData?: string) {
+    try {
+      if (inputData && inputData.length < 3) {
+        dispatch(setStatusMessage(`Check your input. Must be valid JSON or CSV.`));
+        setParsedInputData(null);
+      }
+      if (inputData != null && (inputData[0] === '[' || inputData[0] === '{')) {
+        // json likely, fast path test using compiled JSON.parse
+        const jsonData = JSON.parse(inputData);
+        setParsedInputData(jsonData as any[]);
+      }
+      // try CSV
+      const csvData = await parseCsv(inputData); //.catch(() => null);
+      if (csvData != null) setParsedInputData(csvData);
+    } catch (error) {
+      dispatch(setStatusMessage(`Check your input. Must be valid JSON or CSV. ${error.message}`));
+      console.log(`Parsing error:`, error);
+    }
+    dispatch(setStatusMessage(`Check your input. Must be valid JSON or CSV.`));
+    setParsedInputData(null);
+    return null;
+    //throw Error('Invalid data');
+  }
+
+  async function getTypeSummary() {
+    const results = await schemaAnalyzer(schemaName!, parsedInputData!, options).catch((error) => {
+      dispatch(setStatusMessage(`${error.message}`));
+    });
+    dispatch(setSchema(results || null));
+    return results;
+  }
+
+  async function renderCode() {
+    const generatedCode = render({
+      schemaName: schemaName!,
+      options,
+      writer: options.outputAdapter,
+    })(schema!);
+
+    dispatch(setResults(generatedCode));
+    return generatedCode;
+  }
+
+  async function handleAdapterSelected(adapter?: AdapterNames) {
+    const startTime = Date.now();
+    console.time(`Processing:${adapter}`);
+    await parseRawText().catch(console.error);
+    await getTypeSummary().catch(console.error);
+    await renderCode().catch(console.error);
+    console.timeEnd(`Processing:${adapter}`);
+    dispatch(
+      setStatusMessage(`Completed in ${((Date.now() - startTime) / 1000).toFixed(1)} seconds.`),
     );
-    const options = useSelector((state: RootState) => state.optionsActions);
-    const { statusMessage } = useSelector(
-      (state: RootState) => state.appStateActions,
-      );
-
-      // TODO: 1. Process the inputData into structured data with parseCsv() or JSON.parse
-      // TODO: 2. Process the structured data into Schema analysis
-      // TODO: 3. Convert Schema analysis to flattend types
-      // Now ready to choose a template / output script
-      useEffect(() => {
-        async function fetchData() {
-          // You can await here
-          const results = await schemaAnalyzer(schemaName!, inputData!, options);
-          dispatch(setSchema(results));
-        }
-        fetchData();
-      
-        
-
-      }, [inputTimestamp])
-
-      useEffect(() => {
-        render({ schemaName, options, writer: options.outputAdapter })()
-      }, [inputTimestamp])
-
-  // const [schemaResults, setResults] = React.useState<
-  //   TypeSummary<FieldInfo>
-  // >();
-  // const [schemaName, setSchemaName] = React.useState('Users');
-  // const [inputData, setInputData] = React.useState('');
-  // const [statusMessage, setStatusMessage] = React.useState('');
-  // const [resultsTimestamp, setResultsTimestamp] = React.useState('');
+  }
 
   const schemaLinkProps = schemaTimestamp
-    ? {
-        // style: { cursor: 'pointer', color: '#469408', fontWeight: '500' },
-        className: 'unlocked',
-      }
+    ? { className: 'unlocked' }
     : {
         disabled: true,
-        // style: {
-        //   cursor: 'not-allowed',
-        //   color: '#77777766',
-        //   fontWeight: '200',
-        //   textDecoration: 'none',
-        // },
         className: 'locked disabled',
         onClick: (e: any) => e.preventDefault(),
       };
@@ -101,10 +118,10 @@ export default function SchemaTools() {
           <h1 className="col-9">DataStep.io</h1>
           <aside className="icon-button-box col-3 text-right">
             <Button className={'py-2'}>
-              <InfoOutlined fontSize="large" color="primary" />
+              <InfoOutlinedIcon fontSize="large" color="primary" />
             </Button>
-            <Button className={'py-2'}>
-              <GitHub fontSize="large" color="primary" />
+            <Button className={'py-2 mr-2'}>
+              <GitHubIcon fontSize="large" color="primary" />
             </Button>
             <AdvancedOptionsForm />
           </aside>
@@ -114,39 +131,39 @@ export default function SchemaTools() {
             className="col-5 pb-2 pl-4"
           >
             <Link component={RouteLink} color="inherit" to="/">
-              Input &amp; Code Generator
+              <HomeOutlinedIcon />
+              Code Generator
             </Link>
-            <Link
-              component={RouteLink}
-              {...schemaLinkProps}
-              to="/results/explorer"
-            >
+            <Link component={RouteLink} {...schemaLinkProps} to="/results/explorer">
+              <AssessmentOutlinedIcon />
               Data Visualization
             </Link>
           </Breadcrumbs>
           <DemoDataMenu />
         </nav>
 
-        <Switch>
-          <Route path="/" exact>
-            <section>
-              <InputProcessor />
-              <OutputButtons />
-              <CodeViewer>
-                {results || '// No code to view, please check your settings.'}
-              </CodeViewer>
-              <footer>{statusMessage}</footer>
-            </section>
-          </Route>
-          <Route path="/about" exact>
-            <AboutPage></AboutPage>
-          </Route>
-          <Route path="/results/explorer">
-            <section>
-              <SchemaExplorer schemaResults={results} />
-            </section>
-          </Route>
-        </Switch>
+        <Suspense fallback={<Fragment />}>
+          <Switch>
+            <Route path="/" exact>
+              <section>
+                <InputProcessor />
+                <OutputButtons onChange={handleAdapterSelected} />
+                <CodeViewer>
+                  {results || '// No code to view, please check your settings.'}
+                </CodeViewer>
+                <footer>{statusMessage}</footer>
+              </section>
+            </Route>
+            <Route path="/about" exact>
+              <AboutPage></AboutPage>
+            </Route>
+            <Route path="/results/explorer">
+              <section>
+                <SchemaExplorer schemaResults={results} />
+              </section>
+            </Route>
+          </Switch>
+        </Suspense>
       </Router>
     </main>
   );

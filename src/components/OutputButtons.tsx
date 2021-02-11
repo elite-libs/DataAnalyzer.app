@@ -26,7 +26,13 @@ const outputOptions: OutputMode[] = [
   ['sql', 'SQL "CREATE"', <PostgresIcon />],
 ];
 
-export const OutputButtons = () => {
+type Props = {
+  onChange: (adapter?: AdapterNames) => any
+}
+
+export const OutputButtons = ({
+  onChange
+}: Props) => {
   const dispatch = useDispatch();
   const { inputTimestamp } = useSelector(
     (state: RootState) => state.analysisFeature,
@@ -34,30 +40,27 @@ export const OutputButtons = () => {
   const { outputAdapter } = useSelector(
     (state: RootState) => state.optionsActions,
   );
-
   const schemaLinkProps = inputTimestamp
     ? {
-        // style: { cursor: 'pointer', color: '#469408', fontWeight: '500' },
         className: 'unlocked',
       }
     : {
         disabled: true,
-        // style: {
-        //   cursor: 'not-allowed',
-        //   color: '#77777766',
-        //   fontWeight: '200',
-        //   textDecoration: 'none',
-        // },
         className: 'locked disabled',
         onClick: (e: any) => e.preventDefault(),
       };
+      
+  const onAdapterClicked = ({adapter}: {adapter: AdapterNames}) => {
+    dispatch(setOptions({ outputAdapter: adapter }));
+    onChange(adapter);
+  }
   return (
     <aside className="col-12" style={{ maxHeight: '80px' }}>
       <div className="output-buttons col-12 text-left">
         {outputOptions.map(([adapter, label, icon]) => {
           return (
             <Button
-              onClick={() => dispatch(setOptions({ outputAdapter: adapter }))}
+              onClick={() => onAdapterClicked({adapter})}
               variant={outputAdapter === adapter ? 'contained' : 'outlined'}
               size="medium"
               color={outputAdapter === adapter ? 'default' : 'primary'}

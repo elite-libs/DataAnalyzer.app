@@ -149,7 +149,7 @@ export type SimpleFieldInfo = {
   count: number
 }
 
-export type NumericFieldInfo =  SimpleFieldInfo & {
+export type NumericFieldInfo = SimpleFieldInfo & {
   type: 'Date' | 'Timestamp' | 'Currency' | 'Float' | 'Number'
   scale: number
   precision: number
@@ -160,7 +160,10 @@ export type ScalarFieldInfo = SimpleFieldInfo & {
   length: number
 }
 
-export type CombinedFieldInfo = NumericFieldInfo | ScalarFieldInfo | SimpleFieldInfo
+export type CombinedFieldInfo =
+  | NumericFieldInfo
+  | ScalarFieldInfo
+  | SimpleFieldInfo
 
 /**
  * Contains stats for a given field's (potential) type.
@@ -263,7 +266,7 @@ const { TYPE_ENUM, TYPE_NULLABLE, TYPE_UNIQUE } = MetaChecks
  */
 function schemaAnalyzer(
   schemaName: string,
-  input: any[],
+  input: any[] | { [k: string]: any },
   options: ISchemaAnalyzerOptions | undefined = {
     onProgress: ({ totalRows, currentRow }) => {},
     strictMatching: true,
@@ -373,7 +376,9 @@ function schemaAnalyzer(
       }
     })
 
-  function nestedSchemaAnalyzer(nestedData: { [s: string]: unknown } | ArrayLike<unknown>) {
+  function nestedSchemaAnalyzer(
+    nestedData: { [s: string]: unknown } | ArrayLike<unknown>,
+  ) {
     return Object.entries(nestedData).reduce(
       async (nestedTypeSummaries, [fullTypeName, data]) => {
         const nameParts = fullTypeName.split('.')
@@ -543,7 +548,13 @@ const _evaluateSchemaLevel = ({
  * }
  * ```
  */
-function condenseFieldData({ enumAbsoluteLimit, isEnumEnabled }: { enumAbsoluteLimit: number, isEnumEnabled: boolean}) {
+function condenseFieldData({
+  enumAbsoluteLimit,
+  isEnumEnabled,
+}: {
+  enumAbsoluteLimit: number
+  isEnumEnabled: boolean
+}) {
   return (schema: {
     fieldsData: {
       [x: string]: TypedFieldObject<InternalFieldTypeData>[]
@@ -708,7 +719,10 @@ function condenseFieldSizes(
         aggregateSummary[typeName] &&
         ['Timestamp', 'Date'].indexOf(typeName) > -1
       ) {
-        aggregateSummary[typeName].value! = formatRangeStats(aggregateSummary[typeName]!.value! as any, parseDate)
+        aggregateSummary[typeName].value! = formatRangeStats(
+          aggregateSummary[typeName]!.value! as any,
+          parseDate,
+        )
       }
     },
   )
