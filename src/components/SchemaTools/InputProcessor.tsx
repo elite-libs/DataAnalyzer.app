@@ -17,9 +17,7 @@ type Props = {
 
 export default function InputProcessor({ className = '' }: Props) {
   const dispatch = useDispatch();
-  const { inputData, results, schema, schemaName } = useSelector(
-    (state: RootState) => state.analysisFeature,
-  );
+  const { inputData, schema } = useSelector((state: RootState) => state.analysisFeature);
 
   const hasParsedInputData = Boolean(schema);
   const hasInputData: boolean =
@@ -32,8 +30,8 @@ export default function InputProcessor({ className = '' }: Props) {
   if (hasParsedInputData) className += ' disabled';
 
   const textareaOpts = {
-    rowsMin: hasParsedInputData ? 5 : 10,
-    rowsMax: hasParsedInputData ? 5 : undefined,
+    // rowsMin: hasParsedInputData ? 5 : 10,
+    // rowsMax: hasParsedInputData ? 5 : undefined,
     disabled: hasParsedInputData,
   };
 
@@ -51,21 +49,21 @@ export default function InputProcessor({ className = '' }: Props) {
     >
       {hasParsedInputData ? (
         <>
-          <Button
-            size="large"
-            color="secondary"
-            variant={'contained'}
-            startIcon={<SyncOutlinedIcon />}
-            onClick={resetAppState}
-            style={{
-              margin: '0 auto',
-              transform: 'translateY(-30px)',
-              position: 'absolute',
-              zIndex: 500,
-            }}
+          <div
+            style={{ zIndex: 500, position: 'relative', opacity: 0.88 }}
+            className={`d-flex justify-content-center align-items-center position-absolute`}
           >
-            Reset / Start Over
-          </Button>
+            <Button
+              size="small"
+              color="secondary"
+              variant={'contained'}
+              startIcon={<SyncOutlinedIcon />}
+              onClick={resetAppState}
+              style={{ transform: 'translateY(1.3rem) translateX(40ch)' }}
+            >
+              Reset / Start Over
+            </Button>
+          </div>
           <CodeViewer maxHeight={'15vh'}>{inputData}</CodeViewer>
         </>
       ) : (

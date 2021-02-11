@@ -1,4 +1,4 @@
-import React, { Suspense, Fragment, lazy } from 'react';
+import React, { Suspense, Fragment, lazy, ComponentType } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link as RouteLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
@@ -31,9 +31,14 @@ import type { RootState } from 'store/rootReducer';
 import type { Dictionary } from 'types';
 
 import './index.scss';
+import type SchemaExplorer from './ResultsView/SchemaExplorer';
 
 const CodeViewer = lazy(() => import('./ResultsView/CodeViewer'));
-const SchemaExplorer = lazy(() => import('./ResultsView/SchemaExplorer.js'));
+const SchemaExplorerComponent = lazy<any>(() =>
+  import('./ResultsView/SchemaExplorer').then((SchemaExplorer) => {
+    return SchemaExplorer;
+  }),
+);
 const AboutPage = lazy(() => import('../../AboutPage'));
 
 export default function SchemaTools() {
@@ -58,6 +63,7 @@ export default function SchemaTools() {
   // 2. Process the structured data into Schema analysis
   // 3. Convert Schema analysis to flattend types
   async function parseRawText() {
+    setParsedInputData(null);
     try {
       if (inputData && inputData.length < 3) {
         enqueueSnackbar(`Check your input. Must be valid JSON or CSV.`, { variant: 'warning' });
@@ -94,14 +100,17 @@ export default function SchemaTools() {
   }
 
   async function getTypeSummary() {
-    const results = await schemaAnalyzer(schemaName!, parsedInputData!, options).catch((error) => {
+    const parsedInputData = await parseRawText();
+    const schema = await schemaAnalyzer(schemaName!, parsedInputData!, options).catch((error) => {
       enqueueSnackbar(`${error.message}`, { variant: 'warning' });
     });
-    dispatch(setSchema(results || null));
-    return results;
+    dispatch(setSchema(schema || null));
+    return schema ? schema : null;
   }
 
   async function renderCode() {
+    const schema = await getTypeSummary();
+    console.log('about to generate code', options.outputAdapter, schema);
     const generatedCode = render({
       schemaName: schemaName!,
       options,
@@ -109,6 +118,7 @@ export default function SchemaTools() {
     })(schema!);
 
     dispatch(setResults(generatedCode));
+    console.log('generated code', generatedCode);
     return generatedCode;
   }
 
@@ -116,7 +126,7 @@ export default function SchemaTools() {
     const startTime = Date.now();
     console.time(`Processing:${adapter}`);
     try {
-      await parseRawText();
+      // await parseRawText();
       await getTypeSummary();
       await renderCode();
       enqueueSnackbar(`Completed in ${((Date.now() - startTime) / 1000).toFixed(1)} seconds.`, {
@@ -181,7 +191,7 @@ export default function SchemaTools() {
               </Route>
               <Route path="/results/explorer">
                 <section>
-                  <SchemaExplorer schemaResults={results} />
+                  <SchemaExplorerComponent schemaResults={schema} />
                 </section>
               </Route>
             </Switch>

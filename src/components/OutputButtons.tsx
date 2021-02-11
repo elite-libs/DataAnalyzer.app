@@ -23,9 +23,9 @@ type Props = {
 
 export const OutputButtons = ({ onChange }: Props) => {
   const dispatch = useDispatch();
-  const { inputData, schema } = useSelector((state: RootState) => state.analysisFeature);
+  const { inputData, results } = useSelector((state: RootState) => state.analysisFeature);
   const { outputAdapter } = useSelector((state: RootState) => state.optionsActions);
-  const hasParsedInputData = Boolean(schema);
+  const hasParsedInputData = Boolean(results);
   console.log({ hasParsedInputData });
   const schemaLinkProps = inputData
     ? {
@@ -48,7 +48,7 @@ export const OutputButtons = ({ onChange }: Props) => {
           return (
             <Button
               onClick={() => onAdapterClicked({ adapter })}
-              variant={outputAdapter === adapter ? 'contained' : 'outlined'}
+              variant={hasParsedInputData && outputAdapter === adapter ? 'contained' : 'outlined'}
               size="medium"
               color={hasParsedInputData && outputAdapter === adapter ? 'default' : 'primary'}
               startIcon={icon}

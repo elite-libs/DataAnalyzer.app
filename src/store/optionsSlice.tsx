@@ -29,7 +29,7 @@ const slice = createSlice({
   reducers: {
     setOptions(state, action: PayloadAction<Partial<State>>) {
       const { payload } = action;
-      state = { ...state, ...payload, _timestamp: Date.now() };
+      Object.assign(state, payload, { _timestamp: Date.now() });
     },
     resetOptions(state) {
       state = { ...initialState };

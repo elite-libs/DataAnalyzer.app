@@ -1,22 +1,23 @@
 import React from 'react';
 import Chart from 'react-apexcharts';
+import { FieldInfo, TypeSummary } from 'schema-analyzer';
 
-const getFieldNames = (schemaResults) => {
+const getFieldNames = (schemaResults: TypeSummary<FieldInfo>) => {
   return Object.keys(schemaResults.fields);
 };
 
-const getTypeCounts = (schemaResults) => {
+const getTypeCounts = (schemaResults: TypeSummary<FieldInfo>) => {
   return Object.entries(schemaResults.fields).reduce((typeCounts, [fieldName, typeInfo]) => {
     const { types } = typeInfo;
     Object.keys(types).forEach((typeName) => {
       typeCounts[typeName] = typeCounts[typeName] || 0;
       typeCounts[typeName]++;
     });
-    return typeCounts
+    return typeCounts;
   }, {});
 };
 
-const getFieldLabeledData = (schemaResults) => {
+const getFieldLabeledData = (schemaResults: TypeSummary<FieldInfo>) => {
   const { fields } = schemaResults;
   const fieldNames = Object.keys(fields);
   const typesList = Object.keys(getTypeCounts(schemaResults));
@@ -30,9 +31,7 @@ const getFieldLabeledData = (schemaResults) => {
           fields[fieldName],
           fields[fieldName].types[type],
         );
-        return fields[fieldName].types[type]
-          ? fields[fieldName].types[type].count
-          : 0;
+        return fields[fieldName].types[type] ? fields[fieldName].types[type].count : 0;
       }),
     };
   });
@@ -59,7 +58,9 @@ const getFieldLabeledData = (schemaResults) => {
 //     // .filter(f => f[0] !== 'Null' && f[0] !== 'Unknown')
 //     .sort((a, b) => a[1].count > b[1].count ? -1 : a[1].count === b[1].count ? 0 : 1)
 // }
-
+type Props = {
+  schemaResults: TypeSummary<FieldInfo> | null | undefined;
+};
 const pixelHeightPerField = 30; // 21.75
 // NOTE: Additional color sets available here: https://apexcharts.com/docs/options/theme/
 const colorSets = {
@@ -69,13 +70,13 @@ const colorSets = {
   brights: ['#6699cc', '#fff275', '#ff8c42', '#ff3c38', '#a23e48'],
   blueRad: ['#006ba6', '#0496ff', '#ffbc42', '#d81159', '#8f2d56'],
 };
-export default class SchemaExplorer extends React.Component {
-  constructor(props) {
+export default class SchemaExplorer extends React.Component<Props, any> {
+  constructor(props: Props) {
     super(props);
 
     const schemaAnalysis = this.props.schemaResults;
-    const fieldNames = schemaAnalysis && Object.keys(schemaAnalysis.fields);
-    const chartHeight = pixelHeightPerField * fieldNames.length;
+    const fieldNames = (schemaAnalysis && Object.keys(schemaAnalysis.fields)) || [];
+    const chartHeight = pixelHeightPerField * (fieldNames?.length || 0);
 
     // console.error('fieldNames', fieldNames)
     const colorPalette = colorSets.blueRad.concat(
@@ -118,10 +119,8 @@ export default class SchemaExplorer extends React.Component {
             xaxis: {
               categories: getFieldNames(schemaAnalysis), // [2008, 2009, 2010, 2011, 2012, 2013, 2014],
               labels: {
-                formatter: function (
-                  value,
-                  { series, seriesIndex, dataPointIndex, w },
-                ) {
+                // @ts-ignore
+                formatter: function (value: any, { series, seriesIndex, dataPointIndex, w }) {
                   return value + '';
                 },
               },
@@ -133,10 +132,8 @@ export default class SchemaExplorer extends React.Component {
             },
             tooltip: {
               y: {
-                formatter: function (
-                  value,
-                  { series, seriesIndex, dataPointIndex, w },
-                ) {
+                // @ts-ignore
+                formatter: function (value, { series, seriesIndex, dataPointIndex, w }) {
                   return value + '';
                 },
               },
@@ -177,9 +174,7 @@ export default class SchemaExplorer extends React.Component {
         />
       );
     } else {
-      return (
-        <div className="chart-placeholder">Charts waiting for input...</div>
-      );
+      return <div className="chart-placeholder">Charts waiting for input...</div>;
     }
   }
 }
