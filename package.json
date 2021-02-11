@@ -50,7 +50,8 @@
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject",
-    "lint": "npx prettier -w \"{app,src,__{tests,mocks}__}/**/*.{ts,js}\""
+    "lint": "npx prettier -w \"{app,src,__{tests,mocks}__}/**/*.{ts,js}\"",
+    "postinstall": "cd src/schema-analyzer && npm install"
   },
   "eslintConfig": {
     "extends": [
