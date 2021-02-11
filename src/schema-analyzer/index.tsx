@@ -1,10 +1,10 @@
-import debug from 'debug'
+// import debug from 'debug'
 import { detectTypes, MetaChecks } from './utils/type-helpers'
 import * as helpers from './utils/helpers'
 
 export { helpers }
 
-const log = debug('schema-builder:main')
+// const log = debug('schema-builder:main')
 
 // export { schemaAnalyzer, pivotFieldDataByType, getNumberRangeStats, isValidDate }
 
@@ -295,7 +295,7 @@ function schemaAnalyzer(
     uniqueRowsThreshold = 0.99,
   } = options
   const isEnumEnabled = input.length >= enumMinimumRowCount
-  log(`isEnumEnabled: ${isEnumEnabled}`)
+  // #debug: log`isEnumEnabled: ${isEnumEnabled}`)
   const nestedData = {}
 
   const pivotRowsGroupedByType = _pivotRowsGroupedByType({
@@ -307,13 +307,13 @@ function schemaAnalyzer(
     onProgress,
   })
 
-  log(`Processing '${schemaName}', found ${input.length} rows...`)
+  // #debug: log`Processing '${schemaName}', found ${input.length} rows...`)
   return Promise.resolve(input)
     .then(pivotRowsGroupedByType)
     .then(condenseFieldData({ enumAbsoluteLimit, isEnumEnabled }))
     .then(async (schema) => {
-      log('Built summary from Field Type data.')
-      // console.log('Schema', JSON.stringify(schema, null, 2))
+      // #debug: log'Built summary from Field Type data.')
+      // console.// #debug: log'Schema', JSON.stringify(schema, null, 2))
 
       const fields = Object.keys(schema.fields).reduce(
         (fieldTypesResults, fieldName) => {
@@ -413,7 +413,7 @@ const _pivotRowsGroupedByType = ({
       fieldsData: {},
       totalRows: null,
     }
-    log(`  About to examine every row & cell. Found ${docs.length} records...`)
+    // #debug: log`  About to examine every row & cell. Found ${docs.length} records...`)
     const evaluateSchemaLevel = _evaluateSchemaLevel({
       schemaName,
       isEnumEnabled,
@@ -423,7 +423,7 @@ const _pivotRowsGroupedByType = ({
       onProgress,
     })
     const pivotedSchema = docs.reduce(evaluateSchemaLevel, detectedSchema)
-    log('  Extracted data points from Field Type analysis')
+    // #debug: log'  Extracted data points from Field Type analysis')
     return pivotedSchema
   }
 
@@ -451,13 +451,13 @@ const _evaluateSchemaLevel = ({
   ) {
     // eslint-disable-line
     schema.totalRows = schema.totalRows || array.length
-    const fieldNames = Object.keys(row)
-    log(
-      `Processing Row # ${index + 1}/${
-        schema.totalRows
-      } {isEnumEnabled: ${isEnumEnabled}, disableNestedTypes: ${disableNestedTypes}}`,
-    )
-    log(`Found ${fieldNames.length} Column(s)!`)
+    const fieldNames: string[] = Object.keys(row)
+    // #debug: log
+    //   `Processing Row # ${index + 1}/${
+    //     schema.totalRows
+    //   } {isEnumEnabled: ${isEnumEnabled}, disableNestedTypes: ${disableNestedTypes}}`,
+    // )
+    // #debug: log`Found ${fieldNames.length} Column(s)!`)
     fieldNames.forEach((fieldName, index) => {
       const value = row[fieldName]
       const typeFingerprint = getFieldMetadata({ value, strictMatching })
@@ -506,7 +506,7 @@ const _evaluateSchemaLevel = ({
     const showProgress = isDone || index % progressFrequencyModulo === 0
 
     if (onProgress && showProgress) {
-      // console.log("FIRE.onProgress:", totalRows, index + 1);
+      // console.// #debug: log"FIRE.onProgress:", totalRows, index + 1);
       // setImmediate(() => {
       onProgress({
         totalRows: totalRows,
@@ -568,7 +568,7 @@ function condenseFieldData({
     const fieldNames = Object.keys(fieldsData)
 
     const fieldSummary: { [key: string]: FieldInfo } = {}
-    log(
+    // #debug: log
       `Pre-condenseFieldSizes(fields[fieldName]) for ${fieldNames.length} columns`,
     )
     fieldNames.forEach((fieldName) => {
@@ -601,10 +601,10 @@ function condenseFieldData({
         fieldSummary[fieldName]!.enum = schema.uniques[fieldName]
       }
 
-      // console.log(`fieldSummary[${fieldName}]`, fieldSummary[fieldName])
+      // console.// #debug: log`fieldSummary[${fieldName}]`, fieldSummary[fieldName])
     })
-    log('Post-condenseFieldSizes(fields[fieldName])')
-    log('Replaced fieldData with fieldSummary')
+    // #debug: log'Post-condenseFieldSizes(fields[fieldName])')
+    // #debug: log'Replaced fieldData with fieldSummary')
     return {
       fields: fieldSummary,
       uniques: schema.uniques,
@@ -626,14 +626,14 @@ function pivotFieldDataByType(
   typeSizeData: TypedFieldObject<InternalFieldTypeData>[],
 ) {
   // const blankTypeSums = () => ({ length: 0, scale: 0, precision: 0 })
-  log(`Processing ${typeSizeData.length} type guesses`)
+  // #debug: log`Processing ${typeSizeData.length} type guesses`)
   return typeSizeData.reduce((pivotedData, currentTypeGuesses) => {
     Object.entries(currentTypeGuesses).map(
       ([typeName, { value, length, scale, precision }]: [
         typeName: string,
         data: any,
       ]) => {
-        // console.log(typeName, JSON.stringify({ length, scale, precision }))
+        // console.// #debug: logtypeName, JSON.stringify({ length, scale, precision }))
         pivotedData[typeName] = pivotedData[typeName] || { typeName, count: 0 }
         // if (!pivotedData[typeName].count) pivotedData[typeName].count = 0
         if (Number.isFinite(length) && !pivotedData[typeName].length)
@@ -677,7 +677,7 @@ function condenseFieldSizes(
   pivotedDataByType: { [k in TypeNameString]?: InternalFieldTypeData },
 ) {
   const aggregateSummary: { [k in TypeNameString]?: FieldTypeSummary } = {}
-  log('Starting condenseFieldSizes()')
+  // #debug: log'Starting condenseFieldSizes()')
   Object.keys(pivotedDataByType).map(
     (typeName: TypeNameString | string, idx: number, arr: any[]) => {
       aggregateSummary[typeName] = {
@@ -687,7 +687,7 @@ function condenseFieldSizes(
       }
 
       if (typeName === '$ref' && aggregateSummary[typeName]) {
-        // console.log(
+        // console.// #debug: log
         //   "pivotedDataByType.$ref",
         //   JSON.stringify(pivotedDataByType.$ref, null, 2)
         // );
@@ -726,7 +726,7 @@ function condenseFieldSizes(
       }
     },
   )
-  log('Done condenseFieldSizes()...')
+  // #debug: log'Done condenseFieldSizes()...')
   return aggregateSummary
 }
 

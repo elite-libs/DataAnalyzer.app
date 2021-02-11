@@ -1,4 +1,4 @@
-import debug from 'debug'
+// import debug from 'debug'
 import { mapValues } from 'lodash-es'
 import {
   AggregateSummary,
@@ -11,7 +11,7 @@ import {
   FieldTypeSummary,
 } from '..'
 
-const log = debug('schema-builder:helpers')
+// const log = debug('schema-builder:helpers')
 interface IHelperOptions {
   /** Percent of empty records indicating field is still non-null. (Error tolerance for bad data.) Default: 0.001 */
   nullableRowsThreshold: number
@@ -31,16 +31,16 @@ export function flattenTypes(
     targetPrecision: 'max',
     targetScale: 'max',
     targetValue: 'max',
-  }, 
+  },
 ): TypeSummary<CombinedFieldInfo> {
   const fields = mapValues(results.fields, (fieldInfo, name) => {
     if (results.nestedTypes && fieldInfo.types.$ref) {
       const { typeAlias } = fieldInfo.types.$ref
       // lookup real count, set it on the $ref
       const { totalRows } = results.nestedTypes[typeAlias!]!
-      log(
-        `SubType Count Adjustment, from ${fieldInfo.types.$ref.count} to ${totalRows}`,
-      )
+      // log(
+      //   `SubType Count Adjustment, from ${fieldInfo.types.$ref.count} to ${totalRows}`,
+      // )
       fieldInfo.types.$ref.count = totalRows
     }
     return _simplifyFieldInfo(fieldInfo, options)

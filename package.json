@@ -2,6 +2,7 @@
   "name": "data-step-io",
   "version": "1.1.0",
   "private": false,
+  "homepage": "https://dataanalyzer.app",
   "engines": {
     "node": "< 14"
   },
