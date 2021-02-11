@@ -35,4 +35,8 @@
 
 .icon-button-box {
   transform: translateX(30px) translateY(-15px);
+  align-items: start;
+  display: flex;
+  justify-content: inherit;
+  flex-direction: row;
 }

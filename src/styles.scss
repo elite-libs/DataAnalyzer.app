@@ -7,7 +7,7 @@
     overflow-x: hidden;
     > section {
       width: 100%;
-      height: calc( 80vh - 120px );
+      height: calc(80vh - 110px);
       display: flex;
       justify-content: stretch;
       flex-direction: column;
@@ -18,7 +18,16 @@
       > pre {
         flex-grow: 2;
       }
+      > footer {
+        max-height: 32px;
+        font-size: 1.2rem;
+      }
     }
+  }
+
+  nav .MuiBreadcrumbs-li svg {
+    margin-top: -7px;
+    margin-right: 2px;
   }
 }
 
@@ -49,7 +58,8 @@
   padding: 0.8rem;
 }
 
-.popover, .popover-wrapper {
+.popover,
+.popover-wrapper {
   z-index: 10;
 }
 
@@ -157,7 +167,6 @@ form .field-name {
       position: relative;
       z-index: 20;
     }
-
   }
 }
 
@@ -196,7 +205,6 @@ form .field-name {
     opacity: 1;
   }
 }
-
 
 a.unlocked {
   cursor: pointer;

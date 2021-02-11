@@ -49,25 +49,30 @@ export default function InputProcessor({ className = '' }: Props) {
       className={className}
       style={{ display: 'flex', justifyContent: 'stretch' }}
     >
-      <section
-        className="position-relative w-100 d-flex flex-column align-items-center"
-        style={{ justifyContent: 'stretch', height: '120px' }}
-      >
-        {hasParsedInputData ? (
-          <>
-            <Button
-              size="large"
-              color="secondary"
-              variant={'contained'}
-              startIcon={<SyncOutlinedIcon />}
-              onClick={resetAppState}
-              style={{ transform: 'translateY(-50px)' }}
-            >
-              Reset / Start Over
-            </Button>
-            <CodeViewer maxHeight={'15vh'}>{inputData}</CodeViewer>
-          </>
-        ) : (
+      {hasParsedInputData ? (
+        <>
+          <Button
+            size="large"
+            color="secondary"
+            variant={'contained'}
+            startIcon={<SyncOutlinedIcon />}
+            onClick={resetAppState}
+            style={{
+              margin: '0 auto',
+              transform: 'translateY(-30px)',
+              position: 'absolute',
+              zIndex: 500,
+            }}
+          >
+            Reset / Start Over
+          </Button>
+          <CodeViewer maxHeight={'15vh'}>{inputData}</CodeViewer>
+        </>
+      ) : (
+        <section
+          className="position-relative w-100 d-flex flex-column align-items-center"
+          style={{ justifyContent: 'stretch', height: '120px' }}
+        >
           <textarea
             style={{ flexGrow: 1, whiteSpace: 'pre-wrap', overflowX: 'auto' }}
             className="w-100 border-0 m-1 p-1"
@@ -79,8 +84,8 @@ export default function InputProcessor({ className = '' }: Props) {
           >
             {inputData}
           </textarea>
-        )}
-      </section>
+        </section>
+      )}
     </Paper>
   );
 }

@@ -28,7 +28,7 @@ const slice = createSlice({
       const { payload } = action;
       if (payload === state.inputData) return;
       state.inputData = payload;
-      state.inputTimestamp = Date.now();
+      state.inputTimestamp = payload != null ? Date.now() : null;
       state.schema = null;
       state.schemaTimestamp = null;
       state.results = null;
@@ -43,14 +43,14 @@ const slice = createSlice({
     setSchema(state, action: PayloadAction<TypeSummary<FieldInfo> | null>) {
       const { payload } = action;
       state.schema = payload;
-      state.schemaTimestamp = Date.now();
+      state.schemaTimestamp = payload != null ? Date.now() : null;
       state.results = null;
       state.resultsTimestamp = null;
     },
     setResults(state, action: PayloadAction<string | undefined | null>) {
       const { payload } = action;
       state.results = payload;
-      state.resultsTimestamp = Date.now();
+      state.resultsTimestamp = payload != null ? Date.now() : null;
     },
     resetAnalysis(state) {
       state = { ...initialState };
@@ -59,12 +59,6 @@ const slice = createSlice({
   },
 });
 
-export const {
-  setInputData,
-  setResults,
-  setSchema,
-  setSchemaName,
-  resetAnalysis,
-} = slice.actions;
+export const { setInputData, setResults, setSchema, setSchemaName, resetAnalysis } = slice.actions;
 
 export default slice.reducer;
