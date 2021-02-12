@@ -41,7 +41,10 @@ export function flattenTypes(
       // log(
       //   `SubType Count Adjustment, from ${fieldInfo.types.$ref.count} to ${totalRows}`,
       // )
-      fieldInfo.types.$ref.count = totalRows;
+      const newRef = { ...fieldInfo.types.$ref, count: totalRows };
+      const newTypes = { ...fieldInfo.types, $ref: newRef };
+      fieldInfo = { ...fieldInfo, types: newTypes };
+      // fieldInfo.types.$ref = { ...fieldInfo.types.$ref, count: totalRows };
     }
     return _simplifyFieldInfo(fieldInfo, options, name);
   });
@@ -71,7 +74,7 @@ function _simplifyFieldInfo(
     );
   arrayOfTypes = arrayOfTypes
     .slice(0)
-    .filter((f) => f[0] !== 'Null' && f[0] !== 'Unknown')
+    .filter((f) => f[0] !== 'Unknown')
     .sort((a, b) =>
       a[1]!.count > b[1]!.count ? -1 : a[1]!.count === b[1]!.count ? 0 : 1,
     );

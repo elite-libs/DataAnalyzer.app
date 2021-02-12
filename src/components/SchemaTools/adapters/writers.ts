@@ -1,6 +1,8 @@
 import typescriptWriter from './writer.typescript';
 import mongooseWriter from './writer.mongoose';
 import knexWriter from './writer.knex';
+import sqlWriter from './writer.sql';
+
 import {
   ISchemaAnalyzerOptions,
   TypeSummary,
@@ -22,7 +24,7 @@ const writers = {
   typescript: typescriptWriter,
   mongoose: mongooseWriter,
   knex: knexWriter,
-  sql: knexWriter,
+  sql: sqlWriter,
 };
 
 export type AdapterNames = keyof typeof writers;

@@ -755,6 +755,7 @@ function getFieldMetadata({
       // let rank = index + 1
       let count = 1;
 
+      typeGuess = typeGuess!;
       analysis[typeGuess] = { count };
 
       if (typeGuess === 'Array') {

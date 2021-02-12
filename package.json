@@ -60,6 +60,24 @@
     "postinstall": "cd src/schema-analyzer && npm install"
   },
   "eslintConfig": {
+    "parserOptions": {
+      "ecmaVersion": 2020,
+      "ecmaFeatures": {
+        "jsx": true
+      }
+    },
+    "env": {
+      "es6": true,
+      "node": true,
+      "browser": true,
+      "jest": true
+    },
+    "plugins": [
+      "import",
+      "node",
+      "promise",
+      "prettier"
+    ],
     "extends": [
       "react-app",
       "react-app/jest"

@@ -122,13 +122,13 @@ export default function SchemaTools() {
     }
   }
 
-  async function renderCode() {
+  async function renderCode(outputAdapter = options.outputAdapter) {
     const schema = await getTypeSummary();
-    console.log('about to generate code', options.outputAdapter, schema);
+    console.log('about to generate code', outputAdapter, schema);
     const generatedCode = render({
       schemaName: schemaName!,
       options,
-      writer: options.outputAdapter,
+      writer: outputAdapter,
     })(schema!);
 
     dispatch(setResults(generatedCode));
@@ -141,7 +141,7 @@ export default function SchemaTools() {
     console.time(`Processing:${adapter}`);
     try {
       await getTypeSummary();
-      await renderCode();
+      await renderCode(adapter);
       enqueueSnackbar(`Completed in ${((Date.now() - startTime) / 1000).toFixed(1)} seconds.`, {
         variant: 'success',
       });
@@ -163,15 +163,14 @@ export default function SchemaTools() {
 
   // Create any labels & user instructions
   const Messages = {
-    inputDataMissing:
-      inputData == null ? (
-        <div>
-          <AnnouncementIcon color="action" />
-          <b>No input data.</b>
-          <br />
-          Either use the Sample Dataset buttons, OR paste your own data in the textbox.
-        </div>
-      ) : null,
+    inputDataMissing: !inputData ? (
+      <div>
+        <AnnouncementIcon color="action" />
+        <b>No input data.</b>
+        <br />
+        Either use the Sample Dataset buttons, OR paste your own data in the textbox.
+      </div>
+    ) : null,
     schemaNeeded:
       schemaTimestamp == null ? (
         <div>
@@ -196,6 +195,10 @@ export default function SchemaTools() {
     // dispatch(resetOptions());
     // dispatch(resetStatusMessage());
     dispatch(resetAnalysis());
+  }
+  function resetResults() {
+    dispatch(setSchema(null));
+    dispatch(setResults(null));
   }
 
   const codeToolbarUi = !results ? null : (
@@ -235,10 +238,10 @@ export default function SchemaTools() {
       <main className="shadow-lg p-3 m-3 bg-white rounded">
         <Router>
           <nav className="row row-block w-100">
-            <h1 className="col-9 col-sm-10" title="Reset/Load Home Screen" onClick={resetAppState}>
-              <a className="brand-link" href="/">
+            <h1 className="col-9 col-sm-10" title="Reset/Load Home Screen">
+              <Link className="brand-link" component={RouteLink} to="/" onClick={resetResults}>
                 DataAnalyzer.app
-              </a>
+              </Link>
             </h1>
             <aside className="icon-button-box col-3 col-sm-2 text-right">
               <Link className={'py-2 mx-2'} component={RouteLink} to="/about" title="View README">
@@ -255,12 +258,12 @@ export default function SchemaTools() {
               aria-label="breadcrumb"
               className="col-md-5 col-sm-1 col-12 pb-2 pl-1"
             >
-              <Link component={RouteLink} color="inherit" to="/">
+              <Link component={RouteLink} color="inherit" to="/" onClick={resetResults}>
                 <HomeOutlinedIcon />
                 <span className="d-md-inline-block d-none">Code Generator</span>
               </Link>
               <Link component={RouteLink} {...schemaLinkProps} to="/results/explorer">
-                <TooltipWrapper tooltipContent={Messages.schemaNeeded}>
+                <TooltipWrapper tooltipContent={Messages.inputDataMissing || Messages.schemaNeeded}>
                   <div>
                     <AssessmentOutlinedIcon />
                     <span className="d-md-inline-block d-none">Data Visualization</span>
