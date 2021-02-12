@@ -3,14 +3,15 @@
   main {
     min-height: 80vh;
     height: 80vh;
-    overflow-y: auto;
-    overflow-x: hidden;
+    // overflow-y: auto;
+    // overflow-x: hidden;
     > section {
       width: 100%;
       height: calc(80vh - 110px);
       display: flex;
       justify-content: stretch;
       flex-direction: column;
+      overflow-y: auto;
 
       > div {
         flex-grow: 1;
@@ -216,19 +217,4 @@ a.locked {
   color: #77777766;
   font-weight: 200;
   text-decoration: none;
-}
-
-.animate-spin {
-  animation: animate-spin 2s linear infinite;
-}
-.animate-pulse {
-  animation: animate-spin 1s steps(8) infinite;
-}
-@keyframes animate-spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(1turn);
-  }
 }

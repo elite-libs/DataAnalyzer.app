@@ -1,4 +1,6 @@
 import React, { Suspense, Fragment, lazy, ComponentType } from 'react';
+import pkg from '../../../package.json';
+
 import { BrowserRouter as Router, Switch, Route, Link as RouteLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
@@ -29,10 +31,11 @@ import { setResults, setSchema } from 'store/analysisSlice';
 // import { setStatusMessage } from 'store/appStateSlice';
 
 import type { RootState } from 'store/rootReducer';
-import type { Dictionary } from 'types';
+// import type { Dictionary } from 'types';
 
 import './index.scss';
 import TooltipWrapper from 'components/TooltipWrapper';
+import LoadingSpinner from 'components/LoadingSpinner';
 
 const CodeViewer = lazy(() => import('./ResultsView/CodeViewer'));
 const SchemaExplorerComponent = lazy<any>(() => import('./ResultsView/SchemaExplorer'));
@@ -50,7 +53,7 @@ export default function SchemaTools() {
   React.useEffect(() => {
     enqueueSnackbar(
       `© 2020-2021. For educational use. All trademarks, service marks and company names are the property of their respective owners.`,
-      { autoHideDuration: 3000, variant: 'info' },
+      { autoHideDuration: 3000, variant: 'default' },
     );
   }, [enqueueSnackbar]);
 
@@ -143,7 +146,7 @@ export default function SchemaTools() {
     inputDataMissing:
       inputData == null ? (
         <div>
-          <AnnouncementIcon />
+          <AnnouncementIcon color="action" />
           <b>No input data.</b>
           <br />
           Either use the Sample Dataset buttons, OR paste your own data in the textbox.
@@ -152,7 +155,7 @@ export default function SchemaTools() {
     schemaNeeded:
       schemaTimestamp == null ? (
         <div>
-          <AnnouncementIcon />
+          <AnnouncementIcon color="disabled" />
           <b>Choose a Formatter</b>
           <br />
           Click on one of the code formatter buttons to continue!
@@ -167,12 +170,12 @@ export default function SchemaTools() {
           <nav className="row row-block w-100">
             <h1 className="col-9">DataAnalyzer.app</h1>
             <aside className="icon-button-box col-3 text-right">
-              <Link className={'py-2'} component={RouteLink} to="/about">
+              <Link className={'py-2'} component={RouteLink} to="/about" title="View README">
                 <InfoOutlinedIcon fontSize="small" color="action" />
               </Link>
-              <Button className={'py-2 mr-2'}>
+              <Link className={'py-2 mr-2'} target="_blank" href={pkg.repository.url}>
                 <GitHubIcon fontSize="small" color="action" />
-              </Button>
+              </Link>
               <AdvancedOptionsForm />
             </aside>
             <Breadcrumbs separator={'|'} aria-label="breadcrumb" className="col-5 pb-2 pl-4">
@@ -192,7 +195,7 @@ export default function SchemaTools() {
             <DemoDataMenu />
           </nav>
 
-          <Suspense fallback={<Fragment />}>
+          <Suspense fallback={<LoadingSpinner />}>
             <Switch>
               <Route path="/" exact>
                 <section>
@@ -206,7 +209,9 @@ export default function SchemaTools() {
                 </section>
               </Route>
               <Route path="/about" exact>
-                <AboutPage></AboutPage>
+                <section>
+                  <AboutPage></AboutPage>
+                </section>
               </Route>
               <Route path="/results/explorer">
                 <section>

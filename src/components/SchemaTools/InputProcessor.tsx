@@ -69,7 +69,7 @@ export default function InputProcessor({ className = '' }: Props) {
       ) : (
         <section
           className="position-relative w-100 d-flex flex-column align-items-center"
-          style={{ justifyContent: 'stretch', height: '120px' }}
+          style={{ justifyContent: 'stretch' }}
         >
           <textarea
             style={{ flexGrow: 1, whiteSpace: 'pre-wrap', overflowX: 'auto' }}

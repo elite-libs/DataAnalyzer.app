@@ -19,6 +19,8 @@ import { setOptions } from 'store/optionsSlice';
 // import { RootState } from 'store/rootReducer';
 
 import './AdvancedOptionsForm.scss';
+import { TextField } from '@material-ui/core';
+import TooltipWrapper from 'components/TooltipWrapper';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -111,13 +113,9 @@ const percentFormatter = new Intl.NumberFormat({
 const formatPercent = (number) =>
   number != null && Number(percentFormatter.format(number)).toFixed(2);
 
-export default function AdvancedOptionsForm({
-  className = '',
-}) {
+export default function AdvancedOptionsForm({ className = '' }) {
   const dispatch = useDispatch();
-  const options = useSelector(
-    (state) => state.optionsActions,
-  );
+  const options = useSelector((state) => state.optionsActions);
   const classes = useStyles();
   const methods = useForm({ defaultValues: options });
   const { handleSubmit, control, register, watch } = methods;
@@ -140,11 +138,8 @@ export default function AdvancedOptionsForm({
     setExpanded(!expanded);
   };
 
-  const displayNullableRowsThreshold = formatPercent(
-    100.0 * watch('nullableRowsThreshold'),
-  );
-  const displayUniqueRowsThreshold =
-    100 - formatPercent(100.0 * watch('uniqueRowsThreshold'));
+  const displayNullableRowsThreshold = formatPercent(100.0 * watch('nullableRowsThreshold'));
+  const displayUniqueRowsThreshold = 100 - formatPercent(100.0 * watch('uniqueRowsThreshold'));
 
   return (
     <>
@@ -161,7 +156,10 @@ export default function AdvancedOptionsForm({
         )}
       </Button>
       <Card raised={false} style={{ marginLeft: '-200px', zIndex: 5500, position: 'relative' }}>
-        <section style={{height: expanded ? 'auto' : '0', zIndex: 5500}} className={classes.panel}>
+        <section
+          style={{ height: expanded ? 'auto' : '0', zIndex: 5500 }}
+          className={classes.panel}
+        >
           <form
             className={'schema-options ' + className + ' ' + classes.form}
             onSubmit={handleSubmit(onSubmit)}
@@ -171,14 +169,28 @@ export default function AdvancedOptionsForm({
                 <fieldset className="form-group">
                   <legend className="mb-1">Global Rules</legend>
                   <section className="input-group d-flex justify-content-between">
+                    <TooltipWrapper
+                      tooltipContent={
+                        <>
+                          <b>Label your dataset.</b>
+                          <br />
+                          Examples: Customer, Product, Articles, etc.
+                        </>
+                      }
+                    >
+                      <p>Schema Name</p>
+                    </TooltipWrapper>
+                    <TextField
+                      name="schemaName"
+                      value="User"
+                      defaultValue={options.schemaName}
+                      control={control}
+                    />
+                  </section>
+                  <section className="input-group d-flex justify-content-between">
                     <p>Exclusive Type Matching</p>
                     <Controller
-                      as={
-                        <Checkbox
-                          name="strictMatching"
-                          style={{ padding: '0' }}
-                        />
-                      }
+                      as={<Checkbox name="strictMatching" style={{ padding: '0' }} />}
                       name="strictMatching"
                       value="strict"
                       defaultValue={options.strictMatching}
@@ -252,31 +264,21 @@ export default function AdvancedOptionsForm({
                     <span>{displayUniqueRowsThreshold}%</span>
                   </label>
                 </fieldset>
-                </CardContent>
+              </CardContent>
               <CardActions
                 disableSpacing
                 className="d-flex justify-content-between align-items-center button-section"
               >
                 <ButtonGroup size="small" className="py-1">
-                  <Button
-                    type="button"
-                    color="secondary"
-                    onClick={handleExpandClick}
-                    title="Close"
-                  >
+                  <Button type="button" color="secondary" onClick={handleExpandClick} title="Close">
                     <CloseIcon />
                   </Button>
                   {/* <IconButton type='reset' color='default' onClick={reset} title="Reset"><RefreshIcon /></IconButton> */}
                 </ButtonGroup>
-                <Button
-                  variant="contained"
-                  type="submit"
-                  color="primary"
-                  startIcon={<SaveIcon />}
-                >
+                <Button variant="contained" type="submit" color="primary" startIcon={<SaveIcon />}>
                   Save
                 </Button>
-                </CardActions>
+              </CardActions>
             </Paper>
           </form>
         </section>

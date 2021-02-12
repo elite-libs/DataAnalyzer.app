@@ -3,6 +3,10 @@
   "version": "1.1.0",
   "private": false,
   "homepage": "https://dataanalyzer.app",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/justsml/DataAnalyzer.app"
+  },
   "engines": {
     "node": "< 14"
   },

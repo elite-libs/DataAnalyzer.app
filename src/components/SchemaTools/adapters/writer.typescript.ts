@@ -1,5 +1,5 @@
-import { camelCase, startCase } from 'lodash';
-import { CombinedFieldInfo, TypeNameString } from '../../../schema-analyzer';
+import { camelCase } from 'lodash';
+import { CombinedFieldInfo } from '../../../schema-analyzer';
 import { properCase, removeBlankLines } from '../helpers';
 import { IDataAnalyzerWriter, IRenderArgs } from './writers';
 const typeMap: { [k: string]: string } = {
@@ -28,6 +28,7 @@ const getTSTypeExpression = (fieldInfo: CombinedFieldInfo) => {
     return properCase(fieldInfo.typeRef) + `[] ${fieldInfo.nullable ? ' | null' : ''}`;
   return `${tsType} ${fieldInfo.nullable ? ' | null' : ''}`;
 };
+
 const typescriptWriter: IDataAnalyzerWriter = {
   render({ results, options, schemaName }: IRenderArgs) {
     const hasNestedTypes = results.nestedTypes && Object.keys(results.nestedTypes!).length > 0;

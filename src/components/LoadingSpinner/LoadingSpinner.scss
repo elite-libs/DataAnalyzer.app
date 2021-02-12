@@ -1,0 +1,23 @@
+section.spinner-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.animate-spin {
+  animation: animate-spin 2s linear infinite;
+}
+.animate-pulse {
+  animation: animate-spin 1s steps(8) infinite;
+}
+@keyframes animate-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(1turn);
+  }
+}

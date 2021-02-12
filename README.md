@@ -1,34 +1,73 @@
 # DataAnalyzer.app
 
+> DataAnalyzer understands any JSON (and CSV) data into structured type-aware code for any language!
+
 > An Open Source joint by [Dan Levy](https://danlevy.net/) ✨
 
-This project has 2 main parts:
+## Summary
 
-## 1. Analyze column type & size from any input JSON array!
+If you consume popular APIs or utilize Component libraries, you've probably had the tedious task of re-implementing data structures you (hopefully) found in documentation.
 
-## 2. Generate magical auto-typed code & database interfaces!
+What happens in the all-too-common case when the docs are wrong, outdated or missing?
 
-Schema **Analyzer** is the core library behind Dan's [Schema **Generator**](https://github.com/justsml/schema-generator).
+With internal or private APIs the situation is generally worse.
+
+When facing unreliable docs, often **all you can count on is the actual HTTP response data.**
+
+## Solution
+
+DataAnalyzer.app to the rescue!
+
+It can ingest raw data and generate intelligent type-aware code.
+
+The `schema-analyzer` uses a highly [extensible][1] [adapter/template][2] [pattern][3] which can accommodate almost any kind of output. (e.g. SQL, ORM, GraphQL, Classes/Interfaces, Swagger JSON, JSON Schema to Protocol Buffers, and much more.)
+
+[View completed features](#completed)
+
+> Issues/Requests/PRs welcome! :heart:
+
+[View open tasks](#todo)
+
+## Wait, there's more!
+
+DataAnalyzer has 3 Powerful Features to Explore:
+
+## 1. Analyze column type & size stats from any JSON/CSV!
+
+## 2. Generate auto-typed code & database interfaces, instantly!
+
+## 3. Visualize results, explore & understand your data structure!
 
 ### Features
 
-The primary goal is to support any input JSON/CSV and infer as much as possible. More data will generally yield better results.
+> The primary goal is to support any input JSON/CSV and infer as much as possible.
+> More data will generally yield better results.
+
+- Note: CSV files must include column names.
 
 ##### TODO
 
 - **Better code generator support**
 - [ ] Render output using [handlebars templates](https://handlebarsjs.com/guide/).
 - [ ] Support multiple output files.
-- **Type inferencing**
+- **Type inference & detection**
 - [ ] BigInteger/BigNumber
 - [ ] Latitude & Longitude (Coordinate pairs)
 - **Web App Interface**
 - [ ] Migrate leftover Bootstrap utility classes to Material.
 - [ ] [Fix options & overall menu](https://material-ui.com/components/drawers/#mini-variant-drawer)
 - [ ] [Add App Bar](https://material-ui.com/components/app-bar/)
-- [ ] Make the Input and Output sections collapse/toggleable.
+- [ ] Make the Input and Output sections collapse/toggle-able.
 - [ ] Complete Web Worker for Background Processing.
 - [ ] Add confirmation for processing lots of data. (Rows and raw MB limit?)
+- **Code Adapters**
+- [ ] SQL DDL - **Coming soon**
+- [ ] Code for Libraries like `Yup` or `Joi`
+- [ ] JSON Schemas (for libraries like `ajv`)
+- [ ] Swagger yaml Reader/Writer
+- [ ] Binary Encoders (protocol buffers, thrift, avro?)
+- [ ] JPA
+- [ ] Models/Ruby
 
 ##### Completed
 
@@ -46,7 +85,7 @@ The primary goal is to support any input JSON/CSV and infer as much as possible.
   - [x] Float (w/ scale & precision measurements)
   - [x] Number (Integers)
   - [x] Null (sparse column data helps w/ certain inferences)
-  - [x] String (big text and varchar awareness)
+  - [x] String (big text and variable character length awareness)
   - [x] Array (includes min/max/avg length)
   - [x] Object
   - **Specialty Types**
@@ -58,7 +97,8 @@ The primary goal is to support any input JSON/CSV and infer as much as possible.
 - [x] Identify `enum` Fields w/ Values
 - [x] Identify `Not Null` fields
 - [x] _Normalize_ structured JSON into flat typed objects.
-- > An Open Source joint by [Dan Levy](https://danlevy.net/) ✨
+
+> This passion project was created by [Dan Levy](https://danlevy.net/) ✨
 
 This project ([DataAnalyzer.app](https://github.com/justsml/DataAnalyzer.app)) is a web app with usage example for it's sibling library [Schema **Analyzer**](https://github.com/justsml/schema-analyzer).
 
@@ -66,17 +106,13 @@ The _Analyzer_ library provides an automatic data type analysis on any given arr
 
 The components included here support **JSON/CSV data!**
 
-## Mini Demo
-
-![./demo_80.gif](./demo_80.gif 'using built-in sample analysis')
-
 ### Project Goals
 
 The primary goal is to support any input JSON/CSV and infer as much as possible. More data will generally yield better results.
 
 - [x] Support SQL & noSQL systems!
 - [x] Automatic type detection!
-- [x] Detects String & Number size constraints (for SQL backends)!
+- [x] Detects String & Number size constraints (for SQL, Binary encoding)!
 - [x] Handles error/outliers intelligently
 - [x] Ignores error/outlier records!
 - [x] Smart field name formatting, snake-case vs. camel-case!
@@ -91,255 +127,25 @@ The primary goal is to support any input JSON/CSV and infer as much as possible.
 - [x] Mongoose Schema definition - https://mongoosejs.com/
 - [x] Knex Migration scripts - https://knexjs.org
 - [x] TypeScript Types
-- [ ] SQL DDL script (Data-definition language) - **Coming soon**
-- [ ] Validation Code for Libraries like `Yup` or `Joi`
-- [ ] JSON Schemas (for libraries like `ajv`)
-- [ ] Outputs for other languages/tools!
-- [ ] Binary Encoders (protobufs, thrift, avro?)
-- [ ] JPA
-- [ ] Models/Ruby
 
-======================================
+## Tips & Notes
 
-## For developers wishing to use the underlying library!
-
-### Using the Library
-
-```bash
-npm install schema-analyzer
-```
-
-```ts
-import { schemaAnalyzer } from 'schema-analyzer'
-
-schemaAnalyzer(schemaName: string, data: any[]): TypeSummary
-```
-
-### Preview Analysis Results
-
-> What does this library's analysis look like?
-
-It consists of a few top-level properties:
-
-- `fields: FieldTypeSummary` - a map of field names with all detected types ([includes meta-data](#aggregatesummary) for each type detected, with possible overlaps. e.g. an `Email` is also a `String`, `"42"` is a String and Number)
-- `nestedTypes: { [typeAlias: string]: TypeSummary }` - a nested dictionary of sub-types
-- `totalRows` - # of rows analyzed.
-
-#### Example Dataset
-
-| id  | name            | role      | email                        | createdAt  | accountConfirmed |
-| --- | --------------- | --------- | ---------------------------- | ---------- | ---------------- |
-| 1   | Eve             | poweruser | `eve@example.com`            | 01/20/2020 | undefined        |
-| 2   | Alice           | user      | `ali@example.com`            | 02/02/2020 | true             |
-| 3   | Bob             | user      | `robert@example.com`         | 12/31/2019 | true             |
-| 4   | Elliot Alderson | admin     | `falkensmaze@protonmail.com` | 01/01/2001 | false            |
-| 5   | Sam Sepiol      | admin     | `falkensmaze@hotmail.com`    | 9/9/99     | true             |
-
-#### Analysis Results
-
-```json
-{
-  "schemaName": "sampleUsers",
-  "totalRows": 5,
-  "fields": {
-    "id": {
-      "identity": true,
-      "types": {
-        "Number": {
-          "count": 5,
-          "value": {
-            "min": 1,
-            "mean": 3,
-            "max": 5,
-            "p25": 2,
-            "p33": 2,
-            "p50": 3,
-            "p66": 4,
-            "p75": 4,
-            "p99": 5
-          }
-        },
-        "String": {
-          "count": 5,
-          "length": {
-            "min": 1,
-            "mean": 1,
-            "max": 1,
-            "p25": 1,
-            "p33": 1,
-            "p50": 1,
-            "p66": 1,
-            "p75": 1,
-            "p99": 1
-          }
-        }
-      }
-    },
-    "name": {
-      "types": {
-        "String": {
-          "count": 5,
-          "length": {
-            "min": 3,
-            "mean": 7.2,
-            "max": 15,
-            "p25": 3,
-            "p33": 3,
-            "p50": 5,
-            "p66": 10,
-            "p75": 10,
-            "p99": 15
-          }
-        }
-      }
-    },
-    "role": {
-      "types": {
-        "String": {
-          "count": 5,
-          "length": {
-            "min": 4,
-            "mean": 5.4,
-            "max": 9,
-            "p25": 4,
-            "p33": 4,
-            "p50": 5,
-            "p66": 5,
-            "p75": 5,
-            "p99": 9
-          }
-        }
-      }
-    },
-    "email": {
-      "types": {
-        "Email": {
-          "count": 5,
-          "length": {
-            "min": 15,
-            "mean": 19.4,
-            "max": 26,
-            "p25": 15,
-            "p33": 15,
-            "p50": 18,
-            "p66": 23,
-            "p75": 23,
-            "p99": 26
-          }
-        }
-      }
-    },
-    "createdAt": {
-      "types": {
-        "Date": {
-          "count": 4,
-          "value": {
-            "min": "2001-01-01T00:00:00.000Z",
-            "mean": "2015-04-14T18:00:00.000Z",
-            "max": "2020-02-02T00:00:00.000Z",
-            "p25": "2020-02-02T00:00:00.000Z",
-            "p33": "2020-02-02T00:00:00.000Z",
-            "p50": "2019-12-31T00:00:00.000Z",
-            "p66": "2019-12-31T00:00:00.000Z",
-            "p75": "2001-01-01T00:00:00.000Z",
-            "p99": "2001-01-01T00:00:00.000Z"
-          }
-        },
-        "String": {
-          "count": 1,
-          "length": {
-            "min": 6,
-            "mean": 6,
-            "max": 6,
-            "p25": 6,
-            "p33": 6,
-            "p50": 6,
-            "p66": 6,
-            "p75": 6,
-            "p99": 6
-          }
-        }
-      }
-    },
-    "accountConfirmed": {
-      "types": {
-        "Unknown": {
-          "count": 1
-        },
-        "String": {
-          "count": 1,
-          "length": {
-            "min": 9,
-            "mean": 9,
-            "max": 9,
-            "p25": 9,
-            "p33": 9,
-            "p50": 9,
-            "p66": 9,
-            "p75": 9,
-            "p99": 9
-          }
-        },
-        "Boolean": {
-          "count": 4
-        }
-      }
-    }
-  },
-  "nestedTypes": {}
-}
-```
-
-#### `AggregateSummary`
-
-Numeric and String types include a summary of the observed field sizes:
-
-> Number & String Range Object Details
-
-##### Properties
-
-- `min` the minimum number or string length
-- `max` the maximum number or string length
-- `mean` the average number or string length
-- `percentiles[25th, 33th, 50th, 66th, 75th, 99th]` values from the `Nth` percentile (number or string length)
-
-Percentile is based on input data, as-is with out sorting.
-
-##### Length Range Data
-
-Range data for the `length` of a `String` field type:
-
-```js
-{
-  "count": 5,
-  "length": { "min": 15, "mean": 19.4, "max": 26, "p25": 15, "p33": 15, "p50": 18, "p66": 23, "p75": 23, "p99": 26 }
-}
-```
-
-This is useful for defining strict length limits or minimums, for example as SQL servers often require..
-
-Range data for a `Date` fields `value`:
-
-```js
-{
-  "count": 4,
-  "value": { "min": "2001-01-01T00:00:00.000Z", "mean": "2015-04-14T18:00:00.000Z", "max": "2020-02-02T00:00:00.000Z", "p25": "2020-02-02T00:00:00.000Z", "p33": "2020-02-02T00:00:00.000Z", "p50": "2019-12-31T00:00:00.000Z", "p66": "2019-12-31T00:00:00.000Z", "p75": "2001-01-01T00:00:00.000Z", "p99": "2001-01-01T00:00:00.000Z" }
-}
-```
-
-## Notes
-
-We recommend you provide at least 100+ rows. Accuracy increases greatly with 1,000+ rows.
-
-The following features require a certain minimum # of records:
+For `enum` detection, adjust the relevant thresholds if you know (approximately) the expected number of unique enum values. For more accurate results, provide a randomized sample of 100+ rows. Accuracy increases (and speed decreases) greatly with 1,000+ rows.
 
 - Enumeration detection.
-  - Requires at least 100 rows, with 10 or fewer unique values.
-  - Number of unique values must not exceed 20 or 5% of the total number of records. (100 records will identify as Enum w/ 5 values. Up to 20 are possible given 400 or 1,000+.)
+  - Can set a required row count (default 100 rows)
+  - The next enum limit is the max number of unique values allowed?
+    - For example, with `10` max enum items:
+    - Only fields with a `uniqueCount <= 10` will 'match' as enumerations and include an `enum` property.
+    <!-- - Number of unique values must not exceed 20 or 5% of the total number of records. (100 records will identify an Enum w/ 5 values. Up to 20 are possible given 400 or 1,000+.) -->
 - `Not Null` detection.
-  - where `emptyRowCount < (total rows - threshold)`
+  <!-- - Field is nullable when `emptyRowCount` < (total rows - threshold)` -->
 
-### Full List of Detected Types
+> For more info on the **Schema Analyzer** (core library) powering the [DataAnalyzer.app](https://dataanalyzer.app/), check out the [`schema-analyzer` docs!](./README.library.md)
+
+### Included Type Matchers
+
+Some of these (`Email`) are aliases of a base type (`String`). See code for more details on structure/relationship.
 
 - `Unknown`
 - `ObjectId`
@@ -362,3 +168,7 @@ The following features require a certain minimum # of records:
 - https://github.com/jvilk/MakeTypes
 - https://github.com/SweetIQ/schemats
 - https://github.com/vojtechhabarta/typescript-generator
+
+[1]: https://github.com/justsml/DataAnalyzer.app/blob/main/src/components/SchemaTools/adapters/writer.typescript.ts
+[2]: https://github.com/justsml/DataAnalyzer.app/blob/main/src/components/SchemaTools/adapters/writer.knex.ts
+[3]: https://github.com/justsml/DataAnalyzer.app/blob/main/src/components/SchemaTools/adapters/writer.mongoose.ts
