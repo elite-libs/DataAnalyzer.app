@@ -79,9 +79,11 @@ DataAnalyzer has 3 Powerful Features to Explore:
 **Bugs**
 
 - [ ] Mongoose.writer: Nested types duplicate module imports.
-- [ ] Mongoose.writer: Nested types don't use actual nested table name (the $ref Name.)
+- [ ] Mongoose.writer: Nested types don't use actual nested table's PRIMARY KEY (the $ref Name.)
+- [ ] Knex.writer: Recursive nested table support (n-Depth.)
+- [ ] SQL.writer: Recursive nested table support (n-Depth.)
 - [ ] SQL.writer: Use actual nested table ID Column in FOREIGN KEY.
-- [ ] SQL.writer: Verify null/nullable fields emit correctly.
+- [ ] SQL.writer: Null/nullable fields emit correctly.
 
 **Better code generator support**
 

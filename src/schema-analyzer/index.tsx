@@ -278,12 +278,14 @@ function schemaAnalyzer(
     uniqueRowsThreshold: 0.99,
   },
 ): Promise<TypeSummary<FieldInfo>> {
-  if (!Array.isArray(input) || typeof input !== 'object')
-    throw Error('Input Data must be an Array of Objects');
+  if (!input) throw Error('Input Data must be an Object or Array of Objects');
+  if (!Array.isArray(input) && typeof input !== 'object')
+    throw Error('Input Data must be an Object or Array of Objects');
+  // Auto wrap array
+  if (!Array.isArray(input)) input = [input];
   if (input.length < 1) throw Error('1 record required. 100+ recommended.');
   if (typeof input[0] !== 'object')
     throw Error('Input Data must be an Array of Objects');
-
   const {
     onProgress = ({ totalRows, currentRow }) => {},
     strictMatching = true,
@@ -308,77 +310,80 @@ function schemaAnalyzer(
   });
 
   // #debug: log`Processing '${schemaName}', found ${input.length} rows...`)
-  return Promise.resolve(input)
-    .then(pivotRowsGroupedByType)
-    .then((result) => {
-      // console.log(result);
-      return result;
-    })
-    .then(condenseFieldData({ enumAbsoluteLimit, isEnumEnabled }))
-    .then(async (schema) => {
-      // #debug: log'Built summary from Field Type data.')
-      // console.log'Schema', JSON.stringify(schema, null, 2))
+  return (
+    Promise.resolve(input)
+      // @ts-ignore
+      .then(pivotRowsGroupedByType)
+      // .then((result) => {
+      //   // console.log(result);
+      //   return result;
+      // })
+      .then(condenseFieldData({ enumAbsoluteLimit, isEnumEnabled }))
+      .then(async (schema) => {
+        // #debug: log'Built summary from Field Type data.')
+        // console.log'Schema', JSON.stringify(schema, null, 2))
 
-      const fields = Object.keys(schema.fields).reduce(
-        (fieldTypesResults, fieldName) => {
-          const typesInfo = schema.fields[fieldName]!.types;
-          const jobState = {
-            rowCount: input.length,
-            uniques: schema.uniques[fieldName] ?? [],
-          };
-          let f = schema.fields[fieldName]!;
+        const fields = Object.keys(schema.fields).reduce(
+          (fieldTypesResults, fieldName) => {
+            const typesInfo = schema.fields[fieldName]!.types;
+            const jobState = {
+              rowCount: input.length,
+              uniques: schema.uniques[fieldName] ?? [],
+            };
+            let f = schema.fields[fieldName]!;
 
-          let fInfo: FieldInfo = {
-            identity: f.identity || false,
-            types: f.types!,
-            enum: f.enum,
-            nullable: f.nullable,
-            nullCount: f.nullCount || 0,
-            unique: f.unique,
-            uniqueCount: f.uniqueCount || 0,
-          };
+            let fInfo: FieldInfo = {
+              identity: f.identity || false,
+              types: f.types!,
+              enum: f.enum,
+              nullable: f.nullable,
+              nullCount: f.nullCount || 0,
+              unique: f.unique,
+              uniqueCount: f.uniqueCount || 0,
+            };
 
-          fInfo = TYPE_ENUM.check(fInfo, jobState, options);
-          fInfo = TYPE_NULLABLE.check(fInfo, jobState, options);
-          fInfo = TYPE_UNIQUE.check(fInfo, jobState, options);
+            fInfo = TYPE_ENUM.check(fInfo, jobState, options);
+            fInfo = TYPE_NULLABLE.check(fInfo, jobState, options);
+            fInfo = TYPE_UNIQUE.check(fInfo, jobState, options);
 
-          const isIdentity =
-            (typesInfo.Number || typesInfo.UUID || typesInfo.ObjectId) &&
-            /^(gu|uu|_)?id/i.test(fieldName);
+            const isIdentity =
+              (typesInfo.Number || typesInfo.UUID || typesInfo.ObjectId) &&
+              /^(gu|uu|_)?id/i.test(fieldName);
 
-          if (isIdentity) fInfo.identity = true;
+            if (isIdentity) fInfo.identity = true;
 
-          if (schema.uniques && schema.uniques[fieldName]) {
-            fInfo.uniqueCount = schema.uniques[fieldName]!.length;
-            fInfo.unique = fInfo.uniqueCount === jobState.rowCount;
-          }
+            if (schema.uniques && schema.uniques[fieldName]) {
+              fInfo.uniqueCount = schema.uniques[fieldName]!.length;
+              fInfo.unique = fInfo.uniqueCount === jobState.rowCount;
+            }
 
-          // verify `uniques` tracking
-          // if (
-          //   isIdentity &&
-          //   (!schema.uniques?.[fieldName] ||
-          //     schema.uniques?.[fieldName]!.length <= 0)
-          // ) {
-          //   console.trace(
-          //     `ERROR: No unique data tracked for field (${schemaName} ${fieldName}) !!!`
-          //   );
-          // }
-          fieldTypesResults[fieldName] = fInfo;
+            // verify `uniques` tracking
+            // if (
+            //   isIdentity &&
+            //   (!schema.uniques?.[fieldName] ||
+            //     schema.uniques?.[fieldName]!.length <= 0)
+            // ) {
+            //   console.trace(
+            //     `ERROR: No unique data tracked for field (${schemaName} ${fieldName}) !!!`
+            //   );
+            // }
+            fieldTypesResults[fieldName] = fInfo;
 
-          return fieldTypesResults;
-        },
-        {} as { [fieldName: string]: FieldInfo },
-      );
+            return fieldTypesResults;
+          },
+          {} as { [fieldName: string]: FieldInfo },
+        );
 
-      return {
-        schemaName,
-        fields,
-        totalRows: schema.totalRows,
-        nestedTypes: disableNestedTypes
-          ? undefined
-          : await nestedSchemaAnalyzer(nestedData),
-      };
-    });
+        return {
+          schemaName,
+          fields,
+          totalRows: schema.totalRows,
+          nestedTypes: disableNestedTypes
+            ? undefined
+            : await nestedSchemaAnalyzer(nestedData),
+        };
+      })
+  );
 
   function nestedSchemaAnalyzer(
     nestedData: { [s: string]: unknown } | ArrayLike<unknown>,
