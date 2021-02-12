@@ -14,7 +14,7 @@ type State = {
 let initialState: State = {
   inputData: '',
   schema: null,
-  schemaName: '',
+  schemaName: 'Users',
   schemaTimestamp: null,
   results: null,
   resultsTimestamp: null,

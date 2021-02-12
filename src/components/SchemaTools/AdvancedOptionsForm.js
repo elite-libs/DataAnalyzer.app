@@ -117,7 +117,7 @@ const formatPercent = (number) =>
 export default function AdvancedOptionsForm({ className = '' }) {
   const dispatch = useDispatch();
   const options = useSelector((state) => state.optionsActions);
-  const { schemaName } = useSelector((state) => state.analysisFeature);
+  // const { schemaName } = useSelector((state) => state.analysisFeature);
   const classes = useStyles();
   const methods = useForm({ defaultValues: options });
   const { handleSubmit, control, register, watch } = methods;

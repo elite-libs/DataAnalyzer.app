@@ -5,11 +5,11 @@ import SyncOutlinedIcon from '@material-ui/icons/SyncOutlined';
 import Button from '@material-ui/core/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import type { RootState } from 'store/rootReducer';
-import CodeViewer from './ResultsView/CodeViewer';
+// import CodeViewer from './ResultsView/CodeViewer';
 
 import { resetAnalysis, setInputData } from 'store/analysisSlice';
-import { resetOptions } from 'store/optionsSlice';
-import { resetStatusMessage } from 'store/appStateSlice';
+// import { resetOptions } from 'store/optionsSlice';
+// import { resetStatusMessage } from 'store/appStateSlice';
 
 type Props = {
   className?: string;
@@ -36,8 +36,8 @@ export default function InputProcessor({ className = '' }: Props) {
   };
 
   function resetAppState() {
-    dispatch(resetOptions());
-    dispatch(resetStatusMessage());
+    // dispatch(resetOptions());
+    // dispatch(resetStatusMessage());
     dispatch(resetAnalysis());
   }
 
@@ -64,7 +64,7 @@ export default function InputProcessor({ className = '' }: Props) {
               Reset / Start Over
             </Button>
           </div>
-          <CodeViewer maxHeight={'15vh'}>{inputData}</CodeViewer>
+          {/* <CodeViewer maxHeight={'15vh'}>{inputData}</CodeViewer> */}
         </>
       ) : (
         <Paper

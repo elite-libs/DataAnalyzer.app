@@ -26,7 +26,7 @@ export const OutputButtons = ({ onChange }: Props) => {
   const { inputData, results } = useSelector((state: RootState) => state.analysisFeature);
   const { outputAdapter } = useSelector((state: RootState) => state.optionsActions);
   const hasParsedInputData = Boolean(results);
-  console.log({ hasParsedInputData });
+  // console.log({ hasParsedInputData });
   const schemaLinkProps = inputData
     ? {
         className: 'unlocked',
@@ -47,6 +47,7 @@ export const OutputButtons = ({ onChange }: Props) => {
         {outputOptions.map(([adapter, label, icon]) => {
           return (
             <Button
+              key={adapter}
               onClick={() => onAdapterClicked({ adapter })}
               variant={hasParsedInputData && outputAdapter === adapter ? 'contained' : 'outlined'}
               size="medium"

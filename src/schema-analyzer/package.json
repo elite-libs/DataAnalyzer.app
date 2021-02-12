@@ -92,7 +92,7 @@
     "endOfLine": "lf",
     "trailingComma": "all",
     "tabWidth": 2,
-    "semi": false,
+    "semi": true,
     "singleQuote": true
   },
   "jest": {
@@ -103,7 +103,7 @@
     ],
     "preset": "ts-jest",
     "moduleNameMapper": {
-      "^lodash-es$": "<rootDir>/node_modules/lodash/index.js"
+      "^lodash-es$": "node_modules/lodash/index.js"
     }
   },
   "babel": {

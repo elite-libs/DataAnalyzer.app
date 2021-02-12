@@ -1,6 +1,6 @@
 import React from 'react';
 import { withStyles, Theme } from '@material-ui/core/styles';
-import Tooltip, { TooltipProps } from '@material-ui/core/Tooltip';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const HtmlTooltip = withStyles((theme: Theme) => ({
   tooltip: {

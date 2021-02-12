@@ -140,7 +140,6 @@ export default function SchemaTools() {
     const startTime = Date.now();
     console.time(`Processing:${adapter}`);
     try {
-      // await parseRawText();
       await getTypeSummary();
       await renderCode();
       enqueueSnackbar(`Completed in ${((Date.now() - startTime) / 1000).toFixed(1)} seconds.`, {
@@ -148,7 +147,8 @@ export default function SchemaTools() {
       });
     } catch (error) {
       console.error(error);
-      enqueueSnackbar(`Error: ${error.message}`, { variant: 'warning' });
+      dispatch(setSchema(null));
+      enqueueSnackbar(`Error: ${error.message}`, { variant: 'error', autoHideDuration: 6000 });
     }
     console.timeEnd(`Processing:${adapter}`);
   }
@@ -277,13 +277,13 @@ export default function SchemaTools() {
                 <section>
                   {results == null || results.length < 1 ? (
                     <>
-                      <InputProcessor />
+                      <InputProcessor className="flex-grow-1" />
                       <OutputButtons onChange={handleAdapterSelected} />
                     </>
                   ) : (
                     <>
                       {codeToolbarUi}
-                      <CodeViewer>
+                      <CodeViewer className="flex-grow-1">
                         {results || '// No code to view, please check your settings.'}
                       </CodeViewer>
                     </>

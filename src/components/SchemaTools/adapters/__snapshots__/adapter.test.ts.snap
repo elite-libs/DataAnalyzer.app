@@ -16,8 +16,8 @@ exports.up = async function up(knex) {
     table.datetime(\\"modified_at\\").notNullable();
     table.string(\\"catch_phrase\\", 60).notNullable();
     table.string(\\"company_name\\", 20).notNullable();
-    table.integer(\\"credits\\").enum('1', '15', '20', '10', '11', '7', '9').notNullable();
-    table.decimal(\\"sales_score\\", 10, 8).enum('1.75129', '15.75129', '11.453456', '10.75129', '11.75129', '20.75129', '20.65545', '20.9877865', '7.75129', '9.75129').notNullable();
+    table.integer(\\"credits\\").enum('1', '15', '20', '10', '0', '11', '7', '9').notNullable();
+    table.decimal(\\"sales_score\\", 10, 8).notNullable();
     table.string(\\"location\\", 20).enum('nyc', 'remote', 'denver').notNullable();
     table.string(\\"profile\\", 400).unique();
 })
@@ -161,12 +161,11 @@ const Users = new Schema({
   credits: {
     type: \\"Number\\",
     required: true,
-    enum: [\\"1\\", \\"15\\", \\"20\\", \\"10\\", \\"11\\", \\"7\\", \\"9\\"],
+    enum: [\\"1\\", \\"15\\", \\"20\\", \\"10\\", \\"0\\", \\"11\\", \\"7\\", \\"9\\"],
   },
   salesScore: {
     type: \\"Float\\",
     required: true,
-    enum: [\\"1.75129\\", \\"15.75129\\", \\"11.453456\\", \\"10.75129\\", \\"11.75129\\", \\"20.75129\\", \\"20.65545\\", \\"20.9877865\\", \\"7.75129\\", \\"9.75129\\"],
   },
   location: {
     type: \\"String\\",
@@ -355,8 +354,8 @@ exports[`#typescript can emit interface(s) 1`] = `
   modifiedAt: Date;
   catchPhrase: string;
   companyName: string;
-  credits: \\"1\\" | \\"15\\" | \\"20\\" | \\"10\\" | \\"11\\" | \\"7\\" | \\"9\\";
-  salesScore: \\"1.75129\\" | \\"15.75129\\" | \\"11.453456\\" | \\"10.75129\\" | \\"11.75129\\" | \\"20.75129\\" | \\"20.65545\\" | \\"20.9877865\\" | \\"7.75129\\" | \\"9.75129\\";
+  credits: \\"1\\" | \\"15\\" | \\"20\\" | \\"10\\" | \\"0\\" | \\"11\\" | \\"7\\" | \\"9\\";
+  salesScore: number;
   location: \\"nyc\\" | \\"remote\\" | \\"denver\\";
   profile?: string  | null;
 };

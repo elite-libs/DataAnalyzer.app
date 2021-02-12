@@ -7,14 +7,17 @@ export type ICodeGeneratorArgs = {
   language?: string;
   children: ReactNode;
   maxHeight?: Property.Height;
+  className?: string;
 };
 
 function VerticalScrollWrapper({
   children,
   maxHeight = null,
+  className,
 }: {
   children: React.ReactNode;
   maxHeight?: Property.Height | null;
+  className?: string;
 }) {
   if (!maxHeight) return <>{children}</>;
   return <section style={{ overflowY: 'auto', width: '100%', maxHeight }}>{children}</section>;
@@ -24,6 +27,7 @@ export default function CodeViewer({
   language = 'typescript',
   maxHeight = undefined,
   children,
+  className = '',
 }: ICodeGeneratorArgs) {
   // const [generatedCode, setGeneratedCode] = React.useState('');
   // const { adapter = 'knex' } = useParams<{adapter: AdapterNames}>();
@@ -35,8 +39,13 @@ export default function CodeViewer({
   // }
   // console.log(arguments, children)
   return (
-    <VerticalScrollWrapper maxHeight={maxHeight}>
-      <SyntaxHighlighter language={language} style={atomDark} showLineNumbers={true}>
+    <VerticalScrollWrapper maxHeight={maxHeight} className={className}>
+      <SyntaxHighlighter
+        language={language}
+        style={atomDark}
+        showLineNumbers={true}
+        className="flex-grow-1"
+      >
         {children}
       </SyntaxHighlighter>
     </VerticalScrollWrapper>
