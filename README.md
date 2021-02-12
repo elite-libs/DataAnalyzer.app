@@ -1,6 +1,6 @@
 # DataAnalyzer.app
 
-> DataAnalyzer understands any JSON (and CSV) data into structured type-aware code for any language!
+> **DataAnalyzer understands and converts any JSON (or CSV) data into type-aware code for any language!**
 
 > An Open Source joint by [Dan Levy](https://danlevy.net/) ✨
 
