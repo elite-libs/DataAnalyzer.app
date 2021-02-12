@@ -10,7 +10,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
-import Collapse from '@material-ui/core/Collapse';
+// import Collapse from '@material-ui/core/Collapse';
 import SaveIcon from '@material-ui/icons/Save';
 import CloseIcon from '@material-ui/icons/Close';
 import SettingsIcon from '@material-ui/icons/Settings';
@@ -21,6 +21,7 @@ import { setOptions } from 'store/optionsSlice';
 import './AdvancedOptionsForm.scss';
 import { TextField } from '@material-ui/core';
 import TooltipWrapper from 'components/TooltipWrapper';
+import { setSchemaName } from 'store/analysisSlice';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -116,6 +117,7 @@ const formatPercent = (number) =>
 export default function AdvancedOptionsForm({ className = '' }) {
   const dispatch = useDispatch();
   const options = useSelector((state) => state.optionsActions);
+  const { schemaName } = useSelector((state) => state.analysisFeature);
   const classes = useStyles();
   const methods = useForm({ defaultValues: options });
   const { handleSubmit, control, register, watch } = methods;
@@ -128,6 +130,7 @@ export default function AdvancedOptionsForm({ className = '' }) {
     console.log('Saved Options', updatedOptions);
 
     dispatch(setOptions(updatedOptions));
+    dispatch(setSchemaName(data.schemaName));
     setExpanded(false);
   };
 
@@ -155,16 +158,19 @@ export default function AdvancedOptionsForm({ className = '' }) {
           <SettingsIcon fontSize="large" color="primary" aria-label="Open Advanced Options" />
         )}
       </Button>
-      <Card raised={false} style={{ marginLeft: '-200px', zIndex: 5500, position: 'relative' }}>
+      <Card
+        raised={false}
+        style={{ marginLeft: '-220px', marginTop: '50px', zIndex: 500, position: 'absolute' }}
+      >
         <section
-          style={{ height: expanded ? 'auto' : '0', zIndex: 5500 }}
+          style={{ height: expanded ? 'auto' : '0', zIndex: 500, position: 'relative' }}
           className={classes.panel}
         >
           <form
             className={'schema-options ' + className + ' ' + classes.form}
             onSubmit={handleSubmit(onSubmit)}
           >
-            <Paper elevation={3}>
+            <Paper elevation={5} variant="outlined">
               <CardContent className={`px-3 bg-white ${classes.panelContent}`}>
                 <fieldset className="form-group">
                   <legend className="mb-1">Global Rules</legend>
@@ -172,9 +178,11 @@ export default function AdvancedOptionsForm({ className = '' }) {
                     <TooltipWrapper
                       tooltipContent={
                         <>
-                          <b>Label your dataset.</b>
+                          <b>Label your dataset</b>
                           <br />
-                          Examples: Customer, Product, Articles, etc.
+                          Used as a prefix for any nested data structures.
+                          <br />
+                          <b>Examples:</b> Customer, Product, Articles, etc.
                         </>
                       }
                     >
@@ -182,9 +190,8 @@ export default function AdvancedOptionsForm({ className = '' }) {
                     </TooltipWrapper>
                     <TextField
                       name="schemaName"
-                      value="User"
-                      defaultValue={options.schemaName}
-                      control={control}
+                      InputProps={{ name: 'schemaName' }}
+                      inputRef={register}
                     />
                   </section>
                   <section className="input-group d-flex justify-content-between">

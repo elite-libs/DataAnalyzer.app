@@ -23,6 +23,7 @@
     "@types/react-dom": "^16.9.8",
     "@types/recoil": "0.0.1",
     "apexcharts": "^3.23.1",
+    "clipboard-copy": "^4.0.1",
     "comlink": "^4.3.0",
     "csv-parse": "^4.15.0",
     "debug": "^4.3.1",

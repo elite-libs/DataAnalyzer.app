@@ -6,13 +6,15 @@ import Chip from '@material-ui/core/Chip';
 import SyncIcon from '@material-ui/icons/Sync';
 import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
 import CloudDoneIcon from '@material-ui/icons/CloudDone';
-import { useSnackbar } from 'notistack';
+import { useSnackbar, SnackbarKey } from 'notistack';
+import TooltipWrapper from './TooltipWrapper';
+import { InfoOutlined } from '@material-ui/icons';
 
 const sampleDataSets: Record<'label' | 'value' | 'schemaName', string>[] = [
   { label: 'Users', value: 'users.example.json', schemaName: 'Users' },
   { label: 'People', value: 'swapi-people.json', schemaName: 'People' },
   {
-    label: 'Real Estate',
+    label: 'Property',
     value: 'real-estate.example.json',
     schemaName: 'Property',
   },
@@ -20,7 +22,8 @@ const sampleDataSets: Record<'label' | 'value' | 'schemaName', string>[] = [
 ];
 
 export const DemoDataMenu = () => {
-  const { enqueueSnackbar } = useSnackbar();
+  let _loadingSnackMessage: SnackbarKey | null = null;
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const dispatch = useDispatch();
   const [currentlyLoadingData, setCurrentlyLoadingData] = React.useState<string | null>(null);
   const [currentlyLoadedFile, setCurrentlyLoadedFile] = React.useState<string | null>(null);
@@ -35,16 +38,20 @@ export const DemoDataMenu = () => {
     dispatch(setInputData(''));
     setCurrentlyLoadingData(filePath);
     if (!filePath) {
-      enqueueSnackbar('', { variant: 'success' });
+      enqueueSnackbar('Unrecognized option: ' + name + ' ' + filePath, { variant: 'warning' });
       setCurrentlyLoadingData(null);
       return;
     }
-    enqueueSnackbar(`One moment...\nImporting ${name} dataset...`, { variant: 'success' });
+    _loadingSnackMessage = enqueueSnackbar(`One moment...\nImporting ${name} dataset...`, {
+      variant: 'success',
+    });
     return fetch(filePath)
       .then((response) => response.text())
       .then((data) => {
         dispatch(setInputData(data));
         dispatch(setSchemaName(name));
+        if (_loadingSnackMessage) closeSnackbar(_loadingSnackMessage);
+        _loadingSnackMessage = null;
         enqueueSnackbar('Loaded Sample Dataset 🎉', { variant: 'success' });
         setCurrentlyLoadedFile(filePath);
       })
@@ -61,8 +68,21 @@ export const DemoDataMenu = () => {
   };
 
   return (
-    <section className="demo-data-buttons col-7">
-      <label>Try sample dataset:</label>
+    <section className="demo-data-buttons col-12 px-0 col-md-7 col-sm-10 col-xs-12">
+      <TooltipWrapper
+        tooltipContent={
+          <>
+            <b>Test out the service</b>
+            <br />
+            Real data sourced from public APIs.
+          </>
+        }
+      >
+        <label>
+          <InfoOutlined color="action" fontSize="small" />
+          sample datasets:
+        </label>
+      </TooltipWrapper>
       {sampleDataSets.map((set) => {
         return (
           <Chip
@@ -73,7 +93,7 @@ export const DemoDataMenu = () => {
             size="small"
             color={currentlyLoadedFile !== set.value ? 'primary' : 'default'}
             label={set.label}
-            style={{ width: '102px' }}
+            style={{ width: '94px' }}
             onClick={() => loadData(set.schemaName, set.value)}
           />
         );

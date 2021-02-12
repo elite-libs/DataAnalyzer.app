@@ -1,6 +1,6 @@
 import React from 'react';
 import { withStyles, Theme } from '@material-ui/core/styles';
-import Tooltip from '@material-ui/core/Tooltip';
+import Tooltip, { TooltipProps } from '@material-ui/core/Tooltip';
 
 const HtmlTooltip = withStyles((theme: Theme) => ({
   tooltip: {
@@ -14,6 +14,7 @@ const HtmlTooltip = withStyles((theme: Theme) => ({
 
 type Props = {
   tooltipContent?: React.ReactNode | null;
+  // variant: 'default' | 'warning';
   children: any | any[] | null;
 };
 

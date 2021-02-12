@@ -1,13 +1,29 @@
+/**
+Breakpoint 	Class infix 	Dimensions
+X-Small 	None 	<576px
+Small 	sm 	≥576px
+Medium 	md 	≥768px
+Large 	lg 	≥992px
+Extra large 	xl 	≥1200px
+Extra extra large 	xxl 	≥1400px
+*/
+
 .App {
   text-align: left;
   main {
-    min-height: 80vh;
-    height: 80vh;
+    min-height: 91vh;
+    height: 91vh;
+
+    textarea:empty {
+      font-size: 22px;
+      text-align: center;
+      padding: 20px 0 0 0;
+    }
     // overflow-y: auto;
     // overflow-x: hidden;
     > section {
       width: 100%;
-      height: calc(80vh - 110px);
+      height: calc(91vh - 110px);
       display: flex;
       justify-content: stretch;
       flex-direction: column;
@@ -34,16 +50,38 @@
 
 .demo-data-buttons {
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  justify-content: right;
   align-items: center;
   position: relative;
   z-index: -1;
 
+  .MuiChip-root {
+    margin: 0 1.5px 1.5px 0;
+    display: flex;
+    justify-content: flex-start;
+    svg {
+      margin-left: 2.5px;
+    }
+  }
+
+  .MuiChip-label {
+    flex-grow: 1;
+    text-align: center;
+  }
+
   label {
+    margin-right: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin: 0;
     line-height: 24px;
-    height: 24px;
+    // height: 24px;
     font-weight: 500;
+    svg {
+      margin: 0 2.5px;
+    }
   }
 }
 
@@ -107,7 +145,33 @@ form.generator {
   font-size: 1.2rem;
 }
 
-@media only screen and (max-width: 600px) {
+@media (max-width: 575px) {
+  .App {
+    max-width: 100% !important;
+    padding: 0 10px !important;
+
+    main {
+      > section {
+        height: calc(91vh - 220px);
+      }
+    }
+    .shadow-lg {
+      margin: 1rem 0.25rem 0.25rem 0.25rem !important;
+    }
+
+    .brand-link {
+      font-size: 0.72em;
+    }
+  }
+
+  .output-buttons {
+    .MuiButton-startIcon {
+      margin: auto 0;
+    }
+  }
+}
+
+@media (max-width: 575px) {
   form.generator {
     flex-direction: column;
   }

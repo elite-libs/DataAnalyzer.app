@@ -1,10 +1,10 @@
 .output-buttons {
   // explicitly will not expand:
   flex-grow: 0;
-  // create flexbox for children
+  // create flex box for children
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-between;
   flex-direction: row;
 
   margin-top: 0.65rem;
@@ -16,10 +16,11 @@
     max-width: 50px;
   }
   .MuiButtonBase-root {
-    height: 66px;
+    // height: 66px;
     line-height: 1.2rem;
-    margin-right: 2rem;
-    width: 165px;
+    margin-right: 0.3rem;
+    // width: 165px;
+    flex-grow: 1;
   }
   .MuiButton-label {
     max-width: 135px;
@@ -33,12 +34,17 @@
   }
 }
 
+.brand-link {
+  cursor: pointer;
+}
+
 .icon-button-box {
-  transform: translateX(45px) translateY(-15px);
+  transform: translateX(31px) translateY(-16px);
   align-items: start;
   display: flex;
-  justify-content: inherit;
+  justify-content: right;
   flex-direction: row;
+
   > a {
     flex-grow: 0;
     width: 36px;

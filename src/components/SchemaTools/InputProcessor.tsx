@@ -67,13 +67,14 @@ export default function InputProcessor({ className = '' }: Props) {
           <CodeViewer maxHeight={'15vh'}>{inputData}</CodeViewer>
         </>
       ) : (
-        <section
+        <Paper
+          elevation={1}
           className="position-relative w-100 d-flex flex-column align-items-center"
           style={{ justifyContent: 'stretch' }}
         >
           <textarea
             style={{ flexGrow: 1, whiteSpace: 'pre-wrap', overflowX: 'auto' }}
-            className="w-100 border-0 m-1 p-1"
+            className="w-100 m-0"
             aria-label="Input or Paste your CSV or JSON data"
             placeholder="👉 Paste data here!&#160;👈"
             onChange={(e) => dispatch(setInputData(e.target.value))}
@@ -82,7 +83,7 @@ export default function InputProcessor({ className = '' }: Props) {
           >
             {inputData}
           </textarea>
-        </section>
+        </Paper>
       )}
     </Paper>
   );

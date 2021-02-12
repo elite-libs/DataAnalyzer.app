@@ -16,7 +16,7 @@ let initialState: State = {
   schema: null,
   schemaName: '',
   schemaTimestamp: null,
-  results: '',
+  results: null,
   resultsTimestamp: null,
 };
 

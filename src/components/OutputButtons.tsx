@@ -42,8 +42,8 @@ export const OutputButtons = ({ onChange }: Props) => {
     onChange(adapter);
   };
   return (
-    <aside className="col-12" style={{ maxHeight: '80px' }}>
-      <div className="output-buttons col-12 text-left">
+    <aside className="col-12 px-0" style={{ maxHeight: '80px' }}>
+      <div className="output-buttons col-12 text-left px-0">
         {outputOptions.map(([adapter, label, icon]) => {
           return (
             <Button
@@ -54,7 +54,7 @@ export const OutputButtons = ({ onChange }: Props) => {
               startIcon={icon}
               {...schemaLinkProps}
             >
-              <div className="text-left">{label}</div>
+              <div className="text-left d-md-block d-none">{label}</div>
             </Button>
           );
         })}

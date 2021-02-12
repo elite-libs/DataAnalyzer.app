@@ -60,14 +60,14 @@ DataAnalyzer has 3 Powerful Features to Explore:
 - [ ] Make the Input and Output sections collapse/toggle-able.
 - [ ] Complete Web Worker for Background Processing.
 - [ ] Add confirmation for processing lots of data. (Rows and raw MB limit?)
-- **Code Adapters**
-- [ ] SQL DDL - **Coming soon**
+- **Code Writers**
+- [ ] SQL `CREATE TABLE` - **Coming soon**
 - [ ] Code for Libraries like `Yup` or `Joi`
 - [ ] JSON Schemas (for libraries like `ajv`)
 - [ ] Swagger yaml Reader/Writer
-- [ ] Binary Encoders (protocol buffers, thrift, avro?)
-- [ ] JPA
-- [ ] Models/Ruby
+- [ ] Binary Encoders (protocol buffers, thrift, avro)
+- [ ] Java Persistence API
+- [ ] Rails Models
 
 ##### Completed
 
