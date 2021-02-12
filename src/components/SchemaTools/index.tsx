@@ -253,7 +253,7 @@ export default function SchemaTools() {
             <Breadcrumbs
               separator={<span className="divider d-md-block d-none">|</span>}
               aria-label="breadcrumb"
-              className="col-md-5 col-sm-2 col-12 pb-2 pl-1"
+              className="col-md-5 col-sm-1 col-12 pb-2 pl-1"
             >
               <Link component={RouteLink} color="inherit" to="/">
                 <HomeOutlinedIcon />

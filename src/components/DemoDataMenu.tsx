@@ -68,7 +68,7 @@ export const DemoDataMenu = () => {
   };
 
   return (
-    <section className="demo-data-buttons col-12 px-0 col-md-7 col-sm-10 col-xs-12">
+    <section className="demo-data-buttons col-12 px-0 col-md-7 col-sm-11">
       <TooltipWrapper
         tooltipContent={
           <>
@@ -80,7 +80,7 @@ export const DemoDataMenu = () => {
       >
         <label>
           <InfoOutlined color="action" fontSize="small" />
-          sample datasets:
+          demo:&#160;
         </label>
       </TooltipWrapper>
       {sampleDataSets.map((set) => {
@@ -93,7 +93,7 @@ export const DemoDataMenu = () => {
             size="small"
             color={currentlyLoadedFile !== set.value ? 'primary' : 'default'}
             label={set.label}
-            style={{ width: '94px' }}
+            style={{ maxWidth: '94px' }}
             onClick={() => loadData(set.schemaName, set.value)}
           />
         );

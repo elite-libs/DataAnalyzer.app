@@ -52,7 +52,7 @@ Extra extra large 	xxl 	≥1400px
   display: flex;
   flex-wrap: wrap;
   justify-content: right;
-  align-items: center;
+  // align-items: center;
   position: relative;
   z-index: -1;
 
@@ -73,7 +73,7 @@ Extra extra large 	xxl 	≥1400px
   label {
     margin-right: 3px;
     display: flex;
-    align-items: center;
+    // align-items: center;
     justify-content: center;
     margin: 0;
     line-height: 24px;
@@ -149,6 +149,10 @@ form.generator {
   .App {
     max-width: 100% !important;
     padding: 0 10px !important;
+
+    &.container {
+      max-width: 100% !important;
+    }
 
     main {
       > section {
