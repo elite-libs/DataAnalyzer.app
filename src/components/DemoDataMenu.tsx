@@ -9,19 +9,21 @@ import CloudDoneIcon from '@material-ui/icons/CloudDone';
 import { useSnackbar, SnackbarKey } from 'notistack';
 import TooltipWrapper from './TooltipWrapper';
 import { InfoOutlined } from '@material-ui/icons';
+import { useHistory } from 'react-router-dom';
 
 const sampleDataSets: Record<'label' | 'value' | 'schemaName', string>[] = [
-  { label: 'Users', value: 'users.example.json', schemaName: 'Users' },
-  { label: 'People', value: 'swapi-people.json', schemaName: 'People' },
+  { label: 'Users', value: '/users.example.json', schemaName: 'Users' },
+  { label: 'People', value: '/swapi-people.json', schemaName: 'People' },
   {
     label: 'Property',
-    value: 'real-estate.example.json',
+    value: '/real-estate.example.json',
     schemaName: 'Property',
   },
-  { label: 'Products', value: 'products-3000.csv', schemaName: 'Product' },
+  { label: 'Products', value: '/products-3000.csv', schemaName: 'Product' },
 ];
 
 export const DemoDataMenu = () => {
+  const history = useHistory();
   let _loadingSnackMessage: SnackbarKey | null = null;
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const dispatch = useDispatch();
@@ -53,6 +55,7 @@ export const DemoDataMenu = () => {
         if (_loadingSnackMessage) closeSnackbar(_loadingSnackMessage);
         _loadingSnackMessage = null;
         enqueueSnackbar('Loaded Sample Dataset 🎉', { variant: 'success' });
+        history.push('/');
         setCurrentlyLoadedFile(filePath);
       })
       .catch((error) => {

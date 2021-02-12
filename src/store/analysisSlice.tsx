@@ -33,12 +33,14 @@ const slice = createSlice({
       state.schemaTimestamp = null;
       state.results = null;
       state.resultsTimestamp = null;
+      return state;
     },
     setSchemaName(state, action: PayloadAction<string | undefined | null>) {
       const { payload } = action;
       state.schemaName = payload || 'SchemaName';
       state.results = null;
       state.resultsTimestamp = null;
+      return state;
     },
     setSchema(state, action: PayloadAction<TypeSummary<FieldInfo> | null>) {
       const { payload } = action;
@@ -46,11 +48,13 @@ const slice = createSlice({
       state.schemaTimestamp = payload != null ? Date.now() : null;
       state.results = null;
       state.resultsTimestamp = null;
+      return state;
     },
     setResults(state, action: PayloadAction<string | undefined | null>) {
       const { payload } = action;
       state.results = payload;
       state.resultsTimestamp = payload != null ? Date.now() : null;
+      return state;
     },
     resetAnalysis(state) {
       state = { ...initialState };

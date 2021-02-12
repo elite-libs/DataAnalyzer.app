@@ -21,7 +21,7 @@ import { setOptions } from 'store/optionsSlice';
 import './AdvancedOptionsForm.scss';
 import { TextField } from '@material-ui/core';
 import TooltipWrapper from 'components/TooltipWrapper';
-import { setSchemaName } from 'store/analysisSlice';
+import { setResults, setSchema, setSchemaName } from 'store/analysisSlice';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -130,7 +130,8 @@ export default function AdvancedOptionsForm({ className = '' }) {
     console.log('Saved Options', updatedOptions);
 
     dispatch(setOptions(updatedOptions));
-    dispatch(setSchemaName(data.schemaName));
+    dispatch(setSchemaName(updatedOptions.schemaName));
+    resetResults();
     setExpanded(false);
   };
 
@@ -140,6 +141,11 @@ export default function AdvancedOptionsForm({ className = '' }) {
     if (e && e.preventDefault) e.preventDefault();
     setExpanded(!expanded);
   };
+
+  function resetResults() {
+    dispatch(setSchema(null));
+    dispatch(setResults(null));
+  }
 
   const displayNullableRowsThreshold = formatPercent(100.0 * watch('nullableRowsThreshold'));
   const displayUniqueRowsThreshold = 100 - formatPercent(100.0 * watch('uniqueRowsThreshold'));

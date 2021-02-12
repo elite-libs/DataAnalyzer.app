@@ -21,16 +21,16 @@ const getFieldLabeledData = (schemaResults: TypeSummary<FieldInfo>) => {
   const { fields } = schemaResults;
   const fieldNames = Object.keys(fields);
   const typesList = Object.keys(getTypeCounts(schemaResults));
-  console.log('typesList', typesList);
+  // console.log('typesList', typesList);
   return typesList.map((type) => {
     return {
       name: type,
       data: fieldNames.map((fieldName) => {
-        console.log(
-          'fields[fieldName].types[type]',
-          fields[fieldName],
-          fields[fieldName]!.types[type],
-        );
+        // console.log(
+        //   'fields[fieldName].types[type]',
+        //   fields[fieldName],
+        //   fields[fieldName]!.types[type],
+        // );
         return fields[fieldName]!.types[type] ? fields[fieldName]!.types[type].count : 0;
       }),
     };

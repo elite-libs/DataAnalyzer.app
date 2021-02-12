@@ -2,7 +2,7 @@
 
 > **DataAnalyzer understands and converts any JSON (or CSV) data into type-aware code for any language!**
 
-> An Open Source joint by [Dan Levy](https://danlevy.net/) ✨
+> A passion project by [Dan Levy](https://danlevy.net/) ✨
 
 ## Summary
 
@@ -28,48 +28,22 @@ The `schema-analyzer` uses a highly [extensible][1] [adapter/template][2] [patte
 
 [View open tasks](#todo)
 
-## Wait, there's more!
+### Wait, there's more!
 
 DataAnalyzer has 3 Powerful Features to Explore:
 
-## 1. Analyze column type & size stats from any JSON/CSV!
+#### 1. Analyze column type & size stats from any JSON/CSV!
 
-## 2. Generate auto-typed code & database interfaces, instantly!
+#### 2. Generate auto-typed code & database interfaces, instantly!
 
-## 3. Visualize results, explore & understand your data structure!
+#### 3. Visualize results, explore & understand your data structure!
 
-### Features
+## Features
 
 > The primary goal is to support any input JSON/CSV and infer as much as possible.
 > More data will generally yield better results.
 
-- Note: CSV files must include column names.
-
-##### TODO
-
-- **Better code generator support**
-- [ ] Render output using [handlebars templates](https://handlebarsjs.com/guide/).
-- [ ] Support multiple output files.
-- **Type inference & detection**
-- [ ] BigInteger/BigNumber
-- [ ] Latitude & Longitude (Coordinate pairs)
-- **Web App Interface**
-- [ ] Migrate leftover Bootstrap utility classes to Material.
-- [ ] [Fix options & overall menu](https://material-ui.com/components/drawers/#mini-variant-drawer)
-- [ ] [Add App Bar](https://material-ui.com/components/app-bar/)
-- [ ] Make the Input and Output sections collapse/toggle-able.
-- [ ] Complete Web Worker for Background Processing.
-- [ ] Add confirmation for processing lots of data. (Rows and raw MB limit?)
-- **Code Writers**
-- [ ] SQL `CREATE TABLE` - **Coming soon**
-- [ ] Code for Libraries like `Yup` or `Joi`
-- [ ] JSON Schemas (for libraries like `ajv`)
-- [ ] Swagger yaml Reader/Writer
-- [ ] Binary Encoders (protocol buffers, thrift, avro)
-- [ ] Java Persistence API
-- [ ] Rails Models
-
-##### Completed
+#### Completed
 
 - [x] Heuristic type analysis for arrays of objects.
 - [x] Nested data structure & multi-table relational output.
@@ -98,13 +72,45 @@ DataAnalyzer has 3 Powerful Features to Explore:
 - [x] Identify `Not Null` fields
 - [x] _Normalize_ structured JSON into flat typed objects.
 
-> This passion project was created by [Dan Levy](https://danlevy.net/) ✨
+**Note:** CSV files must include column names.
 
-This project ([DataAnalyzer.app](https://github.com/justsml/DataAnalyzer.app)) is a web app with usage example for it's sibling library [Schema **Analyzer**](https://github.com/justsml/schema-analyzer).
+#### TODO
 
-The _Analyzer_ library provides an automatic data type analysis on any given array of objects.
+**Bugs**
 
-The components included here support **JSON/CSV data!**
+- [ ] Mongoose.writer: Nested types duplicate module imports.
+- [ ] Mongoose.writer: Nested types don't use actual nested table name (the $ref Name.)
+- [ ] SQL.writer: Use actual nested table ID Column in FOREIGN KEY.
+- [ ] SQL.writer: Verify null/nullable fields emit correctly.
+
+**Better code generator support**
+
+- [ ] Render output using [handlebars templates](https://handlebarsjs.com/guide/).
+- [ ] Support multiple output files.
+
+**Type inference & detection**
+
+- [ ] BigInteger/BigNumber
+- [ ] Latitude & Longitude (Coordinate pairs)
+
+**Web App Interface**
+
+- [ ] Migrate leftover Bootstrap utility classes to Material.
+- [ ] [Fix options & overall menu](https://material-ui.com/components/drawers/#mini-variant-drawer)
+- [ ] [Add App Bar](https://material-ui.com/components/app-bar/)
+- [ ] Make the Input and Output sections collapse/toggle-able.
+- [ ] Complete Web Worker for Background Processing.
+- [ ] Add confirmation for processing lots of data. (Rows and raw MB limit?)
+
+**Code Writers**
+
+- [ ] SQL `CREATE TABLE` - **Coming soon**
+- [ ] Code for Libraries like `Yup` or `Joi`
+- [ ] JSON Schemas (for libraries like `ajv`)
+- [ ] Swagger yaml Reader/Writer
+- [ ] Binary Encoders (protocol buffers, thrift, avro)
+- [ ] Java Persistence API
+- [ ] Rails Models
 
 ### Project Goals
 
@@ -137,9 +143,7 @@ For `enum` detection, adjust the relevant thresholds if you know (approximately)
   - The next enum limit is the max number of unique values allowed?
     - For example, with `10` max enum items:
     - Only fields with a `uniqueCount <= 10` will 'match' as enumerations and include an `enum` property.
-    <!-- - Number of unique values must not exceed 20 or 5% of the total number of records. (100 records will identify an Enum w/ 5 values. Up to 20 are possible given 400 or 1,000+.) -->
 - `Not Null` detection.
-  <!-- - Field is nullable when `emptyRowCount` < (total rows - threshold)` -->
 
 > For more info on the **Schema Analyzer** (core library) powering the [DataAnalyzer.app](https://dataanalyzer.app/), check out the [`schema-analyzer` docs!](./README.library.md)
 
