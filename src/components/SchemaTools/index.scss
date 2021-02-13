@@ -36,6 +36,13 @@
 
 .brand-link {
   cursor: pointer;
+  img {
+    margin-top: -10px;
+    margin-left: -10px;
+    margin-right: 10px;
+    width: 55px;
+    height: 55px;
+  }
 }
 
 .icon-button-box {

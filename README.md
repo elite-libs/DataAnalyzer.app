@@ -4,7 +4,7 @@
 
 > A passion project by [Dan Levy](https://danlevy.net/) ✨
 
-## Summary
+## Introduction
 
 If you consume popular APIs or utilize Component libraries, you've probably had the tedious task of re-implementing data structures you (hopefully) found in documentation.
 
@@ -16,19 +16,17 @@ When facing unreliable docs, often **all you can count on is the actual HTTP res
 
 ## Solution
 
-DataAnalyzer.app to the rescue!
+**`DataAnalyzer.app`** to the rescue!
 
 It can ingest raw data and generate intelligent type-aware code.
 
 The `schema-analyzer` uses a highly [extensible][1] [adapter/template][2] [pattern][3] which can accommodate almost any kind of output. (e.g. SQL, ORM, GraphQL, Classes/Interfaces, Swagger JSON, JSON Schema to Protocol Buffers, and much more.)
 
-[View completed features](#completed)
+**Contributors:** [View todo & idea list](#todo)
 
-> Issues/Requests/PRs welcome! :heart:
+> Issues/Requests/PRs welcome! 💜💙💚💛🧡♥️
 
-[View open tasks](#todo)
-
-### Wait, there's more!
+### "Wait, there's more!"
 
 DataAnalyzer has 3 Powerful Features to Explore:
 
@@ -97,6 +95,8 @@ DataAnalyzer has 3 Powerful Features to Explore:
 - [ ] Latitude & Longitude (Coordinate pairs)
 - [ ] Phone number (international patterns? configuration?)
 - [ ] Range option for precise Timestamp detection.
+- [ ] Option to visit Hypermedia URLs to discover nested types?
+- [ ] Custom type matchers/regex patterns.
 
 **Web App Interface**
 

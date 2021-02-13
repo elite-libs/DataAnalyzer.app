@@ -27,7 +27,7 @@ const slice = createSlice({
     setInputData(state, action: PayloadAction<string | undefined | null>) {
       const { payload } = action;
       if (payload === state.inputData) return;
-      state.inputData = payload;
+      state.inputData = (payload != null && payload.trim()) || '';
       state.inputTimestamp = payload != null ? Date.now() : null;
       state.schema = null;
       state.schemaTimestamp = null;

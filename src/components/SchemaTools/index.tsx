@@ -240,6 +240,7 @@ export default function SchemaTools() {
           <nav className="row row-block w-100">
             <h1 className="col-9 col-sm-10" title="Reset/Load Home Screen">
               <Link className="brand-link" component={RouteLink} to="/" onClick={resetResults}>
+                <img src="/images/DataAnalyzerDualColor.svg" alt="Data Analyzer app icon" />
                 DataAnalyzer.app
               </Link>
             </h1>
