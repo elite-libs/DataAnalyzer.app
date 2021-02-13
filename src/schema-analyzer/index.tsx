@@ -851,15 +851,15 @@ function formatRangeStats<T, TFormatReturn>(
 ) {
   return {
     // size: stats.size,
-    min: formatter(stats.min),
-    mean: formatter(stats.mean),
-    max: formatter(stats.max),
-    p25: formatter(stats.p25),
-    p33: formatter(stats.p33),
-    p50: formatter(stats.p50),
-    p66: formatter(stats.p66),
-    p75: formatter(stats.p75),
-    p99: formatter(stats.p99),
+    min: formatter(stats?.min),
+    mean: formatter(stats?.mean),
+    max: formatter(stats?.max),
+    p25: formatter(stats?.p25),
+    p33: formatter(stats?.p33),
+    p50: formatter(stats?.p50),
+    p66: formatter(stats?.p66),
+    p75: formatter(stats?.p75),
+    p99: formatter(stats?.p99),
   };
 }
 

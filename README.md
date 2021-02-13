@@ -76,14 +76,15 @@ DataAnalyzer has 3 Powerful Features to Explore:
 
 #### TODO
 
-**Bugs**
+**Bugs** by area/function
 
-- [ ] Mongoose.writer: Nested types duplicate module imports.
-- [ ] Mongoose.writer: Nested types don't use actual nested table's PRIMARY KEY (the $ref Name.)
-- [ ] Knex.writer: Recursive nested table support (n-Depth.)
-- [ ] SQL.writer: Recursive nested table support (n-Depth.)
-- [ ] SQL.writer: Use actual nested table ID Column in FOREIGN KEY.
-- [ ] SQL.writer: Null/nullable fields emit correctly.
+- [ ] `Library.TypeMatcher('Timestamp')`: Aggregate calculations fail with only 1 match. Should fall back to the value.
+- [ ] `Mongoose.writer`: Nested types duplicate module imports.
+- [ ] `Mongoose.writer`: Nested types don't use actual nested table's PRIMARY KEY (the $ref Name.)
+- [ ] `Knex.writer`: Recursive nested table support (n-Depth.)
+- [ ] `SQL.writer`: Recursive nested table support (n-Depth.)
+- [ ] `SQL.writer`: Use actual nested table ID Column in FOREIGN KEY.
+- [ ] `SQL.writer`: Null/nullable fields emit correctly.
 
 **Better code generator support**
 
@@ -92,8 +93,10 @@ DataAnalyzer has 3 Powerful Features to Explore:
 
 **Type inference & detection**
 
-- [ ] BigInteger/BigNumber
+- [ ] BigInt/BigNumber
 - [ ] Latitude & Longitude (Coordinate pairs)
+- [ ] Phone number (international patterns? configuration?)
+- [ ] Range option for precise Timestamp detection.
 
 **Web App Interface**
 
