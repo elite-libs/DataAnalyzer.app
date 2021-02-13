@@ -56,7 +56,9 @@ describe('Multiple Type Matching', () => {
   it('correctly handles dates', () => {
     const matchResult = detectTypes('2020-06-12T02:49:23.473Z', true);
     expect(matchResult).toContain('Date');
-    expect(matchResult.length).toBe(1);
+    let notADateResult = detectTypes(5266);
+    expect(notADateResult).not.toContain('Date');
+    expect(notADateResult.length).toBe(1);
   });
   it('correctly handles timestamps', () => {
     let matchResult = detectTypes(1579994163473);
@@ -151,8 +153,10 @@ describe('Type Detectors', () => {
     expect(TYPE_DATE.check('2020-06-12T02:49:23.473Z')).toBe(true);
     expect(TYPE_DATE.check('2000-01-01')).toBe(true);
     expect(TYPE_DATE.check('2000-01-99')).toBe(false);
+    expect(TYPE_DATE.check(5266)).toBe(false);
   });
   it('can detect timestamp', () => {
+    expect(TYPE_TIMESTAMP.check(5266)).toBe(false);
     expect(TYPE_TIMESTAMP.check(1579994163473)).toBe(true);
     expect(TYPE_TIMESTAMP.check(2579994163473)).toBe(true);
     expect(TYPE_TIMESTAMP.check('1579994163473')).toBe(true);

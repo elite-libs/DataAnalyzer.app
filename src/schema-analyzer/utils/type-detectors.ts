@@ -111,7 +111,7 @@ function isUuid(value: string | any[] | null, fieldName?: string): boolean {
   return value.length < 40 && uuidPattern.test(value);
 }
 /**
- * @param {string | any[] | null} value
+ * @param {string | any | null} value
  * @param {any} fieldName
  */
 function isObjectId(value: string | any[] | null, fieldName?: string): boolean {
@@ -121,7 +121,8 @@ function isObjectId(value: string | any[] | null, fieldName?: string): boolean {
 }
 
 /**
- * @param {string | any[] | null} value
+ * Unix timestamps will match as Timestamp, not a Date
+ * @param {string | any | null} value
  * @param {any} fieldName
  */
 function isDateString(
@@ -130,16 +131,38 @@ function isDateString(
 ): boolean {
   // not bullet-proof, meant to sniff intention in the data
   if (value == null) return false;
+  // This has corresponding lines in the isTimestamp function:
+  if (isNumeric(value)) {
+    // && String(value).length < 10 && String(value).length > 13) return false;
+    // check if timestamp match, return false here.
+    // ///// if (isTimestamp(value))
+    return false;
+  }
   if (isDate(value)) return true;
   value = String(value).trim();
   return value.length < 30 && dateStringPattern.test(value);
 }
 
 /**
- * @param {string | null} value
+ * Timestamps will match on numbers between:
+ *
+ * ```
+ * 10 digits:    1000000000:    new Date(1000000000) // "1970-01-12T13:46:40.000Z"
+ * 13 digits: 9999999999999: new Date(9999999999999) // "2286-11-20T17:46:39.999Z"
+ * ```
+ *
+ * @param {string | any | null} value
  */
-function isTimestamp(value: string | null): boolean {
+function isTimestamp(value: string | any | null): boolean {
   if (value == null) return false;
+  // This has corresponding line in the Timestamp matcher:
+  if (
+    isNumeric(value) &&
+    Number(value) % 2 === 0 &&
+    String(value).length >= 10 &&
+    String(value).length < 14
+  )
+    return true;
   value = String(value).trim();
   return timestampPattern.test(value);
 }
