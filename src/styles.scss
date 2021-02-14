@@ -14,16 +14,22 @@ Extra extra large 	xxl 	≥1400px
     min-height: 91vh;
     height: 91vh;
 
-    textarea:empty {
-      font-size: 22px;
-      text-align: center;
-      padding: 20px 0 0 0;
+    .data-input {
+      textarea:empty {
+        font-size: 22px;
+        text-align: center;
+        padding: 20px 0 0 0;
+      }
+      textarea {
+        max-height: 70vh;
+      }
     }
+
     // overflow-y: auto;
     // overflow-x: hidden;
     > section {
       width: 100%;
-      height: calc(91vh - 110px);
+      height: calc(90vh - 125px);
       display: flex;
       justify-content: stretch;
       flex-direction: column;
@@ -51,7 +57,8 @@ Extra extra large 	xxl 	≥1400px
 .demo-data-buttons {
   display: flex;
   flex-wrap: wrap;
-  justify-content: right;
+  justify-content: flex-end;
+  align-items: flex-end;
   // align-items: center;
   position: relative;
   z-index: -1;

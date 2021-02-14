@@ -62,3 +62,11 @@
     flex-grow: 4;
   }
 }
+
+.snack-close {
+  font-size: 1.2rem;
+  font-weight: 900;
+  &:hover {
+    color: #ffffff;
+  }
+}

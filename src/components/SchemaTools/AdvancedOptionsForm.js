@@ -19,9 +19,7 @@ import { setOptions } from 'store/optionsSlice';
 // import { RootState } from 'store/rootReducer';
 
 import './AdvancedOptionsForm.scss';
-import { TextField } from '@material-ui/core';
-import TooltipWrapper from 'components/TooltipWrapper';
-import { setResults, setSchema, setSchemaName } from 'store/analysisSlice';
+import { setResults, setSchema } from 'store/analysisSlice';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -130,7 +128,6 @@ export default function AdvancedOptionsForm({ className = '' }) {
     console.log('Saved Options', updatedOptions);
 
     dispatch(setOptions(updatedOptions));
-    dispatch(setSchemaName(updatedOptions.schemaName));
     resetResults();
     setExpanded(false);
   };
@@ -180,26 +177,6 @@ export default function AdvancedOptionsForm({ className = '' }) {
               <CardContent className={`px-3 bg-white ${classes.panelContent}`}>
                 <fieldset className="form-group">
                   <legend className="mb-1">Global Rules</legend>
-                  <section className="input-group d-flex justify-content-between">
-                    <TooltipWrapper
-                      tooltipContent={
-                        <>
-                          <b>Label your dataset</b>
-                          <br />
-                          Used as a prefix for any nested data structures.
-                          <br />
-                          <b>Examples:</b> Customer, Product, Articles, etc.
-                        </>
-                      }
-                    >
-                      <p>Schema Name</p>
-                    </TooltipWrapper>
-                    <TextField
-                      name="schemaName"
-                      InputProps={{ name: 'schemaName' }}
-                      inputRef={register}
-                    />
-                  </section>
                   <section className="input-group d-flex justify-content-between">
                     <p>Exclusive Type Matching</p>
                     <Controller

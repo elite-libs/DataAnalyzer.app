@@ -6,10 +6,11 @@ import Chip from '@material-ui/core/Chip';
 import SyncIcon from '@material-ui/icons/Sync';
 import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
 import CloudDoneIcon from '@material-ui/icons/CloudDone';
-import { useSnackbar, SnackbarKey } from 'notistack';
+import { SnackbarKey } from 'notistack';
 import TooltipWrapper from './TooltipWrapper';
 import { InfoOutlined } from '@material-ui/icons';
 import { useHistory } from 'react-router-dom';
+import { useAutoSnackbar } from 'hooks/useAutoSnackbar';
 
 const sampleDataSets: Record<'label' | 'value' | 'schemaName', string>[] = [
   { label: 'Users', value: '/users.example.json', schemaName: 'Users' },
@@ -25,7 +26,7 @@ const sampleDataSets: Record<'label' | 'value' | 'schemaName', string>[] = [
 export const DemoDataMenu = () => {
   const history = useHistory();
   let _loadingSnackMessage: SnackbarKey | null = null;
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const { enqueueSnackbar, closeSnackbar } = useAutoSnackbar();
   const dispatch = useDispatch();
   const [currentlyLoadingData, setCurrentlyLoadingData] = React.useState<string | null>(null);
   const [currentlyLoadedFile, setCurrentlyLoadedFile] = React.useState<string | null>(null);
@@ -71,7 +72,7 @@ export const DemoDataMenu = () => {
   };
 
   return (
-    <section className="demo-data-buttons col-12 px-0 col-md-7 col-sm-11">
+    <section className="demo-data-buttons col-12 col-md-7 col-sm-7 pb-2 px-1">
       <TooltipWrapper
         tooltipContent={
           <>

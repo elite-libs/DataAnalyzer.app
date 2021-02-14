@@ -57,7 +57,7 @@ const slice = createSlice({
       return state;
     },
     resetAnalysis(state) {
-      state = { ...initialState };
+      state = { ...initialState, inputData: state.inputData };
       return state;
     },
   },

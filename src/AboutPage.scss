@@ -1,7 +1,7 @@
 main {
   .markdown-body {
     margin: 2rem auto;
-    width: 70ch;
+    max-width: 70ch;
     font-size: 1.3em;
     [type='checkbox'] {
       margin: 2px 4px;

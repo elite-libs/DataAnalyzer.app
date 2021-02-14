@@ -3,7 +3,6 @@ import pkg from '../../../package.json';
 
 import { BrowserRouter as Router, Switch, Route, Link as RouteLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { useSnackbar } from 'notistack';
 import copy from 'clipboard-copy';
 import SyncOutlinedIcon from '@material-ui/icons/SyncOutlined';
 
@@ -32,22 +31,25 @@ import { DemoDataMenu } from '../../components/DemoDataMenu';
 import { AdapterNames, render } from './adapters/writers';
 import { schemaAnalyzer } from '../../schema-analyzer/index';
 
-import { setResults, setSchema } from 'store/analysisSlice';
+import { setResults, setSchema, setSchemaName } from 'store/analysisSlice';
 // import { setStatusMessage } from 'store/appStateSlice';
 
 import type { RootState } from 'store/rootReducer';
 import { resetAnalysis } from 'store/analysisSlice';
-// import { resetOptions } from 'store/optionsSlice';
+// import { setOptions } from 'store/optionsSlice';
 // import { resetStatusMessage } from 'store/appStateSlice';
 
 import './index.scss';
+import { useAutoSnackbar } from 'hooks/useAutoSnackbar';
+import { FormControl, Input, InputAdornment, InputLabel } from '@material-ui/core';
+import { DatabaseEditIcon } from './AppIcons';
 
 const CodeViewer = lazy(() => import('./ResultsView/CodeViewer'));
 const SchemaExplorerComponent = lazy<any>(() => import('./ResultsView/SchemaExplorer'));
 const AboutPage = lazy(() => import('../../AboutPage'));
 
 export default function SchemaTools() {
-  const { enqueueSnackbar } = useSnackbar();
+  const { enqueueSnackbar } = useAutoSnackbar();
   const dispatch = useDispatch();
   const { inputData, results, schemaTimestamp, schemaName, schema } = useSelector(
     (state: RootState) => state.analysisFeature,
@@ -55,12 +57,13 @@ export default function SchemaTools() {
   const options = useSelector((state: RootState) => state.optionsActions);
   // const { statusMessage } = useSelector((state: RootState) => state.appStateActions);
 
-  React.useEffect(() => {
-    enqueueSnackbar(
-      `© 2020-2021. For educational use. All trademarks, service marks and company names are the property of their respective owners.`,
-      { autoHideDuration: 3000, variant: 'default' },
-    );
-  }, [enqueueSnackbar]);
+  // React.useEffect(() => {
+  //   enqueueSnackbar(
+  //     ``,
+  //     { autoHideDuration: 3000, variant: 'default' },
+  //   );
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   // Once user selects a template / output script...
   // 1. Process the inputData into structured data with parseCsv() or JSON.parse
@@ -195,8 +198,6 @@ export default function SchemaTools() {
   }
 
   function resetAppState() {
-    // dispatch(resetOptions());
-    // dispatch(resetStatusMessage());
     dispatch(resetAnalysis());
   }
   function resetResults() {
@@ -217,7 +218,7 @@ export default function SchemaTools() {
         onClick={resetAppState}
         style={{}}
       >
-        <TooltipWrapper tooltipContent={<b>Warning: Any input data will be lost</b>}>
+        <TooltipWrapper tooltipContent={<b>Generate a different output!</b>}>
           <div>Reset &amp; Start Over</div>
         </TooltipWrapper>
       </Button>
@@ -256,25 +257,54 @@ export default function SchemaTools() {
               </Link>
               <AdvancedOptionsForm />
             </aside>
-            {/*  */}
-            <Breadcrumbs
-              separator={<span className="divider d-md-block d-none">|</span>}
-              aria-label="breadcrumb"
-              className="col-md-5 col-sm-1 col-12 pb-2 pl-1"
-            >
-              <Link component={RouteLink} color="inherit" to="/" onClick={resetResults}>
-                <HomeOutlinedIcon />
-                <span className="d-md-inline-block d-none">Code Generator</span>
-              </Link>
-              <Link component={RouteLink} {...schemaLinkProps} to="/results/explorer">
-                <TooltipWrapper tooltipContent={Messages.inputDataMissing || Messages.schemaNeeded}>
-                  <div>
-                    <AssessmentOutlinedIcon />
-                    <span className="d-md-inline-block d-none">Data Visualization</span>
-                  </div>
+            {!results ? (
+              <FormControl className="col-md-5 col-sm-5 col-12 pb-2 pl-1">
+                <TooltipWrapper
+                  tooltipContent={
+                    <>
+                      <b>Label your dataset</b>
+                      <br />
+                      Used as a prefix for any nested data structures.
+                      <br />
+                      <b>Examples:</b> Customer, Product, Articles, etc.
+                    </>
+                  }
+                >
+                  <InputLabel htmlFor="schema-name">Schema Name</InputLabel>
                 </TooltipWrapper>
-              </Link>
-            </Breadcrumbs>
+                <Input
+                  id="schema-name"
+                  onChange={(e) => dispatch(setSchemaName(e.target.value))}
+                  value={schemaName}
+                  startAdornment={
+                    <InputAdornment position="start">
+                      <DatabaseEditIcon width="1.5rem" height="1.5rem" />
+                    </InputAdornment>
+                  }
+                />
+              </FormControl>
+            ) : (
+              <Breadcrumbs
+                separator={<span className="divider d-md-block d-none">|</span>}
+                aria-label="breadcrumb"
+                className="col-md-5 col-sm-5 col-12 pb-2 px-1"
+              >
+                <Link component={RouteLink} color="inherit" to="/" onClick={resetResults}>
+                  <HomeOutlinedIcon />
+                  <span className="d-md-inline-block d-none">Code Generator</span>
+                </Link>
+                <Link component={RouteLink} {...schemaLinkProps} to="/results/explorer">
+                  <TooltipWrapper
+                    tooltipContent={Messages.inputDataMissing || Messages.schemaNeeded}
+                  >
+                    <div>
+                      <AssessmentOutlinedIcon />
+                      <span className="d-md-inline-block d-none">Data Visualization</span>
+                    </div>
+                  </TooltipWrapper>
+                </Link>
+              </Breadcrumbs>
+            )}
             <DemoDataMenu />
           </nav>
 
@@ -284,7 +314,7 @@ export default function SchemaTools() {
                 <section>
                   {results == null || results.length < 1 ? (
                     <>
-                      <InputProcessor className="flex-grow-1" />
+                      <InputProcessor className="data-input flex-grow-1" />
                       <OutputButtons onChange={handleAdapterSelected} />
                     </>
                   ) : (
