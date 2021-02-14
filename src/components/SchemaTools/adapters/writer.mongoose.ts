@@ -1,4 +1,4 @@
-import { camelCase, startCase } from 'lodash';
+import { camelCase } from 'lodash';
 import {
   NumericFieldInfo,
   TypeNameStringComposite,
@@ -8,7 +8,7 @@ import { properCase, removeBlankLines } from '../helpers';
 import type { IDataAnalyzerWriter, IRenderArgs } from './writers';
 const writer: IDataAnalyzerWriter = {
   render({ results, options, schemaName }: IRenderArgs) {
-    const hasNestedTypes = results.nestedTypes && Object.keys(results.nestedTypes!).length > 0
+    const hasNestedTypes = results.nestedTypes && Object.keys(results.nestedTypes!).length > 0;
     const { fields } = results;
     const getFields = () => {
       return (
@@ -20,46 +20,43 @@ const writer: IDataAnalyzerWriter = {
     ${fieldInfo.unique ? 'unique: true,' : ''}
     ${fieldInfo.nullable ? '' : 'required: true,'}
     ${
-    fieldInfo.value && TypeNameStringDecimal.includes(fieldInfo.type)
-      ? 'max: ' + (fieldInfo as NumericFieldInfo).value + ','
-      : ''}
+      fieldInfo.value && TypeNameStringDecimal.includes(fieldInfo.type)
+        ? 'max: ' + (fieldInfo as NumericFieldInfo).value + ','
+        : ''
+    }
     ${
-    fieldInfo.value && TypeNameStringComposite.includes(fieldInfo.type)
-      ? 'maxLength: ' + fieldInfo.value + ','
-      : ''}
+      fieldInfo.value && TypeNameStringComposite.includes(fieldInfo.type)
+        ? 'maxLength: ' + fieldInfo.value + ','
+        : ''
+    }
     ${
-    Array.isArray(fieldInfo.enum) && fieldInfo.enum.length > 0
-      ? 'enum: ["' + fieldInfo.enum.join('", "') + '"],'
-      : ''}
+      Array.isArray(fieldInfo.enum) && fieldInfo.enum.length > 0
+        ? 'enum: ["' + fieldInfo.enum.join('", "') + '"],'
+        : ''
+    }
   }`;
           })
           .join(',\n') +
         `});
 
-const ${camelCase(schemaName)}Model = mongoose.model("${camelCase(
+const ${camelCase(schemaName)}Model = mongoose.model("${camelCase(schemaName)}", ${properCase(
           schemaName,
-        )}", ${properCase(schemaName)});
+        )});
     
 module.exports.${properCase(schemaName)} = ${camelCase(schemaName)}Model;\n`
       );
     };
 
     const getRecursive = () => {
-      if (
-        !options?.disableNestedTypes &&
-        hasNestedTypes
-      ) {
-        
-        return Object.entries(results.nestedTypes!).map(
-          ([nestedName, results]) => {
-            // console.log('nested mongoose schema:', nestedName);
-            return this.render({
-              schemaName: nestedName,
-              results,
-              options: { disableNestedTypes: false },
-            });
-          },
-        );
+      if (!options?.disableNestedTypes && hasNestedTypes) {
+        return Object.entries(results.nestedTypes!).map(([nestedName, results]) => {
+          // console.log('nested mongoose schema:', nestedName);
+          return this.render({
+            schemaName: nestedName,
+            results,
+            options: { disableNestedTypes: false },
+          });
+        });
       }
       return '';
     };

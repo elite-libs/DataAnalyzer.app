@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-redeclare */
 // import debug from 'debug'
 import { detectTypes, MetaChecks } from './utils/type-helpers';
 import * as helpers from './utils/helpers';
@@ -292,9 +293,9 @@ function schemaAnalyzer(
     disableNestedTypes = false,
     enumMinimumRowCount = 25,
     enumAbsoluteLimit = 10,
-    // enumPercentThreshold = 0.01,
-    nullableRowsThreshold = 0.001,
-    uniqueRowsThreshold = 0.99,
+    // // enumPercentThreshold = 0.01,
+    // nullableRowsThreshold = 0.001,
+    // uniqueRowsThreshold = 0.99,
   } = options;
   const isEnumEnabled = input.length >= enumMinimumRowCount;
   // #debug: log`isEnumEnabled: ${isEnumEnabled}`)
@@ -442,7 +443,7 @@ const _pivotRowsGroupedByType = ({
  */
 const _evaluateSchemaLevel = ({
   schemaName,
-  isEnumEnabled,
+  // isEnumEnabled,
   disableNestedTypes,
   nestedData,
   strictMatching,
@@ -460,6 +461,7 @@ const _evaluateSchemaLevel = ({
   ) {
     // eslint-disable-line
     schema.totalRows = schema.totalRows || array.length;
+    schema.uniques = schema.uniques || {};
     const fieldNames: string[] = Object.keys(row);
     // #debug: log
     //   `Processing Row # ${index + 1}/${
@@ -489,7 +491,6 @@ const _evaluateSchemaLevel = ({
           nestedData[keyPath] = nestedData[keyPath] || [];
           nestedData[keyPath].push(...value);
           typeFingerprint.$ref = typeFingerprint.$ref || {
-            // rank: -12,
             count: index,
           };
           typeFingerprint.$ref.typeAlias = keyPath;
@@ -624,14 +625,14 @@ function condenseFieldData({
   };
 }
 
-interface IPivotData {
-  typeName: string;
-  length: number;
-  scale: number;
-  precision: number;
-  value: number;
-  count: number;
-}
+// interface IPivotData {
+//   typeName: string;
+//   length: number;
+//   scale: number;
+//   precision: number;
+//   value: number;
+//   count: number;
+// }
 
 function pivotFieldDataByType(
   typeSizeData: TypedFieldObject<InternalFieldTypeData>[],
@@ -735,6 +736,7 @@ function condenseFieldSizes(
           parseDate,
         );
       }
+      return aggregateSummary[typeName]; // not used
     },
   );
   // #debug: log'Done condenseFieldSizes()...')

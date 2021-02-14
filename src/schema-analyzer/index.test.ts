@@ -1,3 +1,4 @@
+/* eslint-disable jest/valid-expect-in-promise */
 import {
   schemaAnalyzer,
   _getNumberRangeStats,
@@ -238,9 +239,9 @@ describe('primary use-cases', () => {
     const lowEnumLimitLoosePct = schemaAnalyzer('properties', properties, {
       enumMinimumRowCount: 10,
       enumAbsoluteLimit: 30,
-    }).then((result) =>
-      expect(result).toMatchSnapshot('propertiesResult_lowEnumLimitLoosePct'),
-    );
+    }).then((result) => {
+      expect(result).toMatchSnapshot('propertiesResult_lowEnumLimitLoosePct');
+    });
     const lowEnumLimitLoose = schemaAnalyzer('properties', properties, {
       enumMinimumRowCount: 10,
       enumAbsoluteLimit: 30,

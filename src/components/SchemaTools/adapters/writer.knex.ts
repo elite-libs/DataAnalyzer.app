@@ -57,7 +57,7 @@ const writer: IDataAnalyzerWriter = {
             nullable,
             value,
             enum: enumData,
-            count: typeCount,
+            // count: typeCount,
           } = fieldInfo;
 
           let length;
@@ -81,9 +81,7 @@ const writer: IDataAnalyzerWriter = {
           if (!nullable) appendChain += '.notNullable()';
 
           if ('precision' in fieldInfo && 'scale' in fieldInfo) {
-            const p = fieldInfo.precision!;
-            const s = fieldInfo.scale!;
-            sizePart = `, ${1 + p}, ${s % 2 !== 0 ? s + 1 : s}`;
+            sizePart = `, ${1 + precision}, ${scale % 2 !== 0 ? scale + 1 : scale}`;
             return `    table.decimal("${name}"${sizePart})${appendChain};`;
           }
           if (identity && type === 'Number') {

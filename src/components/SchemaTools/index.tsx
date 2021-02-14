@@ -73,9 +73,11 @@ export default function SchemaTools() {
         return null;
       }
       if (inputData != null && (inputData[0] === '[' || inputData[0] === '{')) {
+        console.info('inputData JSON ish...');
         try {
           // json likely, fast path test using compiled JSON.parse
           const jsonData = JSON.parse(inputData);
+          console.info('inputData IS TOTES JSON!!!', jsonData);
           return jsonData;
         } catch (error) {
           enqueueSnackbar(`Data appears to be invalid JSON. Check input and try again.`, {
@@ -114,9 +116,10 @@ export default function SchemaTools() {
     }
     return doLoad();
     async function doLoad() {
-      const schema = await schemaAnalyzer(schemaName!, parsedInputData!, options).catch((error) => {
-        enqueueSnackbar(`${error.message}`, { variant: 'warning' });
-      });
+      const schema = await schemaAnalyzer(schemaName!, parsedInputData!, options);
+      // .catch((error) => {
+      //   enqueueSnackbar(`${error.message}`, { variant: 'warning' });
+      // });
       dispatch(setSchema(schema || null));
       return schema ? schema : null;
     }

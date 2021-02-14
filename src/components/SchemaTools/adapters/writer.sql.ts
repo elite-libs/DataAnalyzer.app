@@ -56,8 +56,8 @@ const writer: IDataAnalyzerWriter = {
             unique,
             nullable,
             value,
-            enum: enumData,
-            count: typeCount,
+            // enum: enumData,
+            // count: typeCount,
           } = fieldInfo;
 
           let length;
@@ -84,10 +84,9 @@ const writer: IDataAnalyzerWriter = {
           // }
 
           if ('precision' in fieldInfo && 'scale' in fieldInfo) {
-            const p = fieldInfo.precision!;
-            const s = fieldInfo.scale!;
-            sizePart = `(${1 + p}, ${s % 2 !== 0 ? s + 1 : s})`;
-            return `    ${name}    decimal${sizePart} ${appendChain},`;
+            return `    ${name}    DECIMAL(${1 + precision}, ${
+              scale % 2 !== 0 ? scale + 1 : scale
+            }) ${appendChain},`;
           }
           if (identity && type === 'Number') {
             return `    ${name}    SERIAL ${appendChain},`;
@@ -147,12 +146,6 @@ const writer: IDataAnalyzerWriter = {
 
     schemaName = snakecase(schemaName);
 
-    const getAllDropTables = () => {
-      if (!options?.disableNestedTypes && hasNestedTypes) {
-        return [...Object.keys(results.nestedTypes!).map(snakecase), schemaName];
-      }
-      return [schemaName];
-    };
     const getRecursive = () => {
       if (!options?.disableNestedTypes && hasNestedTypes) {
         // console.log('nested schema detected', schemaName);
