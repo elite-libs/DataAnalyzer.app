@@ -13,6 +13,10 @@ export function useAutoSnackbar(): ProviderContext {
     function enqueueSnackbar(message: SnackbarMessage, options?: OptionsObject) {
       let snackId: SnackbarKey = '';
       options = options || {};
+
+      if (!options.anchorOrigin) {
+        options.anchorOrigin = { horizontal: 'right', vertical: 'top' };
+      }
       if (!options?.action) {
         options.action = (
           <Button

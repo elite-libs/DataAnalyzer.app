@@ -16,7 +16,8 @@ export type AppEventCategory =
   | 'analysis.pre'
   | 'analysis.post'
   | 'analysis.results'
-  | 'code.results';
+  | 'code.results'
+  | 'explorer.view';
 
 export type AppEventAction = 'success' | 'warn' | 'fail' | 'view' | 'click' | 'exit' | 'analysis';
 
@@ -28,37 +29,37 @@ export function useAnalytics() {
    * @see https://developers.google.com/analytics/devguides/collection/analyticsjs/field-reference#events
    */
   return { trackCustomEvent };
+}
 
-  function trackCustomEvent({
-    category,
-    action,
-    label,
-    value = undefined,
-    nonInteraction = false,
-    transport = undefined,
-  }: // hitCallback,
-  // callbackTimeout = 100,
-  CustomEventArgs) {
+export function trackCustomEvent({
+  category,
+  action,
+  label,
+  value = undefined,
+  nonInteraction = false,
+  transport = undefined,
+}: CustomEventArgs) {
+  // @ts-ignore
+  if (window != null && window.gtag != null) {
+    const trackingEventOptions = {
+      eventCategory: category,
+      eventAction: action,
+      eventLabel: label,
+      eventValue: value,
+      nonInteraction: nonInteraction,
+      transport,
+    };
+
+    // if (!validateGoogleAnalyticsEvent(trackingEventOptions)) {
+    //   console.error("WARNING: Analytics data invalid, may be truncated.", trackingEventOptions);
+    // }
+
+    // if (hitCallback && typeof hitCallback === `function`) {
+    //   trackingEventOptions.hitCallback = () => setTimeout(hitCallback, callbackTimeout);
+    // }
     // @ts-ignore
-    if (window != null && window.gtag != null) {
-      const trackingEventOptions = {
-        eventCategory: category,
-        eventAction: action,
-        eventLabel: label,
-        eventValue: value,
-        nonInteraction: nonInteraction,
-        transport,
-      };
-
-      // if (!validateGoogleAnalyticsEvent(trackingEventOptions)) {
-      //   console.error("WARNING: Analytics data invalid, may be truncated.", trackingEventOptions);
-      // }
-
-      // if (hitCallback && typeof hitCallback === `function`) {
-      //   trackingEventOptions.hitCallback = () => setTimeout(hitCallback, callbackTimeout);
-      // }
-      // @ts-ignore
-      window.gtag(`send`, `event`, trackingEventOptions);
-    }
+    window.gtag(`send`, `event`, trackingEventOptions);
+  } else {
+    console.warn('Stats could not be recorded.');
   }
 }

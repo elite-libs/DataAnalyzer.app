@@ -6,7 +6,7 @@ import Chip from '@material-ui/core/Chip';
 import SyncIcon from '@material-ui/icons/Sync';
 import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
 import CloudDoneIcon from '@material-ui/icons/CloudDone';
-import { SnackbarKey } from 'notistack';
+// import { SnackbarKey } from 'notistack';
 import TooltipWrapper from './TooltipWrapper';
 import { InfoOutlined } from '@material-ui/icons';
 import { useHistory } from 'react-router-dom';
@@ -61,7 +61,11 @@ export const DemoDataMenu = () => {
         dispatch(setSchemaName(name));
         // if (_loadingSnackMessage) closeSnackbar(_loadingSnackMessage);
         // _loadingSnackMessage = null;
-        enqueueSnackbar('Loaded Sample Dataset 🎉', { variant: 'success' });
+        enqueueSnackbar('Loaded Sample Dataset 🎉', {
+          variant: 'success',
+          autoHideDuration: 2000,
+          anchorOrigin: { horizontal: 'right', vertical: 'top' },
+        });
         history.push('/');
         setCurrentlyLoadedFile(filePath);
       })

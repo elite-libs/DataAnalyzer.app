@@ -1,3 +1,4 @@
+import { trackCustomEvent } from 'hooks/useAnalytics';
 import React from 'react';
 import Chart from 'react-apexcharts';
 import { FieldInfo, TypeSummary } from 'schema-analyzer';
@@ -71,6 +72,12 @@ const colorSets = {
   blueRad: ['#006ba6', '#0496ff', '#ffbc42', '#d81159', '#8f2d56'],
 };
 export default class SchemaExplorer extends React.Component<Props, any> {
+  componentDidMount() {
+    trackCustomEvent({
+      category: 'explorer.view',
+      action: 'click',
+    });
+  }
   constructor(props: Props) {
     super(props);
 
@@ -108,7 +115,7 @@ export default class SchemaExplorer extends React.Component<Props, any> {
               // #cc959b
             },
             title: {
-              text: `Type Analysis for ${fieldNames.length} Fields in ${schemaAnalysis.totalRows} Records`,
+              text: `Field Analysis for ${fieldNames.length} Fields in ${schemaAnalysis.totalRows} Records`,
               style: {
                 fontSize: '18px',
                 fontWeight: 'bold',
