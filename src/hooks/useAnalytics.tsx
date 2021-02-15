@@ -1,10 +1,15 @@
+/**
+ * More reading for 2020+:
+ * https://medium.com/@marco.baldessari/tracking-custom-events-with-google-analytics-in-202-58fbf128e7e9
+ */
+
 type CustomEventArgs = {
   category: AppEventCategory;
   action: AppEventAction;
   label?: string | number | null | any;
   value?: string | number | null | any;
   nonInteraction?: boolean;
-  transport?: any;
+  // transport?: any;
   // hitCallback: Function;
   // callbackTimeout: number;
 };
@@ -37,17 +42,17 @@ export function trackCustomEvent({
   label,
   value = undefined,
   nonInteraction = false,
-  transport = undefined,
-}: CustomEventArgs) {
+}: // transport = undefined,
+CustomEventArgs) {
   // @ts-ignore
   if (window != null && window.gtag != null) {
     const trackingEventOptions = {
-      eventCategory: category,
-      eventAction: action,
-      eventLabel: label,
-      eventValue: value,
-      nonInteraction: nonInteraction,
-      transport,
+      event_category: category,
+      // event_action: action,
+      event_label: label,
+      event_value: value,
+      non_interaction: nonInteraction,
+      // transport,
     };
 
     // if (!validateGoogleAnalyticsEvent(trackingEventOptions)) {
@@ -58,7 +63,7 @@ export function trackCustomEvent({
     //   trackingEventOptions.hitCallback = () => setTimeout(hitCallback, callbackTimeout);
     // }
     // @ts-ignore
-    window.gtag(`send`, `event`, trackingEventOptions);
+    window.gtag(`event`, action, trackingEventOptions);
   } else {
     console.warn('Stats could not be recorded.');
   }
