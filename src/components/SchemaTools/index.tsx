@@ -106,17 +106,18 @@ export default function SchemaTools() {
   async function getTypeSummary() {
     const parsedInputData = await parseRawText();
     // warn on big-ish data
-    if (parsedInputData && parsedInputData.length > 2000) {
+    if (parsedInputData && parsedInputData.length > 4000) {
       enqueueSnackbar(
         `WARNING: You are processing ${parsedInputData.length} records. It may freeze your browser for a few minutes, this operation has high complexity.`,
         { variant: 'error' },
       );
-    } else if (parsedInputData && parsedInputData.length > 500) {
-      enqueueSnackbar(
-        `Alert: You are trying to process ${parsedInputData.length} records. Your browser may freeze for a moment, but don't worry, it'll finish soon.`,
-        { variant: 'warning' },
-      );
     }
+    //  else if (parsedInputData && parsedInputData.length > 500) {
+    //   enqueueSnackbar(
+    //     `Alert: You are trying to process ${parsedInputData.length} records. Your browser may freeze for a moment, but don't worry, it'll finish soon.`,
+    //     { variant: 'warning' },
+    //   );
+    // }
     return doLoad();
     async function doLoad() {
       const schema = await schemaAnalyzer(schemaName!, parsedInputData!, options);
