@@ -43,12 +43,14 @@ import './index.scss';
 import { useAutoSnackbar } from 'hooks/useAutoSnackbar';
 import { FormControl, Input, InputAdornment, InputLabel } from '@material-ui/core';
 import { DatabaseEditIcon } from './AppIcons';
+import { useAnalytics } from 'hooks/useAnalytics';
 
 const CodeViewer = lazy(() => import('./ResultsView/CodeViewer'));
 const SchemaExplorerComponent = lazy<any>(() => import('./ResultsView/SchemaExplorer'));
 const AboutPage = lazy(() => import('../../AboutPage'));
 
 export default function SchemaTools() {
+  const { trackCustomEvent } = useAnalytics();
   const { enqueueSnackbar } = useAutoSnackbar();
   const dispatch = useDispatch();
   const { inputData, results, schemaTimestamp, schemaName, schema } = useSelector(
@@ -76,13 +78,24 @@ export default function SchemaTools() {
         return null;
       }
       if (inputData != null && (inputData[0] === '[' || inputData[0] === '{')) {
-        console.info('inputData JSON ish...');
+        // console.info('inputData JSON ish...');
         try {
           // json likely, fast path test using compiled JSON.parse
           const jsonData = JSON.parse(inputData);
-          console.info('inputData IS TOTES JSON!!!', jsonData);
+          // console.info('inputData IS TOTES JSON!!!', jsonData);
+          trackCustomEvent({
+            category: 'parseData.json',
+            action: 'success',
+            label: String(inputData.length),
+          });
+
           return jsonData;
         } catch (error) {
+          trackCustomEvent({
+            category: 'parseData.json',
+            action: 'fail',
+            value: String(error.message),
+          });
           enqueueSnackbar(`Data appears to be invalid JSON. Check input and try again.`, {
             variant: 'error',
           });
@@ -91,8 +104,19 @@ export default function SchemaTools() {
       }
       // try CSV
       const csvData = await parseCsv(inputData); //.catch(() => null);
+      trackCustomEvent({
+        category: 'parseData.csv',
+        action: 'success',
+        label: String(csvData.length),
+      });
+
       return csvData;
     } catch (error) {
+      trackCustomEvent({
+        category: 'parseData.csv',
+        action: 'fail',
+        value: String(error.message),
+      });
       enqueueSnackbar(`Check your input. Must be valid JSON or CSV. ${error.message}`, {
         variant: 'warning',
       });
@@ -111,6 +135,12 @@ export default function SchemaTools() {
         `WARNING: You are processing ${parsedInputData.length} records. It may freeze your browser for a few minutes, this operation has high complexity.`,
         { variant: 'error' },
       );
+      trackCustomEvent({
+        category: 'analysis.pre',
+        action: 'warn',
+        label: `large_data_set_warning`,
+        value: String(parsedInputData.length),
+      });
     }
     //  else if (parsedInputData && parsedInputData.length > 500) {
     //   enqueueSnackbar(
@@ -139,24 +169,36 @@ export default function SchemaTools() {
     })(schema!);
 
     dispatch(setResults(generatedCode));
-    console.log('generated code', generatedCode);
+    console.info('generated code', generatedCode);
     return generatedCode;
   }
 
   async function handleAdapterSelected(adapter?: AdapterNames) {
     const startTime = Date.now();
-    console.time(`Processing:${adapter}`);
+    // console.time(`Processing:${adapter}`);
     try {
       await renderCode(adapter);
+      trackCustomEvent({
+        category: 'analysis.results',
+        action: 'success',
+        label: `${adapter}.runtime`,
+        value: ((Date.now() - startTime) / 1000).toFixed(4),
+      });
+
       enqueueSnackbar(`Completed in ${((Date.now() - startTime) / 1000).toFixed(1)} seconds.`, {
         variant: 'success',
       });
     } catch (error) {
-      console.error(error);
+      trackCustomEvent({
+        category: 'analysis.results',
+        action: 'fail',
+        value: error.message,
+      });
+      console.error(`Error: Couldn't process input data!`, error);
       dispatch(setSchema(null));
       enqueueSnackbar(`Error: ${error.message}`, { variant: 'error', autoHideDuration: 6000 });
     }
-    console.timeEnd(`Processing:${adapter}`);
+    // console.timeEnd(`Processing:${adapter}`);
   }
 
   const schemaLinkProps = schemaTimestamp
@@ -191,9 +233,11 @@ export default function SchemaTools() {
   async function handleCopyClick() {
     try {
       if (typeof results === 'string') await copy(results);
-      enqueueSnackbar(`Copied Source`, { variant: 'success' });
+      enqueueSnackbar(`Copied Code`, { variant: 'success' });
     } catch (error) {
-      enqueueSnackbar(`Error accessing clipboard.`, { variant: 'error' });
+      enqueueSnackbar(`Clipboard access denied! Try manually copying the code.`, {
+        variant: 'error',
+      });
     }
   }
 

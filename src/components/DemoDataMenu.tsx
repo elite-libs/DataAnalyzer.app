@@ -11,6 +11,7 @@ import TooltipWrapper from './TooltipWrapper';
 import { InfoOutlined } from '@material-ui/icons';
 import { useHistory } from 'react-router-dom';
 import { useAutoSnackbar } from 'hooks/useAutoSnackbar';
+import { useAnalytics } from 'hooks/useAnalytics';
 
 const sampleDataSets: Record<'label' | 'value' | 'schemaName', string>[] = [
   { label: 'Users', value: '/users.example.json', schemaName: 'Users' },
@@ -24,9 +25,9 @@ const sampleDataSets: Record<'label' | 'value' | 'schemaName', string>[] = [
 ];
 
 export const DemoDataMenu = () => {
+  const { trackCustomEvent } = useAnalytics();
   const history = useHistory();
-  let _loadingSnackMessage: SnackbarKey | null = null;
-  const { enqueueSnackbar, closeSnackbar } = useAutoSnackbar();
+  const { enqueueSnackbar } = useAutoSnackbar();
   const dispatch = useDispatch();
   const [currentlyLoadingData, setCurrentlyLoadingData] = React.useState<string | null>(null);
   const [currentlyLoadedFile, setCurrentlyLoadedFile] = React.useState<string | null>(null);
@@ -45,16 +46,21 @@ export const DemoDataMenu = () => {
       setCurrentlyLoadingData(null);
       return;
     }
-    _loadingSnackMessage = enqueueSnackbar(`One moment...\nImporting ${name} dataset...`, {
-      variant: 'success',
+    trackCustomEvent({
+      category: 'demoData.import',
+      action: 'click',
+      label: name,
     });
+    // _loadingSnackMessage = enqueueSnackbar(`One moment...\nImporting ${name} dataset...`, {
+    //   variant: 'success',
+    // });
     return fetch(filePath)
       .then((response) => response.text())
       .then((data) => {
         dispatch(setInputData(data));
         dispatch(setSchemaName(name));
-        if (_loadingSnackMessage) closeSnackbar(_loadingSnackMessage);
-        _loadingSnackMessage = null;
+        // if (_loadingSnackMessage) closeSnackbar(_loadingSnackMessage);
+        // _loadingSnackMessage = null;
         enqueueSnackbar('Loaded Sample Dataset 🎉', { variant: 'success' });
         history.push('/');
         setCurrentlyLoadedFile(filePath);
