@@ -11,21 +11,27 @@
     },
     {
       "source": "/images/(.*).png",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "image/png"
-        }
-      ]
+      "headers": [{ "key": "Content-Type", "value": "image/png" }]
     },
     {
       "source": "/images/(.*).svg",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "image/svg"
-        }
-      ]
+      "headers": [{ "key": "Content-Type", "value": "image/svg" }]
+    },
+    {
+      "source": "/images/(.*).jpg",
+      "headers": [{ "key": "Content-Type", "value": "image/jpeg" }]
+    },
+    {
+      "source": "/(.*).json",
+      "headers": [{ "key": "Content-Type", "value": "text/json; charset=utf-8" }]
+    },
+    {
+      "source": "/images/(.*).js",
+      "headers": [{ "key": "Content-Type", "value": "application/javascript; charset=utf-8" }]
+    },
+    {
+      "source": "/images/(.*).csv",
+      "headers": [{ "key": "Content-Type", "value": "text/plain; charset=utf-8" }]
     },
     {
       "source": "/(.*)",
