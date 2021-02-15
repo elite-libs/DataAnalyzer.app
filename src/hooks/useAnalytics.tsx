@@ -6,8 +6,8 @@
 type CustomEventArgs = {
   category: AppEventCategory;
   action: AppEventAction;
-  label?: string | number | null | any;
-  value?: string | number | null | any;
+  label?: string | null;
+  value?: number | null;
   nonInteraction?: boolean;
   // transport?: any;
   // hitCallback: Function;
@@ -18,13 +18,19 @@ export type AppEventCategory =
   | 'demoData.import'
   | 'parseData.json'
   | 'parseData.csv'
-  | 'analysis.pre'
-  | 'analysis.post'
   | 'analysis.results'
   | 'code.results'
   | 'explorer.view';
 
-export type AppEventAction = 'success' | 'warn' | 'fail' | 'view' | 'click' | 'exit' | 'analysis';
+export type AppEventAction =
+  | 'success'
+  | 'warn'
+  | 'fail'
+  | 'view'
+  | 'click'
+  | 'exit'
+  | 'analysis'
+  | 'generate';
 
 export function useAnalytics() {
   /**

@@ -84,17 +84,17 @@ export default function SchemaTools() {
           const jsonData = JSON.parse(inputData);
           // console.info('inputData IS TOTES JSON!!!', jsonData);
           trackCustomEvent({
-            category: 'parseData.json',
             action: 'success',
-            label: String(inputData.length),
+            category: 'parseData.json',
+            value: inputData.length,
           });
 
           return jsonData;
         } catch (error) {
           trackCustomEvent({
-            category: 'parseData.json',
             action: 'fail',
-            value: String(error.message),
+            category: 'parseData.json',
+            label: error.message,
           });
           enqueueSnackbar(`Data appears to be invalid JSON. Check input and try again.`, {
             variant: 'error',
@@ -105,22 +105,22 @@ export default function SchemaTools() {
       // try CSV
       const csvData = await parseCsv(inputData); //.catch(() => null);
       trackCustomEvent({
-        category: 'parseData.csv',
         action: 'success',
-        label: String(csvData.length),
+        category: 'parseData.csv',
+        value: csvData.length,
       });
 
       return csvData;
     } catch (error) {
+      console.error(`Parsing error:`, error);
       trackCustomEvent({
-        category: 'parseData.csv',
         action: 'fail',
-        value: String(error.message),
+        category: 'parseData.csv',
+        label: String(error.message),
       });
       enqueueSnackbar(`Check your input. Must be valid JSON or CSV. ${error.message}`, {
         variant: 'warning',
       });
-      console.log(`Parsing error:`, error);
     }
     enqueueSnackbar(`Check your input. Must be valid JSON or CSV.`, { variant: 'warning' });
     return null;
@@ -136,10 +136,10 @@ export default function SchemaTools() {
         { variant: 'error' },
       );
       trackCustomEvent({
-        category: 'analysis.pre',
         action: 'warn',
+        category: 'analysis.results',
         label: `large_data_set_warning`,
-        value: String(parsedInputData.length),
+        value: parsedInputData.length,
       });
     }
     //  else if (parsedInputData && parsedInputData.length > 500) {
@@ -179,10 +179,10 @@ export default function SchemaTools() {
     try {
       await renderCode(adapter);
       trackCustomEvent({
-        category: 'analysis.results',
         action: 'success',
+        category: 'code.results',
         label: `${adapter}.runtime`,
-        value: ((Date.now() - startTime) / 1000).toFixed(4),
+        value: (Date.now() - startTime) / 1000,
       });
 
       enqueueSnackbar(`Completed in ${((Date.now() - startTime) / 1000).toFixed(1)} seconds.`, {
@@ -190,8 +190,8 @@ export default function SchemaTools() {
       });
     } catch (error) {
       trackCustomEvent({
-        category: 'analysis.results',
         action: 'fail',
+        category: 'code.results',
         value: error.message,
       });
       console.error(`Error: Couldn't process input data!`, error);
