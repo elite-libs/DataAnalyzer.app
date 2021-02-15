@@ -147,7 +147,6 @@ export default function SchemaTools() {
     const startTime = Date.now();
     console.time(`Processing:${adapter}`);
     try {
-      await getTypeSummary();
       await renderCode(adapter);
       enqueueSnackbar(`Completed in ${((Date.now() - startTime) / 1000).toFixed(1)} seconds.`, {
         variant: 'success',
@@ -259,7 +258,7 @@ export default function SchemaTools() {
               <AdvancedOptionsForm />
             </aside>
             {!results ? (
-              <FormControl className="col-md-5 col-sm-5 col-12 pb-2 pl-1">
+              <FormControl className="col-md-4 col-sm-5 col-12 pb-2 pl-1">
                 <TooltipWrapper
                   tooltipContent={
                     <>
@@ -288,7 +287,7 @@ export default function SchemaTools() {
               <Breadcrumbs
                 separator={<span className="divider d-md-block d-none">|</span>}
                 aria-label="breadcrumb"
-                className="col-md-5 col-sm-5 col-12 pb-2 px-1"
+                className="col-md-4 col-sm-5 col-12 pb-2 px-1"
               >
                 <Link component={RouteLink} color="inherit" to="/" onClick={resetResults}>
                   <HomeOutlinedIcon />

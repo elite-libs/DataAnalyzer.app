@@ -72,7 +72,7 @@ export const DemoDataMenu = () => {
   };
 
   return (
-    <section className="demo-data-buttons col-12 col-md-7 col-sm-7 pb-2 px-1">
+    <section className="demo-data-buttons col-12 col-md-8 col-sm-7 pb-2 px-1">
       <TooltipWrapper
         tooltipContent={
           <>
