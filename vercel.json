@@ -15,7 +15,7 @@
     },
     {
       "source": "/images/(.*).svg",
-      "headers": [{ "key": "Content-Type", "value": "image/svg" }]
+      "headers": [{ "key": "Content-Type", "value": "image/svg+xml" }]
     },
     {
       "source": "/images/(.*).jpg",

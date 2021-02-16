@@ -1,6 +1,8 @@
 import React, { Suspense, lazy } from 'react';
 import pkg from '../../../package.json';
 
+import AppIcon from 'images/DataAnalyzerDualColor.svg';
+
 import { BrowserRouter as Router, Switch, Route, Link as RouteLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import copy from 'clipboard-copy';
@@ -288,7 +290,7 @@ export default function SchemaTools() {
           <nav className="row row-block w-100">
             <h1 className="col-9 col-sm-10" title="Reset/Load Home Screen">
               <Link className="brand-link" component={RouteLink} to="/" onClick={resetResults}>
-                <img src="/images/DataAnalyzerDualColor.svg" alt="Data Analyzer app icon" />
+                <img src={AppIcon} alt="Data Analyzer app icon" />
                 DataAnalyzer.app
               </Link>
             </h1>

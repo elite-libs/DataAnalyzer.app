@@ -2,7 +2,8 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "README.md": ["README.md"]
+      "README.md": ["README.md"],
+      "images/*": ["public/images/*"]
     }
   }
 }
