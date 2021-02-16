@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setInputData, setSchemaName } from 'store/analysisSlice';
 // import { RootState } from 'store/rootReducer';
@@ -63,7 +63,7 @@ export const DemoDataMenu = () => {
         // _loadingSnackMessage = null;
         enqueueSnackbar('Loaded Sample Dataset 🎉', {
           variant: 'success',
-          autoHideDuration: 2000,
+          autoHideDuration: 3000,
           anchorOrigin: { horizontal: 'right', vertical: 'top' },
         });
         history.push('/');
@@ -80,6 +80,11 @@ export const DemoDataMenu = () => {
         setCurrentlyLoadingData(null);
       });
   };
+
+  useEffect(() => {
+    loadData('Users', sampleDataSets[0]?.value!);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <section className="demo-data-buttons col-12 col-md-8 col-sm-7 pb-2 px-1">
