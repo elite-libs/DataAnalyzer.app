@@ -111,13 +111,31 @@
     "eslint-plugin-react": "^7.22.0",
     "prettier": "2.2.1",
     "react-app-rewire-alias": "^0.2.1",
-    "react-app-rewired": "^2.1.8"
+    "react-app-rewired": "^2.1.8",
+    "ts-jest": "^26.5.1"
   },
   "jest": {
-    "transformIgnorePatterns": []
+    "collectCoverage": true,
+    "preset": "ts-jest/presets/js-with-babel",
+    "verbose": true,
+    "moduleNameMapper": {
+      "^images/(.*)$": "<rootDir>/public/images/$1",
+      "^data/(.*)$": "<rootDir>/public/data/$1",
+      "^@src/(.*)$": "<rootDir>/src/$1",
+      "^@components/(.*)$": "<rootDir>/src/components/$1",
+      "^@utils/(.*)$": "<rootDir>/src/schema-analyzer/utils/$1"
+    },
+    "transformIgnorePatterns": [
+      "node_modules/"
+    ],
+    "globals": {
+      "ts-jest": {
+        "tsconfig": "tsconfig.json"
+      }
+    }
   },
   "prettier": {
-    "printWidth": 100,
+    "printWidth": 90,
     "trailingComma": "all",
     "tabWidth": 2,
     "semi": true,

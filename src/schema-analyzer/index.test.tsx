@@ -11,22 +11,40 @@ import fs from 'fs';
 import csvParse from 'csv-parse';
 import { flattenTypes } from './utils/helpers';
 
-import userNotes from './__tests__/user-notes.json';
-import properties from './__tests__/real-estate.example.json';
-import people from './__tests__/swapi-people.json';
-import users from './__tests__/users.example.json';
-import userData_SparseSubtypes from './__tests__/user_sparse-subtypes.json';
+import userNotes from '../../public/data/user-notes.json';
+import properties from '../../public/data/real-estate.example.json';
+import people from '../../public/data/swapi-people.json';
+import users from '../../public/data/users.example.json';
+import userData_SparseSubtypes from '../../public/data/user_sparse-subtypes.json';
+import historicEvents from '../../public/data/historic-events.json';
+import pokemonCharmander from '../../public/data/pokemon-charmander.json';
 
 const productCsv: Promise<any[]> = parseCsv(
   fs.readFileSync(
-    path.resolve(__dirname, './__tests__/products-3000.csv'),
+    path.resolve(__dirname, '../../public/data/products-3000.csv'),
     'utf8',
   ),
-);
+).catch((err) => void console.error(err) || []);
 
 const usersCsv: Promise<any[]> = parseCsv(
-  fs.readFileSync(path.resolve(__dirname, './__tests__/users-alt.csv'), 'utf8'),
-);
+  fs.readFileSync(
+    path.resolve(__dirname, '../../public/data/users-alt.csv'),
+    'utf8',
+  ),
+).catch((err) => void console.error(err) || []);
+
+// process.on('unhandledRejection', (reason, promise) => {
+//   // promise.catch(
+//   //   console.error.bind(console, 'UNHANDLED BUSINESS!!! ERROR NOT CAUGHT:'),
+//   // );
+//   console.log(
+//     'Unhandled rejection at ',
+//     promise,
+//     `reason: ${JSON.stringify(reason)}`,
+//   );
+//   console.dir(reason);
+//   process.exit(1);
+// });
 
 const flattenWrapper = (result) => {
   result = flattenTypes(result, {
@@ -333,3 +351,22 @@ describe('utility & helper methods', () => {
     expect(parseDate('Heyo')).toBeNull();
   });
 });
+
+// describe('#nested non-array object types', () => {
+//   // Uses data from http://history.muffinlabs.com/date/2/16
+//   it('can parse nested objects (non-array)', async () => {
+//     try {
+//       const result = await schemaAnalyzer('historicEvent', historicEvents);
+//       expect(Object.keys(result.fields)).toStrictEqual(['date', 'url', 'data']);
+//       expect(result.nestedTypes).not.toBeNull();
+//       expect(result.nestedTypes?.['historicEvent.Data']).toBeDefined();
+//       expect(
+//         Object.keys(result.nestedTypes?.['historicEvent.Data'].fields),
+//       ).toStrictEqual(['Events', 'Births', 'Deaths']);
+//     } catch (error) {
+//       console.error('ERROR:', error);
+//     }
+//   });
+//   // https://pokeapi.co/api/v2/pokemon/4
+//   // pokemonCharmander
+// });

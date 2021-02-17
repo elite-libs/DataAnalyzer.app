@@ -72,6 +72,11 @@ export interface ISchemaAnalyzerOptions {
   disableNestedTypes?: boolean | undefined;
 }
 
+type NestedTypeSummary<TFieldDetails> = Omit<
+  TypeSummary<TFieldDetails>,
+  'nestedTypes'
+>;
+
 /**
  * Includes the results of main top-level schema.
  */
@@ -81,11 +86,9 @@ export type TypeSummary<TFieldDetails = FieldInfo> = {
     [x: string]: TFieldDetails;
   };
   totalRows: number;
-  nestedTypes:
-    | {
-        [x: string]: TypeSummary<TFieldDetails>;
-      }
-    | undefined;
+  nestedTypes?: {
+    [x: string]: NestedTypeSummary<TFieldDetails>;
+  };
 };
 
 export type TypedFieldObject<T> = {
@@ -424,109 +427,110 @@ const _pivotRowsGroupedByType = ({
       totalRows: null,
     };
     // #debug: log`  About to examine every row & cell. Found ${docs.length} records...`)
-    const evaluateSchemaLevel = _evaluateSchemaLevel({
-      schemaName,
-      isEnumEnabled,
-      disableNestedTypes,
-      nestedData,
-      strictMatching,
-      onProgress,
-    });
-    const pivotedSchema = docs.reduce(evaluateSchemaLevel, detectedSchema);
+    const pivotedSchema = docs.reduce(function evaluateSchemaLevel(
+      schema: {
+        totalRows: number;
+        uniques: { [x: string]: any[] };
+        fieldsData: { [x: string]: TypedFieldObject<FieldTypeSummary>[] };
+      },
+      row: { [x: string]: any },
+      index: number,
+      array: string | any[],
+    ) {
+      // eslint-disable-line
+      schema.totalRows = schema.totalRows || array.length;
+      schema.uniques = schema.uniques || {};
+      const fieldNames: string[] = Object.keys(row || {});
+      // #debug: log
+      //   `Processing Row # ${index + 1}/${
+      //     schema.totalRows
+      //   } {isEnumEnabled: ${isEnumEnabled}, disableNestedTypes: ${disableNestedTypes}}`,
+      // )
+      // #debug: log`Found ${fieldNames.length} Column(s)!`)
+      fieldNames.forEach((fieldName, index) => {
+        const value = row[fieldName];
+        const typeFingerprint = getFieldMetadata({ value, strictMatching });
+        const typeNames = Object.keys(typeFingerprint) as TypeNameString[];
+        const isPossibleEnumOrUniqueType =
+          typeNames.includes('Number') ||
+          typeNames.includes('String') ||
+          typeNames.includes('UUID') ||
+          typeNames.includes('ObjectId');
+
+        const isObjectArray =
+          Array.isArray(value) &&
+          value.length >= 1 &&
+          typeof value[0] === 'object';
+        const isObjectWithKeys =
+          !Array.isArray(value) &&
+          value != null &&
+          typeof value === 'object' &&
+          Object.keys(value).length >= 1;
+
+        // if (fieldName === 'created' && (isObjectWithKeys || isObjectArray)) {
+        //   console.trace('created', { value, isObjectWithKeys, isObjectArray });
+        // }
+        if (!disableNestedTypes) {
+          // TODO: Review hackey pattern here (buffers too much, better association of custom types, see `$ref`)
+          // Steps: 1. Check if Array of Objects, 2. Add to local `nestedData` to hold data for post-processing.
+          if (isObjectArray || isObjectWithKeys) {
+            const keyPath = `${schemaName}.${fieldName}`;
+            nestedData[keyPath] = nestedData[keyPath] || [];
+            nestedData[keyPath].push(...(isObjectArray ? value : [value]));
+            typeFingerprint.$ref = typeFingerprint.$ref || {
+              count: index,
+            };
+            typeFingerprint.$ref.typeAlias = keyPath;
+          }
+        }
+
+        if (isPossibleEnumOrUniqueType) {
+          schema.uniques = schema.uniques || {};
+          schema.uniques[fieldName] = schema.uniques[fieldName] || [];
+          if (!schema.uniques[fieldName]!.includes(value))
+            schema.uniques[fieldName]!.push(row[fieldName]);
+          // } else {
+          //   schema.uniques[fieldName] = null
+        }
+        schema.fieldsData[fieldName] = schema.fieldsData[fieldName] || [];
+        schema.fieldsData[fieldName]!.push(typeFingerprint);
+      });
+
+      const totalRows = schema.totalRows;
+      const isDone = index + 1 === totalRows;
+      const progressFrequencyModulo =
+        totalRows >= 2500 ? 50 : totalRows >= 1000 ? 25 : 10;
+      const showProgress = isDone || index % progressFrequencyModulo === 0;
+
+      if (onProgress && showProgress) {
+        // console.// #debug: log"FIRE.onProgress:", totalRows, index + 1);
+        // setImmediate(() => {
+        onProgress({
+          totalRows: totalRows,
+          currentRow: index + 1,
+          nestedTypes: nestedData && Object.keys(nestedData),
+        });
+        // });
+      }
+      return schema;
+    }, detectedSchema);
     // #debug: log'  Extracted data points from Field Type analysis')
     return pivotedSchema;
   };
 
-/**
- * internal
- * @private
- */
-const _evaluateSchemaLevel = ({
-  schemaName,
-  // isEnumEnabled,
-  disableNestedTypes,
-  nestedData,
-  strictMatching,
-  onProgress,
-}: any) =>
-  function evaluateSchemaLevel(
-    schema: {
-      totalRows: number;
-      uniques: { [x: string]: any[] };
-      fieldsData: { [x: string]: TypedFieldObject<FieldTypeSummary>[] };
-    },
-    row: { [x: string]: any },
-    index: number,
-    array: string | any[],
-  ) {
-    // eslint-disable-line
-    schema.totalRows = schema.totalRows || array.length;
-    schema.uniques = schema.uniques || {};
-    const fieldNames: string[] = Object.keys(row);
-    // #debug: log
-    //   `Processing Row # ${index + 1}/${
-    //     schema.totalRows
-    //   } {isEnumEnabled: ${isEnumEnabled}, disableNestedTypes: ${disableNestedTypes}}`,
-    // )
-    // #debug: log`Found ${fieldNames.length} Column(s)!`)
-    fieldNames.forEach((fieldName, index) => {
-      const value = row[fieldName];
-      const typeFingerprint = getFieldMetadata({ value, strictMatching });
-      const typeNames = Object.keys(typeFingerprint) as TypeNameString[];
-      const isPossibleEnumOrUniqueType =
-        typeNames.includes('Number') ||
-        typeNames.includes('String') ||
-        typeNames.includes('UUID') ||
-        typeNames.includes('ObjectId');
-
-      if (!disableNestedTypes) {
-        // TODO: Review hackey pattern here (buffers too much, better association of custom types, see `$ref`)
-        // Steps: 1. Check if Array of Objects, 2. Add to local `nestedData` to hold data for post-processing.
-        if (
-          Array.isArray(value) &&
-          value.length >= 1 &&
-          typeof value[0] === 'object'
-        ) {
-          const keyPath = `${schemaName}.${fieldName}`;
-          nestedData[keyPath] = nestedData[keyPath] || [];
-          nestedData[keyPath].push(...value);
-          typeFingerprint.$ref = typeFingerprint.$ref || {
-            count: index,
-          };
-          typeFingerprint.$ref.typeAlias = keyPath;
-        }
-      }
-
-      if (isPossibleEnumOrUniqueType) {
-        schema.uniques = schema.uniques || {};
-        schema.uniques[fieldName] = schema.uniques[fieldName] || [];
-        if (!schema.uniques[fieldName]!.includes(value))
-          schema.uniques[fieldName]!.push(row[fieldName]);
-        // } else {
-        //   schema.uniques[fieldName] = null
-      }
-      schema.fieldsData[fieldName] = schema.fieldsData[fieldName] || [];
-      schema.fieldsData[fieldName]!.push(typeFingerprint);
-    });
-
-    const totalRows = schema.totalRows;
-    const isDone = index + 1 === totalRows;
-    const progressFrequencyModulo =
-      totalRows >= 2500 ? 50 : totalRows >= 1000 ? 25 : 10;
-    const showProgress = isDone || index % progressFrequencyModulo === 0;
-
-    if (onProgress && showProgress) {
-      // console.// #debug: log"FIRE.onProgress:", totalRows, index + 1);
-      // setImmediate(() => {
-      onProgress({
-        totalRows: totalRows,
-        currentRow: index + 1,
-        nestedTypes: nestedData && Object.keys(nestedData),
-      });
-      // });
-    }
-    return schema;
-  };
+// /**
+//  * internal
+//  * @private
+//  */
+// const _evaluateSchemaLevel = ({
+//   schemaName,
+//   // isEnumEnabled,
+//   disableNestedTypes,
+//   nestedData,
+//   strictMatching,
+//   onProgress,
+// }: any) =>
+//   ;
 
 /**
  * Returns a fieldName keyed-object with type detection summary data.

@@ -3,7 +3,9 @@
     "baseUrl": ".",
     "paths": {
       "README.md": ["README.md"],
-      "images/*": ["public/images/*"]
+      "images/*": ["public/images/*"],
+      "data/*": ["public/data/*"],
+      "@data/*": ["public/data"]
     }
   }
 }

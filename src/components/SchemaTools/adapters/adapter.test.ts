@@ -1,33 +1,37 @@
 /* eslint-disable import/first */
 
-import { schemaAnalyzer, helpers, FieldTypeSummary, TypeSummary } from '../../../schema-analyzer/index';
+import {
+  schemaAnalyzer,
+  helpers,
+  FieldTypeSummary,
+  TypeSummary,
+} from '../../../schema-analyzer/index';
 
 const flattenTypes = helpers.flattenTypes;
 import knex from './writer.knex';
 import typescript from './writer.typescript';
 import mongoose from './writer.mongoose';
-import users from '../../../../public/users.example.json';
-import usersSparse from '../../../../public/user_sparse-subtypes.json';
-import people from '../../../../public/swapi-people.json';
-import commerceDeptNews from '../../../../public/commerce-dept-news.json';
-// import people from '../../../../public/swapi-people.json'
+import users from '../../../../public/data/users.example.json';
+import usersSparse from '../../../../public/data/user_sparse-subtypes.json';
+import people from '../../../../public/data/swapi-people.json';
+// import commerceDeptNews from '../../../../public/data/commerce-dept-news.json';
 import path from 'path';
 import fs from 'fs';
 import csvParse from 'csv-parse';
 
 const productCsv: Promise<any[]> = parseCsv(
   fs.readFileSync(
-    path.resolve(__dirname, '../../../../public/products-3000.csv'),
+    path.resolve(__dirname, '../../../../public/data/products-3000.csv'),
     'utf8',
   ),
-);
+).catch((err) => void console.error(err) || []);
 
 const usersCsv: Promise<any[]> = parseCsv(
   fs.readFileSync(
-    path.resolve(__dirname, '../../../../public/users-alt.csv'),
+    path.resolve(__dirname, '../../../../public/data/users-alt.csv'),
     'utf8',
   ),
-);
+).catch((err) => void console.error(err) || []);
 
 const flattenWrapper = (result: TypeSummary<any>) => {
   result = flattenTypes(result, {
@@ -118,9 +122,9 @@ describe('#knex', () => {
 
   it.skip('can emit migration with bigInteger id', async () => {
     const options = { strictMatching: false };
-    let localData = usersSparse.map(u => ({ ...u }));
-    localData[0].id = '2147483648'
-    localData[1].id = '2147483649'
+    let localData = usersSparse.map((u) => ({ ...u }));
+    if (localData && localData[0]) localData[0].id = '2147483648';
+    if (localData && localData[1]) localData[1].id = '2147483649';
     const results = await schemaAnalyzer('users', localData, options);
     const flatResult = helpers.flattenTypes(results, {
       targetLength: 'max',
@@ -197,7 +201,7 @@ describe('#mongoose', () => {
 
     expect(code).toMatchSnapshot();
   });
-})
+});
 
 describe('#typescript', () => {
   it('can emit interface(s)', async () => {
@@ -256,4 +260,4 @@ describe('#typescript', () => {
 
     expect(code).toMatchSnapshot();
   });
-})
+});
