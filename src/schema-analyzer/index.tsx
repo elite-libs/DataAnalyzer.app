@@ -2,6 +2,8 @@
 // import debug from 'debug'
 import { detectTypes, MetaChecks } from './utils/type-helpers';
 import * as helpers from './utils/helpers';
+import { String } from 'core-js';
+import { mapValues } from 'lodash';
 
 export { helpers };
 
@@ -72,10 +74,9 @@ export interface ISchemaAnalyzerOptions {
   disableNestedTypes?: boolean | undefined;
 }
 
-type NestedTypeSummary<TFieldDetails> = Omit<
-  TypeSummary<TFieldDetails>,
-  'nestedTypes'
->;
+type NestedTypeSummary<TFieldDetails> = {
+  [x: string]: Omit<TypeSummary<TFieldDetails>, 'nestedTypes'>;
+};
 
 /**
  * Includes the results of main top-level schema.
@@ -86,9 +87,7 @@ export type TypeSummary<TFieldDetails = FieldInfo> = {
     [x: string]: TFieldDetails;
   };
   totalRows: number;
-  nestedTypes?: {
-    [x: string]: NestedTypeSummary<TFieldDetails>;
-  };
+  nestedTypes?: Dict<TypeSummary<TFieldDetails>>;
 };
 
 export type TypedFieldObject<T> = {
@@ -190,6 +189,8 @@ export type FieldTypeSummary = {
   enum?: string[] | number[];
   /** number of times the type was matched */
   count: number;
+  /** Used to indicate a non-array nested type (one-to-one relationship) */
+  isPlainObject?: boolean;
   /** absolute priority of the detected TypeName, defined in the object `typeRankings` */
   // rank: number
 };
@@ -238,31 +239,55 @@ export type progressCallback = (progress: {
 
 const { TYPE_ENUM, TYPE_NULLABLE, TYPE_UNIQUE } = MetaChecks;
 
+function unpackNestedTypes(nestedTypes: Dict<TypeSummary<FieldInfo>>) {
+  return Object.entries(nestedTypes).reduce((nested, keyAndType) => {
+    const [typePath, nestedTypeSummary] = keyAndType;
+    if (nestedTypeSummary) {
+      // append this level's nested types
+      nested = {
+        ...nested,
+        ...unpackNestedTypes(nestedTypeSummary.nestedTypes || {}),
+      };
+    }
+    return nested;
+  }, nestedTypes);
+}
+
+function checkAndDeleteDeeplyNestedTypes(
+  typeSummary: TypeSummary<FieldInfo>,
+): TypeSummary<FieldInfo> {
+  // let nestedTypes = typeSummary.nestedTypes
+  typeSummary.nestedTypes = undefined;
+  return typeSummary;
+  // const hasNestedType = typeof nestedTypes === 'object' || Object.keys(nestedTypes).length === 0
+  // return typeSummary
+  // for (let pathName in typeSummary.nestedTypes) {
+  //   if (typeSummary.nestedTypes[pathName]) typeSummary.nestedTypes[pathName] = checkAndDeleteDeeplyNestedTypes(typeSummary.nestedTypes[pathName])
+  // }
+}
+
+// const recurseIntoNestedTypes
+function extractNestedTypes(typeSummary: TypeSummary<FieldInfo>) {
+  if (typeSummary.nestedTypes) {
+    typeSummary.nestedTypes = unpackNestedTypes(typeSummary.nestedTypes);
+  }
+  return typeSummary;
+}
 /**
  * Returns a fieldName keyed-object with type detection summary data.
+ *
+ * @param _nestedData private temp storage
  *
  * ### Example `fieldSummary`:
  * ```
  * {
  *  "id": {
  *    "UUID": {
- *      "rank": 2,
  *      "count": 25
  *    },
  *    "Number": {
- *      "rank": 8,
  *      "count": 1,
- *      "value": {
- *        "min": 9999999,
- *        "mean": 9999999,
- *        "max": 9999999,
- *        "p25": 9999999,
- *        "p33": 9999999,
- *        "p50": 9999999,
- *        "p66": 9999999,
- *        "p75": 9999999,
- *        "p99": 9999999
- *      }
+ *      "value": { "min": 9, "mean": 9, "max": 9, "p25": 9, "p33": 9, "p50": 9, "p66": 9, "p75": 9, "p99": 9 }
  *    }
  *  }
  * }
@@ -281,6 +306,34 @@ function schemaAnalyzer(
     nullableRowsThreshold: 0.001,
     uniqueRowsThreshold: 0.99,
   },
+  // _nestedData?: { [key: string]: unknown },
+): Promise<TypeSummary<FieldInfo>> {
+  return _schemaAnalyzer(schemaName, input, options).then(
+    (nestedSchemaTypes) => {
+      const schemaWithUnpackedData = extractNestedTypes(nestedSchemaTypes);
+      schemaWithUnpackedData.nestedTypes = mapValues(
+        schemaWithUnpackedData.nestedTypes,
+        checkAndDeleteDeeplyNestedTypes,
+      );
+      return schemaWithUnpackedData;
+    },
+  );
+}
+
+function _schemaAnalyzer(
+  schemaName: string,
+  input: any[] | { [k: string]: any },
+  options: ISchemaAnalyzerOptions | undefined = {
+    onProgress: ({ totalRows, currentRow }) => {},
+    strictMatching: true,
+    disableNestedTypes: false,
+    enumMinimumRowCount: 100,
+    enumAbsoluteLimit: 5,
+    // enumPercentThreshold: 0.01,
+    nullableRowsThreshold: 0.001,
+    uniqueRowsThreshold: 0.99,
+  },
+  // _nestedData?: { [key: string]: unknown },
 ): Promise<TypeSummary<FieldInfo>> {
   if (!input) throw Error('Input Data must be an Object or Array of Objects');
   if (!Array.isArray(input) && typeof input !== 'object')
@@ -392,22 +445,91 @@ function schemaAnalyzer(
   function nestedSchemaAnalyzer(
     nestedData: { [s: string]: unknown } | ArrayLike<unknown>,
   ) {
-    return Object.entries(nestedData).reduce(
-      async (nestedTypeSummaries, [fullTypeName, data]) => {
-        const nameParts = fullTypeName.split('.');
-        const nameSuffix = nameParts[nameParts.length - 1];
+    return Promise.all(
+      Object.entries(nestedData).map(([fullTypeName, data]) => {
+        // const nameParts = fullTypeName.split('.');
+        // const nameSuffix = nameParts[nameParts.length - 1];
 
-        nestedTypeSummaries[fullTypeName] = await schemaAnalyzer(
-          nameSuffix!,
+        return _schemaAnalyzer(
+          fullTypeName!,
           data as any[],
           options,
-        );
-        return nestedTypeSummaries;
-      },
-      {},
-    );
+        ).then((result): [string, TypeSummary<FieldInfo>] => [
+          fullTypeName,
+          result,
+        ]);
+      }),
+    ).then((resultPairs) => {
+      return resultPairs.reduce((nestedTypeSummary, nameAndDataPair) => {
+        nestedTypeSummary[nameAndDataPair[0]] = nameAndDataPair[1];
+        return nestedTypeSummary;
+      }, {});
+    });
+  }
+  // function nestedSchemaAnalyzer(nestedData: {
+  //   [s: string]: any[];
+  // }): Dict<TypeSummary<FieldInfo>> {
+  //   return Object.entries(nestedData).reduce(
+  //     async (nestedTypeSummaries, [fullTypeName, data]) => {
+  //       const nameParts = fullTypeName.split('.');
+  //       const nameSuffix = nameParts[nameParts.length - 1];
+
+  //       await schemaAnalyzer(nameSuffix!, data as any[], options);
+
+  //       nestedTypeSummaries[fullTypeName] = result;
+  //       return nestedTypeSummaries;
+  //     },
+  //     {},
+  //   );
+  // }
+
+  function flattenNestedTypes(
+    schemaPrefix: string,
+    typeSummary: Dict<TypeSummary<FieldInfo>>,
+    flatSummary: Dict<TypeSummary<FieldInfo>> = { ...typeSummary },
+  ): Dict<TypeSummary<FieldInfo>> {
+    // let currentNested = []
+    Object.entries(typeSummary).forEach(([typePath, typeSchema]) => {
+      let hasNestedTypes = typeSchema.nestedTypes;
+      if (hasNestedTypes) {
+        Object.entries(
+          typeSchema.nestedTypes as Dict<TypeSummary<FieldInfo>>,
+        ).forEach(([nestedKey, typeData]) => {
+          const nestedFieldPath = schemaPrefix + '.' + nestedKey;
+          // schemaPrefix + '.' + typePath + '.' + nestedKey;
+          flatSummary[nestedFieldPath] = typeData;
+          // check for recursive ness
+          if (typeData.nestedTypes) {
+            flattenNestedTypes(
+              nestedFieldPath,
+              typeData.nestedTypes,
+              flatSummary,
+            );
+            // typeData.nestedTypes = undefined;
+            // TODO: DELETE .nestedTypes KEY
+            console.log(`EXTRA TYPES:`, nestedFieldPath);
+          }
+        });
+      }
+    });
+    return flatSummary;
+    // const reducer = (flatSummary: Dict<TypeSummary<FieldInfo>>, [keyPath, schemaSummary]: [string, TypeSummary<FieldInfo>]) => {
+    //   if (schemaSummary.nestedTypes && Object.keys(schemaSummary.nestedTypes).length >= 1) {
+    //     // smash the nested values into the flatSummary
+    //     // Not so simple, need to concat keys: flatSummary = {...flatSummary, ...schemaSummary.nestedTypes};
+
+    //   }
+    //   return flatSummary
+    // }
+    // return Object.entries(
+    //   nestedData,
+    // ).reduce<Dict<TypeSummary<FieldInfo>>>(reducer, {});
   }
 }
+// function arrayifyNestedTypes(schema: Dict<TypeSummary<FieldInfo>>) {
+
+//   typeData.nestedTypes
+// }
 
 /**
  * @//returns {{ totalRows: number; uniques: { [x: string]: any[]; }; fieldsData: { [x: string]: InternalFieldTypeData[]; }; }} schema
@@ -479,6 +601,7 @@ const _pivotRowsGroupedByType = ({
             nestedData[keyPath].push(...(isObjectArray ? value : [value]));
             typeFingerprint.$ref = typeFingerprint.$ref || {
               count: index,
+              isPlainObject: isObjectWithKeys ? true : undefined,
             };
             typeFingerprint.$ref.typeAlias = keyPath;
           }
@@ -547,15 +670,15 @@ const _pivotRowsGroupedByType = ({
  *      "rank": 8,
  *      "count": 1,
  *      "value": {
- *        "min": 9999999,
- *        "mean": 9999999,
- *        "max": 9999999,
- *        "p25": 9999999,
- *        "p33": 9999999,
- *        "p50": 9999999,
- *        "p66": 9999999,
- *        "p75": 9999999,
- *        "p99": 9999999
+ *        "min": 9,
+ *        "mean": 9,
+ *        "max": 9,
+ *        "p25": 9,
+ *        "p33": 9,
+ *        "p50": 9,
+ *        "p66": 9,
+ *        "p75": 9,
+ *        "p99": 9
  *      }
  *    }
  *  }
@@ -606,6 +729,9 @@ function condenseFieldData({
         fieldSummary[
           fieldName
         ]!.types.$ref!.typeAlias = refType!.$ref!.typeAlias;
+        // fieldSummary[
+        //   fieldName
+        // ]!.types.$ref!.isPlainObject = refType!.$ref!.isPlainObject;
       }
 
       // check for enum fields
@@ -703,9 +829,9 @@ function condenseFieldSizes(
       };
 
       if (typeName === '$ref' && aggregateSummary[typeName]) {
-        // console.// #debug: log
-        //   "pivotedDataByType.$ref",
-        //   JSON.stringify(pivotedDataByType.$ref, null, 2)
+        // console.log(
+        //   'pivotedDataByType.$ref',
+        //   JSON.stringify(pivotedDataByType.$ref, null, 2),
         // );
         aggregateSummary[
           typeName
@@ -878,4 +1004,5 @@ export {
   formatRangeStats as _formatRangeStats,
   getFieldMetadata as _getFieldMetadata,
   isValidDate as _isValidDate,
+  extractNestedTypes,
 };
