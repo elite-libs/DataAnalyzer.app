@@ -1,7 +1,8 @@
 // import { mapValues } from 'lodash';
 import snakecase from 'lodash.snakecase';
+import { KeyValPair } from 'types';
 // import debug from 'debug';
-import { CombinedFieldInfo } from '../../../schema-analyzer/index';
+import { CombinedFieldInfo, TypeSummary } from '../../../schema-analyzer/index';
 import { IDataAnalyzerWriter, IRenderArgs } from './writers';
 // const log = debug('writer:knex');
 
@@ -42,7 +43,8 @@ const getFieldLengthArg = (fieldName: string, maxLength: number) => {
 // }
 const writer: IDataAnalyzerWriter = {
   render({ results, options, schemaName }: IRenderArgs) {
-    const hasNestedTypes = results.nestedTypes && Object.keys(results.nestedTypes!).length > 0;
+    const hasNestedTypes =
+      results.nestedTypes && Object.keys(results.nestedTypes!).length > 0;
 
     const getCreateTableCode = ({ schemaName, results }: IRenderArgs) =>
       `knex.schema.createTable("${schemaName}", (table) => {\n` +
@@ -70,7 +72,8 @@ const writer: IDataAnalyzerWriter = {
 
           let appendChain = '';
 
-          let sizePart = type === 'String' && length ? `, ${getFieldLengthArg(name, length)}` : '';
+          let sizePart =
+            type === 'String' && length ? `, ${getFieldLengthArg(name, length)}` : '';
 
           if (enumData && enumData.length > 0) {
             // console.info(`ENUM Detected: ${name} (${uniques.length}) \n TODO: Get/add unique values from the SchemaAnalyzer`)
@@ -115,11 +118,15 @@ const writer: IDataAnalyzerWriter = {
               typeRef,
             )}');`;
 
-          if (type === 'Unknown') return `    table.text("${name}"${sizePart})${appendChain};`;
+          if (type === 'Unknown')
+            return `    table.text("${name}"${sizePart})${appendChain};`;
           if (type === 'ObjectId') return `    table.string("${name}", 24);`;
-          if (type === 'UUID') return `    table.uuid("${name}"${sizePart})${appendChain};`;
-          if (type === 'Boolean') return `    table.boolean("${name}"${sizePart})${appendChain};`;
-          if (type === 'Date') return `    table.datetime("${name}"${sizePart})${appendChain};`;
+          if (type === 'UUID')
+            return `    table.uuid("${name}"${sizePart})${appendChain};`;
+          if (type === 'Boolean')
+            return `    table.boolean("${name}"${sizePart})${appendChain};`;
+          if (type === 'Date')
+            return `    table.datetime("${name}"${sizePart})${appendChain};`;
           if (type === 'Timestamp') return `    table.timestamp("${name}"${sizePart})`;
           if (type === 'Currency') return `    table.float("${name}"${sizePart});`;
           if (type === 'Float') return `    table.float("${name}"${sizePart});`;
@@ -128,13 +135,19 @@ const writer: IDataAnalyzerWriter = {
               value != null && value > BIG_INTEGER_MIN ? 'bigInteger' : 'integer'
             }("${name}")${appendChain};`;
           }
-          if (type === 'Email') return `    table.string("${name}"${sizePart})${appendChain};`;
-          if (type === 'String') return `    table.string("${name}"${sizePart})${appendChain};`;
-          if (type === 'Array') return `    table.json("${name}"${sizePart})${appendChain};`;
-          if (type === 'Object') return `    table.json("${name}"${sizePart})${appendChain};`;
+          if (type === 'Email')
+            return `    table.string("${name}"${sizePart})${appendChain};`;
+          if (type === 'String')
+            return `    table.string("${name}"${sizePart})${appendChain};`;
+          if (type === 'Array')
+            return `    table.json("${name}"${sizePart})${appendChain};`;
+          if (type === 'Object')
+            return `    table.json("${name}"${sizePart})${appendChain};`;
           if (type === 'Null') return `    table.text("${name}")${appendChain};`;
 
-          return `    table.text("${name}")${appendChain}; // ` + JSON.stringify(fieldInfo);
+          return (
+            `    table.text("${name}")${appendChain}; // ` + JSON.stringify(fieldInfo)
+          );
         })
         .join('\n') +
       `\n})\n`;
@@ -150,9 +163,10 @@ const writer: IDataAnalyzerWriter = {
     const getRecursive = () => {
       if (!options?.disableNestedTypes && hasNestedTypes) {
         // console.log('nested schema detected', schemaName);
-
+        // @ts-ignore
         return Object.entries(results.nestedTypes!).map(([nestedName, results]) => {
-          // console.log('nested knex schema:', nestedName);
+          if (!results || !results.fields || !results)
+            return `// Error invalid field data //`;
           return getCreateTableCode({
             schemaName: snakecase(nestedName),
             results,

@@ -6,15 +6,18 @@ import {
 } from '../../../schema-analyzer';
 import { properCase, removeBlankLines } from '../helpers';
 import type { IDataAnalyzerWriter, IRenderArgs } from './writers';
+
 const writer: IDataAnalyzerWriter = {
   render({ results, options, schemaName }: IRenderArgs) {
-    const hasNestedTypes = results.nestedTypes && Object.keys(results.nestedTypes!).length > 0;
+    const hasNestedTypes =
+      results.nestedTypes && Object.keys(results.nestedTypes!).length > 0;
     const { fields } = results;
     const getFields = () => {
       return (
         `const ${properCase(schemaName)} = new Schema({\n` +
         Object.entries(fields)
           .map(([fieldName, fieldInfo]) => {
+            if (fieldInfo == null) return `// null field info !!!`;
             return `  ${camelCase(fieldName)}: {
     type: "${fieldInfo.type}",
     ${fieldInfo.unique ? 'unique: true,' : ''}
@@ -39,9 +42,9 @@ const writer: IDataAnalyzerWriter = {
           .join(',\n') +
         `});
 
-const ${camelCase(schemaName)}Model = mongoose.model("${camelCase(schemaName)}", ${properCase(
+const ${camelCase(schemaName)}Model = mongoose.model("${camelCase(
           schemaName,
-        )});
+        )}", ${properCase(schemaName)});
     
 module.exports.${properCase(schemaName)} = ${camelCase(schemaName)}Model;\n`
       );

@@ -109,6 +109,7 @@ DataAnalyzer has 3 Powerful Features to Explore:
 
 **Code Writers**
 
+- [ ] Add [TypeScript+Mongoose Support](http://thecodebarbarian.com/working-with-mongoose-in-typescript.html) (Possibly write all templates in TypeScript first, using `tsc` to emit JS code as needed?)
 - [ ] SQL `CREATE TABLE` - **Coming soon**
 - [ ] Code for Libraries like `Yup` or `Joi`
 - [ ] JSON Schemas (for libraries like `ajv`)

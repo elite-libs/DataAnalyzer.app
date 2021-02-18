@@ -1,6 +1,6 @@
-import { schemaAnalyzer, extractNestedTypes } from '../';
+import { schemaAnalyzer } from '../';
 import historicEvents from '../../../public/data/historic-events.json';
-import pokemonCharmander from '../../../public/data/pokemon-charmander.json';
+// import pokemonCharmander from '../../../public/data/pokemon-charmander.json';
 
 describe('#nested non-array object types', () => {
   // Uses data from http://history.muffinlabs.com/date/2/16

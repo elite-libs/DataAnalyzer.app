@@ -2,8 +2,8 @@
 // import debug from 'debug'
 import { detectTypes, MetaChecks } from './utils/type-helpers';
 import * as helpers from './utils/helpers';
-import { String } from 'core-js';
 import { mapValues } from 'lodash';
+import { KeyValPair } from '../types';
 
 export { helpers };
 
@@ -83,11 +83,9 @@ type NestedTypeSummary<TFieldDetails> = {
  */
 export type TypeSummary<TFieldDetails = FieldInfo> = {
   schemaName?: string;
-  fields: {
-    [x: string]: TFieldDetails;
-  };
+  fields: KeyValPair<TFieldDetails>;
   totalRows: number;
-  nestedTypes?: Dict<TypeSummary<TFieldDetails>>;
+  nestedTypes?: KeyValPair<TypeSummary<TFieldDetails>>;
 };
 
 export type TypedFieldObject<T> = {
@@ -175,6 +173,8 @@ export type CombinedFieldInfo =
  *    We currently uses object key structure: {"String": FieldTypeSummary}
  */
 export type FieldTypeSummary = {
+  /** Used to indicate a non-array nested type (one-to-one relationship) */
+  typeRelationship?: 'one-to-one' | 'one-to-many';
   /** for nested type support. */
   typeAlias?: string | TypeNameString;
   /** extracted field values, placed into an array. This simplifies (at expense of memory) type analysis and summarization when creating the `AggregateSummary`. */
@@ -189,8 +189,6 @@ export type FieldTypeSummary = {
   enum?: string[] | number[];
   /** number of times the type was matched */
   count: number;
-  /** Used to indicate a non-array nested type (one-to-one relationship) */
-  isPlainObject?: boolean;
   /** absolute priority of the detected TypeName, defined in the object `typeRankings` */
   // rank: number
 };
@@ -199,6 +197,8 @@ export type FieldTypeSummary = {
  * It mirrors the `FieldSummary` type it will become.
  */
 export type InternalFieldTypeData = {
+  /** Used to indicate a non-array nested type (one-to-one relationship) */
+  typeRelationship?: 'one-to-one' | 'one-to-many';
   /** for nested type support. */
   typeAlias?: string | undefined;
   /** array of values, pre processing into an AggregateSummary */
@@ -239,7 +239,7 @@ export type progressCallback = (progress: {
 
 const { TYPE_ENUM, TYPE_NULLABLE, TYPE_UNIQUE } = MetaChecks;
 
-function unpackNestedTypes(nestedTypes: Dict<TypeSummary<FieldInfo>>) {
+function unpackNestedTypes(nestedTypes: KeyValPair<TypeSummary<FieldInfo>>) {
   return Object.entries(nestedTypes).reduce((nested, keyAndType) => {
     const [typePath, nestedTypeSummary] = keyAndType;
     if (nestedTypeSummary) {
@@ -442,9 +442,7 @@ function _schemaAnalyzer(
       })
   );
 
-  function nestedSchemaAnalyzer(
-    nestedData: { [s: string]: unknown } | ArrayLike<unknown>,
-  ) {
+  function nestedSchemaAnalyzer(nestedData: { [s: string]: unknown }) {
     return Promise.all(
       Object.entries(nestedData).map(([fullTypeName, data]) => {
         // const nameParts = fullTypeName.split('.');
@@ -468,7 +466,7 @@ function _schemaAnalyzer(
   }
   // function nestedSchemaAnalyzer(nestedData: {
   //   [s: string]: any[];
-  // }): Dict<TypeSummary<FieldInfo>> {
+  // }): KeyValPair<TypeSummary<FieldInfo>> {
   //   return Object.entries(nestedData).reduce(
   //     async (nestedTypeSummaries, [fullTypeName, data]) => {
   //       const nameParts = fullTypeName.split('.');
@@ -485,15 +483,15 @@ function _schemaAnalyzer(
 
   function flattenNestedTypes(
     schemaPrefix: string,
-    typeSummary: Dict<TypeSummary<FieldInfo>>,
-    flatSummary: Dict<TypeSummary<FieldInfo>> = { ...typeSummary },
-  ): Dict<TypeSummary<FieldInfo>> {
+    typeSummary: KeyValPair<TypeSummary<FieldInfo>>,
+    flatSummary: KeyValPair<TypeSummary<FieldInfo>> = { ...typeSummary },
+  ): KeyValPair<TypeSummary<FieldInfo>> {
     // let currentNested = []
     Object.entries(typeSummary).forEach(([typePath, typeSchema]) => {
       let hasNestedTypes = typeSchema.nestedTypes;
       if (hasNestedTypes) {
         Object.entries(
-          typeSchema.nestedTypes as Dict<TypeSummary<FieldInfo>>,
+          typeSchema.nestedTypes as KeyValPair<TypeSummary<FieldInfo>>,
         ).forEach(([nestedKey, typeData]) => {
           const nestedFieldPath = schemaPrefix + '.' + nestedKey;
           // schemaPrefix + '.' + typePath + '.' + nestedKey;
@@ -513,7 +511,7 @@ function _schemaAnalyzer(
       }
     });
     return flatSummary;
-    // const reducer = (flatSummary: Dict<TypeSummary<FieldInfo>>, [keyPath, schemaSummary]: [string, TypeSummary<FieldInfo>]) => {
+    // const reducer = (flatSummary: KeyValPair<TypeSummary<FieldInfo>>, [keyPath, schemaSummary]: [string, TypeSummary<FieldInfo>]) => {
     //   if (schemaSummary.nestedTypes && Object.keys(schemaSummary.nestedTypes).length >= 1) {
     //     // smash the nested values into the flatSummary
     //     // Not so simple, need to concat keys: flatSummary = {...flatSummary, ...schemaSummary.nestedTypes};
@@ -523,10 +521,10 @@ function _schemaAnalyzer(
     // }
     // return Object.entries(
     //   nestedData,
-    // ).reduce<Dict<TypeSummary<FieldInfo>>>(reducer, {});
+    // ).reduce<KeyValPair<TypeSummary<FieldInfo>>>(reducer, {});
   }
 }
-// function arrayifyNestedTypes(schema: Dict<TypeSummary<FieldInfo>>) {
+// function arrayifyNestedTypes(schema: KeyValPair<TypeSummary<FieldInfo>>) {
 
 //   typeData.nestedTypes
 // }
@@ -601,7 +599,7 @@ const _pivotRowsGroupedByType = ({
             nestedData[keyPath].push(...(isObjectArray ? value : [value]));
             typeFingerprint.$ref = typeFingerprint.$ref || {
               count: index,
-              isPlainObject: isObjectWithKeys ? true : undefined,
+              typeRelationship: isObjectArray ? 'one-to-many' : 'one-to-one',
             };
             typeFingerprint.$ref.typeAlias = keyPath;
           }
@@ -729,9 +727,9 @@ function condenseFieldData({
         fieldSummary[
           fieldName
         ]!.types.$ref!.typeAlias = refType!.$ref!.typeAlias;
-        // fieldSummary[
-        //   fieldName
-        // ]!.types.$ref!.isPlainObject = refType!.$ref!.isPlainObject;
+        fieldSummary[
+          fieldName
+        ]!.types.$ref!.typeRelationship = refType!.$ref!.typeRelationship;
       }
 
       // check for enum fields
@@ -829,13 +827,16 @@ function condenseFieldSizes(
       };
 
       if (typeName === '$ref' && aggregateSummary[typeName]) {
-        // console.log(
-        //   'pivotedDataByType.$ref',
-        //   JSON.stringify(pivotedDataByType.$ref, null, 2),
-        // );
+        console.log(
+          'pivotedDataByType.$ref',
+          JSON.stringify(pivotedDataByType.$ref, null, 2),
+        );
         aggregateSummary[
           typeName
         ]!.typeAlias = pivotedDataByType.$ref!.typeAlias;
+        aggregateSummary[
+          typeName
+        ]!.typeRelationship = pivotedDataByType.$ref!.typeRelationship;
       } else {
         if (typeName !== 'String' && pivotedDataByType[typeName]!.value)
           aggregateSummary[typeName]!.value = getNumberRangeStats(
@@ -900,9 +901,9 @@ function getFieldMetadata({
         analysis[typeGuess] = { ...analysis[typeGuess], count, length };
       }
       if (typeGuess === 'Float') {
-        value = parseFloat(String(value));
+        value = parseFloat(`${value}`);
         analysis[typeGuess] = { ...analysis[typeGuess], count, value };
-        const significandAndMantissa = String(value).split('.');
+        const significandAndMantissa = `${value}`.split('.');
         if (significandAndMantissa.length === 2) {
           // Note: To future self, the following is correct: 'precision' is the total # of digits!
           precision = significandAndMantissa.join('').length; // total # of numeric positions before & after decimal
@@ -934,7 +935,7 @@ function getFieldMetadata({
         }
       }
       if (typeGuess === 'String' || typeGuess === 'Email') {
-        length = String(value).length;
+        length = `${value}`.length;
         // @ts-ignore
         analysis[typeGuess] = { ...analysis[typeGuess], count, length, value };
       }
@@ -965,12 +966,12 @@ function getNumberRangeStats(
     min: sortedNumbers[0],
     mean: sum / numbers.length,
     max: sortedNumbers[numbers.length - 1],
-    p25: numbers[parseInt(String(numbers.length * 0.25), 10)],
-    p33: numbers[parseInt(String(numbers.length * 0.33), 10)],
-    p50: numbers[parseInt(String(numbers.length * 0.5), 10)],
-    p66: numbers[parseInt(String(numbers.length * 0.66), 10)],
-    p75: numbers[parseInt(String(numbers.length * 0.75), 10)],
-    p99: numbers[parseInt(String(numbers.length * 0.99), 10)],
+    p25: numbers[parseInt((numbers.length * 0.25).toString(), 10)],
+    p33: numbers[parseInt((numbers.length * 0.33).toString(), 10)],
+    p50: numbers[parseInt((numbers.length * 0.5).toString(), 10)],
+    p66: numbers[parseInt((numbers.length * 0.66).toString(), 10)],
+    p75: numbers[parseInt((numbers.length * 0.75).toString(), 10)],
+    p99: numbers[parseInt((numbers.length * 0.99).toString(), 10)],
   };
 }
 

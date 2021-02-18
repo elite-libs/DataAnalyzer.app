@@ -5,6 +5,6 @@ export interface Dictionary<T> {
 
 export type CallbackFn<TArgs, TReturn = void> = (args?: TArgs | any) => TReturn | any;
 
-export interface Dict<TValue> {
-  [id: string]: TValue | undefined | null;
+export interface KeyValPair<TValue> {
+  [id: string]: TValue;
 }

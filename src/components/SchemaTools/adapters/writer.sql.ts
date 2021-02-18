@@ -1,6 +1,5 @@
 // import { mapValues } from 'lodash';
 import snakecase from 'lodash.snakecase';
-// import debug from 'debug';
 import { CombinedFieldInfo } from '../../../schema-analyzer/index';
 import { IDataAnalyzerWriter, IRenderArgs } from './writers';
 // const log = debug('writer:knex');
@@ -42,7 +41,8 @@ const getFieldLengthArg = (fieldName: string, maxLength: number) => {
 // }
 const writer: IDataAnalyzerWriter = {
   render({ results, options, schemaName }: IRenderArgs) {
-    const hasNestedTypes = results.nestedTypes && Object.keys(results.nestedTypes!).length > 0;
+    const hasNestedTypes =
+      results.nestedTypes && Object.keys(results.nestedTypes!).length > 0;
 
     const getCreateTableCode = ({ schemaName, results }: IRenderArgs) =>
       `CREATE TABLE ${snakecase(schemaName)} (\n` +
@@ -69,7 +69,8 @@ const writer: IDataAnalyzerWriter = {
           if ('precision' in fieldInfo) precision = fieldInfo.precision;
 
           let appendChain = '';
-          let sizePart = type === 'String' && length ? `(${getFieldLengthArg(name, length)})` : '';
+          let sizePart =
+            type === 'String' && length ? `(${getFieldLengthArg(name, length)})` : '';
 
           if (!nullable) appendChain += ' NOT NULL ';
           if (identity) {
@@ -117,11 +118,15 @@ const writer: IDataAnalyzerWriter = {
               typeRef,
             )}_id), // TODO: Verify column names`;
 
-          if (type === 'Unknown') return `    ${name}    VARCHAR(${sizePart})   ${appendChain},`;
+          if (type === 'Unknown')
+            return `    ${name}    VARCHAR(${sizePart})   ${appendChain},`;
           if (type === 'ObjectId') return `    ${name}    VARCHAR(24)   ${appendChain},`;
-          if (type === 'UUID') return `    ${name}    UUID    ${sizePart}  ${appendChain},`;
-          if (type === 'Boolean') return `    ${name}    BOOLEAN    ${sizePart}  ${appendChain},`;
-          if (type === 'Date') return `    ${name}    TIMESTAMP    ${sizePart}  ${appendChain},`;
+          if (type === 'UUID')
+            return `    ${name}    UUID    ${sizePart}  ${appendChain},`;
+          if (type === 'Boolean')
+            return `    ${name}    BOOLEAN    ${sizePart}  ${appendChain},`;
+          if (type === 'Date')
+            return `    ${name}    TIMESTAMP    ${sizePart}  ${appendChain},`;
           if (type === 'Timestamp') return `    ${name}    TIMESTAMP    ${appendChain},`;
           if (type === 'Currency') return `    ${name}    MONEY    ${appendChain},`;
           if (type === 'Float') return `    ${name}    NUMERIC${sizePart},`;
@@ -130,8 +135,10 @@ const writer: IDataAnalyzerWriter = {
               value != null && value > BIG_INTEGER_MIN ? 'BIGINT' : 'INT'
             } ${appendChain},`;
           }
-          if (type === 'Email') return `    ${name}    VARCHAR${sizePart}  ${appendChain},`;
-          if (type === 'String') return `    ${name}    VARCHAR${sizePart}  ${appendChain},`;
+          if (type === 'Email')
+            return `    ${name}    VARCHAR${sizePart}  ${appendChain},`;
+          if (type === 'String')
+            return `    ${name}    VARCHAR${sizePart}  ${appendChain},`;
           if (type === 'Array') return `    ${name}    JSONB    ${appendChain},`;
           if (type === 'Object') return `    ${name}    JSONB    ${appendChain},`;
           if (type === 'Null')
