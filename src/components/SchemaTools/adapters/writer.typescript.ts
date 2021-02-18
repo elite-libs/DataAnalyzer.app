@@ -20,18 +20,27 @@ const typeMap: { [k: string]: string } = {
   Null: 'string',
 };
 
-const getTSTypeExpression = (fieldInfo: CombinedFieldInfo) => {
+const getTSTypeExpression = (fieldInfo: CombinedFieldInfo, schemaName: string) => {
   let tsType = typeMap[fieldInfo.type];
   if (fieldInfo.enum)
-    return '"' + fieldInfo.enum.join('" | "') + `" ${fieldInfo.nullable ? ' | null' : ''}`;
-  if (fieldInfo.typeRef)
-    return properCase(fieldInfo.typeRef) + `[] ${fieldInfo.nullable ? ' | null' : ''}`;
+    return (
+      '"' + fieldInfo.enum.join('" | "') + `" ${fieldInfo.nullable ? ' | null' : ''}`
+    );
+  if (fieldInfo.typeRef) {
+    return (
+      properCase(fieldInfo.typeRef) +
+      `${fieldInfo.typeRelationship === 'one-to-many' ? '[]' : ''} ${
+        fieldInfo.nullable ? ' | null' : ''
+      }`
+    );
+  }
   return `${tsType} ${fieldInfo.nullable ? ' | null' : ''}`;
 };
 
 const typescriptWriter: IDataAnalyzerWriter = {
   render({ results, options, schemaName }: IRenderArgs) {
-    const hasNestedTypes = results.nestedTypes && Object.keys(results.nestedTypes!).length > 0;
+    const hasNestedTypes =
+      results.nestedTypes && Object.keys(results.nestedTypes!).length > 0;
     const { fields } = results;
     const getFields = () => {
       return (
@@ -40,7 +49,7 @@ const typescriptWriter: IDataAnalyzerWriter = {
           .map(([fieldName, fieldInfo]) => {
             return `  ${camelCase(fieldName)}${
               fieldInfo.nullable ? '?' : ''
-            }: ${getTSTypeExpression(fieldInfo).trim()};`;
+            }: ${getTSTypeExpression(fieldInfo, schemaName).trim()};`;
           })
           .join('\n') +
         `\n};\n`
@@ -60,9 +69,9 @@ const typescriptWriter: IDataAnalyzerWriter = {
           });
         });
       }
-      return '';
+      return [''];
     };
-    return removeBlankLines(getFields() + '\n' + getRecursive());
+    return removeBlankLines(getFields() + '\n' + getRecursive().join(''));
   },
 };
 

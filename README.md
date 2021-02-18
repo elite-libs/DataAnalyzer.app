@@ -104,7 +104,7 @@ DataAnalyzer has 3 Powerful Features to Explore:
 - [ ] Migrate leftover Bootstrap utility classes to Material.
 - [ ] Add a "Schema Editor" table-like view to tune & view the results.
 - [ ] [Fix options & overall menu](https://material-ui.com/components/drawers/#mini-variant-drawer)
-- [ ] [Add App Bar](https://material-ui.com/components/app-bar/)
+- [ ] [Add App Bar](https://material-ui.com/components/app-bar/) for config, or use router, modal - anything to get away from z-index BS.
 - [ ] Make the Input and Output sections collapse/toggle-able.
 - [ ] Complete Web Worker for Background Processing.
 - [ ] Add confirmation for processing lots of data. (Rows and raw MB limit?)

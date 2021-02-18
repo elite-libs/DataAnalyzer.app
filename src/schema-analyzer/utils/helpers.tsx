@@ -9,6 +9,7 @@ import {
   ScalarFieldInfo,
   NumericFieldInfo,
   FieldTypeSummary,
+  SimpleFieldInfo,
 } from '..';
 
 // const log = debug('schema-builder:helpers')
@@ -87,27 +88,36 @@ function _simplifyFieldInfo(
   // }
   // get the 'winning' type from sorted array
   let topType = arrayOfTypes[0]![0];
-  let typeRef: string | undefined = undefined;
+  let refTypeField = arrayOfTypes.slice(0).find((f) => f[0] === '$ref');
+  let refFieldInfo = refTypeField ? refTypeField[1] : null;
 
+  let typeAliasRef: string | undefined = undefined;
+  let typeRelationship: SimpleFieldInfo['typeRelationship'] = undefined;
   // check for under-counted $ref due to empty arrays in the rows
-  if (
-    topType === 'Array' &&
-    arrayOfTypes.length > 1 &&
-    arrayOfTypes[1] != null &&
-    arrayOfTypes[1][0] === '$ref'
-  ) {
-    typeRef = arrayOfTypes[1]![1]!.typeAlias;
+  // if (
+  //   topType === 'Array' &&
+  //   arrayOfTypes.length > 1 &&
+  //   arrayOfTypes[1] != null &&
+  //   arrayOfTypes[1][0] === '$ref'
+  // ) {
+  if (refFieldInfo) {
+    // console.log('REFTYPEFIELD', refTypeField);
+    typeAliasRef = refFieldInfo.typeAlias;
+    typeRelationship = refFieldInfo.typeRelationship;
   }
+  // }
 
-  if (topType === '$ref') {
-    typeRef = arrayOfTypes[0]![1]!.typeAlias;
-  }
+  // if (topType === '$ref') {
+  //   typeAliasRef = arrayOfTypes[0]![1]!.typeAlias;
+  //   typeRelationship = arrayOfTypes[0]![1]!.typeRelationship;
+  // }
 
   const fieldTypeDetails = fieldInfo.types[topType as TypeNameString]!;
 
   let result: CombinedFieldInfo = {
     type: topType as TypeNameString,
-    typeRef,
+    typeRef: typeAliasRef,
+    typeRelationship,
     identity: fieldInfo.identity || false,
     enum: fieldInfo.enum || null,
     nullable: Boolean(fieldInfo.nullable),

@@ -15,14 +15,24 @@ import { useAutoSnackbar } from 'hooks/useAutoSnackbar';
 import { useAnalytics } from 'hooks/useAnalytics';
 
 const sampleDataSets: Record<'label' | 'value' | 'schemaName', string>[] = [
-  { label: 'Users', value: '/data/users.example.json', schemaName: 'Users' },
-  { label: 'People', value: '/data/swapi-people.json', schemaName: 'People' },
+  // { label: 'Users', value: '/data/users.example.json', schemaName: 'Users' },
+  // { label: 'People', value: '/data/swapi-people.json', schemaName: 'People' },
   {
     label: 'Property',
     value: '/data/real-estate.example.json',
     schemaName: 'Property',
   },
   { label: 'Products', value: '/data/products-3000.csv', schemaName: 'Product' },
+  {
+    label: 'Events',
+    value: '/data/historic-events.json',
+    schemaName: 'HistoricEvent',
+  },
+  {
+    label: 'Pokemon',
+    value: '/data/pokemon-charmander.json',
+    schemaName: 'Pokemon',
+  },
 ];
 
 export const DemoDataMenu = () => {
@@ -89,7 +99,7 @@ export const DemoDataMenu = () => {
   };
 
   useEffect(() => {
-    loadData('Users', sampleDataSets[0]?.value!);
+    loadData(sampleDataSets[2]?.label || 'Users', sampleDataSets[2]?.value!);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

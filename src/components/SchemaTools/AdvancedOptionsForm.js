@@ -11,15 +11,17 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 // import Collapse from '@material-ui/core/Collapse';
+import SettingsIcon from '@material-ui/icons/Settings';
 import SaveIcon from '@material-ui/icons/Save';
 import CloseIcon from '@material-ui/icons/Close';
-import SettingsIcon from '@material-ui/icons/Settings';
 import { useDispatch, useSelector } from 'react-redux';
 import { setOptions } from 'store/optionsSlice';
 // import { RootState } from 'store/rootReducer';
 
 import './AdvancedOptionsForm.scss';
 import { setResults, setSchema } from 'store/analysisSlice';
+import { useHistory } from 'react-router';
+import { CardHeader } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,16 +42,16 @@ const useStyles = makeStyles((theme) => ({
   margin: {
     height: theme.spacing(3),
   },
-  expand: {
-    // transform: 'rotate(0deg)',
-    // marginLeft: 'auto',
-    // transition: theme.transitions.create('transform', {
-    //   duration: theme.transitions.duration.shortest,
-    // }),
-  },
-  expandOpen: {
-    transform: 'rotate(180deg)',
-  },
+  // expand: {
+  //   // transform: 'rotate(0deg)',
+  //   // marginLeft: 'auto',
+  //   // transition: theme.transitions.create('transform', {
+  //   //   duration: theme.transitions.duration.shortest,
+  //   // }),
+  // },
+  // expandOpen: {
+  //   transform: 'rotate(180deg)',
+  // },
   form: {
     width: '100%',
     "& [type='range']": {
@@ -59,22 +61,22 @@ const useStyles = makeStyles((theme) => ({
   },
   parentPanel: {},
   panel: {
-    position: 'absolute',
+    // position: 'absolute',
     background:
       'linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(245,245,245,0.98) 25%, rgba(245,245,245,0.98) 75%, rgba(255,255,255,1) 100%)' /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */,
     zIndex: 10000,
-    overflowY: 'hidden',
+    // overflowY: 'hidden',
   },
   panelContent: {
-    position: 'relative',
-    margin: 0,
-    top: '0.45rem',
-    // background: 'rgba(245, 245, 245, 0.985)',
-    height: '100%',
-    maxHeight: '50vh',
-    overflowY: 'auto',
-    minWidth: '400px',
-    zIndex: 10,
+    // position: 'relative',
+    // margin: 0,
+    // top: '0.45rem',
+    // // background: 'rgba(245, 245, 245, 0.985)',
+    // height: '100%',
+    // maxHeight: '50vh',
+    // overflowY: 'auto',
+    // minWidth: '400px',
+    // zIndex: 10,
   },
 }));
 
@@ -113,6 +115,7 @@ const formatPercent = (number) =>
   number != null && Number(percentFormatter.format(number)).toFixed(2);
 
 export default function AdvancedOptionsForm({ className = '' }) {
+  const history = useHistory();
   const dispatch = useDispatch();
   const options = useSelector((state) => state.optionsActions);
   // const { schemaName } = useSelector((state) => state.analysisFeature);
@@ -129,14 +132,8 @@ export default function AdvancedOptionsForm({ className = '' }) {
 
     dispatch(setOptions(updatedOptions));
     resetResults();
-    setExpanded(false);
-  };
-
-  const [expanded, setExpanded] = React.useState(false);
-
-  const handleExpandClick = (e) => {
-    if (e && e.preventDefault) e.preventDefault();
-    setExpanded(!expanded);
+    goToHome();
+    // setExpanded(false);
   };
 
   function resetResults() {
@@ -144,36 +141,32 @@ export default function AdvancedOptionsForm({ className = '' }) {
     dispatch(setResults(null));
   }
 
-  const displayNullableRowsThreshold = formatPercent(100.0 * watch('nullableRowsThreshold'));
-  const displayUniqueRowsThreshold = 100 - formatPercent(100.0 * watch('uniqueRowsThreshold'));
+  function goToHome() {
+    history.push('/');
+  }
+
+  const displayNullableRowsThreshold = formatPercent(
+    100.0 * watch('nullableRowsThreshold'),
+  );
+  const displayUniqueRowsThreshold =
+    100 - formatPercent(100.0 * watch('uniqueRowsThreshold'));
 
   return (
     <>
-      <Button
-        className={classes.root + ' py-2'}
-        aria-label="open settings panel"
-        onClick={handleExpandClick}
-        title="Advanced Options"
-      >
-        {expanded ? (
-          <CloseIcon aria-label="Close" fontSize="large" color="error" />
-        ) : (
-          <SettingsIcon fontSize="large" color="primary" aria-label="Open Advanced Options" />
-        )}
-      </Button>
       <Card
-        raised={false}
-        style={{ marginLeft: '-220px', marginTop: '50px', zIndex: 500, position: 'absolute' }}
+        // raised={false}
+        raised={true}
       >
-        <section
-          style={{ height: expanded ? 'auto' : '0', zIndex: 500, position: 'relative' }}
-          className={classes.panel}
-        >
+        <CardHeader
+          avatar={<SettingsIcon color="primary" fontSize="large" />}
+          title={'Settings'}
+        ></CardHeader>
+        <section style={{ zIndex: 500 }} className={classes.panel}>
           <form
             className={'schema-options ' + className + ' ' + classes.form}
             onSubmit={handleSubmit(onSubmit)}
           >
-            <Paper elevation={5} variant="outlined">
+            <Paper elevation={2} variant="outlined">
               <CardContent className={`px-3 bg-white ${classes.panelContent}`}>
                 <fieldset className="form-group">
                   <legend className="mb-1">Global Rules</legend>
@@ -260,12 +253,22 @@ export default function AdvancedOptionsForm({ className = '' }) {
                 className="d-flex justify-content-between align-items-center button-section"
               >
                 <ButtonGroup size="small" className="py-1">
-                  <Button type="button" color="secondary" onClick={handleExpandClick} title="Close">
+                  <Button
+                    type="button"
+                    color="secondary"
+                    onClick={goToHome}
+                    title="Close"
+                  >
                     <CloseIcon />
                   </Button>
                   {/* <IconButton type='reset' color='default' onClick={reset} title="Reset"><RefreshIcon /></IconButton> */}
                 </ButtonGroup>
-                <Button variant="contained" type="submit" color="primary" startIcon={<SaveIcon />}>
+                <Button
+                  variant="contained"
+                  type="submit"
+                  color="primary"
+                  startIcon={<SaveIcon />}
+                >
                   Save
                 </Button>
               </CardActions>

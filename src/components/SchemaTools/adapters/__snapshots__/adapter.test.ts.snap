@@ -4,8 +4,12 @@ exports[`#knex can emit migration 1`] = `
 "// More info: http://knexjs.org/#Schema-createTable
 
 exports.up = async function up(knex) {
+  // NOTE #1: You can break up multiple createTable's into different migration scripts
+  // OR, you can chain the calls to .createTable()'s
+  // NOTE #2: make sure any tables are created before it's relations (tables) are setup.
   /* Note: no nested types detected */
 
+  // Create the parent table
   return knex.schema.createTable(\\"test\\", (table) => {
     table.uuid(\\"id\\").notNullable().primary();
     table.string(\\"email\\", 40).notNullable();
@@ -20,7 +24,7 @@ exports.up = async function up(knex) {
     table.decimal(\\"sales_score\\", 10, 8).notNullable();
     table.string(\\"location\\", 20).enum('nyc', 'remote', 'denver').notNullable();
     table.string(\\"profile\\", 400).unique();
-})
+  })
 
 };
 
@@ -34,18 +38,22 @@ exports[`#knex can emit migration for nested type 1`] = `
 "// More info: http://knexjs.org/#Schema-createTable
 
 exports.up = async function up(knex) {
+  // NOTE #1: You can break up multiple createTable's into different migration scripts
+  // OR, you can chain the calls to .createTable()'s
+  // NOTE #2: make sure any tables are created before it's relations (tables) are setup.
   await knex.schema.createTable(\\"users_notes\\", (table) => {
     table.increments(\\"id\\");
     table.string(\\"text\\", 20).notNullable();
-})
-;
+  })
 
 
+
+  // Create the parent table
   return knex.schema.createTable(\\"users_sparse\\", (table) => {
     table.increments(\\"id\\");
     table.string(\\"name\\", 20).notNullable();
-    table.integer(\\"notes\\").references('id').inTable('users_notes');
-})
+    table.integer(\\"notes\\").references(\\"id,[object Object]\\").inTable('users_notes'); // note: one-to-many
+  })
 
 };
 
@@ -60,8 +68,12 @@ exports[`#knex can emit migration for people json 1`] = `
 "// More info: http://knexjs.org/#Schema-createTable
 
 exports.up = async function up(knex) {
+  // NOTE #1: You can break up multiple createTable's into different migration scripts
+  // OR, you can chain the calls to .createTable()'s
+  // NOTE #2: make sure any tables are created before it's relations (tables) are setup.
   /* Note: no nested types detected */
 
+  // Create the parent table
   return knex.schema.createTable(\\"people\\", (table) => {
     table.string(\\"name\\", 40).notNullable().unique();
     table.integer(\\"height\\");
@@ -80,7 +92,7 @@ exports.up = async function up(knex) {
     table.datetime(\\"edited\\").notNullable();
     table.string(\\"url\\", 40).notNullable().unique();
     table.increments(\\"id\\");
-})
+  })
 
 };
 

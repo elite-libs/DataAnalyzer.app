@@ -1,6 +1,6 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import LoadingSpinner from 'components/LoadingSpinner';
 
@@ -8,18 +8,21 @@ import { OutputButtons } from '../OutputButtons/OutputButtons';
 // import { AdapterNames, render } from './adapters/writers';
 // import { schemaAnalyzer } from '../../schema-analyzer/index';
 
-import { setResults, setSchema, resetAnalysis } from 'store/analysisSlice';
+// import { setResults, setSchema, resetAnalysis } from 'store/analysisSlice';
 import type { RootState } from 'store/rootReducer';
 // import { setOptions } from 'store/optionsSlice';
 // import { resetStatusMessage } from 'store/appStateSlice';
 
-import './index.scss';
-import { useAutoSnackbar } from 'hooks/useAutoSnackbar';
-import { useAnalytics } from 'hooks/useAnalytics';
-import useAppMessages from 'hooks/useAppMessages';
+// import { useAutoSnackbar } from 'hooks/useAutoSnackbar';
+// import { useAnalytics } from 'hooks/useAnalytics';
+// import useAppMessages from 'hooks/useAppMessages';
 import Header from 'components/Header';
 import { CodeEditor } from 'components/CodeEditor';
 import useViewportSize from 'hooks/useViewportSize';
+
+import './index.scss';
+import AdvancedOptionsForm from './AdvancedOptionsForm';
+import NotFoundPage from 'components/NotFoundPage/NotFoundPage';
 
 const CodeViewer = lazy(() => import('./ResultsView/CodeViewer'));
 const SchemaExplorerComponent = lazy<any>(() => import('./ResultsView/SchemaExplorer'));
@@ -32,7 +35,7 @@ export default function SchemaTools() {
   // const messages = useAppMessages();
 
   const { results, schema } = useSelector((state: RootState) => state.analysisFeature);
-  const options = useSelector((state: RootState) => state.optionsActions);
+  // const options = useSelector((state: RootState) => state.optionsActions);
   const { parsedInput, inputData } = useSelector(
     (state: RootState) => state.appStateActions,
   );
@@ -89,6 +92,9 @@ export default function SchemaTools() {
                   </>
                 </section>
               </Route>
+              <Route path="/options" exact>
+                <AdvancedOptionsForm />
+              </Route>
               <Route path="/about" exact>
                 <section>
                   <AboutPage></AboutPage>
@@ -98,6 +104,9 @@ export default function SchemaTools() {
                 <section>
                   <SchemaExplorerComponent schemaResults={schema} />
                 </section>
+              </Route>
+              <Route>
+                <NotFoundPage />
               </Route>
             </Switch>
           </Suspense>

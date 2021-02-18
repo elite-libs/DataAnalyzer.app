@@ -1,8 +1,8 @@
 import React from 'react';
 import Paper from '@material-ui/core/Paper';
 // import { Link, useParams, useHistory } from 'react-router-dom';
-import SyncOutlinedIcon from '@material-ui/icons/SyncOutlined';
-import Button from '@material-ui/core/Button';
+// import SyncOutlinedIcon from '@material-ui/icons/SyncOutlined';
+// import Button from '@material-ui/core/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import type { RootState } from 'store/rootReducer';
 // import CodeViewer from './ResultsView/CodeViewer';

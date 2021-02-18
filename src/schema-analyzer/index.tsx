@@ -135,6 +135,7 @@ export type SimpleFieldInfo = {
   type: TypeNameString;
   /** Should contain any $ref keys */
   typeRef?: string;
+  typeRelationship?: 'one-to-one' | 'one-to-many';
   /** indicates unique identifier or primary key */
   identity?: boolean;
   /** is the field nullable */
@@ -669,10 +670,10 @@ function condenseFieldSizes(
       };
 
       if (typeName === '$ref' && aggregateSummary[typeName]) {
-        console.log(
-          'pivotedDataByType.$ref',
-          JSON.stringify(pivotedDataByType.$ref, null, 2),
-        );
+        // console.log(
+        //   'pivotedDataByType.$ref',
+        //   JSON.stringify(pivotedDataByType.$ref, null, 2),
+        // );
         aggregateSummary[
           typeName
         ]!.typeAlias = pivotedDataByType.$ref!.typeAlias;

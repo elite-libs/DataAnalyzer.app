@@ -10,12 +10,13 @@ import {
   Link as RouteLink,
 } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import copy from 'clipboard-copy';
-import SyncOutlinedIcon from '@material-ui/icons/SyncOutlined';
+// import copy from 'clipboard-copy';
+// import SyncOutlinedIcon from '@material-ui/icons/SyncOutlined';
 
 import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined';
 import AssessmentOutlinedIcon from '@material-ui/icons/AssessmentOutlined';
-import FileCopy from '@material-ui/icons/FileCopyOutlined';
+// import FileCopy from '@material-ui/icons/FileCopyOutlined';
+import SettingsIcon from '@material-ui/icons/Settings';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 // import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import GitHubIcon from '@material-ui/icons/GitHub';
@@ -24,7 +25,7 @@ import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 
-import AdvancedOptionsForm from './SchemaTools/AdvancedOptionsForm';
+// import AdvancedOptionsForm from './SchemaTools/AdvancedOptionsForm';
 import InputProcessor from './SchemaTools/InputProcessor';
 
 import TooltipWrapper from 'components/TooltipWrapper';
@@ -67,13 +68,13 @@ export default function Header() {
 
   return (
     <nav className="row row-block w-100">
-      <h1 className="col-9 col-sm-10" title="Reset/Load Home Screen">
+      <h1 className="col-10 col-sm-10" title="Reset/Load Home Screen">
         <Link className="brand-link" component={RouteLink} to="/" onClick={resetResults}>
           <img src={AppIcon} alt="Data Analyzer app icon" />
           DataAnalyzer.app
         </Link>
       </h1>
-      <aside className="icon-button-box col-3 col-sm-2 text-right">
+      <aside className="icon-button-box col-2 col-sm-2 text-right">
         <Link
           className={'py-2 mx-2'}
           component={RouteLink}
@@ -85,10 +86,19 @@ export default function Header() {
         <Link className={'py-2 mx-2'} target="_blank" href={pkg.repository.url}>
           <GitHubIcon fontSize="small" color="action" />
         </Link>
-        <AdvancedOptionsForm />
+        <Link
+          className={'py-2 mx-2'}
+          component={RouteLink}
+          to="/options"
+          title="Settings / Configuration"
+          aria-label="Settings / Configuration"
+        >
+          <SettingsIcon fontSize="large" color="primary" />
+        </Link>
       </aside>
+      <DemoDataMenu />
       {!results ? (
-        <FormControl className="col-md-4 col-sm-4 col-12 pb-2 pl-1">
+        <FormControl className="schema-name-input col-md-4 col-sm-4 col-12 pb-2 pl-1">
           <TooltipWrapper
             tooltipContent={
               <>
@@ -135,7 +145,6 @@ export default function Header() {
           </Link>
         </Breadcrumbs>
       )}
-      <DemoDataMenu />
     </nav>
   );
 

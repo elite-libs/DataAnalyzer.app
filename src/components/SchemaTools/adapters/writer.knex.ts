@@ -1,7 +1,8 @@
 // import { mapValues } from 'lodash';
 import snakecase from 'lodash.snakecase';
+import { KeyValPair } from 'types';
 // import debug from 'debug';
-import { CombinedFieldInfo } from '../../../schema-analyzer/index';
+import { CombinedFieldInfo, TypeSummary } from '../../../schema-analyzer/index';
 import { IDataAnalyzerWriter, IRenderArgs } from './writers';
 // const log = debug('writer:knex');
 
@@ -42,8 +43,35 @@ const getFieldLengthArg = (fieldName: string, maxLength: number) => {
 // }
 const writer: IDataAnalyzerWriter = {
   render({ results, options, schemaName }: IRenderArgs) {
-    const hasNestedTypes =
-      results.nestedTypes && Object.keys(results.nestedTypes!).length > 0;
+    const { nestedTypes } = results;
+    const hasNestedTypes = nestedTypes && Object.keys(nestedTypes!).length > 0;
+
+    function getFirstIdentityOrUniqueField(
+      nestedTypeName: string,
+      preferUniqueOverFirstColumn = true,
+    ) {
+      if (nestedTypes == null)
+        throw new Error(
+          `Error: Missing nested type data. Couldn't lookup '${nestedTypeName}'`,
+        );
+      const schema = nestedTypes[nestedTypeName];
+      if (schema?.fields == null)
+        throw new Error(`Error: Failed to find nested schema for '${nestedTypeName}'`);
+      const fieldSet = Object.entries<CombinedFieldInfo>(schema.fields);
+      // locate by explicit identity indicator
+      let identityField = fieldSet.find(([fieldName, fieldStats]) => {
+        if (fieldStats.identity) return fieldName;
+      });
+      if (identityField) return identityField;
+      // No solid ID col found, fallback to preferUniqueOverFirstColumn
+      if (preferUniqueOverFirstColumn) {
+        // next check for unique fields :shrug: :fingers_crossed:
+        identityField = fieldSet.find(([fieldName, fieldStats]) => {
+          if (fieldStats.unique) return fieldName;
+        });
+      }
+      return fieldSet[0] && fieldSet[0][0];
+    }
 
     const getCreateTableCode = ({ schemaName, results }: IRenderArgs) =>
       `knex.schema.createTable("${schemaName}", (table) => {\n` +
@@ -53,6 +81,7 @@ const writer: IDataAnalyzerWriter = {
           const {
             type,
             typeRef,
+            typeRelationship,
             identity,
             unique,
             nullable,
@@ -113,9 +142,10 @@ const writer: IDataAnalyzerWriter = {
           }
 
           if (typeRef)
-            return `    table.integer("${name}").references('id').inTable('${snakecase(
+            return `    table.integer("${name}").references("${getFirstIdentityOrUniqueField(
               typeRef,
-            )}');`;
+              false,
+            )}").inTable('${snakecase(typeRef)}'); // note: ${typeRelationship}`;
 
           if (type === 'Unknown')
             return `    table.text("${name}"${sizePart})${appendChain};`;
@@ -149,13 +179,13 @@ const writer: IDataAnalyzerWriter = {
           );
         })
         .join('\n') +
-      `\n})\n`;
+      `\n  })\n`;
 
     schemaName = snakecase(schemaName);
 
     const getAllDropTables = () => {
       if (!options?.disableNestedTypes && hasNestedTypes) {
-        return [...Object.keys(results.nestedTypes!).map(snakecase), schemaName];
+        return [...Object.keys(nestedTypes!).reverse().map(snakecase), schemaName];
       }
       return [schemaName];
     };
@@ -163,15 +193,17 @@ const writer: IDataAnalyzerWriter = {
       if (!options?.disableNestedTypes && hasNestedTypes) {
         // console.log('nested schema detected', schemaName);
         // @ts-ignore
-        return Object.entries(results.nestedTypes!).map(([nestedName, results]) => {
-          if (!results || !results.fields || !results)
-            return `// Error invalid field data //`;
-          return getCreateTableCode({
-            schemaName: snakecase(nestedName),
-            results,
-            options: { disableNestedTypes: false }, // possible needs to be true?
+        return Object.entries(nestedTypes!)
+          .reverse()
+          .map(([nestedName, results]) => {
+            if (!results || !results.fields || !results)
+              return `// Error invalid field data //`;
+            return getCreateTableCode({
+              schemaName: snakecase(nestedName),
+              results,
+              options: { disableNestedTypes: false }, // possible needs to be true?
+            });
           });
-        });
       }
       return [''];
     };
@@ -179,12 +211,16 @@ const writer: IDataAnalyzerWriter = {
     return `// More info: http://knexjs.org/#Schema-createTable
 
 exports.up = async function up(knex) {
+  // NOTE #1: You can break up multiple createTable's into different migration scripts
+  // OR, you can chain the calls to .createTable()'s
+  // NOTE #2: make sure any tables are created before it's relations (tables) are setup.
 ${
   hasNestedTypes
-    ? `  await ${getRecursive().join(';\n  await')};\n`
+    ? `  await ${getRecursive().join('\n  await ')}\n`
     : `  /* Note: no nested types detected */`
 }
 
+  // Create the parent table
   return ${getCreateTableCode({ schemaName, results })}
 };
 

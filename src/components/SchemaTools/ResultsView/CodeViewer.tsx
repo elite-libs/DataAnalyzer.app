@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import copy from 'clipboard-copy';
 
-import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { ghcolors } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import SyncOutlinedIcon from '@material-ui/icons/SyncOutlined';
 import FileCopy from '@material-ui/icons/FileCopyOutlined';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
@@ -100,15 +100,16 @@ export default function CodeViewer({
           }
           Step #3:
         </div>
-        {isPanelSuccessState ? 'Profit!' : 'View Generated Code'}
+        {isPanelSuccessState ? 'Profit!' : 'Generate Code'}
       </legend>
       {results != null ? codeToolbarUi : null}
       <SyntaxHighlighter
         language={language}
-        style={atomDark}
+        style={ghcolors}
         showLineNumbers={true}
         className="flex-grow-1"
-        customStyle={{ margin: 0 }}
+        customStyle={{ margin: 0, maxHeight: '1600px', overflowY: 'auto' }}
+        codeTagProps={{ style: { fontSize: '0.8rem' } }}
       >
         {children}
       </SyntaxHighlighter>

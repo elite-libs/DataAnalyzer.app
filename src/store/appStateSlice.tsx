@@ -5,6 +5,7 @@ type State = {
   statusIsError?: boolean;
   parsedInput?: any | any[];
   inputData?: string | null;
+  parserError?: string;
   // inputTimestamp?: number | null;
 };
 
@@ -13,6 +14,7 @@ let initialState: State = {
   statusIsError: false,
   parsedInput: undefined,
   inputData: '',
+  parserError: undefined,
 };
 
 const slice = createSlice({
@@ -33,7 +35,14 @@ const slice = createSlice({
       return state;
     },
     setParsedInput(state, action: PayloadAction<any>) {
-      state.parsedInput = action.payload;
+      if (action.payload != null) {
+        state.parsedInput = action.payload;
+        state.parserError = undefined;
+      }
+      return state;
+    },
+    setParserError(state, action: PayloadAction<string>) {
+      state.parserError = action.payload;
       return state;
     },
     resetAppState(state) {
@@ -50,6 +59,7 @@ export const {
   resetAppState,
   setParsedInput,
   setInputData,
+  setParserError,
 } = slice.actions;
 
 export default appStateActions;

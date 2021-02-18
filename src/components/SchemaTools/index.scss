@@ -9,6 +9,12 @@
   }
 }
 
+.current-xs,
+.current-sm {
+  .brand-link {
+    font-size: 1.4rem;
+  }
+}
 .brand-link {
   cursor: pointer;
   img {

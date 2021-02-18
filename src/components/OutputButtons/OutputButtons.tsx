@@ -1,6 +1,5 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setOptions } from 'store/optionsSlice';
 import { RootState } from 'store/rootReducer';
 import Button from '@material-ui/core/Button';
 import {
@@ -12,17 +11,18 @@ import {
 
 import { AdapterNames, render } from '../SchemaTools/adapters/writers';
 import { schemaAnalyzer } from 'schema-analyzer/index';
+import { setOptions } from 'store/optionsSlice';
 import { setResults, setSchema } from 'store/analysisSlice';
+import { setParserError } from 'store/appStateSlice';
 import { useAnalytics } from 'hooks/useAnalytics';
 import { useAutoSnackbar } from 'hooks/useAutoSnackbar';
-
-import './OutputButtons.scss';
 import { ButtonGroup } from '@material-ui/core';
+
 import useViewportSize from 'hooks/useViewportSize';
 import TooltipWrapper from 'components/TooltipWrapper';
 import GetAppIcon from '@material-ui/icons/GetApp';
-// import ErrorIcon from '@material-ui/icons/Error';
-import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+
+import './OutputButtons.scss';
 
 type OutputMode = [adapterKey: AdapterNames, label: string, icon: React.ReactNode];
 
@@ -120,6 +120,7 @@ export const OutputButtons = ({ size = 'medium', className = '' }: Props) => {
         value: error.message,
       });
       console.error(`Error: Couldn't process input data!`, error);
+      dispatch(setParserError(error.message));
       dispatch(setSchema(null));
       enqueueSnackbar(`Error: ${error.message}`, {
         variant: 'error',
@@ -133,6 +134,7 @@ export const OutputButtons = ({ size = 'medium', className = '' }: Props) => {
     handleAdapterSelected(adapter);
   };
   const isPanelSuccessState = Boolean(parsedInput);
+  const isResultsLoaded = Boolean(results);
 
   let isStackedViewMode = ['xs', 'sm'].includes(breakpoint!);
 
@@ -151,6 +153,9 @@ export const OutputButtons = ({ size = 'medium', className = '' }: Props) => {
             <GetAppIcon
               htmlColor={isPanelSuccessState ? 'green' : 'inherit'}
               fontSize="large"
+              className={`choose-output-indicator ${
+                isResultsLoaded ? 'rotate-point-right' : ''
+              }`}
             />
           }
           Step #2:
