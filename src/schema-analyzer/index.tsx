@@ -74,9 +74,9 @@ export interface ISchemaAnalyzerOptions {
   disableNestedTypes?: boolean | undefined;
 }
 
-type NestedTypeSummary<TFieldDetails> = {
-  [x: string]: Omit<TypeSummary<TFieldDetails>, 'nestedTypes'>;
-};
+// type NestedTypeSummary<TFieldDetails> = {
+//   [x: string]: Omit<TypeSummary<TFieldDetails>, 'nestedTypes'>;
+// };
 
 /**
  * Includes the results of main top-level schema.
@@ -238,45 +238,8 @@ export type progressCallback = (progress: {
 }) => any;
 
 const { TYPE_ENUM, TYPE_NULLABLE, TYPE_UNIQUE } = MetaChecks;
-
-function unpackNestedTypes(nestedTypes: KeyValPair<TypeSummary<FieldInfo>>) {
-  return Object.entries(nestedTypes).reduce((nested, keyAndType) => {
-    const [typePath, nestedTypeSummary] = keyAndType;
-    if (nestedTypeSummary) {
-      // append this level's nested types
-      nested = {
-        ...nested,
-        ...unpackNestedTypes(nestedTypeSummary.nestedTypes || {}),
-      };
-    }
-    return nested;
-  }, nestedTypes);
-}
-
-function checkAndDeleteDeeplyNestedTypes(
-  typeSummary: TypeSummary<FieldInfo>,
-): TypeSummary<FieldInfo> {
-  // let nestedTypes = typeSummary.nestedTypes
-  typeSummary.nestedTypes = undefined;
-  return typeSummary;
-  // const hasNestedType = typeof nestedTypes === 'object' || Object.keys(nestedTypes).length === 0
-  // return typeSummary
-  // for (let pathName in typeSummary.nestedTypes) {
-  //   if (typeSummary.nestedTypes[pathName]) typeSummary.nestedTypes[pathName] = checkAndDeleteDeeplyNestedTypes(typeSummary.nestedTypes[pathName])
-  // }
-}
-
-// const recurseIntoNestedTypes
-function extractNestedTypes(typeSummary: TypeSummary<FieldInfo>) {
-  if (typeSummary.nestedTypes) {
-    typeSummary.nestedTypes = unpackNestedTypes(typeSummary.nestedTypes);
-  }
-  return typeSummary;
-}
 /**
  * Returns a fieldName keyed-object with type detection summary data.
- *
- * @param _nestedData private temp storage
  *
  * ### Example `fieldSummary`:
  * ```
@@ -414,16 +377,6 @@ function _schemaAnalyzer(
               fInfo.unique = fInfo.uniqueCount === jobState.rowCount;
             }
 
-            // verify `uniques` tracking
-            // if (
-            //   isIdentity &&
-            //   (!schema.uniques?.[fieldName] ||
-            //     schema.uniques?.[fieldName]!.length <= 0)
-            // ) {
-            //   console.trace(
-            //     `ERROR: No unique data tracked for field (${schemaName} ${fieldName}) !!!`
-            //   );
-            // }
             fieldTypesResults[fieldName] = fInfo;
 
             return fieldTypesResults;
@@ -572,50 +525,6 @@ const _pivotRowsGroupedByType = ({
     return pivotedSchema;
   };
 
-// /**
-//  * internal
-//  * @private
-//  */
-// const _evaluateSchemaLevel = ({
-//   schemaName,
-//   // isEnumEnabled,
-//   disableNestedTypes,
-//   nestedData,
-//   strictMatching,
-//   onProgress,
-// }: any) =>
-//   ;
-
-/**
- * Returns a fieldName keyed-object with type detection summary data.
- *
- * ### Example `fieldSummary`:
- * ```
- * {
- *  "id": {
- *    "UUID": {
- *      "rank": 2,
- *      "count": 25
- *    },
- *    "Number": {
- *      "rank": 8,
- *      "count": 1,
- *      "value": {
- *        "min": 9,
- *        "mean": 9,
- *        "max": 9,
- *        "p25": 9,
- *        "p33": 9,
- *        "p50": 9,
- *        "p66": 9,
- *        "p75": 9,
- *        "p99": 9
- *      }
- *    }
- *  }
- * }
- * ```
- */
 function condenseFieldData({
   enumAbsoluteLimit,
   isEnumEnabled,
@@ -927,6 +836,37 @@ function formatRangeStats<T, TFormatReturn>(
     p75: formatter(stats?.p75),
     p99: formatter(stats?.p99),
   };
+}
+
+function unpackNestedTypes(nestedTypes: KeyValPair<TypeSummary<FieldInfo>>) {
+  return Object.entries(nestedTypes).reduce((nested, keyAndType) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const [typePath, nestedTypeSummary] = keyAndType;
+    if (nestedTypeSummary) {
+      // append this level's nested types
+      nested = {
+        ...nested,
+        ...unpackNestedTypes(nestedTypeSummary.nestedTypes || {}),
+      };
+    }
+    return nested;
+  }, nestedTypes);
+}
+
+function checkAndDeleteDeeplyNestedTypes(
+  typeSummary: TypeSummary<FieldInfo>,
+): TypeSummary<FieldInfo> {
+  // let nestedTypes = typeSummary.nestedTypes
+  typeSummary.nestedTypes = undefined;
+  return typeSummary;
+}
+
+// const recurseIntoNestedTypes
+function extractNestedTypes(typeSummary: TypeSummary<FieldInfo>) {
+  if (typeSummary.nestedTypes) {
+    typeSummary.nestedTypes = unpackNestedTypes(typeSummary.nestedTypes);
+  }
+  return typeSummary;
 }
 
 export {

@@ -1,8 +1,7 @@
 // import { mapValues } from 'lodash';
 import snakecase from 'lodash.snakecase';
-import { KeyValPair } from 'types';
 // import debug from 'debug';
-import { CombinedFieldInfo, TypeSummary } from '../../../schema-analyzer/index';
+import { CombinedFieldInfo } from '../../../schema-analyzer/index';
 import { IDataAnalyzerWriter, IRenderArgs } from './writers';
 // const log = debug('writer:knex');
 

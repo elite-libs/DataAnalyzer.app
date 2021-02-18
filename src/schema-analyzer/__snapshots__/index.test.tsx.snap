@@ -23631,6 +23631,7 @@ Object {
         "$ref": Object {
           "count": 3,
           "typeAlias": "users.notes",
+          "typeRelationship": "one-to-many",
         },
         "Array": Object {
           "count": 12,
@@ -23838,6 +23839,7 @@ Object {
         "$ref": Object {
           "count": 3,
           "typeAlias": "users.notes",
+          "typeRelationship": "one-to-many",
         },
         "Array": Object {
           "count": 5,
@@ -24045,6 +24047,7 @@ Object {
         "$ref": Object {
           "count": 3,
           "typeAlias": "users.notes",
+          "typeRelationship": "one-to-many",
         },
         "Array": Object {
           "count": 12,
