@@ -53,11 +53,6 @@ $breakpoint-xl: 1200p;
     //   }
     // }
 
-    legend {
-      display: block;
-      font-size: 0.8rem;
-      flex-grow: 0;
-    }
     section.page {
       width: 100%;
       // height: calc(90vh - 125px);
@@ -65,6 +60,16 @@ $breakpoint-xl: 1200p;
       justify-content: stretch;
       flex-direction: row;
       flex-grow: 1;
+
+      legend {
+        display: block;
+        font-size: 0.8rem;
+        flex-grow: 0;
+        > div {
+          font-weight: 900;
+          font-size: 1.2em;
+        }
+      }
       > section {
         display: flex;
         justify-content: stretch;
@@ -82,7 +87,7 @@ $breakpoint-xl: 1200p;
       flex-grow: 1;
       justify-content: stretch;
       // margin: auto 0;
-      svg {
+      > div svg {
         height: 2.75rem;
         width: 2.75rem;
         margin: 0.5rem;

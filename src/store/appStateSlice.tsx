@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 type State = {
   statusMessage: string | null;
+  statusIsError?: boolean;
   parsedInput?: any | any[];
   inputData?: string | null;
   // inputTimestamp?: number | null;
@@ -9,6 +10,7 @@ type State = {
 
 let initialState: State = {
   statusMessage: 'Ready for your data',
+  statusIsError: false,
   parsedInput: undefined,
   inputData: '',
 };
@@ -19,6 +21,8 @@ const slice = createSlice({
   reducers: {
     setStatusMessage(state, action: PayloadAction<string>) {
       const { payload } = action;
+      state.statusIsError =
+        /Invalid/gim.test(`${payload}`) || /Error/gim.test(`${payload}`);
       state.statusMessage = payload;
     },
     setInputData(state, action: PayloadAction<string | undefined | null>) {

@@ -3,20 +3,23 @@ import { ISchemaAnalyzerOptions, schemaAnalyzer } from '../schema-analyzer';
 import { parse } from './SchemaTools/adapters/readers';
 import { AdapterNames, render } from './SchemaTools/adapters/writers';
 import CodeViewer from './SchemaTools/ResultsView/CodeViewer';
-import { PostgresIcon, MongoDbIcon } from './SchemaTools/AppIcons.js';
+import { PostgresIcon, MongoDbIcon } from './SchemaTools/AppIcons';
 
 type GeneratorFormArgs<T> = {
-  options: ISchemaAnalyzerOptions & { 
-    schemaName: string,
-    [key: string]: any
+  options: ISchemaAnalyzerOptions & {
+    schemaName: string;
+    [key: string]: any;
   };
-  onSchema: (data: T, schemaName: string) => any
-}
+  onSchema: (data: T, schemaName: string) => any;
+};
 /**
- * 
+ *
  * @deprecated
  */
-export default function GeneratorForm({ options = { schemaName: 'user'}, onSchema }: GeneratorFormArgs<any>) {
+export default function GeneratorForm({
+  options = { schemaName: 'user' },
+  onSchema,
+}: GeneratorFormArgs<any>) {
   const [schemaName, setSchemaName] = useState(options?.schemaName || 'user');
   const [inputData, setInputData] = useState('');
   const [schemaOutput, setSchemaOutput] = useState('');
@@ -43,9 +46,7 @@ export default function GeneratorForm({ options = { schemaName: 'user'}, onSchem
       .then(render({ schemaName, options, writer: outputMode }))
       .then(setSchemaOutput)
       .catch((error) => {
-        setSchemaOutput(
-          `Oh noes! We ran into a problem!\n\n  ${error.message}`,
-        );
+        setSchemaOutput(`Oh noes! We ran into a problem!\n\n  ${error.message}`);
         console.error(error);
       })
       .then(scrollToOutput);
@@ -74,9 +75,7 @@ export default function GeneratorForm({ options = { schemaName: 'user'}, onSchem
           />
         </label>
         <label className="w-100">
-          <strong className="field-name">
-            Paste your JSON or CSV data:&#160;
-          </strong>
+          <strong className="field-name">Paste your JSON or CSV data:&#160;</strong>
           <textarea
             className="rounded"
             value={inputData}
@@ -113,10 +112,7 @@ export default function GeneratorForm({ options = { schemaName: 'user'}, onSchem
             <br />
             Mongoose Schema
           </button>
-          <button
-            onClick={() => generateSchema('knex')}
-            className="btn btn-info mx-auto"
-          >
+          <button onClick={() => generateSchema('knex')} className="btn btn-info mx-auto">
             <div>
               <PostgresIcon />
             </div>

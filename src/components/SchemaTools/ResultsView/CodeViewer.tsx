@@ -16,6 +16,9 @@ import type { RootState } from 'store/rootReducer';
 import { resetAnalysis } from 'store/analysisSlice';
 import { useAutoSnackbar } from 'hooks/useAutoSnackbar';
 
+import './ResultsView.scss';
+import { CheckCircleIcon } from '../AppIcons';
+
 export type ICodeGeneratorArgs = {
   language?: string;
   children: ReactNode;
@@ -51,8 +54,7 @@ export default function CodeViewer({
   const codeToolbarUi = !results ? null : (
     <ButtonGroup
       variant="contained"
-      style={{ zIndex: 50, position: 'relative', opacity: 0.82 }}
-      className={`d-flex align-items-start mt-1 ml-1`}
+      className={`generated-code-toolbar d-flex align-items-start mt-1 ml-1`}
     >
       <Button
         size="small"
@@ -81,10 +83,24 @@ export default function CodeViewer({
     </ButtonGroup>
   );
 
+  const isPanelSuccessState = Boolean(results);
   return (
-    <section className={`generated-code ${className}`}>
+    <section
+      className={`generated-code ${
+        isPanelSuccessState ? 'panel-success' : 'panel-error'
+      } ${className}`.trim()}
+    >
       <legend>
-        <div>Step #3:</div>Profit!
+        <div>
+          {
+            <CheckCircleIcon
+              htmlColor={isPanelSuccessState ? 'green' : 'inherit'}
+              fontSize="large"
+            />
+          }
+          Step #3:
+        </div>
+        Profit!
       </legend>
       {results != null ? codeToolbarUi : null}
       <SyntaxHighlighter

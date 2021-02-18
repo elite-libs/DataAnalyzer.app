@@ -12,12 +12,16 @@ import { throttle } from 'lodash';
 
 import './CodeEditor.scss';
 import { RootState } from 'store/rootReducer';
+import { CheckCircleIcon, ErrorIcon } from 'components/SchemaTools/AppIcons';
+import TooltipWrapper from 'components/TooltipWrapper';
 
 export function CodeEditor(props: IAceEditorProps) {
   const dispatch = useDispatch();
   const [dimensions, setDimensions] = React.useState({ height: 'auto', width: 'auto' });
   const { results, schema } = useSelector((state: RootState) => state.analysisFeature);
-  const { inputData } = useSelector((state: RootState) => state.appStateActions);
+  const { inputData, statusMessage, statusIsError } = useSelector(
+    (state: RootState) => state.appStateActions,
+  );
 
   const getContainerSize = throttle((selector = '.resizable-editor'): DOMRect => {
     const el$: HTMLBaseElement = document.querySelector(selector);
@@ -73,9 +77,9 @@ export function CodeEditor(props: IAceEditorProps) {
     } catch (error) {
       console.warn('[Normal behavior] Auto-parser failed:', error);
       dispatch(setParsedInput(null));
-      dispatch(setStatusMessage(`Invalid JSON or CSV input: ${error.message}`));
+      dispatch(setStatusMessage(`Invalid input: ${error.message}`));
     }
-  }, 1000);
+  }, 200);
 
   React.useEffect(() => {
     onChangeParseInput(inputData);
@@ -85,10 +89,22 @@ export function CodeEditor(props: IAceEditorProps) {
   return (
     <section
       className={`resizable-editor ${props.className}`}
-      style={{ flex: results ? '0 0 20%' : '1 0 40%' }}
+      style={{ flex: results ? '1 1 100%' : '1 0 100%' }}
     >
       <legend>
-        <div>Step #1:</div>Paste Data Here
+        <div>
+          {statusIsError ? (
+            <TooltipWrapper tooltipContent={statusMessage}>
+              <div className="d-inline-block cursor-error">
+                <ErrorIcon color="error" fontSize="large" />
+              </div>
+            </TooltipWrapper>
+          ) : (
+            <CheckCircleIcon htmlColor="green" fontSize="large" />
+          )}
+          Step #1:
+        </div>
+        Paste Data Below
       </legend>
       <AceEditor
         placeholder="Paste your JSON or CSV data here!"

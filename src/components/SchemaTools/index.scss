@@ -1,3 +1,14 @@
+.cursor-error {
+  cursor: help;
+}
+.panel-error {
+  cursor: help;
+  svg {
+    opacity: 0.5;
+    color: #999;
+  }
+}
+
 .brand-link {
   cursor: pointer;
   img {
@@ -32,5 +43,32 @@
   font-weight: 900;
   &:hover {
     color: #ffffff;
+  }
+}
+
+// Credit: https://www.florin-pop.com/blog/2019/03/css-pulse-effect/
+// More reading: https://css-tricks.com/almanac/properties/a/animation/
+.pulse-error-icon {
+  animation: pulse-red 2s infinite;
+  color: rgba(255, 82, 82, 1);
+  box-shadow: 0 0 0 0 rgba(255, 82, 82, 1);
+  border-radius: 100%;
+  transform: scale(0.85);
+}
+
+@keyframes pulse-red {
+  0% {
+    transform: scale(0.85);
+    box-shadow: 0 0 0 0 rgba(255, 82, 82, 0.7);
+  }
+
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 10px rgba(255, 82, 82, 0);
+  }
+
+  100% {
+    transform: scale(0.85);
+    box-shadow: 0 0 0 0 rgba(255, 82, 82, 0);
   }
 }

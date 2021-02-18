@@ -20,8 +20,8 @@ import './OutputButtons.scss';
 import { ButtonGroup } from '@material-ui/core';
 import useViewportSize from 'hooks/useViewportSize';
 import TooltipWrapper from 'components/TooltipWrapper';
-
-import ErrorIcon from '@material-ui/icons/Error';
+import GetAppIcon from '@material-ui/icons/GetApp';
+// import ErrorIcon from '@material-ui/icons/Error';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 
 type OutputMode = [adapterKey: AdapterNames, label: string, icon: React.ReactNode];
@@ -132,14 +132,27 @@ export const OutputButtons = ({ size = 'medium', className = '' }: Props) => {
     dispatch(setOptions({ outputAdapter: adapter }));
     handleAdapterSelected(adapter);
   };
+  const isPanelSuccessState = Boolean(parsedInput);
 
   let isStackedViewMode = ['xs', 'sm'].includes(breakpoint!);
 
   return (
-    <section className={`output-buttons-panel ${className}`}>
+    <section
+      className={`output-buttons-panel ${
+        isPanelSuccessState ? 'panel-success' : 'panel-error'
+      } ${className}`.trim()}
+      title={
+        !isPanelSuccessState ? 'Verify your data is valid, then try again.' : undefined
+      }
+    >
       <legend>
         <div>
-          {parsedInput && <CheckCircleIcon />}
+          {
+            <GetAppIcon
+              htmlColor={isPanelSuccessState ? 'green' : 'inherit'}
+              fontSize="large"
+            />
+          }
           Step #2:
         </div>
         Select Output
@@ -149,6 +162,7 @@ export const OutputButtons = ({ size = 'medium', className = '' }: Props) => {
         className="output-buttons"
         variant="outlined"
         orientation={isStackedViewMode ? 'horizontal' : 'vertical'}
+        disabled={!isPanelSuccessState}
       >
         {outputOptions.map(([adapter, label, icon]) => {
           return (

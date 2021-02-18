@@ -1,4 +1,30 @@
 import React from 'react';
+import MuiErrorIcon from '@material-ui/icons/Error';
+import MuiCheckCircleIcon from '@material-ui/icons/CheckCircle';
+// import PropTypes, { SvgIconTypeMap } from '@material-ui/core';
+
+type IconColors = 'inherit' | 'primary' | 'secondary' | 'action' | 'disabled' | 'error';
+type IconSize = 'inherit' | 'default' | 'small' | 'large';
+type IconProps = {
+  color?: IconColors;
+  fontSize?: IconSize;
+  htmlColor?: string;
+};
+export const ErrorIcon = ({
+  color = 'inherit',
+  fontSize = 'inherit',
+  htmlColor,
+}: IconProps = {}) => {
+  return <MuiErrorIcon color={color} fontSize={fontSize} htmlColor={htmlColor} />;
+};
+
+export const CheckCircleIcon = ({
+  color = 'inherit',
+  fontSize = 'inherit',
+  htmlColor,
+}: IconProps = {}) => {
+  return <MuiCheckCircleIcon color={color} fontSize={fontSize} htmlColor={htmlColor} />;
+};
 
 export const MongoDbIcon = (...props) => (
   <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 37 81">
