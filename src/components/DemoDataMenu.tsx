@@ -14,14 +14,14 @@ import { useAutoSnackbar } from 'hooks/useAutoSnackbar';
 import { useAnalytics } from 'hooks/useAnalytics';
 
 const sampleDataSets: Record<'label' | 'value' | 'schemaName', string>[] = [
-  { label: 'Users', value: '/users.example.json', schemaName: 'Users' },
-  { label: 'People', value: '/swapi-people.json', schemaName: 'People' },
+  { label: 'Users', value: '/data/users.example.json', schemaName: 'Users' },
+  { label: 'People', value: '/data/swapi-people.json', schemaName: 'People' },
   {
     label: 'Property',
-    value: '/real-estate.example.json',
+    value: '/data/real-estate.example.json',
     schemaName: 'Property',
   },
-  { label: 'Products', value: '/products-3000.csv', schemaName: 'Product' },
+  { label: 'Products', value: '/data/products-3000.csv', schemaName: 'Product' },
 ];
 
 export const DemoDataMenu = () => {
@@ -29,8 +29,12 @@ export const DemoDataMenu = () => {
   const history = useHistory();
   const { enqueueSnackbar } = useAutoSnackbar();
   const dispatch = useDispatch();
-  const [currentlyLoadingData, setCurrentlyLoadingData] = React.useState<string | null>(null);
-  const [currentlyLoadedFile, setCurrentlyLoadedFile] = React.useState<string | null>(null);
+  const [currentlyLoadingData, setCurrentlyLoadingData] = React.useState<string | null>(
+    null,
+  );
+  const [currentlyLoadedFile, setCurrentlyLoadedFile] = React.useState<string | null>(
+    null,
+  );
 
   const getStatusIcon = (forFileName: string) => {
     if (currentlyLoadingData === forFileName) return <SyncIcon />;
@@ -42,7 +46,9 @@ export const DemoDataMenu = () => {
     dispatch(setInputData(''));
     setCurrentlyLoadingData(filePath);
     if (!filePath) {
-      enqueueSnackbar('Unrecognized option: ' + name + ' ' + filePath, { variant: 'warning' });
+      enqueueSnackbar('Unrecognized option: ' + name + ' ' + filePath, {
+        variant: 'warning',
+      });
       setCurrentlyLoadingData(null);
       return;
     }

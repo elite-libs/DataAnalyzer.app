@@ -12,6 +12,7 @@ Object {
         "$ref": Object {
           "count": 1,
           "typeAlias": "historicEvent.data",
+          "typeRelationship": "one-to-one",
         },
         "Object": Object {
           "count": 1,
@@ -81,6 +82,7 @@ Object {
             "$ref": Object {
               "count": 1,
               "typeAlias": "historicEvent.data.Births",
+              "typeRelationship": "one-to-many",
             },
             "Array": Object {
               "count": 1,
@@ -109,6 +111,7 @@ Object {
             "$ref": Object {
               "count": 1,
               "typeAlias": "historicEvent.data.Deaths",
+              "typeRelationship": "one-to-many",
             },
             "Array": Object {
               "count": 1,
@@ -137,6 +140,7 @@ Object {
             "$ref": Object {
               "count": 1,
               "typeAlias": "historicEvent.data.Events",
+              "typeRelationship": "one-to-many",
             },
             "Array": Object {
               "count": 1,
@@ -196,6 +200,7 @@ Object {
             "$ref": Object {
               "count": 178,
               "typeAlias": "historicEvent.data.Births.links",
+              "typeRelationship": "one-to-many",
             },
             "Array": Object {
               "count": 178,
@@ -382,6 +387,7 @@ Object {
             "$ref": Object {
               "count": 76,
               "typeAlias": "historicEvent.data.Deaths.links",
+              "typeRelationship": "one-to-many",
             },
             "Array": Object {
               "count": 76,
@@ -568,6 +574,7 @@ Object {
             "$ref": Object {
               "count": 40,
               "typeAlias": "historicEvent.data.Events.links",
+              "typeRelationship": "one-to-many",
             },
             "Array": Object {
               "count": 40,

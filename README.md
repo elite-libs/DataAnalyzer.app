@@ -92,7 +92,8 @@ DataAnalyzer has 3 Powerful Features to Explore:
 **Type inference & detection**
 
 - [ ] BigInt/BigNumber
-- [ ] Latitude & Longitude (Coordinate pairs)
+- [ ] Url/String
+- [ ] Latitude & Longitude (Coordinate pairs, GIS support)
 - [ ] Phone number (international patterns? configuration?)
 - [ ] Range option for precise Timestamp detection.
 - [ ] Option to visit Hypermedia URLs to discover nested types?

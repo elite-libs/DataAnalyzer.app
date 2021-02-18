@@ -442,20 +442,16 @@ function _schemaAnalyzer(
       })
   );
 
-  function nestedSchemaAnalyzer(nestedData: { [s: string]: unknown }) {
+  function nestedSchemaAnalyzer(nestedData: { [s: string]: any[] }) {
     return Promise.all(
       Object.entries(nestedData).map(([fullTypeName, data]) => {
         // const nameParts = fullTypeName.split('.');
         // const nameSuffix = nameParts[nameParts.length - 1];
 
-        return _schemaAnalyzer(
-          fullTypeName!,
-          data as any[],
-          options,
-        ).then((result): [string, TypeSummary<FieldInfo>] => [
-          fullTypeName,
-          result,
-        ]);
+        return _schemaAnalyzer(fullTypeName!, data, options).then((result): [
+          string,
+          TypeSummary<FieldInfo>,
+        ] => [fullTypeName, result]);
       }),
     ).then((resultPairs) => {
       return resultPairs.reduce((nestedTypeSummary, nameAndDataPair) => {
@@ -464,70 +460,7 @@ function _schemaAnalyzer(
       }, {});
     });
   }
-  // function nestedSchemaAnalyzer(nestedData: {
-  //   [s: string]: any[];
-  // }): KeyValPair<TypeSummary<FieldInfo>> {
-  //   return Object.entries(nestedData).reduce(
-  //     async (nestedTypeSummaries, [fullTypeName, data]) => {
-  //       const nameParts = fullTypeName.split('.');
-  //       const nameSuffix = nameParts[nameParts.length - 1];
-
-  //       await schemaAnalyzer(nameSuffix!, data as any[], options);
-
-  //       nestedTypeSummaries[fullTypeName] = result;
-  //       return nestedTypeSummaries;
-  //     },
-  //     {},
-  //   );
-  // }
-
-  function flattenNestedTypes(
-    schemaPrefix: string,
-    typeSummary: KeyValPair<TypeSummary<FieldInfo>>,
-    flatSummary: KeyValPair<TypeSummary<FieldInfo>> = { ...typeSummary },
-  ): KeyValPair<TypeSummary<FieldInfo>> {
-    // let currentNested = []
-    Object.entries(typeSummary).forEach(([typePath, typeSchema]) => {
-      let hasNestedTypes = typeSchema.nestedTypes;
-      if (hasNestedTypes) {
-        Object.entries(
-          typeSchema.nestedTypes as KeyValPair<TypeSummary<FieldInfo>>,
-        ).forEach(([nestedKey, typeData]) => {
-          const nestedFieldPath = schemaPrefix + '.' + nestedKey;
-          // schemaPrefix + '.' + typePath + '.' + nestedKey;
-          flatSummary[nestedFieldPath] = typeData;
-          // check for recursive ness
-          if (typeData.nestedTypes) {
-            flattenNestedTypes(
-              nestedFieldPath,
-              typeData.nestedTypes,
-              flatSummary,
-            );
-            // typeData.nestedTypes = undefined;
-            // TODO: DELETE .nestedTypes KEY
-            console.log(`EXTRA TYPES:`, nestedFieldPath);
-          }
-        });
-      }
-    });
-    return flatSummary;
-    // const reducer = (flatSummary: KeyValPair<TypeSummary<FieldInfo>>, [keyPath, schemaSummary]: [string, TypeSummary<FieldInfo>]) => {
-    //   if (schemaSummary.nestedTypes && Object.keys(schemaSummary.nestedTypes).length >= 1) {
-    //     // smash the nested values into the flatSummary
-    //     // Not so simple, need to concat keys: flatSummary = {...flatSummary, ...schemaSummary.nestedTypes};
-
-    //   }
-    //   return flatSummary
-    // }
-    // return Object.entries(
-    //   nestedData,
-    // ).reduce<KeyValPair<TypeSummary<FieldInfo>>>(reducer, {});
-  }
 }
-// function arrayifyNestedTypes(schema: KeyValPair<TypeSummary<FieldInfo>>) {
-
-//   typeData.nestedTypes
-// }
 
 /**
  * @//returns {{ totalRows: number; uniques: { [x: string]: any[]; }; fieldsData: { [x: string]: InternalFieldTypeData[]; }; }} schema
