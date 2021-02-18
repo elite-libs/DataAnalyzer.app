@@ -5,7 +5,7 @@ import { SnackbarProvider } from 'notistack';
 export default function App() {
   return (
     <SnackbarProvider disableWindowBlurListener={true}>
-      <div className="App container">
+      <div className="App container-lg">
         <SchemaTools />
         {/* <NavBar />  */}
         {/* <Header /> */}

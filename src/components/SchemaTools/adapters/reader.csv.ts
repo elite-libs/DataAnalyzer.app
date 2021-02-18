@@ -1,10 +1,12 @@
 import csvParse from 'csv-parse';
+import type { IReaderAdapter } from './readers';
 
-const csvReader = {
-  shouldParse(content: any) {
+const csvReader: IReaderAdapter = {
+  name: 'csv',
+  shouldParse(content: string) {
     const sample =
       (content && content.length > 500 ? content.slice(0, 500) : content) || '';
-    return sample.split(',').length > 5;
+    return sample.split(/[,\t|]/).length > 5;
   },
 
   parse(content: string) {

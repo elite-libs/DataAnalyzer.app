@@ -7,7 +7,7 @@ const HtmlTooltip = withStyles((theme: Theme) => ({
     backgroundColor: '#f5f5f5',
     color: 'rgba(0, 0, 0, 0.87)',
     maxWidth: 220,
-    fontSize: theme.typography.pxToRem(12),
+    fontSize: theme.typography.pxToRem(14),
     border: '1px solid #dadde9',
   },
 }))(Tooltip);
@@ -16,11 +16,20 @@ type Props = {
   tooltipContent?: React.ReactNode | null;
   // variant: 'default' | 'warning';
   children: any | any[] | null;
+  className?: string;
 };
 
-export default function TooltipWrapper({ tooltipContent, children }: Props) {
+export default function TooltipWrapper({
+  tooltipContent,
+  className = '',
+  children,
+}: Props) {
   if (!tooltipContent) {
     return <>{children}</>;
   }
-  return <HtmlTooltip title={tooltipContent!}>{children}</HtmlTooltip>;
+  return (
+    <HtmlTooltip className={className} title={tooltipContent!}>
+      {children}
+    </HtmlTooltip>
+  );
 }

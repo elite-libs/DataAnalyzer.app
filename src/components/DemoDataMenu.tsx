@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { setInputData, setSchemaName } from 'store/analysisSlice';
+import { setSchemaName } from 'store/analysisSlice';
+import { setInputData } from 'store/appStateSlice';
 // import { RootState } from 'store/rootReducer';
 import Chip from '@material-ui/core/Chip';
 import SyncIcon from '@material-ui/icons/Sync';
@@ -93,7 +94,7 @@ export const DemoDataMenu = () => {
   }, []);
 
   return (
-    <section className="demo-data-buttons col-12 col-md-8 col-sm-7 pb-2 px-1">
+    <section className="demo-data-buttons col-12 col-md-8 col-sm-8 pb-2 px-1">
       <TooltipWrapper
         tooltipContent={
           <>

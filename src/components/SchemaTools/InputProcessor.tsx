@@ -7,7 +7,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import type { RootState } from 'store/rootReducer';
 // import CodeViewer from './ResultsView/CodeViewer';
 
-import { resetAnalysis, setInputData } from 'store/analysisSlice';
+import { resetAnalysis } from 'store/analysisSlice';
+import { setInputData } from 'store/appStateSlice';
 // import { resetOptions } from 'store/optionsSlice';
 // import { resetStatusMessage } from 'store/appStateSlice';
 
@@ -15,9 +16,14 @@ type Props = {
   className?: string;
 };
 
-export default function InputProcessor({ className = '' }: Props) {
+export default function InputProcessor({
+  className = 'position-relative w-100 d-flex flex-column align-items-center',
+}: Props) {
   const dispatch = useDispatch();
-  const { inputData, schema } = useSelector((state: RootState) => state.analysisFeature);
+  const { schema } = useSelector((state: RootState) => state.analysisFeature);
+  const { parsedInput, inputData } = useSelector(
+    (state: RootState) => state.appStateActions,
+  );
 
   const hasParsedInputData = Boolean(schema);
   const hasInputData: boolean =
@@ -42,49 +48,18 @@ export default function InputProcessor({ className = '' }: Props) {
   }
 
   return (
-    <Paper
-      elevation={3}
-      className={className}
-      style={{ display: 'flex', justifyContent: 'stretch' }}
-    >
-      {hasParsedInputData ? (
-        <>
-          <div
-            style={{ zIndex: 500, position: 'relative', opacity: 0.88 }}
-            className={`d-flex justify-content-center align-items-center position-absolute`}
-          >
-            <Button
-              size="small"
-              color="secondary"
-              variant={'contained'}
-              startIcon={<SyncOutlinedIcon />}
-              onClick={resetAppState}
-              style={{ transform: 'translateY(1.3rem) translateX(40ch)' }}
-            >
-              Reset / Start Over
-            </Button>
-          </div>
-          {/* <CodeViewer maxHeight={'15vh'}>{inputData}</CodeViewer> */}
-        </>
-      ) : (
-        <Paper
-          elevation={1}
-          className="position-relative w-100 d-flex flex-column align-items-center"
-          style={{ justifyContent: 'stretch' }}
-        >
-          <textarea
-            style={{ flexGrow: 1, whiteSpace: 'pre-wrap', overflowX: 'auto' }}
-            className="w-100 m-0"
-            aria-label="Input or Paste your CSV or JSON data"
-            placeholder="👉 Paste data here!&#160;👈"
-            onChange={(e) => dispatch(setInputData(e.target.value))}
-            {...textareaOpts}
-            value={inputData!}
-          >
-            {inputData}
-          </textarea>
-        </Paper>
-      )}
+    <Paper elevation={3} className={className} style={{ justifyContent: 'stretch' }}>
+      <textarea
+        style={{ flexGrow: 1, whiteSpace: 'pre-wrap', overflowX: 'auto' }}
+        className="w-100 m-0"
+        aria-label="Input or Paste your CSV or JSON data"
+        placeholder="👉 Paste data here!&#160;👈"
+        onChange={(e) => dispatch(setInputData(e.target.value))}
+        {...textareaOpts}
+        value={inputData!}
+      >
+        {inputData}
+      </textarea>
     </Paper>
   );
 }

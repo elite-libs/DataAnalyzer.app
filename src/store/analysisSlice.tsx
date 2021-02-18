@@ -2,8 +2,6 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { FieldInfo, TypeSummary } from '../schema-analyzer';
 
 type State = {
-  inputData?: string | null;
-  inputTimestamp?: number | null;
   results?: string | null;
   resultsTimestamp?: number | null;
   schemaName: string | null;
@@ -12,7 +10,6 @@ type State = {
 };
 
 let initialState: State = {
-  inputData: '',
   schema: null,
   schemaName: 'Users',
   schemaTimestamp: null,
@@ -24,17 +21,6 @@ const slice = createSlice({
   name: 'analysis',
   initialState,
   reducers: {
-    setInputData(state, action: PayloadAction<string | undefined | null>) {
-      const { payload } = action;
-      if (payload === state.inputData) return;
-      state.inputData = (payload != null && payload.trim()) || '';
-      state.inputTimestamp = payload != null ? Date.now() : null;
-      state.schema = null;
-      state.schemaTimestamp = null;
-      state.results = null;
-      state.resultsTimestamp = null;
-      return state;
-    },
     setSchemaName(state, action: PayloadAction<string | undefined | null>) {
       const { payload } = action;
       state.schemaName = payload || 'SchemaName';
@@ -57,12 +43,12 @@ const slice = createSlice({
       return state;
     },
     resetAnalysis(state) {
-      state = { ...initialState, inputData: state.inputData };
+      state = { ...initialState };
       return state;
     },
   },
 });
 
-export const { setInputData, setResults, setSchema, setSchemaName, resetAnalysis } = slice.actions;
+export const { setResults, setSchema, setSchemaName, resetAnalysis } = slice.actions;
 
 export default slice.reducer;

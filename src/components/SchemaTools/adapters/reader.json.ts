@@ -1,9 +1,14 @@
-const jsonReader = {
-  shouldParse(content: any) {
-    return /^\s*(\[|\{).*(\}|\])\s*$/gims.test(content);
+import type { IReaderAdapter } from './readers';
+
+const jsonReader: IReaderAdapter = {
+  name: 'json',
+  shouldParse(content: string) {
+    content = `${content}`.trim();
+    if (content.startsWith('[') || content.startsWith('{')) return true;
+    return false;
   },
   parse(content: string) {
-    return JSON.parse(content);
+    return Promise.resolve(JSON.parse(content));
   },
 };
 

@@ -2,11 +2,15 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 type State = {
   statusMessage: string | null;
+  parsedInput?: any | any[];
+  inputData?: string | null;
+  // inputTimestamp?: number | null;
 };
 
 let initialState: State = {
-  statusMessage:
-    '© 2020-2021. For educational use. All trademarks, service marks and company names are the property of their respective owners.',
+  statusMessage: 'Ready for your data',
+  parsedInput: undefined,
+  inputData: '',
 };
 
 const slice = createSlice({
@@ -17,8 +21,19 @@ const slice = createSlice({
       const { payload } = action;
       state.statusMessage = payload;
     },
-    resetStatusMessage(state) {
-      state.statusMessage = initialState.statusMessage;
+    setInputData(state, action: PayloadAction<string | undefined | null>) {
+      let { payload } = action;
+      payload = `${payload}`.trim();
+      if (payload === state.inputData) return;
+      state.inputData = payload;
+      return state;
+    },
+    setParsedInput(state, action: PayloadAction<any>) {
+      state.parsedInput = action.payload;
+      return state;
+    },
+    resetAppState(state) {
+      state = { ...initialState };
       return state;
     },
   },
@@ -26,6 +41,11 @@ const slice = createSlice({
 
 const appStateActions = slice.reducer;
 
-export const { setStatusMessage, resetStatusMessage } = slice.actions;
+export const {
+  setStatusMessage,
+  resetAppState,
+  setParsedInput,
+  setInputData,
+} = slice.actions;
 
 export default appStateActions;

@@ -1,0 +1,33 @@
+.output-buttons {
+  // explicitly will not expand:
+  // flex-grow: 0;
+  // // create flex box for children
+  // display: flex;
+  // align-items: center;
+  // justify-content: space-between;
+  // flex-direction: column;
+
+  // margin-top: 0.65rem;
+
+  // svg {
+  //   height: 2.75rem;
+  //   width: 2.75rem;
+  // }
+  // .MuiButtonBase-root {
+  //   // height: 66px;
+  //   line-height: 1.2rem;
+  //   margin-right: 0.3rem;
+  //   // width: 165px;
+  //   flex-grow: 1;
+  // }
+  // .MuiButton-label {
+  //   max-width: 135px;
+  //   display: flex;
+  //   flex-direction: row;
+  //   align-items: center;
+  //   justify-content: center;
+  //   > div {
+  //     margin: 0 0.25rem;
+  //   }
+  // }
+}

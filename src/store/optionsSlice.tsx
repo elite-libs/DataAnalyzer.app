@@ -32,7 +32,7 @@ const slice = createSlice({
       Object.assign(state, payload, { _timestamp: Date.now() });
     },
     resetOptions(state) {
-      state = { ...initialState };
+      state = { ...initialState, _timestamp: Date.now() };
       return state;
     },
   },

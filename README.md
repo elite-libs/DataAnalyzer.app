@@ -102,6 +102,7 @@ DataAnalyzer has 3 Powerful Features to Explore:
 **Web App Interface**
 
 - [ ] Migrate leftover Bootstrap utility classes to Material.
+- [ ] Add a "Schema Editor" table-like view to tune & view the results.
 - [ ] [Fix options & overall menu](https://material-ui.com/components/drawers/#mini-variant-drawer)
 - [ ] [Add App Bar](https://material-ui.com/components/app-bar/)
 - [ ] Make the Input and Output sections collapse/toggle-able.
