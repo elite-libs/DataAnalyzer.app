@@ -9,21 +9,38 @@ type IconProps = {
   color?: IconColors;
   fontSize?: IconSize;
   htmlColor?: string;
+  className?: string;
 };
 export const ErrorIcon = ({
   color = 'inherit',
   fontSize = 'inherit',
+  className = '',
   htmlColor,
 }: IconProps = {}) => {
-  return <MuiErrorIcon color={color} fontSize={fontSize} htmlColor={htmlColor} />;
+  return (
+    <MuiErrorIcon
+      className={className}
+      color={color}
+      fontSize={fontSize}
+      htmlColor={htmlColor}
+    />
+  );
 };
 
 export const CheckCircleIcon = ({
   color = 'inherit',
   fontSize = 'inherit',
+  className = '',
   htmlColor,
 }: IconProps = {}) => {
-  return <MuiCheckCircleIcon color={color} fontSize={fontSize} htmlColor={htmlColor} />;
+  return (
+    <MuiCheckCircleIcon
+      className={className}
+      color={color}
+      fontSize={fontSize}
+      htmlColor={htmlColor}
+    />
+  );
 };
 
 export const MongoDbIcon = (...props) => (

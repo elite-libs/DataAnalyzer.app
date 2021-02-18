@@ -68,12 +68,16 @@ $breakpoint-xl: 1200p;
         > div {
           font-weight: 900;
           font-size: 1.2em;
+          white-space: nowrap;
         }
       }
       > section {
         display: flex;
         justify-content: stretch;
         flex-direction: column;
+        overflow-y: auto;
+        overflow-x: visible;
+        max-height: 75vh;
       }
     }
     .generated-code {
@@ -101,18 +105,49 @@ $breakpoint-xl: 1200p;
   }
 }
 
+// .App main.results-loaded section.page .code-edit {
+// }
 .App {
-  main.results-loaded {
+  main {
+    &.stacked-view {
+      legend > div {
+        display: inline-block;
+        margin-right: 0.5rem;
+      }
+    }
+    &.results-loaded.stacked-view {
+      .resizable-editor {
+        flex: 0 1 100%;
+        min-height: 16vh;
+      }
+      .generated-code {
+        flex: 2 0 100%;
+      }
+      .output-buttons {
+        align-content: center;
+        justify-content: center;
+      }
+    }
     .resizable-editor {
-      flex: 0 0 20%;
+      flex: 1 1 100%;
     }
     .generated-code {
-      min-height: 25vh;
-      flex: 2 0 60%;
+      flex: 1 0 100%;
     }
   }
+  // Define the small-screen stacked UI css:
   main.stacked-view {
     flex-grow: 0;
+
+    .resizable-editor {
+      padding-left: 0;
+      padding-right: 0;
+      // flex-shrink: 1;
+      flex: 1 1 100%;
+    }
+    .generated-code {
+      flex: 0 1 100%;
+    }
 
     section {
       padding-left: 0;
@@ -124,25 +159,18 @@ $breakpoint-xl: 1200p;
       flex-shrink: 2;
       flex-grow: 1;
     }
-    .resizable-editor {
-      padding-left: 0;
-      padding-right: 0;
-      // flex-shrink: 1;
-      flex: 1 0 40%;
-    }
-    .generated-code {
-      flex: 1 0 40%;
-    }
     .output-buttons-panel {
-      > button {
-        width: 100%;
-        max-height: 2.125rem;
+      .output-buttons {
+        > button {
+          width: 100%;
+          max-height: 2.125rem;
+        }
       }
       > legend {
-        width: 25vw;
+        width: 100%;
       }
-      max-height: 5rem;
-      margin: 0.5rem 0;
+      max-height: 6rem;
+      margin: 0.5rem auto;
       flex-shrink: 0;
       flex-grow: 0;
       flex-direction: column;

@@ -4,3 +4,14 @@
   min-height: 250px;
   width: auto;
 }
+
+.read-only-ui {
+  cursor: zoom-in;
+}
+
+.read-only-panel {
+  .ace_content {
+    cursor: not-allowed !important;
+    pointer-events: none !important;
+  }
+}

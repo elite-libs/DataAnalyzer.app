@@ -100,7 +100,7 @@ export default function CodeViewer({
           }
           Step #3:
         </div>
-        Profit!
+        {isPanelSuccessState ? 'Profit!' : 'View Generated Code'}
       </legend>
       {results != null ? codeToolbarUi : null}
       <SyntaxHighlighter
@@ -108,6 +108,7 @@ export default function CodeViewer({
         style={atomDark}
         showLineNumbers={true}
         className="flex-grow-1"
+        customStyle={{ margin: 0 }}
       >
         {children}
       </SyntaxHighlighter>
