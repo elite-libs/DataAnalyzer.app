@@ -5,26 +5,21 @@ import AppIcon from 'images/DataAnalyzerDualColor.svg';
 
 import { Link as RouteLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-// import copy from 'clipboard-copy';
-// import SyncOutlinedIcon from '@material-ui/icons/SyncOutlined';
 
 import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined';
 import AssessmentOutlinedIcon from '@material-ui/icons/AssessmentOutlined';
-// import FileCopy from '@material-ui/icons/FileCopyOutlined';
 import SettingsIcon from '@material-ui/icons/Settings';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
-// import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import GitHubIcon from '@material-ui/icons/GitHub';
 
 import Link from '@material-ui/core/Link';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 
-// import AdvancedOptionsForm from './SchemaTools/AdvancedOptionsForm';
-
 import TooltipWrapper from 'components/TooltipWrapper';
 import { setResults, setSchema } from 'store/analysisSlice';
 import useAppMessages from 'hooks/useAppMessages';
 import { RootState } from 'store/rootReducer';
+import { DemoDataMenu } from './DemoDataMenu';
 
 export default function Header() {
   const dispatch = useDispatch();
@@ -49,13 +44,15 @@ export default function Header() {
 
   return (
     <nav className="row row-block w-100">
-      <h1 className="col-10 col-sm-10" title="Reset/Load Home Screen">
+      <h1 className="col-10 col-sm-8" title="Reset/Load Home Screen">
         <Link className="brand-link" component={RouteLink} to="/" onClick={resetResults}>
           <img src={AppIcon} alt="Data Analyzer app icon" />
           DataAnalyzer.app
         </Link>
       </h1>
-      <aside className="icon-button-box col-2 col-sm-2 text-right">
+      <aside className="icon-button-box col-2 col-sm-4 text-right">
+        <DemoDataMenu />
+
         <Link
           className={'py-2 mx-2'}
           component={RouteLink}
@@ -75,6 +72,11 @@ export default function Header() {
           aria-label="Settings / Configuration"
         >
           <SettingsIcon fontSize="large" color="primary" />
+          <SettingsIcon fontSize="large" color="secondary" />
+          <SettingsIcon fontSize="large" color="action" />
+          <SettingsIcon fontSize="large" color="disabled" />
+          <SettingsIcon fontSize="large" color="error" />
+          <SettingsIcon fontSize="large" color="inherit" />
         </Link>
       </aside>
       {!results ? (

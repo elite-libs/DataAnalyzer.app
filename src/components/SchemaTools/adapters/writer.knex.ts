@@ -1,8 +1,7 @@
 // import { mapValues } from 'lodash';
 import snakecase from 'lodash.snakecase';
-import { KeyValPair } from 'types';
 // import debug from 'debug';
-import { CombinedFieldInfo, TypeSummary } from '../../../schema-analyzer/index';
+import { CombinedFieldInfo } from '../../../schema-analyzer/index';
 import { IDataAnalyzerWriter, IRenderArgs } from './writers';
 // const log = debug('writer:knex');
 
@@ -60,14 +59,14 @@ const writer: IDataAnalyzerWriter = {
       const fieldSet = Object.entries<CombinedFieldInfo>(schema.fields);
       // locate by explicit identity indicator
       let identityField = fieldSet.find(([fieldName, fieldStats]) => {
-        if (fieldStats.identity) return fieldName;
+        return fieldStats.identity ? true : false;
       });
       if (identityField) return identityField;
       // No solid ID col found, fallback to preferUniqueOverFirstColumn
       if (preferUniqueOverFirstColumn) {
         // next check for unique fields :shrug: :fingers_crossed:
         identityField = fieldSet.find(([fieldName, fieldStats]) => {
-          if (fieldStats.unique) return fieldName;
+          return fieldStats.unique ? true : false;
         });
       }
       return fieldSet[0] && fieldSet[0][0];

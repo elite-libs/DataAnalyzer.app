@@ -19,6 +19,9 @@ $breakpoint-lg: 992px;
 // Extra large screen / wide desktop
 $breakpoint-xl: 1200p;
 
+.schema-name-input {
+  flex: 0 1 auto;
+}
 .App {
   text-align: left;
   nav.row {

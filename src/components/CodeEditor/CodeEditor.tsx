@@ -43,10 +43,10 @@ function getJsonParsingErrorLocation(message: string) {
 export function CodeEditor(props: IAceEditorProps) {
   const dispatch = useDispatch();
   const { enqueueSnackbar } = useAutoSnackbar();
-  let aceRef: AceEditor | null = null;
+  // let aceRef: AceEditor | null = null;
 
   // const [dimensions, setDimensions] = React.useState({ height: 'auto', width: 'auto' });
-  const { results, schema } = useSelector((state: RootState) => state.analysisFeature);
+  // const { results, schema } = useSelector((state: RootState) => state.analysisFeature);
   const {
     inputData,
     parsedInput,
@@ -181,7 +181,7 @@ export function CodeEditor(props: IAceEditorProps) {
       <AceEditor
         placeholder="Paste your JSON or CSV data here!"
         mode="javascript"
-        ref={(ref) => (aceRef = ref)}
+        // ref={(ref) => (aceRef = ref)}
         markers={markers}
         // theme={isPanelReadOnly ? 'github' : 'monokai'}
         theme={'github'}

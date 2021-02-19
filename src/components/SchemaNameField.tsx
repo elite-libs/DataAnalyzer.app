@@ -6,7 +6,7 @@ import { FormControl, Input, InputAdornment, InputLabel } from '@material-ui/cor
 import TooltipWrapper from 'components/TooltipWrapper';
 import { RootState } from 'store/rootReducer';
 
-export default function SchemaNameField({}) {
+export default function SchemaNameField() {
   const dispatch = useDispatch();
   const { schemaName } = useSelector((state: RootState) => state.analysisFeature);
   return (
@@ -16,13 +16,14 @@ export default function SchemaNameField({}) {
           <>
             <b>Label your dataset</b>
             <br />
-            Used as a prefix for any nested data structures.
+            Will be used as a name prefix for nested data structures.
             <br />
-            <b>Examples:</b> Customer, Product, Articles, etc.
+            <b>Examples:</b> Customer, Customer-&gt;Product[], Product, Product:Inventory,
+            Articles-&gt;Comments[], etc.
           </>
         }
       >
-        <InputLabel htmlFor="schema-name">Schema Name</InputLabel>
+        <InputLabel htmlFor="schema-name">Name your dataset</InputLabel>
       </TooltipWrapper>
       <Input
         id="schema-name"

@@ -4,9 +4,9 @@ import { setSchemaName } from 'store/analysisSlice';
 import { setInputData } from 'store/appStateSlice';
 // import { RootState } from 'store/rootReducer';
 // import Chip from '@material-ui/core/Chip';
-import SyncIcon from '@material-ui/icons/Sync';
-import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
-import CloudDoneIcon from '@material-ui/icons/CloudDone';
+// import SyncIcon from '@material-ui/icons/Sync';
+// import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
+// import CloudDoneIcon from '@material-ui/icons/CloudDone';
 // import { SnackbarKey } from 'notistack';
 import TooltipWrapper from '../TooltipWrapper';
 // import { InfoOutlined } from '@material-ui/icons';
@@ -45,15 +45,15 @@ export const DemoDataMenu = () => {
   const [currentlyLoadingData, setCurrentlyLoadingData] = React.useState<string | null>(
     null,
   );
-  const [currentlyLoadedFile, setCurrentlyLoadedFile] = React.useState<string | null>(
-    null,
-  );
+  // const [currentlyLoadedFile, setCurrentlyLoadedFile] = React.useState<string | null>(
+  //   null,
+  // );
 
-  const getStatusIcon = (forFileName: string) => {
-    if (currentlyLoadingData === forFileName) return <SyncIcon />;
-    if (currentlyLoadedFile === forFileName) return <CloudDoneIcon />;
-    return <CloudDownloadIcon />;
-  };
+  // const getStatusIcon = (forFileName: string) => {
+  //   if (currentlyLoadingData === forFileName) return <SyncIcon />;
+  //   if (currentlyLoadedFile === forFileName) return <CloudDoneIcon />;
+  //   return <CloudDownloadIcon />;
+  // };
 
   /** choose a random dataset and load it  */
   const iAmFeelingLucky = () => {
@@ -95,7 +95,7 @@ export const DemoDataMenu = () => {
           anchorOrigin: { horizontal: 'right', vertical: 'top' },
         });
         history.push('/');
-        setCurrentlyLoadedFile(filePath);
+        // setCurrentlyLoadedFile(filePath);
       })
       .catch((error) => {
         console.error('ERROR:', error);

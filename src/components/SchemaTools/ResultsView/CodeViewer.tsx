@@ -34,7 +34,7 @@ export default function CodeViewer({
   const dispatch = useDispatch();
   const { enqueueSnackbar } = useAutoSnackbar();
 
-  const { results, schema } = useSelector((state: RootState) => state.analysisFeature);
+  const { results } = useSelector((state: RootState) => state.analysisFeature);
 
   function resetAppState() {
     dispatch(resetAnalysis());

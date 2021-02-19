@@ -17,8 +17,13 @@
 }
 .brand-link {
   cursor: pointer;
+
+  position: absolute;
+  top: -20px;
+  left: -1rem;
+
   img {
-    margin-top: -10px;
+    margin-top: -20px;
     margin-left: -10px;
     margin-right: 10px;
     width: 55px;
@@ -56,8 +61,8 @@
 // More reading: https://css-tricks.com/almanac/properties/a/animation/
 .pulse-error-icon {
   animation: pulse-red 2s infinite;
-  color: rgba(255, 82, 82, 1);
-  box-shadow: 0 0 0 0 rgba(255, 82, 82, 1);
+  color: rgba(245, 0, 87, 1);
+  box-shadow: 0 0 0 0 rgba(245, 0, 87, 1);
   border-radius: 100%;
   transform: scale(0.65);
   z-index: 100;
@@ -66,18 +71,16 @@
 @keyframes pulse-red {
   0% {
     transform: scale(0.65);
-    box-shadow: 0 0 0 0 rgba(255, 82, 82, 0.7);
+    box-shadow: 0 0 0 0 rgba(245, 0, 87, 0.7);
   }
 
   70% {
     transform: scale(0.9);
-    box-shadow: 0 0 0 10px rgba(255, 82, 82, 0);
+    box-shadow: 0 0 0 10px rgba(245, 0, 87, 0);
   }
 
   100% {
     transform: scale(0.65);
-    box-shadow: 0 0 0 0 rgba(255, 82, 82, 0);
+    box-shadow: 0 0 0 0 rgba(245, 0, 87, 0);
   }
 }
-
-

@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 export default function NotFoundPage() {
   const location = useLocation();
 
