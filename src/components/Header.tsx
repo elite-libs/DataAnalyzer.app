@@ -3,12 +3,7 @@ import pkg from '../../package.json';
 
 import AppIcon from 'images/DataAnalyzerDualColor.svg';
 
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link as RouteLink,
-} from 'react-router-dom';
+import { Link as RouteLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 // import copy from 'clipboard-copy';
 // import SyncOutlinedIcon from '@material-ui/icons/SyncOutlined';
@@ -21,23 +16,13 @@ import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 // import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import GitHubIcon from '@material-ui/icons/GitHub';
 
-import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 
 // import AdvancedOptionsForm from './SchemaTools/AdvancedOptionsForm';
-import InputProcessor from './SchemaTools/InputProcessor';
 
 import TooltipWrapper from 'components/TooltipWrapper';
-import LoadingSpinner from 'components/LoadingSpinner';
-
-import { DemoDataMenu } from './DemoDataMenu/DemoDataMenu';
-
-import { setResults, setSchema, setSchemaName } from 'store/analysisSlice';
-import { useAutoSnackbar } from 'hooks/useAutoSnackbar';
-import { FormControl, Input, InputAdornment, InputLabel } from '@material-ui/core';
-import { DatabaseEditIcon } from './SchemaTools/AppIcons';
-import { useAnalytics } from 'hooks/useAnalytics';
+import { setResults, setSchema } from 'store/analysisSlice';
 import useAppMessages from 'hooks/useAppMessages';
 import { RootState } from 'store/rootReducer';
 
@@ -46,13 +31,9 @@ export default function Header() {
   // const { trackCustomEvent } = useAnalytics();
   // const { enqueueSnackbar } = useAutoSnackbar();
   const messages = useAppMessages();
-  const { results, schemaTimestamp, schemaName, schema } = useSelector(
-    (state: RootState) => state.analysisFeature,
-  );
-  const options = useSelector((state: RootState) => state.optionsActions);
-  const { parsedInput, inputData } = useSelector(
-    (state: RootState) => state.appStateActions,
-  );
+  const { results } = useSelector((state: RootState) => state.analysisFeature);
+  // const options = useSelector((state: RootState) => state.optionsActions);
+  const { parsedInput } = useSelector((state: RootState) => state.appStateActions);
   function resetResults() {
     dispatch(setSchema(null));
     dispatch(setResults(null));
@@ -97,31 +78,7 @@ export default function Header() {
         </Link>
       </aside>
       {!results ? (
-        <FormControl className="schema-name-input col-md-4 col-sm-4 col-12 pb-2 pl-1">
-          <TooltipWrapper
-            tooltipContent={
-              <>
-                <b>Label your dataset</b>
-                <br />
-                Used as a prefix for any nested data structures.
-                <br />
-                <b>Examples:</b> Customer, Product, Articles, etc.
-              </>
-            }
-          >
-            <InputLabel htmlFor="schema-name">Schema Name</InputLabel>
-          </TooltipWrapper>
-          <Input
-            id="schema-name"
-            onChange={(e) => dispatch(setSchemaName(e.target.value))}
-            value={schemaName}
-            startAdornment={
-              <InputAdornment position="start">
-                <DatabaseEditIcon width="1.5rem" height="1.5rem" />
-              </InputAdornment>
-            }
-          />
-        </FormControl>
+        <></>
       ) : (
         <Breadcrumbs
           separator={<span className="divider d-md-block d-none">|</span>}

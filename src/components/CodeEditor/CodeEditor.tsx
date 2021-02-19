@@ -23,7 +23,8 @@ import TooltipWrapper from 'components/TooltipWrapper';
 import { useAutoSnackbar } from 'hooks/useAutoSnackbar';
 // import { Ace } from 'ace-builds';
 import { resetAnalysis } from 'store/analysisSlice';
-import { DemoDataMenu } from 'components/DemoDataMenu';
+// import { DemoDataMenu } from 'components/DemoDataMenu';
+import SchemaNameField from 'components/SchemaNameField';
 
 function getJsonParsingErrorLocation(message: string) {
   const lineAndColumnRegEx = /.*line (\d+).+column (\d+).*/;
@@ -172,11 +173,11 @@ export function CodeEditor(props: IAceEditorProps) {
           ) : (
             <CheckCircleIcon htmlColor="green" fontSize="large" />
           )}
-          Step #1:
+          <span>Step #1:</span>
         </div>
         {stepOneMessage}
-        <DemoDataMenu />
       </legend>
+      <SchemaNameField />
       <AceEditor
         placeholder="Paste your JSON or CSV data here!"
         mode="javascript"

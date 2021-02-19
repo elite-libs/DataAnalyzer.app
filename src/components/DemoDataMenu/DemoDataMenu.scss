@@ -11,6 +11,45 @@
   }
 }
 
+
+.roll-dice {
+  &.animated {
+    animation: roll-dice 1.5s steps(6) infinite;
+  }
+  display: inline-block;
+  // animation: roll-dice 1.5s steps(6) infinite;
+  background-image: url(../../../public/images/dice-sprite.svg);
+  width: 25px;
+  height: 25px;
+  background-size: cover;
+}
+
+@keyframes roll-dice {
+  100% {
+    background-position: -600px 0;
+  }
+  // 0% {
+  //   background-position: 0 -0px;
+  // }
+  // 16% {
+  //   background-position: 0 -100px;
+  // }
+  // 33% {
+  //   background-position: 0 -200px;
+  // }
+  // 49% {
+  //   background-position: 0 -300px;
+  // }
+  // 65% {
+  //   background-position: 0 -400px;
+  // }
+  // 81% {
+  //   background-position: 0 -500px;
+  // }
+  // 97% {
+  //   background-position: 0 -600px;
+  // }
+}
 // .current-xs,
 // .current-sm {
 //   .demo-data-buttons {

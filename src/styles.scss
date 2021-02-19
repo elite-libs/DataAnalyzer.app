@@ -22,7 +22,12 @@ $breakpoint-xl: 1200p;
 .App {
   text-align: left;
   nav.row {
-    flex: 0 1 120px;
+    flex: 0 1 60px;
+  }
+  .current-xs {
+    nav.row {
+      flex: 0 1 45px;
+    }
   }
   main {
     min-height: 90vh;
@@ -32,6 +37,9 @@ $breakpoint-xl: 1200p;
 
     margin: 0.25rem !important;
 
+    &.current-xs {
+      margin: 0rem !important;
+    }
     &.current-sm {
       margin: 0rem !important;
     }

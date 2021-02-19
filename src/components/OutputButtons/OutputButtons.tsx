@@ -158,7 +158,7 @@ export const OutputButtons = ({ size = 'medium', className = '' }: Props) => {
               }`}
             />
           }
-          Step #2:
+          <span>Step #2:</span>
         </div>
         Select Output
       </legend>

@@ -98,7 +98,7 @@ export default function CodeViewer({
               fontSize="large"
             />
           }
-          Step #3:
+          <span>Step #3:</span>
         </div>
         {isPanelSuccessState ? 'Profit!' : 'Generate Code'}
       </legend>
