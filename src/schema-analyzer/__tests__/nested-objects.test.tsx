@@ -13,7 +13,7 @@ describe('#nested non-array object types', () => {
       expect(result.nestedTypes).not.toBeNull();
       expect(result.nestedTypes?.['historicEvent.data']).toBeDefined();
       expect(
-        Object.keys(result.nestedTypes?.['historicEvent.data'].fields),
+        Object.keys(result.nestedTypes?.['historicEvent.data']?.fields!),
       ).toStrictEqual(['Events', 'Births', 'Deaths']);
     } catch (error) {
       console.error('ERROR:', error);

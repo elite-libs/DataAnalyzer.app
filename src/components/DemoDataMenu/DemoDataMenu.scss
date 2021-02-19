@@ -1,0 +1,64 @@
+.demo-link {
+  margin: 0 auto;
+
+  transition: all 0.5s ease-in;
+  cursor: pointer;
+
+  &:hover {
+    color: #f50057;
+    border: 0.75px solid #666;
+    border-radius: 10% 50%;
+  }
+}
+
+// .current-xs,
+// .current-sm {
+//   .demo-data-buttons {
+//     order: 3;
+//     flex-wrap: nowrap;
+//     justify-content: flex-start;
+//     overflow-x: auto;
+//   }
+// }
+// .schema-name-input {
+//   order: 1;
+// }
+
+// .demo-data-buttons {
+//   order: 3;
+//   display: flex;
+//   flex-wrap: wrap;
+//   justify-content: flex-end;
+//   align-items: flex-end;
+//   // align-items: center;
+//   position: relative;
+//   z-index: -1;
+
+//   .MuiChip-root {
+//     margin: 0 1.5px 1.5px 0;
+//     display: flex;
+//     justify-content: flex-start;
+//     svg {
+//       margin-left: 2.5px;
+//     }
+//   }
+
+//   .MuiChip-label {
+//     flex-grow: 1;
+//     text-align: center;
+//   }
+
+//   label {
+//     margin-right: 3px;
+//     display: flex;
+//     // align-items: center;
+//     justify-content: center;
+//     margin: 0;
+//     line-height: 24px;
+//     // height: 24px;
+//     font-weight: 500;
+//     svg {
+//       margin: 0 2.5px;
+//     }
+//   }
+// }

@@ -31,7 +31,7 @@ import InputProcessor from './SchemaTools/InputProcessor';
 import TooltipWrapper from 'components/TooltipWrapper';
 import LoadingSpinner from 'components/LoadingSpinner';
 
-import { DemoDataMenu } from '../components/DemoDataMenu';
+import { DemoDataMenu } from './DemoDataMenu/DemoDataMenu';
 
 import { setResults, setSchema, setSchemaName } from 'store/analysisSlice';
 import { useAutoSnackbar } from 'hooks/useAutoSnackbar';
@@ -96,7 +96,6 @@ export default function Header() {
           <SettingsIcon fontSize="large" color="primary" />
         </Link>
       </aside>
-      <DemoDataMenu />
       {!results ? (
         <FormControl className="schema-name-input col-md-4 col-sm-4 col-12 pb-2 pl-1">
           <TooltipWrapper

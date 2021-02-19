@@ -6,7 +6,7 @@ import { CombinedFieldInfo, TypeSummary } from '../../../schema-analyzer/index';
 import { IDataAnalyzerWriter, IRenderArgs } from './writers';
 // const log = debug('writer:knex');
 
-const BIG_INTEGER_MIN = 2147483647n;
+const BIG_INTEGER_MIN = BigInt('2147483647');
 
 const getFieldLengthArg = (fieldName: string, maxLength: number) => {
   if (maxLength > 4000) return 8000;

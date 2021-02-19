@@ -14,6 +14,7 @@ export function useAutoSnackbar(): ProviderContext {
       let snackId: SnackbarKey = '';
       options = options || {};
 
+      options.transitionDuration = options.transitionDuration || { enter: 75, exit: 125 };
       if (!options.anchorOrigin) {
         options.anchorOrigin = { horizontal: 'right', vertical: 'top' };
       }

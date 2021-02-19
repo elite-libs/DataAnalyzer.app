@@ -341,8 +341,8 @@ function _schemaAnalyzer(
       // })
       .then(condenseFieldData({ enumAbsoluteLimit, isEnumEnabled }))
       .then(async (schema) => {
-        // #debug: log'Built summary from Field Type data.')
-        // console.log'Schema', JSON.stringify(schema, null, 2))
+        // #debug//log('Built summary from Field Type data.')
+        // console.log('Schema', JSON.stringify(schema, null, 2))
 
         const fields = Object.keys(schema.fields).reduce(
           (fieldTypesResults, fieldName) => {
@@ -371,6 +371,9 @@ function _schemaAnalyzer(
               (typesInfo.Number || typesInfo.UUID || typesInfo.ObjectId) &&
               /^(gu|uu|_)?id/i.test(fieldName);
 
+            if (isIdentity && (!fInfo.unique || fInfo.nullable)) {
+              console.warn(fieldName, fInfo);
+            }
             if (isIdentity) fInfo.identity = true;
 
             if (schema.uniques && schema.uniques[fieldName]) {
@@ -522,7 +525,7 @@ const _pivotRowsGroupedByType = ({
       }
       return schema;
     }, detectedSchema);
-    // #debug: log'  Extracted data points from Field Type analysis')
+    // #debug//log('  Extracted data points from Field Type analysis')
     return pivotedSchema;
   };
 
@@ -586,8 +589,8 @@ function condenseFieldData({
 
       // console.// #debug: log`fieldSummary[${fieldName}]`, fieldSummary[fieldName])
     });
-    // #debug: log'Post-condenseFieldSizes(fields[fieldName])')
-    // #debug: log'Replaced fieldData with fieldSummary')
+    // #debug//log('Post-condenseFieldSizes(fields[fieldName])')
+    // #debug//log('Replaced fieldData with fieldSummary')
     return {
       fields: fieldSummary,
       uniques: schema.uniques,
@@ -660,7 +663,7 @@ function condenseFieldSizes(
   pivotedDataByType: { [k in TypeNameString]?: InternalFieldTypeData },
 ) {
   const aggregateSummary: { [k in TypeNameString]?: FieldTypeSummary } = {};
-  // #debug: log'Starting condenseFieldSizes()')
+  // #debug//log('Starting condenseFieldSizes()')
   Object.keys(pivotedDataByType).map(
     (typeName: TypeNameString | string, idx: number, arr: any[]) => {
       aggregateSummary[typeName] = {
@@ -713,7 +716,7 @@ function condenseFieldSizes(
       return aggregateSummary[typeName]; // not used
     },
   );
-  // #debug: log'Done condenseFieldSizes()...')
+  // #debug//log('Done condenseFieldSizes()...')
   return aggregateSummary;
 }
 

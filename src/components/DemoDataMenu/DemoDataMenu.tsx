@@ -3,20 +3,22 @@ import { useDispatch } from 'react-redux';
 import { setSchemaName } from 'store/analysisSlice';
 import { setInputData } from 'store/appStateSlice';
 // import { RootState } from 'store/rootReducer';
-import Chip from '@material-ui/core/Chip';
+// import Chip from '@material-ui/core/Chip';
 import SyncIcon from '@material-ui/icons/Sync';
 import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
 import CloudDoneIcon from '@material-ui/icons/CloudDone';
 // import { SnackbarKey } from 'notistack';
-import TooltipWrapper from './TooltipWrapper';
-import { InfoOutlined } from '@material-ui/icons';
+import TooltipWrapper from '../TooltipWrapper';
+// import { InfoOutlined } from '@material-ui/icons';
 import { useHistory } from 'react-router-dom';
 import { useAutoSnackbar } from 'hooks/useAutoSnackbar';
 import { useAnalytics } from 'hooks/useAnalytics';
 
+import './DemoDataMenu.scss';
+
 const sampleDataSets: Record<'label' | 'value' | 'schemaName', string>[] = [
-  // { label: 'Users', value: '/data/users.example.json', schemaName: 'Users' },
-  // { label: 'People', value: '/data/swapi-people.json', schemaName: 'People' },
+  { label: 'Users', value: '/data/users.example.json', schemaName: 'Users' },
+  { label: 'People', value: '/data/swapi-people.json', schemaName: 'People' },
   {
     label: 'Property',
     value: '/data/real-estate.example.json',
@@ -51,6 +53,15 @@ export const DemoDataMenu = () => {
     if (currentlyLoadingData === forFileName) return <SyncIcon />;
     if (currentlyLoadedFile === forFileName) return <CloudDoneIcon />;
     return <CloudDownloadIcon />;
+  };
+
+  /** choose a random dataset and load it  */
+  const iAmFeelingLucky = () => {
+    const rnd = parseInt(`${Math.random() * sampleDataSets.length}`, 10);
+    setCurrentlyLoadingData('truthiness');
+    setTimeout(() => {
+      return loadData(sampleDataSets[rnd]?.schemaName!, sampleDataSets[rnd]?.value!);
+    }, 1250);
   };
 
   const loadData = (name: string, filePath: string) => {
@@ -99,27 +110,28 @@ export const DemoDataMenu = () => {
   };
 
   useEffect(() => {
-    loadData(sampleDataSets[2]?.label || 'Users', sampleDataSets[2]?.value!);
+    iAmFeelingLucky();
+    // loadData(sampleDataSets[2]?.label || 'Users', sampleDataSets[2]?.value!);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <section className="demo-data-buttons col-12 col-md-8 col-sm-8 pb-2 px-1">
+    <>
       <TooltipWrapper
         tooltipContent={
           <>
-            <b>Test out the service</b>
+            <b>Test out random data from real APIs</b>
             <br />
-            Real data sourced from public APIs.
+            Roll the dice &amp; see how DataAnalyzer.app handles all kinds of data!
           </>
         }
       >
-        <label>
-          <InfoOutlined color="action" fontSize="small" />
-          demo:&#160;
+        <label className="demo-link" onClick={iAmFeelingLucky}>
+          <b>Test it out!&#160;&#160;</b>
+          <div className={'roll-dice ' + (currentlyLoadingData ? 'animated' : '')}></div>
         </label>
       </TooltipWrapper>
-      {sampleDataSets.map((set) => {
+      {/* {sampleDataSets.map((set) => {
         return (
           <Chip
             key={set.value}
@@ -133,8 +145,8 @@ export const DemoDataMenu = () => {
             onClick={() => loadData(set.schemaName, set.value)}
           />
         );
-      })}
-    </section>
+      })} */}
+    </>
   );
   // <DropdownMenu
   //   buttonTextOverride="Demo: Choose a Dataset"
