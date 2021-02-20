@@ -6,11 +6,11 @@ import { FormControl, Input, InputAdornment, InputLabel } from '@material-ui/cor
 import TooltipWrapper from 'components/TooltipWrapper';
 import { RootState } from 'store/rootReducer';
 
-export default function SchemaNameField() {
+export default function SchemaNameField({ className = '' }: { className: string }) {
   const dispatch = useDispatch();
   const { schemaName } = useSelector((state: RootState) => state.analysisFeature);
   return (
-    <FormControl className="schema-name-input col-md-4 col-sm-4 col-12 pb-2 pl-1">
+    <FormControl className={`schema-name-input ${className}`}>
       <TooltipWrapper
         tooltipContent={
           <>

@@ -154,7 +154,7 @@ export function CodeEditor(props: IAceEditorProps) {
       className={`resizable-editor ${props.className} `}
       // style={{ flex: results ? '1 1 100%' : '1 0 100%' }}
     >
-      <legend>
+      <legend className="col-6">
         <div>
           {statusIsError ? (
             <TooltipWrapper tooltipContent={statusMessage}>
@@ -177,7 +177,7 @@ export function CodeEditor(props: IAceEditorProps) {
         </div>
         {stepOneMessage}
       </legend>
-      <SchemaNameField />
+      <SchemaNameField className="col-md-4 col-sm-4 col-12 pb-2 pl-1" />
       <AceEditor
         placeholder="Paste your JSON or CSV data here!"
         mode="javascript"

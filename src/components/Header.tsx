@@ -72,11 +72,11 @@ export default function Header() {
           aria-label="Settings / Configuration"
         >
           <SettingsIcon fontSize="large" color="primary" />
-          <SettingsIcon fontSize="large" color="secondary" />
+          {/* <SettingsIcon fontSize="large" color="secondary" />
           <SettingsIcon fontSize="large" color="action" />
           <SettingsIcon fontSize="large" color="disabled" />
           <SettingsIcon fontSize="large" color="error" />
-          <SettingsIcon fontSize="large" color="inherit" />
+          <SettingsIcon fontSize="large" color="inherit" /> */}
         </Link>
       </aside>
       {!results ? (
