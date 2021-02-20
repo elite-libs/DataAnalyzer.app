@@ -1,3 +1,24 @@
+/**
+Breakpoint 	Class infix 	Dimensions
+X-Small 	None 	<576px
+Small 	sm 	≥576px
+Medium 	md 	≥768px
+Large 	lg 	≥992px
+Extra large 	xl 	≥1200px
+Extra extra large 	xxl 	≥1400px
+*/
+// Bootstrap breaks
+// Extra small screen / phone
+$breakpoint-xs: 0;
+// Small screen / phone
+$breakpoint-sm: 576px;
+// Medium screen / tablet
+$breakpoint-md: 768px;
+// Large screen / desktop
+$breakpoint-lg: 992px;
+// Extra large screen / wide desktop
+$breakpoint-xl: 1200px;
+
 .cursor-error {
   cursor: help;
 }
@@ -15,12 +36,21 @@
     font-size: 1.4rem;
   }
 }
+
+main > nav {
+  padding: 0.5rem;
+}
 .brand-link {
   cursor: pointer;
-
+  margin: 0.2rem 1rem;
   position: absolute;
-  top: -20px;
-  left: -1rem;
+  // top: -5px;
+  // left: -0.1rem;
+  @media (max-width: $breakpoint-sm) {
+    span {
+      display: none;
+    }
+  }
 
   img {
     margin-top: -20px;
@@ -35,10 +65,13 @@
   transform: translateX(31px) translateY(-16px);
   align-items: flex-start;
   display: flex;
-  justify-content: right;
+  justify-content: space-between;
   flex-direction: row;
 
   > a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     flex-grow: 0;
     width: 36px;
     height: 36px;

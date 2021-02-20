@@ -2,13 +2,16 @@ import React, { ReactNode } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import copy from 'clipboard-copy';
+import Panel from 'components/Layouts/Panel';
+import TooltipWrapper from 'components/TooltipWrapper';
+import useViewportSize from 'hooks/useViewportSize';
+import GetAppIcon from '@material-ui/icons/GetApp';
 
 import { ghcolors } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import SyncOutlinedIcon from '@material-ui/icons/SyncOutlined';
 import FileCopy from '@material-ui/icons/FileCopyOutlined';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Button from '@material-ui/core/Button';
-import TooltipWrapper from 'components/TooltipWrapper';
 // import InputProcessor from './InputProcessor';
 
 import type { Property } from 'csstype';
@@ -85,12 +88,11 @@ export default function CodeViewer({
 
   const isPanelSuccessState = Boolean(results);
   return (
-    <section
-      className={`generated-code ${
+    <Panel
+      className={`code-viewer ${
         isPanelSuccessState ? 'panel-success' : 'panel-error'
       } ${className}`.trim()}
-    >
-      <legend>
+      title={
         <div>
           {
             <CheckCircleIcon
@@ -100,19 +102,20 @@ export default function CodeViewer({
           }
           <span>Step #3:</span>
         </div>
-        {isPanelSuccessState ? 'Profit!' : 'Generate Code'}
-      </legend>
+      }
+      subTitle={isPanelSuccessState ? 'Profit!' : 'Generate Code'}
+    >
       {results != null ? codeToolbarUi : null}
       <SyntaxHighlighter
         language={language}
         style={ghcolors}
         showLineNumbers={true}
-        className="flex-grow-1"
+        className=""
         customStyle={{ margin: 0, maxHeight: '1600px', overflowY: 'auto' }}
         codeTagProps={{ style: { fontSize: '0.8rem' } }}
       >
         {children}
       </SyntaxHighlighter>
-    </section>
+    </Panel>
   );
 }

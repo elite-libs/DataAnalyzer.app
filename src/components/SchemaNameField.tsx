@@ -31,7 +31,7 @@ export default function SchemaNameField({ className = '' }: { className: string 
         value={schemaName}
         startAdornment={
           <InputAdornment position="start">
-            <DatabaseEditIcon width="1.5rem" height="1.5rem" />
+            <DatabaseEditIcon />
           </InputAdornment>
         }
       />

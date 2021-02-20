@@ -18,8 +18,9 @@ import { useAnalytics } from 'hooks/useAnalytics';
 import { useAutoSnackbar } from 'hooks/useAutoSnackbar';
 import { ButtonGroup } from '@material-ui/core';
 
-import useViewportSize from 'hooks/useViewportSize';
+import Panel from 'components/Layouts/Panel';
 import TooltipWrapper from 'components/TooltipWrapper';
+import useViewportSize from 'hooks/useViewportSize';
 import GetAppIcon from '@material-ui/icons/GetApp';
 
 import './OutputButtons.scss';
@@ -139,15 +140,11 @@ export const OutputButtons = ({ size = 'medium', className = '' }: Props) => {
   let isStackedViewMode = ['xs', 'sm'].includes(breakpoint!);
 
   return (
-    <section
+    <Panel
       className={`output-buttons-panel ${
         isPanelSuccessState ? 'panel-success' : 'panel-error'
       } ${className}`.trim()}
       title={
-        !isPanelSuccessState ? 'Verify your data is valid, then try again.' : undefined
-      }
-    >
-      <legend>
         <div>
           {
             <GetAppIcon
@@ -160,13 +157,13 @@ export const OutputButtons = ({ size = 'medium', className = '' }: Props) => {
           }
           <span>Step #2:</span>
         </div>
-        Select Output
-      </legend>
-
+      }
+      subTitle={'Select Output'}
+    >
       <ButtonGroup
         className="output-buttons"
         variant="outlined"
-        orientation={isStackedViewMode ? 'horizontal' : 'vertical'}
+        orientation={'horizontal'}
         disabled={!isPanelSuccessState}
       >
         {outputOptions.map(([adapter, label, icon]) => {
@@ -196,6 +193,6 @@ export const OutputButtons = ({ size = 'medium', className = '' }: Props) => {
           );
         })}
       </ButtonGroup>
-    </section>
+    </Panel>
   );
 };

@@ -1,21 +1,36 @@
 .demo-link {
-  margin: 0 auto;
+  height: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  // margin: 0.5rem auto;
 
   transition: all 0.5s ease-in;
   cursor: pointer;
-
+  text-decoration: underline;
   &:hover {
     color: #f50057;
-    border: 0.75px solid #666;
-    border-radius: 10% 50%;
+    .roll-dice {
+      animation: roll-dice 1.5s steps(6) infinite;
+      background-color: #4527a0;
+    }
   }
 }
 
-
+.roll-dice-wrapper {
+  border: 1px solid #f50057;
+  border-radius: 0.3rem;
+  width: 28px;
+  height: 28px;
+}
 .roll-dice {
+  box-sizing: border-box;
+  background-color: #f50057;
   &.animated {
-    animation: roll-dice 1.5s steps(6) infinite;
+    animation: roll-dice 0.75s steps(6) infinite;
   }
+  border-radius: 0.5rem;
   display: inline-block;
   // animation: roll-dice 1.5s steps(6) infinite;
   background-image: url(../../../public/images/dice-sprite.svg);

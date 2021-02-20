@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 export interface IViewportSize {
   width?: number;
   height?: number;
-  breakpoint?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+  breakpoint?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'xxxl';
 }
 export default function useViewportSize(): IViewportSize {
   const [windowSize, setWindowSize] = useState<IViewportSize>({

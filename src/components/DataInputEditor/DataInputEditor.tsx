@@ -16,7 +16,7 @@ import {
 } from 'store/appStateSlice';
 import { throttle } from 'lodash';
 
-import './CodeEditor.scss';
+import './DataInputEditor.scss';
 import { RootState } from 'store/rootReducer';
 import { CheckCircleIcon, ErrorIcon } from 'components/SchemaTools/AppIcons';
 import TooltipWrapper from 'components/TooltipWrapper';
@@ -25,6 +25,8 @@ import { useAutoSnackbar } from 'hooks/useAutoSnackbar';
 import { resetAnalysis } from 'store/analysisSlice';
 // import { DemoDataMenu } from 'components/DemoDataMenu';
 import SchemaNameField from 'components/SchemaNameField';
+import Panel from 'components/Layouts/Panel';
+import useViewportSize from 'hooks/useViewportSize';
 
 function getJsonParsingErrorLocation(message: string) {
   const lineAndColumnRegEx = /.*line (\d+).+column (\d+).*/;
@@ -40,7 +42,7 @@ function getJsonParsingErrorLocation(message: string) {
   };
 }
 
-export function CodeEditor(props: IAceEditorProps) {
+export function DataInputEditor(props: IAceEditorProps) {
   const dispatch = useDispatch();
   const { enqueueSnackbar } = useAutoSnackbar();
   // let aceRef: AceEditor | null = null;
@@ -55,23 +57,23 @@ export function CodeEditor(props: IAceEditorProps) {
     statusIsError,
   } = useSelector((state: RootState) => state.appStateActions);
 
-  // const getContainerSize = throttle((selector = '.resizable-editor'): DOMRect => {
-  //   const el$: HTMLBaseElement = document.querySelector(selector);
-  //   if (el$ && el$.getBoundingClientRect) {
-  //     return el$.getBoundingClientRect();
-  //   }
-  //   return {
-  //     height: NaN,
-  //     width: NaN,
-  //     x: NaN,
-  //     y: NaN,
-  //     top: NaN,
-  //     right: NaN,
-  //     bottom: NaN,
-  //     left: NaN,
-  //     toJSON: () => '{}',
-  //   };
-  // }, 60);
+  const getContainerSize = throttle((selector = '.resizable-editor'): DOMRect => {
+    const el$: HTMLBaseElement = document.querySelector(selector);
+    if (el$ && el$.getBoundingClientRect) {
+      return el$.getBoundingClientRect();
+    }
+    return {
+      height: NaN,
+      width: NaN,
+      x: NaN,
+      y: NaN,
+      top: NaN,
+      right: NaN,
+      bottom: NaN,
+      left: NaN,
+      toJSON: () => '{}',
+    };
+  }, 60);
 
   // const onResize = (w, h) => {
   //   const dim = getContainerSize('.resizable-editor');
@@ -124,6 +126,8 @@ export function CodeEditor(props: IAceEditorProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inputData]);
 
+  const viewport = useViewportSize();
+  const editorHeight = (viewport.height! * 0.9 - 232.6) / 18;
   // const isPanelReadOnly = Boolean(schema && results);
   let stepOneMessage = statusIsError
     ? statusMessage
@@ -146,15 +150,12 @@ export function CodeEditor(props: IAceEditorProps) {
         type: 'text',
       });
     }
-    console.warn('MARKERS', ...markers);
   }
 
   return (
-    <section
-      className={`resizable-editor ${props.className} `}
-      // style={{ flex: results ? '1 1 100%' : '1 0 100%' }}
-    >
-      <legend className="col-6">
+    <Panel
+      className={`data-input-editor ${props.className || ''}`}
+      title={
         <div>
           {statusIsError ? (
             <TooltipWrapper tooltipContent={statusMessage}>
@@ -175,9 +176,10 @@ export function CodeEditor(props: IAceEditorProps) {
           )}
           <span>Step #1:</span>
         </div>
-        {stepOneMessage}
-      </legend>
-      <SchemaNameField className="col-md-4 col-sm-4 col-12 pb-2 pl-1" />
+      }
+      subTitle={stepOneMessage}
+    >
+      <SchemaNameField className="col-md-12 col-sm-12 col-12 pb-2 pl-1" />
       <AceEditor
         placeholder="Paste your JSON or CSV data here!"
         mode="javascript"
@@ -189,16 +191,20 @@ export function CodeEditor(props: IAceEditorProps) {
         // readOnly={isPanelReadOnly ? true : false}
         // width={dimensions.width}
         width={'100%'}
-        height={'100%'}
+        // height={'80vh'}
         fontSize={'0.8rem'}
         showPrintMargin={false}
         showGutter={true}
+        // maxLines={(window.innerHeight * 0.4) / 12}
+        minLines={4}
+        maxLines={6}
+        debounceChangePeriod={250}
         highlightActiveLine={true}
         onChange={onChangeUpdateRawData}
         className="ace-editor"
         value={props.value}
         style={{
-          height: '100%',
+          maxHeight: '80vh',
           fontSize: '12px',
           display: 'flex',
           justifyContent: 'stretch',
@@ -216,7 +222,9 @@ export function CodeEditor(props: IAceEditorProps) {
           $blockScrolling: 1,
         }}
         setOptions={{
-          maxLines: 50,
+          minLines: 4,
+          maxLines: editorHeight,
+          // maxLines: 50,
           // readOnly: isPanelReadOnly ? true : false,
           useWorker: false,
           wrap: false,
@@ -226,6 +234,6 @@ export function CodeEditor(props: IAceEditorProps) {
           hScrollBarAlwaysVisible: false,
         }}
       />
-    </section>
+    </Panel>
   );
 }

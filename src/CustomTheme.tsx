@@ -1,20 +1,21 @@
 import React from 'react';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-// import { orange } from '@material-ui/core/colors';
+import { purple, deepPurple, pink, teal, red } from '@material-ui/core/colors';
 
 const theme = createMuiTheme({
   palette: {
     primary: {
       // light: will be calculated from palette.primary.main,
-      main: '#ff4400',
+      main: deepPurple['600'],
       // dark: will be calculated from palette.primary.main,
       // contrastText: will be calculated to contrast with palette.primary.main
     },
     secondary: {
-      light: '#0066ff',
-      main: '#0044ff',
-      // dark: will be calculated from palette.secondary.main,
-      contrastText: '#ffcc00',
+      main: teal['500'],
+      // light: '#0066ff',
+      // main: '#0044ff',
+      // // dark: will be calculated from palette.secondary.main,
+      // contrastText: '#ffcc00',
     },
     // Used by `getContrastText()` to maximize the contrast between
     // the background and the text.

@@ -128,7 +128,11 @@ export const DemoDataMenu = () => {
       >
         <label className="demo-link" onClick={iAmFeelingLucky}>
           <b>Test it out!&#160;&#160;</b>
-          <div className={'roll-dice ' + (currentlyLoadingData ? 'animated' : '')}></div>
+          <div className="roll-dice-wrapper">
+            <div
+              className={'roll-dice ' + (currentlyLoadingData ? 'animated' : '')}
+            ></div>
+          </div>
         </label>
       </TooltipWrapper>
       {/* {sampleDataSets.map((set) => {

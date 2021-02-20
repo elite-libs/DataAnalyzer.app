@@ -44,28 +44,23 @@ export default function Header() {
 
   return (
     <nav className="row row-block w-100">
-      <h1 className="col-10 col-sm-8" title="Reset/Load Home Screen">
+      <h1 className="col-12 col-sm-6" title="Reset/Load Home Screen">
         <Link className="brand-link" component={RouteLink} to="/" onClick={resetResults}>
           <img src={AppIcon} alt="Data Analyzer app icon" />
           DataAnalyzer.app
         </Link>
       </h1>
-      <aside className="icon-button-box col-2 col-sm-4 text-right">
+      <aside className="icon-button-box col-12 col-sm-6 text-right">
         <DemoDataMenu />
 
-        <Link
-          className={'py-2 mx-2'}
-          component={RouteLink}
-          to="/about"
-          title="View README"
-        >
+        <Link className={''} component={RouteLink} to="/about" title="View README">
           <InfoOutlinedIcon fontSize="small" color="action" />
         </Link>
-        <Link className={'py-2 mx-2'} target="_blank" href={pkg.repository.url}>
+        <Link className={''} target="_blank" href={pkg.repository.url}>
           <GitHubIcon fontSize="small" color="action" />
         </Link>
         <Link
-          className={'py-2 mx-2'}
+          className={''}
           component={RouteLink}
           to="/options"
           title="Settings / Configuration"
@@ -85,7 +80,7 @@ export default function Header() {
         <Breadcrumbs
           separator={<span className="divider d-md-block d-none">|</span>}
           aria-label="breadcrumb"
-          className="col-md-4 col-sm-4 col-12 pb-2 px-1"
+          className="col-sm-12 col-12 pb-2 px-1"
         >
           <Link component={RouteLink} to="/" onClick={resetResults}>
             <HomeOutlinedIcon />

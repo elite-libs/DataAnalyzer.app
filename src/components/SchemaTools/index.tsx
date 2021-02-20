@@ -1,30 +1,17 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-
-import LoadingSpinner from 'components/LoadingSpinner';
-
-import { OutputButtons } from '../OutputButtons/OutputButtons';
-// import { AdapterNames, render } from './adapters/writers';
-// import { schemaAnalyzer } from '../../schema-analyzer/index';
-
-// import { setResults, setSchema, resetAnalysis } from 'store/analysisSlice';
-import type { RootState } from 'store/rootReducer';
-// import { setOptions } from 'store/optionsSlice';
-// import { resetStatusMessage } from 'store/appStateSlice';
-
-// import { useAutoSnackbar } from 'hooks/useAutoSnackbar';
-// import { useAnalytics } from 'hooks/useAnalytics';
-// import useAppMessages from 'hooks/useAppMessages';
+import Paper from '@material-ui/core/Paper';
 import Header from 'components/Header';
-import { CodeEditor } from 'components/CodeEditor';
+import HomePage from 'components/HomePage/HomePage';
+import LoadingSpinner from 'components/LoadingSpinner';
 import useViewportSize from 'hooks/useViewportSize';
+import type { RootState } from 'store/rootReducer';
 
 import './index.scss';
-import AdvancedOptionsForm from './AdvancedOptionsForm';
-import NotFoundPage from 'components/NotFoundPage/NotFoundPage';
 
-const CodeViewer = lazy(() => import('./ResultsView/CodeViewer'));
+const AdvancedOptionsForm = lazy<any>(() => import('./AdvancedOptionsForm'));
+const NotFoundPage = lazy<any>(() => import('components/NotFoundPage/NotFoundPage'));
 const SchemaExplorerComponent = lazy<any>(() => import('./ResultsView/SchemaExplorer'));
 const AboutPage = lazy(() => import('../../AboutPage'));
 
@@ -59,59 +46,36 @@ export default function SchemaTools() {
   if (results) classModifier += ' results-loaded';
   if (parsedInput) classModifier += ' parsed-input-loaded';
 
-  let userInstructions =
-    parsedInput == null
-      ? `Make sure your input data is valid!`
-      : `Choose a code generator button to continue!`;
-
   return (
     <>
-      <main
-        className={`${classModifier} current-${breakpoint} shadow-lg p-3 m-3 bg-white rounded`}
+      <Paper
+        className={`current-${breakpoint} ${classModifier} shadow-lg p-3 bg-white rounded`}
       >
         <Router>
           <Header />
           <Suspense fallback={<LoadingSpinner />}>
-            <Switch>
-              <Route path="/" exact>
-                <section className="page">
-                  <>
-                    {/* <InputProcessor className="data-input flex-grow-1" /> */}
-                    <CodeEditor
-                      value={inputData || undefined}
-                      // height="80vh"
-                      className="col-12 col-md-5 px-0"
-                    />
-                    <OutputButtons
-                      size={isStackedViewMode ? 'small' : 'large'}
-                      className="col-12 col-md-2"
-                    />
-                    <CodeViewer className="col-12 col-md-5 px-0">
-                      {results || `// ${userInstructions}`}
-                    </CodeViewer>
-                  </>
-                </section>
-              </Route>
-              <Route path="/options" exact>
-                <AdvancedOptionsForm />
-              </Route>
-              <Route path="/about" exact>
-                <section>
+            <section className="page">
+              <Switch>
+                <Route path="/" exact>
+                  <HomePage />
+                </Route>
+                <Route path="/options" exact>
+                  <AdvancedOptionsForm />
+                </Route>
+                <Route path="/about" exact>
                   <AboutPage></AboutPage>
-                </section>
-              </Route>
-              <Route path="/results/explorer">
-                <section>
-                  <SchemaExplorerComponent schemaResults={schema} />
-                </section>
-              </Route>
-              <Route>
-                <NotFoundPage />
-              </Route>
-            </Switch>
+                </Route>
+                <Route path="/results/explorer">
+                  <SchemaExplorerComponent />
+                </Route>
+                <Route>
+                  <NotFoundPage />
+                </Route>
+              </Switch>
+            </section>
           </Suspense>
         </Router>
-      </main>
+      </Paper>
     </>
   );
 }
