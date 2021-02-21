@@ -29,7 +29,7 @@ export type ICodeGeneratorArgs = {
   className?: string;
 };
 
-export default function CodeViewer({
+export default function CodePreviewPanel({
   language = 'typescript',
   children,
   className = '',

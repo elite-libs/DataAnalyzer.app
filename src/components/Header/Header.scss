@@ -1,0 +1,37 @@
+$breakpoint-xs: 0;
+// Small screen / phone
+$breakpoint-sm: 576px;
+// Medium screen / tablet
+$breakpoint-md: 768px;
+// Large screen / desktop
+$breakpoint-lg: 992px;
+// Extra large screen / wide desktop
+$breakpoint-xl: 1200px;
+
+.brand-link {
+  cursor: pointer;
+  margin: 0.2rem 1rem;
+  position: absolute;
+  // top: -5px;
+  // left: -0.1rem;
+  @media (max-width: $breakpoint-sm) {
+    span {
+      display: none;
+    }
+  }
+
+  img {
+    margin-top: -20px;
+    margin-left: -10px;
+    margin-right: 10px;
+    width: 55px;
+    height: 55px;
+  }
+}
+
+.current-xs,
+.current-sm {
+  .brand-link {
+    font-size: 1.4rem;
+  }
+}

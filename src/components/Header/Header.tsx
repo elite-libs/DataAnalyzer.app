@@ -1,5 +1,5 @@
 import React from 'react';
-import pkg from '../../package.json';
+import pkg from '../../../package.json';
 
 import AppIcon from 'images/DataAnalyzerDualColor.svg';
 
@@ -19,7 +19,9 @@ import TooltipWrapper from 'components/TooltipWrapper';
 import { setResults, setSchema } from 'store/analysisSlice';
 import useAppMessages from 'hooks/useAppMessages';
 import { RootState } from 'store/rootReducer';
-import { DemoDataMenu } from './DemoDataMenu';
+import { DemoDataMenu } from '../DemoDataMenu';
+
+import './Header.scss';
 
 export default function Header() {
   const dispatch = useDispatch();

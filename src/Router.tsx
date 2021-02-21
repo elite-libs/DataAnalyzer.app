@@ -1,21 +1,25 @@
 import React, { Suspense, lazy } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Paper from '@material-ui/core/Paper';
-import Header from 'components/Header';
-import HomePage from 'components/HomePage/HomePage';
+import HomePage from 'pages/HomePage/HomePage';
+import Header from 'components/Header/Header';
 import LoadingSpinner from 'components/LoadingSpinner';
 import useViewportSize from 'hooks/useViewportSize';
 import type { RootState } from 'store/rootReducer';
 
-import './index.scss';
+// import './index.scss';
 
-const AdvancedOptionsForm = lazy<any>(() => import('./AdvancedOptionsForm'));
-const NotFoundPage = lazy<any>(() => import('components/NotFoundPage/NotFoundPage'));
-const SchemaExplorerComponent = lazy<any>(() => import('./ResultsView/SchemaExplorer'));
-const AboutPage = lazy(() => import('../../AboutPage'));
+const AdvancedOptionsForm = lazy<any>(
+  () => import('./components/SchemaTools/AdvancedOptionsForm'),
+);
+const SchemaExplorerComponent = lazy<any>(
+  () => import('./components/SchemaTools/ResultsView/SchemaExplorer'),
+);
+const AboutPage = lazy(() => import('./pages/AboutPage/AboutPage'));
+const NotFoundPage = lazy<any>(() => import('./pages/NotFoundPage/NotFoundPage'));
 
-export default function SchemaTools() {
+export default function Router() {
   // const dispatch = useDispatch();
   // const { trackCustomEvent } = useAnalytics();
   // const { enqueueSnackbar } = useAutoSnackbar();
@@ -49,9 +53,10 @@ export default function SchemaTools() {
   return (
     <>
       <Paper
+        component="main"
         className={`current-${breakpoint} ${classModifier} shadow-lg p-3 bg-white rounded`}
       >
-        <Router>
+        <BrowserRouter>
           <Header />
           <Suspense fallback={<LoadingSpinner />}>
             <section className="page">
@@ -74,7 +79,7 @@ export default function SchemaTools() {
               </Switch>
             </section>
           </Suspense>
-        </Router>
+        </BrowserRouter>
       </Paper>
     </>
   );

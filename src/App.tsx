@@ -1,12 +1,12 @@
 import React from 'react';
-import SchemaTools from './components/SchemaTools';
+import Router from './Router';
 import { SnackbarProvider } from 'notistack';
 
 export default function App() {
   return (
     <SnackbarProvider disableWindowBlurListener={false}>
       <div className="App container-xl">
-        <SchemaTools />
+        <Router />
         {/* <NavBar />  */}
         {/* <Header /> */}
         {/* <AdvancedOptionsForm

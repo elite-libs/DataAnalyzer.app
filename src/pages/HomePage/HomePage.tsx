@@ -1,11 +1,13 @@
 import React, { lazy } from 'react';
 import type { RootState } from 'store/rootReducer';
 import useViewportSize from 'hooks/useViewportSize';
-import { OutputButtons } from '../OutputButtons/OutputButtons';
+import { OutputButtons } from 'components/OutputButtons/OutputButtons';
 import { DataInputEditor } from 'components/DataInputEditor';
 import { useSelector } from 'react-redux';
 import './HomePage.scss';
-const CodeViewer = lazy(() => import('../SchemaTools/ResultsView/CodeViewer'));
+const CodePreviewPanel = lazy(
+  () => import('components/SchemaTools/ResultsView/CodePreviewPanel'),
+);
 
 /**
  * 3 column layout, where the last 2 can stack vertically on mid-size screens
@@ -38,7 +40,9 @@ export default function HomePage() {
     <section className="home-layout">
       <DataInputEditor value={inputData || undefined} />
       <OutputButtons size={isStackedViewMode ? 'small' : 'large'} className="" />
-      <CodeViewer className="">{results || `// ${userInstructions}`}</CodeViewer>
+      <CodePreviewPanel className="">
+        {results || `// ${userInstructions}`}
+      </CodePreviewPanel>
     </section>
   );
 }
