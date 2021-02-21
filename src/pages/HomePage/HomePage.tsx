@@ -5,9 +5,7 @@ import { OutputButtons } from 'components/OutputButtons/OutputButtons';
 import { DataInputEditor } from 'components/DataInputEditor';
 import { useSelector } from 'react-redux';
 import './HomePage.scss';
-const CodePreviewPanel = lazy(
-  () => import('components/SchemaTools/ResultsView/CodePreviewPanel'),
-);
+const CodePreviewPanel = lazy(() => import('components/CodePreviewPanel'));
 
 /**
  * 3 column layout, where the last 2 can stack vertically on mid-size screens

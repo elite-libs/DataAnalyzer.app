@@ -1,6 +1,6 @@
 import { camelCase } from 'lodash';
-import { CombinedFieldInfo } from '../../../schema-analyzer';
-import { properCase, removeBlankLines } from '../helpers';
+import { CombinedFieldInfo } from '../schema-analyzer';
+import { properCase, removeBlankLines } from 'helpers';
 import { IDataAnalyzerWriter, IRenderArgs } from './writers';
 const typeMap: { [k: string]: string } = {
   $ref: 'string',

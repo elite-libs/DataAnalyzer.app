@@ -1,57 +1,32 @@
 import React from 'react';
+import { useHistory } from 'react-router';
 import { useForm, Controller } from 'react-hook-form';
-// import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
-// import Input from '@material-ui/core/Input'
 import Checkbox from '@material-ui/core/Checkbox';
 import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
-// import Collapse from '@material-ui/core/Collapse';
 import SettingsIcon from '@material-ui/icons/Settings';
 import SaveIcon from '@material-ui/icons/Save';
 import CloseIcon from '@material-ui/icons/Close';
 import { useDispatch, useSelector } from 'react-redux';
 import { setOptions } from 'store/optionsSlice';
-// import { RootState } from 'store/rootReducer';
 
-import './AdvancedOptionsForm.scss';
 import { setResults, setSchema } from 'store/analysisSlice';
-import { useHistory } from 'react-router';
-import { CardHeader } from '@material-ui/core';
+import './AdvancedOptionsForm.scss';
+import { RootState } from 'store/rootReducer';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    // transform: 'scale(1.25)',
-    // margin: '0',
-    // width: '42px',
-    // minWidth: '0',
-    // maxWidth: '42px',
-    // marginRight: '-23px',
-    // marginTop: '-10px',
     zIndex: 10,
   },
-  // header: {
-  //   padding: '0.5rem',
-  //   maxWidth: '64px',
-  //   maxHeight: '64px'
-  // },
   margin: {
     height: theme.spacing(3),
   },
-  // expand: {
-  //   // transform: 'rotate(0deg)',
-  //   // marginLeft: 'auto',
-  //   // transition: theme.transitions.create('transform', {
-  //   //   duration: theme.transitions.duration.shortest,
-  //   // }),
-  // },
-  // expandOpen: {
-  //   transform: 'rotate(180deg)',
-  // },
   form: {
     width: '100%',
     "& [type='range']": {
@@ -61,53 +36,14 @@ const useStyles = makeStyles((theme) => ({
   },
   parentPanel: {},
   panel: {
-    // position: 'absolute',
     background:
       'linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(245,245,245,0.98) 25%, rgba(245,245,245,0.98) 75%, rgba(255,255,255,1) 100%)' /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */,
     zIndex: 10000,
-    // overflowY: 'hidden',
   },
-  panelContent: {
-    // position: 'relative',
-    // margin: 0,
-    // top: '0.45rem',
-    // // background: 'rgba(245, 245, 245, 0.985)',
-    // height: '100%',
-    // maxHeight: '50vh',
-    // overflowY: 'auto',
-    // minWidth: '400px',
-    // zIndex: 10,
-  },
+  panelContent: {},
 }));
 
-// const WrapWithLabel = ({ label, children }) => <section className='form-field'>
-//   <Typography as='label'>{label}: </Typography>
-//   {children}
-// </section>
-
-// const SliderField = ({ name, label, value, control, ...args }) => (<WrapWithLabel label={label}>
-//   <Controller
-//     as={Slider}
-//     {...args}
-//     valueLabelDisplay='auto'
-//     aria-label={label}
-//     name={name}
-//     control={control}
-//     defaultValue={value}
-//   />
-// </WrapWithLabel>)
-// // React.forwardRef((props, ref) => {
-// const RangeInputField = React.forwardRef(({ name, label, value, control, register, ...args }, ref) => (<WrapWithLabel label={label}>
-//   <input
-//     type='number'
-//     name={name}
-//     aria-label={label}
-//     defaultValue={value}
-//     ref={ref}
-//     {...args}
-//   />
-// </WrapWithLabel>))
-const percentFormatter = new Intl.NumberFormat({
+const percentFormatter = new Intl.NumberFormat(['en-US', 'en'], {
   style: 'percent',
   minimumFractionDigits: 2,
 });
@@ -117,7 +53,7 @@ const formatPercent = (number) =>
 export default function AdvancedOptionsForm({ className = '' }) {
   const history = useHistory();
   const dispatch = useDispatch();
-  const options = useSelector((state) => state.optionsActions);
+  const options = useSelector((state: RootState) => state.optionsActions);
   // const { schemaName } = useSelector((state) => state.analysisFeature);
   const classes = useStyles();
   const methods = useForm({ defaultValues: options });
@@ -148,8 +84,7 @@ export default function AdvancedOptionsForm({ className = '' }) {
   const displayNullableRowsThreshold = formatPercent(
     100.0 * watch('nullableRowsThreshold'),
   );
-  const displayUniqueRowsThreshold =
-    100 - formatPercent(100.0 * watch('uniqueRowsThreshold'));
+  const displayUniqueRowsThreshold = formatPercent(100.0 * watch('uniqueRowsThreshold'));
 
   return (
     <>

@@ -19,7 +19,7 @@ import type { RootState } from 'store/rootReducer';
 import { resetAnalysis } from 'store/analysisSlice';
 import { useAutoSnackbar } from 'hooks/useAutoSnackbar';
 
-import './ResultsView.scss';
+import './CodePreviewPanel.scss';
 import { CheckCircleIcon } from '../AppIcons';
 
 export type ICodeGeneratorArgs = {
@@ -111,7 +111,7 @@ export default function CodePreviewPanel({
         style={ghcolors}
         showLineNumbers={true}
         className=""
-        customStyle={{ margin: 0, maxHeight: '1600px', overflowY: 'auto' }}
+        customStyle={{ margin: 0, overflowY: 'auto' }}
         codeTagProps={{ style: { fontSize: '0.8rem' } }}
       >
         {children}

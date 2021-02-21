@@ -3,8 +3,8 @@ import {
   NumericFieldInfo,
   TypeNameStringComposite,
   TypeNameStringDecimal,
-} from '../../../schema-analyzer';
-import { properCase, removeBlankLines } from '../helpers';
+} from '../schema-analyzer';
+import { properCase, removeBlankLines } from 'helpers';
 import type { IDataAnalyzerWriter, IRenderArgs } from './writers';
 
 const writer: IDataAnalyzerWriter = {

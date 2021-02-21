@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { AdapterNames } from 'components/SchemaTools/adapters/writers';
+import { AdapterNames } from 'adapters/writers';
 
 type State = {
   outputAdapter: AdapterNames;

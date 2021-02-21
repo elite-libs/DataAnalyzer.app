@@ -6,20 +6,18 @@ import HomePage from 'pages/HomePage/HomePage';
 import Header from 'components/Header/Header';
 import LoadingSpinner from 'components/LoadingSpinner';
 import useViewportSize from 'hooks/useViewportSize';
+import { cssVariablesFromMuiTheme } from 'CustomTheme';
+import { withStyles } from '@material-ui/core';
 import type { RootState } from 'store/rootReducer';
 
 // import './index.scss';
 
-const AdvancedOptionsForm = lazy<any>(
-  () => import('./components/SchemaTools/AdvancedOptionsForm'),
-);
-const SchemaExplorerComponent = lazy<any>(
-  () => import('./components/SchemaTools/ResultsView/SchemaExplorer'),
-);
+const AdvancedOptionsForm = lazy<any>(() => import('components/AdvancedOptionsForm'));
+const SchemaExplorerComponent = lazy<any>(() => import('components/SchemaExplorer'));
 const AboutPage = lazy(() => import('./pages/AboutPage/AboutPage'));
 const NotFoundPage = lazy<any>(() => import('./pages/NotFoundPage/NotFoundPage'));
 
-export default function Router() {
+function Router() {
   // const dispatch = useDispatch();
   // const { trackCustomEvent } = useAnalytics();
   // const { enqueueSnackbar } = useAutoSnackbar();
@@ -51,36 +49,36 @@ export default function Router() {
   if (parsedInput) classModifier += ' parsed-input-loaded';
 
   return (
-    <>
-      <Paper
-        component="main"
-        className={`current-${breakpoint} ${classModifier} shadow-lg p-3 bg-white rounded`}
-      >
-        <BrowserRouter>
-          <Header />
-          <Suspense fallback={<LoadingSpinner />}>
-            <section className="page">
-              <Switch>
-                <Route path="/" exact>
-                  <HomePage />
-                </Route>
-                <Route path="/options" exact>
-                  <AdvancedOptionsForm />
-                </Route>
-                <Route path="/about" exact>
-                  <AboutPage></AboutPage>
-                </Route>
-                <Route path="/results/explorer">
-                  <SchemaExplorerComponent />
-                </Route>
-                <Route>
-                  <NotFoundPage />
-                </Route>
-              </Switch>
-            </section>
-          </Suspense>
-        </BrowserRouter>
-      </Paper>
-    </>
+    <Paper
+      component="main"
+      className={`current-${breakpoint} ${classModifier} shadow-lg p-3 bg-white rounded`}
+    >
+      <BrowserRouter>
+        <Header />
+        <Suspense fallback={<LoadingSpinner />}>
+          <section className="page">
+            <Switch>
+              <Route path="/" exact>
+                <HomePage />
+              </Route>
+              <Route path="/options" exact>
+                <AdvancedOptionsForm />
+              </Route>
+              <Route path="/about" exact>
+                <AboutPage></AboutPage>
+              </Route>
+              <Route path="/results/explorer">
+                <SchemaExplorerComponent />
+              </Route>
+              <Route>
+                <NotFoundPage />
+              </Route>
+            </Switch>
+          </section>
+        </Suspense>
+      </BrowserRouter>
+    </Paper>
   );
 }
+
+export default Router;

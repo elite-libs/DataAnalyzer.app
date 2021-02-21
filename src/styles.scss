@@ -24,8 +24,9 @@ $breakpoint-xl: 1200px;
 }
 
 main {
-  min-height: 80vh;
+  min-height: 85vh;
   max-height: 94vh;
+  overflow-y: auto;
   // height: fit-content;
   // height: 95vh;
   flex-direction: column;

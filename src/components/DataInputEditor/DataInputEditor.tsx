@@ -1,13 +1,9 @@
 import React from 'react';
 import AceEditor, { IAceEditorProps } from 'react-ace';
-// import ReactResizeDetector from 'react-resize-detector';
-// import { Ace } from 'ace-builds';
-// import 'ace-builds/webpack-resolver';
 import 'ace-builds/src-noconflict/mode-javascript';
 import 'ace-builds/src-noconflict/theme-github';
-// import 'ace-builds/src-noconflict/theme-github';
 import { useDispatch, useSelector } from 'react-redux';
-import { parse } from 'components/SchemaTools/adapters/readers';
+import { parse } from 'adapters/readers';
 import {
   setInputData,
   setParsedInput,
@@ -18,7 +14,7 @@ import { throttle } from 'lodash';
 
 import './DataInputEditor.scss';
 import { RootState } from 'store/rootReducer';
-import { CheckCircleIcon, ErrorIcon } from 'components/SchemaTools/AppIcons';
+import { CheckCircleIcon, ErrorIcon } from 'components/AppIcons';
 import TooltipWrapper from 'components/TooltipWrapper';
 import { useAutoSnackbar } from 'hooks/useAutoSnackbar';
 // import { Ace } from 'ace-builds';

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { DatabaseEditIcon } from './SchemaTools/AppIcons';
+import { DatabaseEditIcon } from 'components/AppIcons';
 import { setSchemaName } from 'store/analysisSlice';
 import { FormControl, Input, InputAdornment, InputLabel } from '@material-ui/core';
 import TooltipWrapper from 'components/TooltipWrapper';

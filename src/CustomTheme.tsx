@@ -1,8 +1,8 @@
 import React from 'react';
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import { createMuiTheme, Theme, ThemeProvider } from '@material-ui/core/styles';
 import { purple, blue, pink, teal, red } from '@material-ui/core/colors';
 
-export const theme = createMuiTheme({
+export const muiTheme = createMuiTheme({
   palette: {
     primary: {
       // light: will be calculated from palette.primary.main,
@@ -30,6 +30,26 @@ export const theme = createMuiTheme({
   // },
 });
 
-export default function Theme({ children }) {
-  return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
+// const getObjectPrefix = ({prefix, nextKey, obj}: {prefix: string, nextKey: string, obj: object}) => {
+//   [].flatMap()
+//   getObjectPrefix('')
+// }
+
+export const cssVariablesFromMuiTheme = (theme: Theme = muiTheme) => (
+  <style>
+    {`    :root: {
+      --color-primary: ${theme.palette.primary.main};
+      --color-secondary: ${theme.palette.secondary.main};
+      --color-success: ${theme.palette.success.main};
+      --color-info: ${theme.palette.info.main};
+      --color-warning: ${theme.palette.warning.main};
+      --color-error: ${theme.palette.error.main};
+      --color-background: ${theme.palette.background.default};
+    }
+`}
+  </style>
+);
+
+export default function CustomTheme({ children }) {
+  return <ThemeProvider theme={muiTheme}>{children}</ThemeProvider>;
 }

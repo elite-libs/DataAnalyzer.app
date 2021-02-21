@@ -2,14 +2,9 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store/rootReducer';
 import Button from '@material-ui/core/Button';
-import {
-  PostgresIcon,
-  MongoDbIcon,
-  TypeScriptIcon,
-  KnexIcon,
-} from '../SchemaTools/AppIcons';
+import { PostgresIcon, MongoDbIcon, TypeScriptIcon, KnexIcon } from 'components/AppIcons';
 
-import { AdapterNames, render } from '../SchemaTools/adapters/writers';
+import { AdapterNames, render } from 'adapters/writers';
 import { schemaAnalyzer } from 'schema-analyzer/index';
 import { setOptions } from 'store/optionsSlice';
 import { setResults, setSchema } from 'store/analysisSlice';

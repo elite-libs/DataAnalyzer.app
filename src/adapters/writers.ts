@@ -9,7 +9,7 @@ import {
   helpers,
   CombinedFieldInfo,
   FieldInfo,
-} from '../../../schema-analyzer/index';
+} from '../schema-analyzer/index';
 
 export interface IDataAnalyzerWriter {
   render(options: IRenderArgs): string;

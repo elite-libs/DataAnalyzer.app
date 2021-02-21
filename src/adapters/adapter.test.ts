@@ -5,15 +5,15 @@ import {
   helpers,
   FieldTypeSummary,
   TypeSummary,
-} from '../../../schema-analyzer/index';
+} from '../schema-analyzer/index';
 
 const flattenTypes = helpers.flattenTypes;
 import knex from './writer.knex';
 import typescript from './writer.typescript';
 import mongoose from './writer.mongoose';
-import users from '../../../../public/data/users.example.json';
-import usersSparse from '../../../../public/data/user_sparse-subtypes.json';
-import people from '../../../../public/data/swapi-people.json';
+import users from '../../public/data/users.example.json';
+import usersSparse from '../../public/data/user_sparse-subtypes.json';
+import people from '../../public/data/swapi-people.json';
 // import commerceDeptNews from '../../../../public/data/commerce-dept-news.json';
 import path from 'path';
 import fs from 'fs';
