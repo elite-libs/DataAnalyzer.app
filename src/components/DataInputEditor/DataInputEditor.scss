@@ -1,3 +1,11 @@
+.data-input-editor {
+  .panel-body {
+    .ace_editor {
+      max-height: 40vh;
+    }
+  }
+}
+
 .resizable {
   overflow: auto;
   resize: both;

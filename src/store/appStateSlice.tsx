@@ -29,7 +29,7 @@ const slice = createSlice({
     },
     setInputData(state, action: PayloadAction<string | undefined | null>) {
       let { payload } = action;
-      payload = `${payload}`.trim();
+      payload = `${payload}`;
       if (payload === state.inputData) return;
       state.inputData = payload;
       return state;

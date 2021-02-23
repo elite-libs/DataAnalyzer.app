@@ -4,8 +4,8 @@ import './styles.scss';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import store from './store/store';
-import CustomTheme, { cssVariablesFromMuiTheme } from './CustomTheme';
-import { Theme, withStyles } from '@material-ui/core';
+import CustomTheme from './CustomTheme';
+// import { Theme, withStyles } from '@material-ui/core';
 import Router from 'Router';
 import { SnackbarProvider } from 'notistack';
 

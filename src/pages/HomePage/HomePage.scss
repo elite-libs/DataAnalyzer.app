@@ -31,7 +31,7 @@ $breakpoint-xl: 1200px;
   align-content: stretch;
   @media (max-width: $breakpoint-sm) {
     grid-template-columns: 1fr;
-    grid-template-rows: minmax(220px, 1fr) 130px minmax(200px, 1fr);
+    grid-template-rows: minmax(210px, 40vh) 130px minmax(200px, 1fr);
   }
 
   // grid-auto-rows: minmax(100px, auto);
@@ -40,15 +40,15 @@ $breakpoint-xl: 1200px;
 
 .home-layout {
   @extend %three-column-stacking-layout;
-  max-height: 80vh;
-  overflow-y: auto;
-  padding: 4px;
-  @media (max-height: 600) {
-    max-height: 80vh;
-  }
-  @media (max-height: 800) {
-    max-height: 90vh;
-  }
+  // max-height: 80vh;
+  // overflow-y: auto;
+  // padding: 4px;
+  // @media (max-height: 600) {
+  //   max-height: 80vh;
+  // }
+  // @media (max-height: 800) {
+  //   max-height: 90vh;
+  // }
   .MuiPaper-root {
     overflow-y: auto;
   }

@@ -1,7 +1,14 @@
-// .generated-code-toolbar {
-//   position: absolute;
-//   opacity: 0.82;
-//   right: 12px;
-//   top: 22px;
-//   z-index: 50;
-// }
+.code-viewer {
+  .panel-body {
+    position: relative;
+    pre {
+      max-height: 40vh;
+    }
+  }
+}
+.generated-code-toolbar {
+  position: absolute;
+  right: 0rem;
+  top: -0.4rem;
+  z-index: 10000;
+}

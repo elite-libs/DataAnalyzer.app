@@ -21,9 +21,9 @@ const slice = createSlice({
   name: 'analysis',
   initialState,
   reducers: {
-    setSchemaName(state, action: PayloadAction<string | undefined | null>) {
+    setSchemaName(state, action: PayloadAction<string | null>) {
       const { payload } = action;
-      state.schemaName = payload || 'SchemaName';
+      state.schemaName = payload;
       state.results = null;
       state.resultsTimestamp = null;
       return state;

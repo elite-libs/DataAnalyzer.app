@@ -139,7 +139,7 @@ export const OutputButtons = ({ size = 'medium', className = '' }: Props) => {
       className={`output-buttons-panel ${
         isPanelSuccessState ? 'panel-success' : 'panel-error'
       } ${className}`.trim()}
-      title={
+      titleComponent={
         <div>
           {
             <GetAppIcon

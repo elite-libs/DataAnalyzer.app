@@ -24,32 +24,39 @@ $breakpoint-xl: 1200px;
 }
 
 main {
-  min-height: 85vh;
-  max-height: 94vh;
-  overflow-y: auto;
+  // min-height: 85vh;
+  // max-height: 94vh;
+  // overflow-y: auto;
   // height: fit-content;
   // height: 95vh;
+  position: absolute;
+  bottom: 2rem;
+  top: 0;
+  right: 1rem;
+  left: 1rem;
+
   flex-direction: column;
   display: flex;
 
-  margin: 0.25rem !important;
+  // margin: 0.25rem !important;
 
   &.current-xs {
-    margin: 0rem !important;
+    position: static;
+    margin: 0 0 2rem 0;
   }
   &.current-sm {
-    margin: 0rem !important;
-    max-height: auto;
+    position: static;
+    margin: 0 0 2rem 0;
   }
-  &.current-md {
-    margin: 0rem !important;
-  }
-  &.current-lg {
-    margin: 1rem !important;
-  }
-  &.current-xl {
-    margin: 0rem 2.5rem 2rem 2.5rem !important;
-  }
+  // &.current-md {
+  //   margin: 0rem !important;
+  // }
+  // &.current-lg {
+  //   margin: 1rem !important;
+  // }
+  // &.current-xl {
+  //   margin: 0rem 2.5rem 2rem 2.5rem !important;
+  // }
 }
 
 .schema-options {
@@ -80,7 +87,7 @@ main {
 
 a.unlocked {
   cursor: pointer;
-  color: #469408;
+  // color: #469408;
   font-weight: 500;
 }
 a.locked {

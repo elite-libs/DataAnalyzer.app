@@ -8,6 +8,9 @@ $breakpoint-lg: 992px;
 // Extra large screen / wide desktop
 $breakpoint-xl: 1200px;
 
+h1 {
+  min-height: 45px;
+}
 .brand-link {
   cursor: pointer;
   margin: 0.2rem 1rem;

@@ -6,25 +6,25 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import Paper from '@material-ui/core/Paper';
+import Paper, { PaperProps } from '@material-ui/core/Paper';
 
+import './Panel.scss';
 // const useStyles = makeStyles({
 //   root: {},
 // });
 
 type Props = {
-  title: ReactNode | string;
+  titleComponent: ReactNode | string;
   subTitle?: ReactNode | string | null;
   children: ReactNode;
   actions?: typeof Button[] | null;
   className?: string | null;
-};
+} & PaperProps;
 
-export default function Panel({ title, subTitle, children, actions, className }: Props) {
-  // const classes = useStyles();
-
+export default React.forwardRef<any, Props>((props, ref) => {
+  const { titleComponent: title, subTitle, children, actions, className } = props;
   return (
-    <Paper elevation={2} className={`${className || ''} panel-component`}>
+    <Paper elevation={2} className={`${className || ''} panel-component`} ref={ref}>
       <Card>
         <CardContent>
           <div className="panel-header">
@@ -49,4 +49,4 @@ export default function Panel({ title, subTitle, children, actions, className }:
       </Card>
     </Paper>
   );
-}
+});

@@ -92,7 +92,7 @@ export default function CodePreviewPanel({
       className={`code-viewer ${
         isPanelSuccessState ? 'panel-success' : 'panel-error'
       } ${className}`.trim()}
-      title={
+      titleComponent={
         <div>
           {
             <CheckCircleIcon
@@ -110,7 +110,6 @@ export default function CodePreviewPanel({
         language={language}
         style={ghcolors}
         showLineNumbers={true}
-        className=""
         customStyle={{ margin: 0, overflowY: 'auto' }}
         codeTagProps={{ style: { fontSize: '0.8rem' } }}
       >

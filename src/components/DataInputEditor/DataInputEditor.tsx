@@ -39,6 +39,7 @@ function getJsonParsingErrorLocation(message: string) {
 }
 
 export function DataInputEditor(props: IAceEditorProps) {
+  let $panelEl = document.querySelector('.data-input-editor');
   const dispatch = useDispatch();
   const { enqueueSnackbar } = useAutoSnackbar();
   // let aceRef: AceEditor | null = null;
@@ -52,33 +53,6 @@ export function DataInputEditor(props: IAceEditorProps) {
     statusMessage,
     statusIsError,
   } = useSelector((state: RootState) => state.appStateActions);
-
-  const getContainerSize = throttle((selector = '.resizable-editor'): DOMRect => {
-    const el$: HTMLBaseElement = document.querySelector(selector);
-    if (el$ && el$.getBoundingClientRect) {
-      return el$.getBoundingClientRect();
-    }
-    return {
-      height: NaN,
-      width: NaN,
-      x: NaN,
-      y: NaN,
-      top: NaN,
-      right: NaN,
-      bottom: NaN,
-      left: NaN,
-      toJSON: () => '{}',
-    };
-  }, 60);
-
-  // const onResize = (w, h) => {
-  //   const dim = getContainerSize('.resizable-editor');
-  //   setDimensions({
-  //     height: `${dim?.height}px` || h,
-  //     width: `${dim?.width! - 30}px` || w,
-  //   });
-  //   console.log({ dimensions });
-  // };
 
   const onChangeUpdateRawData = (newValue) => {
     dispatch(setInputData(newValue));
@@ -113,17 +87,45 @@ export function DataInputEditor(props: IAceEditorProps) {
     }
   }, 200);
 
-  // const interceptEditorEvent = () => {
-  //   if (isPanelReadOnly) aceRef?.editor.clearSelection();
-  // };
-
   React.useEffect(() => {
     onChangeParseInput(inputData);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inputData]);
 
   const viewport = useViewportSize();
-  const editorHeight = (viewport.height! * 0.9 - 232.6) / 18;
+
+  // const getEditorLines = () => {
+  //   if ($panelEl) {
+  //     const $panelSize = getElementSize('.MuiPaper-root', $panelEl);
+  //     const $panelHeader = getElementSize('.panel-header', $panelEl);
+  //     const $inputField = getElementSize('.schema-name-input', $panelEl);
+  //     const totalHeight = $panelSize?.height;
+  //     const panelHeaderHeight = $panelHeader?.height;
+  //     const inputFieldHeight = $inputField?.height;
+  //     const availableHeight = totalHeight - panelHeaderHeight - inputFieldHeight;
+  //     console.info({
+  //       lines: availableHeight / 18,
+  //       totalHeight,
+  //       panelHeaderHeight,
+  //       inputFieldHeight,
+  //     });
+  //     return availableHeight / 18;
+  //   } else {
+  //     const isSplitView = viewport.width! >= 768;
+  //     const heightModifier = isSplitView ? 0.9 : 0.75;
+  //     const editorLines = viewport.height! * heightModifier - 132.6;
+  //     return editorLines;
+  //   }
+  // };
+
+  const getEditorLines = () => {
+    const isSplitView = viewport.width! >= 768;
+    // const heightModifier = isSplitView ? 0.9 : 0.75;
+    // const editorLines = viewport.height! * heightModifier - 132.6;
+    return isSplitView ? 18 : 10;
+  };
+  const editorLines = getEditorLines();
+  console.warn(`EditorLines:`, editorLines);
   // const isPanelReadOnly = Boolean(schema && results);
   let stepOneMessage = statusIsError
     ? statusMessage
@@ -151,7 +153,7 @@ export function DataInputEditor(props: IAceEditorProps) {
   return (
     <Panel
       className={`data-input-editor ${props.className || ''}`}
-      title={
+      titleComponent={
         <div>
           {statusIsError ? (
             <TooltipWrapper tooltipContent={statusMessage}>
@@ -168,7 +170,11 @@ export function DataInputEditor(props: IAceEditorProps) {
               </div>
             </TooltipWrapper>
           ) : (
-            <CheckCircleIcon htmlColor="green" fontSize="large" />
+            <CheckCircleIcon
+              htmlColor="green"
+              color={inputData ? 'inherit' : 'disabled'}
+              fontSize="large"
+            />
           )}
           <span>Step #1:</span>
         </div>
@@ -200,7 +206,6 @@ export function DataInputEditor(props: IAceEditorProps) {
         className="ace-editor"
         value={props.value}
         style={{
-          maxHeight: '80vh',
           fontSize: '12px',
           display: 'flex',
           justifyContent: 'stretch',
@@ -219,7 +224,7 @@ export function DataInputEditor(props: IAceEditorProps) {
         }}
         setOptions={{
           minLines: 4,
-          maxLines: editorHeight,
+          maxLines: editorLines,
           // maxLines: 50,
           // readOnly: isPanelReadOnly ? true : false,
           useWorker: false,
