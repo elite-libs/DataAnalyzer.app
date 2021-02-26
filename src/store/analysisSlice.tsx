@@ -11,7 +11,7 @@ type State = {
 
 let initialState: State = {
   schema: null,
-  schemaName: 'Users',
+  schemaName: '',
   schemaTimestamp: null,
   results: null,
   resultsTimestamp: null,
@@ -43,7 +43,7 @@ const slice = createSlice({
       return state;
     },
     resetAnalysis(state) {
-      state = { ...initialState };
+      state = { ...initialState, schemaName: state.schemaName };
       return state;
     },
   },

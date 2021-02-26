@@ -1,3 +1,12 @@
+// $link-color: #000000;
+// @import 'bootstrap/scss/_variables.scss';
+$font-family-base: 'Lato';
+$body-bg: #f3f3f3;
+$font-size-base: 0.8125rem;
+
+@import 'bootstrap/scss/bootstrap-reboot.scss';
+@import 'bootstrap/scss/bootstrap-grid.scss';
+
 /**
 Breakpoint 	Class infix 	Dimensions
 X-Small 	None 	<576px
@@ -8,16 +17,16 @@ Extra large 	xl 	≥1200px
 Extra extra large 	xxl 	≥1400px
 */
 // Bootstrap breaks
-// Extra small screen / phone
-$breakpoint-xs: 0;
-// Small screen / phone
-$breakpoint-sm: 576px;
-// Medium screen / tablet
-$breakpoint-md: 768px;
-// Large screen / desktop
-$breakpoint-lg: 992px;
-// Extra large screen / wide desktop
-$breakpoint-xl: 1200px;
+// // Extra small screen / phone
+// $breakpoint-xs: 0;
+// // Small screen / phone
+// $breakpoint-sm: 576px;
+// // Medium screen / tablet
+// $breakpoint-md: 768px;
+// // Large screen / desktop
+// $breakpoint-lg: 992px;
+// // Extra large screen / wide desktop
+// $breakpoint-xl: 1200px;
 
 .schema-name-input {
   flex: 0 1 auto;

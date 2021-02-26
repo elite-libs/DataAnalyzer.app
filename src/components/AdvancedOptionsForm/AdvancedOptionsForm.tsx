@@ -61,8 +61,8 @@ export default function AdvancedOptionsForm({ className = '' }) {
   const onSubmit = (data) => {
     const updatedOptions = {
       ...data,
-      nullableRowsThreshold: data.nullableRowsThreshold / 100.0,
-      uniqueRowsThreshold: data.uniqueRowsThreshold / 100.0,
+      nullableRowsThreshold: data.nullableRowsThreshold, // / 100.0
+      uniqueRowsThreshold: data.uniqueRowsThreshold, // / 100.0
     };
     console.log('Saved Options', updatedOptions);
 
@@ -81,10 +81,11 @@ export default function AdvancedOptionsForm({ className = '' }) {
     history.push('/');
   }
 
-  const displayNullableRowsThreshold = formatPercent(
-    100.0 * watch('nullableRowsThreshold'),
-  );
-  const displayUniqueRowsThreshold = formatPercent(100.0 * watch('uniqueRowsThreshold'));
+  const displayNullableRowsThreshold = `${watch('nullableRowsThreshold')}`;
+  /*formatPercent(
+    100.0 * parseFloat( */
+  console.log(watch('nullableRowsThreshold'), watch('uniqueRowsThreshold'));
+  const displayUniqueRowsThreshold = `${watch('uniqueRowsThreshold')}`;
 
   return (
     <>
@@ -154,6 +155,7 @@ export default function AdvancedOptionsForm({ className = '' }) {
                     <p>Empty field limit</p>
                     <input
                       type="range"
+                      style={{ flex: '0 0 50%' }}
                       name="nullableRowsThreshold"
                       defaultValue={0.02}
                       min={0.0}
@@ -162,7 +164,9 @@ export default function AdvancedOptionsForm({ className = '' }) {
                       title="Between 0.0-0.10, Default: 0.02"
                       ref={register({ min: 0.0, max: 0.1 })}
                     />
-                    <span>{displayNullableRowsThreshold}%</span>
+                    <span style={{ flex: '0 0 23%' }}>
+                      {displayNullableRowsThreshold}%
+                    </span>
                   </label>
                 </fieldset>
 
@@ -172,6 +176,7 @@ export default function AdvancedOptionsForm({ className = '' }) {
                     <p>Unique values required</p>
                     <input
                       type="range"
+                      style={{ flex: '0 0 50%' }}
                       name="uniqueRowsThreshold"
                       defaultValue={1.0}
                       min={0.8}
@@ -179,7 +184,7 @@ export default function AdvancedOptionsForm({ className = '' }) {
                       step={0.005}
                       ref={register({ min: 0.8, max: 1.0 })}
                     />
-                    <span>{displayUniqueRowsThreshold}%</span>
+                    <span style={{ flex: '0 0 23%' }}>{displayUniqueRowsThreshold}%</span>
                   </label>
                 </fieldset>
               </CardContent>
@@ -190,18 +195,18 @@ export default function AdvancedOptionsForm({ className = '' }) {
                 <ButtonGroup size="small" className="py-1">
                   <Button
                     type="button"
-                    color="secondary"
+                    // color=""
                     onClick={goToHome}
                     title="Close"
                   >
-                    <CloseIcon />
+                    <CloseIcon color="error" />
                   </Button>
                   {/* <IconButton type='reset' color='default' onClick={reset} title="Reset"><RefreshIcon /></IconButton> */}
                 </ButtonGroup>
                 <Button
                   variant="contained"
                   type="submit"
-                  color="primary"
+                  color="secondary"
                   startIcon={<SaveIcon />}
                 >
                   Save

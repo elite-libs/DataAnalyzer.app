@@ -171,7 +171,7 @@ export const OutputButtons = ({ size = 'medium', className = '' }: Props) => {
                   ? 'contained'
                   : 'outlined'
               }
-              size={isStackedViewMode ? 'small' : 'large'}
+              size={isStackedViewMode ? 'medium' : 'large'}
               color={
                 hasParsedInputData && options.outputAdapter === adapter
                   ? 'default'

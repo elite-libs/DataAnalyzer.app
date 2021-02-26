@@ -3,7 +3,7 @@ import pkg from '../../../package.json';
 
 import AppIcon from 'images/DataAnalyzerDualColor.svg';
 
-import { Link as RouteLink } from 'react-router-dom';
+import { Link as RouteLink, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined';
@@ -25,6 +25,8 @@ import './Header.scss';
 
 export default function Header() {
   const dispatch = useDispatch();
+  const location = useLocation();
+
   // const { trackCustomEvent } = useAnalytics();
   // const { enqueueSnackbar } = useAutoSnackbar();
   const messages = useAppMessages();
@@ -76,30 +78,36 @@ export default function Header() {
           <SettingsIcon fontSize="large" color="inherit" /> */}
         </Link>
       </aside>
-      {!results ? (
-        <></>
-      ) : (
-        <Breadcrumbs
-          separator={<span className="divider d-md-block d-none">|</span>}
-          aria-label="breadcrumb"
-          className="col-sm-12 col-12 pb-2 px-1"
+      <Breadcrumbs
+        separator={<span className="divider d-md-block d-none">|</span>}
+        aria-label="breadcrumb"
+        className="col-sm-12 col-12 pb-2 px-1"
+      >
+        <Link
+          component={RouteLink}
+          to="/"
+          className={location.pathname === `/` ? 'active' : ''}
+          onClick={resetResults}
         >
-          <Link component={RouteLink} to="/" onClick={resetResults}>
-            <HomeOutlinedIcon />
-            <span className="d-md-inline-block d-none">Code Generator</span>
-          </Link>
-          <Link component={RouteLink} {...schemaLinkProps} to="/results/explorer">
-            <TooltipWrapper
-              tooltipContent={messages.inputDataMissing || messages.schemaNeeded}
-            >
-              <div>
-                <AssessmentOutlinedIcon />
-                <span className="d-md-inline-block d-none">Data Visualization</span>
-              </div>
-            </TooltipWrapper>
-          </Link>
-        </Breadcrumbs>
-      )}
+          <HomeOutlinedIcon />
+          <span className="d-md-inline-block d-none">Code Generator</span>
+        </Link>
+        <Link
+          component={RouteLink}
+          {...schemaLinkProps}
+          className={location.pathname === `/results/explorer` ? 'active' : ''}
+          to="/results/explorer"
+        >
+          <TooltipWrapper
+            tooltipContent={messages.inputDataMissing || messages.schemaNeeded}
+          >
+            <div>
+              <AssessmentOutlinedIcon />
+              <span className="d-md-inline-block d-none">Data Visualization</span>
+            </div>
+          </TooltipWrapper>
+        </Link>
+      </Breadcrumbs>
     </nav>
   );
 
