@@ -1,6 +1,7 @@
 import typescriptWriter from './writer.typescript';
 import mongooseWriter from './writer.mongoose';
 import knexWriter from './writer.knex';
+import golangWriter from './writer.golang';
 import sqlWriter from './writer.sql';
 
 import {
@@ -22,6 +23,8 @@ export interface IRenderArgs {
 
 const writers = {
   typescript: typescriptWriter,
+  golang: golangWriter,
+
   mongoose: mongooseWriter,
   knex: knexWriter,
   sql: sqlWriter,

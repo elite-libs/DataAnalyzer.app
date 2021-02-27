@@ -98,6 +98,28 @@ DataAnalyzer has 3 Powerful Features to Explore:
 - [ ] Range option for precise Timestamp detection.
 - [ ] Option to visit Hypermedia URLs to discover nested types?
 - [ ] Custom type matchers/regex patterns.
+- [ ] De-duplicate similar shaped objects (example below)
+
+```go
+type PokemonGame struct {
+    Name string
+    Url string
+}
+
+type PokemonMove struct {
+    Name string
+    Url string
+}
+```
+
+Becomes the generic (possibly prefixed struct):
+
+```go
+type NameUrl struct {
+    Name string
+    Url string
+}
+```
 
 **Web App Interface**
 
@@ -108,6 +130,7 @@ DataAnalyzer has 3 Powerful Features to Explore:
 - [ ] Make the Input and Output sections collapse/toggle-able.
 - [ ] Complete Web Worker for Background Processing.
 - [ ] Add confirmation for processing lots of data. (Rows and raw MB limit?)
+- [ ] Setup [plausible](https://plausible.io/docs/self-hosting) analytics.
 
 **Code Writers**
 
