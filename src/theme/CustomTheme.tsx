@@ -1,22 +1,40 @@
 import React from 'react';
 import { createMuiTheme, Theme, ThemeProvider } from '@material-ui/core/styles';
-import { purple, lightBlue, pink, teal, red } from '@material-ui/core/colors';
+// import {
+//   purple,
+//   lightBlue,
+//   pink,
+//   teal,
+//   red,
+//   orange,
+//   deepPurple,
+// } from '@material-ui/core/colors';
 
 export const muiTheme = createMuiTheme({
   palette: {
     primary: {
-      // light: will be calculated from palette.primary.main,
-      main: lightBlue['500'],
-      // dark: will be calculated from palette.primary.main,
-      // contrastText: will be calculated to contrast with palette.primary.main
+      main: '#1a237e',
     },
     secondary: {
-      // light: teal['500'],
-      // light: '#0066ff',
-      main: purple['500'], //'#0044ff',
-      // // dark: will be calculated from palette.secondary.main,
-      // contrastText: '#ffcc00',
+      main: '#607d8b',
     },
+    text: {
+      primary: '#333333',
+      secondary: '#555555',
+    },
+    info: {
+      main: '#64b5f6',
+    },
+    success: {
+      main: '#66bb6a',
+    },
+    warning: {
+      main: '#ef6c00',
+    },
+    error: {
+      main: '#f50057cc',
+    },
+
     // Used by `getContrastText()` to maximize the contrast between
     // the background and the text.
     contrastThreshold: 3,

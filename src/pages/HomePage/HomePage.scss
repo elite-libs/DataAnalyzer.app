@@ -9,15 +9,6 @@ Extra extra large 	xxl 	≥1400px
 */
 // Bootstrap breaks
 // Extra small screen / phone
-$breakpoint-xs: 0;
-// Small screen / phone
-$breakpoint-sm: 576px;
-// Medium screen / tablet
-$breakpoint-md: 768px;
-// Large screen / desktop
-$breakpoint-lg: 992px;
-// Extra large screen / wide desktop
-$breakpoint-xl: 1200px;
 
 %three-column-stacking-layout {
   display: grid;

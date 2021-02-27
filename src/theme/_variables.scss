@@ -1,0 +1,70 @@
+// Testing colors...
+// $color-secondary: #9c27b0;
+// $color-primary: #1b5e20;
+// $color-primary2: #0277bd;
+// $color-primary3: #01579b;
+// $color1: #1a237e;
+// $color2: #5e35b1;
+// $color3: #311b92;
+// $color4: #d32f2f;
+// $color5: #ef5350;
+// $color6: #4a148c;
+// $color7: #37474f;
+$color-primary: #1a237e;
+$color-secondary: #607d8b;
+$color-error: #f50057cc;
+$color-warning: #ef6c00;
+$color-success: #66bb6a;
+$color-background: #d0d0d0;
+$text-color-primary: #333333;
+$text-color-secondary: #33333366; // #555555
+
+// $breakpoint-xs: 0;
+// $breakpoint-sm: 576px;
+// $breakpoint-md: 768px;
+// $breakpoint-lg: 992px;
+// $breakpoint-xl: 1200px;
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 600px,
+  md: 900px,
+  lg: 1200px,
+  xl: 1600px,
+);
+
+$container-max-widths: (
+  sm: 560px,
+  md: 860px,
+  lg: 1100px,
+  xl: 1400px,
+);
+
+// alternative breakpoints:
+$breakpoint-xs: 0;
+$breakpoint-sm: 600px;
+$breakpoint-md: 900px;
+$breakpoint-lg: 1200px;
+$breakpoint-xl: 1600px;
+
+// shorthand variables
+$text-color: $text-color-primary;
+
+$variables: (
+  // main ui colors
+  --color-primary: $color-primary,
+  --color-secondary: $color-secondary,
+  --color-error: $color-error,
+  --color-warning: $color-warning,
+  --color-success: $color-success,
+  --color-background: $color-background,
+  // text color
+  --text-color-primary: $text-color-primary,
+  --text-color-secondary: $text-color-secondary,
+  // breakpoints
+  --breakpoint-xs: $breakpoint-xs,
+  --breakpoint-sm: $breakpoint-sm,
+  --breakpoint-md: $breakpoint-md,
+  --breakpoint-lg: $breakpoint-lg,
+  --breakpoint-xl: $breakpoint-xl
+);

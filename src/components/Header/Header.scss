@@ -1,32 +1,23 @@
-$breakpoint-xs: 0;
-// Small screen / phone
-$breakpoint-sm: 576px;
-// Medium screen / tablet
-$breakpoint-md: 768px;
-// Large screen / desktop
-$breakpoint-lg: 992px;
-// Extra large screen / wide desktop
-$breakpoint-xl: 1200px;
-
 h1 {
   min-height: 45px;
 }
 .brand-link {
   cursor: pointer;
-  margin: 0.2rem 1rem;
+  margin: 0.5rem 1rem;
   position: absolute;
-  // top: -5px;
-  // left: -0.1rem;
-  @media (max-width: $breakpoint-sm) {
-    span {
-      display: none;
-    }
-  }
+  display: flex;
+  align-items: flex-end;
+  // @media (max-width: $breakpoint-sm) {
+  //   span {
+  //     display: none;
+  //   }
+  // }
 
-  img {
-    margin-top: -20px;
-    margin-left: -10px;
-    margin-right: 10px;
+  svg {
+    // margin-top: -20px;
+    // margin-left: -10px;
+    // margin-right: 10px;
+    margin: 0.2rem 1rem 0.2rem 0.2rem;
     width: 55px;
     height: 55px;
   }
@@ -46,7 +37,10 @@ h1 {
   align-items: center;
   flex-direction: row;
 
-  > a {
+  > a,
+  > label {
+    margin-left: 1rem;
+    margin-right: 1rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -55,7 +49,62 @@ h1 {
     height: 36px;
     text-align: center;
   }
+  > label {
+    width: auto;
+  }
   > .expand-spacer {
     flex-grow: 4;
+  }
+}
+
+// .nav-breadcrumbs {
+
+// }
+
+.demo-link {
+  height: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  // margin: 0.5rem auto;
+
+  transition: all 0.5s ease-in;
+  cursor: pointer;
+  // text-decoration: underline;
+  &:hover {
+    color: var(--color-secondary);
+    .roll-dice {
+      animation: roll-dice 1.5s steps(6) infinite;
+      background-color: var(--color-error);
+    }
+  }
+}
+
+.roll-dice-wrapper {
+  border: 1px solid var(--color-secondary);
+  border-radius: 0.3rem;
+  width: 28px;
+  height: 28px;
+  padding: 1px 1px 0 0;
+}
+.roll-dice {
+  box-sizing: border-box;
+  background-color: var(--color-error);
+  &.animated {
+    animation: roll-dice 0.75s steps(6) infinite;
+  }
+  border-radius: 0.5rem;
+  display: inline-block;
+  // animation: roll-dice 1.5s steps(6) infinite;
+  background-image: url(../../../public/images/dice-sprite.svg);
+  width: 25px;
+  height: 25px;
+  background-size: cover;
+}
+
+@keyframes roll-dice {
+  100% {
+    background-position: -600px 0;
   }
 }

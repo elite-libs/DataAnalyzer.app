@@ -74,6 +74,8 @@ DataAnalyzer has 3 Powerful Features to Explore:
 
 #### TODO
 
+- [ ] Move the demo button to a hover menu over the Data Input Panel (with a `Clear` button.)
+- [ ] Change the `OutputButtons` to use a scrolling grid of icons.
 - [ ] Convert CSSin-JS to use Linaria.
 
 **Bugs** by area/function

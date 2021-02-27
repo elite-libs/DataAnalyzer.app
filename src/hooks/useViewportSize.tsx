@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 export interface IViewportSize {
   width: number;
   height: number;
-  breakpoint?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'xxxl';
+  breakpoint?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'; // | 'xxl' | 'xxxl';
 }
 export default function useViewportSize(): IViewportSize {
   const [windowSize, setWindowSize] = useState<IViewportSize>({
@@ -18,10 +18,11 @@ export default function useViewportSize(): IViewportSize {
     function _handleResize() {
       const width = window.innerWidth;
       let breakpoint: IViewportSize['breakpoint'] = 'xs';
-      if (width > 576) breakpoint = 'sm';
-      if (width > 768) breakpoint = 'md';
-      if (width > 992) breakpoint = 'lg';
-      if (width > 1200) breakpoint = 'xl';
+      // IMPORTANT: Sync these values up with the `_variables.scss` file, see `$grid-breakpoints`
+      if (width > 600) breakpoint = 'sm';
+      if (width > 900) breakpoint = 'md';
+      if (width > 1200) breakpoint = 'lg';
+      if (width > 1600) breakpoint = 'xl';
       setWindowSize({
         height: window.innerHeight,
         width: width,

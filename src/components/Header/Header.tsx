@@ -1,7 +1,8 @@
 import React from 'react';
 import pkg from '../../../package.json';
 
-import AppIcon from 'images/DataAnalyzerDualColor.svg';
+// import AppIcon from 'images/DataAnalyzerDualColor.svg';
+import AppIcon from './AppIcon';
 
 import { Link as RouteLink, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -50,7 +51,7 @@ export default function Header() {
     <nav className="row row-block w-100">
       <h1 className="col-12 col-sm-6" title="Reset/Load Home Screen">
         <Link className="brand-link" component={RouteLink} to="/" onClick={resetResults}>
-          <img src={AppIcon} alt="Data Analyzer app icon" />
+          <AppIcon />
           DataAnalyzer.app
         </Link>
       </h1>
@@ -67,21 +68,16 @@ export default function Header() {
           className={''}
           component={RouteLink}
           to="/options"
-          title="Settings / Configuration"
-          aria-label="Settings / Configuration"
+          title="Options / Configuration"
+          aria-label="Options / Configuration"
         >
           <SettingsIcon fontSize="large" color="primary" />
-          {/* <SettingsIcon fontSize="large" color="secondary" />
-          <SettingsIcon fontSize="large" color="action" />
-          <SettingsIcon fontSize="large" color="disabled" />
-          <SettingsIcon fontSize="large" color="error" />
-          <SettingsIcon fontSize="large" color="inherit" /> */}
         </Link>
       </aside>
       <Breadcrumbs
         separator={<span className="divider d-md-block d-none">|</span>}
         aria-label="breadcrumb"
-        className="col-sm-12 col-12 pb-2 px-1"
+        className="nav-breadcrumbs col-sm-12 col-12 pb-2 px-1"
       >
         <Link
           component={RouteLink}
@@ -89,8 +85,10 @@ export default function Header() {
           className={location.pathname === `/` ? 'active' : ''}
           onClick={resetResults}
         >
-          <HomeOutlinedIcon />
-          <span className="d-md-inline-block d-none">Code Generator</span>
+          <div className="d-flex align-items-center">
+            <HomeOutlinedIcon color="secondary" />
+            <span className="d-md-inline-block d-none">Code Generator</span>
+          </div>
         </Link>
         <Link
           component={RouteLink}
@@ -99,10 +97,14 @@ export default function Header() {
           to="/results/explorer"
         >
           <TooltipWrapper
-            tooltipContent={messages.inputDataMissing || messages.schemaNeeded}
+            tooltipContent={
+              messages.inputDataMissing ||
+              messages.schemaNeeded ||
+              `View Statistical Report about your Input Data`
+            }
           >
-            <div>
-              <AssessmentOutlinedIcon />
+            <div className="d-flex align-items-center">
+              <AssessmentOutlinedIcon color="secondary" />
               <span className="d-md-inline-block d-none">Data Visualization</span>
             </div>
           </TooltipWrapper>

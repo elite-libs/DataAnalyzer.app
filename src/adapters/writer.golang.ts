@@ -40,14 +40,15 @@ const formatValue = (key: string | number) =>
   typeof key === 'string' ? `"${properCase(key)}"` : key;
 
 const getEnumDeclaration = (fieldName: string, fieldInfo: CombinedFieldInfo) => {
-  if (!fieldInfo.enum) return ``;
+  if (!fieldInfo.enum || fieldInfo.enum.length <= 0) return ``;
   const typeName = properCase(fieldName);
   const enumName = `${typeName}Enum`;
 
   return `type ${enumName} string
 
 const(
-${(fieldInfo.enum as any[])
+${fieldInfo.enum
+  .slice()
   .sort()
   // @ts-ignore
   .map<any>(
@@ -83,7 +84,7 @@ GoLang types:
 // | complex128          |                         |                        |
 
 */
-const typescriptWriter: IDataAnalyzerWriter = {
+const Writer: IDataAnalyzerWriter = {
   render({ results, options, schemaName }: IRenderArgs) {
     const enums: string[] = [];
     const hasNestedTypes =
@@ -107,7 +108,7 @@ const typescriptWriter: IDataAnalyzerWriter = {
         // console.log('nested schema detected', schemaName);
 
         return Object.entries(results.nestedTypes!).map(([nestedName, results]) => {
-          // console.log('nested typescript schema:', nestedName);
+          // console.log('nested schema:', nestedName);
           return this.render({
             schemaName: nestedName,
             results,
@@ -122,4 +123,4 @@ const typescriptWriter: IDataAnalyzerWriter = {
   },
 };
 
-export default typescriptWriter;
+export default Writer;

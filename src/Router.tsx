@@ -6,7 +6,7 @@ import HomePage from 'pages/HomePage/HomePage';
 import Header from 'components/Header/Header';
 import LoadingSpinner from 'components/LoadingSpinner';
 import useViewportSize from 'hooks/useViewportSize';
-import { cssVariablesFromMuiTheme } from 'CustomTheme';
+import { cssVariablesFromMuiTheme } from 'theme/CustomTheme';
 import { withStyles } from '@material-ui/core';
 import type { RootState } from 'store/rootReducer';
 

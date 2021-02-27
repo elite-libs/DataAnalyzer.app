@@ -199,12 +199,12 @@ export const OutputButtons = ({ size = 'medium', className = '' }: Props) => {
                   : 'secondary'
               }
               {...schemaLinkProps}
-              aria-label={label}
+              aria-label={`Output to ${label}`}
             >
               <TooltipWrapper tooltipContent={label}>
                 <>
                   <div>{icon}</div>
-                  <div>{label}</div>
+                  <div className="target-name">{label}</div>
                 </>
               </TooltipWrapper>
               {/* <div className="text-left d-md-block d-none"></div> */}

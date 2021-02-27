@@ -116,7 +116,9 @@
     "eslint-plugin-react": "^7.22.0",
     "prettier": "2.2.1",
     "react-app-rewire-alias": "^0.2.1",
+    "react-app-rewire-scss-loaders": "^0.1.2",
     "react-app-rewired": "^2.1.8",
+    "sass-resources-loader": "^2.1.1",
     "ts-jest": "^26.5.1"
   },
   "jest": {
