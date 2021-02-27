@@ -315,7 +315,7 @@ function _schemaAnalyzer(
     enumAbsoluteLimit = 10,
     // // enumPercentThreshold = 0.01,
     // nullableRowsThreshold = 0.001,
-    // uniqueRowsThreshold = 0.99,
+    uniqueRowsThreshold = 0.99,
   } = options;
   const isEnumEnabled = input.length >= enumMinimumRowCount;
   // #debug: log`isEnumEnabled: ${isEnumEnabled}`)
@@ -372,7 +372,14 @@ function _schemaAnalyzer(
               /^(gu|uu|_)?id/i.test(fieldName);
 
             if (isIdentity && (!fInfo.unique || fInfo.nullable)) {
-              console.warn(fieldName, fInfo);
+              console.warn(
+                options.uniqueRowsThreshold,
+                jobState.rowCount,
+                jobState.uniques.length,
+                input.length,
+                fieldName,
+                fInfo,
+              );
             }
             if (isIdentity) fInfo.identity = true;
 

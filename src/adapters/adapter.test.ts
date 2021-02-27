@@ -1,49 +1,41 @@
 /* eslint-disable import/first */
-
 import {
   schemaAnalyzer,
   helpers,
-  FieldTypeSummary,
-  TypeSummary,
+  // FieldTypeSummary,
+  // TypeSummary,
 } from '../schema-analyzer/index';
 
-const flattenTypes = helpers.flattenTypes;
 import knex from './writer.knex';
 import typescript from './writer.typescript';
 import mongoose from './writer.mongoose';
 import users from '../../public/data/users.example.json';
 import usersSparse from '../../public/data/user_sparse-subtypes.json';
 import people from '../../public/data/swapi-people.json';
-// import commerceDeptNews from '../../../../public/data/commerce-dept-news.json';
+// import commerceDeptNews from '../../public/data/commerce-dept-news.json';
 import path from 'path';
 import fs from 'fs';
 import csvParse from 'csv-parse';
 
 const productCsv: Promise<any[]> = parseCsv(
-  fs.readFileSync(
-    path.resolve(__dirname, '../../../../public/data/products-3000.csv'),
-    'utf8',
-  ),
+  fs.readFileSync(path.resolve(__dirname, '../../public/data/products-3000.csv'), 'utf8'),
 ).catch((err) => void console.error(err) || []);
 
 const usersCsv: Promise<any[]> = parseCsv(
-  fs.readFileSync(
-    path.resolve(__dirname, '../../../../public/data/users-alt.csv'),
-    'utf8',
-  ),
+  fs.readFileSync(path.resolve(__dirname, '../../public/data/users-alt.csv'), 'utf8'),
 ).catch((err) => void console.error(err) || []);
 
-const flattenWrapper = (result: TypeSummary<any>) => {
-  result = flattenTypes(result, {
-    nullableRowsThreshold: 0.0001,
-    targetValue: 'p99',
-    targetLength: 'p99',
-    targetPrecision: 'p99',
-    targetScale: 'p99',
-  });
-  // if (!isCI) console.log(JSON.stringify(result, null, 2))
-  return result;
-};
+// const flattenWrapper = (result: TypeSummary<any>) => {
+//   result = flattenTypes(result, {
+//     nullableRowsThreshold: 0.0001,
+//     targetValue: 'p99',
+//     targetLength: 'p99',
+//     targetPrecision: 'p99',
+//     targetScale: 'p99',
+//   });
+//   // if (!isCI) console.log(JSON.stringify(result, null, 2))
+//   return result;
+// };
 
 function parseCsv(content: any): Promise<any[]> {
   return new Promise((resolve, reject) => {

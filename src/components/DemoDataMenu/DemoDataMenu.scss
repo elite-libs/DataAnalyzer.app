@@ -1,3 +1,8 @@
+$color-secondary: #9c27b0;
+$color-primary: #03a9f4;
+$color-primary2: #0277bd;
+$color-primary3: #01579b;
+
 .demo-link {
   height: 2rem;
   display: flex;
@@ -10,7 +15,7 @@
   cursor: pointer;
   // text-decoration: underline;
   &:hover {
-    color: #f50057;
+    color: #03a9f4;
     .roll-dice {
       animation: roll-dice 1.5s steps(6) infinite;
       background-color: #4527a0;
@@ -19,7 +24,7 @@
 }
 
 .roll-dice-wrapper {
-  border: 1px solid #f50057;
+  border: 1px solid #03a9f4;
   border-radius: 0.3rem;
   width: 28px;
   height: 28px;
@@ -27,7 +32,7 @@
 }
 .roll-dice {
   box-sizing: border-box;
-  background-color: #f50057;
+  background-color: #03a9f4;
   &.animated {
     animation: roll-dice 0.75s steps(6) infinite;
   }

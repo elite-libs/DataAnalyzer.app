@@ -125,7 +125,7 @@ const TYPE_NULLABLE: IAdvancedTypeMatcher = {
 const TYPE_UNIQUE: IAdvancedTypeMatcher = {
   type: 'unique',
   // matchBasicTypes: ['String', 'Number'],
-  check: (typeInfo, { rowCount, uniques }, { uniqueRowsThreshold }) => {
+  check: (typeInfo, { rowCount, uniques }, { uniqueRowsThreshold = 0.99 }) => {
     if (!uniques || uniques.length === 0) return typeInfo;
     // const uniqueness = rowCount / uniques.length
     const isUnique = uniques.length >= rowCount * uniqueRowsThreshold!;

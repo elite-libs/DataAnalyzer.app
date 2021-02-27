@@ -2,7 +2,13 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store/rootReducer';
 import Button from '@material-ui/core/Button';
-import { PostgresIcon, MongoDbIcon, TypeScriptIcon, KnexIcon } from 'components/AppIcons';
+import {
+  PostgresIcon,
+  MongoDbIcon,
+  TypeScriptIcon,
+  KnexIcon,
+  GoLangIcon,
+} from 'components/AppIcons';
 
 import { AdapterNames, render } from 'adapters/writers';
 import { schemaAnalyzer } from 'schema-analyzer/index';
@@ -17,16 +23,23 @@ import Panel from 'components/Layouts/Panel';
 import TooltipWrapper from 'components/TooltipWrapper';
 import useViewportSize from 'hooks/useViewportSize';
 import GetAppIcon from '@material-ui/icons/GetApp';
+import { SupportedTargetLanguages } from 'types';
 
 import './OutputButtons.scss';
 
-type OutputMode = [adapterKey: AdapterNames, label: string, icon: React.ReactNode];
+type OutputMode = [
+  adapterKey: AdapterNames,
+  label: string,
+  highlightLanguage: SupportedTargetLanguages,
+  icon: React.ReactNode,
+];
 
 const outputOptions: OutputMode[] = [
-  ['typescript', 'TypeScript', <TypeScriptIcon />],
-  ['knex', 'Knex', <KnexIcon />],
-  ['mongoose', 'Mongoose (MongoDB)', <MongoDbIcon />],
-  ['sql', 'SQL "CREATE"', <PostgresIcon />],
+  ['typescript', 'TypeScript', 'typescript', <TypeScriptIcon />],
+  ['golang', 'GoLang', 'go', <GoLangIcon />],
+  ['knex', 'Knex', 'typescript', <KnexIcon />],
+  ['mongoose', 'Mongoose (MongoDB)', 'typescript', <MongoDbIcon />],
+  ['sql', 'SQL "CREATE"', 'typescript', <PostgresIcon />],
 ];
 
 type Props = {
@@ -104,8 +117,9 @@ export const OutputButtons = ({ size = 'medium', className = '' }: Props) => {
       });
 
       enqueueSnackbar(
-        `Completed in ${((Date.now() - startTime) / 1000).toFixed(1)} seconds.`,
+        `Completed in ${((Date.now() - startTime) / 1000).toFixed(3)} seconds.`,
         {
+          autoHideDuration: 750,
           variant: 'success',
         },
       );
@@ -125,8 +139,14 @@ export const OutputButtons = ({ size = 'medium', className = '' }: Props) => {
     }
     // console.timeEnd(`Processing:${adapter}`);
   }
-  const onAdapterClicked = ({ adapter }: { adapter: AdapterNames }) => {
-    dispatch(setOptions({ outputAdapter: adapter }));
+  const onAdapterClicked = ({
+    adapter,
+    highlightLanguage,
+  }: {
+    adapter: AdapterNames;
+    highlightLanguage: SupportedTargetLanguages;
+  }) => {
+    dispatch(setOptions({ outputAdapter: adapter, outputLanguage: highlightLanguage }));
     handleAdapterSelected(adapter);
   };
   const isPanelSuccessState = Boolean(parsedInput);
@@ -160,12 +180,13 @@ export const OutputButtons = ({ size = 'medium', className = '' }: Props) => {
         variant="outlined"
         orientation={'horizontal'}
         disabled={!isPanelSuccessState}
+        color="secondary"
       >
-        {outputOptions.map(([adapter, label, icon]) => {
+        {outputOptions.map(([adapter, label, highlightLanguage, icon]) => {
           return (
             <Button
               key={adapter}
-              onClick={() => onAdapterClicked({ adapter })}
+              onClick={() => onAdapterClicked({ adapter, highlightLanguage })}
               variant={
                 hasParsedInputData && options.outputAdapter === adapter
                   ? 'contained'
@@ -175,13 +196,16 @@ export const OutputButtons = ({ size = 'medium', className = '' }: Props) => {
               color={
                 hasParsedInputData && options.outputAdapter === adapter
                   ? 'default'
-                  : 'primary'
+                  : 'secondary'
               }
               {...schemaLinkProps}
               aria-label={label}
             >
               <TooltipWrapper tooltipContent={label}>
-                <div>{icon}</div>
+                <>
+                  <div>{icon}</div>
+                  <div>{label}</div>
+                </>
               </TooltipWrapper>
               {/* <div className="text-left d-md-block d-none"></div> */}
             </Button>

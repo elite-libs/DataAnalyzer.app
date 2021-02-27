@@ -4,26 +4,22 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import copy from 'clipboard-copy';
 import Panel from 'components/Layouts/Panel';
 import TooltipWrapper from 'components/TooltipWrapper';
-import useViewportSize from 'hooks/useViewportSize';
-import GetAppIcon from '@material-ui/icons/GetApp';
-
 import { ghcolors } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import SyncOutlinedIcon from '@material-ui/icons/SyncOutlined';
 import FileCopy from '@material-ui/icons/FileCopyOutlined';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Button from '@material-ui/core/Button';
-// import InputProcessor from './InputProcessor';
-
-import type { Property } from 'csstype';
-import type { RootState } from 'store/rootReducer';
+import { CheckCircleIcon } from '../AppIcons';
 import { resetAnalysis } from 'store/analysisSlice';
 import { useAutoSnackbar } from 'hooks/useAutoSnackbar';
+import type { Property } from 'csstype';
+import type { RootState } from 'store/rootReducer';
+import type { SupportedTargetLanguages } from 'types';
 
 import './CodePreviewPanel.scss';
-import { CheckCircleIcon } from '../AppIcons';
 
-export type ICodeGeneratorArgs = {
-  language?: string;
+export type ICodePreviewPanelProps = {
+  language?: SupportedTargetLanguages;
   children: ReactNode;
   maxHeight?: Property.Height;
   className?: string;
@@ -33,7 +29,7 @@ export default function CodePreviewPanel({
   language = 'typescript',
   children,
   className = '',
-}: ICodeGeneratorArgs) {
+}: ICodePreviewPanelProps) {
   const dispatch = useDispatch();
   const { enqueueSnackbar } = useAutoSnackbar();
 

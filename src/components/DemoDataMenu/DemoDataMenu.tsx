@@ -61,7 +61,7 @@ export const DemoDataMenu = () => {
     setCurrentlyLoadingData('truthiness');
     setTimeout(() => {
       return loadData(sampleDataSets[rnd]?.schemaName!, sampleDataSets[rnd]?.value!);
-    }, 1250);
+    }, 500);
   };
 
   const loadData = (name: string, filePath: string) => {
@@ -89,7 +89,7 @@ export const DemoDataMenu = () => {
         dispatch(setSchemaName(name));
         // if (_loadingSnackMessage) closeSnackbar(_loadingSnackMessage);
         // _loadingSnackMessage = null;
-        enqueueSnackbar('Loaded Sample Dataset 🎉', {
+        enqueueSnackbar(`Loaded the "${name}" Dataset 🎉`, {
           variant: 'success',
           autoHideDuration: 3000,
           anchorOrigin: { horizontal: 'right', vertical: 'top' },

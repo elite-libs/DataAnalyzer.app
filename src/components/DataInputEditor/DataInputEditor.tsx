@@ -122,7 +122,15 @@ export function DataInputEditor(props: IAceEditorProps) {
     const isSplitView = viewport.width! >= 768;
     // const heightModifier = isSplitView ? 0.9 : 0.75;
     // const editorLines = viewport.height! * heightModifier - 132.6;
-    return isSplitView ? 18 : 10;
+    const getHeightMultiple = (height: number) => {
+      if (height > 1200) return 2.5;
+      if (height > 1000) return 2;
+      if (height > 800) return 1.75;
+      if (height > 600) return 1.5;
+      if (height > 400) return 1.125;
+      return 1;
+    };
+    return isSplitView ? 18 * getHeightMultiple(viewport.height) : 10;
   };
   const editorLines = getEditorLines();
   console.warn(`EditorLines:`, editorLines);

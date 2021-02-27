@@ -36,18 +36,24 @@ const getGoLangType = (fieldName: string, fieldInfo: CombinedFieldInfo) => {
 
 const formatKey = (key: string | number) =>
   typeof key === 'string' ? properCase(key) : key;
+const formatValue = (key: string | number) =>
+  typeof key === 'string' ? `"${properCase(key)}"` : key;
 
 const getEnumDeclaration = (fieldName: string, fieldInfo: CombinedFieldInfo) => {
   if (!fieldInfo.enum) return ``;
   const typeName = properCase(fieldName);
+  const enumName = `${typeName}Enum`;
 
-  return `type ${typeName}Enum string
+  return `type ${enumName} string
 
 const(
 ${(fieldInfo.enum as any[])
   .sort()
   // @ts-ignore
-  .map<any>((key) => `    ${formatKey(key)} = "${formatKey(key)}"`)
+  .map<any>(
+    (key, index) =>
+      `    ${formatKey(key)} ${index === 0 ? enumName : ''} = ${formatValue(key)}`,
+  )
   .join('\n')}
 )`;
 };

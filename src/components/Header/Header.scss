@@ -38,3 +38,24 @@ h1 {
     font-size: 1.4rem;
   }
 }
+
+.icon-button-box {
+  // transform: translateX(31px) translateY(-16px);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-direction: row;
+
+  > a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 0;
+    width: 36px;
+    height: 36px;
+    text-align: center;
+  }
+  > .expand-spacer {
+    flex-grow: 4;
+  }
+}
