@@ -5,7 +5,7 @@ import Paper from '@material-ui/core/Paper';
 // import Button from '@material-ui/core/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import type { RootState } from 'store/rootReducer';
-// import CodeViewer from './ResultsView/CodeViewer';
+// import CodePreviewPanel from './ResultsView/CodePreviewPanel';
 
 import { resetAnalysis } from 'store/analysisSlice';
 import { setInputData } from 'store/appStateSlice';

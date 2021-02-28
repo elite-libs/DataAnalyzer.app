@@ -1,7 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { AdapterNames } from 'components/SchemaTools/adapters/writers';
+import { AdapterNames } from 'adapters/writers';
+import type { SupportedTargetLanguages } from 'types';
 
 type State = {
+  outputLanguage: SupportedTargetLanguages;
   outputAdapter: AdapterNames;
   strictMatching: boolean;
   enumMinimumRowCount: number;
@@ -13,6 +15,7 @@ type State = {
 };
 
 let initialState: State = {
+  outputLanguage: 'typescript',
   outputAdapter: 'typescript',
   strictMatching: false,
   enumMinimumRowCount: 100,

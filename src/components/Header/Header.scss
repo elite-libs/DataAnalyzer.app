@@ -1,0 +1,123 @@
+h1 {
+  min-height: 45px;
+}
+.brand-link {
+  font-family: Lato, Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', Oxygen, Ubuntu,
+    Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  cursor: pointer;
+  margin: 0.1rem 1rem;
+  // position: absolute;
+  display: flex;
+  align-items: flex-end;
+  // @media (max-width: $breakpoint-sm) {
+  //   span {
+  //     display: none;
+  //   }
+  // }
+  --logo-primary: var(--color-primary);
+  --logo-secondary: var(--color-error);
+  &:hover {
+    --logo-primary: var(--color-primary);
+    --logo-secondary: var(--color-success);
+  }
+  svg {
+    // margin-top: -20px;
+    // margin-left: -10px;
+    // margin-right: 10px;
+    margin: 0.2rem 0.6rem 0.2rem 0.2rem;
+    width: 55px;
+    height: 55px;
+  }
+}
+
+.current-xs,
+.current-sm {
+  .brand-link {
+    font-size: 1.4rem;
+  }
+}
+
+.icon-button-box {
+  // transform: translateX(31px) translateY(-16px);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-direction: row;
+
+  > a,
+  > label {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 0;
+    width: 36px;
+    height: 36px;
+    text-align: center;
+  }
+  > label {
+    width: auto;
+  }
+  > .expand-spacer {
+    flex-grow: 4;
+  }
+}
+
+.nav-breadcrumbs {
+  margin: 0 1rem !important;
+  a:hover,
+  a.active {
+    span {
+      text-decoration: underline;
+    }
+  }
+}
+
+.demo-link {
+  height: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  // margin: 0.5rem auto;
+
+  transition: all 0.5s ease-in;
+  cursor: pointer;
+  // text-decoration: underline;
+  &:hover {
+    color: var(--text-color-secondary);
+    .roll-dice {
+      animation: roll-dice 1.5s steps(6) infinite;
+      background-color: var(--color-error);
+    }
+  }
+}
+
+.roll-dice-wrapper {
+  // border: 1px solid var(--text-color-secondary);
+  border-radius: 0.3rem;
+  width: 28px;
+  height: 28px;
+  padding: 1px 1px 0 0;
+}
+.roll-dice {
+  box-sizing: border-box;
+  background-color: var(--color-primary);
+  &.animated {
+    animation: roll-dice 0.75s steps(6) infinite;
+  }
+  border-radius: 0.5rem;
+  display: inline-block;
+  // animation: roll-dice 1.5s steps(6) infinite;
+  background-image: url(../../../public/images/dice-sprite.svg);
+  width: 25px;
+  height: 25px;
+  background-size: cover;
+}
+
+@keyframes roll-dice {
+  100% {
+    background-position: -600px 0;
+  }
+}

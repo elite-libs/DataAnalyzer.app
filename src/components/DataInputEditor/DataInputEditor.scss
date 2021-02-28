@@ -1,0 +1,43 @@
+.data-input-editor {
+  .panel-body {
+    position: relative;
+    .code-toolbar {
+      top: 53px;
+    }
+    .ace_editor {
+      max-height: 40vh;
+    }
+  }
+}
+
+.code-toolbar {
+  button {
+    opacity: 0.66;
+    &:hover {
+      opacity: 1 !important;
+    }
+  }
+}
+
+.resizable {
+  overflow: auto;
+  resize: both;
+  min-height: 250px;
+  width: auto;
+}
+
+.read-only-ui {
+  cursor: zoom-in;
+}
+
+.read-only-panel {
+  .ace_content {
+    cursor: not-allowed !important;
+    pointer-events: none !important;
+  }
+}
+
+.error-marker {
+  position: absolute;
+  background-color: #ff0000;
+}

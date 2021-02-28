@@ -1,5 +1,8 @@
 {
   "editor.formatOnSave": true,
   "prettier.trailingComma": "all",
-  "prettier.singleQuote": true
+  "prettier.singleQuote": true,
+  "cSpell.ignoreWords": [
+    "xxxl"
+  ]
 }

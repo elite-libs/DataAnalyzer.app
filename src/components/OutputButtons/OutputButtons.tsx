@@ -7,9 +7,11 @@ import {
   MongoDbIcon,
   TypeScriptIcon,
   KnexIcon,
-} from '../SchemaTools/AppIcons';
+  GoLangIcon,
+  GetAppIcon,
+} from 'components/AppIcons';
 
-import { AdapterNames, render } from '../SchemaTools/adapters/writers';
+import { AdapterNames, render } from 'adapters/writers';
 import { schemaAnalyzer } from 'schema-analyzer/index';
 import { setOptions } from 'store/optionsSlice';
 import { setResults, setSchema } from 'store/analysisSlice';
@@ -18,19 +20,27 @@ import { useAnalytics } from 'hooks/useAnalytics';
 import { useAutoSnackbar } from 'hooks/useAutoSnackbar';
 import { ButtonGroup } from '@material-ui/core';
 
-import useViewportSize from 'hooks/useViewportSize';
+import Panel from 'components/Layouts/Panel';
 import TooltipWrapper from 'components/TooltipWrapper';
-import GetAppIcon from '@material-ui/icons/GetApp';
+import useViewportSize from 'hooks/useViewportSize';
+// import GetAppIcon from '@material-ui/icons/GetApp';
+import { SupportedTargetLanguages } from 'types';
 
 import './OutputButtons.scss';
 
-type OutputMode = [adapterKey: AdapterNames, label: string, icon: React.ReactNode];
+type OutputMode = [
+  adapterKey: AdapterNames,
+  label: string,
+  highlightLanguage: SupportedTargetLanguages,
+  icon: React.ReactNode,
+];
 
 const outputOptions: OutputMode[] = [
-  ['typescript', 'TypeScript', <TypeScriptIcon />],
-  ['knex', 'Knex', <KnexIcon />],
-  ['mongoose', 'Mongoose (MongoDB)', <MongoDbIcon />],
-  ['sql', 'SQL "CREATE"', <PostgresIcon />],
+  ['typescript', 'TypeScript', 'typescript', <TypeScriptIcon />],
+  ['golang', 'GoLang', 'go', <GoLangIcon />],
+  ['knex', 'Knex', 'typescript', <KnexIcon />],
+  ['mongoose', 'Mongoose (MongoDB)', 'typescript', <MongoDbIcon />],
+  ['sql', 'SQL "CREATE"', 'typescript', <PostgresIcon />],
 ];
 
 type Props = {
@@ -108,8 +118,9 @@ export const OutputButtons = ({ size = 'medium', className = '' }: Props) => {
       });
 
       enqueueSnackbar(
-        `Completed in ${((Date.now() - startTime) / 1000).toFixed(1)} seconds.`,
+        `Completed in ${((Date.now() - startTime) / 1000).toFixed(3)} seconds.`,
         {
+          autoHideDuration: 750,
           variant: 'success',
         },
       );
@@ -129,8 +140,14 @@ export const OutputButtons = ({ size = 'medium', className = '' }: Props) => {
     }
     // console.timeEnd(`Processing:${adapter}`);
   }
-  const onAdapterClicked = ({ adapter }: { adapter: AdapterNames }) => {
-    dispatch(setOptions({ outputAdapter: adapter }));
+  const onAdapterClicked = ({
+    adapter,
+    highlightLanguage,
+  }: {
+    adapter: AdapterNames;
+    highlightLanguage: SupportedTargetLanguages;
+  }) => {
+    dispatch(setOptions({ outputAdapter: adapter, outputLanguage: highlightLanguage }));
     handleAdapterSelected(adapter);
   };
   const isPanelSuccessState = Boolean(parsedInput);
@@ -139,63 +156,64 @@ export const OutputButtons = ({ size = 'medium', className = '' }: Props) => {
   let isStackedViewMode = ['xs', 'sm'].includes(breakpoint!);
 
   return (
-    <section
+    <Panel
       className={`output-buttons-panel ${
         isPanelSuccessState ? 'panel-success' : 'panel-error'
       } ${className}`.trim()}
-      title={
-        !isPanelSuccessState ? 'Verify your data is valid, then try again.' : undefined
-      }
-    >
-      <legend>
+      titleComponent={
         <div>
           {
             <GetAppIcon
-              htmlColor={isPanelSuccessState ? 'green' : 'inherit'}
+              cssColor={isPanelSuccessState ? 'var(--color-success)' : 'inherit'}
+              // htmlColor={isPanelSuccessState ? 'green' : 'inherit'}
               fontSize="large"
               className={`choose-output-indicator ${
                 isResultsLoaded ? 'rotate-point-right' : ''
               }`}
             />
           }
-          Step #2:
+          <span>Step #2/3</span>
         </div>
-        Select Output
-      </legend>
-
+      }
+      subTitle={'Select Output'}
+    >
       <ButtonGroup
         className="output-buttons"
         variant="outlined"
-        orientation={isStackedViewMode ? 'horizontal' : 'vertical'}
+        orientation={'horizontal'}
         disabled={!isPanelSuccessState}
+        color="secondary"
       >
-        {outputOptions.map(([adapter, label, icon]) => {
+        {outputOptions.map(([adapter, label, highlightLanguage, icon]) => {
           return (
             <Button
               key={adapter}
-              onClick={() => onAdapterClicked({ adapter })}
+              onClick={() => onAdapterClicked({ adapter, highlightLanguage })}
               variant={
                 hasParsedInputData && options.outputAdapter === adapter
                   ? 'contained'
                   : 'outlined'
               }
-              size={isStackedViewMode ? 'small' : 'large'}
+              size={isStackedViewMode ? 'medium' : 'large'}
               color={
                 hasParsedInputData && options.outputAdapter === adapter
                   ? 'default'
-                  : 'primary'
+                  : 'secondary'
               }
               {...schemaLinkProps}
-              aria-label={label}
+              aria-label={`Output to ${label}`}
             >
               <TooltipWrapper tooltipContent={label}>
-                <div>{icon}</div>
+                <>
+                  <div>{icon}</div>
+                  <div className="target-name">{label}</div>
+                </>
               </TooltipWrapper>
               {/* <div className="text-left d-md-block d-none"></div> */}
             </Button>
           );
         })}
       </ButtonGroup>
-    </section>
+    </Panel>
   );
 };
