@@ -1,0 +1,857 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`#ConsolidatedTypes can emit deeply nested structs 1`] = `
+"
+type Pokemon struct {
+    Abilities []PokemonAbilities
+    BaseExperience int
+    Forms []PokemonForms
+    GameIndices []PokemonGameIndices
+    Height int
+    HeldItems []string
+    Id int
+    IsDefault bool
+    LocationAreaEncounters string
+    Moves []PokemonMoves
+    Name string
+    Order int
+    Species PokemonSpecies
+    Sprites PokemonSprites
+    Stats []PokemonStats
+    Types []PokemonTypes
+    Weight int
+}
+
+type PokemonAbilities struct {
+    Ability PokemonAbilitiesAbility
+    IsHidden bool
+    Slot int
+}
+
+type PokemonForms struct {
+    Name string
+    Url string
+}
+
+type PokemonGameIndices struct {
+    GameIndex int
+    Version PokemonGameIndicesVersion
+}
+
+type PokemonMoves struct {
+    Move PokemonMovesMove
+    VersionGroupDetails []PokemonMovesVersionGroupDetails
+}
+
+type PokemonSpecies struct {
+    Name string
+    Url string
+}
+
+type PokemonSprites struct {
+    BackDefault string
+    BackFemale string
+    BackShiny string
+    BackShinyFemale string
+    FrontDefault string
+    FrontFemale string
+    FrontShiny string
+    FrontShinyFemale string
+    Other PokemonSpritesOther
+    Versions PokemonSpritesVersions
+}
+
+type PokemonStats struct {
+    BaseStat int
+    Effort int
+    Stat PokemonStatsStat
+}
+
+type PokemonTypes struct {
+    Slot int
+    Type PokemonTypesType
+}
+
+type PokemonAbilitiesAbility struct {
+    Name string
+    Url string
+}
+
+type PokemonGameIndicesVersion struct {
+    Name string
+    Url string
+}
+
+type PokemonMovesMove struct {
+    Name string
+    Url string
+}
+
+type PokemonMovesVersionGroupDetails struct {
+    LevelLearnedAt int
+    MoveLearnMethod PokemonMovesVersionGroupDetailsMoveLearnMethod
+    VersionGroup PokemonMovesVersionGroupDetailsVersionGroup
+}
+
+type PokemonMovesVersionGroupDetailsMoveLearnMethod struct {
+    Name NameEnum
+    Url UrlEnum
+}
+
+type PokemonMovesVersionGroupDetailsVersionGroup struct {
+    Name string
+    Url string
+}
+
+type PokemonSpritesOther struct {
+    DreamWorld PokemonSpritesOtherDreamWorld
+    OfficialArtwork PokemonSpritesOtherOfficialArtwork
+}
+
+type PokemonSpritesVersions struct {
+    GenerationI PokemonSpritesVersionsGenerationI
+    GenerationIi PokemonSpritesVersionsGenerationIi
+    GenerationIii PokemonSpritesVersionsGenerationIii
+    GenerationIv PokemonSpritesVersionsGenerationIv
+    GenerationV PokemonSpritesVersionsGenerationV
+    GenerationVi PokemonSpritesVersionsGenerationVi
+    GenerationVii PokemonSpritesVersionsGenerationVii
+    GenerationViii PokemonSpritesVersionsGenerationViii
+}
+
+type PokemonSpritesOtherDreamWorld struct {
+    FrontDefault string
+    FrontFemale string
+}
+
+type PokemonSpritesOtherOfficialArtwork struct {
+    FrontDefault string
+}
+
+type PokemonSpritesVersionsGenerationI struct {
+    RedBlue PokemonSpritesVersionsGenerationIRedBlue
+    Yellow PokemonSpritesVersionsGenerationIYellow
+}
+
+type PokemonSpritesVersionsGenerationIi struct {
+    Crystal PokemonSpritesVersionsGenerationIiCrystal
+    Gold PokemonSpritesVersionsGenerationIiGold
+    Silver PokemonSpritesVersionsGenerationIiSilver
+}
+
+type PokemonSpritesVersionsGenerationIii struct {
+    Emerald PokemonSpritesVersionsGenerationIiiEmerald
+    FireredLeafgreen PokemonSpritesVersionsGenerationIiiFireredLeafgreen
+    RubySapphire PokemonSpritesVersionsGenerationIiiRubySapphire
+}
+
+type PokemonSpritesVersionsGenerationIv struct {
+    DiamondPearl PokemonSpritesVersionsGenerationIvDiamondPearl
+    HeartgoldSoulsilver PokemonSpritesVersionsGenerationIvHeartgoldSoulsilver
+    Platinum PokemonSpritesVersionsGenerationIvPlatinum
+}
+
+type PokemonSpritesVersionsGenerationV struct {
+    BlackWhite PokemonSpritesVersionsGenerationVBlackWhite
+}
+
+type PokemonSpritesVersionsGenerationVi struct {
+    OmegarubyAlphasapphire PokemonSpritesVersionsGenerationViOmegarubyAlphasapphire
+    XY PokemonSpritesVersionsGenerationViXY
+}
+
+type PokemonSpritesVersionsGenerationVii struct {
+    Icons PokemonSpritesVersionsGenerationViiIcons
+    UltraSunUltraMoon PokemonSpritesVersionsGenerationViiUltraSunUltraMoon
+}
+
+type PokemonSpritesVersionsGenerationViii struct {
+    Icons PokemonSpritesVersionsGenerationViiiIcons
+}
+
+type PokemonSpritesVersionsGenerationIRedBlue struct {
+    BackDefault string
+    BackGray string
+    FrontDefault string
+    FrontGray string
+}
+
+type PokemonSpritesVersionsGenerationIYellow struct {
+    BackDefault string
+    BackGray string
+    FrontDefault string
+    FrontGray string
+}
+
+type PokemonSpritesVersionsGenerationIiCrystal struct {
+    BackDefault string
+    BackShiny string
+    FrontDefault string
+    FrontShiny string
+}
+
+type PokemonSpritesVersionsGenerationIiGold struct {
+    BackDefault string
+    BackShiny string
+    FrontDefault string
+    FrontShiny string
+}
+
+type PokemonSpritesVersionsGenerationIiSilver struct {
+    BackDefault string
+    BackShiny string
+    FrontDefault string
+    FrontShiny string
+}
+
+type PokemonSpritesVersionsGenerationIiiEmerald struct {
+    FrontDefault string
+    FrontShiny string
+}
+
+type PokemonSpritesVersionsGenerationIiiFireredLeafgreen struct {
+    BackDefault string
+    BackShiny string
+    FrontDefault string
+    FrontShiny string
+}
+
+type PokemonSpritesVersionsGenerationIiiRubySapphire struct {
+    BackDefault string
+    BackShiny string
+    FrontDefault string
+    FrontShiny string
+}
+
+type PokemonSpritesVersionsGenerationIvDiamondPearl struct {
+    BackDefault string
+    BackFemale string
+    BackShiny string
+    BackShinyFemale string
+    FrontDefault string
+    FrontFemale string
+    FrontShiny string
+    FrontShinyFemale string
+}
+
+type PokemonSpritesVersionsGenerationIvHeartgoldSoulsilver struct {
+    BackDefault string
+    BackFemale string
+    BackShiny string
+    BackShinyFemale string
+    FrontDefault string
+    FrontFemale string
+    FrontShiny string
+    FrontShinyFemale string
+}
+
+type PokemonSpritesVersionsGenerationIvPlatinum struct {
+    BackDefault string
+    BackFemale string
+    BackShiny string
+    BackShinyFemale string
+    FrontDefault string
+    FrontFemale string
+    FrontShiny string
+    FrontShinyFemale string
+}
+
+type PokemonSpritesVersionsGenerationVBlackWhite struct {
+    Animated PokemonSpritesVersionsGenerationVBlackWhiteAnimated
+    BackDefault string
+    BackFemale string
+    BackShiny string
+    BackShinyFemale string
+    FrontDefault string
+    FrontFemale string
+    FrontShiny string
+    FrontShinyFemale string
+}
+
+type PokemonSpritesVersionsGenerationVBlackWhiteAnimated struct {
+    BackDefault string
+    BackFemale string
+    BackShiny string
+    BackShinyFemale string
+    FrontDefault string
+    FrontFemale string
+    FrontShiny string
+    FrontShinyFemale string
+}
+
+type PokemonSpritesVersionsGenerationViOmegarubyAlphasapphire struct {
+    FrontDefault string
+    FrontFemale string
+    FrontShiny string
+    FrontShinyFemale string
+}
+
+type PokemonSpritesVersionsGenerationViXY struct {
+    FrontDefault string
+    FrontFemale string
+    FrontShiny string
+    FrontShinyFemale string
+}
+
+type PokemonSpritesVersionsGenerationViiIcons struct {
+    FrontDefault string
+    FrontFemale string
+}
+
+type PokemonSpritesVersionsGenerationViiUltraSunUltraMoon struct {
+    FrontDefault string
+    FrontFemale string
+    FrontShiny string
+    FrontShinyFemale string
+}
+
+type PokemonSpritesVersionsGenerationViiiIcons struct {
+    FrontDefault string
+    FrontFemale string
+}
+
+type PokemonStatsStat struct {
+    Name string
+    Url string
+}
+
+type PokemonTypesType struct {
+    Name string
+    Url string
+}
+"
+`;
+
+exports[`#ConsolidatedTypes can emit nested structs 1`] = `
+"
+type Users struct {
+    Id int
+    Name string
+    Notes []UserNotes
+}
+
+type UserNotes struct {
+    Id int
+    Text string
+}
+"
+`;
+
+exports[`#GoLang can emit deeply nested structs 1`] = `
+"
+type Pokemon struct {
+    Abilities []PokemonAbilities
+    BaseExperience int
+    Forms []PokemonForms
+    GameIndices []PokemonGameIndices
+    Height int
+    HeldItems []string
+    Id int
+    IsDefault bool
+    LocationAreaEncounters string
+    Moves []PokemonMoves
+    Name string
+    Order int
+    Species PokemonSpecies
+    Sprites PokemonSprites
+    Stats []PokemonStats
+    Types []PokemonTypes
+    Weight int
+}
+
+type PokemonAbilities struct {
+    Ability PokemonAbilitiesAbility
+    IsHidden bool
+    Slot int
+}
+
+type PokemonForms struct {
+    Name string
+    Url string
+}
+
+type PokemonGameIndices struct {
+    GameIndex int
+    Version PokemonGameIndicesVersion
+}
+
+type PokemonMoves struct {
+    Move PokemonMovesMove
+    VersionGroupDetails []PokemonMovesVersionGroupDetails
+}
+
+type PokemonSpecies struct {
+    Name string
+    Url string
+}
+
+type PokemonSprites struct {
+    BackDefault string
+    BackFemale string
+    BackShiny string
+    BackShinyFemale string
+    FrontDefault string
+    FrontFemale string
+    FrontShiny string
+    FrontShinyFemale string
+    Other PokemonSpritesOther
+    Versions PokemonSpritesVersions
+}
+
+type PokemonStats struct {
+    BaseStat int
+    Effort int
+    Stat PokemonStatsStat
+}
+
+type PokemonTypes struct {
+    Slot int
+    Type PokemonTypesType
+}
+
+type PokemonAbilitiesAbility struct {
+    Name string
+    Url string
+}
+
+type PokemonGameIndicesVersion struct {
+    Name string
+    Url string
+}
+
+type PokemonMovesMove struct {
+    Name string
+    Url string
+}
+
+type PokemonMovesVersionGroupDetails struct {
+    LevelLearnedAt int
+    MoveLearnMethod PokemonMovesVersionGroupDetailsMoveLearnMethod
+    VersionGroup PokemonMovesVersionGroupDetailsVersionGroup
+}
+
+type PokemonMovesVersionGroupDetailsMoveLearnMethod struct {
+    Name NameEnum
+    Url UrlEnum
+}
+
+type PokemonMovesVersionGroupDetailsVersionGroup struct {
+    Name string
+    Url string
+}
+
+type PokemonSpritesOther struct {
+    DreamWorld PokemonSpritesOtherDreamWorld
+    OfficialArtwork PokemonSpritesOtherOfficialArtwork
+}
+
+type PokemonSpritesVersions struct {
+    GenerationI PokemonSpritesVersionsGenerationI
+    GenerationIi PokemonSpritesVersionsGenerationIi
+    GenerationIii PokemonSpritesVersionsGenerationIii
+    GenerationIv PokemonSpritesVersionsGenerationIv
+    GenerationV PokemonSpritesVersionsGenerationV
+    GenerationVi PokemonSpritesVersionsGenerationVi
+    GenerationVii PokemonSpritesVersionsGenerationVii
+    GenerationViii PokemonSpritesVersionsGenerationViii
+}
+
+type PokemonSpritesOtherDreamWorld struct {
+    FrontDefault string
+    FrontFemale string
+}
+
+type PokemonSpritesOtherOfficialArtwork struct {
+    FrontDefault string
+}
+
+type PokemonSpritesVersionsGenerationI struct {
+    RedBlue PokemonSpritesVersionsGenerationIRedBlue
+    Yellow PokemonSpritesVersionsGenerationIYellow
+}
+
+type PokemonSpritesVersionsGenerationIi struct {
+    Crystal PokemonSpritesVersionsGenerationIiCrystal
+    Gold PokemonSpritesVersionsGenerationIiGold
+    Silver PokemonSpritesVersionsGenerationIiSilver
+}
+
+type PokemonSpritesVersionsGenerationIii struct {
+    Emerald PokemonSpritesVersionsGenerationIiiEmerald
+    FireredLeafgreen PokemonSpritesVersionsGenerationIiiFireredLeafgreen
+    RubySapphire PokemonSpritesVersionsGenerationIiiRubySapphire
+}
+
+type PokemonSpritesVersionsGenerationIv struct {
+    DiamondPearl PokemonSpritesVersionsGenerationIvDiamondPearl
+    HeartgoldSoulsilver PokemonSpritesVersionsGenerationIvHeartgoldSoulsilver
+    Platinum PokemonSpritesVersionsGenerationIvPlatinum
+}
+
+type PokemonSpritesVersionsGenerationV struct {
+    BlackWhite PokemonSpritesVersionsGenerationVBlackWhite
+}
+
+type PokemonSpritesVersionsGenerationVi struct {
+    OmegarubyAlphasapphire PokemonSpritesVersionsGenerationViOmegarubyAlphasapphire
+    XY PokemonSpritesVersionsGenerationViXY
+}
+
+type PokemonSpritesVersionsGenerationVii struct {
+    Icons PokemonSpritesVersionsGenerationViiIcons
+    UltraSunUltraMoon PokemonSpritesVersionsGenerationViiUltraSunUltraMoon
+}
+
+type PokemonSpritesVersionsGenerationViii struct {
+    Icons PokemonSpritesVersionsGenerationViiiIcons
+}
+
+type PokemonSpritesVersionsGenerationIRedBlue struct {
+    BackDefault string
+    BackGray string
+    FrontDefault string
+    FrontGray string
+}
+
+type PokemonSpritesVersionsGenerationIYellow struct {
+    BackDefault string
+    BackGray string
+    FrontDefault string
+    FrontGray string
+}
+
+type PokemonSpritesVersionsGenerationIiCrystal struct {
+    BackDefault string
+    BackShiny string
+    FrontDefault string
+    FrontShiny string
+}
+
+type PokemonSpritesVersionsGenerationIiGold struct {
+    BackDefault string
+    BackShiny string
+    FrontDefault string
+    FrontShiny string
+}
+
+type PokemonSpritesVersionsGenerationIiSilver struct {
+    BackDefault string
+    BackShiny string
+    FrontDefault string
+    FrontShiny string
+}
+
+type PokemonSpritesVersionsGenerationIiiEmerald struct {
+    FrontDefault string
+    FrontShiny string
+}
+
+type PokemonSpritesVersionsGenerationIiiFireredLeafgreen struct {
+    BackDefault string
+    BackShiny string
+    FrontDefault string
+    FrontShiny string
+}
+
+type PokemonSpritesVersionsGenerationIiiRubySapphire struct {
+    BackDefault string
+    BackShiny string
+    FrontDefault string
+    FrontShiny string
+}
+
+type PokemonSpritesVersionsGenerationIvDiamondPearl struct {
+    BackDefault string
+    BackFemale string
+    BackShiny string
+    BackShinyFemale string
+    FrontDefault string
+    FrontFemale string
+    FrontShiny string
+    FrontShinyFemale string
+}
+
+type PokemonSpritesVersionsGenerationIvHeartgoldSoulsilver struct {
+    BackDefault string
+    BackFemale string
+    BackShiny string
+    BackShinyFemale string
+    FrontDefault string
+    FrontFemale string
+    FrontShiny string
+    FrontShinyFemale string
+}
+
+type PokemonSpritesVersionsGenerationIvPlatinum struct {
+    BackDefault string
+    BackFemale string
+    BackShiny string
+    BackShinyFemale string
+    FrontDefault string
+    FrontFemale string
+    FrontShiny string
+    FrontShinyFemale string
+}
+
+type PokemonSpritesVersionsGenerationVBlackWhite struct {
+    Animated PokemonSpritesVersionsGenerationVBlackWhiteAnimated
+    BackDefault string
+    BackFemale string
+    BackShiny string
+    BackShinyFemale string
+    FrontDefault string
+    FrontFemale string
+    FrontShiny string
+    FrontShinyFemale string
+}
+
+type PokemonSpritesVersionsGenerationVBlackWhiteAnimated struct {
+    BackDefault string
+    BackFemale string
+    BackShiny string
+    BackShinyFemale string
+    FrontDefault string
+    FrontFemale string
+    FrontShiny string
+    FrontShinyFemale string
+}
+
+type PokemonSpritesVersionsGenerationViOmegarubyAlphasapphire struct {
+    FrontDefault string
+    FrontFemale string
+    FrontShiny string
+    FrontShinyFemale string
+}
+
+type PokemonSpritesVersionsGenerationViXY struct {
+    FrontDefault string
+    FrontFemale string
+    FrontShiny string
+    FrontShinyFemale string
+}
+
+type PokemonSpritesVersionsGenerationViiIcons struct {
+    FrontDefault string
+    FrontFemale string
+}
+
+type PokemonSpritesVersionsGenerationViiUltraSunUltraMoon struct {
+    FrontDefault string
+    FrontFemale string
+    FrontShiny string
+    FrontShinyFemale string
+}
+
+type PokemonSpritesVersionsGenerationViiiIcons struct {
+    FrontDefault string
+    FrontFemale string
+}
+
+type PokemonStatsStat struct {
+    Name string
+    Url string
+}
+
+type PokemonTypesType struct {
+    Name string
+    Url string
+}
+"
+`;
+
+exports[`#GoLang can emit nested structs 1`] = `
+"
+type Users struct {
+    Id int
+    Name string
+    Notes []UserNotes
+}
+
+type UserNotes struct {
+    Id int
+    Text string
+}
+"
+`;
+
+exports[`#GoLang can emit structs with enum 1`] = `
+"
+type Users struct {
+    Id UUID
+    Email string
+    FirstName string
+    LastName string
+    IsActive bool
+    CreatedAt Time
+    ModifiedAt Time
+    CatchPhrase string
+    CompanyName string
+    Credits CreditsEnum
+    SalesScore float32
+    Location LocationEnum
+    Profile string
+}
+"
+`;
+
+exports[`#GoLang can emit structs with enum 2`] = `
+Object {
+  "fields": Object {
+    "catchPhrase": Object {
+      "count": 26,
+      "enum": null,
+      "identity": false,
+      "length": 48,
+      "nullable": false,
+      "type": "String",
+      "typeRef": undefined,
+      "typeRelationship": undefined,
+      "unique": false,
+    },
+    "companyName": Object {
+      "count": 26,
+      "enum": null,
+      "identity": false,
+      "length": 20,
+      "nullable": false,
+      "type": "String",
+      "typeRef": undefined,
+      "typeRelationship": undefined,
+      "unique": false,
+    },
+    "createdAt": Object {
+      "count": 26,
+      "enum": null,
+      "identity": false,
+      "nullable": false,
+      "type": "Date",
+      "typeRef": undefined,
+      "typeRelationship": undefined,
+      "unique": false,
+    },
+    "credits": Object {
+      "count": 26,
+      "enum": Array [
+        1,
+        15,
+        20,
+        10,
+        0,
+        11,
+        7,
+        9,
+      ],
+      "identity": false,
+      "nullable": false,
+      "type": "Number",
+      "typeRef": undefined,
+      "typeRelationship": undefined,
+      "unique": false,
+    },
+    "email": Object {
+      "count": 25,
+      "enum": null,
+      "identity": false,
+      "length": 29,
+      "nullable": false,
+      "type": "String",
+      "typeRef": undefined,
+      "typeRelationship": undefined,
+      "unique": false,
+    },
+    "firstName": Object {
+      "count": 25,
+      "enum": null,
+      "identity": false,
+      "length": 10,
+      "nullable": false,
+      "type": "String",
+      "typeRef": undefined,
+      "typeRelationship": undefined,
+      "unique": false,
+    },
+    "id": Object {
+      "count": 25,
+      "enum": null,
+      "identity": true,
+      "nullable": false,
+      "type": "UUID",
+      "typeRef": undefined,
+      "typeRelationship": undefined,
+      "unique": true,
+    },
+    "isActive": Object {
+      "count": 26,
+      "enum": null,
+      "identity": false,
+      "nullable": false,
+      "type": "Boolean",
+      "typeRef": undefined,
+      "typeRelationship": undefined,
+      "unique": false,
+    },
+    "lastName": Object {
+      "count": 25,
+      "enum": null,
+      "identity": false,
+      "length": 11,
+      "nullable": false,
+      "type": "String",
+      "typeRef": undefined,
+      "typeRelationship": undefined,
+      "unique": false,
+    },
+    "location": Object {
+      "count": 26,
+      "enum": Array [
+        "nyc",
+        "remote",
+        "denver",
+      ],
+      "identity": false,
+      "length": 6,
+      "nullable": false,
+      "type": "String",
+      "typeRef": undefined,
+      "typeRelationship": undefined,
+      "unique": false,
+    },
+    "modifiedAt": Object {
+      "count": 26,
+      "enum": null,
+      "identity": false,
+      "nullable": false,
+      "type": "Date",
+      "typeRef": undefined,
+      "typeRelationship": undefined,
+      "unique": false,
+    },
+    "profile": Object {
+      "count": 25,
+      "enum": null,
+      "identity": false,
+      "length": 234,
+      "nullable": true,
+      "type": "String",
+      "typeRef": undefined,
+      "typeRelationship": undefined,
+      "unique": true,
+    },
+    "salesScore": Object {
+      "count": 26,
+      "enum": null,
+      "identity": false,
+      "nullable": false,
+      "precision": 9,
+      "scale": 7,
+      "type": "Float",
+      "typeRef": undefined,
+      "typeRelationship": undefined,
+      "unique": false,
+    },
+  },
+  "nestedTypes": Object {},
+  "schemaName": "users",
+  "totalRows": 26,
+}
+`;
