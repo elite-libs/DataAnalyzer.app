@@ -18,23 +18,26 @@ export const muiTheme = createMuiTheme({
     secondary: {
       main: '#607d8b',
     },
-    text: {
-      primary: '#333333',
-      secondary: '#555555',
-    },
     info: {
       main: '#64b5f6',
     },
     success: {
-      main: '#66bb6a',
-    },
-    warning: {
-      main: '#ef6c00',
+      main: '#009600',
     },
     error: {
       main: '#f50057cc',
     },
-
+    warning: {
+      main: '#ef6c00',
+    },
+    background: {
+      default: '#d0d0d0',
+    },
+    text: {
+      primary: '#3a3a3a',
+      secondary: '#414141cc',
+      disabled: '#9a9a9add',
+    },
     // Used by `getContrastText()` to maximize the contrast between
     // the background and the text.
     contrastThreshold: 3,

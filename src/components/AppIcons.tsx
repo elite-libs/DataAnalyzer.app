@@ -10,7 +10,9 @@ type IconProps = {
   fontSize?: IconSize;
   htmlColor?: string;
   className?: string;
+  style?: React.CSSProperties;
 };
+
 export const ErrorIcon = ({
   color = 'inherit',
   fontSize = 'inherit',
@@ -32,6 +34,7 @@ export const CheckCircleIcon = ({
   fontSize = 'inherit',
   className = '',
   htmlColor,
+  style,
 }: IconProps = {}) => {
   return (
     <MuiCheckCircleIcon
@@ -39,6 +42,7 @@ export const CheckCircleIcon = ({
       color={color}
       fontSize={fontSize}
       htmlColor={htmlColor}
+      style={style}
     />
   );
 };

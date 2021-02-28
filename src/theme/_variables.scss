@@ -1,24 +1,5 @@
-// Testing colors...
-// $color-secondary: #9c27b0;
-// $color-primary: #1b5e20;
-// $color-primary2: #0277bd;
-// $color-primary3: #01579b;
-// $color1: #1a237e;
-// $color2: #5e35b1;
-// $color3: #311b92;
-// $color4: #d32f2f;
-// $color5: #ef5350;
-// $color6: #4a148c;
-// $color7: #37474f;
-$color-primary: #1a237e;
-$color-secondary: #607d8b;
-$color-error: #f50057cc;
-$color-warning: #ef6c00;
-$color-success: #66bb6a;
-$color-background: #d0d0d0;
-$text-color-primary: #333333;
-$text-color-secondary: #33333366; // #555555
-
+/** BREAKPOINT SETTINGS */
+// Old bootstrap-based breaks:
 // $breakpoint-xs: 0;
 // $breakpoint-sm: 576px;
 // $breakpoint-md: 768px;
@@ -47,6 +28,18 @@ $breakpoint-md: 900px;
 $breakpoint-lg: 1200px;
 $breakpoint-xl: 1600px;
 
+// TODO/IMPORTANT: UPDATE THE `CustomTheme.tsx` HARDCODED COLORS
+$color-primary: #1a237e;
+$color-secondary: #607d8b;
+$color-info: #64b5f6;
+$color-success: #009600; // #66bb6a;
+$color-error: #f50057cc;
+$color-warning: #ef6c00;
+$color-background: #d0d0d0;
+$text-color-primary: #3a3a3a;
+$text-color-secondary: #414141cc; // #555555
+$text-color-disabled: #9a9a9add;
+
 // shorthand variables
 $text-color: $text-color-primary;
 
@@ -54,13 +47,15 @@ $variables: (
   // main ui colors
   --color-primary: $color-primary,
   --color-secondary: $color-secondary,
+  --color-success: $color-success,
+  --color-info: $color-info,
   --color-error: $color-error,
   --color-warning: $color-warning,
-  --color-success: $color-success,
   --color-background: $color-background,
   // text color
   --text-color-primary: $text-color-primary,
   --text-color-secondary: $text-color-secondary,
+  --text-color-disabled: $text-color-disabled,
   // breakpoints
   --breakpoint-xs: $breakpoint-xs,
   --breakpoint-sm: $breakpoint-sm,

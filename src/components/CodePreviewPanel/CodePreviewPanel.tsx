@@ -92,7 +92,13 @@ export default function CodePreviewPanel({
         <div>
           {
             <CheckCircleIcon
-              htmlColor={isPanelSuccessState ? 'green' : 'inherit'}
+              // color={isPanelSuccessState ? 'action' : 'inherit'}
+              // htmlColor={isPanelSuccessState ? 'green' : 'inherit'}
+              style={{
+                color: isPanelSuccessState
+                  ? 'var(--color-success)'
+                  : 'var(--text-color-disabled)',
+              }}
               fontSize="large"
             />
           }

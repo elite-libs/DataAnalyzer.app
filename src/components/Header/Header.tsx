@@ -21,12 +21,14 @@ import { setResults, setSchema } from 'store/analysisSlice';
 import useAppMessages from 'hooks/useAppMessages';
 import { RootState } from 'store/rootReducer';
 import { DemoDataMenu } from '../DemoDataMenu';
+import { muiTheme } from 'theme/CustomTheme';
 
 import './Header.scss';
 
 export default function Header() {
   const dispatch = useDispatch();
   const location = useLocation();
+  const { palette } = muiTheme;
 
   // const { trackCustomEvent } = useAnalytics();
   // const { enqueueSnackbar } = useAutoSnackbar();
@@ -47,6 +49,7 @@ export default function Header() {
         onClick: (e: any) => e.preventDefault(),
       };
 
+  console.log('location.pathname', location.pathname);
   return (
     <nav className="row row-block w-100">
       <h1 className="col-12 col-sm-6" title="Reset/Load Home Screen">
@@ -86,7 +89,11 @@ export default function Header() {
           onClick={resetResults}
         >
           <div className="d-flex align-items-center">
-            <HomeOutlinedIcon color="secondary" />
+            <HomeOutlinedIcon
+              htmlColor={
+                location.pathname === `/` ? palette.success.main : palette.grey[300]
+              }
+            />
             <span className="d-md-inline-block d-none">Code Generator</span>
           </div>
         </Link>
@@ -100,11 +107,17 @@ export default function Header() {
             tooltipContent={
               messages.inputDataMissing ||
               messages.schemaNeeded ||
-              `View Statistical Report about your Input Data`
+              `View chart about your Input Data!`
             }
           >
             <div className="d-flex align-items-center">
-              <AssessmentOutlinedIcon color="secondary" />
+              <AssessmentOutlinedIcon
+                htmlColor={
+                  location.pathname === `/results/explorer`
+                    ? palette.success.main
+                    : palette.grey[300]
+                }
+              />
               <span className="d-md-inline-block d-none">Data Visualization</span>
             </div>
           </TooltipWrapper>
