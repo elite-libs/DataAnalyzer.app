@@ -1,48 +1,28 @@
 .output-buttons {
-  // explicitly will not expand:
-  // flex-grow: 0;
-  // // create flex box for children
-  // display: flex;
-  // align-items: center;
-  // justify-content: space-between;
-  // flex-direction: column;
-
-  // margin-top: 0.65rem;
-
-  // svg {
-  //   height: 2.75rem;
-  //   width: 2.75rem;
-  // }
-  // .MuiButtonBase-root {
-  //   // height: 66px;
-  //   line-height: 1.2rem;
-  //   margin-right: 0.3rem;
-  //   // width: 165px;
-  //   flex-grow: 1;
-  // }
-  // .MuiButton-label {
-  //   max-width: 135px;
-  //   display: flex;
-  //   flex-direction: row;
-  //   align-items: center;
-  //   justify-content: center;
-  //   > div {
-  //     margin: 0 0.25rem;
-  //   }
-  // }
+  .target-name {
+    display: none;
+  }
+}
+.current-xl .output-buttons {
+  .target-name {
+    display: block;
+  }
 }
 
-%choose-output-indicator {
+%rotate-arrow-down {
   transition: all cubic-bezier(0.68, -0.55, 0.265, 1.55) 750ms,
     fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms !important;
-  transform: rotate(0deg);
+  transform: rotate(-90deg);
 }
 %rotate-point-right {
-  transform: rotate(-90deg);
+  transform: rotate(0deg);
+}
+%rotate-point-up {
+  transform: rotate(90deg);
 }
 
 .choose-output-indicator {
-  @extend %choose-output-indicator;
+  @extend %rotate-arrow-down;
 }
 .rotate-point-right {
   @extend %rotate-point-right;
@@ -51,10 +31,10 @@
 .current-xs {
   // combine both for small screens
   .choose-output-indicator {
-    @extend %choose-output-indicator;
+    @extend %rotate-arrow-down;
     @extend %rotate-point-right;
   }
   .rotate-point-right {
-    transform: rotate(0deg);
+    transform: rotate(-90deg);
   }
 }

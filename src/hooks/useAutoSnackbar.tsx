@@ -16,7 +16,7 @@ export function useAutoSnackbar(): ProviderContext {
 
       options.transitionDuration = options.transitionDuration || { enter: 75, exit: 125 };
       if (!options.anchorOrigin) {
-        options.anchorOrigin = { horizontal: 'right', vertical: 'top' };
+        options.anchorOrigin = { horizontal: 'right', vertical: 'bottom' };
       }
       if (!options?.action) {
         options.action = (

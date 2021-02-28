@@ -1,0 +1,18 @@
+.code-toolbar {
+  position: absolute;
+  right: 0.8rem;
+  top: -0.2rem;
+  z-index: 10000;
+  &.MuiButtonGroup-root,
+  button {
+    max-height: 44.25px;
+    border-top-left-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+  }
+  .btn-height-hack {
+    height: 44px;
+  }
+  // &.MuiButtonGroup-groupedContainedHorizontal:not(:last-child) {
+  //   height: 44px;
+  // }
+}

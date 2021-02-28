@@ -8,3 +8,5 @@ export type CallbackFn<TArgs, TReturn = void> = (args?: TArgs | any) => TReturn 
 export interface KeyValPair<TValue> {
   [id: string]: TValue;
 }
+
+export type SupportedTargetLanguages = 'typescript' | 'go' | 'json' | 'javascript';

@@ -7,7 +7,7 @@ describe('#nested non-array object types', () => {
   it('can parse nested objects (non-array)', async () => {
     try {
       const result = await schemaAnalyzer('historicEvent', historicEvents);
-      console.log(JSON.stringify(result, null, 2));
+      // console.log(JSON.stringify(result, null, 2));
       expect(result).toMatchSnapshot();
       expect(Object.keys(result.fields)).toStrictEqual(['date', 'url', 'data']);
       expect(result.nestedTypes).not.toBeNull();

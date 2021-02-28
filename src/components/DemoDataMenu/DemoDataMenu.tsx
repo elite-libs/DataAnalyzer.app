@@ -4,9 +4,9 @@ import { setSchemaName } from 'store/analysisSlice';
 import { setInputData } from 'store/appStateSlice';
 // import { RootState } from 'store/rootReducer';
 // import Chip from '@material-ui/core/Chip';
-import SyncIcon from '@material-ui/icons/Sync';
-import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
-import CloudDoneIcon from '@material-ui/icons/CloudDone';
+// import SyncIcon from '@material-ui/icons/Sync';
+// import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
+// import CloudDoneIcon from '@material-ui/icons/CloudDone';
 // import { SnackbarKey } from 'notistack';
 import TooltipWrapper from '../TooltipWrapper';
 // import { InfoOutlined } from '@material-ui/icons';
@@ -16,7 +16,7 @@ import { useAnalytics } from 'hooks/useAnalytics';
 
 import './DemoDataMenu.scss';
 
-const sampleDataSets: Record<'label' | 'value' | 'schemaName', string>[] = [
+export const sampleDataSets: Record<'label' | 'value' | 'schemaName', string>[] = [
   { label: 'Users', value: '/data/users.example.json', schemaName: 'Users' },
   { label: 'People', value: '/data/swapi-people.json', schemaName: 'People' },
   {
@@ -45,15 +45,15 @@ export const DemoDataMenu = () => {
   const [currentlyLoadingData, setCurrentlyLoadingData] = React.useState<string | null>(
     null,
   );
-  const [currentlyLoadedFile, setCurrentlyLoadedFile] = React.useState<string | null>(
-    null,
-  );
+  // const [currentlyLoadedFile, setCurrentlyLoadedFile] = React.useState<string | null>(
+  //   null,
+  // );
 
-  const getStatusIcon = (forFileName: string) => {
-    if (currentlyLoadingData === forFileName) return <SyncIcon />;
-    if (currentlyLoadedFile === forFileName) return <CloudDoneIcon />;
-    return <CloudDownloadIcon />;
-  };
+  // const getStatusIcon = (forFileName: string) => {
+  //   if (currentlyLoadingData === forFileName) return <SyncIcon />;
+  //   if (currentlyLoadedFile === forFileName) return <CloudDoneIcon />;
+  //   return <CloudDownloadIcon />;
+  // };
 
   /** choose a random dataset and load it  */
   const iAmFeelingLucky = () => {
@@ -89,13 +89,13 @@ export const DemoDataMenu = () => {
         dispatch(setSchemaName(name));
         // if (_loadingSnackMessage) closeSnackbar(_loadingSnackMessage);
         // _loadingSnackMessage = null;
-        enqueueSnackbar('Loaded Sample Dataset 🎉', {
+        enqueueSnackbar(`Loaded the "${name}" Dataset 🎉`, {
           variant: 'success',
           autoHideDuration: 3000,
           anchorOrigin: { horizontal: 'right', vertical: 'top' },
         });
         history.push('/');
-        setCurrentlyLoadedFile(filePath);
+        // setCurrentlyLoadedFile(filePath);
       })
       .catch((error) => {
         console.error('ERROR:', error);
@@ -128,7 +128,11 @@ export const DemoDataMenu = () => {
       >
         <label className="demo-link" onClick={iAmFeelingLucky}>
           <b>Test it out!&#160;&#160;</b>
-          <div className={'roll-dice ' + (currentlyLoadingData ? 'animated' : '')}></div>
+          <div className="roll-dice-wrapper">
+            <div
+              className={'roll-dice ' + (currentlyLoadingData ? 'animated' : '')}
+            ></div>
+          </div>
         </label>
       </TooltipWrapper>
       {/* {sampleDataSets.map((set) => {

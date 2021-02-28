@@ -1,15 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './styles.scss';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { Provider } from 'react-redux'
-import store from './store/store'
+import { Provider } from 'react-redux';
+import store from './store/store';
+import CustomTheme from './theme/CustomTheme';
+// import { Theme, withStyles } from '@material-ui/core';
+import Router from 'Router';
+import { SnackbarProvider } from 'notistack';
 
 ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
+  <div className="App container-xl">
+    <Provider store={store}>
+      <CustomTheme>
+        <SnackbarProvider disableWindowBlurListener={false}>
+          <Router />
+        </SnackbarProvider>
+      </CustomTheme>
+    </Provider>
+  </div>,
   document.getElementById('root'),
 );
 
