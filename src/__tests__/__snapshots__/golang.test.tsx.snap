@@ -395,12 +395,12 @@ Object {
     "credits": Object {
       "count": 26,
       "enum": Array [
-        0,
         1,
-        10,
-        11,
         15,
         20,
+        10,
+        0,
+        11,
         7,
         9,
       ],
@@ -467,9 +467,9 @@ Object {
     "location": Object {
       "count": 26,
       "enum": Array [
-        "denver",
         "nyc",
         "remote",
+        "denver",
       ],
       "identity": false,
       "length": 6,
