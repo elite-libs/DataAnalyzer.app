@@ -1,8 +1,20 @@
 import React from 'react';
 import MuiErrorIcon from '@material-ui/icons/Error';
 import MuiCheckCircleIcon from '@material-ui/icons/CheckCircle';
+import MuiGetAppIcon from '@material-ui/icons/GetApp';
+
 // import PropTypes, { SvgIconTypeMap } from '@material-ui/core';
 
+export type ThemeColors =
+  | 'inherit'
+  | 'primary'
+  | 'secondary'
+  | 'success'
+  | 'info'
+  | 'warning'
+  | 'error'
+  | 'action'
+  | 'disabled';
 type IconColors = 'inherit' | 'primary' | 'secondary' | 'action' | 'disabled' | 'error';
 type IconSize = 'inherit' | 'default' | 'small' | 'large';
 type IconProps = {
@@ -11,6 +23,7 @@ type IconProps = {
   htmlColor?: string;
   className?: string;
   style?: React.CSSProperties;
+  cssColor?: string;
 };
 
 export const ErrorIcon = ({
@@ -18,6 +31,7 @@ export const ErrorIcon = ({
   fontSize = 'inherit',
   className = '',
   htmlColor,
+  cssColor,
 }: IconProps = {}) => {
   return (
     <MuiErrorIcon
@@ -25,6 +39,7 @@ export const ErrorIcon = ({
       color={color}
       fontSize={fontSize}
       htmlColor={htmlColor}
+      style={{ fill: cssColor }}
     />
   );
 };
@@ -35,6 +50,7 @@ export const CheckCircleIcon = ({
   className = '',
   htmlColor,
   style,
+  cssColor,
 }: IconProps = {}) => {
   return (
     <MuiCheckCircleIcon
@@ -42,8 +58,62 @@ export const CheckCircleIcon = ({
       color={color}
       fontSize={fontSize}
       htmlColor={htmlColor}
-      style={style}
+      style={{ ...style, fill: cssColor }}
     />
+  );
+};
+
+export const GetAppIcon = ({
+  color = 'inherit',
+  fontSize = 'inherit',
+  className = '',
+  htmlColor,
+  style,
+  cssColor,
+}: IconProps = {}) => {
+  return (
+    <MuiGetAppIcon
+      className={className}
+      color={color}
+      fontSize={fontSize}
+      htmlColor={htmlColor}
+      style={{ ...style, fill: cssColor }}
+    />
+  );
+};
+
+/**
+ *
+ * @param {string} [cssColor] Can be any CSS color expression: 'var(--text-color-disabled)' or `red`
+ * @returns
+ */
+export const CodeOutputIcon = ({
+  cssColor,
+  fontSize = 'large',
+}: {
+  cssColor: string;
+  fontSize: 'large' | 'medium' | 'small';
+}) => {
+  const className =
+    fontSize === 'large'
+      ? `MuiSvgIcon-fontSizeLarge`
+      : fontSize === 'medium'
+      ? `MuiSvgIcon-fontSizeMedium`
+      : fontSize === 'small'
+      ? `MuiSvgIcon-fontSizeSmall`
+      : '';
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 29 29"
+      className={`MuiSvgIcon-root ${className}`}
+    >
+      <path
+        style={{ fill: cssColor }}
+        d="M3 0v29h22.3V7.35l-.3-.34L18.3.3 17.95 0H3zm2.23 2.23h11.15v6.7h6.7v17.84H5.23V2.23zm13.39 1.6l2.85 2.86h-2.85V3.83zm-4.47 7.32l-2.23 13.39h2.23l2.23-13.39h-2.23zM9.94 13.8l-2.8 3.35-.58.7.59.7 2.79 3.34 1.74-1.4-2.2-2.64 2.2-2.65-1.74-1.4zm8.43 0l-1.74 1.4 2.2 2.65-2.2 2.65 1.74 1.39 2.79-3.35.6-.7-.6-.7-2.79-3.34z"
+      />
+    </svg>
   );
 };
 

@@ -1,15 +1,3 @@
-/**
-Breakpoint 	Class infix 	Dimensions
-X-Small 	None 	<576px
-Small 	sm 	≥576px
-Medium 	md 	≥768px
-Large 	lg 	≥992px
-Extra large 	xl 	≥1200px
-Extra extra large 	xxl 	≥1400px
-*/
-// Bootstrap breaks
-// Extra small screen / phone
-
 %three-column-stacking-layout {
   display: grid;
   // grid-template-columns: minmax(160px, 33%) 1fr 1fr;
@@ -41,7 +29,7 @@ Extra extra large 	xxl 	≥1400px
   //   max-height: 90vh;
   // }
   .MuiPaper-root {
-    overflow-y: auto;
+    // overflow-y: auto;
   }
 }
 
@@ -72,7 +60,8 @@ Extra extra large 	xxl 	≥1400px
   }
 
   svg {
-    max-height: 40px;
+    max-height: 45px;
+    min-width: 30px;
   }
   display: flex;
   justify-content: center;
@@ -114,6 +103,10 @@ Extra extra large 	xxl 	≥1400px
   grid-template-columns: 40% 60%; //repeat(auto-fill, minmax(40%, 1fr));
   justify-content: space-between;
   white-space: nowrap;
+  margin: -16px;
+  margin-bottom: 4px;
+  padding: 16px;
+  padding-bottom: 0;
   > p {
     text-align: right;
   }

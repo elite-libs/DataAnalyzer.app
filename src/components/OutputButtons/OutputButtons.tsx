@@ -8,6 +8,7 @@ import {
   TypeScriptIcon,
   KnexIcon,
   GoLangIcon,
+  GetAppIcon,
 } from 'components/AppIcons';
 
 import { AdapterNames, render } from 'adapters/writers';
@@ -22,7 +23,7 @@ import { ButtonGroup } from '@material-ui/core';
 import Panel from 'components/Layouts/Panel';
 import TooltipWrapper from 'components/TooltipWrapper';
 import useViewportSize from 'hooks/useViewportSize';
-import GetAppIcon from '@material-ui/icons/GetApp';
+// import GetAppIcon from '@material-ui/icons/GetApp';
 import { SupportedTargetLanguages } from 'types';
 
 import './OutputButtons.scss';
@@ -163,14 +164,15 @@ export const OutputButtons = ({ size = 'medium', className = '' }: Props) => {
         <div>
           {
             <GetAppIcon
-              htmlColor={isPanelSuccessState ? 'green' : 'inherit'}
+              cssColor={isPanelSuccessState ? 'var(--color-success)' : 'inherit'}
+              // htmlColor={isPanelSuccessState ? 'green' : 'inherit'}
               fontSize="large"
               className={`choose-output-indicator ${
                 isResultsLoaded ? 'rotate-point-right' : ''
               }`}
             />
           }
-          <span>Step #2:</span>
+          <span>Step #2/3</span>
         </div>
       }
       subTitle={'Select Output'}

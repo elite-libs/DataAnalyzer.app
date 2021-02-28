@@ -3,13 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import copy from 'clipboard-copy';
 import Panel from 'components/Layouts/Panel';
-import TooltipWrapper from 'components/TooltipWrapper';
 import { ghcolors } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import SyncOutlinedIcon from '@material-ui/icons/SyncOutlined';
 import FileCopy from '@material-ui/icons/FileCopyOutlined';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
-import Button from '@material-ui/core/Button';
-import { CheckCircleIcon } from '../AppIcons';
+import { CheckCircleIcon, CodeOutputIcon } from '../AppIcons';
 import { resetAnalysis } from 'store/analysisSlice';
 import { useAutoSnackbar } from 'hooks/useAutoSnackbar';
 import type { Property } from 'csstype';
@@ -17,6 +14,7 @@ import type { RootState } from 'store/rootReducer';
 import type { SupportedTargetLanguages } from 'types';
 
 import './CodePreviewPanel.scss';
+import CodeToolbar, { IToolbarButton } from 'components/CodeToolbar/CodeToolbar';
 
 export type ICodePreviewPanelProps = {
   language?: SupportedTargetLanguages;
@@ -34,6 +32,9 @@ export default function CodePreviewPanel({
   const { enqueueSnackbar } = useAutoSnackbar();
 
   const { results } = useSelector((state: RootState) => state.analysisFeature);
+  const { outputLanguage = 'typescript' } = useSelector(
+    (state: RootState) => state.optionsActions,
+  );
 
   function resetAppState() {
     dispatch(resetAnalysis());
@@ -49,38 +50,22 @@ export default function CodePreviewPanel({
       });
     }
   }
-
-  const codeToolbarUi = !results ? null : (
-    <ButtonGroup
-      variant="contained"
-      className={`generated-code-toolbar d-flex align-items-start mt-1 ml-1`}
-    >
-      <Button
-        size="small"
-        color="secondary"
-        variant={'contained'}
-        startIcon={<SyncOutlinedIcon />}
-        onClick={resetAppState}
-        style={{}}
-      >
-        <TooltipWrapper tooltipContent={<b>Generate a different output!</b>}>
-          <div>Reset</div>
-        </TooltipWrapper>
-      </Button>
-      <Button
-        size="small"
-        variant="contained"
-        color="primary"
-        title="Copy source"
-        onClick={handleCopyClick}
-        startIcon={<FileCopy />}
-      >
-        <TooltipWrapper tooltipContent={<b>Copy to clipboard</b>}>
-          <div>Copy</div>
-        </TooltipWrapper>
-      </Button>
-    </ButtonGroup>
-  );
+  const buttons: IToolbarButton[] = [
+    {
+      label: 'Reset',
+      color: 'secondary',
+      tooltip: <b>Generate a different output!</b>,
+      startIcon: <SyncOutlinedIcon />,
+      onClick: resetAppState,
+    },
+    {
+      label: 'Copy',
+      color: 'primary',
+      tooltip: <b>Copy to clipboard!</b>,
+      startIcon: <FileCopy />,
+      onClick: handleCopyClick,
+    },
+  ];
 
   const isPanelSuccessState = Boolean(results);
   return (
@@ -91,28 +76,29 @@ export default function CodePreviewPanel({
       titleComponent={
         <div>
           {
-            <CheckCircleIcon
+            <CodeOutputIcon
               // color={isPanelSuccessState ? 'action' : 'inherit'}
               // htmlColor={isPanelSuccessState ? 'green' : 'inherit'}
-              style={{
-                color: isPanelSuccessState
-                  ? 'var(--color-success)'
-                  : 'var(--text-color-disabled)',
-              }}
               fontSize="large"
+              cssColor={
+                isPanelSuccessState
+                  ? 'var(--color-success)'
+                  : 'var(--text-color-disabled)'
+              }
             />
           }
-          <span>Step #3:</span>
+          <span>Step #3/3</span>
         </div>
       }
       subTitle={isPanelSuccessState ? 'Profit!' : 'Generate Code'}
     >
-      {results != null ? codeToolbarUi : null}
+      <CodeToolbar buttons={buttons} disabled={isPanelSuccessState ? false : true} />
+
       <SyntaxHighlighter
-        language={language}
+        language={outputLanguage}
         style={ghcolors}
         showLineNumbers={true}
-        customStyle={{ margin: 0, overflowY: 'auto' }}
+        customStyle={{ margin: 0, overflowY: 'auto', paddingTop: '1.5rem' }}
         codeTagProps={{ style: { fontSize: '0.8rem' } }}
       >
         {children}

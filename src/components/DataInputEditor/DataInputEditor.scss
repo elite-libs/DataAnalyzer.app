@@ -1,7 +1,20 @@
 .data-input-editor {
   .panel-body {
+    position: relative;
+    .code-toolbar {
+      top: 53px;
+    }
     .ace_editor {
       max-height: 40vh;
+    }
+  }
+}
+
+.code-toolbar {
+  button {
+    opacity: 0.66;
+    &:hover {
+      opacity: 1 !important;
     }
   }
 }

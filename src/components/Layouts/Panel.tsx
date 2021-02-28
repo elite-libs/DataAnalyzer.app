@@ -7,7 +7,8 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Paper, { PaperProps } from '@material-ui/core/Paper';
-
+// import AspectRatioIcon from '@material-ui/icons/AspectRatio';
+// import CompareArrowsIcon from '@material-ui/icons/CompareArrows';
 import './Panel.scss';
 // const useStyles = makeStyles({
 //   root: {},
@@ -22,9 +23,12 @@ type Props = {
 } & PaperProps;
 
 export default React.forwardRef<any, Props>((props, ref) => {
+  // TODO/2021-02-27: Allow collapsible panel, add toggle icons in-place of subTitle.
+  // Improve this 'jumpy' pattern later
   const { titleComponent: title, subTitle, children, actions, className } = props;
+
   return (
-    <Paper elevation={2} className={`${className || ''} panel-component`} ref={ref}>
+    <Paper elevation={3} className={`${className || ''} panel-component`} ref={ref}>
       <Card>
         <CardContent>
           <div className="panel-header">

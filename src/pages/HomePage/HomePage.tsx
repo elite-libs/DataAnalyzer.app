@@ -32,14 +32,14 @@ export default function HomePage() {
   let userInstructions =
     parsedInput == null
       ? `Make sure your input data is valid!`
-      : `Choose a code generator button to continue!`;
+      : `Click an Output button\n to see some code!`;
 
   return (
     <section className="home-layout">
       <DataInputEditor value={inputData || undefined} />
       <OutputButtons size={isStackedViewMode ? 'small' : 'large'} className="" />
       <CodePreviewPanel className="">
-        {results || `// ${userInstructions}`}
+        {results || `/*\n\n${userInstructions}\n\n*/`}
       </CodePreviewPanel>
     </section>
   );

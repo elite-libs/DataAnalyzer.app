@@ -20,7 +20,7 @@ import TooltipWrapper from 'components/TooltipWrapper';
 import { setResults, setSchema } from 'store/analysisSlice';
 import useAppMessages from 'hooks/useAppMessages';
 import { RootState } from 'store/rootReducer';
-import { DemoDataMenu } from '../DemoDataMenu';
+// import { DemoDataMenu } from '../DemoDataMenu';
 import { muiTheme } from 'theme/CustomTheme';
 
 import './Header.scss';
@@ -59,7 +59,7 @@ export default function Header() {
         </Link>
       </h1>
       <aside className="icon-button-box col-12 col-sm-6 text-right">
-        <DemoDataMenu />
+        {/* <DemoDataMenu /> */}
 
         <Link className={''} component={RouteLink} to="/about" title="View README">
           <InfoOutlinedIcon fontSize="small" color="action" />

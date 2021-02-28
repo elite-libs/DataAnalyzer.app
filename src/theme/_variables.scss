@@ -36,6 +36,7 @@ $color-success: #009600; // #66bb6a;
 $color-error: #f50057cc;
 $color-warning: #ef6c00;
 $color-background: #d0d0d0;
+$color-background-light: #dddddddd;
 $text-color-primary: #3a3a3a;
 $text-color-secondary: #414141cc; // #555555
 $text-color-disabled: #9a9a9add;
@@ -51,7 +52,9 @@ $variables: (
   --color-info: $color-info,
   --color-error: $color-error,
   --color-warning: $color-warning,
+  // bg colors
   --color-background: $color-background,
+  --color-background-light: $color-background-light,
   // text color
   --text-color-primary: $text-color-primary,
   --text-color-secondary: $text-color-secondary,

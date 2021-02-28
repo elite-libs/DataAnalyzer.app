@@ -16,7 +16,7 @@ import { useAnalytics } from 'hooks/useAnalytics';
 
 import './DemoDataMenu.scss';
 
-const sampleDataSets: Record<'label' | 'value' | 'schemaName', string>[] = [
+export const sampleDataSets: Record<'label' | 'value' | 'schemaName', string>[] = [
   { label: 'Users', value: '/data/users.example.json', schemaName: 'Users' },
   { label: 'People', value: '/data/swapi-people.json', schemaName: 'People' },
   {
