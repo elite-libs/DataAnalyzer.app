@@ -1,11 +1,20 @@
-import { fromPairs, mapValues, cloneDeep } from 'lodash';
+import {
+  fromPairs,
+  mapValues,
+  cloneDeep,
+  intersection,
+  union,
+  difference,
+  xor,
+} from 'lodash';
 import { helpers } from '..';
 import type {
   CombinedFieldInfo,
   IConsolidateTypesOptions,
   TypeSummary,
 } from '..';
-import type { KeyValPair, SubstringMatchDetails } from '../../types';
+import type { KeyValPair, TypeNameSuggestion } from '../../types';
+import { initialify } from './helpers';
 
 export default function consolidateNestedTypes(
   nestedTypes: KeyValPair<TypeSummary<CombinedFieldInfo>>,
@@ -74,7 +83,8 @@ export default function consolidateNestedTypes(
    *     or by using only the last 1-2 word parts?)
    */
   const shapeMapOfTypes = Object.entries<string[]>(typeAliases.shapeToType);
-  //// console.log('shapeMapOfTypes', shapeMapOfTypes);
+  console.log('shapeMapOfTypes', shapeMapOfTypes);
+
   const typesToRemap = shapeMapOfTypes.filter(
     ([shape, typeNames]) => typeNames.length > 1,
   );
@@ -82,29 +92,31 @@ export default function consolidateNestedTypes(
   const remapedShapeNames = fromPairs(
     typesToRemap.map(([shape, typePaths]) => [
       shape,
-      inferTypeNames(typePaths),
+      inferTypeNames(typePaths, shape),
     ]),
   );
-  const fieldsToReplace = [];
-  const longestShapeAliases = {};
-  // const namedShapeAliases =
-  mapValues(remapedShapeNames, (typePaths, key) => {
-    const suggestedName = determineSuggestedName(typePaths);
-    if (suggestedName) {
-      fieldsToReplace.push({ shape: key, alias: suggestedName });
-      if (
-        !longestShapeAliases[suggestedName] ||
-        longestShapeAliases[suggestedName].length < key.length
-      ) {
-        longestShapeAliases[suggestedName] = key;
-      }
-    }
+  console.log('remapedShapeNames', JSON.stringify(remapedShapeNames, null, 2));
 
-    // TODO: Add name collision avoidance before over-writing back into the TypeSummary
-    // Idea: We can possibly trust the longest shape to be a superset of other smaller shapes - when colliding suggested names
-    //    Trying with `longestShapeAliases`
-    return suggestedName;
+  const fieldsToReplace = [];
+  // const namedShapeAliases =
+  const suggestedNames = mapValues(remapedShapeNames, (typePaths, fieldShape) =>
+    determinePossibleNames({
+      ...typePaths,
+      fieldShape,
+    }),
+  );
+
+  mapValues(suggestedNames, (suggestedName, fieldShape) => {
+    // Ensure we got a name, and it's currently unused.
+    if (suggestedName != false && !nestedTypes[suggestedName]) {
+      fieldsToReplace.push({
+        shape: fieldShape,
+        targetTypes: typeAliases.shapeToType[fieldShape],
+        alias: suggestedName,
+      });
+    }
   });
+  console.log('fieldsToReplace', fieldsToReplace);
   //// console.log('remapedShapeNames', {
   ////   fieldsToReplace,
   ////   namedShapeAliases,
@@ -129,81 +141,32 @@ export default function consolidateNestedTypes(
   return updatedTypes;
 
   /**
-   * @private
-   * Input for `inferTypeName(typePaths)` will look like either:
-   * ```
-   * [
-   *   "historicEvent.data.Events",
-   *   "historicEvent.data.Births",
-   *   "historicEvent.data.Deaths"
-   * ]
-   * ```
-   * 
-   * Or
-   * 
-   * ```
-   * [
-   *  "historicEvent.data.Events.links",
-   *  "historicEvent.data.Births.links",
-   *  "historicEvent.data.Deaths.links"
-   * ]
-   * ```
-   * 
-   * And should return:
-   * 
-   * ```
-   * {
-   *   'html|links|no_year_html|text|year': { 
-   *     prefixMatches: [ 'historicEvent', 'data' ], 
-   *     suffixMatches: []
-   *   },
-   *   'link|title': {
-   *     prefixMatches: [ 'historicEvent', 'data' ],
-   *     suffixMatches: [ 'links' ]
-   *   }
-   * }
-   * ```
-
-   */
-  function inferTypeNames(typePaths: string[]): SubstringMatchDetails {
-    // first try find similar ending parts, then similar beginning parts
-    const splitTypeNamePaths = typePaths.map((p) => p.split('.'));
-    const firstTypePath = splitTypeNamePaths[0];
-    const prefixMatches = firstTypePath.map((pathPart, pathIndex) => {
-      return splitTypeNamePaths.every((parts) => parts[pathIndex] === pathPart)
-        ? pathPart
-        : null;
-    });
-    const suffixMatches = firstTypePath
-      .slice()
-      .reverse()
-      .map((pathPart, pathIndex) => {
-        return splitTypeNamePaths.every(
-          (parts) => parts.reverse()[pathIndex] === pathPart,
-        )
-          ? pathPart
-          : null;
-      });
-    // .reverse();
-    return {
-      prefixMatches: helpers.takeUntilNull(prefixMatches),
-      suffixMatches: helpers.takeUntilNull(suffixMatches),
-    };
-  }
-  /**
    * Implement the logic to choose a name from available prefix/suffix strings.
    *
    * 2021-02 Logic:
    * 1. If suffixMatches, return that.
-   * 2. Fallback to prefix,
+   * ```
+   * 'Site.links' => "links"
+   * 'Game.links' => "links"
+   * ```
+   * 2. Fallback to a mode where we take the Type Path starting from the last common subpath prefix,
+   * ```
+   * 'Pokemon.sprites.versions.generation-i' => "versions.generation-i"
+   * 'Pokemon.sprites.versions.generation-v' => "versions.generation-v"
+   * ```
+
    * 3. Or, fail with `false`
    *
    */
-  function determineSuggestedName({
+  function determinePossibleNames({
+    fieldShape,
     prefixMatches,
     suffixMatches,
-  }: SubstringMatchDetails): string | false {
+    pathSplitByLastCommonSubstring,
+  }: TypeNameSuggestion & { fieldShape: string }): string | false {
     if (suffixMatches.length > 0) return suffixMatches.join('.');
+    if (pathSplitByLastCommonSubstring && pathSplitByLastCommonSubstring[1])
+      return pathSplitByLastCommonSubstring[1]; //.join('.');
     if (prefixMatches.length > 0) return prefixMatches.join('.');
     return false;
   }
@@ -242,3 +205,123 @@ export default function consolidateNestedTypes(
     });
   }
 }
+
+/**
+   * @private
+   * @param 
+   * Input for `inferTypeName(typePaths)` will look like either:
+   * ```
+   * [
+   *   "historicEvent.data.Events",
+   *   "historicEvent.data.Births",
+   *   "historicEvent.data.Deaths"
+   * ]
+   * ```
+   * 
+   * Or
+   * 
+   * ```
+   * [
+   *  "historicEvent.data.Events.links",
+   *  "historicEvent.data.Births.links",
+   *  "historicEvent.data.Deaths.links"
+   * ]
+   * ```
+   * 
+   * And should return:
+   * 
+   * ```
+   * {
+   *   'html|links|no_year_html|text|year': { 
+   *     prefixMatches: [ 'historicEvent', 'data' ], 
+   *     suffixMatches: []
+   *   },
+   *   'link|title': {
+   *     prefixMatches: [ 'historicEvent', 'data' ],
+   *     suffixMatches: [ 'links' ]
+   *   }
+   * }
+   * ```
+
+   */
+function inferTypeNames(
+  typePaths: string[],
+  shape: string,
+): TypeNameSuggestion {
+  // first try find similar ending parts, then similar beginning parts
+  const splitTypeNamePaths = typePaths.map((p) => p.split('.'));
+
+  const firstTypePath = splitTypeNamePaths[0];
+  const lastCommonIndex = firstTypePath.findIndex(
+    (pathPart, pathIndex) =>
+      !splitTypeNamePaths.every((parts) => parts[pathIndex] === pathPart),
+  );
+  const prefixMatches = firstTypePath.map((pathPart, pathIndex) => {
+    return splitTypeNamePaths.every((parts) => parts[pathIndex] === pathPart)
+      ? pathPart
+      : null;
+  });
+  const suffixMatches = firstTypePath
+    .slice()
+    .reverse()
+    .map((pathPart, pathIndex) => {
+      return splitTypeNamePaths.every(
+        (parts) => parts.slice().reverse()[pathIndex] === pathPart,
+      )
+        ? pathPart
+        : null;
+    });
+  console.log(
+    'suffixMatches',
+    lastCommonIndex,
+    firstTypePath.join('.'),
+    suffixMatches.toString(),
+  );
+  const shapeParts = shape.split(/\|/gim);
+  let shapeBasedName = shapeParts.length <= 2 ? shapeParts.join('.') : null;
+
+  return {
+    shapeBasedName,
+    sourceTypePaths: typePaths,
+    prefixMatches: helpers.takeUntilNull(prefixMatches),
+    suffixMatches: helpers.takeUntilNull(suffixMatches),
+    pathSplitByLastCommonSubstring:
+      lastCommonIndex >= 1
+        ? [
+            firstTypePath.slice(0, lastCommonIndex - 1).join('.'),
+            firstTypePath.slice(lastCommonIndex - 1).join('.'),
+          ]
+        : null,
+    exactMatches: {
+      lastCommonKey: suffixMatches && suffixMatches[0],
+      nextToLastCommonKey:
+        suffixMatches && suffixMatches.length >= 2 && suffixMatches[1],
+    },
+    setOperations: {
+      intersection: intersection(...splitTypeNamePaths).join('.'),
+      difference:
+        splitTypeNamePaths.length > 0
+          ? // @ts-ignore
+            difference(...splitTypeNamePaths)
+          : undefined,
+      union: union(...splitTypeNamePaths).join('.'),
+      xor: xor(...splitTypeNamePaths).join('.'),
+    },
+    alternatePrefixes: {
+      initials:
+        prefixMatches.length > 0
+          ? prefixMatches.map(initialify).join('.')
+          : null,
+      abbreviated:
+        prefixMatches.length > 0
+          ? prefixMatches.map((p, i) => (i === 0 ? initialify(p) : p)).join('.')
+          : null,
+      truncated:
+        prefixMatches.length > 0
+          ? prefixMatches.filter((p, i) => i !== 0).join('.')
+          : null,
+    },
+  };
+}
+
+export { inferTypeNames as _inferTypeNames };

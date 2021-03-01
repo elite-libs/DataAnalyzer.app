@@ -27,6 +27,7 @@
     "bootstrap": "^4.6.0",
     "clipboard-copy": "^4.0.1",
     "comlink": "^4.3.0",
+    "common-substrings": "^3.0.1",
     "csv-parse": "^4.15.0",
     "debug": "^4.3.1",
     "functional-promises": "^2.0.2",

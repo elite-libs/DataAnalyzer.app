@@ -11,7 +11,29 @@ export interface KeyValPair<TValue> {
 
 export type SupportedTargetLanguages = 'typescript' | 'go' | 'json' | 'javascript';
 
-export type SubstringMatchDetails = {
+export type TypeNameSuggestion = {
+  readonly sourceTypePaths: string[];
+  shapeBasedName: string;
   prefixMatches: string[];
   suffixMatches: string[];
+  pathSplitByLastCommonSubstring: string[] | null;
+  // trailing string matches
+  exactMatches: {
+    lastCommonKey: null | string;
+    nextToLastCommonKey: null | string;
+  };
+
+  setOperations: {
+    // uses lodash.intersection
+    intersection: null | string;
+    difference: string[];
+    union: null | string;
+    xor: null | string;
+  };
+
+  alternatePrefixes: null | {
+    initials: null | string;
+    abbreviated: null | string;
+    truncated: null | string;
+  };
 };
