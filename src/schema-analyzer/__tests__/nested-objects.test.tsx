@@ -5,7 +5,7 @@ import {
   consolidateNestedTypes,
 } from '../';
 import historicEvents from '../../../public/data/historic-events.json';
-// import pokemonCharmander from '../../../public/data/pokemon-charmander.json';
+import pokemonCharmander from '../../../public/data/pokemon-charmander.json';
 
 describe('#nested objects', () => {
   // Uses data from http://history.muffinlabs.com/date/2/16
@@ -36,18 +36,11 @@ describe('#nested objects', () => {
   });
   describe('#de-duplicating subtypes', () => {
     // Uses data from http://history.muffinlabs.com/date/2/16
-    it('can match types by their field names', async () => {
+    it('can find similar types by field name', async () => {
       try {
-        const options: ISchemaAnalyzerOptions = {
+        const summary = await schemaAnalyzer('historicEvent', historicEvents, {
           strictMatching: false,
-          consolidateTypes: 'field-names',
-        };
-
-        const summary = await schemaAnalyzer(
-          'historicEvent',
-          historicEvents,
-          options,
-        );
+        });
         const result = helpers.flattenTypes(summary, {
           nullableRowsThreshold: 0.0001,
           targetValue: 'p99',
@@ -55,9 +48,10 @@ describe('#nested objects', () => {
           targetPrecision: 'p99',
           targetScale: 'p99',
         });
-        expect(
-          consolidateNestedTypes(result.nestedTypes, options),
-        ).toBeDefined();
+        result.nestedTypes = consolidateNestedTypes(result.nestedTypes, {
+          consolidateTypes: 'field-names',
+        });
+        expect(result.nestedTypes).toMatchSnapshot();
         // console.log(JSON.stringify(result, null, 2));
         // expect(result).toMatchSnapshot();
         expect(Object.keys(result.fields)).toStrictEqual([
@@ -68,17 +62,105 @@ describe('#nested objects', () => {
         expect(result.nestedTypes).not.toBeNull();
         expect(Object.keys(result.nestedTypes)).toStrictEqual([
           'historicEvent.data',
-          'historicEvent.data.Events',
-          'historicEvent.data.Births',
-          'historicEvent.data.Deaths',
           'links',
         ]);
         expect(result.nestedTypes?.['historicEvent.data']).toBeDefined();
         expect(
           Object.keys(result.nestedTypes?.['historicEvent.data']?.fields!),
-        ).toStrictEqual(['Events', 'Births', 'Deaths']);
+        ).toStrictEqual(['year', 'text', 'html', 'no_year_html', 'links']);
       } catch (error) {
         console.error('ERROR:', error);
+        throw error;
+      }
+    });
+    it('can find similar types by field+type (mode: field-names-and-type)', async () => {
+      try {
+        const summary = await schemaAnalyzer('Pokemon', pokemonCharmander, {
+          strictMatching: false,
+        });
+        const result = helpers.flattenTypes(summary, {
+          nullableRowsThreshold: 0.0001,
+          targetValue: 'p99',
+          targetLength: 'p99',
+          targetPrecision: 'p99',
+          targetScale: 'p99',
+        });
+        expect(result.nestedTypes).toMatchSnapshot(
+          'Before consolidating types',
+        );
+        result.nestedTypes = consolidateNestedTypes(result.nestedTypes, {
+          consolidateTypes: 'field-names-and-type',
+        });
+        expect(result.nestedTypes).toMatchSnapshot('After consolidating types');
+        // console.log(JSON.stringify(result, null, 2));
+        // expect(result).toMatchSnapshot();
+        expect(Object.keys(result.fields)).toStrictEqual([
+          'abilities',
+          'base_experience',
+          'forms',
+          'game_indices',
+          'height',
+          'held_items',
+          'id',
+          'is_default',
+          'location_area_encounters',
+          'moves',
+          'name',
+          'order',
+          'species',
+          'sprites',
+          'stats',
+          'types',
+          'weight',
+        ]);
+      } catch (error) {
+        console.error('ERROR:', error);
+        throw error;
+      }
+    });
+    it('can find similar types by field+type (mode: field-names)', async () => {
+      try {
+        const summary = await schemaAnalyzer('Pokemon', pokemonCharmander, {
+          strictMatching: false,
+        });
+        const result = helpers.flattenTypes(summary, {
+          nullableRowsThreshold: 0.0001,
+          targetValue: 'p99',
+          targetLength: 'p99',
+          targetPrecision: 'p99',
+          targetScale: 'p99',
+        });
+        expect(result.nestedTypes).toMatchSnapshot(
+          'Before consolidating types',
+        );
+        result.nestedTypes = consolidateNestedTypes(result.nestedTypes, {
+          consolidateTypes: 'field-names',
+        });
+        expect(result.nestedTypes).toMatchSnapshot('After consolidating types');
+        // console.log(JSON.stringify(result, null, 2));
+        // expect(result).toMatchSnapshot();
+        expect(Object.keys(result.fields)).toStrictEqual([
+          'abilities',
+          'base_experience',
+          'forms',
+          'game_indices',
+          'height',
+          'held_items',
+          'id',
+          'is_default',
+          'location_area_encounters',
+          'moves',
+          'name',
+          'order',
+          'species',
+          'sprites',
+          'stats',
+          'types',
+          'weight',
+        ]);
+      } catch (error) {
+        console.error('ERROR:', error);
+        throw error;
       }
     });
   });

@@ -10,3 +10,8 @@ export interface KeyValPair<TValue> {
 }
 
 export type SupportedTargetLanguages = 'typescript' | 'go' | 'json' | 'javascript';
+
+export type SubstringMatchDetails = {
+  prefixMatches: string[];
+  suffixMatches: string[];
+};

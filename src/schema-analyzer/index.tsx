@@ -3,9 +3,8 @@
 import { detectTypes, MetaChecks } from './utils/type-helpers';
 import * as helpers from './utils/helpers';
 import { mapValues } from 'lodash';
-import { KeyValPair } from '../types';
-import { zipObject } from 'lodash';
-import { fromPairs } from 'lodash';
+import type { KeyValPair } from '../types';
+import consolidateNestedTypes from './utils/consolidate-nested-types';
 
 export { helpers };
 
@@ -73,8 +72,9 @@ export interface ISchemaAnalyzerOptions {
   strictMatching?: boolean | undefined;
   /** Nested object arrays will return sub-type info by default. */
   disableNestedTypes?: boolean | undefined;
-
-  /** consolidateTypes?: null | */
+}
+export interface IConsolidateTypesOptions {
+  /** `consolidateTypes` is a flag/mode to indicate the shape matching behavior. */
   consolidateTypes?: null | 'field-names' | 'field-names-and-type';
 }
 
@@ -854,133 +854,6 @@ function formatRangeStats<T, TFormatReturn>(
   };
 }
 
-function consolidateNestedTypes(
-  nestedTypes: KeyValPair<TypeSummary<CombinedFieldInfo>>,
-  { consolidateTypes }: ISchemaAnalyzerOptions,
-) {
-  const nestedTypePairs = Object.entries(nestedTypes);
-
-  let getKey = null;
-  if (consolidateTypes === 'field-names') {
-    getKey = (typeSummary: TypeSummary<CombinedFieldInfo>) =>
-      Object.keys(typeSummary.fields).sort().join('|');
-  } else if (consolidateTypes === 'field-names-and-type') {
-    getKey = (typeSummary: TypeSummary<CombinedFieldInfo>) =>
-      Object.keys(typeSummary.fields)
-        .sort()
-        .map(
-          (name) =>
-            `${name}:${
-              typeSummary.fields[name].typeRef || typeSummary.fields[name].type
-            }`,
-        )
-        .join('|');
-  } else {
-    return nestedTypes; // bail out
-  }
-
-  const typeAliases = nestedTypePairs.reduce(
-    (typeAliases, [subTypeName, subTypeSummary]) => {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      if (subTypeSummary) {
-        const shape = getKey(subTypeSummary);
-        typeAliases.typeToShape[subTypeName] = shape;
-        // add to the the array for shape keys:
-        if (Array.isArray(typeAliases.shapeToType[shape])) {
-          typeAliases.shapeToType[shape].push(subTypeName);
-        } else {
-          typeAliases.shapeToType[shape] = [subTypeName];
-        }
-      }
-      return typeAliases;
-    },
-    { shapeToType: {}, typeToShape: {}, shapeAlias: {} },
-  );
-  console.log('typeAliases', typeAliases);
-
-  /**
-   * Now typeAliases will look like:
-   *
-   * ```json
-   * {
-   *   "typeToShape": {
-   *     "event.links": "title|url",
-   *     "location.links": "title|url"
-   *   },
-   *   "shapeToType": {
-   *     "title|url": ["event.links", "location.links"]
-   *   }
-   * }
-   * ```
-   *
-   * We need a name for the new type,
-   * 2 strategies for MVP:
-   *   1. Use last part of the typeName string (if they match)
-   *   2. Use LCS algorithm to find best name
-   *    (possibly cleanup by eliminating duplicate words/substrings?
-   *     or by using only the last 1-2 word parts?)
-   */
-  const shapeMapOfTypes = Object.entries<string[]>(typeAliases.shapeToType);
-  console.log('shapeMapOfTypes', shapeMapOfTypes);
-  const typesToRemap = shapeMapOfTypes.filter(
-    ([shape, typeNames]) => typeNames.length > 1,
-  );
-
-  const remapedShapeNames = fromPairs(
-    typesToRemap.map(([shape, typePaths]) => [shape, inferTypeName(typePaths)]),
-  );
-  console.log('remapedShapeNames', remapedShapeNames, typesToRemap);
-  /*
-   * Then we can reassign the names of typeAliases in each typeSummary.fields
-   * And finally we return the simplified nestedTypes
-   */
-
-  /**
-   * @private
-   * Input for `inferTypeName(typePaths)` will look like either:
-   * ```
-   * [
-   *   "historicEvent.data.Events",
-   *   "historicEvent.data.Births",
-   *   "historicEvent.data.Deaths"
-   * ]
-   * ```
-   * 
-   * Or
-   * 
-   * ```
-   * [
-   *  "historicEvent.data.Events.links",
-   *  "historicEvent.data.Births.links",
-   *  "historicEvent.data.Deaths.links"
-   * ]
-   * ```
-
-   */
-  function inferTypeName(typePaths: string[]) {
-    // first try find similar ending parts, then similar beginning parts
-    const splitTypeNamePaths = typePaths.map((p) => p.split('.'));
-    const firstTypePath = splitTypeNamePaths[0];
-    const prefixMatches = firstTypePath.map((pathPart, pathIndex) => {
-      return splitTypeNamePaths.every((parts) => parts[pathIndex] === pathPart)
-        ? pathPart
-        : null;
-    });
-    const suffixMatches = firstTypePath
-      .slice()
-      .reverse()
-      .map((pathPart, pathIndex) => {
-        return splitTypeNamePaths.every(
-          (parts) => parts.reverse()[pathIndex] === pathPart,
-        )
-          ? pathPart
-          : null;
-      });
-    // .reverse();
-    return { prefixMatches, suffixMatches };
-  }
-}
-
 function unpackNestedTypes(nestedTypes: KeyValPair<TypeSummary<FieldInfo>>) {
   return Object.entries(nestedTypes).reduce((nested, keyAndType) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -1013,14 +886,14 @@ function extractNestedTypes(typeSummary: TypeSummary<FieldInfo>) {
 }
 
 export {
-  // evaluateSchemaLevel as _evaluateSchemaLevel,
   schemaAnalyzer,
+  extractNestedTypes,
+  consolidateNestedTypes,
+  // private-ish methods:
   condenseFieldData as _condenseFieldData,
   pivotFieldDataByType as _pivotFieldDataByType,
   getNumberRangeStats as _getNumberRangeStats,
   formatRangeStats as _formatRangeStats,
   getFieldMetadata as _getFieldMetadata,
   isValidDate as _isValidDate,
-  extractNestedTypes,
-  consolidateNestedTypes,
 };
