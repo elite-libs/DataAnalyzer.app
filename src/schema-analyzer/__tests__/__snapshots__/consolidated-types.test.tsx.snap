@@ -1,0 +1,228 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`#consolidated-types #can resolve names for \`historicEvent\` set 1`] = `
+Object {
+  "Births|Deaths|Events": Object {
+    "alternatePrefixes": Object {
+      "abbreviated": "HE.data",
+      "initials": "HE.D",
+      "truncated": "data",
+    },
+    "exactMatches": Object {
+      "lastCommonKey": "data",
+      "nextToLastCommonKey": "historicEvent",
+    },
+    "pathSplitByLastCommonSubstring": null,
+    "prefixMatches": Array [
+      "historicEvent",
+      "data",
+    ],
+    "setOperations": Object {
+      "difference": Array [
+        "historicEvent",
+        "data",
+      ],
+      "intersection": "historicEvent.data",
+      "union": "historicEvent.data",
+      "xor": "data.historicEvent",
+    },
+    "shape": "Births|Deaths|Events",
+    "shapeBasedName": null,
+    "suffixMatches": Array [
+      "data",
+      "historicEvent",
+    ],
+    "typePaths": Array [
+      "historicEvent.data",
+    ],
+  },
+  "address|address2|city|state|zip": Object {
+    "alternatePrefixes": Object {
+      "abbreviated": "HE..",
+      "initials": "HE..",
+      "truncated": ".",
+    },
+    "exactMatches": Object {
+      "lastCommonKey": null,
+      "nextToLastCommonKey": null,
+    },
+    "pathSplitByLastCommonSubstring": Array [
+      "",
+      "historicEvent.copyright.owner",
+    ],
+    "prefixMatches": Array [
+      "historicEvent",
+    ],
+    "setOperations": Object {
+      "difference": Array [
+        "copyright",
+        "owner",
+      ],
+      "intersection": "historicEvent",
+      "union": "historicEvent.copyright.owner.data.Events.location",
+      "xor": "Events.copyright.data.location.owner",
+    },
+    "shape": "address|address2|city|state|zip",
+    "shapeBasedName": null,
+    "suffixMatches": Array [],
+    "typePaths": Array [
+      "historicEvent.copyright.owner",
+      "historicEvent.data.Events.location",
+    ],
+  },
+  "html|links|no_year_html|text|year": Object {
+    "alternatePrefixes": Object {
+      "abbreviated": "HE.data.",
+      "initials": "HE.D.",
+      "truncated": "data.",
+    },
+    "exactMatches": Object {
+      "lastCommonKey": null,
+      "nextToLastCommonKey": "data",
+    },
+    "pathSplitByLastCommonSubstring": Array [
+      "historicEvent",
+      "data.Events",
+    ],
+    "prefixMatches": Array [
+      "historicEvent",
+      "data",
+    ],
+    "setOperations": Object {
+      "difference": Array [
+        "Events",
+      ],
+      "intersection": "historicEvent.data",
+      "union": "historicEvent.data.Events.Births.Deaths",
+      "xor": "Births.Deaths.Events",
+    },
+    "shape": "html|links|no_year_html|text|year",
+    "shapeBasedName": null,
+    "suffixMatches": Array [],
+    "typePaths": Array [
+      "historicEvent.data.Events",
+      "historicEvent.data.Births",
+      "historicEvent.data.Deaths",
+    ],
+  },
+  "id|name|value": Object {
+    "alternatePrefixes": Object {
+      "abbreviated": "HE.",
+      "initials": "HE.",
+      "truncated": "",
+    },
+    "exactMatches": Object {
+      "lastCommonKey": null,
+      "nextToLastCommonKey": null,
+    },
+    "pathSplitByLastCommonSubstring": Array [
+      "",
+      "historicEvent.adminFields",
+    ],
+    "prefixMatches": Array [
+      "historicEvent",
+    ],
+    "setOperations": Object {
+      "difference": Array [
+        "adminFields",
+      ],
+      "intersection": "historicEvent",
+      "union": "historicEvent.adminFields.metadata.data.Events",
+      "xor": "Events.adminFields.data",
+    },
+    "shape": "id|name|value",
+    "shapeBasedName": null,
+    "suffixMatches": Array [],
+    "typePaths": Array [
+      "historicEvent.adminFields",
+      "historicEvent.metadata",
+      "historicEvent.data.Events.metadata",
+    ],
+  },
+  "id|title|description": Object {
+    "alternatePrefixes": Object {
+      "abbreviated": "HE.data..articles",
+      "initials": "HE.D..A",
+      "truncated": "data..articles",
+    },
+    "exactMatches": Object {
+      "lastCommonKey": "articles",
+      "nextToLastCommonKey": null,
+    },
+    "pathSplitByLastCommonSubstring": Array [
+      "historicEvent",
+      "data.Events.articles",
+    ],
+    "prefixMatches": Array [
+      "historicEvent",
+      "data",
+    ],
+    "setOperations": Object {
+      "difference": Array [
+        "Events",
+      ],
+      "intersection": "historicEvent.data.articles",
+      "union": "historicEvent.data.Events.articles.Births.Deaths",
+      "xor": "Births.Deaths.Events",
+    },
+    "shape": "id|title|description",
+    "shapeBasedName": null,
+    "suffixMatches": Array [
+      "articles",
+    ],
+    "typePaths": Array [
+      "historicEvent.data.Events.articles",
+      "historicEvent.data.Births.articles",
+      "historicEvent.data.Deaths.articles",
+    ],
+  },
+  "link|title": Object {
+    "alternatePrefixes": Object {
+      "abbreviated": "HE.data..links",
+      "initials": "HE.D..L",
+      "truncated": "data..links",
+    },
+    "exactMatches": Object {
+      "lastCommonKey": "links",
+      "nextToLastCommonKey": null,
+    },
+    "pathSplitByLastCommonSubstring": Array [
+      "historicEvent",
+      "data.Events.links",
+    ],
+    "prefixMatches": Array [
+      "historicEvent",
+      "data",
+    ],
+    "setOperations": Object {
+      "difference": Array [
+        "Events",
+      ],
+      "intersection": "historicEvent.data.links",
+      "union": "historicEvent.data.Events.links.Births.Deaths",
+      "xor": "Births.Deaths.Events",
+    },
+    "shape": "link|title",
+    "shapeBasedName": "link.title",
+    "suffixMatches": Array [
+      "links",
+    ],
+    "typePaths": Array [
+      "historicEvent.data.Events.links",
+      "historicEvent.data.Births.links",
+      "historicEvent.data.Deaths.links",
+    ],
+  },
+}
+`;
+
+exports[`#consolidated-types #can resolve names for \`historicEvent\` set 2`] = `
+Object {
+  "Births|Deaths|Events": "historicEvent.data",
+  "address|address2|city|state|zip": false,
+  "html|links|no_year_html|text|year": "Births.Deaths.Events",
+  "id|name|value": "name.value",
+  "id|title|description": "articles",
+  "link|title": "links",
+}
+`;

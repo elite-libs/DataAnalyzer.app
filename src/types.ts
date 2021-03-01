@@ -12,7 +12,8 @@ export interface KeyValPair<TValue> {
 export type SupportedTargetLanguages = 'typescript' | 'go' | 'json' | 'javascript';
 
 export type TypeNameSuggestion = {
-  readonly sourceTypePaths: string[];
+  readonly typePaths: string[];
+  shape: string;
   shapeBasedName: string;
   prefixMatches: string[];
   suffixMatches: string[];

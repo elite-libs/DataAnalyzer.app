@@ -271,18 +271,19 @@ function inferTypeNames(
         ? pathPart
         : null;
     });
-  console.log(
-    'suffixMatches',
-    lastCommonIndex,
-    firstTypePath.join('.'),
-    suffixMatches.toString(),
-  );
-  const shapeParts = shape.split(/\|/gim);
+  // console.log(
+  //   'suffixMatches',
+  //   lastCommonIndex,
+  //   firstTypePath.join('.'),
+  //   suffixMatches.toString(),
+  // );
+  const shapeParts = shape.split(/\|/gim).sort();
   let shapeBasedName = shapeParts.length <= 2 ? shapeParts.join('.') : null;
 
   return {
     shapeBasedName,
-    sourceTypePaths: typePaths,
+    shape,
+    typePaths,
     prefixMatches: helpers.takeUntilNull(prefixMatches),
     suffixMatches: helpers.takeUntilNull(suffixMatches),
     pathSplitByLastCommonSubstring:
@@ -305,7 +306,10 @@ function inferTypeNames(
             difference(...splitTypeNamePaths)
           : undefined,
       union: union(...splitTypeNamePaths).join('.'),
-      xor: xor(...splitTypeNamePaths).join('.'),
+      xor: xor(...splitTypeNamePaths)
+        .slice()
+        .sort()
+        .join('.'),
     },
     alternatePrefixes: {
       initials:
@@ -324,4 +328,104 @@ function inferTypeNames(
   };
 }
 
-export { inferTypeNames as _inferTypeNames };
+/**
+ * assignInferredNames applies 'logic rules' as follows:
+ * - if suffixMatchLength === 1, prefixMatchLength === 0
+ * - if typePaths.length === 1, use it w/o changes.
+ * - if shape has 2-columns (minus ID or _ID)
+ * - if fieldCount > 2 && XOR <= 4
+ *
+ *
+ * @param shapeAndNameSuggestions
+ * Example input:
+ * ```
+ * {
+ *    'Births|Deaths|Events': ['historicEvent.data'],
+ *    'html|links|no_year_html|text|year': [
+ *      'historicEvent.data.Events',
+ *      'historicEvent.data.Births',
+ *      'historicEvent.data.Deaths',
+ *    ],
+ *    'link|title': [
+ *      'historicEvent.data.Events.links',
+ *      'historicEvent.data.Births.links',
+ *      'historicEvent.data.Deaths.links',
+ *    ],
+ *    'id|link|title': [
+ *      'historicEvent.data.Events.articles',
+ *      'historicEvent.data.Births.articles',
+ *      'historicEvent.data.Deaths.articles',
+ *    ],
+ *    'address|address2|city|state|zip': [
+ *      'historicEvent.copyright.owner',
+ *      'historicEvent.data.Events.location',
+ *    ],
+ *  }
+ * ```
+ */
+function assignInferredNames(
+  shapeAndNameSuggestions: Record<string, TypeNameSuggestion>,
+  excludeNames: string[],
+) {
+  const __debugBouncedNames = [];
+  const resolvedShapeNames = mapValues(
+    shapeAndNameSuggestions,
+    (suggestionInfo, shape) => {
+      const simplifiedShape = __getShapePartsWithoutId(shape);
+      // 1.
+      const { suffixMatches } = suggestionInfo;
+      if (suffixMatches.length === 1 && __isNameFree(suffixMatches[0]))
+        return suffixMatches[0];
+      //// Now only change when typePaths.len >= 2 ////
+      const { typePaths } = suggestionInfo;
+      if (typePaths.length >= 1) {
+        // 2.
+        if (typePaths.length === 1 && __isNameFree(typePaths[0]))
+          return typePaths[0];
+        // 2.5
+        const {
+          exactMatches: { lastCommonKey, nextToLastCommonKey },
+        } = suggestionInfo;
+        if (lastCommonKey != null && nextToLastCommonKey == null) {
+          return lastCommonKey;
+        }
+        // 3.
+        if (
+          simplifiedShape.length === 2 &&
+          __isNameFree(simplifiedShape.join('.'))
+        )
+          return simplifiedShape.join('.');
+        // 4.
+        const {
+          setOperations: { xor: xorPath },
+        } = suggestionInfo;
+        let xorPathKeys = xorPath.split('.');
+        if (
+          xorPathKeys.length <= 4 &&
+          simplifiedShape.length >= 3 &&
+          __isNameFree(xorPathKeys.join('.'))
+        )
+          return xorPathKeys.join('.');
+      }
+
+      return false;
+    },
+  );
+
+  function __getShapePartsWithoutId(shape: string) {
+    return shape.split('|').filter((field) => !/^((id)|(_id))/gim.test(field));
+  }
+  function __isNameFree(proposedTypeName) {
+    const inUseAlready = excludeNames.includes(proposedTypeName);
+    if (inUseAlready) __debugBouncedNames.push(proposedTypeName);
+    return !inUseAlready;
+  }
+  if (__debugBouncedNames.length > 0)
+    console.error('__debugBouncedNames', __debugBouncedNames);
+  return resolvedShapeNames;
+}
+
+export {
+  inferTypeNames as _inferTypeNames,
+  assignInferredNames as _assignInferredNames,
+};
