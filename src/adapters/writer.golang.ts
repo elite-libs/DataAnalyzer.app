@@ -2,15 +2,16 @@
 import { CombinedFieldInfo } from '../schema-analyzer';
 import { properCase } from 'helpers';
 import { IDataAnalyzerWriter, IRenderArgs } from './writers';
+import { snakeCase } from 'lodash';
 
 const typeMap: { [k: string]: string } = {
   $ref: 'string',
   Unknown: 'string',
   ObjectId: 'ObjectId',
-  UUID: 'UUID',
+  UUID: 'uuid.UUID',
   Boolean: 'bool',
-  Date: 'Time',
-  Timestamp: 'Time',
+  Date: 'time.Time',
+  Timestamp: 'time.Time',
   Currency: 'number',
   Float: 'float32',
   Number: 'int',
@@ -24,7 +25,7 @@ const typeMap: { [k: string]: string } = {
 const getGoLangType = (fieldName: string, fieldInfo: CombinedFieldInfo) => {
   let tsType = typeMap[fieldInfo.type];
   // if enum, use getEnumDeclaration() to build the enums we'll need to support this struct
-  if (fieldInfo.enum) return `${properCase(fieldName)}Enum`;
+  if (fieldInfo.enum && fieldInfo.enum.length >= 1) return `${properCase(fieldName)}Enum`;
   if (fieldInfo.typeRef) {
     return (
       `${fieldInfo.typeRelationship === 'one-to-many' ? '[]' : ''}` +
@@ -51,10 +52,7 @@ ${fieldInfo.enum
   .slice()
   .sort()
   // @ts-ignore
-  .map<any>(
-    (key, index) =>
-      `    ${formatKey(key)} ${index === 0 ? enumName : ''} = ${formatValue(key)}`,
-  )
+  .map<any>((key) => `    ${formatKey(key)} ${enumName} = ${formatValue(key)}`)
   .join('\n')}
 )`;
 };
@@ -98,7 +96,7 @@ const Writer: IDataAnalyzerWriter = {
           return `    ${properCase(fieldName)} ${getGoLangType(
             fieldName,
             fieldInfo,
-          ).trim()}`;
+          ).trim()} \`json:"${snakeCase(fieldName)}" db:"${snakeCase(fieldName)}"\``;
         })
         .join('\n')}\n}`;
     };
@@ -119,6 +117,7 @@ const Writer: IDataAnalyzerWriter = {
       return [''];
     };
     const getEnums = () => `\n${enums.join('\n\n')}`.trim();
+    // console.warn({ enums });
     return getEnums() + '\n' + getFields() + '\n' + getRecursive().join('');
   },
 };
