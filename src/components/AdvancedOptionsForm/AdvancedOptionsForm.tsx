@@ -14,11 +14,12 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import SaveIcon from '@material-ui/icons/Save';
 import CloseIcon from '@material-ui/icons/Close';
 import { useDispatch, useSelector } from 'react-redux';
-import { setOptions } from 'store/optionsSlice';
-
+import { OptionsState, setOptions } from 'store/optionsSlice';
 import { setResults, setSchema } from 'store/analysisSlice';
-import './AdvancedOptionsForm.scss';
 import { RootState } from 'store/rootReducer';
+
+import './AdvancedOptionsForm.scss';
+import { MenuItem, Select } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -50,14 +51,18 @@ const percentFormatter = new Intl.NumberFormat(['en-US', 'en'], {
 const formatPercent = (number) =>
   number != null && Number(percentFormatter.format(number)).toFixed(2);
 
+// type FormOptions = OptionsState & {
+//   consolidateTypes: NestedValue<string[]>
+// }
+
 export default function AdvancedOptionsForm({ className = '' }) {
   const history = useHistory();
   const dispatch = useDispatch();
   const options = useSelector((state: RootState) => state.optionsActions);
   // const { schemaName } = useSelector((state) => state.analysisFeature);
   const classes = useStyles();
-  const methods = useForm({ defaultValues: options });
-  const { handleSubmit, control, register, watch } = methods;
+  const methods = useForm<OptionsState>({ defaultValues: options });
+  const { handleSubmit, control, register, watch, setValue } = methods;
   const onSubmit = (data) => {
     const updatedOptions = {
       ...data,
@@ -113,6 +118,42 @@ export default function AdvancedOptionsForm({ className = '' }) {
                       name="strictMatching"
                       value="strict"
                       defaultValue={options.strictMatching}
+                      control={control}
+                    />
+                  </section>
+                </fieldset>
+
+                <fieldset className="form-group">
+                  <legend className="mb-1">De-duplicate Similar Types</legend>
+                  <section className="input-group d-flex justify-content-between">
+                    <p>Detect Similarly Named Fields</p>
+
+                    <Select
+                      id="consolidateTypes"
+                      onChange={(e) =>
+                        setValue('consolidateTypes', e.target.value as number[])
+                      }
+                      inputProps={{
+                        inputRef: (ref) => {
+                          if (!ref) return;
+                          register({
+                            name: 'consolidateTypes',
+                            value: ref.value,
+                          });
+                        },
+                      }}
+                    >
+                      <MenuItem value={undefined}>Disabled</MenuItem>
+                      <MenuItem value={'field-names'}>field-names</MenuItem>
+                      <MenuItem value={'field-names-and-type'}>
+                        field-names-and-type
+                      </MenuItem>
+                    </Select>
+                    <Controller
+                      as={<Checkbox name="consolidateTypes" style={{ padding: '0' }} />}
+                      name="consolidateTypes"
+                      value="strict"
+                      defaultValue={options.consolidateTypes}
                       control={control}
                     />
                   </section>

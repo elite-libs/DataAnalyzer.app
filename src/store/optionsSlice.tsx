@@ -1,8 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AdapterNames } from 'adapters/writers';
+import { IConsolidateTypesOptions } from 'schema-analyzer';
 import type { SupportedTargetLanguages } from 'types';
 
-type State = {
+export interface OptionsState {
   outputLanguage: SupportedTargetLanguages;
   outputAdapter: AdapterNames;
   strictMatching: boolean;
@@ -11,10 +12,11 @@ type State = {
   enumPercentThreshold: number;
   nullableRowsThreshold: number;
   uniqueRowsThreshold: number;
+  consolidateTypes: IConsolidateTypesOptions['consolidateTypes'];
   readonly _timestamp: number;
-};
+}
 
-let initialState: State = {
+let initialState: OptionsState = {
   outputLanguage: 'typescript',
   outputAdapter: 'typescript',
   strictMatching: false,
@@ -23,6 +25,7 @@ let initialState: State = {
   enumPercentThreshold: 0.01,
   nullableRowsThreshold: 0.001,
   uniqueRowsThreshold: 1.0,
+  consolidateTypes: undefined,
   _timestamp: Date.now(),
 };
 
@@ -30,7 +33,7 @@ const slice = createSlice({
   name: 'options',
   initialState,
   reducers: {
-    setOptions(state, action: PayloadAction<Partial<State>>) {
+    setOptions(state, action: PayloadAction<Partial<OptionsState>>) {
       const { payload } = action;
       Object.assign(state, payload, { _timestamp: Date.now() });
     },

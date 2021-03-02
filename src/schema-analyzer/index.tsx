@@ -75,7 +75,8 @@ export interface ISchemaAnalyzerOptions {
 }
 export interface IConsolidateTypesOptions {
   /** `consolidateTypes` is a flag/mode to indicate the shape matching behavior. */
-  consolidateTypes?: null | 'field-names' | 'field-names-and-type';
+  consolidateTypes?: 'field-names' | 'field-names-and-type';
+  limitCompositeTypeNames?: 0 | 1 | 2 | 3 | 4 | 5;
 }
 
 // type NestedTypeSummary<TFieldDetails> = {
@@ -291,16 +292,7 @@ function schemaAnalyzer(
 function _schemaAnalyzer(
   schemaName: string,
   input: any[] | { [k: string]: any },
-  options: ISchemaAnalyzerOptions | undefined = {
-    onProgress: ({ totalRows, currentRow }) => {},
-    strictMatching: true,
-    disableNestedTypes: false,
-    enumMinimumRowCount: 100,
-    enumAbsoluteLimit: 5,
-    // enumPercentThreshold: 0.01,
-    nullableRowsThreshold: 0.001,
-    uniqueRowsThreshold: 0.99,
-  },
+  options: ISchemaAnalyzerOptions,
   // _nestedData?: { [key: string]: unknown },
 ): Promise<TypeSummary<FieldInfo>> {
   if (!input) throw Error('Input Data must be an Object or Array of Objects');

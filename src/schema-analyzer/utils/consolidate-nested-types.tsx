@@ -16,13 +16,23 @@ import type {
 import type { KeyValPair, TypeNameSuggestion } from '../../types';
 import { initialify } from './helpers';
 
+interface IConsolidateTypesResults {
+  nestedTypes: KeyValPair<TypeSummary<CombinedFieldInfo>>;
+  changes: ChangeFieldDescription[];
+}
+interface ChangeFieldDescription {
+  alias: string;
+  shape: string;
+  targetTypes: string[];
+}
+
 export default function consolidateNestedTypes(
   nestedTypes: KeyValPair<TypeSummary<CombinedFieldInfo>>,
   { consolidateTypes }: IConsolidateTypesOptions,
-) {
+): IConsolidateTypesResults {
   const nestedTypePairs = Object.entries(nestedTypes);
 
-  let getKey = null;
+  let getKey: any = null;
   if (consolidateTypes === 'field-names') {
     getKey = (typeSummary: TypeSummary<CombinedFieldInfo>) =>
       Object.keys(typeSummary.fields).sort().join('|');
@@ -32,13 +42,19 @@ export default function consolidateNestedTypes(
         .sort()
         .map(
           (name) =>
+            // @ts-ignore
             `${name}:${
-              typeSummary.fields[name].typeRef || typeSummary.fields[name].type
+              typeSummary != null &&
+              typeSummary.fields != null &&
+              typeSummary.fields[name] != null
+                ? typeSummary?.fields[name]?.typeRef ||
+                  typeSummary?.fields[name]?.type
+                : ''
             }`,
         )
         .join('|');
   } else {
-    return nestedTypes; // bail out
+    return { nestedTypes, changes: [] }; // bail out
   }
 
   const typeAliases = nestedTypePairs.reduce(
@@ -58,7 +74,7 @@ export default function consolidateNestedTypes(
     },
     { shapeToType: {}, typeToShape: {}, shapeAlias: {} },
   );
-  console.log('typeAliases', typeAliases);
+  // console.log('typeAliases', typeAliases);
 
   /**
    * Now typeAliases will look like:
@@ -83,40 +99,44 @@ export default function consolidateNestedTypes(
    *     or by using only the last 1-2 word parts?)
    */
   const shapeMapOfTypes = Object.entries<string[]>(typeAliases.shapeToType);
-  console.log('shapeMapOfTypes', shapeMapOfTypes);
+  // console.log('shapeMapOfTypes', shapeMapOfTypes);
 
   const typesToRemap = shapeMapOfTypes.filter(
     ([shape, typeNames]) => typeNames.length > 1,
   );
 
+  const existingTypeNames = []; // TODO: seed with type names which will not be messed with.
   const remapedShapeNames = fromPairs(
     typesToRemap.map(([shape, typePaths]) => [
       shape,
       inferTypeNames(typePaths, shape),
     ]),
   );
-  console.log('remapedShapeNames', JSON.stringify(remapedShapeNames, null, 2));
+  if (process.env.NODE_ENV === 'development')
+    console.log(
+      'remapedShapeNamesStats',
+      JSON.stringify(remapedShapeNames, null, 2),
+    );
 
-  const fieldsToReplace = [];
-  // const namedShapeAliases =
-  const suggestedNames = mapValues(remapedShapeNames, (typePaths, fieldShape) =>
-    determinePossibleNames({
-      ...typePaths,
-      fieldShape,
-    }),
+  const fieldsToReplace: ChangeFieldDescription[] = [];
+  mapValues(
+    assignInferredNames(remapedShapeNames, existingTypeNames),
+    (suggestedName, fieldShape) => {
+      // Ensure we got a name, and it's currently unused.
+      if (
+        suggestedName != null &&
+        suggestedName != false &&
+        !nestedTypes[suggestedName]
+      ) {
+        fieldsToReplace.push({
+          shape: fieldShape,
+          targetTypes: typeAliases.shapeToType[fieldShape],
+          alias: suggestedName,
+        });
+      }
+    },
   );
-
-  mapValues(suggestedNames, (suggestedName, fieldShape) => {
-    // Ensure we got a name, and it's currently unused.
-    if (suggestedName != false && !nestedTypes[suggestedName]) {
-      fieldsToReplace.push({
-        shape: fieldShape,
-        targetTypes: typeAliases.shapeToType[fieldShape],
-        alias: suggestedName,
-      });
-    }
-  });
-  console.log('fieldsToReplace', fieldsToReplace);
+  // console.log('fieldsToReplace', fieldsToReplace);
   //// console.log('remapedShapeNames', {
   ////   fieldsToReplace,
   ////   namedShapeAliases,
@@ -137,10 +157,10 @@ export default function consolidateNestedTypes(
       aliasInfo.alias,
     );
   });
-  console.log(`FINAL KEYS:`, Object.keys(updatedTypes), fieldsToReplace);
-  return updatedTypes;
+  // console.log(`FINAL KEYS:`, Object.keys(updatedTypes), fieldsToReplace);
+  return { nestedTypes: updatedTypes, changes: fieldsToReplace };
 
-  /**
+  /*
    * Implement the logic to choose a name from available prefix/suffix strings.
    *
    * 2021-02 Logic:
@@ -158,35 +178,48 @@ export default function consolidateNestedTypes(
    * 3. Or, fail with `false`
    *
    */
-  function determinePossibleNames({
-    fieldShape,
-    prefixMatches,
-    suffixMatches,
-    pathSplitByLastCommonSubstring,
-  }: TypeNameSuggestion & { fieldShape: string }): string | false {
-    if (suffixMatches.length > 0) return suffixMatches.join('.');
-    if (pathSplitByLastCommonSubstring && pathSplitByLastCommonSubstring[1])
-      return pathSplitByLastCommonSubstring[1]; //.join('.');
-    if (prefixMatches.length > 0) return prefixMatches.join('.');
-    return false;
-  }
+  // function determinePossibleNames({
+  //   fieldShape,
+  //   prefixMatches,
+  //   suffixMatches,
+  //   pathSplitByLastCommonSubstring,
+  // }: TypeNameSuggestion & { fieldShape: string }): string | false {
+  //   if (suffixMatches.length > 0) return suffixMatches.join('.');
+  //   if (pathSplitByLastCommonSubstring && pathSplitByLastCommonSubstring[1])
+  //     return pathSplitByLastCommonSubstring[1]; //.join('.');
+  //   if (prefixMatches.length > 0) return prefixMatches.join('.');
+  //   return false;
+  // }
 
   function replaceTypeAliases(
     nestedTypes: KeyValPair<TypeSummary<CombinedFieldInfo>>,
     matchNames: string[],
     alias: string,
   ) {
-    const updatedTypes = cloneDeep(nestedTypes);
+    const updatedTypes = cloneDeep(nestedTypes)!;
     // get field with longest fields, to help with name collisions
     const longestFields = matchNames
       .map((m) => {
-        return { name: m, count: Object.keys(updatedTypes[m].fields).length };
+        return {
+          name: m,
+          count:
+            // @ts-ignore
+            updatedTypes![m].fields != null &&
+            // @ts-ignore
+            Object.keys(updatedTypes![m].fields).length,
+        };
       })
       .slice()
-      .sort((a, b) => a.count - b.count)
+      .sort((a, b) => Number(a.count) - Number(b.count))
       .slice(0, 1);
     // 1. Re-assign typeName to alias (of first similar field)
-    updatedTypes[alias] = updatedTypes[longestFields[0].name];
+    if (
+      longestFields.length > 0 &&
+      longestFields[0]?.name != undefined &&
+      updatedTypes[longestFields[0].name] != undefined
+    ) {
+      updatedTypes[alias] = updatedTypes[longestFields[0].name!]!;
+    }
     // 2. Delete extra sub types
     if (matchNames.length >= 1) {
       matchNames.slice().forEach((typeToDelete) => {
@@ -196,7 +229,7 @@ export default function consolidateNestedTypes(
     // 3. Replace all typeAliases
     return mapValues(updatedTypes, (subTypeSummary) => {
       subTypeSummary.fields = mapValues(subTypeSummary.fields, (fieldInfo) => {
-        if (matchNames.includes(fieldInfo.typeRef)) {
+        if (matchNames.includes(`${fieldInfo.typeRef}`)) {
           fieldInfo.typeRef = alias;
         }
         return fieldInfo;
@@ -251,7 +284,7 @@ function inferTypeNames(
   // first try find similar ending parts, then similar beginning parts
   const splitTypeNamePaths = typePaths.map((p) => p.split('.'));
 
-  const firstTypePath = splitTypeNamePaths[0];
+  const firstTypePath = splitTypeNamePaths[0]!;
   const lastCommonIndex = firstTypePath.findIndex(
     (pathPart, pathIndex) =>
       !splitTypeNamePaths.every((parts) => parts[pathIndex] === pathPart),
@@ -294,9 +327,9 @@ function inferTypeNames(
           ]
         : null,
     exactMatches: {
-      lastCommonKey: suffixMatches && suffixMatches[0],
+      lastCommonKey: suffixMatches ? suffixMatches[0] : null,
       nextToLastCommonKey:
-        suffixMatches && suffixMatches.length >= 2 && suffixMatches[1],
+        suffixMatches && suffixMatches.length >= 2 ? suffixMatches[1] : null,
     },
     setOperations: {
       intersection: intersection(...splitTypeNamePaths).join('.'),
@@ -367,11 +400,12 @@ function assignInferredNames(
   shapeAndNameSuggestions: Record<string, TypeNameSuggestion>,
   excludeNames: string[],
 ) {
-  const __debugBouncedNames = [];
   const resolvedShapeNames = mapValues(
     shapeAndNameSuggestions,
     (suggestionInfo, shape) => {
-      const simplifiedShape = __getShapePartsWithoutId(shape);
+      const simplifiedShape = __getShapePartsWithoutId(shape).map(
+        __removeShapeTypeSpecifier,
+      );
       // 1.
       const { suffixMatches } = suggestionInfo;
       if (suffixMatches.length === 1 && __isNameFree(suffixMatches[0]))
@@ -399,7 +433,7 @@ function assignInferredNames(
         const {
           setOperations: { xor: xorPath },
         } = suggestionInfo;
-        let xorPathKeys = xorPath.split('.');
+        let xorPathKeys = xorPath != null ? xorPath.split('.') : [];
         if (
           xorPathKeys.length <= 4 &&
           simplifiedShape.length >= 3 &&
@@ -411,17 +445,23 @@ function assignInferredNames(
       return false;
     },
   );
+  function __removeShapeTypeSpecifier(shapeExp) {
+    return shapeExp != null && shapeExp.split(':')[0];
+  }
 
   function __getShapePartsWithoutId(shape: string) {
     return shape.split('|').filter((field) => !/^((id)|(_id))/gim.test(field));
   }
   function __isNameFree(proposedTypeName) {
     const inUseAlready = excludeNames.includes(proposedTypeName);
-    if (inUseAlready) __debugBouncedNames.push(proposedTypeName);
+    if (inUseAlready) {
+      console.warn(`WARN: Name is in use already: ${proposedTypeName}`);
+    } else {
+      // not in use, but add to excludeNames
+      excludeNames.push(proposedTypeName);
+    }
     return !inUseAlready;
   }
-  if (__debugBouncedNames.length > 0)
-    console.error('__debugBouncedNames', __debugBouncedNames);
   return resolvedShapeNames;
 }
 

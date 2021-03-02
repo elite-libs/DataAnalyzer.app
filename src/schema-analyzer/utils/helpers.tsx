@@ -172,7 +172,7 @@ export function takeUntilNull<T>(array: Array<T | null>) {
  * @param string
  * @returns
  */
-export function initialify(string: string) {
+export function initialify(string: string | null) {
   return string && string.length > 0
     ? startCase(string).replace(/[^[A-Z]*/gm, '')
     : null;
