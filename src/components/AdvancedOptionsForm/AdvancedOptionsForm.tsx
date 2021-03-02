@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useRef } from 'react';
 import { useHistory } from 'react-router';
 import { useForm, Controller } from 'react-hook-form';
 import { makeStyles } from '@material-ui/core/styles';
@@ -13,13 +13,14 @@ import CardActions from '@material-ui/core/CardActions';
 import SettingsIcon from '@material-ui/icons/Settings';
 import SaveIcon from '@material-ui/icons/Save';
 import CloseIcon from '@material-ui/icons/Close';
+import WarningIcon from '@material-ui/icons/Warning';
+import { FormControl, Select } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { OptionsState, setOptions } from 'store/optionsSlice';
 import { setResults, setSchema } from 'store/analysisSlice';
 import { RootState } from 'store/rootReducer';
 
 import './AdvancedOptionsForm.scss';
-import { MenuItem, Select } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -48,8 +49,8 @@ const percentFormatter = new Intl.NumberFormat(['en-US', 'en'], {
   style: 'percent',
   minimumFractionDigits: 2,
 });
-const formatPercent = (number) =>
-  number != null && Number(percentFormatter.format(number)).toFixed(2);
+const formatPercent = (number: number | string) =>
+  number != null ? percentFormatter.format(Number(number)) : `0.00`;
 
 // type FormOptions = OptionsState & {
 //   consolidateTypes: NestedValue<string[]>
@@ -57,25 +58,52 @@ const formatPercent = (number) =>
 
 export default function AdvancedOptionsForm({ className = '' }) {
   const history = useHistory();
+  const formRef$ = useRef<HTMLFormElement | undefined>();
   const dispatch = useDispatch();
   const options = useSelector((state: RootState) => state.optionsActions);
   // const { schemaName } = useSelector((state) => state.analysisFeature);
   const classes = useStyles();
-  const methods = useForm<OptionsState>({ defaultValues: options });
-  const { handleSubmit, control, register, watch, setValue } = methods;
-  const onSubmit = (data) => {
-    const updatedOptions = {
-      ...data,
-      nullableRowsThreshold: data.nullableRowsThreshold, // / 100.0
-      uniqueRowsThreshold: data.uniqueRowsThreshold, // / 100.0
-    };
-    console.log('Saved Options', updatedOptions);
+  const methods = useForm<OptionsState>({ defaultValues: options, mode: 'onChange' });
+  const {
+    handleSubmit,
+    control,
+    register,
+    watch,
+    setValue,
+    getValues,
+    formState,
+  } = methods;
 
-    dispatch(setOptions(updatedOptions));
-    resetResults();
-    goToHome();
-    // setExpanded(false);
-  };
+  // const currentValues = getValues();
+
+  // React.useEffect(() => {
+  //   console.log('Checking formRef$', formRef$.current);
+  //   const handleChange = (event) => {
+  //     console.log('changed!', event.target.value, getValues());
+  //   };
+  //   if (formRef$.current) {
+  //     formRef$.current.addEventListener('input', handleChange);
+  //   }
+  //   return () => formRef$?.current?.removeEventListener('input', handleChange);
+  // }, [formRef$, formRef$.current]);
+
+  const onSubmit = useCallback(
+    (data: OptionsState) => {
+      const updatedOptions = {
+        ...data,
+        nullableRowsThreshold: data.nullableRowsThreshold, // / 100.0
+        uniqueRowsThreshold: data.uniqueRowsThreshold, // / 100.0
+      };
+      console.log('Saved Options', updatedOptions);
+
+      dispatch(setOptions(updatedOptions));
+      // TODO: Auto re-generate code
+      resetResults();
+      // goToHome();
+      // setExpanded(false);
+    },
+    [JSON.stringify(getValues())],
+  );
 
   function resetResults() {
     dispatch(setSchema(null));
@@ -92,6 +120,23 @@ export default function AdvancedOptionsForm({ className = '' }) {
   console.log(watch('nullableRowsThreshold'), watch('uniqueRowsThreshold'));
   const displayUniqueRowsThreshold = `${watch('uniqueRowsThreshold')}`;
 
+  const onInput = React.useCallback(() => onSubmit(getValues()), [
+    JSON.stringify(getValues()),
+  ]);
+  const onChange = React.useCallback(() => onSubmit(getValues()), [
+    JSON.stringify(getValues()),
+  ]);
+  const autoSaveHandlers = { onInput, onChange };
+
+  React.useEffect(() => {
+    register('strictMatching', {
+      // validate: (value) => value.length || 'This is required.',
+    });
+    register('consolidateTypes', {
+      // validate: (value) => value.length || 'This is required.',
+    });
+  }, [register]);
+
   return (
     <>
       <Card
@@ -100,12 +145,15 @@ export default function AdvancedOptionsForm({ className = '' }) {
       >
         <CardHeader
           avatar={<SettingsIcon color="primary" fontSize="large" />}
-          title={'Settings'}
+          title={<h2>Settings</h2>}
         ></CardHeader>
         <section style={{ zIndex: 500 }} className={classes.panel}>
           <form
             className={'schema-options ' + className + ' ' + classes.form}
-            onSubmit={handleSubmit(onSubmit)}
+            // onSubmit={handleSubmit(onSubmit)}
+            // onInput={handleSubmit(onSubmit)}
+            // onChange={handleSubmit(onSubmit)}
+            // ref={formRef$}
           >
             <Paper elevation={2} variant="outlined">
               <CardContent className={`px-3 bg-white ${classes.panelContent}`}>
@@ -113,49 +161,51 @@ export default function AdvancedOptionsForm({ className = '' }) {
                   <legend className="mb-1">Global Rules</legend>
                   <section className="input-group d-flex justify-content-between">
                     <p>Exclusive Type Matching</p>
-                    <Controller
-                      as={<Checkbox name="strictMatching" style={{ padding: '0' }} />}
+                    <Checkbox
                       name="strictMatching"
-                      value="strict"
-                      defaultValue={options.strictMatching}
-                      control={control}
+                      style={{ padding: '0' }}
+                      onChange={(event, checked) => {
+                        setValue('strictMatching', checked);
+                        onSubmit(getValues());
+                      }}
+                      checked={options.strictMatching}
                     />
                   </section>
                 </fieldset>
 
-                <fieldset className="form-group">
+                <fieldset
+                  className={`form-group ${
+                    watch('consolidateTypes') !== undefined ? 'show-warning' : ''
+                  }`}
+                >
                   <legend className="mb-1">De-duplicate Similar Types</legend>
                   <section className="input-group d-flex justify-content-between">
-                    <p>Detect Similarly Named Fields</p>
+                    <p>Detect Similarly Shaped Fields</p>
+                    <label className="warning-label">
+                      <WarningIcon color="error" className="warning-icon" />
+                    </label>
 
                     <Select
-                      id="consolidateTypes"
-                      onChange={(e) =>
-                        setValue('consolidateTypes', e.target.value as number[])
-                      }
+                      native
+                      placeholder={'Not enabled'}
+                      id="consolidateTypesSelect"
+                      // onChange={(e) =>
+                      //   setValue('consolidateTypes', e.target.value as number[])
+                      // }
+                      onChange={(event, data) => {
+                        setValue('consolidateTypes', event.target.value);
+                        onSubmit(getValues());
+                      }}
                       inputProps={{
-                        inputRef: (ref) => {
-                          if (!ref) return;
-                          register({
-                            name: 'consolidateTypes',
-                            value: ref.value,
-                          });
-                        },
+                        id: 'consolidateTypes',
                       }}
                     >
-                      <MenuItem value={undefined}>Disabled</MenuItem>
-                      <MenuItem value={'field-names'}>field-names</MenuItem>
-                      <MenuItem value={'field-names-and-type'}>
-                        field-names-and-type
-                      </MenuItem>
+                      <option aria-label="None" value={undefined}>
+                        Not Enabled
+                      </option>
+                      <option value={'field-names'}>Field Names</option>
+                      <option value={'field-names-and-type'}>Field Name and Type</option>
                     </Select>
-                    <Controller
-                      as={<Checkbox name="consolidateTypes" style={{ padding: '0' }} />}
-                      name="consolidateTypes"
-                      value="strict"
-                      defaultValue={options.consolidateTypes}
-                      control={control}
-                    />
                   </section>
                 </fieldset>
 
@@ -173,6 +223,8 @@ export default function AdvancedOptionsForm({ className = '' }) {
                       step={10}
                       title="Between 0-10000, Default: 100"
                       ref={register({ min: 0, max: 10000 })}
+                      // onChange
+                      {...autoSaveHandlers}
                     />
                   </label>
                   <label className="input-group d-flex justify-content-between">
@@ -186,11 +238,12 @@ export default function AdvancedOptionsForm({ className = '' }) {
                       step={1}
                       title="Between 0-100, Default=10"
                       ref={register({ min: 0, max: 100 })}
+                      {...autoSaveHandlers}
                     />
                   </label>
                 </fieldset>
 
-                <fieldset className="form-group">
+                <fieldset className="form-group slider-input">
                   <legend className="mb-1">Null Detection</legend>
                   <label className="input-group d-flex justify-content-between">
                     <p>Empty field limit</p>
@@ -204,14 +257,15 @@ export default function AdvancedOptionsForm({ className = '' }) {
                       step={0.005}
                       title="Between 0.0-0.10, Default: 0.02"
                       ref={register({ min: 0.0, max: 0.1 })}
+                      {...autoSaveHandlers}
                     />
-                    <span style={{ flex: '0 0 23%' }}>
+                    <span style={{ flex: '0 0 150px' }}>
                       {displayNullableRowsThreshold}%
                     </span>
                   </label>
                 </fieldset>
 
-                <fieldset className="form-group">
+                <fieldset className="form-group slider-input">
                   <legend className="mb-1">Uniqueness Detection</legend>
                   <label className="input-group d-flex justify-content-between">
                     <p>Unique values required</p>
@@ -224,35 +278,14 @@ export default function AdvancedOptionsForm({ className = '' }) {
                       max={1.0}
                       step={0.005}
                       ref={register({ min: 0.8, max: 1.0 })}
+                      {...autoSaveHandlers}
                     />
-                    <span style={{ flex: '0 0 23%' }}>{displayUniqueRowsThreshold}%</span>
+                    <span style={{ flex: '0 0 150px' }}>
+                      {displayUniqueRowsThreshold}%
+                    </span>
                   </label>
                 </fieldset>
               </CardContent>
-              <CardActions
-                disableSpacing
-                className="d-flex justify-content-between align-items-center button-section"
-              >
-                <ButtonGroup size="small" className="py-1">
-                  <Button
-                    type="button"
-                    // color=""
-                    onClick={goToHome}
-                    title="Close"
-                  >
-                    <CloseIcon color="error" />
-                  </Button>
-                  {/* <IconButton type='reset' color='default' onClick={reset} title="Reset"><RefreshIcon /></IconButton> */}
-                </ButtonGroup>
-                <Button
-                  variant="contained"
-                  type="submit"
-                  color="secondary"
-                  startIcon={<SaveIcon />}
-                >
-                  Save
-                </Button>
-              </CardActions>
             </Paper>
           </form>
         </section>

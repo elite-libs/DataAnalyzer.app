@@ -1,9 +1,20 @@
-
 .form-fields-area {
   box-shadow: inset 4rem -4em 4em rgba(120, 120, 120, 0.12);
 }
 
-
+.warning-label {
+  visibility: hidden;
+}
+.show-warning {
+  .warning-label {
+    visibility: hidden;
+  }
+}
+.slider-input {
+  span:last-of-type {
+    text-align: right;
+  }
+}
 /**
 inset 0 -3em 3em rgba(0,0,0,0.1),
       0 0  0 2px rgb(255,255,255),
@@ -12,4 +23,3 @@ inset 4rem -4em 4em rgba(120, 120, 120, 0.12), 0 0 0 2px white, 0.3em 0.3em 1em 
 inset 4rem -4em 4em rgba(120, 120, 120, 0.12), 0 0 0 2px white
 inset 4rem -4em 4em rgba(120, 120, 120, 0.12)
 */
-

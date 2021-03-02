@@ -75,7 +75,7 @@ export interface ISchemaAnalyzerOptions {
 }
 export interface IConsolidateTypesOptions {
   /** `consolidateTypes` is a flag/mode to indicate the shape matching behavior. */
-  consolidateTypes?: 'field-names' | 'field-names-and-type';
+  consolidateTypes?: '' | 'field-names' | 'field-names-and-type';
   limitCompositeTypeNames?: 0 | 1 | 2 | 3 | 4 | 5;
 }
 
