@@ -1,8 +1,8 @@
 // import { camelCase } from 'lodash';
 import { CombinedFieldInfo } from '../schema-analyzer';
-import { properCase } from 'helpers';
+import { properCase, numericSorter } from 'helpers';
 import { IDataAnalyzerWriter, IRenderArgs } from './writers';
-import { snakeCase } from 'lodash';
+import { map, mapValues, snakeCase } from 'lodash';
 
 const typeMap: { [k: string]: string } = {
   $ref: 'string',
@@ -39,18 +39,18 @@ const formatKey = (key: string | number) =>
   typeof key === 'string' ? properCase(key) : key;
 const formatValue = (key: string | number) =>
   typeof key === 'string' ? `"${properCase(key)}"` : key;
+const getSortByTypeFn = (fieldInfo: CombinedFieldInfo) =>
+  fieldInfo.type === 'String' ? undefined : numericSorter;
 
 const getEnumDeclaration = (fieldName: string, fieldInfo: CombinedFieldInfo) => {
   if (!fieldInfo.enum || fieldInfo.enum.length <= 0) return ``;
   const typeName = properCase(fieldName);
   const enumName = `${typeName}Enum`;
-
-  return `type ${enumName} string
-
+  return `type ${enumName} ${fieldInfo.type === 'String' ? 'string' : 'int'}
 const(
 ${fieldInfo.enum
   .slice()
-  .sort()
+  .sort(getSortByTypeFn(fieldInfo))
   // @ts-ignore
   .map<any>((key) => `    ${formatKey(key)} ${enumName} = ${formatValue(key)}`)
   .join('\n')}
@@ -84,15 +84,12 @@ GoLang types:
 */
 const Writer: IDataAnalyzerWriter = {
   render({ results, options, schemaName }: IRenderArgs) {
-    const enums: string[] = [];
     const hasNestedTypes =
       results.nestedTypes && Object.keys(results.nestedTypes!).length > 0;
     const { fields } = results;
     const getFields = () => {
       return `type ${properCase(schemaName)} struct {\n${Object.entries(fields)
         .map(([fieldName, fieldInfo]) => {
-          if (fieldInfo.enum) enums.push(getEnumDeclaration(fieldName, fieldInfo));
-
           return `    ${properCase(fieldName)} ${getGoLangType(
             fieldName,
             fieldInfo,
@@ -116,10 +113,16 @@ const Writer: IDataAnalyzerWriter = {
       }
       return [''];
     };
-    const getEnums = () => `\n${enums.join('\n\n')}`.trim();
+    const enumDefs = map(fields, (fieldInfo, fieldName) => {
+      if (fieldInfo.enum && fieldInfo.enum.length > 0)
+        return getEnumDeclaration(fieldName, fieldInfo);
+      return null;
+    });
+    const getEnums = () => `\n${enumDefs.join('\n')}`.trim();
     // console.warn({ enums });
-    return getEnums() + '\n' + getFields() + '\n' + getRecursive().join('');
+    return getFields() + '\n\n' + getEnums() + '\n' + getRecursive().join('');
   },
 };
 
 export default Writer;
+export { getEnumDeclaration as _getEnumDeclaration };

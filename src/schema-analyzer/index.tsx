@@ -72,6 +72,8 @@ export interface ISchemaAnalyzerOptions {
   strictMatching?: boolean | undefined;
   /** Nested object arrays will return sub-type info by default. */
   disableNestedTypes?: boolean | undefined;
+  /** for debugging */
+  debug?: boolean;
 }
 
 // type NestedTypeSummary<TFieldDetails> = {
