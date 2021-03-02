@@ -8,26 +8,26 @@
     "eye_color": "blue",
     "birth_year": "19BBY",
     "gender": "male",
-    "homeworld": "https://swapi.co/api/planets/1/",
+    "homeworld": "https://star-wars-api.example/api/planets/1/",
     "films": [
-      "https://swapi.co/api/films/2/",
-      "https://swapi.co/api/films/6/",
-      "https://swapi.co/api/films/3/",
-      "https://swapi.co/api/films/1/",
-      "https://swapi.co/api/films/7/"
+      "https://star-wars-api.example/api/films/2/",
+      "https://star-wars-api.example/api/films/6/",
+      "https://star-wars-api.example/api/films/3/",
+      "https://star-wars-api.example/api/films/1/",
+      "https://star-wars-api.example/api/films/7/"
     ],
-    "species": ["https://swapi.co/api/species/1/"],
+    "species": ["https://star-wars-api.example/api/species/1/"],
     "vehicles": [
-      "https://swapi.co/api/vehicles/14/",
-      "https://swapi.co/api/vehicles/30/"
+      "https://star-wars-api.example/api/vehicles/14/",
+      "https://star-wars-api.example/api/vehicles/30/"
     ],
     "starships": [
-      "https://swapi.co/api/starships/12/",
-      "https://swapi.co/api/starships/22/"
+      "https://star-wars-api.example/api/starships/12/",
+      "https://star-wars-api.example/api/starships/22/"
     ],
     "created": "2014-12-09T13:50:51.644000Z",
     "edited": "2014-12-20T21:17:56.891000Z",
-    "url": "https://swapi.co/api/people/1/",
+    "url": "https://star-wars-api.example/api/people/1/",
     "id": 1
   },
   {
@@ -39,21 +39,21 @@
     "eye_color": "yellow",
     "birth_year": "112BBY",
     "gender": "n/a",
-    "homeworld": "https://swapi.co/api/planets/1/",
+    "homeworld": "https://star-wars-api.example/api/planets/1/",
     "films": [
-      "https://swapi.co/api/films/2/",
-      "https://swapi.co/api/films/5/",
-      "https://swapi.co/api/films/4/",
-      "https://swapi.co/api/films/6/",
-      "https://swapi.co/api/films/3/",
-      "https://swapi.co/api/films/1/"
+      "https://star-wars-api.example/api/films/2/",
+      "https://star-wars-api.example/api/films/5/",
+      "https://star-wars-api.example/api/films/4/",
+      "https://star-wars-api.example/api/films/6/",
+      "https://star-wars-api.example/api/films/3/",
+      "https://star-wars-api.example/api/films/1/"
     ],
-    "species": ["https://swapi.co/api/species/2/"],
+    "species": ["https://star-wars-api.example/api/species/2/"],
     "vehicles": [],
     "starships": [],
     "created": "2014-12-10T15:10:51.357000Z",
     "edited": "2014-12-20T21:17:50.309000Z",
-    "url": "https://swapi.co/api/people/2/",
+    "url": "https://star-wars-api.example/api/people/2/",
     "id": 2
   },
   {
@@ -65,22 +65,22 @@
     "eye_color": "red",
     "birth_year": "33BBY",
     "gender": "n/a",
-    "homeworld": "https://swapi.co/api/planets/8/",
+    "homeworld": "https://star-wars-api.example/api/planets/8/",
     "films": [
-      "https://swapi.co/api/films/2/",
-      "https://swapi.co/api/films/5/",
-      "https://swapi.co/api/films/4/",
-      "https://swapi.co/api/films/6/",
-      "https://swapi.co/api/films/3/",
-      "https://swapi.co/api/films/1/",
-      "https://swapi.co/api/films/7/"
+      "https://star-wars-api.example/api/films/2/",
+      "https://star-wars-api.example/api/films/5/",
+      "https://star-wars-api.example/api/films/4/",
+      "https://star-wars-api.example/api/films/6/",
+      "https://star-wars-api.example/api/films/3/",
+      "https://star-wars-api.example/api/films/1/",
+      "https://star-wars-api.example/api/films/7/"
     ],
-    "species": ["https://swapi.co/api/species/2/"],
+    "species": ["https://star-wars-api.example/api/species/2/"],
     "vehicles": [],
     "starships": [],
     "created": "2014-12-10T15:11:50.376000Z",
     "edited": "2014-12-20T21:17:50.311000Z",
-    "url": "https://swapi.co/api/people/3/",
+    "url": "https://star-wars-api.example/api/people/3/",
     "id": 3
   },
   {
@@ -92,19 +92,19 @@
     "eye_color": "yellow",
     "birth_year": "41.9BBY",
     "gender": "male",
-    "homeworld": "https://swapi.co/api/planets/1/",
+    "homeworld": "https://star-wars-api.example/api/planets/1/",
     "films": [
-      "https://swapi.co/api/films/2/",
-      "https://swapi.co/api/films/6/",
-      "https://swapi.co/api/films/3/",
-      "https://swapi.co/api/films/1/"
+      "https://star-wars-api.example/api/films/2/",
+      "https://star-wars-api.example/api/films/6/",
+      "https://star-wars-api.example/api/films/3/",
+      "https://star-wars-api.example/api/films/1/"
     ],
-    "species": ["https://swapi.co/api/species/1/"],
+    "species": ["https://star-wars-api.example/api/species/1/"],
     "vehicles": [],
-    "starships": ["https://swapi.co/api/starships/13/"],
+    "starships": ["https://star-wars-api.example/api/starships/13/"],
     "created": "2014-12-10T15:18:20.704000Z",
     "edited": "2014-12-20T21:17:50.313000Z",
-    "url": "https://swapi.co/api/people/4/",
+    "url": "https://star-wars-api.example/api/people/4/",
     "id": 4
   },
   {
@@ -116,20 +116,20 @@
     "eye_color": "brown",
     "birth_year": "19BBY",
     "gender": "female",
-    "homeworld": "https://swapi.co/api/planets/2/",
+    "homeworld": "https://star-wars-api.example/api/planets/2/",
     "films": [
-      "https://swapi.co/api/films/2/",
-      "https://swapi.co/api/films/6/",
-      "https://swapi.co/api/films/3/",
-      "https://swapi.co/api/films/1/",
-      "https://swapi.co/api/films/7/"
+      "https://star-wars-api.example/api/films/2/",
+      "https://star-wars-api.example/api/films/6/",
+      "https://star-wars-api.example/api/films/3/",
+      "https://star-wars-api.example/api/films/1/",
+      "https://star-wars-api.example/api/films/7/"
     ],
-    "species": ["https://swapi.co/api/species/1/"],
-    "vehicles": ["https://swapi.co/api/vehicles/30/"],
+    "species": ["https://star-wars-api.example/api/species/1/"],
+    "vehicles": ["https://star-wars-api.example/api/vehicles/30/"],
     "starships": [],
     "created": "2014-12-10T15:20:09.791000Z",
     "edited": "2014-12-20T21:17:50.315000Z",
-    "url": "https://swapi.co/api/people/5/",
+    "url": "https://star-wars-api.example/api/people/5/",
     "id": 5
   },
   {
@@ -141,18 +141,18 @@
     "eye_color": "blue",
     "birth_year": "52BBY",
     "gender": "male",
-    "homeworld": "https://swapi.co/api/planets/1/",
+    "homeworld": "https://star-wars-api.example/api/planets/1/",
     "films": [
-      "https://swapi.co/api/films/5/",
-      "https://swapi.co/api/films/6/",
-      "https://swapi.co/api/films/1/"
+      "https://star-wars-api.example/api/films/5/",
+      "https://star-wars-api.example/api/films/6/",
+      "https://star-wars-api.example/api/films/1/"
     ],
-    "species": ["https://swapi.co/api/species/1/"],
+    "species": ["https://star-wars-api.example/api/species/1/"],
     "vehicles": [],
     "starships": [],
     "created": "2014-12-10T15:52:14.024000Z",
     "edited": "2014-12-20T21:17:50.317000Z",
-    "url": "https://swapi.co/api/people/6/",
+    "url": "https://star-wars-api.example/api/people/6/",
     "id": 6
   },
   {
@@ -164,18 +164,18 @@
     "eye_color": "blue",
     "birth_year": "47BBY",
     "gender": "female",
-    "homeworld": "https://swapi.co/api/planets/1/",
+    "homeworld": "https://star-wars-api.example/api/planets/1/",
     "films": [
-      "https://swapi.co/api/films/5/",
-      "https://swapi.co/api/films/6/",
-      "https://swapi.co/api/films/1/"
+      "https://star-wars-api.example/api/films/5/",
+      "https://star-wars-api.example/api/films/6/",
+      "https://star-wars-api.example/api/films/1/"
     ],
-    "species": ["https://swapi.co/api/species/1/"],
+    "species": ["https://star-wars-api.example/api/species/1/"],
     "vehicles": [],
     "starships": [],
     "created": "2014-12-10T15:53:41.121000Z",
     "edited": "2014-12-20T21:17:50.319000Z",
-    "url": "https://swapi.co/api/people/7/",
+    "url": "https://star-wars-api.example/api/people/7/",
     "id": 7
   },
   {
@@ -187,14 +187,14 @@
     "eye_color": "red",
     "birth_year": null,
     "gender": "n/a",
-    "homeworld": "https://swapi.co/api/planets/1/",
-    "films": ["https://swapi.co/api/films/1/"],
-    "species": ["https://swapi.co/api/species/2/"],
+    "homeworld": "https://star-wars-api.example/api/planets/1/",
+    "films": ["https://star-wars-api.example/api/films/1/"],
+    "species": ["https://star-wars-api.example/api/species/2/"],
     "vehicles": [],
     "starships": [],
     "created": "2014-12-10T15:57:50.959000Z",
     "edited": "2014-12-20T21:17:50.321000Z",
-    "url": "https://swapi.co/api/people/8/",
+    "url": "https://star-wars-api.example/api/people/8/",
     "id": 8
   },
   {
@@ -206,14 +206,14 @@
     "eye_color": "brown",
     "birth_year": "24BBY",
     "gender": "male",
-    "homeworld": "https://swapi.co/api/planets/1/",
-    "films": ["https://swapi.co/api/films/1/"],
-    "species": ["https://swapi.co/api/species/1/"],
+    "homeworld": "https://star-wars-api.example/api/planets/1/",
+    "films": ["https://star-wars-api.example/api/films/1/"],
+    "species": ["https://star-wars-api.example/api/species/1/"],
     "vehicles": [],
-    "starships": ["https://swapi.co/api/starships/12/"],
+    "starships": ["https://star-wars-api.example/api/starships/12/"],
     "created": "2014-12-10T15:59:50.509000Z",
     "edited": "2014-12-20T21:17:50.323000Z",
-    "url": "https://swapi.co/api/people/9/",
+    "url": "https://star-wars-api.example/api/people/9/",
     "id": 9
   },
   {
@@ -225,27 +225,27 @@
     "eye_color": "blue-gray",
     "birth_year": "57BBY",
     "gender": "male",
-    "homeworld": "https://swapi.co/api/planets/20/",
+    "homeworld": "https://star-wars-api.example/api/planets/20/",
     "films": [
-      "https://swapi.co/api/films/2/",
-      "https://swapi.co/api/films/5/",
-      "https://swapi.co/api/films/4/",
-      "https://swapi.co/api/films/6/",
-      "https://swapi.co/api/films/3/",
-      "https://swapi.co/api/films/1/"
+      "https://star-wars-api.example/api/films/2/",
+      "https://star-wars-api.example/api/films/5/",
+      "https://star-wars-api.example/api/films/4/",
+      "https://star-wars-api.example/api/films/6/",
+      "https://star-wars-api.example/api/films/3/",
+      "https://star-wars-api.example/api/films/1/"
     ],
-    "species": ["https://swapi.co/api/species/1/"],
-    "vehicles": ["https://swapi.co/api/vehicles/38/"],
+    "species": ["https://star-wars-api.example/api/species/1/"],
+    "vehicles": ["https://star-wars-api.example/api/vehicles/38/"],
     "starships": [
-      "https://swapi.co/api/starships/48/",
-      "https://swapi.co/api/starships/59/",
-      "https://swapi.co/api/starships/64/",
-      "https://swapi.co/api/starships/65/",
-      "https://swapi.co/api/starships/74/"
+      "https://star-wars-api.example/api/starships/48/",
+      "https://star-wars-api.example/api/starships/59/",
+      "https://star-wars-api.example/api/starships/64/",
+      "https://star-wars-api.example/api/starships/65/",
+      "https://star-wars-api.example/api/starships/74/"
     ],
     "created": "2014-12-10T16:16:29.192000Z",
     "edited": "2014-12-20T21:17:50.325000Z",
-    "url": "https://swapi.co/api/people/10/",
+    "url": "https://star-wars-api.example/api/people/10/",
     "id": 10
   },
   {
@@ -257,25 +257,25 @@
     "eye_color": "blue",
     "birth_year": "41.9BBY",
     "gender": "male",
-    "homeworld": "https://swapi.co/api/planets/1/",
+    "homeworld": "https://star-wars-api.example/api/planets/1/",
     "films": [
-      "https://swapi.co/api/films/5/",
-      "https://swapi.co/api/films/4/",
-      "https://swapi.co/api/films/6/"
+      "https://star-wars-api.example/api/films/5/",
+      "https://star-wars-api.example/api/films/4/",
+      "https://star-wars-api.example/api/films/6/"
     ],
-    "species": ["https://swapi.co/api/species/1/"],
+    "species": ["https://star-wars-api.example/api/species/1/"],
     "vehicles": [
-      "https://swapi.co/api/vehicles/44/",
-      "https://swapi.co/api/vehicles/46/"
+      "https://star-wars-api.example/api/vehicles/44/",
+      "https://star-wars-api.example/api/vehicles/46/"
     ],
     "starships": [
-      "https://swapi.co/api/starships/59/",
-      "https://swapi.co/api/starships/65/",
-      "https://swapi.co/api/starships/39/"
+      "https://star-wars-api.example/api/starships/59/",
+      "https://star-wars-api.example/api/starships/65/",
+      "https://star-wars-api.example/api/starships/39/"
     ],
     "created": "2014-12-10T16:20:44.310000Z",
     "edited": "2014-12-20T21:17:50.327000Z",
-    "url": "https://swapi.co/api/people/11/",
+    "url": "https://star-wars-api.example/api/people/11/",
     "id": 11
   },
   {
@@ -287,14 +287,17 @@
     "eye_color": "blue",
     "birth_year": "64BBY",
     "gender": "male",
-    "homeworld": "https://swapi.co/api/planets/21/",
-    "films": ["https://swapi.co/api/films/6/", "https://swapi.co/api/films/1/"],
-    "species": ["https://swapi.co/api/species/1/"],
+    "homeworld": "https://star-wars-api.example/api/planets/21/",
+    "films": [
+      "https://star-wars-api.example/api/films/6/",
+      "https://star-wars-api.example/api/films/1/"
+    ],
+    "species": ["https://star-wars-api.example/api/species/1/"],
     "vehicles": [],
     "starships": [],
     "created": "2014-12-10T16:26:56.138000Z",
     "edited": "2014-12-20T21:17:50.330000Z",
-    "url": "https://swapi.co/api/people/12/",
+    "url": "https://star-wars-api.example/api/people/12/",
     "id": 12
   },
   {
@@ -306,23 +309,23 @@
     "eye_color": "blue",
     "birth_year": "200BBY",
     "gender": "male",
-    "homeworld": "https://swapi.co/api/planets/14/",
+    "homeworld": "https://star-wars-api.example/api/planets/14/",
     "films": [
-      "https://swapi.co/api/films/2/",
-      "https://swapi.co/api/films/6/",
-      "https://swapi.co/api/films/3/",
-      "https://swapi.co/api/films/1/",
-      "https://swapi.co/api/films/7/"
+      "https://star-wars-api.example/api/films/2/",
+      "https://star-wars-api.example/api/films/6/",
+      "https://star-wars-api.example/api/films/3/",
+      "https://star-wars-api.example/api/films/1/",
+      "https://star-wars-api.example/api/films/7/"
     ],
-    "species": ["https://swapi.co/api/species/3/"],
-    "vehicles": ["https://swapi.co/api/vehicles/19/"],
+    "species": ["https://star-wars-api.example/api/species/3/"],
+    "vehicles": ["https://star-wars-api.example/api/vehicles/19/"],
     "starships": [
-      "https://swapi.co/api/starships/10/",
-      "https://swapi.co/api/starships/22/"
+      "https://star-wars-api.example/api/starships/10/",
+      "https://star-wars-api.example/api/starships/22/"
     ],
     "created": "2014-12-10T16:42:45.066000Z",
     "edited": "2014-12-20T21:17:50.332000Z",
-    "url": "https://swapi.co/api/people/13/",
+    "url": "https://star-wars-api.example/api/people/13/",
     "id": 13
   },
   {
@@ -334,22 +337,22 @@
     "eye_color": "brown",
     "birth_year": "29BBY",
     "gender": "male",
-    "homeworld": "https://swapi.co/api/planets/22/",
+    "homeworld": "https://star-wars-api.example/api/planets/22/",
     "films": [
-      "https://swapi.co/api/films/2/",
-      "https://swapi.co/api/films/3/",
-      "https://swapi.co/api/films/1/",
-      "https://swapi.co/api/films/7/"
+      "https://star-wars-api.example/api/films/2/",
+      "https://star-wars-api.example/api/films/3/",
+      "https://star-wars-api.example/api/films/1/",
+      "https://star-wars-api.example/api/films/7/"
     ],
-    "species": ["https://swapi.co/api/species/1/"],
+    "species": ["https://star-wars-api.example/api/species/1/"],
     "vehicles": [],
     "starships": [
-      "https://swapi.co/api/starships/10/",
-      "https://swapi.co/api/starships/22/"
+      "https://star-wars-api.example/api/starships/10/",
+      "https://star-wars-api.example/api/starships/22/"
     ],
     "created": "2014-12-10T16:49:14.582000Z",
     "edited": "2014-12-20T21:17:50.334000Z",
-    "url": "https://swapi.co/api/people/14/",
+    "url": "https://star-wars-api.example/api/people/14/",
     "id": 14
   },
   {
@@ -361,14 +364,14 @@
     "eye_color": "black",
     "birth_year": "44BBY",
     "gender": "male",
-    "homeworld": "https://swapi.co/api/planets/23/",
-    "films": ["https://swapi.co/api/films/1/"],
-    "species": ["https://swapi.co/api/species/4/"],
+    "homeworld": "https://star-wars-api.example/api/planets/23/",
+    "films": ["https://star-wars-api.example/api/films/1/"],
+    "species": ["https://star-wars-api.example/api/species/4/"],
     "vehicles": [],
     "starships": [],
     "created": "2014-12-10T17:03:30.334000Z",
     "edited": "2014-12-20T21:17:50.336000Z",
-    "url": "https://swapi.co/api/people/15/",
+    "url": "https://star-wars-api.example/api/people/15/",
     "id": 15
   },
   {
@@ -380,18 +383,18 @@
     "eye_color": "orange",
     "birth_year": "600BBY",
     "gender": "hermaphrodite",
-    "homeworld": "https://swapi.co/api/planets/24/",
+    "homeworld": "https://star-wars-api.example/api/planets/24/",
     "films": [
-      "https://swapi.co/api/films/4/",
-      "https://swapi.co/api/films/3/",
-      "https://swapi.co/api/films/1/"
+      "https://star-wars-api.example/api/films/4/",
+      "https://star-wars-api.example/api/films/3/",
+      "https://star-wars-api.example/api/films/1/"
     ],
-    "species": ["https://swapi.co/api/species/5/"],
+    "species": ["https://star-wars-api.example/api/species/5/"],
     "vehicles": [],
     "starships": [],
     "created": "2014-12-10T17:11:31.638000Z",
     "edited": "2014-12-20T21:17:50.338000Z",
-    "url": "https://swapi.co/api/people/16/",
+    "url": "https://star-wars-api.example/api/people/16/",
     "id": 16
   },
   {
@@ -403,18 +406,18 @@
     "eye_color": "hazel",
     "birth_year": "21BBY",
     "gender": "male",
-    "homeworld": "https://swapi.co/api/planets/22/",
+    "homeworld": "https://star-wars-api.example/api/planets/22/",
     "films": [
-      "https://swapi.co/api/films/2/",
-      "https://swapi.co/api/films/3/",
-      "https://swapi.co/api/films/1/"
+      "https://star-wars-api.example/api/films/2/",
+      "https://star-wars-api.example/api/films/3/",
+      "https://star-wars-api.example/api/films/1/"
     ],
-    "species": ["https://swapi.co/api/species/1/"],
-    "vehicles": ["https://swapi.co/api/vehicles/14/"],
-    "starships": ["https://swapi.co/api/starships/12/"],
+    "species": ["https://star-wars-api.example/api/species/1/"],
+    "vehicles": ["https://star-wars-api.example/api/vehicles/14/"],
+    "starships": ["https://star-wars-api.example/api/starships/12/"],
     "created": "2014-12-12T11:08:06.469000Z",
     "edited": "2014-12-20T21:17:50.341000Z",
-    "url": "https://swapi.co/api/people/18/",
+    "url": "https://star-wars-api.example/api/people/18/",
     "id": 18
   },
   {
@@ -426,14 +429,14 @@
     "eye_color": "blue",
     "birth_year": null,
     "gender": "male",
-    "homeworld": "https://swapi.co/api/planets/26/",
-    "films": ["https://swapi.co/api/films/1/"],
-    "species": ["https://swapi.co/api/species/1/"],
+    "homeworld": "https://star-wars-api.example/api/planets/26/",
+    "films": ["https://star-wars-api.example/api/films/1/"],
+    "species": ["https://star-wars-api.example/api/species/1/"],
     "vehicles": [],
-    "starships": ["https://swapi.co/api/starships/12/"],
+    "starships": ["https://star-wars-api.example/api/starships/12/"],
     "created": "2014-12-12T11:16:56.569000Z",
     "edited": "2014-12-20T21:17:50.343000Z",
-    "url": "https://swapi.co/api/people/19/",
+    "url": "https://star-wars-api.example/api/people/19/",
     "id": 19
   },
   {
@@ -445,20 +448,20 @@
     "eye_color": "brown",
     "birth_year": "896BBY",
     "gender": "male",
-    "homeworld": "https://swapi.co/api/planets/28/",
+    "homeworld": "https://star-wars-api.example/api/planets/28/",
     "films": [
-      "https://swapi.co/api/films/2/",
-      "https://swapi.co/api/films/5/",
-      "https://swapi.co/api/films/4/",
-      "https://swapi.co/api/films/6/",
-      "https://swapi.co/api/films/3/"
+      "https://star-wars-api.example/api/films/2/",
+      "https://star-wars-api.example/api/films/5/",
+      "https://star-wars-api.example/api/films/4/",
+      "https://star-wars-api.example/api/films/6/",
+      "https://star-wars-api.example/api/films/3/"
     ],
-    "species": ["https://swapi.co/api/species/6/"],
+    "species": ["https://star-wars-api.example/api/species/6/"],
     "vehicles": [],
     "starships": [],
     "created": "2014-12-15T12:26:01.042000Z",
     "edited": "2014-12-20T21:17:50.345000Z",
-    "url": "https://swapi.co/api/people/20/",
+    "url": "https://star-wars-api.example/api/people/20/",
     "id": 20
   },
   {
@@ -470,20 +473,20 @@
     "eye_color": "yellow",
     "birth_year": "82BBY",
     "gender": "male",
-    "homeworld": "https://swapi.co/api/planets/8/",
+    "homeworld": "https://star-wars-api.example/api/planets/8/",
     "films": [
-      "https://swapi.co/api/films/2/",
-      "https://swapi.co/api/films/5/",
-      "https://swapi.co/api/films/4/",
-      "https://swapi.co/api/films/6/",
-      "https://swapi.co/api/films/3/"
+      "https://star-wars-api.example/api/films/2/",
+      "https://star-wars-api.example/api/films/5/",
+      "https://star-wars-api.example/api/films/4/",
+      "https://star-wars-api.example/api/films/6/",
+      "https://star-wars-api.example/api/films/3/"
     ],
-    "species": ["https://swapi.co/api/species/1/"],
+    "species": ["https://star-wars-api.example/api/species/1/"],
     "vehicles": [],
     "starships": [],
     "created": "2014-12-15T12:48:05.971000Z",
     "edited": "2014-12-20T21:17:50.347000Z",
-    "url": "https://swapi.co/api/people/21/",
+    "url": "https://star-wars-api.example/api/people/21/",
     "id": 21
   },
   {
@@ -495,18 +498,18 @@
     "eye_color": "brown",
     "birth_year": "31.5BBY",
     "gender": "male",
-    "homeworld": "https://swapi.co/api/planets/10/",
+    "homeworld": "https://star-wars-api.example/api/planets/10/",
     "films": [
-      "https://swapi.co/api/films/2/",
-      "https://swapi.co/api/films/5/",
-      "https://swapi.co/api/films/3/"
+      "https://star-wars-api.example/api/films/2/",
+      "https://star-wars-api.example/api/films/5/",
+      "https://star-wars-api.example/api/films/3/"
     ],
-    "species": ["https://swapi.co/api/species/1/"],
+    "species": ["https://star-wars-api.example/api/species/1/"],
     "vehicles": [],
-    "starships": ["https://swapi.co/api/starships/21/"],
+    "starships": ["https://star-wars-api.example/api/starships/21/"],
     "created": "2014-12-15T12:49:32.457000Z",
     "edited": "2014-12-20T21:17:50.349000Z",
-    "url": "https://swapi.co/api/people/22/",
+    "url": "https://star-wars-api.example/api/people/22/",
     "id": 22
   },
   {
@@ -518,14 +521,14 @@
     "eye_color": "red",
     "birth_year": "15BBY",
     "gender": "none",
-    "homeworld": "https://swapi.co/api/planets/28/",
-    "films": ["https://swapi.co/api/films/2/"],
-    "species": ["https://swapi.co/api/species/2/"],
+    "homeworld": "https://star-wars-api.example/api/planets/28/",
+    "films": ["https://star-wars-api.example/api/films/2/"],
+    "species": ["https://star-wars-api.example/api/species/2/"],
     "vehicles": [],
     "starships": [],
     "created": "2014-12-15T12:51:10.076000Z",
     "edited": "2014-12-20T21:17:50.351000Z",
-    "url": "https://swapi.co/api/people/23/",
+    "url": "https://star-wars-api.example/api/people/23/",
     "id": 23
   },
   {
@@ -537,14 +540,14 @@
     "eye_color": "red",
     "birth_year": "53BBY",
     "gender": "male",
-    "homeworld": "https://swapi.co/api/planets/29/",
-    "films": ["https://swapi.co/api/films/2/"],
-    "species": ["https://swapi.co/api/species/7/"],
+    "homeworld": "https://star-wars-api.example/api/planets/29/",
+    "films": ["https://star-wars-api.example/api/films/2/"],
+    "species": ["https://star-wars-api.example/api/species/7/"],
     "vehicles": [],
     "starships": [],
     "created": "2014-12-15T12:53:49.297000Z",
     "edited": "2014-12-20T21:17:50.355000Z",
-    "url": "https://swapi.co/api/people/24/",
+    "url": "https://star-wars-api.example/api/people/24/",
     "id": 24
   },
   {
@@ -556,14 +559,17 @@
     "eye_color": "brown",
     "birth_year": "31BBY",
     "gender": "male",
-    "homeworld": "https://swapi.co/api/planets/30/",
-    "films": ["https://swapi.co/api/films/2/", "https://swapi.co/api/films/3/"],
-    "species": ["https://swapi.co/api/species/1/"],
+    "homeworld": "https://star-wars-api.example/api/planets/30/",
+    "films": [
+      "https://star-wars-api.example/api/films/2/",
+      "https://star-wars-api.example/api/films/3/"
+    ],
+    "species": ["https://star-wars-api.example/api/species/1/"],
     "vehicles": [],
-    "starships": ["https://swapi.co/api/starships/10/"],
+    "starships": ["https://star-wars-api.example/api/starships/10/"],
     "created": "2014-12-15T12:56:32.683000Z",
     "edited": "2014-12-20T21:17:50.357000Z",
-    "url": "https://swapi.co/api/people/25/",
+    "url": "https://star-wars-api.example/api/people/25/",
     "id": 25
   },
   {
@@ -575,14 +581,14 @@
     "eye_color": "blue",
     "birth_year": "37BBY",
     "gender": "male",
-    "homeworld": "https://swapi.co/api/planets/6/",
-    "films": ["https://swapi.co/api/films/2/"],
-    "species": ["https://swapi.co/api/species/1/"],
+    "homeworld": "https://star-wars-api.example/api/planets/6/",
+    "films": ["https://star-wars-api.example/api/films/2/"],
+    "species": ["https://star-wars-api.example/api/species/1/"],
     "vehicles": [],
     "starships": [],
     "created": "2014-12-15T13:01:57.178000Z",
     "edited": "2014-12-20T21:17:50.359000Z",
-    "url": "https://swapi.co/api/people/26/",
+    "url": "https://star-wars-api.example/api/people/26/",
     "id": 26
   },
   {
@@ -594,14 +600,17 @@
     "eye_color": "orange",
     "birth_year": "41BBY",
     "gender": "male",
-    "homeworld": "https://swapi.co/api/planets/31/",
-    "films": ["https://swapi.co/api/films/3/", "https://swapi.co/api/films/7/"],
-    "species": ["https://swapi.co/api/species/8/"],
+    "homeworld": "https://star-wars-api.example/api/planets/31/",
+    "films": [
+      "https://star-wars-api.example/api/films/3/",
+      "https://star-wars-api.example/api/films/7/"
+    ],
+    "species": ["https://star-wars-api.example/api/species/8/"],
     "vehicles": [],
     "starships": [],
     "created": "2014-12-18T11:07:50.584000Z",
     "edited": "2014-12-20T21:17:50.362000Z",
-    "url": "https://swapi.co/api/people/27/",
+    "url": "https://star-wars-api.example/api/people/27/",
     "id": 27
   },
   {
@@ -613,14 +622,14 @@
     "eye_color": "blue",
     "birth_year": "48BBY",
     "gender": "female",
-    "homeworld": "https://swapi.co/api/planets/32/",
-    "films": ["https://swapi.co/api/films/3/"],
-    "species": ["https://swapi.co/api/species/1/"],
+    "homeworld": "https://star-wars-api.example/api/planets/32/",
+    "films": ["https://star-wars-api.example/api/films/3/"],
+    "species": ["https://star-wars-api.example/api/species/1/"],
     "vehicles": [],
     "starships": [],
     "created": "2014-12-18T11:12:38.895000Z",
     "edited": "2014-12-20T21:17:50.364000Z",
-    "url": "https://swapi.co/api/people/28/",
+    "url": "https://star-wars-api.example/api/people/28/",
     "id": 28
   },
   {
@@ -632,14 +641,14 @@
     "eye_color": "brown",
     "birth_year": null,
     "gender": "male",
-    "homeworld": "https://swapi.co/api/planets/28/",
-    "films": ["https://swapi.co/api/films/3/"],
-    "species": ["https://swapi.co/api/species/1/"],
+    "homeworld": "https://star-wars-api.example/api/planets/28/",
+    "films": ["https://star-wars-api.example/api/films/3/"],
+    "species": ["https://star-wars-api.example/api/species/1/"],
     "vehicles": [],
-    "starships": ["https://swapi.co/api/starships/28/"],
+    "starships": ["https://star-wars-api.example/api/starships/28/"],
     "created": "2014-12-18T11:16:33.020000Z",
     "edited": "2014-12-20T21:17:50.367000Z",
-    "url": "https://swapi.co/api/people/29/",
+    "url": "https://star-wars-api.example/api/people/29/",
     "id": 29
   },
   {
@@ -651,14 +660,14 @@
     "eye_color": "brown",
     "birth_year": "8BBY",
     "gender": "male",
-    "homeworld": "https://swapi.co/api/planets/7/",
-    "films": ["https://swapi.co/api/films/3/"],
-    "species": ["https://swapi.co/api/species/9/"],
+    "homeworld": "https://star-wars-api.example/api/planets/7/",
+    "films": ["https://star-wars-api.example/api/films/3/"],
+    "species": ["https://star-wars-api.example/api/species/9/"],
     "vehicles": [],
     "starships": [],
     "created": "2014-12-18T11:21:58.954000Z",
     "edited": "2014-12-20T21:17:50.369000Z",
-    "url": "https://swapi.co/api/people/30/",
+    "url": "https://star-wars-api.example/api/people/30/",
     "id": 30
   },
   {
@@ -670,14 +679,14 @@
     "eye_color": "black",
     "birth_year": null,
     "gender": "male",
-    "homeworld": "https://swapi.co/api/planets/33/",
-    "films": ["https://swapi.co/api/films/3/"],
-    "species": ["https://swapi.co/api/species/10/"],
+    "homeworld": "https://star-wars-api.example/api/planets/33/",
+    "films": ["https://star-wars-api.example/api/films/3/"],
+    "species": ["https://star-wars-api.example/api/species/10/"],
     "vehicles": [],
-    "starships": ["https://swapi.co/api/starships/10/"],
+    "starships": ["https://star-wars-api.example/api/starships/10/"],
     "created": "2014-12-18T11:26:18.541000Z",
     "edited": "2014-12-20T21:17:50.371000Z",
-    "url": "https://swapi.co/api/people/31/",
+    "url": "https://star-wars-api.example/api/people/31/",
     "id": 31
   },
   {
@@ -689,14 +698,14 @@
     "eye_color": "blue",
     "birth_year": "92BBY",
     "gender": "male",
-    "homeworld": "https://swapi.co/api/planets/28/",
-    "films": ["https://swapi.co/api/films/4/"],
-    "species": ["https://swapi.co/api/species/1/"],
-    "vehicles": ["https://swapi.co/api/vehicles/38/"],
+    "homeworld": "https://star-wars-api.example/api/planets/28/",
+    "films": ["https://star-wars-api.example/api/films/4/"],
+    "species": ["https://star-wars-api.example/api/species/1/"],
+    "vehicles": ["https://star-wars-api.example/api/vehicles/38/"],
     "starships": [],
     "created": "2014-12-19T16:54:53.618000Z",
     "edited": "2014-12-20T21:17:50.375000Z",
-    "url": "https://swapi.co/api/people/32/",
+    "url": "https://star-wars-api.example/api/people/32/",
     "id": 32
   },
   {
@@ -708,18 +717,18 @@
     "eye_color": "red",
     "birth_year": null,
     "gender": "male",
-    "homeworld": "https://swapi.co/api/planets/18/",
+    "homeworld": "https://star-wars-api.example/api/planets/18/",
     "films": [
-      "https://swapi.co/api/films/5/",
-      "https://swapi.co/api/films/4/",
-      "https://swapi.co/api/films/6/"
+      "https://star-wars-api.example/api/films/5/",
+      "https://star-wars-api.example/api/films/4/",
+      "https://star-wars-api.example/api/films/6/"
     ],
-    "species": ["https://swapi.co/api/species/11/"],
+    "species": ["https://star-wars-api.example/api/species/11/"],
     "vehicles": [],
     "starships": [],
     "created": "2014-12-19T17:05:57.357000Z",
     "edited": "2014-12-20T21:17:50.377000Z",
-    "url": "https://swapi.co/api/people/33/",
+    "url": "https://star-wars-api.example/api/people/33/",
     "id": 33
   },
   {
@@ -731,14 +740,14 @@
     "eye_color": "blue",
     "birth_year": "91BBY",
     "gender": "male",
-    "homeworld": "https://swapi.co/api/planets/9/",
-    "films": ["https://swapi.co/api/films/4/"],
-    "species": ["https://swapi.co/api/species/1/"],
+    "homeworld": "https://star-wars-api.example/api/planets/9/",
+    "films": ["https://star-wars-api.example/api/films/4/"],
+    "species": ["https://star-wars-api.example/api/species/1/"],
     "vehicles": [],
     "starships": [],
     "created": "2014-12-19T17:21:45.915000Z",
     "edited": "2014-12-20T21:17:50.379000Z",
-    "url": "https://swapi.co/api/people/34/",
+    "url": "https://star-wars-api.example/api/people/34/",
     "id": 34
   },
   {
@@ -750,14 +759,17 @@
     "eye_color": "orange",
     "birth_year": "52BBY",
     "gender": "male",
-    "homeworld": "https://swapi.co/api/planets/8/",
-    "films": ["https://swapi.co/api/films/5/", "https://swapi.co/api/films/4/"],
-    "species": ["https://swapi.co/api/species/12/"],
+    "homeworld": "https://star-wars-api.example/api/planets/8/",
+    "films": [
+      "https://star-wars-api.example/api/films/5/",
+      "https://star-wars-api.example/api/films/4/"
+    ],
+    "species": ["https://star-wars-api.example/api/species/12/"],
     "vehicles": [],
     "starships": [],
     "created": "2014-12-19T17:29:32.489000Z",
     "edited": "2014-12-20T21:17:50.383000Z",
-    "url": "https://swapi.co/api/people/36/",
+    "url": "https://star-wars-api.example/api/people/36/",
     "id": 36
   },
   {
@@ -769,14 +781,14 @@
     "eye_color": "orange",
     "birth_year": null,
     "gender": "male",
-    "homeworld": "https://swapi.co/api/planets/8/",
-    "films": ["https://swapi.co/api/films/4/"],
-    "species": ["https://swapi.co/api/species/12/"],
+    "homeworld": "https://star-wars-api.example/api/planets/8/",
+    "films": ["https://star-wars-api.example/api/films/4/"],
+    "species": ["https://star-wars-api.example/api/species/12/"],
     "vehicles": [],
     "starships": [],
     "created": "2014-12-19T17:32:56.741000Z",
     "edited": "2014-12-20T21:17:50.385000Z",
-    "url": "https://swapi.co/api/people/37/",
+    "url": "https://star-wars-api.example/api/people/37/",
     "id": 37
   },
   {
@@ -788,14 +800,14 @@
     "eye_color": "orange",
     "birth_year": null,
     "gender": "male",
-    "homeworld": "https://swapi.co/api/planets/8/",
-    "films": ["https://swapi.co/api/films/4/"],
-    "species": ["https://swapi.co/api/species/12/"],
+    "homeworld": "https://star-wars-api.example/api/planets/8/",
+    "films": ["https://star-wars-api.example/api/films/4/"],
+    "species": ["https://star-wars-api.example/api/species/12/"],
     "vehicles": [],
     "starships": [],
     "created": "2014-12-19T17:33:38.909000Z",
     "edited": "2014-12-20T21:17:50.388000Z",
-    "url": "https://swapi.co/api/people/38/",
+    "url": "https://star-wars-api.example/api/people/38/",
     "id": 38
   },
   {
@@ -807,14 +819,14 @@
     "eye_color": "blue",
     "birth_year": null,
     "gender": "male",
-    "homeworld": "https://swapi.co/api/planets/8/",
-    "films": ["https://swapi.co/api/films/4/"],
+    "homeworld": "https://star-wars-api.example/api/planets/8/",
+    "films": ["https://star-wars-api.example/api/films/4/"],
     "species": [],
     "vehicles": [],
-    "starships": ["https://swapi.co/api/starships/40/"],
+    "starships": ["https://star-wars-api.example/api/starships/40/"],
     "created": "2014-12-19T17:45:01.522000Z",
     "edited": "2014-12-20T21:17:50.392000Z",
-    "url": "https://swapi.co/api/people/39/",
+    "url": "https://star-wars-api.example/api/people/39/",
     "id": 39
   },
   {
@@ -826,14 +838,17 @@
     "eye_color": "yellow",
     "birth_year": null,
     "gender": "male",
-    "homeworld": "https://swapi.co/api/planets/34/",
-    "films": ["https://swapi.co/api/films/5/", "https://swapi.co/api/films/4/"],
-    "species": ["https://swapi.co/api/species/13/"],
+    "homeworld": "https://star-wars-api.example/api/planets/34/",
+    "films": [
+      "https://star-wars-api.example/api/films/5/",
+      "https://star-wars-api.example/api/films/4/"
+    ],
+    "species": ["https://star-wars-api.example/api/species/13/"],
     "vehicles": [],
     "starships": [],
     "created": "2014-12-19T17:48:54.647000Z",
     "edited": "2014-12-20T21:17:50.395000Z",
-    "url": "https://swapi.co/api/people/40/",
+    "url": "https://star-wars-api.example/api/people/40/",
     "id": 40
   },
   {
@@ -845,14 +860,14 @@
     "eye_color": "orange",
     "birth_year": null,
     "gender": "male",
-    "homeworld": "https://swapi.co/api/planets/35/",
-    "films": ["https://swapi.co/api/films/4/"],
-    "species": ["https://swapi.co/api/species/14/"],
+    "homeworld": "https://star-wars-api.example/api/planets/35/",
+    "films": ["https://star-wars-api.example/api/films/4/"],
+    "species": ["https://star-wars-api.example/api/species/14/"],
     "vehicles": [],
     "starships": [],
     "created": "2014-12-19T17:53:02.586000Z",
     "edited": "2014-12-20T21:17:50.397000Z",
-    "url": "https://swapi.co/api/people/41/",
+    "url": "https://star-wars-api.example/api/people/41/",
     "id": 41
   },
   {
@@ -864,14 +879,14 @@
     "eye_color": "brown",
     "birth_year": "62BBY",
     "gender": "male",
-    "homeworld": "https://swapi.co/api/planets/8/",
-    "films": ["https://swapi.co/api/films/4/"],
+    "homeworld": "https://star-wars-api.example/api/planets/8/",
+    "films": ["https://star-wars-api.example/api/films/4/"],
     "species": [],
     "vehicles": [],
     "starships": [],
     "created": "2014-12-19T17:55:43.348000Z",
     "edited": "2014-12-20T21:17:50.399000Z",
-    "url": "https://swapi.co/api/people/42/",
+    "url": "https://star-wars-api.example/api/people/42/",
     "id": 42
   }
 ]

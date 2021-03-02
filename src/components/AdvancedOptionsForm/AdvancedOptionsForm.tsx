@@ -1,24 +1,22 @@
 import React, { useCallback, useRef } from 'react';
 import { useHistory } from 'react-router';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { makeStyles } from '@material-ui/core/styles';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
-import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
 import SettingsIcon from '@material-ui/icons/Settings';
 import SaveIcon from '@material-ui/icons/Save';
 import CloseIcon from '@material-ui/icons/Close';
 import WarningIcon from '@material-ui/icons/Warning';
 import { FormControl, Select } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
-import { OptionsState, setOptions } from 'store/optionsSlice';
+import { OptionsState, setOptions, _initialOptions } from 'store/optionsSlice';
 import { setResults, setSchema } from 'store/analysisSlice';
 import { RootState } from 'store/rootReducer';
+import { pick } from 'lodash';
 
 import './AdvancedOptionsForm.scss';
 
@@ -45,24 +43,14 @@ const useStyles = makeStyles((theme) => ({
   panelContent: {},
 }));
 
-const percentFormatter = new Intl.NumberFormat(['en-US', 'en'], {
-  style: 'percent',
-  minimumFractionDigits: 2,
-});
-const formatPercent = (number: number | string) =>
-  number != null ? percentFormatter.format(Number(number)) : `0.00`;
-
-// type FormOptions = OptionsState & {
-//   consolidateTypes: NestedValue<string[]>
-// }
-
 export default function AdvancedOptionsForm({ className = '' }) {
-  const history = useHistory();
-  const formRef$ = useRef<HTMLFormElement | undefined>();
+  // const history = useHistory();
+  // const formRef$ = useRef<HTMLFormElement | undefined>();
   const dispatch = useDispatch();
   const options = useSelector((state: RootState) => state.optionsActions);
   // const { schemaName } = useSelector((state) => state.analysisFeature);
   const classes = useStyles();
+
   const methods = useForm<OptionsState>({ defaultValues: options, mode: 'onChange' });
   const {
     handleSubmit,
@@ -95,6 +83,7 @@ export default function AdvancedOptionsForm({ className = '' }) {
         uniqueRowsThreshold: data.uniqueRowsThreshold, // / 100.0
       };
       console.log('Saved Options', updatedOptions);
+      localStorage.setItem('analyzer.options', JSON.stringify(updatedOptions));
 
       dispatch(setOptions(updatedOptions));
       // TODO: Auto re-generate code
@@ -105,15 +94,21 @@ export default function AdvancedOptionsForm({ className = '' }) {
     [JSON.stringify(getValues())],
   );
 
+  // load previous options value:
+  React.useEffect(() => {
+    const optionsJson = localStorage.getItem('analyzer.options');
+    if (optionsJson && optionsJson.length > 1) {
+      let opts = JSON.parse(optionsJson);
+      opts = pick(opts, Object.keys(_initialOptions));
+      console.log('restoring saved settings:', optionsJson, opts);
+      dispatch(setOptions(opts));
+    }
+  }, []);
+
   function resetResults() {
     dispatch(setSchema(null));
     dispatch(setResults(null));
   }
-
-  function goToHome() {
-    history.push('/');
-  }
-
   const displayNullableRowsThreshold = `${watch('nullableRowsThreshold')}`;
   /*formatPercent(
     100.0 * parseFloat( */

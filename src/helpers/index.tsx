@@ -1,5 +1,7 @@
 import { camelCase } from 'lodash';
 
+export const numericSorter = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
+
 export const removeBlankLines = (s: string, expectLen: number = -1): string => {
   const newStr = s.replace(/^ +\n/gim, '');
   if (s.length !== newStr.length) return removeBlankLines(newStr, newStr.length);
@@ -28,3 +30,11 @@ export const getElementSize = (
     toJSON: () => '{}',
   };
 };
+
+const _percentFormatter = new Intl.NumberFormat(['en-US', 'en'], {
+  style: 'percent',
+  minimumFractionDigits: 2,
+});
+
+export const formatPercent = (number: number | string) =>
+  number != null ? _percentFormatter.format(Number(number)) : `0.00`;
