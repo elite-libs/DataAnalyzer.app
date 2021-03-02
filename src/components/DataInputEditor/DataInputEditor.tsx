@@ -11,7 +11,7 @@ import {
   setParserError,
   setStatusMessage,
 } from 'store/appStateSlice';
-import { throttle } from 'lodash';
+import { filter, fromPairs, takeWhile, throttle } from 'lodash';
 
 import { RootState } from 'store/rootReducer';
 import { CheckCircleIcon, ErrorIcon } from 'components/AppIcons';
@@ -28,7 +28,7 @@ import CodeToolbar, { IToolbarButton } from 'components/CodeToolbar/CodeToolbar'
 // import ReactAce from 'react-ace/lib/ace';
 import { sampleDataSets } from 'components/DemoDataMenu';
 import { useAnalytics } from 'hooks/useAnalytics';
-import { useHistory } from 'react-router';
+import { useHistory, useLocation } from 'react-router';
 
 import './DataInputEditor.scss';
 
@@ -47,7 +47,8 @@ function getJsonParsingErrorLocation(message: string) {
 }
 
 export function DataInputEditor(props: IAceEditorProps) {
-  let $panelEl = document.querySelector('.data-input-editor');
+  // let $panelEl = document.querySelector('.data-input-editor');
+  const location = useLocation();
 
   const dispatch = useDispatch();
   const { enqueueSnackbar } = useAutoSnackbar();
@@ -181,11 +182,12 @@ export function DataInputEditor(props: IAceEditorProps) {
     return fetch(filePath)
       .then((response) => response.text())
       .then((data) => {
+        setTimeout(() => (window.location.hash = `demo=${name}`), 1);
         dispatch(setInputData(data));
         dispatch(setSchemaName(name));
         // if (_loadingSnackMessage) closeSnackbar(_loadingSnackMessage);
         // _loadingSnackMessage = null;
-        enqueueSnackbar(`Loaded the "${name}" Dataset 🎉`, {
+        enqueueSnackbar(`Loaded "${name}" Dataset 🎉`, {
           variant: 'success',
           autoHideDuration: 3000,
           anchorOrigin: { horizontal: 'right', vertical: 'top' },
@@ -204,6 +206,27 @@ export function DataInputEditor(props: IAceEditorProps) {
         setCurrentlyLoadingData(null);
       });
   };
+
+  // load specified data set if set in url hash
+  React.useLayoutEffect(() => {
+    setTimeout(() => {
+      const { hash } = window.location;
+      const hashParts = fromPairs(
+        hash
+          .replace(/^#/gm, '')
+          .split('&')
+          .map((pairs) => pairs.split('=')),
+      );
+      console.log({ hash, hashParts });
+      if (hashParts['demo']) {
+        console.log("hashParts['demo']", hashParts['demo']);
+        const dataToLoad = filter(sampleDataSets, { schemaName: hashParts['demo'] });
+        console.log('dataToLoad', dataToLoad);
+        if (dataToLoad && dataToLoad[0])
+          loadData(dataToLoad[0].schemaName!, dataToLoad[0].value!);
+      }
+    }, 50);
+  }, []);
 
   const buttons: IToolbarButton[] = [
     {

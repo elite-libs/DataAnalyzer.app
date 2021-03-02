@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AdapterNames } from 'adapters/writers';
 import type { SupportedTargetLanguages } from 'types';
 
-type State = {
+type OptionsState = {
   outputLanguage: SupportedTargetLanguages;
   outputAdapter: AdapterNames;
   strictMatching: boolean;
@@ -11,26 +11,27 @@ type State = {
   enumPercentThreshold: number;
   nullableRowsThreshold: number;
   uniqueRowsThreshold: number;
-  readonly _timestamp: number;
+  readonly _timestamp?: number;
 };
 
-let initialState: State = {
+let initialState: Readonly<OptionsState> = {
   outputLanguage: 'typescript',
   outputAdapter: 'typescript',
   strictMatching: false,
-  enumMinimumRowCount: 100,
+  enumMinimumRowCount: 50,
   enumAbsoluteLimit: 10,
   enumPercentThreshold: 0.01,
   nullableRowsThreshold: 0.001,
   uniqueRowsThreshold: 1.0,
-  _timestamp: Date.now(),
+  // _timestamp: Date.now(),
 };
 
+export { initialState as _initialOptions };
 const slice = createSlice({
   name: 'options',
   initialState,
   reducers: {
-    setOptions(state, action: PayloadAction<Partial<State>>) {
+    setOptions(state, action: PayloadAction<Partial<OptionsState>>) {
       const { payload } = action;
       Object.assign(state, payload, { _timestamp: Date.now() });
     },

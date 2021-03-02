@@ -1,5 +1,7 @@
 import { camelCase } from 'lodash';
 
+export const numericSorter = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
+
 export const removeBlankLines = (s: string, expectLen: number = -1): string => {
   const newStr = s.replace(/^ +\n/gim, '');
   if (s.length !== newStr.length) return removeBlankLines(newStr, newStr.length);

@@ -14,11 +14,12 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import SaveIcon from '@material-ui/icons/Save';
 import CloseIcon from '@material-ui/icons/Close';
 import { useDispatch, useSelector } from 'react-redux';
-import { setOptions } from 'store/optionsSlice';
+import { setOptions, _initialOptions } from 'store/optionsSlice';
 
 import { setResults, setSchema } from 'store/analysisSlice';
 import './AdvancedOptionsForm.scss';
 import { RootState } from 'store/rootReducer';
+import { pick } from 'lodash';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -64,13 +65,25 @@ export default function AdvancedOptionsForm({ className = '' }) {
       nullableRowsThreshold: data.nullableRowsThreshold, // / 100.0
       uniqueRowsThreshold: data.uniqueRowsThreshold, // / 100.0
     };
-    console.log('Saved Options', updatedOptions);
 
+    // console.log('Saved Options', updatedOptions);
+    localStorage.setItem('analyzer.options', JSON.stringify(options));
     dispatch(setOptions(updatedOptions));
     resetResults();
     goToHome();
     // setExpanded(false);
   };
+
+  // load previous options value:
+  React.useEffect(() => {
+    const optionsJson = localStorage.getItem('analyzer.options');
+    if (optionsJson && optionsJson.length > 1) {
+      let opts = JSON.parse(optionsJson);
+      opts = pick(opts, Object.keys(_initialOptions));
+      console.log('restoring saved settings:', optionsJson, opts);
+      dispatch(setOptions(opts));
+    }
+  }, []);
 
   function resetResults() {
     dispatch(setSchema(null));
