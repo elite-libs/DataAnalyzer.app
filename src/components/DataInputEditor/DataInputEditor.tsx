@@ -229,7 +229,7 @@ export function DataInputEditor(props: IAceEditorProps) {
 
   const buttons: IToolbarButton[] = [
     {
-      label: 'Reset',
+      label: 'Reset All',
       size: 'small',
       color: 'secondary',
       tooltip: <b>Clear all data &amp; keep options!</b>,

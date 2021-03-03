@@ -71,7 +71,9 @@ function getDebugSummary(
   const nestedTypeNames: string[] = nestedTypes != null ? Object.keys(nestedTypes) : [];
 
   return `\n\n/*
+#### DEBUG INFO ####
 @SchemaName: ${typeSummary.schemaName}
+@TotalRows: ${typeSummary.totalRows}
 @Options:
 ${Object.entries(options)
   .map((opt) => '    ' + opt.join(': '))
