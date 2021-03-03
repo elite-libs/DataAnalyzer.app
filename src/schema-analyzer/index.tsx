@@ -313,7 +313,6 @@ function _schemaAnalyzer(
     enumAbsoluteLimit = 10,
     // // enumPercentThreshold = 0.01,
     // nullableRowsThreshold = 0.001,
-    uniqueRowsThreshold = 0.99,
   } = options;
   const isEnumEnabled = input.length >= enumMinimumRowCount;
   // #debug: log`isEnumEnabled: ${isEnumEnabled}`)

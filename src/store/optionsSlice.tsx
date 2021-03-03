@@ -14,6 +14,7 @@ export interface OptionsState {
   uniqueRowsThreshold: number;
   consolidateTypes: IConsolidateTypesOptions['consolidateTypes'];
   readonly _timestamp?: number;
+  debug?: boolean;
 }
 
 let initialState: Readonly<OptionsState> = {

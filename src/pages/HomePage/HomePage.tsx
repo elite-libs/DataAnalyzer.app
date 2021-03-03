@@ -12,20 +12,20 @@ const CodePreviewPanel = lazy(() => import('components/CodePreviewPanel'));
  * top level has 2 columns with 1/3 and 2/3, so the next child has 50%
  */
 export default function HomePage() {
-  const { results, schema } = useSelector((state: RootState) => state.analysisFeature);
+  const { results } = useSelector((state: RootState) => state.analysisFeature);
   // const options = useSelector((state: RootState) => state.optionsActions);
   const { inputData, parsedInput } = useSelector(
     (state: RootState) => state.appStateActions,
   );
 
-  let classModifier = '';
+  // let classModifier = '';
   let isStackedViewMode = false;
   const { breakpoint } = useViewportSize();
   if (breakpoint && ['xs', 'sm'].includes(breakpoint)) {
-    classModifier = 'stacked-view';
+    // classModifier = 'stacked-view';
     isStackedViewMode = true;
   } else {
-    classModifier = '';
+    // classModifier = '';
     isStackedViewMode = false;
   }
 

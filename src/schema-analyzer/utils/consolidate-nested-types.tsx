@@ -125,7 +125,7 @@ export default function consolidateNestedTypes(
       // Ensure we got a name, and it's currently unused.
       if (
         suggestedName != null &&
-        suggestedName != false &&
+        suggestedName !== false &&
         !nestedTypes[suggestedName]
       ) {
         fieldsToReplace.push({
@@ -215,8 +215,8 @@ export default function consolidateNestedTypes(
     // 1. Re-assign typeName to alias (of first similar field)
     if (
       longestFields.length > 0 &&
-      longestFields[0]?.name != undefined &&
-      updatedTypes[longestFields[0].name] != undefined
+      longestFields[0]?.name !== undefined &&
+      updatedTypes[longestFields[0].name] !== undefined
     ) {
       updatedTypes[alias] = updatedTypes[longestFields[0].name!]!;
     }

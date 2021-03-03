@@ -28,7 +28,7 @@ import CodeToolbar, { IToolbarButton } from 'components/CodeToolbar/CodeToolbar'
 // import ReactAce from 'react-ace/lib/ace';
 import { sampleDataSets } from 'components/DemoDataMenu';
 import { useAnalytics } from 'hooks/useAnalytics';
-import { useHistory, useLocation } from 'react-router';
+import { useHistory } from 'react-router';
 
 import './DataInputEditor.scss';
 
@@ -48,8 +48,6 @@ function getJsonParsingErrorLocation(message: string) {
 
 export function DataInputEditor(props: IAceEditorProps) {
   // let $panelEl = document.querySelector('.data-input-editor');
-  const location = useLocation();
-
   const dispatch = useDispatch();
   const { enqueueSnackbar } = useAutoSnackbar();
   // let aceRef: AceEditor | null = null;
@@ -226,6 +224,7 @@ export function DataInputEditor(props: IAceEditorProps) {
           loadData(dataToLoad[0].schemaName!, dataToLoad[0].value!);
       }
     }, 50);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const buttons: IToolbarButton[] = [

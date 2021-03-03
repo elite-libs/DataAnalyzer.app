@@ -33,8 +33,16 @@ export const getElementSize = (
 
 const _percentFormatter = new Intl.NumberFormat(['en-US', 'en'], {
   style: 'percent',
-  minimumFractionDigits: 2,
+  minimumFractionDigits: 1,
 });
 
 export const formatPercent = (number: number | string) =>
   number != null ? _percentFormatter.format(Number(number)) : `0.00`;
+
+export const convertFractionToPercent = (fraction?: number | string) => {
+  return Number(fraction) > 0
+    ? Math.abs(Number(fraction) * 100.0)
+        .toString()
+        .concat('%')
+    : '0.000%';
+};

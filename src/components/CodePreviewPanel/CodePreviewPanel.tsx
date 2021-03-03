@@ -6,7 +6,7 @@ import Panel from 'components/Layouts/Panel';
 import { ghcolors } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import SyncOutlinedIcon from '@material-ui/icons/SyncOutlined';
 import FileCopy from '@material-ui/icons/FileCopyOutlined';
-import { CheckCircleIcon, CodeOutputIcon } from '../AppIcons';
+import { CodeOutputIcon } from '../AppIcons';
 import { resetAnalysis } from 'store/analysisSlice';
 import { useAutoSnackbar } from 'hooks/useAutoSnackbar';
 import type { Property } from 'csstype';
@@ -70,6 +70,7 @@ export default function CodePreviewPanel({
   const isPanelSuccessState = Boolean(results);
   return (
     <Panel
+      disabled={!isPanelSuccessState}
       className={`code-viewer ${
         isPanelSuccessState ? 'panel-success' : 'panel-error'
       } ${className}`.trim()}

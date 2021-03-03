@@ -2,7 +2,7 @@
 import { CombinedFieldInfo } from '../schema-analyzer';
 import { properCase, numericSorter } from 'helpers';
 import { IDataAnalyzerWriter, IRenderArgs } from './writers';
-import { map, mapValues, snakeCase } from 'lodash';
+import { map, snakeCase } from 'lodash';
 
 const typeMap: { [k: string]: string } = {
   $ref: 'string',
@@ -57,31 +57,28 @@ ${fieldInfo.enum
 )`;
 };
 /**
-
-GoLang types:
-
-| typename            |            min          |          max           |
-|---------------------|-------------------------|------------------------|
-| bool                |                         |                        |  
-| string              |                         |                        |    
-| int                 | 32 or 64bit             | 32 or 64bit            |
-| int8                | -128                    | 127                    |
-| int16               | -32767                  | 32767                  |  
-| int32 (`rune`)      | -2147483647             | 2147483647             |
-| int64               | -9223372036854775808    | 9223372036854775808    |  
-| uint                | 0                       | 32 or 64bit            |  
-| uint8 (`byte`)      | 0                       | 255                    |  
-| uint16              | 0                       | 65535                  |    
-| uint32              | 0                       | 4294967295             |    
-| uint64              | 0                       | 18446744073709551614   |
-| uintptr             | 0                       |                        |
-
-// | float32             |                         |                        |
-// | float64             |                         |                        |
-// | complex64           |                         |                        |
-// | complex128          |                         |                        |
-
-*/
+ * #### Type Size Table for GoLang
+ * | typename            |            min          |          max           |
+ * |---------------------|-------------------------|------------------------|
+ * | bool                |                         |                        |
+ * | string              |                         |                        |
+ * | int                 | 32 or 64bit             | 32 or 64bit            |
+ * | int8                | -128                    | 127                    |
+ * | int16               | -32767                  | 32767                  |
+ * | int32 (`rune`)      | -2147483647             | 2147483647             |
+ * | int64               | -9223372036854775808    | 9223372036854775808    |
+ * | uint                | 0                       | 32 or 64bit            |
+ * | uint8 (`byte`)      | 0                       | 255                    |
+ * | uint16              | 0                       | 65535                  |
+ * | uint32              | 0                       | 4294967295             |
+ * | uint64              | 0                       | 18446744073709551614   |
+ * | uintptr             | 0                       |                        |
+ * | float32             |                         |                        |
+ * | float64             |                         |                        |
+ * | complex64           |                         |                        |
+ * | complex128          |                         |                        |
+ *
+ */
 const Writer: IDataAnalyzerWriter = {
   render({ results, options, schemaName }: IRenderArgs) {
     const hasNestedTypes =
@@ -107,7 +104,8 @@ const Writer: IDataAnalyzerWriter = {
           return this.render({
             schemaName: nestedName,
             results,
-            options: { disableNestedTypes: false },
+            options,
+            // options: { disableNestedTypes: false },
           });
         });
       }
@@ -117,7 +115,7 @@ const Writer: IDataAnalyzerWriter = {
       if (fieldInfo.enum && fieldInfo.enum.length > 0)
         return getEnumDeclaration(fieldName, fieldInfo);
       return null;
-    });
+    }).filter(Boolean);
     const getEnums = () => `\n${enumDefs.join('\n')}`.trim();
     // console.warn({ enums });
     return getFields() + '\n\n' + getEnums() + '\n' + getRecursive().join('');

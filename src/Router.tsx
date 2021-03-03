@@ -6,8 +6,6 @@ import HomePage from 'pages/HomePage/HomePage';
 import Header from 'components/Header/Header';
 import LoadingSpinner from 'components/LoadingSpinner';
 import useViewportSize from 'hooks/useViewportSize';
-import { cssVariablesFromMuiTheme } from 'theme/CustomTheme';
-import { withStyles } from '@material-ui/core';
 import type { RootState } from 'store/rootReducer';
 
 // import './index.scss';
@@ -23,11 +21,9 @@ function Router() {
   // const { enqueueSnackbar } = useAutoSnackbar();
   // const messages = useAppMessages();
 
-  const { results, schema } = useSelector((state: RootState) => state.analysisFeature);
+  const { results } = useSelector((state: RootState) => state.analysisFeature);
   // const options = useSelector((state: RootState) => state.optionsActions);
-  const { parsedInput, inputData } = useSelector(
-    (state: RootState) => state.appStateActions,
-  );
+  const { parsedInput } = useSelector((state: RootState) => state.appStateActions);
 
   // Once user selects a template / output script...
   // 1. Process the inputData into structured data with parseCsv() or JSON.parse
@@ -35,14 +31,14 @@ function Router() {
   // 3. Convert Schema analysis to flattened types
 
   let classModifier = '';
-  let isStackedViewMode = false;
+  // let isStackedViewMode = false;
   const { breakpoint } = useViewportSize();
   if (breakpoint && ['xs', 'sm'].includes(breakpoint)) {
     classModifier = 'stacked-view';
-    isStackedViewMode = true;
+    // isStackedViewMode = true;
   } else {
     classModifier = '';
-    isStackedViewMode = false;
+    // isStackedViewMode = false;
   }
 
   if (results) classModifier += ' results-loaded';

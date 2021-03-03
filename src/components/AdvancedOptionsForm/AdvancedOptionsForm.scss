@@ -1,15 +1,47 @@
+.schema-options {
+  fieldset {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+  legend {
+    margin-left: -1rem;
+    margin-right: -1rem;
+  }
+  .input-group {
+    display: flex;
+    justify-content: space-between;
+    p {
+      flex: 1 0 auto;
+    }
+  }
+  .slider-input {
+    .input-group {
+      > p {
+        flex: 0 0 145px;
+      }
+      > span:first-of-type {
+        flex: 1 0 50%;
+      }
+      > span:last-of-type {
+        flex: 0 0 80px;
+      }
+    }
+  }
+
+  .warning-label {
+    visibility: hidden;
+  }
+  .show-warning {
+    .warning-label {
+      visibility: hidden;
+    }
+  }
+}
+
 .form-fields-area {
   box-shadow: inset 4rem -4em 4em rgba(120, 120, 120, 0.12);
 }
 
-.warning-label {
-  visibility: hidden;
-}
-.show-warning {
-  .warning-label {
-    visibility: hidden;
-  }
-}
 .slider-input {
   span:last-of-type {
     text-align: right;

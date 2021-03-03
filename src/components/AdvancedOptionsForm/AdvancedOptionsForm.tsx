@@ -1,5 +1,5 @@
-import React, { useCallback, useRef } from 'react';
-import { useHistory } from 'react-router';
+import React, { useCallback } from 'react';
+// import { useHistory } from 'react-router';
 import { useForm } from 'react-hook-form';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -8,10 +8,10 @@ import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import SettingsIcon from '@material-ui/icons/Settings';
-import SaveIcon from '@material-ui/icons/Save';
-import CloseIcon from '@material-ui/icons/Close';
+// import SaveIcon from '@material-ui/icons/Save';
+// import CloseIcon from '@material-ui/icons/Close';
 import WarningIcon from '@material-ui/icons/Warning';
-import { FormControl, Select } from '@material-ui/core';
+import { Select, Slider } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { OptionsState, setOptions, _initialOptions } from 'store/optionsSlice';
 import { setResults, setSchema } from 'store/analysisSlice';
@@ -19,10 +19,12 @@ import { RootState } from 'store/rootReducer';
 import { pick } from 'lodash';
 
 import './AdvancedOptionsForm.scss';
+import { convertFractionToPercent, formatPercent } from 'helpers';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    zIndex: 10,
+    maxWidth: 600,
+    margin: 'auto',
   },
   margin: {
     height: theme.spacing(3),
@@ -41,26 +43,41 @@ const useStyles = makeStyles((theme) => ({
     zIndex: 10000,
   },
   panelContent: {},
+  title: {
+    marginBottom: 0,
+  },
 }));
+
+// const marks = [
+//   {
+//     value: 0,
+//     label: '0°C',
+//   },
+//   {
+//     value: 20,
+//     label: '20°C',
+//   },
+//   {
+//     value: 37,
+//     label: '37°C',
+//   },
+//   {
+//     value: 100,
+//     label: '100°C',
+//   },
+// ];
 
 export default function AdvancedOptionsForm({ className = '' }) {
   // const history = useHistory();
   // const formRef$ = useRef<HTMLFormElement | undefined>();
   const dispatch = useDispatch();
   const options = useSelector((state: RootState) => state.optionsActions);
+  // const {} = useSelector((state: RootState) => state.appStateActions);
   // const { schemaName } = useSelector((state) => state.analysisFeature);
   const classes = useStyles();
 
   const methods = useForm<OptionsState>({ defaultValues: options, mode: 'onChange' });
-  const {
-    handleSubmit,
-    control,
-    register,
-    watch,
-    setValue,
-    getValues,
-    formState,
-  } = methods;
+  const { register, watch, setValue, getValues } = methods;
 
   // const currentValues = getValues();
 
@@ -74,7 +91,8 @@ export default function AdvancedOptionsForm({ className = '' }) {
   //   }
   //   return () => formRef$?.current?.removeEventListener('input', handleChange);
   // }, [formRef$, formRef$.current]);
-
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const getInitialOptions = React.useMemo(() => options, []);
   const onSubmit = useCallback(
     (data: OptionsState) => {
       const updatedOptions = {
@@ -89,9 +107,14 @@ export default function AdvancedOptionsForm({ className = '' }) {
       // TODO: Auto re-generate code
       resetResults();
       // goToHome();
+      function resetResults() {
+        dispatch(setSchema(null));
+        dispatch(setResults(null));
+      }
       // setExpanded(false);
     },
-    [JSON.stringify(getValues())],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [JSON.stringify(getValues()), dispatch],
   );
 
   // load previous options value:
@@ -103,33 +126,35 @@ export default function AdvancedOptionsForm({ className = '' }) {
       console.log('restoring saved settings:', optionsJson, opts);
       dispatch(setOptions(opts));
     }
-  }, []);
+  }, [dispatch]);
 
-  function resetResults() {
-    dispatch(setSchema(null));
-    dispatch(setResults(null));
-  }
-  const displayNullableRowsThreshold = `${watch('nullableRowsThreshold')}`;
   /*formatPercent(
-    100.0 * parseFloat( */
-  console.log(watch('nullableRowsThreshold'), watch('uniqueRowsThreshold'));
-  const displayUniqueRowsThreshold = `${watch('uniqueRowsThreshold')}`;
+  100.0 * parseFloat( */
+  const nullableRowsThreshold = watch('nullableRowsThreshold');
+  const uniqueRowsThreshold = watch('uniqueRowsThreshold');
+  const displayNullableRowsThreshold = `${nullableRowsThreshold}`;
+  // const displayUniqueRowsThreshold = `${uniqueRowsThreshold}`;
 
   const onInput = React.useCallback(() => onSubmit(getValues()), [
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     JSON.stringify(getValues()),
+    getValues,
+    onSubmit,
   ]);
   const onChange = React.useCallback(() => onSubmit(getValues()), [
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     JSON.stringify(getValues()),
+    getValues,
+    onSubmit,
   ]);
   const autoSaveHandlers = { onInput, onChange };
 
   React.useEffect(() => {
-    register('strictMatching', {
-      // validate: (value) => value.length || 'This is required.',
-    });
-    register('consolidateTypes', {
-      // validate: (value) => value.length || 'This is required.',
-    });
+    register('debug', {});
+    register('strictMatching', {});
+    register('consolidateTypes', {});
+    register('uniqueRowsThreshold', { min: 0.8, max: 1.0, valueAsNumber: true });
+    register('nullableRowsThreshold', { min: 0.0, max: 0.1, valueAsNumber: true });
   }, [register]);
 
   return (
@@ -137,10 +162,11 @@ export default function AdvancedOptionsForm({ className = '' }) {
       <Card
         // raised={false}
         raised={true}
+        className={classes.root}
       >
         <CardHeader
           avatar={<SettingsIcon color="primary" fontSize="large" />}
-          title={<h2>Settings</h2>}
+          title={<h2 className={classes.title}>Settings</h2>}
         ></CardHeader>
         <section style={{ zIndex: 500 }} className={classes.panel}>
           <form
@@ -217,7 +243,7 @@ export default function AdvancedOptionsForm({ className = '' }) {
                       max={10000}
                       step={10}
                       title="Between 0-10000, Default: 100"
-                      ref={register({ min: 0, max: 10000 })}
+                      ref={register({ min: 0, max: 10000, valueAsNumber: true })}
                       // onChange
                       {...autoSaveHandlers}
                     />
@@ -232,7 +258,7 @@ export default function AdvancedOptionsForm({ className = '' }) {
                       max={100}
                       step={1}
                       title="Between 0-100, Default=10"
-                      ref={register({ min: 0, max: 100 })}
+                      ref={register({ min: 0, max: 100, valueAsNumber: true })}
                       {...autoSaveHandlers}
                     />
                   </label>
@@ -242,21 +268,21 @@ export default function AdvancedOptionsForm({ className = '' }) {
                   <legend className="mb-1">Null Detection</legend>
                   <label className="input-group d-flex justify-content-between">
                     <p>Empty field limit</p>
-                    <input
-                      type="range"
-                      style={{ flex: '0 0 50%' }}
-                      name="nullableRowsThreshold"
-                      defaultValue={0.02}
+                    <Slider
+                      value={nullableRowsThreshold}
+                      getAriaValueText={formatPercent}
+                      valueLabelFormat={formatPercent}
                       min={0.0}
                       max={0.1}
                       step={0.005}
-                      title="Between 0.0-0.10, Default: 0.02"
-                      ref={register({ min: 0.0, max: 0.1 })}
-                      {...autoSaveHandlers}
+                      valueLabelDisplay="on"
+                      // style={{ flex: '0 0 50%' }}
+                      onChange={(e, data) => {
+                        setValue('nullableRowsThreshold', data);
+                        onSubmit(getValues());
+                      }}
                     />
-                    <span style={{ flex: '0 0 150px' }}>
-                      {displayNullableRowsThreshold}%
-                    </span>
+                    <span>{formatPercent(displayNullableRowsThreshold)}</span>
                   </label>
                 </fieldset>
 
@@ -264,21 +290,37 @@ export default function AdvancedOptionsForm({ className = '' }) {
                   <legend className="mb-1">Uniqueness Detection</legend>
                   <label className="input-group d-flex justify-content-between">
                     <p>Unique values required</p>
-                    <input
-                      type="range"
-                      style={{ flex: '0 0 50%' }}
-                      name="uniqueRowsThreshold"
-                      defaultValue={1.0}
+                    <Slider
+                      value={uniqueRowsThreshold}
+                      getAriaValueText={convertFractionToPercent}
+                      valueLabelFormat={convertFractionToPercent}
                       min={0.8}
                       max={1.0}
                       step={0.005}
-                      ref={register({ min: 0.8, max: 1.0 })}
-                      {...autoSaveHandlers}
+                      valueLabelDisplay="on"
+                      // style={{ flex: '0 0 50%' }}
+                      onChange={(e, data) => {
+                        setValue('uniqueRowsThreshold', data);
+                        onSubmit(getValues());
+                      }}
                     />
-                    <span style={{ flex: '0 0 150px' }}>
-                      {displayUniqueRowsThreshold}%
-                    </span>
+                    <span>{formatPercent(Math.abs(Number(uniqueRowsThreshold)))}</span>
                   </label>
+                </fieldset>
+                <fieldset className="form-group">
+                  <legend className="mb-1">Debug Mode</legend>
+                  <section className="input-group d-flex justify-content-between">
+                    <p>Append `TypeSummary` results JSON in your generated code.</p>
+                    <Checkbox
+                      name="debug"
+                      style={{ padding: '0' }}
+                      onChange={(event, checked) => {
+                        setValue('debug', checked);
+                        onSubmit(getValues());
+                      }}
+                      checked={options.debug}
+                    />
+                  </section>
                 </fieldset>
               </CardContent>
             </Paper>

@@ -94,6 +94,18 @@ h1 {
   }
 }
 
+.options-link {
+  transition: transform 750ms cubic-bezier(0.215, 0.61, 0.355, 1);
+  &.active {
+    transform: rotate(1turn);
+    // svg {
+    // }
+  }
+  &:hover {
+    transform: rotate(-90deg);
+  }
+}
+
 .roll-dice-wrapper {
   // border: 1px solid var(--text-color-secondary);
   border-radius: 0.3rem;

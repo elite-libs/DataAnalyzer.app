@@ -157,6 +157,7 @@ export const OutputButtons = ({ size = 'medium', className = '' }: Props) => {
 
   return (
     <Panel
+      disabled={!isPanelSuccessState}
       className={`output-buttons-panel ${
         isPanelSuccessState ? 'panel-success' : 'panel-error'
       } ${className}`.trim()}

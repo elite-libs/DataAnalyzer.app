@@ -33,7 +33,7 @@ export default function Header() {
   // const { trackCustomEvent } = useAnalytics();
   // const { enqueueSnackbar } = useAutoSnackbar();
   const messages = useAppMessages();
-  const { results } = useSelector((state: RootState) => state.analysisFeature);
+  // const { results } = useSelector((state: RootState) => state.analysisFeature);
   // const options = useSelector((state: RootState) => state.optionsActions);
   const { parsedInput } = useSelector((state: RootState) => state.appStateActions);
   function resetResults() {
@@ -68,13 +68,16 @@ export default function Header() {
           <GitHubIcon fontSize="small" color="action" />
         </Link>
         <Link
-          className={''}
+          className={'options-link ' + (location.pathname === `/options` ? 'active' : '')}
           component={RouteLink}
-          to="/options"
+          to={location.pathname === '/options' ? '/' : '/options'}
           title="Options / Configuration"
           aria-label="Options / Configuration"
         >
-          <SettingsIcon fontSize="large" color="primary" />
+          <SettingsIcon
+            fontSize="large"
+            color={location.pathname === '/options' ? 'secondary' : 'primary'}
+          />
         </Link>
       </aside>
       <Breadcrumbs
