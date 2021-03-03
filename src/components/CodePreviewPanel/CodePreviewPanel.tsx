@@ -54,6 +54,7 @@ export default function CodePreviewPanel({
     {
       label: 'Reset',
       color: 'secondary',
+      size: 'small',
       tooltip: <b>Generate a different output!</b>,
       startIcon: <SyncOutlinedIcon />,
       onClick: resetAppState,
@@ -61,6 +62,7 @@ export default function CodePreviewPanel({
     {
       label: 'Copy',
       color: 'primary',
+      size: 'small',
       tooltip: <b>Copy to clipboard!</b>,
       startIcon: <FileCopy />,
       onClick: handleCopyClick,

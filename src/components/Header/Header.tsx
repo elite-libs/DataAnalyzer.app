@@ -52,7 +52,7 @@ export default function Header() {
   console.log('location.pathname', location.pathname);
   return (
     <nav className="row row-block w-100">
-      <h1 className="col-12 col-sm-6" title="Reset/Load Home Screen">
+      <h1 className="col-12 col-sm-6 col-md-4" title="Reset/Load Home Screen">
         <Link className="brand-link" component={RouteLink} to="/" onClick={resetResults}>
           <AppIcon />
           <div>
@@ -62,7 +62,7 @@ export default function Header() {
           </div>
         </Link>
       </h1>
-      <aside className="icon-button-box col-12 col-sm-6 text-right">
+      <aside className="icon-button-box col-12 col-sm-6 col-md-8 text-right">
         {/* <DemoDataMenu /> */}
 
         <Link component={RouteLink} to="/about" title="View README">

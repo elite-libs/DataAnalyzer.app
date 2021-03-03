@@ -229,7 +229,6 @@ export function DataInputEditor(props: IAceEditorProps) {
 
   const buttons: IToolbarButton[] = [
     {
-      className: 'btn-height-hack',
       label: 'Reset',
       size: 'small',
       color: 'secondary',
@@ -240,6 +239,7 @@ export function DataInputEditor(props: IAceEditorProps) {
     {
       label: 'Import Demo Data',
       size: 'small',
+      className: 'btn-load-demo',
       tooltip: (
         <>
           <b>Test out random data from real APIs</b>
@@ -249,8 +249,10 @@ export function DataInputEditor(props: IAceEditorProps) {
       ),
       color: 'primary',
       startIcon: (
-        <div className="roll-dice-wrapper">
-          <div className={'roll-dice ' + (currentlyLoadingData ? 'animated' : '')}></div>
+        <div className="roll-dice-16px-wrapper">
+          <div
+            className={'roll-dice-16px ' + (currentlyLoadingData ? 'animated' : '')}
+          ></div>
         </div>
       ),
       onClick: iAmFeelingLucky,

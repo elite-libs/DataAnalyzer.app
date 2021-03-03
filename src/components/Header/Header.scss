@@ -150,3 +150,69 @@ h1 {
     background-position: -600px 0;
   }
 }
+
+.roll-dice-20px-wrapper {
+  // border: 1px solid var(--text-color-secondary);
+  border-radius: 0.3rem;
+  width: 24px;
+  height: 24px;
+  padding: 1px 1px 0 0;
+}
+.roll-dice-20px {
+  box-sizing: border-box;
+  background-color: var(--color-primary);
+  &.animated {
+    animation: roll-dice-20px 0.75s steps(6) infinite;
+  }
+  border-radius: 0.5rem;
+  display: inline-block;
+  // animation: roll-dice-20px 1.5s steps(6) infinite;
+  background-image: url(../../../public/images/dice-sprite-h20px.svg);
+  width: 20px;
+  height: 20px;
+  background-size: cover;
+}
+
+@keyframes roll-dice-20px {
+  100% {
+    background-position: -120px 0;
+  }
+}
+
+///////////////
+.btn-load-demo {
+  &:hover {
+    .roll-dice-16px {
+      animation: roll-dice-16px 1.25s steps(6) infinite;
+    }
+  }
+}
+.roll-dice-16px-wrapper {
+  margin-top: 2px;
+  line-height: 1;
+  // border: 1px solid var(--text-color-secondary);
+  // border-radius: 2px;
+  // width: 19px;
+  // height: 19px;
+  padding: 0; //1px 1px 0 0;
+}
+.roll-dice-16px {
+  box-sizing: border-box;
+  background-color: var(--color-primary);
+  &.animated {
+    animation: roll-dice-16px 0.75s steps(6) infinite;
+  }
+  border-radius: 2px;
+  display: inline-block;
+  // animation: roll-dice-16px 1.5s steps(6) infinite;
+  background-image: url(../../../public/images/dice-sprite-h16px.svg);
+  width: 16px;
+  height: 16px;
+  background-size: cover;
+}
+
+@keyframes roll-dice-16px {
+  100% {
+    background-position: -96px 0;
+  }
+}
