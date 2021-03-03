@@ -1,4 +1,5 @@
 // import debug from 'debug'
+import { startCase, takeWhile } from 'lodash';
 import { mapValues } from 'lodash';
 import {
   AggregateSummary,
@@ -156,4 +157,23 @@ function _simplifyFieldInfo(
   }
 
   return result;
+}
+
+export function takeUntilNull<T>(array: Array<T | null>) {
+  let foundNull = false;
+  return takeWhile(array, (item) => {
+    if (item == null) foundNull = true;
+    return !foundNull && item != null;
+  });
+}
+
+/**
+ * initialify turns a string expression and gets all initial word-letters, and making them uppercase.
+ * @param string
+ * @returns
+ */
+export function initialify(string: string | null) {
+  return string && string.length > 0
+    ? startCase(string).replace(/[^[A-Z]*/gm, '')
+    : null;
 }

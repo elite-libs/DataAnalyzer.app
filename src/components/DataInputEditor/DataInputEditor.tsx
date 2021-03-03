@@ -11,7 +11,7 @@ import {
   setParserError,
   setStatusMessage,
 } from 'store/appStateSlice';
-import { filter, fromPairs, takeWhile, throttle } from 'lodash';
+import { filter, fromPairs, throttle } from 'lodash';
 
 import { RootState } from 'store/rootReducer';
 import { CheckCircleIcon, ErrorIcon } from 'components/AppIcons';
@@ -19,8 +19,8 @@ import TooltipWrapper from 'components/TooltipWrapper';
 import { useAutoSnackbar } from 'hooks/useAutoSnackbar';
 // import { Ace } from 'ace-builds';
 import { resetAnalysis, setSchemaName } from 'store/analysisSlice';
-import UnfoldLessIcon from '@material-ui/icons/UnfoldLess';
-import RestorePageIcon from '@material-ui/icons/RestorePage';
+// import UnfoldLessIcon from '@material-ui/icons/UnfoldLess';
+import SyncOutlinedIcon from '@material-ui/icons/SyncOutlined';
 import SchemaNameField from 'components/SchemaNameField';
 import Panel from 'components/Layouts/Panel';
 import useViewportSize from 'hooks/useViewportSize';
@@ -28,7 +28,7 @@ import CodeToolbar, { IToolbarButton } from 'components/CodeToolbar/CodeToolbar'
 // import ReactAce from 'react-ace/lib/ace';
 import { sampleDataSets } from 'components/DemoDataMenu';
 import { useAnalytics } from 'hooks/useAnalytics';
-import { useHistory, useLocation } from 'react-router';
+import { useHistory } from 'react-router';
 
 import './DataInputEditor.scss';
 
@@ -48,8 +48,6 @@ function getJsonParsingErrorLocation(message: string) {
 
 export function DataInputEditor(props: IAceEditorProps) {
   // let $panelEl = document.querySelector('.data-input-editor');
-  const location = useLocation();
-
   const dispatch = useDispatch();
   const { enqueueSnackbar } = useAutoSnackbar();
   // let aceRef: AceEditor | null = null;
@@ -226,21 +224,22 @@ export function DataInputEditor(props: IAceEditorProps) {
           loadData(dataToLoad[0].schemaName!, dataToLoad[0].value!);
       }
     }, 50);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const buttons: IToolbarButton[] = [
     {
-      className: 'btn-height-hack',
-      label: 'Reset',
-      size: 'large',
+      label: 'Reset All',
+      size: 'small',
       color: 'secondary',
       tooltip: <b>Clear all data &amp; keep options!</b>,
-      startIcon: <RestorePageIcon />,
+      startIcon: <SyncOutlinedIcon />,
       onClick: resetAllAppState,
     },
     {
-      label: 'Try Demo Data',
-      size: 'large',
+      label: 'Import Demo Data',
+      size: 'small',
+      className: 'btn-load-demo',
       tooltip: (
         <>
           <b>Test out random data from real APIs</b>
@@ -250,8 +249,10 @@ export function DataInputEditor(props: IAceEditorProps) {
       ),
       color: 'primary',
       startIcon: (
-        <div className="roll-dice-wrapper">
-          <div className={'roll-dice ' + (currentlyLoadingData ? 'animated' : '')}></div>
+        <div className="roll-dice-16px-wrapper">
+          <div
+            className={'roll-dice-16px ' + (currentlyLoadingData ? 'animated' : '')}
+          ></div>
         </div>
       ),
       onClick: iAmFeelingLucky,
@@ -352,7 +353,7 @@ export function DataInputEditor(props: IAceEditorProps) {
         enableLiveAutocompletion={false}
         enableSnippets={false}
         editorProps={{
-          $blockScrolling: 1,
+          $blockScrolling: true,
         }}
         setOptions={{
           minLines: 4,

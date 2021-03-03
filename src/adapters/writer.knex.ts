@@ -7,6 +7,11 @@ import { IDataAnalyzerWriter, IRenderArgs } from './writers';
 
 const BIG_INTEGER_MIN = BigInt('2147483647');
 
+const instructionsForMultipleTypes = `// NOTE #1: You can break up multiple createTable's into different migration scripts
+  // OR, you can chain the calls to .createTable()'s
+  // NOTE #2: make sure any tables are created before it's relations (tables) are setup.
+`;
+
 const getFieldLengthArg = (fieldName: string, maxLength: number) => {
   if (maxLength > 4000) return 8000;
   if (maxLength > 2000) return 4000;
@@ -48,7 +53,7 @@ const writer: IDataAnalyzerWriter = {
     function getFirstIdentityOrUniqueField(
       nestedTypeName: string,
       preferUniqueOverFirstColumn = true,
-    ) {
+    ): string {
       if (nestedTypes == null)
         throw new Error(
           `Error: Missing nested type data. Couldn't lookup '${nestedTypeName}'`,
@@ -61,7 +66,7 @@ const writer: IDataAnalyzerWriter = {
       let identityField = fieldSet.find(([fieldName, fieldStats]) => {
         return fieldStats.identity ? true : false;
       });
-      if (identityField) return identityField;
+      if (identityField) return identityField[0];
       // No solid ID col found, fallback to preferUniqueOverFirstColumn
       if (preferUniqueOverFirstColumn) {
         // next check for unique fields :shrug: :fingers_crossed:
@@ -69,7 +74,7 @@ const writer: IDataAnalyzerWriter = {
           return fieldStats.unique ? true : false;
         });
       }
-      return fieldSet[0] && fieldSet[0][0];
+      return fieldSet[0] && fieldSet[0][0] ? fieldSet[0][0] : '__unknown__';
     }
 
     const getCreateTableCode = ({ schemaName, results }: IRenderArgs) =>
@@ -210,16 +215,14 @@ const writer: IDataAnalyzerWriter = {
     return `// More info: http://knexjs.org/#Schema-createTable
 
 exports.up = async function up(knex) {
-  // NOTE #1: You can break up multiple createTable's into different migration scripts
-  // OR, you can chain the calls to .createTable()'s
-  // NOTE #2: make sure any tables are created before it's relations (tables) are setup.
+  ${nestedTypes && hasNestedTypes ? instructionsForMultipleTypes : ''}
 ${
   hasNestedTypes
     ? `  await ${getRecursive().join('\n  await ')}\n`
     : `  /* Note: no nested types detected */`
 }
 
-  // Create the parent table
+  // Create the main table
   return ${getCreateTableCode({ schemaName, results })}
 };
 

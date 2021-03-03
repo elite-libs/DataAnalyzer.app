@@ -92,6 +92,24 @@ DataAnalyzer has 3 Powerful Features to Explore:
 
 - [ ] Render output using [handlebars templates](https://handlebarsjs.com/guide/).
 - [ ] Support multiple output files.
+- [ ] Use AI to name subtypes based on their column names (When assigning the full-qualified Path or de-duplicating types)
+- [ ] Add fuzzy matching of types if fields meet similarity threshold.
+
+```
+WHEN
+  Completed TypeSummary processing.
+  And SubType Shapes (column names) have `>= X%` similar columns.
+GIVEN
+  Nested type shapes:
+    'latitude|longitude'
+    'latitude|longitude|title'
+    'latitude|longitude|url'
+THEN
+  1. Return an adjusted type with combined fields
+    `latitude|longitude|title*|url*`
+  2. Determine a new suggested name.
+  3. Apply the Rename & Update fields with unified/composite type.
+```
 
 **Type inference & detection**
 

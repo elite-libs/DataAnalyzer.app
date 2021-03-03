@@ -33,7 +33,7 @@ export default function Header() {
   // const { trackCustomEvent } = useAnalytics();
   // const { enqueueSnackbar } = useAutoSnackbar();
   const messages = useAppMessages();
-  const { results } = useSelector((state: RootState) => state.analysisFeature);
+  // const { results } = useSelector((state: RootState) => state.analysisFeature);
   // const options = useSelector((state: RootState) => state.optionsActions);
   const { parsedInput } = useSelector((state: RootState) => state.appStateActions);
   function resetResults() {
@@ -52,29 +52,36 @@ export default function Header() {
   console.log('location.pathname', location.pathname);
   return (
     <nav className="row row-block w-100">
-      <h1 className="col-12 col-sm-6" title="Reset/Load Home Screen">
+      <h1 className="col-12 col-sm-6 col-md-4" title="Reset/Load Home Screen">
         <Link className="brand-link" component={RouteLink} to="/" onClick={resetResults}>
           <AppIcon />
-          DataAnalyzer.app
+          <div>
+            Data
+            <br />
+            Analyzer.app
+          </div>
         </Link>
       </h1>
-      <aside className="icon-button-box col-12 col-sm-6 text-right">
+      <aside className="icon-button-box col-12 col-sm-6 col-md-8 text-right">
         {/* <DemoDataMenu /> */}
 
-        <Link className={''} component={RouteLink} to="/about" title="View README">
+        <Link component={RouteLink} to="/about" title="View README">
           <InfoOutlinedIcon fontSize="small" color="action" />
         </Link>
-        <Link className={''} target="_blank" href={pkg.repository.url}>
+        <Link target="_blank" href={pkg.repository.url}>
           <GitHubIcon fontSize="small" color="action" />
         </Link>
         <Link
-          className={''}
+          className={'options-link ' + (location.pathname === `/options` ? 'active' : '')}
           component={RouteLink}
-          to="/options"
+          to={location.pathname === '/options' ? '/' : '/options'}
           title="Options / Configuration"
           aria-label="Options / Configuration"
         >
-          <SettingsIcon fontSize="large" color="primary" />
+          <SettingsIcon
+            fontSize="large"
+            color={location.pathname === '/options' ? 'secondary' : 'primary'}
+          />
         </Link>
       </aside>
       <Breadcrumbs

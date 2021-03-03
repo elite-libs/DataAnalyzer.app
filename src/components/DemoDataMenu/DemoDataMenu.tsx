@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setSchemaName } from 'store/analysisSlice';
 import { setInputData } from 'store/appStateSlice';
 // import { RootState } from 'store/rootReducer';
@@ -15,8 +15,8 @@ import { useAutoSnackbar } from 'hooks/useAutoSnackbar';
 import { useAnalytics } from 'hooks/useAnalytics';
 
 import './DemoDataMenu.scss';
-import { RootState } from 'store/rootReducer';
-import { fromPairs, takeWhile } from 'lodash';
+// import { RootState } from 'store/rootReducer';
+// import { fromPairs, takeWhile } from 'lodash';
 
 export const sampleDataSets: Record<'label' | 'value' | 'schemaName', string>[] = [
   { label: 'Users', value: '/data/users.example.json', schemaName: 'Users' },
@@ -40,7 +40,7 @@ export const sampleDataSets: Record<'label' | 'value' | 'schemaName', string>[] 
 ];
 
 export const DemoDataMenu = () => {
-  const { schemaName } = useSelector((state: RootState) => state.analysisFeature);
+  // const { schemaName } = useSelector((state: RootState) => state.analysisFeature);
   const { trackCustomEvent } = useAnalytics();
   const history = useHistory();
   const { enqueueSnackbar } = useAutoSnackbar();

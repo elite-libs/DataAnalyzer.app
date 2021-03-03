@@ -1,13 +1,13 @@
 import React, { ReactNode } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import copy from 'clipboard-copy';
 import Panel from 'components/Layouts/Panel';
 import { ghcolors } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import SyncOutlinedIcon from '@material-ui/icons/SyncOutlined';
+// import SyncOutlinedIcon from '@material-ui/icons/SyncOutlined';
 import FileCopy from '@material-ui/icons/FileCopyOutlined';
-import { CheckCircleIcon, CodeOutputIcon } from '../AppIcons';
-import { resetAnalysis } from 'store/analysisSlice';
+import { CodeOutputIcon } from '../AppIcons';
+// import { resetAnalysis } from 'store/analysisSlice';
 import { useAutoSnackbar } from 'hooks/useAutoSnackbar';
 import type { Property } from 'csstype';
 import type { RootState } from 'store/rootReducer';
@@ -28,7 +28,7 @@ export default function CodePreviewPanel({
   children,
   className = '',
 }: ICodePreviewPanelProps) {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const { enqueueSnackbar } = useAutoSnackbar();
 
   const { results } = useSelector((state: RootState) => state.analysisFeature);
@@ -36,9 +36,9 @@ export default function CodePreviewPanel({
     (state: RootState) => state.optionsActions,
   );
 
-  function resetAppState() {
-    dispatch(resetAnalysis());
-  }
+  // function resetAppState() {
+  //   dispatch(resetAnalysis());
+  // }
 
   async function handleCopyClick() {
     try {
@@ -51,16 +51,18 @@ export default function CodePreviewPanel({
     }
   }
   const buttons: IToolbarButton[] = [
-    {
-      label: 'Reset',
-      color: 'secondary',
-      tooltip: <b>Generate a different output!</b>,
-      startIcon: <SyncOutlinedIcon />,
-      onClick: resetAppState,
-    },
+    // {
+    //   label: 'Clear',
+    //   color: 'secondary',
+    //   size: 'small',
+    //   tooltip: <b>Generate a different output!</b>,
+    //   startIcon: <SyncOutlinedIcon />,
+    //   onClick: resetAppState,
+    // },
     {
       label: 'Copy',
       color: 'primary',
+      size: 'small',
       tooltip: <b>Copy to clipboard!</b>,
       startIcon: <FileCopy />,
       onClick: handleCopyClick,
@@ -70,6 +72,7 @@ export default function CodePreviewPanel({
   const isPanelSuccessState = Boolean(results);
   return (
     <Panel
+      disabled={!isPanelSuccessState}
       className={`code-viewer ${
         isPanelSuccessState ? 'panel-success' : 'panel-error'
       } ${className}`.trim()}

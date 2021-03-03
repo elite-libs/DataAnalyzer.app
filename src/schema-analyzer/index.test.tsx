@@ -1,11 +1,5 @@
 /* eslint-disable jest/valid-expect-in-promise */
-import {
-  schemaAnalyzer,
-  _getNumberRangeStats,
-  _condenseFieldData,
-  _pivotFieldDataByType,
-  parseDate,
-} from './index';
+import { schemaAnalyzer, _getNumberRangeStats, parseDate } from './index';
 import path from 'path';
 import fs from 'fs';
 import csvParse from 'csv-parse';
@@ -310,6 +304,14 @@ describe('progress api', () => {
       // const lastCall = progMock[progMock.length - 1]
       expect(result.fields.name).toBeDefined();
       expect(mockRunCount).toBeGreaterThan(1);
+    });
+  });
+});
+
+describe('default options', () => {
+  it('can run with default options', () => {
+    return schemaAnalyzer('users', userNotes).then((result) => {
+      expect(result.fields.name).toBeDefined();
     });
   });
 });

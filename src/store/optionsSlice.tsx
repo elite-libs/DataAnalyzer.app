@@ -1,8 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AdapterNames } from 'adapters/writers';
+import { IConsolidateTypesOptions } from 'schema-analyzer';
 import type { SupportedTargetLanguages } from 'types';
 
-type OptionsState = {
+export interface OptionsState {
   outputLanguage: SupportedTargetLanguages;
   outputAdapter: AdapterNames;
   strictMatching: boolean;
@@ -11,8 +12,10 @@ type OptionsState = {
   enumPercentThreshold: number;
   nullableRowsThreshold: number;
   uniqueRowsThreshold: number;
+  consolidateTypes: IConsolidateTypesOptions['consolidateTypes'];
   readonly _timestamp?: number;
-};
+  debug?: boolean;
+}
 
 let initialState: Readonly<OptionsState> = {
   outputLanguage: 'typescript',
@@ -23,13 +26,14 @@ let initialState: Readonly<OptionsState> = {
   enumPercentThreshold: 0.01,
   nullableRowsThreshold: 0.001,
   uniqueRowsThreshold: 1.0,
+  consolidateTypes: undefined,
   // _timestamp: Date.now(),
 };
 
 export { initialState as _initialOptions };
 const slice = createSlice({
   name: 'options',
-  initialState,
+  initialState: getSavedOptions() || initialState,
   reducers: {
     setOptions(state, action: PayloadAction<Partial<OptionsState>>) {
       const { payload } = action;
@@ -47,3 +51,17 @@ const appStateActions = slice.reducer;
 export const { setOptions, resetOptions } = slice.actions;
 
 export default appStateActions;
+
+export function getSavedOptions() {
+  try {
+    const optionsJson = localStorage.getItem('analyzer.options');
+    if (optionsJson && optionsJson.length > 1) {
+      let opts = JSON.parse(optionsJson);
+      console.log('restoring saved settings:', optionsJson, opts);
+      return opts;
+    }
+  } catch (error) {
+    // ignore localStorage fails
+  }
+  return null;
+}

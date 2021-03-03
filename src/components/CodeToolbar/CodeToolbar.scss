@@ -5,13 +5,13 @@
   z-index: 10000;
   &.MuiButtonGroup-root,
   button {
-    max-height: 44.25px;
+    // max-height: 44.25px;
     border-top-left-radius: 0px !important;
     border-top-right-radius: 0px !important;
   }
-  .btn-height-hack {
-    height: 44px;
-  }
+  // .btn-height-hack {
+  //   height: 44px;
+  // }
   // &.MuiButtonGroup-groupedContainedHorizontal:not(:last-child) {
   //   height: 44px;
   // }

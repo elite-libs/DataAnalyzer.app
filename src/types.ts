@@ -10,3 +10,31 @@ export interface KeyValPair<TValue> {
 }
 
 export type SupportedTargetLanguages = 'typescript' | 'go' | 'json' | 'javascript';
+
+export type TypeNameSuggestion = {
+  readonly typePaths: string[];
+  shape: string;
+  shapeBasedName: string | null;
+  prefixMatches: Array<string | null>;
+  suffixMatches: Array<string | null>;
+  pathSplitByLastCommonSubstring: string[] | null;
+  // trailing string matches
+  exactMatches: {
+    lastCommonKey?: null | string;
+    nextToLastCommonKey?: null | string;
+  };
+
+  setOperations: {
+    // uses lodash.intersection
+    intersection: null | string;
+    difference?: string[];
+    union: null | string;
+    xor: null | string;
+  };
+
+  alternatePrefixes: null | {
+    initials: null | string;
+    abbreviated: null | string;
+    truncated: null | string;
+  };
+};

@@ -3,7 +3,8 @@
 import { detectTypes, MetaChecks } from './utils/type-helpers';
 import * as helpers from './utils/helpers';
 import { mapValues } from 'lodash';
-import { KeyValPair } from '../types';
+import type { KeyValPair } from '../types';
+import consolidateNestedTypes from './utils/consolidate-nested-types';
 
 export { helpers };
 
@@ -62,8 +63,7 @@ export interface ISchemaAnalyzerOptions {
   enumMinimumRowCount?: number | undefined;
   /** The maximum # unique enum values allowed before switching to `String` mode. For US States, 50 or so would be appropriate. Default 5. */
   enumAbsoluteLimit?: number | undefined;
-  /** Obsolete? */
-  // enumPercentThreshold?: number | undefined
+
   /** Percent of empty records indicating field is still non-null. (Error tolerance for bad data.) Default: 0.001 */
   nullableRowsThreshold?: number | undefined;
   /** */
@@ -74,6 +74,11 @@ export interface ISchemaAnalyzerOptions {
   disableNestedTypes?: boolean | undefined;
   /** for debugging */
   debug?: boolean;
+}
+export interface IConsolidateTypesOptions {
+  /** `consolidateTypes` is a flag/mode to indicate the shape matching behavior. */
+  consolidateTypes?: '' | 'field-names' | 'field-names-and-type';
+  limitCompositeTypeNames?: 0 | 1 | 2 | 3 | 4 | 5;
 }
 
 // type NestedTypeSummary<TFieldDetails> = {
@@ -274,6 +279,8 @@ function schemaAnalyzer(
   },
   // _nestedData?: { [key: string]: unknown },
 ): Promise<TypeSummary<FieldInfo>> {
+  if (!schemaName || schemaName.length < 1)
+    return Promise.reject(Error('A SchemaName must be provided.'));
   return _schemaAnalyzer(schemaName, input, options).then(
     (nestedSchemaTypes) => {
       const schemaWithUnpackedData = extractNestedTypes(nestedSchemaTypes);
@@ -289,16 +296,7 @@ function schemaAnalyzer(
 function _schemaAnalyzer(
   schemaName: string,
   input: any[] | { [k: string]: any },
-  options: ISchemaAnalyzerOptions | undefined = {
-    onProgress: ({ totalRows, currentRow }) => {},
-    strictMatching: true,
-    disableNestedTypes: false,
-    enumMinimumRowCount: 100,
-    enumAbsoluteLimit: 5,
-    // enumPercentThreshold: 0.01,
-    nullableRowsThreshold: 0.001,
-    uniqueRowsThreshold: 0.99,
-  },
+  options: ISchemaAnalyzerOptions,
   // _nestedData?: { [key: string]: unknown },
 ): Promise<TypeSummary<FieldInfo>> {
   if (!input) throw Error('Input Data must be an Object or Array of Objects');
@@ -317,7 +315,6 @@ function _schemaAnalyzer(
     enumAbsoluteLimit = 10,
     // // enumPercentThreshold = 0.01,
     // nullableRowsThreshold = 0.001,
-    uniqueRowsThreshold = 0.99,
   } = options;
   const isEnumEnabled = input.length >= enumMinimumRowCount;
   // #debug: log`isEnumEnabled: ${isEnumEnabled}`)
@@ -884,13 +881,14 @@ function extractNestedTypes(typeSummary: TypeSummary<FieldInfo>) {
 }
 
 export {
-  // evaluateSchemaLevel as _evaluateSchemaLevel,
   schemaAnalyzer,
+  extractNestedTypes,
+  consolidateNestedTypes,
+  // private-ish methods:
   condenseFieldData as _condenseFieldData,
   pivotFieldDataByType as _pivotFieldDataByType,
   getNumberRangeStats as _getNumberRangeStats,
   formatRangeStats as _formatRangeStats,
   getFieldMetadata as _getFieldMetadata,
   isValidDate as _isValidDate,
-  extractNestedTypes,
 };

@@ -20,16 +20,29 @@ type Props = {
   children: ReactNode;
   actions?: typeof Button[] | null;
   className?: string | null;
+  disabled?: boolean;
 } & PaperProps;
 
 export default React.forwardRef<any, Props>((props, ref) => {
   // TODO/2021-02-27: Allow collapsible panel, add toggle icons in-place of subTitle.
   // Improve this 'jumpy' pattern later
-  const { titleComponent: title, subTitle, children, actions, className } = props;
+  const {
+    titleComponent: title,
+    subTitle,
+    children,
+    actions,
+    className,
+    disabled,
+  } = props;
 
   return (
-    <Paper elevation={3} className={`${className || ''} panel-component`} ref={ref}>
-      <Card>
+    <Paper
+      elevation={disabled ? 1 : 4}
+      className={`${className || ''} panel-component ${disabled ? 'panel-disabled' : ''}`}
+      ref={ref}
+      aria-disabled={Boolean(disabled)}
+    >
+      <Card elevation={0}>
         <CardContent>
           <div className="panel-header">
             <Typography gutterBottom variant="h5" component="h2">
@@ -45,8 +58,8 @@ export default React.forwardRef<any, Props>((props, ref) => {
         </CardContent>
         {actions && (
           <CardActions>
-            {actions.map((ButtonComponent) => (
-              <ButtonComponent />
+            {actions.map((ButtonComponent, index) => (
+              <ButtonComponent key={index} />
             ))}
           </CardActions>
         )}

@@ -1,18 +1,20 @@
 import { camelCase } from 'lodash';
 import {
+  CombinedFieldInfo,
   NumericFieldInfo,
   TypeNameStringComposite,
   TypeNameStringDecimal,
 } from '../schema-analyzer';
 import { properCase, removeBlankLines } from 'helpers';
+import { KeyValPair } from 'types';
 import type { IDataAnalyzerWriter, IRenderArgs } from './writers';
 
 const writer: IDataAnalyzerWriter = {
   render({ results, options, schemaName }: IRenderArgs) {
     const hasNestedTypes =
       results.nestedTypes && Object.keys(results.nestedTypes!).length > 0;
-    const { fields } = results;
-    const getFields = () => {
+    // const { fields } = results;
+    const getSchema = (schemaName: string, fields: KeyValPair<CombinedFieldInfo>) => {
       return (
         `const ${properCase(schemaName)} = new Schema({\n` +
         Object.entries(fields)
@@ -54,16 +56,15 @@ module.exports.${properCase(schemaName)} = ${camelCase(schemaName)}Model;\n`
       if (!options?.disableNestedTypes && hasNestedTypes) {
         return Object.entries(results.nestedTypes!).map(([nestedName, results]) => {
           // console.log('nested mongoose schema:', nestedName);
-          return this.render({
-            schemaName: nestedName,
-            results,
-            options: { disableNestedTypes: false },
-          });
+          return getSchema(nestedName, results.fields);
         });
       }
       return '';
     };
-    return getHeader() + removeBlankLines(getFields() + getRecursive());
+    return (
+      getHeader() +
+      removeBlankLines(getSchema(results.schemaName!, results.fields) + getRecursive())
+    );
   },
 };
 

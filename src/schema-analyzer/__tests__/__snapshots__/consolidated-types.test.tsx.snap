@@ -1,0 +1,640 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`#consolidated-types #can resolve names for \`historicEvent\` set 1`] = `
+Object {
+  "Births|Deaths|Events": Object {
+    "alternatePrefixes": Object {
+      "abbreviated": "HE.data",
+      "initials": "HE.D",
+      "truncated": "data",
+    },
+    "exactMatches": Object {
+      "lastCommonKey": "data",
+      "nextToLastCommonKey": "historicEvent",
+    },
+    "pathSplitByLastCommonSubstring": null,
+    "prefixMatches": Array [
+      "historicEvent",
+      "data",
+    ],
+    "setOperations": Object {
+      "difference": Array [
+        "historicEvent",
+        "data",
+      ],
+      "intersection": "historicEvent.data",
+      "union": "historicEvent.data",
+      "xor": "data.historicEvent",
+    },
+    "shape": "Births|Deaths|Events",
+    "shapeBasedName": null,
+    "suffixMatches": Array [
+      "data",
+      "historicEvent",
+    ],
+    "typePaths": Array [
+      "historicEvent.data",
+    ],
+  },
+  "address|address2|city|state|zip": Object {
+    "alternatePrefixes": Object {
+      "abbreviated": "HE..",
+      "initials": "HE..",
+      "truncated": ".",
+    },
+    "exactMatches": Object {
+      "lastCommonKey": null,
+      "nextToLastCommonKey": null,
+    },
+    "pathSplitByLastCommonSubstring": Array [
+      "",
+      "historicEvent.copyright.owner",
+    ],
+    "prefixMatches": Array [
+      "historicEvent",
+    ],
+    "setOperations": Object {
+      "difference": Array [
+        "copyright",
+        "owner",
+      ],
+      "intersection": "historicEvent",
+      "union": "historicEvent.copyright.owner.data.Events.location",
+      "xor": "Events.copyright.data.location.owner",
+    },
+    "shape": "address|address2|city|state|zip",
+    "shapeBasedName": null,
+    "suffixMatches": Array [],
+    "typePaths": Array [
+      "historicEvent.copyright.owner",
+      "historicEvent.data.Events.location",
+    ],
+  },
+  "html|links|no_year_html|text|year": Object {
+    "alternatePrefixes": Object {
+      "abbreviated": "HE.data.",
+      "initials": "HE.D.",
+      "truncated": "data.",
+    },
+    "exactMatches": Object {
+      "lastCommonKey": null,
+      "nextToLastCommonKey": "data",
+    },
+    "pathSplitByLastCommonSubstring": Array [
+      "historicEvent",
+      "data.Events",
+    ],
+    "prefixMatches": Array [
+      "historicEvent",
+      "data",
+    ],
+    "setOperations": Object {
+      "difference": Array [
+        "Events",
+      ],
+      "intersection": "historicEvent.data",
+      "union": "historicEvent.data.Events.Births.Deaths",
+      "xor": "Births.Deaths.Events",
+    },
+    "shape": "html|links|no_year_html|text|year",
+    "shapeBasedName": null,
+    "suffixMatches": Array [],
+    "typePaths": Array [
+      "historicEvent.data.Events",
+      "historicEvent.data.Births",
+      "historicEvent.data.Deaths",
+    ],
+  },
+  "id|name|value": Object {
+    "alternatePrefixes": Object {
+      "abbreviated": "HE.",
+      "initials": "HE.",
+      "truncated": "",
+    },
+    "exactMatches": Object {
+      "lastCommonKey": null,
+      "nextToLastCommonKey": null,
+    },
+    "pathSplitByLastCommonSubstring": Array [
+      "",
+      "historicEvent.adminFields",
+    ],
+    "prefixMatches": Array [
+      "historicEvent",
+    ],
+    "setOperations": Object {
+      "difference": Array [
+        "adminFields",
+      ],
+      "intersection": "historicEvent",
+      "union": "historicEvent.adminFields.metadata.data.Events",
+      "xor": "Events.adminFields.data",
+    },
+    "shape": "id|name|value",
+    "shapeBasedName": null,
+    "suffixMatches": Array [],
+    "typePaths": Array [
+      "historicEvent.adminFields",
+      "historicEvent.metadata",
+      "historicEvent.data.Events.metadata",
+    ],
+  },
+  "id|title|description": Object {
+    "alternatePrefixes": Object {
+      "abbreviated": "HE.data..articles",
+      "initials": "HE.D..A",
+      "truncated": "data..articles",
+    },
+    "exactMatches": Object {
+      "lastCommonKey": "articles",
+      "nextToLastCommonKey": null,
+    },
+    "pathSplitByLastCommonSubstring": Array [
+      "historicEvent",
+      "data.Events.articles",
+    ],
+    "prefixMatches": Array [
+      "historicEvent",
+      "data",
+    ],
+    "setOperations": Object {
+      "difference": Array [
+        "Events",
+      ],
+      "intersection": "historicEvent.data.articles",
+      "union": "historicEvent.data.Events.articles.Births.Deaths",
+      "xor": "Births.Deaths.Events",
+    },
+    "shape": "id|title|description",
+    "shapeBasedName": null,
+    "suffixMatches": Array [
+      "articles",
+    ],
+    "typePaths": Array [
+      "historicEvent.data.Events.articles",
+      "historicEvent.data.Births.articles",
+      "historicEvent.data.Deaths.articles",
+    ],
+  },
+  "link|title": Object {
+    "alternatePrefixes": Object {
+      "abbreviated": "HE.data..links",
+      "initials": "HE.D..L",
+      "truncated": "data..links",
+    },
+    "exactMatches": Object {
+      "lastCommonKey": "links",
+      "nextToLastCommonKey": null,
+    },
+    "pathSplitByLastCommonSubstring": Array [
+      "historicEvent",
+      "data.Events.links",
+    ],
+    "prefixMatches": Array [
+      "historicEvent",
+      "data",
+    ],
+    "setOperations": Object {
+      "difference": Array [
+        "Events",
+      ],
+      "intersection": "historicEvent.data.links",
+      "union": "historicEvent.data.Events.links.Births.Deaths",
+      "xor": "Births.Deaths.Events",
+    },
+    "shape": "link|title",
+    "shapeBasedName": "link.title",
+    "suffixMatches": Array [
+      "links",
+    ],
+    "typePaths": Array [
+      "historicEvent.data.Events.links",
+      "historicEvent.data.Births.links",
+      "historicEvent.data.Deaths.links",
+    ],
+  },
+}
+`;
+
+exports[`#consolidated-types #can resolve names for \`historicEvent\` set 2`] = `
+Object {
+  "Births|Deaths|Events": "historicEvent.data",
+  "address|address2|city|state|zip": false,
+  "html|links|no_year_html|text|year": "Births.Deaths.Events",
+  "id|name|value": "name.value",
+  "id|title|description": "articles",
+  "link|title": "links",
+}
+`;
+
+exports[`#consolidated-types #can resolve names for \`pokemon\` set 1`] = `
+Object {
+  "ability:Pokemon.abilities.ability|is_hidden:Boolean|slot:Number": Object {
+    "alternatePrefixes": Object {
+      "abbreviated": "P.abilities",
+      "initials": "P.A",
+      "truncated": "abilities",
+    },
+    "exactMatches": Object {
+      "lastCommonKey": "abilities",
+      "nextToLastCommonKey": "Pokemon",
+    },
+    "pathSplitByLastCommonSubstring": null,
+    "prefixMatches": Array [
+      "Pokemon",
+      "abilities",
+    ],
+    "setOperations": Object {
+      "difference": Array [
+        "Pokemon",
+        "abilities",
+      ],
+      "intersection": "Pokemon.abilities",
+      "union": "Pokemon.abilities",
+      "xor": "Pokemon.abilities",
+    },
+    "shape": "ability:Pokemon.abilities.ability|is_hidden:Boolean|slot:Number",
+    "shapeBasedName": null,
+    "suffixMatches": Array [
+      "abilities",
+      "Pokemon",
+    ],
+    "typePaths": Array [
+      "Pokemon.abilities",
+    ],
+  },
+  "back_default:String|back_female:Null|back_shiny:String|back_shiny_female:Null|front_default:String|front_female:Null|front_shiny:String|front_shiny_female:Null|other:Pokemon.sprites.other|versions:Pokemon.sprites.versions": Object {
+    "alternatePrefixes": Object {
+      "abbreviated": "P.sprites",
+      "initials": "P.S",
+      "truncated": "sprites",
+    },
+    "exactMatches": Object {
+      "lastCommonKey": "sprites",
+      "nextToLastCommonKey": "Pokemon",
+    },
+    "pathSplitByLastCommonSubstring": null,
+    "prefixMatches": Array [
+      "Pokemon",
+      "sprites",
+    ],
+    "setOperations": Object {
+      "difference": Array [
+        "Pokemon",
+        "sprites",
+      ],
+      "intersection": "Pokemon.sprites",
+      "union": "Pokemon.sprites",
+      "xor": "Pokemon.sprites",
+    },
+    "shape": "back_default:String|back_female:Null|back_shiny:String|back_shiny_female:Null|front_default:String|front_female:Null|front_shiny:String|front_shiny_female:Null|other:Pokemon.sprites.other|versions:Pokemon.sprites.versions",
+    "shapeBasedName": null,
+    "suffixMatches": Array [
+      "sprites",
+      "Pokemon",
+    ],
+    "typePaths": Array [
+      "Pokemon.sprites",
+    ],
+  },
+  "base_stat:Number|effort:Number|stat:Pokemon.stats.stat": Object {
+    "alternatePrefixes": Object {
+      "abbreviated": "P.stats",
+      "initials": "P.S",
+      "truncated": "stats",
+    },
+    "exactMatches": Object {
+      "lastCommonKey": "stats",
+      "nextToLastCommonKey": "Pokemon",
+    },
+    "pathSplitByLastCommonSubstring": null,
+    "prefixMatches": Array [
+      "Pokemon",
+      "stats",
+    ],
+    "setOperations": Object {
+      "difference": Array [
+        "Pokemon",
+        "stats",
+      ],
+      "intersection": "Pokemon.stats",
+      "union": "Pokemon.stats",
+      "xor": "Pokemon.stats",
+    },
+    "shape": "base_stat:Number|effort:Number|stat:Pokemon.stats.stat",
+    "shapeBasedName": null,
+    "suffixMatches": Array [
+      "stats",
+      "Pokemon",
+    ],
+    "typePaths": Array [
+      "Pokemon.stats",
+    ],
+  },
+  "dream_world:Pokemon.sprites.other.dream_world|official-artwork:Pokemon.sprites.other.official-artwork": Object {
+    "alternatePrefixes": Object {
+      "abbreviated": "P.sprites.other",
+      "initials": "P.S.O",
+      "truncated": "sprites.other",
+    },
+    "exactMatches": Object {
+      "lastCommonKey": "other",
+      "nextToLastCommonKey": "sprites",
+    },
+    "pathSplitByLastCommonSubstring": null,
+    "prefixMatches": Array [
+      "Pokemon",
+      "sprites",
+      "other",
+    ],
+    "setOperations": Object {
+      "difference": Array [
+        "Pokemon",
+        "sprites",
+        "other",
+      ],
+      "intersection": "Pokemon.sprites.other",
+      "union": "Pokemon.sprites.other",
+      "xor": "Pokemon.other.sprites",
+    },
+    "shape": "dream_world:Pokemon.sprites.other.dream_world|official-artwork:Pokemon.sprites.other.official-artwork",
+    "shapeBasedName": "dream_world:Pokemon.sprites.other.dream_world.official-artwork:Pokemon.sprites.other.official-artwork",
+    "suffixMatches": Array [
+      "other",
+      "sprites",
+      "Pokemon",
+    ],
+    "typePaths": Array [
+      "Pokemon.sprites.other",
+    ],
+  },
+  "front_default:String|front_female:Null": Object {
+    "alternatePrefixes": Object {
+      "abbreviated": "P.sprites..",
+      "initials": "P.S..",
+      "truncated": "sprites..",
+    },
+    "exactMatches": Object {
+      "lastCommonKey": null,
+      "nextToLastCommonKey": null,
+    },
+    "pathSplitByLastCommonSubstring": Array [
+      "Pokemon",
+      "sprites.other.dream_world",
+    ],
+    "prefixMatches": Array [
+      "Pokemon",
+      "sprites",
+    ],
+    "setOperations": Object {
+      "difference": Array [
+        "other",
+        "dream_world",
+      ],
+      "intersection": "Pokemon.sprites",
+      "union": "Pokemon.sprites.other.dream_world.versions.generation-vii.icons.generation-viii",
+      "xor": "dream_world.generation-vii.generation-viii.other",
+    },
+    "shape": "front_default:String|front_female:Null",
+    "shapeBasedName": "front_default:String.front_female:Null",
+    "suffixMatches": Array [],
+    "typePaths": Array [
+      "Pokemon.sprites.other.dream_world",
+      "Pokemon.sprites.versions.generation-vii.icons",
+      "Pokemon.sprites.versions.generation-viii.icons",
+    ],
+  },
+  "game_index:Number|version:Pokemon.game_indices.version": Object {
+    "alternatePrefixes": Object {
+      "abbreviated": "P.game_indices",
+      "initials": "P.GI",
+      "truncated": "game_indices",
+    },
+    "exactMatches": Object {
+      "lastCommonKey": "game_indices",
+      "nextToLastCommonKey": "Pokemon",
+    },
+    "pathSplitByLastCommonSubstring": null,
+    "prefixMatches": Array [
+      "Pokemon",
+      "game_indices",
+    ],
+    "setOperations": Object {
+      "difference": Array [
+        "Pokemon",
+        "game_indices",
+      ],
+      "intersection": "Pokemon.game_indices",
+      "union": "Pokemon.game_indices",
+      "xor": "Pokemon.game_indices",
+    },
+    "shape": "game_index:Number|version:Pokemon.game_indices.version",
+    "shapeBasedName": "game_index:Number.version:Pokemon.game_indices.version",
+    "suffixMatches": Array [
+      "game_indices",
+      "Pokemon",
+    ],
+    "typePaths": Array [
+      "Pokemon.game_indices",
+    ],
+  },
+  "generation-i:Pokemon.sprites.versions.generation-i|generation-ii:Pokemon.sprites.versions.generation-ii|generation-iii:Pokemon.sprites.versions.generation-iii|generation-iv:Pokemon.sprites.versions.generation-iv|generation-v:Pokemon.sprites.versions.generation-v|generation-vi:Pokemon.sprites.versions.generation-vi|generation-vii:Pokemon.sprites.versions.generation-vii|generation-viii:Pokemon.sprites.versions.generation-viii": Object {
+    "alternatePrefixes": Object {
+      "abbreviated": "P.sprites.versions",
+      "initials": "P.S.V",
+      "truncated": "sprites.versions",
+    },
+    "exactMatches": Object {
+      "lastCommonKey": "versions",
+      "nextToLastCommonKey": "sprites",
+    },
+    "pathSplitByLastCommonSubstring": null,
+    "prefixMatches": Array [
+      "Pokemon",
+      "sprites",
+      "versions",
+    ],
+    "setOperations": Object {
+      "difference": Array [
+        "Pokemon",
+        "sprites",
+        "versions",
+      ],
+      "intersection": "Pokemon.sprites.versions",
+      "union": "Pokemon.sprites.versions",
+      "xor": "Pokemon.sprites.versions",
+    },
+    "shape": "generation-i:Pokemon.sprites.versions.generation-i|generation-ii:Pokemon.sprites.versions.generation-ii|generation-iii:Pokemon.sprites.versions.generation-iii|generation-iv:Pokemon.sprites.versions.generation-iv|generation-v:Pokemon.sprites.versions.generation-v|generation-vi:Pokemon.sprites.versions.generation-vi|generation-vii:Pokemon.sprites.versions.generation-vii|generation-viii:Pokemon.sprites.versions.generation-viii",
+    "shapeBasedName": null,
+    "suffixMatches": Array [
+      "versions",
+      "sprites",
+      "Pokemon",
+    ],
+    "typePaths": Array [
+      "Pokemon.sprites.versions",
+    ],
+  },
+  "level_learned_at:Number|move_learn_method:Pokemon.moves.version_group_details.move_learn_method|version_group:Pokemon.moves.version_group_details.version_group": Object {
+    "alternatePrefixes": Object {
+      "abbreviated": "P.moves.version_group_details",
+      "initials": "P.M.VGD",
+      "truncated": "moves.version_group_details",
+    },
+    "exactMatches": Object {
+      "lastCommonKey": "version_group_details",
+      "nextToLastCommonKey": "moves",
+    },
+    "pathSplitByLastCommonSubstring": null,
+    "prefixMatches": Array [
+      "Pokemon",
+      "moves",
+      "version_group_details",
+    ],
+    "setOperations": Object {
+      "difference": Array [
+        "Pokemon",
+        "moves",
+        "version_group_details",
+      ],
+      "intersection": "Pokemon.moves.version_group_details",
+      "union": "Pokemon.moves.version_group_details",
+      "xor": "Pokemon.moves.version_group_details",
+    },
+    "shape": "level_learned_at:Number|move_learn_method:Pokemon.moves.version_group_details.move_learn_method|version_group:Pokemon.moves.version_group_details.version_group",
+    "shapeBasedName": null,
+    "suffixMatches": Array [
+      "version_group_details",
+      "moves",
+      "Pokemon",
+    ],
+    "typePaths": Array [
+      "Pokemon.moves.version_group_details",
+    ],
+  },
+  "move:Pokemon.moves.move|version_group_details:Pokemon.moves.version_group_details": Object {
+    "alternatePrefixes": Object {
+      "abbreviated": "P.moves",
+      "initials": "P.M",
+      "truncated": "moves",
+    },
+    "exactMatches": Object {
+      "lastCommonKey": "moves",
+      "nextToLastCommonKey": "Pokemon",
+    },
+    "pathSplitByLastCommonSubstring": null,
+    "prefixMatches": Array [
+      "Pokemon",
+      "moves",
+    ],
+    "setOperations": Object {
+      "difference": Array [
+        "Pokemon",
+        "moves",
+      ],
+      "intersection": "Pokemon.moves",
+      "union": "Pokemon.moves",
+      "xor": "Pokemon.moves",
+    },
+    "shape": "move:Pokemon.moves.move|version_group_details:Pokemon.moves.version_group_details",
+    "shapeBasedName": "move:Pokemon.moves.move.version_group_details:Pokemon.moves.version_group_details",
+    "suffixMatches": Array [
+      "moves",
+      "Pokemon",
+    ],
+    "typePaths": Array [
+      "Pokemon.moves",
+    ],
+  },
+  "name:String|url:String": Object {
+    "alternatePrefixes": Object {
+      "abbreviated": "P.",
+      "initials": "P.",
+      "truncated": "",
+    },
+    "exactMatches": Object {
+      "lastCommonKey": null,
+      "nextToLastCommonKey": null,
+    },
+    "pathSplitByLastCommonSubstring": Array [
+      "",
+      "Pokemon.forms",
+    ],
+    "prefixMatches": Array [
+      "Pokemon",
+    ],
+    "setOperations": Object {
+      "difference": Array [
+        "forms",
+      ],
+      "intersection": "Pokemon",
+      "union": "Pokemon.forms.species.abilities.ability.game_indices.version.moves.move.version_group_details.move_learn_method.version_group.stats.stat.types.type",
+      "xor": "abilities.ability.forms.game_indices.move.move_learn_method.species.stat.stats.type.types.version.version_group",
+    },
+    "shape": "name:String|url:String",
+    "shapeBasedName": "name:String.url:String",
+    "suffixMatches": Array [],
+    "typePaths": Array [
+      "Pokemon.forms",
+      "Pokemon.species",
+      "Pokemon.abilities.ability",
+      "Pokemon.game_indices.version",
+      "Pokemon.moves.move",
+      "Pokemon.moves.version_group_details.move_learn_method",
+      "Pokemon.moves.version_group_details.version_group",
+      "Pokemon.stats.stat",
+      "Pokemon.types.type",
+    ],
+  },
+  "slot:Number|type:Pokemon.types.type": Object {
+    "alternatePrefixes": Object {
+      "abbreviated": "P.types",
+      "initials": "P.T",
+      "truncated": "types",
+    },
+    "exactMatches": Object {
+      "lastCommonKey": "types",
+      "nextToLastCommonKey": "Pokemon",
+    },
+    "pathSplitByLastCommonSubstring": null,
+    "prefixMatches": Array [
+      "Pokemon",
+      "types",
+    ],
+    "setOperations": Object {
+      "difference": Array [
+        "Pokemon",
+        "types",
+      ],
+      "intersection": "Pokemon.types",
+      "union": "Pokemon.types",
+      "xor": "Pokemon.types",
+    },
+    "shape": "slot:Number|type:Pokemon.types.type",
+    "shapeBasedName": "slot:Number.type:Pokemon.types.type",
+    "suffixMatches": Array [
+      "types",
+      "Pokemon",
+    ],
+    "typePaths": Array [
+      "Pokemon.types",
+    ],
+  },
+}
+`;
+
+exports[`#consolidated-types #can resolve names for \`pokemon\` set 2`] = `
+Object {
+  "ability:Pokemon.abilities.ability|is_hidden:Boolean|slot:Number": "Pokemon.abilities",
+  "back_default:String|back_female:Null|back_shiny:String|back_shiny_female:Null|front_default:String|front_female:Null|front_shiny:String|front_shiny_female:Null|other:Pokemon.sprites.other|versions:Pokemon.sprites.versions": "Pokemon.sprites",
+  "base_stat:Number|effort:Number|stat:Pokemon.stats.stat": "Pokemon.stats",
+  "dream_world:Pokemon.sprites.other.dream_world|official-artwork:Pokemon.sprites.other.official-artwork": "Pokemon.sprites.other",
+  "front_default:String|front_female:Null": "front_default.front_female",
+  "game_index:Number|version:Pokemon.game_indices.version": "Pokemon.game_indices",
+  "generation-i:Pokemon.sprites.versions.generation-i|generation-ii:Pokemon.sprites.versions.generation-ii|generation-iii:Pokemon.sprites.versions.generation-iii|generation-iv:Pokemon.sprites.versions.generation-iv|generation-v:Pokemon.sprites.versions.generation-v|generation-vi:Pokemon.sprites.versions.generation-vi|generation-vii:Pokemon.sprites.versions.generation-vii|generation-viii:Pokemon.sprites.versions.generation-viii": "Pokemon.sprites.versions",
+  "level_learned_at:Number|move_learn_method:Pokemon.moves.version_group_details.move_learn_method|version_group:Pokemon.moves.version_group_details.version_group": "Pokemon.moves.version_group_details",
+  "move:Pokemon.moves.move|version_group_details:Pokemon.moves.version_group_details": "Pokemon.moves",
+  "name:String|url:String": "name.url",
+  "slot:Number|type:Pokemon.types.type": "Pokemon.types",
+}
+`;
