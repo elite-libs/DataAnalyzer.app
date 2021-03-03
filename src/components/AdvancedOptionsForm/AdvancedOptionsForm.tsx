@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 // import { useHistory } from 'react-router';
 import { useForm } from 'react-hook-form';
 import { makeStyles } from '@material-ui/core/styles';
@@ -7,16 +7,19 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
-import SettingsIcon from '@material-ui/icons/Settings';
+import Link from '@material-ui/core/Link';
+import { Link as RouteLink } from 'react-router-dom';
+
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 // import SaveIcon from '@material-ui/icons/Save';
 // import CloseIcon from '@material-ui/icons/Close';
 import WarningIcon from '@material-ui/icons/Warning';
 import { Select, Slider } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
-import { OptionsState, setOptions, _initialOptions } from 'store/optionsSlice';
+import { OptionsState, setOptions } from 'store/optionsSlice';
 import { setResults, setSchema } from 'store/analysisSlice';
 import { RootState } from 'store/rootReducer';
-import { pick } from 'lodash';
+// import { pick } from 'lodash';
 
 import './AdvancedOptionsForm.scss';
 import { convertFractionToPercent, formatPercent } from 'helpers';
@@ -79,6 +82,7 @@ export default function AdvancedOptionsForm({ className = '' }) {
   const methods = useForm<OptionsState>({ defaultValues: options, mode: 'onChange' });
   const { register, watch, setValue, getValues } = methods;
 
+  const [successClass, setSuccessClass] = React.useState<string>('');
   // const currentValues = getValues();
 
   // React.useEffect(() => {
@@ -92,7 +96,12 @@ export default function AdvancedOptionsForm({ className = '' }) {
   //   return () => formRef$?.current?.removeEventListener('input', handleChange);
   // }, [formRef$, formRef$.current]);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const getInitialOptions = React.useMemo(() => options, []);
+  // const getInitialOptions = React.useMemo(() => options, []);
+
+  useEffect(() => {
+    if (successClass.length > 1) setTimeout(() => setSuccessClass(''), 1250); // remove the animate class
+  }, [successClass]);
+
   const onSubmit = useCallback(
     (data: OptionsState) => {
       const updatedOptions = {
@@ -104,6 +113,7 @@ export default function AdvancedOptionsForm({ className = '' }) {
       localStorage.setItem('analyzer.options', JSON.stringify(updatedOptions));
 
       dispatch(setOptions(updatedOptions));
+      setSuccessClass('pulse-success-bg'); // this will get auto-cleared by a useEffect above.
       // TODO: Auto re-generate code
       resetResults();
       // goToHome();
@@ -122,16 +132,16 @@ export default function AdvancedOptionsForm({ className = '' }) {
     const optionsJson = localStorage.getItem('analyzer.options');
     if (optionsJson && optionsJson.length > 1) {
       let opts = JSON.parse(optionsJson);
-      opts = pick(opts, Object.keys(_initialOptions));
+      // opts = pick(opts, Object.keys(_initialOptions));
       console.log('restoring saved settings:', optionsJson, opts);
       dispatch(setOptions(opts));
     }
   }, [dispatch]);
 
+  const { debug, nullableRowsThreshold, uniqueRowsThreshold, consolidateTypes } = watch();
+
   /*formatPercent(
   100.0 * parseFloat( */
-  const nullableRowsThreshold = watch('nullableRowsThreshold');
-  const uniqueRowsThreshold = watch('uniqueRowsThreshold');
   const displayNullableRowsThreshold = `${nullableRowsThreshold}`;
   // const displayUniqueRowsThreshold = `${uniqueRowsThreshold}`;
 
@@ -149,6 +159,7 @@ export default function AdvancedOptionsForm({ className = '' }) {
   ]);
   const autoSaveHandlers = { onInput, onChange };
 
+  // https://react-hook-form.com/faqs/#CanitworkwithControlledcomponents
   React.useEffect(() => {
     register('debug', {});
     register('strictMatching', {});
@@ -160,15 +171,19 @@ export default function AdvancedOptionsForm({ className = '' }) {
   return (
     <>
       <Card
-        // raised={false}
-        raised={true}
+        raised={false}
+        // raised={true}
         className={classes.root}
       >
         <CardHeader
-          avatar={<SettingsIcon color="primary" fontSize="large" />}
+          avatar={
+            <Link component={RouteLink} to={'/'} className="back-button">
+              <ArrowBackIcon color="primary" fontSize="large" />
+            </Link>
+          }
           title={<h2 className={classes.title}>Settings</h2>}
         ></CardHeader>
-        <section style={{ zIndex: 500 }} className={classes.panel}>
+        <section style={{ zIndex: 500 }} className={classes.panel + ' ' + successClass}>
           <form
             className={'schema-options ' + className + ' ' + classes.form}
             // onSubmit={handleSubmit(onSubmit)}
@@ -220,6 +235,7 @@ export default function AdvancedOptionsForm({ className = '' }) {
                       inputProps={{
                         id: 'consolidateTypes',
                       }}
+                      value={consolidateTypes}
                     >
                       <option aria-label="None" value={undefined}>
                         Not Enabled
@@ -298,7 +314,6 @@ export default function AdvancedOptionsForm({ className = '' }) {
                       max={1.0}
                       step={0.005}
                       valueLabelDisplay="on"
-                      // style={{ flex: '0 0 50%' }}
                       onChange={(e, data) => {
                         setValue('uniqueRowsThreshold', data);
                         onSubmit(getValues());
@@ -318,7 +333,7 @@ export default function AdvancedOptionsForm({ className = '' }) {
                         setValue('debug', checked);
                         onSubmit(getValues());
                       }}
-                      checked={options.debug}
+                      checked={Boolean(debug)}
                     />
                   </section>
                 </fieldset>

@@ -37,12 +37,12 @@ export default React.forwardRef<any, Props>((props, ref) => {
 
   return (
     <Paper
-      elevation={disabled ? 0 : 4}
-      className={`${className || ''} panel-component`}
+      elevation={disabled ? 1 : 4}
+      className={`${className || ''} panel-component ${disabled ? 'panel-disabled' : ''}`}
       ref={ref}
       aria-disabled={Boolean(disabled)}
     >
-      <Card>
+      <Card elevation={0}>
         <CardContent>
           <div className="panel-header">
             <Typography gutterBottom variant="h5" component="h2">

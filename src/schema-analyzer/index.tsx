@@ -279,6 +279,8 @@ function schemaAnalyzer(
   },
   // _nestedData?: { [key: string]: unknown },
 ): Promise<TypeSummary<FieldInfo>> {
+  if (!schemaName || schemaName.length < 1)
+    return Promise.reject(Error('A SchemaName must be provided.'));
   return _schemaAnalyzer(schemaName, input, options).then(
     (nestedSchemaTypes) => {
       const schemaWithUnpackedData = extractNestedTypes(nestedSchemaTypes);

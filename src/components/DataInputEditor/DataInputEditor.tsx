@@ -231,15 +231,15 @@ export function DataInputEditor(props: IAceEditorProps) {
     {
       className: 'btn-height-hack',
       label: 'Reset',
-      size: 'large',
+      size: 'small',
       color: 'secondary',
       tooltip: <b>Clear all data &amp; keep options!</b>,
       startIcon: <SyncOutlinedIcon />,
       onClick: resetAllAppState,
     },
     {
-      label: 'Try Demo Data',
-      size: 'large',
+      label: 'Import Demo Data',
+      size: 'small',
       tooltip: (
         <>
           <b>Test out random data from real APIs</b>
@@ -351,7 +351,7 @@ export function DataInputEditor(props: IAceEditorProps) {
         enableLiveAutocompletion={false}
         enableSnippets={false}
         editorProps={{
-          $blockScrolling: 1,
+          $blockScrolling: true,
         }}
         setOptions={{
           minLines: 4,

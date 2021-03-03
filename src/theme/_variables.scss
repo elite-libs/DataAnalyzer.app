@@ -59,6 +59,18 @@ $variables: (
   --text-color-primary: $text-color-primary,
   --text-color-secondary: $text-color-secondary,
   --text-color-disabled: $text-color-disabled,
+  ///// RGB triplets for dynamic rgba use //////
+  --color-primary-rgb: #{hex-to-rgb-tuple($color-primary)},
+  --color-secondary-rgb: #{hex-to-rgb-tuple($color-secondary)},
+  --color-success-rgb: #{hex-to-rgb-tuple($color-success)},
+  --color-info-rgb: #{hex-to-rgb-tuple($color-info)},
+  --color-error-rgb: #{hex-to-rgb-tuple($color-error)},
+  --color-warning-rgb: #{hex-to-rgb-tuple($color-warning)},
+  --color-background-rgb: #{hex-to-rgb-tuple($color-background)},
+  --color-background-light-rgb: #{hex-to-rgb-tuple($color-background-light)},
+  --text-color-primary-rgb: #{hex-to-rgb-tuple($text-color-primary)},
+  --text-color-secondary-rgb: #{hex-to-rgb-tuple($text-color-secondary)},
+  --text-color-disabled-rgb: #{hex-to-rgb-tuple($text-color-disabled)},
   // breakpoints
   --breakpoint-xs: $breakpoint-xs,
   --breakpoint-sm: $breakpoint-sm,
@@ -66,3 +78,10 @@ $variables: (
   --breakpoint-lg: $breakpoint-lg,
   --breakpoint-xl: $breakpoint-xl
 );
+
+// Convert a hex value to comma-delimited rgb values
+// In: #000
+// Out: 0,0,0
+@function hex-to-rgb-tuple($hex) {
+  @return red($hex), green($hex), blue($hex);
+}

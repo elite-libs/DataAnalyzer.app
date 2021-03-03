@@ -13,7 +13,7 @@ let initialState: State = {
   statusMessage: 'Ready for your data',
   statusIsError: false,
   parsedInput: undefined,
-  inputData: '',
+  inputData: '\n\n\n\n\n\n\n\n\n\n',
   parserError: undefined,
 };
 

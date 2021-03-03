@@ -33,7 +33,7 @@ let initialState: Readonly<OptionsState> = {
 export { initialState as _initialOptions };
 const slice = createSlice({
   name: 'options',
-  initialState,
+  initialState: getSavedOptions() || initialState,
   reducers: {
     setOptions(state, action: PayloadAction<Partial<OptionsState>>) {
       const { payload } = action;
@@ -51,3 +51,17 @@ const appStateActions = slice.reducer;
 export const { setOptions, resetOptions } = slice.actions;
 
 export default appStateActions;
+
+export function getSavedOptions() {
+  try {
+    const optionsJson = localStorage.getItem('analyzer.options');
+    if (optionsJson && optionsJson.length > 1) {
+      let opts = JSON.parse(optionsJson);
+      console.log('restoring saved settings:', optionsJson, opts);
+      return opts;
+    }
+  } catch (error) {
+    // ignore localStorage fails
+  }
+  return null;
+}

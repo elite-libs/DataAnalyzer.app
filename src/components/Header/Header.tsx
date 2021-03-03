@@ -55,16 +55,20 @@ export default function Header() {
       <h1 className="col-12 col-sm-6" title="Reset/Load Home Screen">
         <Link className="brand-link" component={RouteLink} to="/" onClick={resetResults}>
           <AppIcon />
-          DataAnalyzer.app
+          <div>
+            Data
+            <br />
+            Analyzer.app
+          </div>
         </Link>
       </h1>
       <aside className="icon-button-box col-12 col-sm-6 text-right">
         {/* <DemoDataMenu /> */}
 
-        <Link className={''} component={RouteLink} to="/about" title="View README">
+        <Link component={RouteLink} to="/about" title="View README">
           <InfoOutlinedIcon fontSize="small" color="action" />
         </Link>
-        <Link className={''} target="_blank" href={pkg.repository.url}>
+        <Link target="_blank" href={pkg.repository.url}>
           <GitHubIcon fontSize="small" color="action" />
         </Link>
         <Link
