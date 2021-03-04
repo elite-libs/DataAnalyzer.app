@@ -3,7 +3,7 @@ import mongooseWriter from './writer.mongoose';
 import knexWriter from './writer.knex';
 import golangWriter from './writer.golang';
 import sqlWriter from './writer.sql';
-
+import pkg from '../../package.json';
 import type {
   ISchemaAnalyzerOptions,
   // TypeSummary,
@@ -40,8 +40,8 @@ export function render(adapter: AdapterNames, results: DataAnalysisResults) {
 
   const header = `/*
 @generator: DataAnalyzer.app / @justsml
-@date ${new Date().toISOString()}
-@debug ${Boolean(options.debug)}
+@version ${pkg.version}
+@debug ${Boolean(options.debug) ? 'on' : 'off'}
 */\n${getSummary(results, options)}\n`;
 
   return header + renderer.render(results);
@@ -88,13 +88,13 @@ ${Object.entries(omit(options, 'outputAdapter', 'outputLanguage', '_timestamp'))
   return `\n/*
 ${debug ? '#### DEBUG INFO ####\n' : ''}@schemaName: ${typeSummary.schemaName}
 @totalRows: ${typeSummary.totalRows}
-${debug ? getOptions() : ''}${
-    consolidatedTypes
-      ? `@condensedTypes: De-duplicated ${
-          nestedCount - consolidatedCount
-        } of ${nestedCount} subtypes\n`
-      : ''
-  }${getSubTypes(consolidatedTypeNames || nestedTypeNames)}
+${debug ? getOptions() : ''}${`@condensedTypes: ${
+    options.consolidateTypes && options.consolidateTypes.length > 0
+      ? `De-duplicated ${nestedCount - consolidatedCount} of ${nestedCount} subtypes (${
+          options.consolidateTypes
+        })`
+      : 'off'
+  }\n`}${getSubTypes(consolidatedTypeNames || nestedTypeNames)}
 */\n`;
 }
 

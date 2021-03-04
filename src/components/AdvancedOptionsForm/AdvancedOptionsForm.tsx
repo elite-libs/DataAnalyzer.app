@@ -237,7 +237,7 @@ export default function AdvancedOptionsForm({ className = '' }) {
                       }}
                       value={consolidateTypes}
                     >
-                      <option aria-label="None" value={undefined}>
+                      <option aria-label="None" value={''}>
                         Not Enabled
                       </option>
                       <option value={'field-names'}>Field Names</option>
