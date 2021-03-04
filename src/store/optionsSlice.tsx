@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AdapterNames } from 'adapters/writers';
-import { IConsolidateTypesOptions } from 'schema-analyzer';
-import type { SupportedTargetLanguages } from 'types';
+import type { IConsolidateTypesOptions, SupportedTargetLanguages } from 'types';
 
 export interface OptionsState {
   outputLanguage: SupportedTargetLanguages;
@@ -26,7 +25,7 @@ let initialState: Readonly<OptionsState> = {
   enumPercentThreshold: 0.01,
   nullableRowsThreshold: 0.001,
   uniqueRowsThreshold: 1.0,
-  consolidateTypes: undefined,
+  consolidateTypes: 'field-names',
   // _timestamp: Date.now(),
 };
 

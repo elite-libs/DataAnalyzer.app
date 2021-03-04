@@ -1,10 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable import/first */
-import {
-  schemaAnalyzer,
-  helpers,
-  // FieldTypeSummary,
-  // TypeSummary,
-} from '../schema-analyzer/index';
+import { schemaAnalyzer } from '../schema-analyzer/index';
 
 import knex from './writer.knex';
 import typescript from './writer.typescript';
@@ -56,81 +52,69 @@ function parseCsv(content: any): Promise<any[]> {
 
 describe('#knex', () => {
   it('can emit migration', async () => {
-    const options = { strictMatching: false };
-    const results = await schemaAnalyzer('users', users, options);
-    const flatResult = helpers.flattenTypes(results, {
-      targetLength: 'p99',
-      targetPrecision: 'p99',
-      targetScale: 'p99',
-      targetValue: 'p99',
-      nullableRowsThreshold: 0.001,
+    const results = await schemaAnalyzer('users', users, {
+      strictMatching: false,
+      flattenOptions: {
+        targetLength: 'p99',
+        targetPrecision: 'p99',
+        targetScale: 'p99',
+        targetValue: 'p99',
+        nullableRowsThreshold: 0.001,
+      },
     });
-    const code = knex.render({
-      schemaName: 'test',
-      results: flatResult,
-      options,
-    });
+    const code = knex.render(results);
 
     expect(code).toMatchSnapshot();
   });
 
   it('can emit migration for people json', async () => {
-    const options = { strictMatching: false };
-    const results = await schemaAnalyzer('people', people, options);
-    const flatResult = helpers.flattenTypes(results, {
-      targetLength: 'p99',
-      targetPrecision: 'p99',
-      targetScale: 'p99',
-      targetValue: 'p99',
-      nullableRowsThreshold: 0.001,
+    const results = await schemaAnalyzer('people', people, {
+      debug: true,
+      strictMatching: false,
+      flattenOptions: {
+        targetLength: 'p99',
+        targetPrecision: 'p99',
+        targetScale: 'p99',
+        targetValue: 'p99',
+        nullableRowsThreshold: 0.001,
+      },
     });
-    const code = knex.render({
-      schemaName: 'people',
-      results: flatResult,
-      options,
-    });
+    const code = knex.render(results);
 
     expect(code).toMatchSnapshot();
   });
 
   it('can emit migration for nested type', async () => {
-    const options = { strictMatching: false };
-    const results = await schemaAnalyzer('users', usersSparse, options);
-    const flatResult = helpers.flattenTypes(results, {
-      targetLength: 'p99',
-      targetPrecision: 'p99',
-      targetScale: 'p99',
-      targetValue: 'p99',
-      nullableRowsThreshold: 0.001,
+    const results = await schemaAnalyzer('users', usersSparse, {
+      strictMatching: false,
+      flattenOptions: {
+        targetLength: 'p99',
+        targetPrecision: 'p99',
+        targetScale: 'p99',
+        targetValue: 'p99',
+        nullableRowsThreshold: 0.001,
+      },
     });
-    const code = knex.render({
-      schemaName: 'usersSparse',
-      results: flatResult,
-      options,
-    });
+    const code = knex.render(results);
 
     expect(code).toMatchSnapshot();
   });
 
   it.skip('can emit migration with bigInteger id', async () => {
-    const options = { strictMatching: false };
     let localData = usersSparse.map((u) => ({ ...u }));
     if (localData && localData[0]) localData[0].id = '2147483648';
     if (localData && localData[1]) localData[1].id = '2147483649';
-    const results = await schemaAnalyzer('users', localData, options);
-    const flatResult = helpers.flattenTypes(results, {
-      targetLength: 'max',
-      targetPrecision: 'max',
-      targetScale: 'max',
-      targetValue: 'max',
-      nullableRowsThreshold: 0.001,
+    const results = await schemaAnalyzer('users', localData, {
+      strictMatching: false,
+      flattenOptions: {
+        targetLength: 'max',
+        targetPrecision: 'max',
+        targetScale: 'max',
+        targetValue: 'max',
+        nullableRowsThreshold: 0.001,
+      },
     });
-
-    const code = knex.render({
-      schemaName: 'usersBigInt',
-      results: flatResult,
-      options,
-    });
+    const code = knex.render(results);
 
     expect(code).toMatchSnapshot();
   });
@@ -138,58 +122,50 @@ describe('#knex', () => {
 
 describe('#mongoose', () => {
   it('can emit schema', async () => {
-    const options = { strictMatching: false };
-    const results = await schemaAnalyzer('users', users, options);
-    const flatResult = helpers.flattenTypes(results, {
-      targetLength: 'p99',
-      targetPrecision: 'p99',
-      targetScale: 'p99',
-      targetValue: 'p99',
-      nullableRowsThreshold: 0.001,
+    const results = await schemaAnalyzer('users', users, {
+      debug: true,
+      strictMatching: false,
+      flattenOptions: {
+        targetLength: 'p99',
+        targetPrecision: 'p99',
+        targetScale: 'p99',
+        targetValue: 'p99',
+        nullableRowsThreshold: 0.001,
+      },
     });
-    const code = mongoose.render({
-      schemaName: 'users',
-      results: flatResult,
-      options,
-    });
+    const code = mongoose.render(results);
 
     expect(code).toMatchSnapshot();
   });
 
   it('can emit schema for people json', async () => {
-    const options = { strictMatching: false };
-    const results = await schemaAnalyzer('people', people, options);
-    const flatResult = helpers.flattenTypes(results, {
-      targetLength: 'p99',
-      targetPrecision: 'p99',
-      targetScale: 'p99',
-      targetValue: 'p99',
-      nullableRowsThreshold: 0.001,
+    const results = await schemaAnalyzer('people', people, {
+      strictMatching: false,
+      flattenOptions: {
+        targetLength: 'p99',
+        targetPrecision: 'p99',
+        targetScale: 'p99',
+        targetValue: 'p99',
+        nullableRowsThreshold: 0.001,
+      },
     });
-    const code = mongoose.render({
-      schemaName: 'people',
-      results: flatResult,
-      options,
-    });
+    const code = mongoose.render(results);
 
     expect(code).toMatchSnapshot();
   });
 
   it('can emit schema with nested types', async () => {
-    const options = { strictMatching: false };
-    const results = await schemaAnalyzer('users', usersSparse, options);
-    const flatResult = helpers.flattenTypes(results, {
-      targetLength: 'p99',
-      targetPrecision: 'p99',
-      targetScale: 'p99',
-      targetValue: 'p99',
-      nullableRowsThreshold: 0.001,
+    const results = await schemaAnalyzer('users', usersSparse, {
+      strictMatching: false,
+      flattenOptions: {
+        targetLength: 'p99',
+        targetPrecision: 'p99',
+        targetScale: 'p99',
+        targetValue: 'p99',
+        nullableRowsThreshold: 0.001,
+      },
     });
-    const code = mongoose.render({
-      schemaName: 'usersSparse',
-      results: flatResult,
-      options,
-    });
+    const code = mongoose.render(results);
 
     expect(code).toMatchSnapshot();
   });
@@ -197,58 +173,50 @@ describe('#mongoose', () => {
 
 describe('#typescript', () => {
   it('can emit interface(s)', async () => {
-    const options = { strictMatching: false };
-    const results = await schemaAnalyzer('users', users, options);
-    const flatResult = helpers.flattenTypes(results, {
-      targetLength: 'p99',
-      targetPrecision: 'p99',
-      targetScale: 'p99',
-      targetValue: 'p99',
-      nullableRowsThreshold: 0.001,
+    const results = await schemaAnalyzer('users', users, {
+      strictMatching: false,
+      flattenOptions: {
+        targetLength: 'p99',
+        targetPrecision: 'p99',
+        targetScale: 'p99',
+        targetValue: 'p99',
+        nullableRowsThreshold: 0.001,
+      },
     });
-    const code = typescript.render({
-      schemaName: 'users',
-      results: flatResult,
-      options,
-    });
+    const code = typescript.render(results);
 
     expect(code).toMatchSnapshot();
   });
 
   it('can emit interface for people json', async () => {
-    const options = { strictMatching: false };
-    const results = await schemaAnalyzer('people', people, options);
-    const flatResult = helpers.flattenTypes(results, {
-      targetLength: 'p99',
-      targetPrecision: 'p99',
-      targetScale: 'p99',
-      targetValue: 'p99',
-      nullableRowsThreshold: 0.001,
+    const results = await schemaAnalyzer('people', people, {
+      debug: true,
+      strictMatching: false,
+      flattenOptions: {
+        targetLength: 'p99',
+        targetPrecision: 'p99',
+        targetScale: 'p99',
+        targetValue: 'p99',
+        nullableRowsThreshold: 0.001,
+      },
     });
-    const code = typescript.render({
-      schemaName: 'people',
-      results: flatResult,
-      options,
-    });
+    const code = typescript.render(results);
 
     expect(code).toMatchSnapshot();
   });
 
   it('can emit interface for nested types', async () => {
-    const options = { strictMatching: false };
-    const results = await schemaAnalyzer('users', usersSparse, options);
-    const flatResult = helpers.flattenTypes(results, {
-      targetLength: 'p99',
-      targetPrecision: 'p99',
-      targetScale: 'p99',
-      targetValue: 'p99',
-      nullableRowsThreshold: 0.001,
+    const results = await schemaAnalyzer('users', usersSparse, {
+      strictMatching: false,
+      flattenOptions: {
+        targetLength: 'p99',
+        targetPrecision: 'p99',
+        targetScale: 'p99',
+        targetValue: 'p99',
+        nullableRowsThreshold: 0.001,
+      },
     });
-    const code = typescript.render({
-      schemaName: 'usersSparse',
-      results: flatResult,
-      options,
-    });
+    const code = typescript.render(results);
 
     expect(code).toMatchSnapshot();
   });

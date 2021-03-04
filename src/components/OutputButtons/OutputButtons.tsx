@@ -95,11 +95,7 @@ export const OutputButtons = ({ size = 'medium', className = '' }: Props) => {
   async function renderCode(outputAdapter = options.outputAdapter) {
     const schema = await getTypeSummary();
     console.log('about to generate code', outputAdapter, schema);
-    const generatedCode = render({
-      schemaName: schemaName!,
-      options,
-      writer: outputAdapter,
-    })(schema!);
+    const generatedCode = render(outputAdapter, schema!);
 
     dispatch(setResults(generatedCode));
     console.info('generated code', generatedCode);
@@ -148,7 +144,7 @@ export const OutputButtons = ({ size = 'medium', className = '' }: Props) => {
     highlightLanguage: SupportedTargetLanguages;
   }) => {
     dispatch(setOptions({ outputAdapter: adapter, outputLanguage: highlightLanguage }));
-    handleAdapterSelected(adapter);
+    setTimeout(() => handleAdapterSelected(adapter), 10);
   };
   const isPanelSuccessState = Boolean(parsedInput);
   const isResultsLoaded = Boolean(results);

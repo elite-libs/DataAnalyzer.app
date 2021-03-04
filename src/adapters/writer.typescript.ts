@@ -1,7 +1,7 @@
 import { camelCase } from 'lodash';
-import { CombinedFieldInfo } from '../schema-analyzer';
 import { properCase, removeBlankLines } from 'helpers';
-import { IDataAnalyzerWriter, IRenderArgs } from './writers';
+import { IDataAnalyzerWriter } from './writers';
+import { CombinedFieldInfo, KeyValPair } from 'types';
 const typeMap: { [k: string]: string } = {
   $ref: 'string',
   Unknown: 'string',
@@ -38,11 +38,13 @@ const getTSTypeExpression = (fieldInfo: CombinedFieldInfo, schemaName: string) =
 };
 
 const typescriptWriter: IDataAnalyzerWriter = {
-  render({ results, options, schemaName }: IRenderArgs) {
+  render(results) {
+    const { options } = results;
+    const typeSummary = results.flatTypeSummary;
     const hasNestedTypes =
-      results.nestedTypes && Object.keys(results.nestedTypes!).length > 0;
-    const { fields } = results;
-    const getFields = () => {
+      typeSummary.nestedTypes && Object.keys(typeSummary.nestedTypes!).length > 0;
+
+    const getFields = (schemaName: string, fields: KeyValPair<CombinedFieldInfo>) => {
       return (
         `export interface ${properCase(schemaName)} {\n` +
         Object.entries(fields)
@@ -60,18 +62,20 @@ const typescriptWriter: IDataAnalyzerWriter = {
       if (!options?.disableNestedTypes && hasNestedTypes) {
         // console.log('nested schema detected', schemaName);
 
-        return Object.entries(results.nestedTypes!).map(([nestedName, results]) => {
-          // console.log('nested typescript schema:', nestedName);
-          return this.render({
-            schemaName: nestedName,
-            results,
-            options: { disableNestedTypes: false },
-          });
-        });
+        return Object.entries(typeSummary.nestedTypes!).map(
+          ([nestedName, subTypeSummary]) => {
+            // console.log('nested typescript schema:', nestedName);
+            return getFields(nestedName, subTypeSummary.fields);
+          },
+        );
       }
       return [''];
     };
-    return removeBlankLines(getFields() + '\n' + getRecursive().join(''));
+    return removeBlankLines(
+      getFields(typeSummary.schemaName, typeSummary.fields) +
+        '\n' +
+        getRecursive().join(''),
+    );
   },
 };
 

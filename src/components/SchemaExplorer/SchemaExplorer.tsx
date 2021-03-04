@@ -3,7 +3,7 @@ import React from 'react';
 import Chart from 'react-apexcharts';
 import { ApexOptions } from 'apexcharts';
 import { connect } from 'react-redux';
-import { FieldInfo, TypeSummary } from 'schema-analyzer';
+import { FieldInfo, TypeSummary } from 'types';
 import { RootState } from 'store/rootReducer';
 
 const getFieldNames = (schemaResults: TypeSummary<FieldInfo>) => {

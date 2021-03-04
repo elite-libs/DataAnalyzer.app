@@ -12,21 +12,14 @@ import type {
   CombinedFieldInfo,
   IConsolidateTypesOptions,
   TypeSummary,
-} from '..';
-import type { KeyValPair, TypeNameSuggestion } from '../../types';
+  IConsolidateTypesResults,
+  KeyValPair,
+  TypeNameSuggestion,
+  ChangeFieldDescription,
+} from '../../types';
 import { initialify } from './helpers';
 
-interface IConsolidateTypesResults {
-  nestedTypes: KeyValPair<TypeSummary<CombinedFieldInfo>>;
-  changes: ChangeFieldDescription[];
-}
-interface ChangeFieldDescription {
-  alias: string;
-  shape: string;
-  targetTypes: string[];
-}
-
-export default function consolidateNestedTypes(
+export function consolidateNestedTypes(
   nestedTypes: KeyValPair<TypeSummary<CombinedFieldInfo>>,
   { consolidateTypes }: IConsolidateTypesOptions,
 ): IConsolidateTypesResults {
@@ -112,11 +105,6 @@ export default function consolidateNestedTypes(
       inferTypeNames(typePaths, shape),
     ]),
   );
-  if (process.env.NODE_ENV === 'development')
-    console.log(
-      'remapedShapeNamesStats',
-      JSON.stringify(remapedShapeNames, null, 2),
-    );
 
   const fieldsToReplace: ChangeFieldDescription[] = [];
   mapValues(

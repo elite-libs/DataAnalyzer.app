@@ -1,8 +1,8 @@
 // import { mapValues } from 'lodash';
 import snakecase from 'lodash.snakecase';
+import { CombinedFieldInfo, KeyValPair } from 'types';
 // import debug from 'debug';
-import { CombinedFieldInfo } from '../schema-analyzer';
-import { IDataAnalyzerWriter, IRenderArgs } from './writers';
+import { IDataAnalyzerWriter } from './writers';
 // const log = debug('writer:knex');
 
 const BIG_INTEGER_MIN = BigInt('2147483647');
@@ -46,8 +46,10 @@ const getFieldLengthArg = (fieldName: string, maxLength: number) => {
 //   return types.find((field) => field[0].toLowerCase() === typeName.toLowerCase())
 // }
 const writer: IDataAnalyzerWriter = {
-  render({ results, options, schemaName }: IRenderArgs) {
-    const { nestedTypes } = results;
+  render(results) {
+    let { options, schemaName } = results;
+    const typeSummary = results.flatTypeSummary;
+    const { nestedTypes } = typeSummary;
     const hasNestedTypes = nestedTypes && Object.keys(nestedTypes!).length > 0;
 
     function getFirstIdentityOrUniqueField(
@@ -77,9 +79,15 @@ const writer: IDataAnalyzerWriter = {
       return fieldSet[0] && fieldSet[0][0] ? fieldSet[0][0] : '__unknown__';
     }
 
-    const getCreateTableCode = ({ schemaName, results }: IRenderArgs) =>
+    const getCreateTableCode = ({
+      schemaName,
+      fields,
+    }: {
+      schemaName: string;
+      fields: KeyValPair<CombinedFieldInfo>;
+    }) =>
       `knex.schema.createTable("${schemaName}", (table) => {\n` +
-      Object.entries<CombinedFieldInfo>(results.fields)
+      Object.entries<CombinedFieldInfo>(fields)
         .map(([fieldName, fieldInfo]) => {
           const name = snakecase(fieldName);
           const {
@@ -204,8 +212,7 @@ const writer: IDataAnalyzerWriter = {
               return `// Error invalid field data //`;
             return getCreateTableCode({
               schemaName: snakecase(nestedName),
-              results,
-              options: { disableNestedTypes: false }, // possible needs to be true?
+              fields: results.fields,
             });
           });
       }
@@ -223,7 +230,7 @@ ${
 }
 
   // Create the main table
-  return ${getCreateTableCode({ schemaName, results })}
+  return ${getCreateTableCode({ schemaName, fields: typeSummary.fields })}
 };
 
 exports.down = async function down(knex) {
