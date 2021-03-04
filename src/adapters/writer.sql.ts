@@ -1,7 +1,7 @@
 // import { mapValues } from 'lodash';
 import snakecase from 'lodash.snakecase';
-import { CombinedFieldInfo } from '../schema-analyzer';
-import { IDataAnalyzerWriter, IRenderArgs } from './writers';
+import { CombinedFieldInfo } from 'types';
+import { IDataAnalyzerWriter } from './writers';
 // const log = debug('writer:knex');
 
 const BIG_INTEGER_MIN = BigInt('2147483647');
@@ -40,13 +40,16 @@ const getFieldLengthArg = (fieldName: string, maxLength: number) => {
 //   return types.find((field) => field[0].toLowerCase() === typeName.toLowerCase())
 // }
 const writer: IDataAnalyzerWriter = {
-  render({ results, options, schemaName }: IRenderArgs) {
+  render(results) {
+    let { schemaName } = results;
+    const { options } = results;
+    const typeSummary = results.flatTypeSummary;
     const hasNestedTypes =
-      results.nestedTypes && Object.keys(results.nestedTypes!).length > 0;
+      typeSummary.nestedTypes && Object.keys(typeSummary.nestedTypes!).length > 0;
 
-    const getCreateTableCode = ({ schemaName, results }: IRenderArgs) =>
+    const getCreateTableCode = ({ schemaName, fields }) =>
       `CREATE TABLE ${snakecase(schemaName)} (\n` +
-      Object.entries<CombinedFieldInfo>(results.fields)
+      Object.entries<CombinedFieldInfo>(fields)
         .map(([fieldName, fieldInfo]) => {
           const name = snakecase(fieldName);
           const {
@@ -157,14 +160,15 @@ const writer: IDataAnalyzerWriter = {
       if (!options?.disableNestedTypes && hasNestedTypes) {
         // console.log('nested schema detected', schemaName);
 
-        return Object.entries(results.nestedTypes!).map(([nestedName, results]) => {
-          // console.log('nested knex schema:', nestedName);
-          return getCreateTableCode({
-            schemaName: snakecase(nestedName),
-            results,
-            options: { disableNestedTypes: false }, // possible needs to be true?
-          });
-        });
+        return Object.entries(typeSummary.nestedTypes!).map(
+          ([nestedName, { fields }]) => {
+            // console.log('nested knex schema:', nestedName);
+            return getCreateTableCode({
+              schemaName: snakecase(nestedName),
+              fields,
+            });
+          },
+        );
       }
       return [''];
     };
@@ -174,7 +178,7 @@ const writer: IDataAnalyzerWriter = {
         ? `${getRecursive().join(';\n').trim()};\n`
         : `/* Note: no nested types detected */`
     }
-${getCreateTableCode({ schemaName, results })}
+${getCreateTableCode({ schemaName, fields: typeSummary.fields })}
 
 `;
 

@@ -1,8 +1,7 @@
-// import { camelCase } from 'lodash';
-import { CombinedFieldInfo } from '../schema-analyzer';
 import { properCase, numericSorter } from 'helpers';
-import { IDataAnalyzerWriter, IRenderArgs } from './writers';
+import { IDataAnalyzerWriter } from './writers';
 import { map, snakeCase } from 'lodash';
+import { CombinedFieldInfo, KeyValPair } from 'types';
 
 const typeMap: { [k: string]: string } = {
   $ref: 'string',
@@ -43,13 +42,13 @@ const getSortByTypeFn = (fieldInfo: CombinedFieldInfo) =>
   fieldInfo.type === 'String' ? undefined : numericSorter;
 
 const getEnumDeclaration = (fieldName: string, fieldInfo: CombinedFieldInfo) => {
-  if (!fieldInfo.enum || fieldInfo.enum.length <= 0) return ``;
+  // if (!fieldInfo.enum || fieldInfo.enum.length <= 0) return ``;
   const typeName = properCase(fieldName);
   const enumName = `${typeName}Enum`;
   return `type ${enumName} ${fieldInfo.type === 'String' ? 'string' : 'int'}
 const(
-${fieldInfo.enum
-  .slice()
+${fieldInfo
+  .enum!.slice()
   .sort(getSortByTypeFn(fieldInfo))
   // @ts-ignore
   .map<any>((key) => `    ${formatKey(key)} ${enumName} = ${formatValue(key)}`)
@@ -80,11 +79,13 @@ ${fieldInfo.enum
  *
  */
 const Writer: IDataAnalyzerWriter = {
-  render({ results, options, schemaName }: IRenderArgs) {
+  render(results) {
+    const { options } = results;
+    const typeSummary = results.flatTypeSummary;
     const hasNestedTypes =
-      results.nestedTypes && Object.keys(results.nestedTypes!).length > 0;
-    const { fields } = results;
-    const getFields = () => {
+      typeSummary.nestedTypes && Object.keys(typeSummary.nestedTypes!).length > 0;
+    const { fields } = typeSummary;
+    const getFields = (schemaName: string, fields: KeyValPair<CombinedFieldInfo>) => {
       return `type ${properCase(schemaName)} struct {\n${Object.entries(fields)
         .map(([fieldName, fieldInfo]) => {
           return `    ${properCase(fieldName)} ${getGoLangType(
@@ -98,16 +99,12 @@ const Writer: IDataAnalyzerWriter = {
     const getRecursive = () => {
       if (!options?.disableNestedTypes && hasNestedTypes) {
         // console.log('nested schema detected', schemaName);
-
-        return Object.entries(results.nestedTypes!).map(([nestedName, results]) => {
-          // console.log('nested schema:', nestedName);
-          return this.render({
-            schemaName: nestedName,
-            results,
-            options,
-            // options: { disableNestedTypes: false },
-          });
-        });
+        return Object.entries(typeSummary.nestedTypes!).map(
+          ([nestedName, typeSummary]) => {
+            // console.log('nested schema:', nestedName);
+            return getFields(nestedName, typeSummary.fields);
+          },
+        );
       }
       return [''];
     };
@@ -118,7 +115,13 @@ const Writer: IDataAnalyzerWriter = {
     }).filter(Boolean);
     const getEnums = () => `\n${enumDefs.join('\n')}`.trim();
     // console.warn({ enums });
-    return getFields() + '\n\n' + getEnums() + '\n' + getRecursive().join('');
+    return (
+      getFields(results.schemaName!, typeSummary.fields) +
+      '\n\n' +
+      getEnums() +
+      '\n' +
+      getRecursive().join('')
+    );
   },
 };
 

@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-redeclare */
 export type TypeSummary<TFieldDetails = FieldInfo> = {
-  schemaName?: string;
+  schemaName: string;
   fields: KeyValPair<TFieldDetails>;
   totalRows: number;
   nestedTypes?: KeyValPair<TypeSummary<TFieldDetails>>;
 };
 
-export type TypeSummaryResults = TypeSummary<FieldInfo> & {
-  flatSchema: TypeSummary<CombinedFieldInfo>;
-  denseNestedTypes?: KeyValPair<TypeSummary<CombinedFieldInfo>>;
+export type DataAnalysisResults = TypeSummary<FieldInfo> & {
+  flatTypeSummary: TypeSummary<CombinedFieldInfo>;
+  // denseNestedTypes?: KeyValPair<TypeSummary<CombinedFieldInfo>>;
   denseNestedChanges?: ChangeFieldDescription[];
   debug?: boolean;
   options: ISchemaAnalyzerOptions;

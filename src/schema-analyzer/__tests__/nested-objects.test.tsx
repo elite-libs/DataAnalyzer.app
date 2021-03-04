@@ -48,7 +48,7 @@ describe('#nested objects', () => {
             targetScale: 'p99',
           },
         });
-        const result = summary.flatSchema;
+        const result = summary.flatTypeSummary;
         if (summary.denseNestedTypes)
           result.nestedTypes = summary.denseNestedTypes;
         expect(summary.denseNestedChanges).toMatchSnapshot();
@@ -91,7 +91,7 @@ describe('#nested objects', () => {
             targetScale: 'p99',
           },
         });
-        const result = summary.flatSchema;
+        const result = summary.flatTypeSummary;
         expect(result).toMatchSnapshot('Consolidated types');
         // console.log(JSON.stringify(result, null, 2));
         // expect(result).toMatchSnapshot();
@@ -131,7 +131,7 @@ describe('#nested objects', () => {
             targetScale: 'p99',
           },
         });
-        const result = summary.flatSchema;
+        const result = summary.flatTypeSummary;
         expect(result.nestedTypes).toMatchSnapshot(
           'Before consolidating types',
         );
@@ -180,7 +180,7 @@ describe('#nested objects', () => {
           targetScale: 'p99',
         },
       });
-      expect(summary.flatSchema).toMatchSnapshot();
+      expect(summary.flatTypeSummary).toMatchSnapshot();
     } catch (error) {
       console.error('ERROR:', error);
       throw error;
@@ -198,7 +198,7 @@ describe('#nested objects', () => {
       },
     };
     const results = await schemaAnalyzer('User', usersNotes, options);
-    expect(results.flatSchema).toMatchSnapshot();
+    expect(results.flatTypeSummary).toMatchSnapshot();
   });
 
   it('can emit deeply nested structs', async () => {
@@ -213,6 +213,6 @@ describe('#nested objects', () => {
       },
     };
     const results = await schemaAnalyzer('Pokemon', pokemonCharmander, options);
-    expect(results.flatSchema).toMatchSnapshot();
+    expect(results.flatTypeSummary).toMatchSnapshot();
   });
 });

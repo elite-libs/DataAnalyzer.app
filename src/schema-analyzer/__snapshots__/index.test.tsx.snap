@@ -73,7 +73,7 @@ Object {
 exports[`primary use-cases analyze all 3K+ rows in products.csv: productsResult 1`] = `
 Object {
   "debug": undefined,
-  "denseNestedTypes": undefined,
+  "denseNestedChanges": undefined,
   "fields": Object {
     "Alcohol By Volume": Object {
       "enum": Array [
@@ -1079,7 +1079,7 @@ Object {
       "uniqueCount": 1,
     },
   },
-  "flatSchema": Object {
+  "flatTypeSummary": Object {
     "fields": Object {
       "Alcohol By Volume": Object {
         "count": 3134,
@@ -1383,7 +1383,6 @@ Object {
     "schemaName": "products",
     "totalRows": 3135,
   },
-  "nestedTypeChanges": undefined,
   "nestedTypes": Object {},
   "options": Object {
     "disableNestedTypes": false,
@@ -1409,7 +1408,7 @@ Object {
 exports[`primary use-cases analyze inline csv: accountsCsvResult 1`] = `
 Object {
   "debug": undefined,
-  "denseNestedTypes": undefined,
+  "denseNestedChanges": undefined,
   "fields": Object {
     "accountConfirmed": Object {
       "enum": undefined,
@@ -1619,7 +1618,7 @@ Object {
       "uniqueCount": 3,
     },
   },
-  "flatSchema": Object {
+  "flatTypeSummary": Object {
     "fields": Object {
       "accountConfirmed": Object {
         "count": 4,
@@ -1701,7 +1700,6 @@ Object {
     "schemaName": "sampleCsv",
     "totalRows": 5,
   },
-  "nestedTypeChanges": undefined,
   "nestedTypes": Object {},
   "options": Object {
     "disableNestedTypes": false,
@@ -1812,7 +1810,7 @@ Object {
 exports[`primary use-cases analyze people.json: peopleResult 1`] = `
 Object {
   "debug": undefined,
-  "denseNestedTypes": undefined,
+  "denseNestedChanges": undefined,
   "fields": Object {
     "birth_year": Object {
       "enum": undefined,
@@ -2271,7 +2269,7 @@ Object {
       "uniqueCount": 0,
     },
   },
-  "flatSchema": Object {
+  "flatTypeSummary": Object {
     "fields": Object {
       "birth_year": Object {
         "count": 30,
@@ -2460,7 +2458,6 @@ Object {
     "schemaName": "people",
     "totalRows": 40,
   },
-  "nestedTypeChanges": undefined,
   "nestedTypes": Object {},
   "options": Object {
     "disableNestedTypes": false,
@@ -2486,7 +2483,7 @@ Object {
 exports[`primary use-cases analyze properties.json: propertiesResult 1`] = `
 Object {
   "debug": undefined,
-  "denseNestedTypes": undefined,
+  "denseNestedChanges": undefined,
   "fields": Object {
     "address1": Object {
       "enum": undefined,
@@ -4827,7 +4824,7 @@ Object {
       "uniqueCount": 100,
     },
   },
-  "flatSchema": Object {
+  "flatTypeSummary": Object {
     "fields": Object {
       "address1": Object {
         "count": 100,
@@ -5919,7 +5916,6 @@ Object {
     "schemaName": "properties",
     "totalRows": 100,
   },
-  "nestedTypeChanges": undefined,
   "nestedTypes": Object {},
   "options": Object {
     "disableNestedTypes": true,
@@ -5932,7 +5928,7 @@ Object {
 exports[`primary use-cases analyze top 250 rows in products.csv: productsResult_250 1`] = `
 Object {
   "debug": undefined,
-  "denseNestedTypes": undefined,
+  "denseNestedChanges": undefined,
   "fields": Object {
     "Alcohol By Volume": Object {
       "enum": Array [
@@ -6793,7 +6789,7 @@ Object {
       "uniqueCount": 1,
     },
   },
-  "flatSchema": Object {
+  "flatTypeSummary": Object {
     "fields": Object {
       "Alcohol By Volume": Object {
         "count": 250,
@@ -7121,7 +7117,6 @@ Object {
     "schemaName": "products",
     "totalRows": 250,
   },
-  "nestedTypeChanges": undefined,
   "nestedTypes": Object {},
   "options": Object {
     "disableNestedTypes": false,
@@ -7478,7 +7473,7 @@ Object {
 exports[`primary use-cases analyze top 1250 rows in products.csv: productsResult_1250 1`] = `
 Object {
   "debug": undefined,
-  "denseNestedTypes": undefined,
+  "denseNestedChanges": undefined,
   "fields": Object {
     "Alcohol By Volume": Object {
       "enum": Array [
@@ -8418,7 +8413,7 @@ Object {
       "uniqueCount": 1,
     },
   },
-  "flatSchema": Object {
+  "flatTypeSummary": Object {
     "fields": Object {
       "Alcohol By Volume": Object {
         "count": 1250,
@@ -8722,7 +8717,6 @@ Object {
     "schemaName": "products",
     "totalRows": 1250,
   },
-  "nestedTypeChanges": undefined,
   "nestedTypes": Object {},
   "options": Object {
     "disableNestedTypes": false,
@@ -8748,7 +8742,7 @@ Object {
 exports[`primary use-cases analyze users.json: usersResult 1`] = `
 Object {
   "debug": undefined,
-  "denseNestedTypes": undefined,
+  "denseNestedChanges": undefined,
   "fields": Object {
     "catchPhrase": Object {
       "enum": undefined,
@@ -9128,7 +9122,7 @@ Object {
       "uniqueCount": 0,
     },
   },
-  "flatSchema": Object {
+  "flatTypeSummary": Object {
     "fields": Object {
       "catchPhrase": Object {
         "count": 26,
@@ -9274,7 +9268,6 @@ Object {
     "schemaName": "users",
     "totalRows": 26,
   },
-  "nestedTypeChanges": undefined,
   "nestedTypes": Object {},
   "options": Object {
     "disableNestedTypes": false,
@@ -9300,7 +9293,7 @@ Object {
 exports[`primary use-cases can analyze schema w/ enum options: propertiesResult_highEnumLimit 1`] = `
 Object {
   "debug": undefined,
-  "denseNestedTypes": undefined,
+  "denseNestedChanges": undefined,
   "fields": Object {
     "address1": Object {
       "enum": undefined,
@@ -11487,7 +11480,7 @@ Object {
       "uniqueCount": 100,
     },
   },
-  "flatSchema": Object {
+  "flatTypeSummary": Object {
     "fields": Object {
       "address1": Object {
         "count": 100,
@@ -12425,7 +12418,6 @@ Object {
     "schemaName": "properties",
     "totalRows": 100,
   },
-  "nestedTypeChanges": undefined,
   "nestedTypes": Object {},
   "options": Object {
     "enumMinimumRowCount": 1000,
@@ -12438,7 +12430,7 @@ Object {
 exports[`primary use-cases can analyze schema w/ enum options: propertiesResult_highNullableLimit 1`] = `
 Object {
   "debug": undefined,
-  "denseNestedTypes": undefined,
+  "denseNestedChanges": undefined,
   "fields": Object {
     "address1": Object {
       "enum": undefined,
@@ -14779,7 +14771,7 @@ Object {
       "uniqueCount": 100,
     },
   },
-  "flatSchema": Object {
+  "flatTypeSummary": Object {
     "fields": Object {
       "address1": Object {
         "count": 100,
@@ -15871,7 +15863,6 @@ Object {
     "schemaName": "properties",
     "totalRows": 100,
   },
-  "nestedTypeChanges": undefined,
   "nestedTypes": Object {},
   "options": Object {
     "nullableRowsThreshold": 0.25,
@@ -15884,7 +15875,7 @@ Object {
 exports[`primary use-cases can analyze schema w/ enum options: propertiesResult_lowEnumLimit 1`] = `
 Object {
   "debug": undefined,
-  "denseNestedTypes": undefined,
+  "denseNestedChanges": undefined,
   "fields": Object {
     "address1": Object {
       "enum": undefined,
@@ -18225,7 +18216,7 @@ Object {
       "uniqueCount": 100,
     },
   },
-  "flatSchema": Object {
+  "flatTypeSummary": Object {
     "fields": Object {
       "address1": Object {
         "count": 100,
@@ -19317,7 +19308,6 @@ Object {
     "schemaName": "properties",
     "totalRows": 100,
   },
-  "nestedTypeChanges": undefined,
   "nestedTypes": Object {},
   "options": Object {
     "enumMinimumRowCount": 10,
@@ -19330,7 +19320,7 @@ Object {
 exports[`primary use-cases can analyze schema w/ enum options: propertiesResult_lowEnumLimitLoose 1`] = `
 Object {
   "debug": undefined,
-  "denseNestedTypes": undefined,
+  "denseNestedChanges": undefined,
   "fields": Object {
     "address1": Object {
       "enum": undefined,
@@ -21913,7 +21903,7 @@ Object {
       "uniqueCount": 100,
     },
   },
-  "flatSchema": Object {
+  "flatTypeSummary": Object {
     "fields": Object {
       "address1": Object {
         "count": 100,
@@ -23247,7 +23237,6 @@ Object {
     "schemaName": "properties",
     "totalRows": 100,
   },
-  "nestedTypeChanges": undefined,
   "nestedTypes": Object {},
   "options": Object {
     "enumAbsoluteLimit": 30,
@@ -23261,7 +23250,7 @@ Object {
 exports[`primary use-cases can analyze schema w/ enum options: propertiesResult_lowEnumLimitLoosePct 1`] = `
 Object {
   "debug": undefined,
-  "denseNestedTypes": undefined,
+  "denseNestedChanges": undefined,
   "fields": Object {
     "address1": Object {
       "enum": undefined,
@@ -25844,7 +25833,7 @@ Object {
       "uniqueCount": 100,
     },
   },
-  "flatSchema": Object {
+  "flatTypeSummary": Object {
     "fields": Object {
       "address1": Object {
         "count": 100,
@@ -27178,7 +27167,6 @@ Object {
     "schemaName": "properties",
     "totalRows": 100,
   },
-  "nestedTypeChanges": undefined,
   "nestedTypes": Object {},
   "options": Object {
     "enumAbsoluteLimit": 30,
@@ -27192,7 +27180,7 @@ Object {
 exports[`primary use-cases can analyze schema w/ enum options: propertiesResult_lowNullableLimit 1`] = `
 Object {
   "debug": undefined,
-  "denseNestedTypes": undefined,
+  "denseNestedChanges": undefined,
   "fields": Object {
     "address1": Object {
       "enum": undefined,
@@ -29533,7 +29521,7 @@ Object {
       "uniqueCount": 100,
     },
   },
-  "flatSchema": Object {
+  "flatTypeSummary": Object {
     "fields": Object {
       "address1": Object {
         "count": 100,
@@ -30625,7 +30613,6 @@ Object {
     "schemaName": "properties",
     "totalRows": 100,
   },
-  "nestedTypeChanges": undefined,
   "nestedTypes": Object {},
   "options": Object {
     "nullableRowsThreshold": 0,
@@ -30638,7 +30625,7 @@ Object {
 exports[`primary use-cases can analyze schema w/ enum options: propertiesResult_notStrict 1`] = `
 Object {
   "debug": undefined,
-  "denseNestedTypes": undefined,
+  "denseNestedChanges": undefined,
   "fields": Object {
     "address1": Object {
       "enum": undefined,
@@ -33091,7 +33078,7 @@ Object {
       "uniqueCount": 100,
     },
   },
-  "flatSchema": Object {
+  "flatTypeSummary": Object {
     "fields": Object {
       "address1": Object {
         "count": 100,
@@ -34184,7 +34171,6 @@ Object {
     "schemaName": "properties",
     "totalRows": 100,
   },
-  "nestedTypeChanges": undefined,
   "nestedTypes": Object {},
   "options": Object {
     "strictMatching": false,
@@ -34197,7 +34183,7 @@ Object {
 exports[`primary use-cases can handle dense nested types: denseNestedData 1`] = `
 Object {
   "debug": undefined,
-  "denseNestedTypes": undefined,
+  "denseNestedChanges": undefined,
   "fields": Object {
     "id": Object {
       "enum": undefined,
@@ -34277,7 +34263,7 @@ Object {
       "uniqueCount": 0,
     },
   },
-  "flatSchema": Object {
+  "flatTypeSummary": Object {
     "fields": Object {
       "id": Object {
         "count": 12,
@@ -34344,7 +34330,6 @@ Object {
     "schemaName": "users",
     "totalRows": 12,
   },
-  "nestedTypeChanges": undefined,
   "nestedTypes": Object {
     "users.notes": Object {
       "fields": Object {
@@ -34496,7 +34481,7 @@ Object {
 exports[`primary use-cases can handle nested types: nestedData 1`] = `
 Object {
   "debug": undefined,
-  "denseNestedTypes": undefined,
+  "denseNestedChanges": undefined,
   "fields": Object {
     "id": Object {
       "enum": undefined,
@@ -34576,7 +34561,7 @@ Object {
       "uniqueCount": 0,
     },
   },
-  "flatSchema": Object {
+  "flatTypeSummary": Object {
     "fields": Object {
       "id": Object {
         "count": 5,
@@ -34643,7 +34628,6 @@ Object {
     "schemaName": "users",
     "totalRows": 5,
   },
-  "nestedTypeChanges": undefined,
   "nestedTypes": Object {
     "users.notes": Object {
       "fields": Object {
@@ -34795,7 +34779,7 @@ Object {
 exports[`primary use-cases can handle sparsely nested types: sparseNestedData 1`] = `
 Object {
   "debug": undefined,
-  "denseNestedTypes": undefined,
+  "denseNestedChanges": undefined,
   "fields": Object {
     "id": Object {
       "enum": undefined,
@@ -34875,7 +34859,7 @@ Object {
       "uniqueCount": 0,
     },
   },
-  "flatSchema": Object {
+  "flatTypeSummary": Object {
     "fields": Object {
       "id": Object {
         "count": 12,
@@ -34943,7 +34927,6 @@ Object {
     "schemaName": "users",
     "totalRows": 12,
   },
-  "nestedTypeChanges": undefined,
   "nestedTypes": Object {
     "users.notes": Object {
       "fields": Object {
@@ -35096,7 +35079,7 @@ Object {
 exports[`primary use-cases handles null field data: nullFieldsSmall 1`] = `
 Object {
   "debug": undefined,
-  "denseNestedTypes": undefined,
+  "denseNestedChanges": undefined,
   "fields": Object {
     "id": Object {
       "enum": undefined,
@@ -35160,7 +35143,7 @@ Object {
       "uniqueCount": 2,
     },
   },
-  "flatSchema": Object {
+  "flatTypeSummary": Object {
     "fields": Object {
       "id": Object {
         "count": 3,
@@ -35198,7 +35181,6 @@ Object {
     "schemaName": "notes",
     "totalRows": 3,
   },
-  "nestedTypeChanges": undefined,
   "nestedTypes": Object {},
   "options": Object {
     "disableNestedTypes": false,
@@ -35224,7 +35206,7 @@ Object {
 exports[`primary use-cases supports enum detection: peopleWithEnums 1`] = `
 Object {
   "debug": undefined,
-  "denseNestedTypes": undefined,
+  "denseNestedChanges": undefined,
   "fields": Object {
     "birth_year": Object {
       "enum": undefined,
@@ -35757,7 +35739,7 @@ Object {
       "uniqueCount": 0,
     },
   },
-  "flatSchema": Object {
+  "flatTypeSummary": Object {
     "fields": Object {
       "birth_year": Object {
         "count": 30,
@@ -35961,7 +35943,6 @@ Object {
     "schemaName": "people",
     "totalRows": 40,
   },
-  "nestedTypeChanges": undefined,
   "nestedTypes": Object {},
   "options": Object {
     "enumAbsoluteLimit": 8,

@@ -105,11 +105,6 @@ export function consolidateNestedTypes(
       inferTypeNames(typePaths, shape),
     ]),
   );
-  if (process.env.NODE_ENV === 'development')
-    console.log(
-      'remapedShapeNamesStats',
-      JSON.stringify(remapedShapeNames, null, 2),
-    );
 
   const fieldsToReplace: ChangeFieldDescription[] = [];
   mapValues(

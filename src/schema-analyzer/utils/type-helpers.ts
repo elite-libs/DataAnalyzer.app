@@ -10,7 +10,7 @@ import {
   isTimestamp,
   isUuid,
 } from './type-detectors';
-import { FieldInfo, TypeDescriptorName, TypeNameString } from '../index';
+import { FieldInfo, TypeDescriptorName, TypeNameString } from '../../types';
 
 const hasLeadingZero = /^0+\d/;
 

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import type { FieldInfo, TypeSummary } from '../schema-analyzer';
+import type { FieldInfo, TypeSummary } from '../types';
 
 type State = {
   results?: string | null;

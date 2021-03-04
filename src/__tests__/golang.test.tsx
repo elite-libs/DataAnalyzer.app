@@ -18,11 +18,7 @@ describe('#GoLang', () => {
       },
     };
     const results = await schemaAnalyzer('users', users, options);
-    const code = golang.render({
-      schemaName: 'users',
-      results,
-      options,
-    });
+    const code = golang.render(results);
 
     expect(code).toMatchSnapshot();
   });
@@ -39,11 +35,7 @@ describe('#GoLang', () => {
       },
     };
     const results = await schemaAnalyzer('User', usersNotes, options);
-    const code = golang.render({
-      schemaName: 'users',
-      results,
-      options,
-    });
+    const code = golang.render(results);
 
     expect(code).toMatchSnapshot();
   });
@@ -60,11 +52,7 @@ describe('#GoLang', () => {
       },
     };
     const results = await schemaAnalyzer('Pokemon', pokemonCharmander, options);
-    const code = golang.render({
-      schemaName: 'Pokemon',
-      results,
-      options,
-    });
+    const code = golang.render(results);
 
     expect(code).toMatchSnapshot();
   });
@@ -73,6 +61,7 @@ describe('#GoLang', () => {
     const options: ISchemaAnalyzerOptions = {
       strictMatching: false,
       consolidateTypes: 'field-names',
+      debug: true,
       flattenOptions: {
         targetLength: 'max',
         targetPrecision: 'max',
@@ -82,11 +71,7 @@ describe('#GoLang', () => {
       },
     };
     const results = await schemaAnalyzer('Pokemon', pokemonCharmander, options);
-    const code = golang.render({
-      schemaName: 'Pokemon',
-      results,
-      options,
-    });
+    const code = golang.render(results);
 
     expect(code).toMatchSnapshot();
   });

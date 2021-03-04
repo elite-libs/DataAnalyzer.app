@@ -8,7 +8,7 @@ exports.up = async function up(knex) {
   /* Note: no nested types detected */
 
   // Create the main table
-  return knex.schema.createTable(\\"test\\", (table) => {
+  return knex.schema.createTable(\\"users\\", (table) => {
     table.uuid(\\"id\\").notNullable().primary();
     table.string(\\"email\\", 40).notNullable();
     table.string(\\"first_name\\", 20).notNullable();
@@ -27,7 +27,7 @@ exports.up = async function up(knex) {
 };
 
 exports.down = async function down(knex) {
-  await knex.schema.dropTableIfExists(\\"test\\");
+  await knex.schema.dropTableIfExists(\\"users\\");
 };
 "
 `;
@@ -48,7 +48,7 @@ exports.up = async function up(knex) {
 
 
   // Create the main table
-  return knex.schema.createTable(\\"users_sparse\\", (table) => {
+  return knex.schema.createTable(\\"users\\", (table) => {
     table.increments(\\"id\\");
     table.string(\\"name\\", 20).notNullable();
     table.integer(\\"notes\\").references(\\"id\\").inTable('users_notes'); // note: one-to-many
@@ -58,7 +58,7 @@ exports.up = async function up(knex) {
 
 exports.down = async function down(knex) {
   await knex.schema.dropTableIfExists(\\"users_notes\\");
-  await knex.schema.dropTableIfExists(\\"users_sparse\\");
+  await knex.schema.dropTableIfExists(\\"users\\");
 };
 "
 `;
@@ -311,7 +311,7 @@ module.exports.UsersNotes = usersNotesModel;
 `;
 
 exports[`#typescript can emit interface for nested types 1`] = `
-"export interface UsersSparse {
+"export interface Users {
   id: number;
   name: string;
   notes: UsersNotes[];
@@ -321,7 +321,6 @@ export interface UsersNotes {
   id: number;
   text: string;
 };
-
 "
 `;
 

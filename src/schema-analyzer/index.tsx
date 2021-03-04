@@ -6,7 +6,7 @@ import { mapValues } from 'lodash';
 import type {
   KeyValPair,
   ISchemaAnalyzerOptions,
-  TypeSummaryResults,
+  DataAnalysisResults,
   FieldInfo,
   TypeSummary,
   TypedFieldObject,
@@ -74,7 +74,7 @@ function schemaAnalyzer(
     },
   },
   // _nestedData?: { [key: string]: unknown },
-): Promise<TypeSummaryResults> {
+): Promise<DataAnalysisResults> {
   if (!schemaName || schemaName.length < 1)
     return Promise.reject(Error('A SchemaName must be provided.'));
   return _schemaAnalyzer(schemaName, input, options)
@@ -88,28 +88,30 @@ function schemaAnalyzer(
     })
     .then((typeSummary) => {
       let condensedResults: IConsolidateTypesResults | null = null;
-      const flatTypeMap = helpers.flattenTypes(
+      const flatTypeSummary = helpers.flattenTypes(
         typeSummary,
         options.flattenOptions,
       );
+      // flatTypeSummary.nestedTypes = typeSummary.nestedTypes
       if (
         options.consolidateTypes &&
         options.consolidateTypes.length > 0 &&
-        flatTypeMap.nestedTypes
+        flatTypeSummary.nestedTypes
       ) {
         condensedResults = consolidateNestedTypes(
-          flatTypeMap.nestedTypes,
+          flatTypeSummary.nestedTypes,
           options,
         );
+        flatTypeSummary.nestedTypes = condensedResults.nestedTypes;
       }
 
       return {
         ...typeSummary,
-        flatSchema: flatTypeMap,
-        denseNestedTypes: condensedResults
-          ? condensedResults.nestedTypes
-          : undefined,
-        nestedTypeChanges: condensedResults
+        flatTypeSummary,
+        // denseNestedTypes: condensedResults
+        //   ? condensedResults.nestedTypes
+        //   : undefined,
+        denseNestedChanges: condensedResults
           ? condensedResults.changes
           : undefined,
         debug: options.debug,
