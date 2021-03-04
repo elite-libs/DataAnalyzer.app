@@ -144,7 +144,7 @@ export const OutputButtons = ({ size = 'medium', className = '' }: Props) => {
     highlightLanguage: SupportedTargetLanguages;
   }) => {
     dispatch(setOptions({ outputAdapter: adapter, outputLanguage: highlightLanguage }));
-    handleAdapterSelected(adapter);
+    setTimeout(() => handleAdapterSelected(adapter), 10);
   };
   const isPanelSuccessState = Boolean(parsedInput);
   const isResultsLoaded = Boolean(results);

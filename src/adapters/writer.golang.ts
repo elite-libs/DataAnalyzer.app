@@ -120,7 +120,7 @@ const Writer: IDataAnalyzerWriter = {
       '\n\n' +
       getEnums() +
       '\n' +
-      getRecursive().join('')
+      getRecursive().join('\n')
     );
   },
 };

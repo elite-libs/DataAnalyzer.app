@@ -49,8 +49,6 @@ describe('#nested objects', () => {
           },
         });
         const result = summary.flatTypeSummary;
-        if (summary.denseNestedTypes)
-          result.nestedTypes = summary.denseNestedTypes;
         expect(summary.denseNestedChanges).toMatchSnapshot();
         // console.log(JSON.stringify(result, null, 2));
         // expect(result).toMatchSnapshot();

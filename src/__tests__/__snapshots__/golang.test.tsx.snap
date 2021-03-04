@@ -26,13 +26,16 @@ type PokemonAbilities struct {
     Ability NameUrl \`json:\\"ability\\" db:\\"ability\\"\`
     IsHidden bool \`json:\\"is_hidden\\" db:\\"is_hidden\\"\`
     Slot int \`json:\\"slot\\" db:\\"slot\\"\`
-}type PokemonGameIndices struct {
+}
+type PokemonGameIndices struct {
     GameIndex int \`json:\\"game_index\\" db:\\"game_index\\"\`
     Version NameUrl \`json:\\"version\\" db:\\"version\\"\`
-}type PokemonMoves struct {
+}
+type PokemonMoves struct {
     Move NameUrl \`json:\\"move\\" db:\\"move\\"\`
     VersionGroupDetails []PokemonMovesVersionGroupDetails \`json:\\"version_group_details\\" db:\\"version_group_details\\"\`
-}type PokemonSprites struct {
+}
+type PokemonSprites struct {
     BackDefault string \`json:\\"back_default\\" db:\\"back_default\\"\`
     BackFemale string \`json:\\"back_female\\" db:\\"back_female\\"\`
     BackShiny string \`json:\\"back_shiny\\" db:\\"back_shiny\\"\`
@@ -43,21 +46,26 @@ type PokemonAbilities struct {
     FrontShinyFemale string \`json:\\"front_shiny_female\\" db:\\"front_shiny_female\\"\`
     Other PokemonSpritesOther \`json:\\"other\\" db:\\"other\\"\`
     Versions PokemonSpritesVersions \`json:\\"versions\\" db:\\"versions\\"\`
-}type PokemonStats struct {
+}
+type PokemonStats struct {
     BaseStat int \`json:\\"base_stat\\" db:\\"base_stat\\"\`
     Effort int \`json:\\"effort\\" db:\\"effort\\"\`
     Stat NameUrl \`json:\\"stat\\" db:\\"stat\\"\`
-}type PokemonTypes struct {
+}
+type PokemonTypes struct {
     Slot int \`json:\\"slot\\" db:\\"slot\\"\`
     Type NameUrl \`json:\\"type\\" db:\\"type\\"\`
-}type PokemonMovesVersionGroupDetails struct {
+}
+type PokemonMovesVersionGroupDetails struct {
     LevelLearnedAt int \`json:\\"level_learned_at\\" db:\\"level_learned_at\\"\`
     MoveLearnMethod NameUrl \`json:\\"move_learn_method\\" db:\\"move_learn_method\\"\`
     VersionGroup NameUrl \`json:\\"version_group\\" db:\\"version_group\\"\`
-}type PokemonSpritesOther struct {
+}
+type PokemonSpritesOther struct {
     DreamWorld FrontDefaultFrontFemale \`json:\\"dream_world\\" db:\\"dream_world\\"\`
     OfficialArtwork PokemonSpritesOtherOfficialArtwork \`json:\\"official_artwork\\" db:\\"official_artwork\\"\`
-}type PokemonSpritesVersions struct {
+}
+type PokemonSpritesVersions struct {
     GenerationI PokemonSpritesVersionsGenerationI \`json:\\"generation_i\\" db:\\"generation_i\\"\`
     GenerationIi PokemonSpritesVersionsGenerationIi \`json:\\"generation_ii\\" db:\\"generation_ii\\"\`
     GenerationIii PokemonSpritesVersionsGenerationIii \`json:\\"generation_iii\\" db:\\"generation_iii\\"\`
@@ -66,71 +74,78 @@ type PokemonAbilities struct {
     GenerationVi PokemonSpritesVersionsGenerationVi \`json:\\"generation_vi\\" db:\\"generation_vi\\"\`
     GenerationVii PokemonSpritesVersionsGenerationVii \`json:\\"generation_vii\\" db:\\"generation_vii\\"\`
     GenerationViii PokemonSpritesVersionsGenerationViii \`json:\\"generation_viii\\" db:\\"generation_viii\\"\`
-}type PokemonSpritesOtherOfficialArtwork struct {
+}
+type PokemonSpritesOtherOfficialArtwork struct {
     FrontDefault string \`json:\\"front_default\\" db:\\"front_default\\"\`
-}type PokemonSpritesVersionsGenerationI struct {
+}
+type PokemonSpritesVersionsGenerationI struct {
     RedBlue RedBlueYellow \`json:\\"red_blue\\" db:\\"red_blue\\"\`
     Yellow RedBlueYellow \`json:\\"yellow\\" db:\\"yellow\\"\`
-}type PokemonSpritesVersionsGenerationIi struct {
+}
+type PokemonSpritesVersionsGenerationIi struct {
     Crystal PokemonSpritesVersionsGenerationIiCrystal \`json:\\"crystal\\" db:\\"crystal\\"\`
     Gold PokemonSpritesVersionsGenerationIiGold \`json:\\"gold\\" db:\\"gold\\"\`
     Silver PokemonSpritesVersionsGenerationIiSilver \`json:\\"silver\\" db:\\"silver\\"\`
-}type PokemonSpritesVersionsGenerationIii struct {
+}
+type PokemonSpritesVersionsGenerationIii struct {
     Emerald PokemonSpritesVersionsGenerationIiiEmerald \`json:\\"emerald\\" db:\\"emerald\\"\`
     FireredLeafgreen PokemonSpritesVersionsGenerationIiiFireredLeafgreen \`json:\\"firered_leafgreen\\" db:\\"firered_leafgreen\\"\`
     RubySapphire PokemonSpritesVersionsGenerationIiiRubySapphire \`json:\\"ruby_sapphire\\" db:\\"ruby_sapphire\\"\`
-}type PokemonSpritesVersionsGenerationIv struct {
+}
+type PokemonSpritesVersionsGenerationIv struct {
     DiamondPearl PokemonSpritesVersionsGenerationIvDiamondPearl \`json:\\"diamond_pearl\\" db:\\"diamond_pearl\\"\`
     HeartgoldSoulsilver PokemonSpritesVersionsGenerationIvHeartgoldSoulsilver \`json:\\"heartgold_soulsilver\\" db:\\"heartgold_soulsilver\\"\`
     Platinum PokemonSpritesVersionsGenerationIvPlatinum \`json:\\"platinum\\" db:\\"platinum\\"\`
-}type PokemonSpritesVersionsGenerationV struct {
+}
+type PokemonSpritesVersionsGenerationV struct {
     BlackWhite PokemonSpritesVersionsGenerationVBlackWhite \`json:\\"black_white\\" db:\\"black_white\\"\`
-}type PokemonSpritesVersionsGenerationVi struct {
+}
+type PokemonSpritesVersionsGenerationVi struct {
     OmegarubyAlphasapphire GenerationViiOmegarubyAlphasapphireUltraSunUltraMoonXY \`json:\\"omegaruby_alphasapphire\\" db:\\"omegaruby_alphasapphire\\"\`
     XY GenerationViiOmegarubyAlphasapphireUltraSunUltraMoonXY \`json:\\"x_y\\" db:\\"x_y\\"\`
-}type PokemonSpritesVersionsGenerationVii struct {
+}
+type PokemonSpritesVersionsGenerationVii struct {
     Icons FrontDefaultFrontFemale \`json:\\"icons\\" db:\\"icons\\"\`
     UltraSunUltraMoon GenerationViiOmegarubyAlphasapphireUltraSunUltraMoonXY \`json:\\"ultra_sun_ultra_moon\\" db:\\"ultra_sun_ultra_moon\\"\`
-}type PokemonSpritesVersionsGenerationViii struct {
+}
+type PokemonSpritesVersionsGenerationViii struct {
     Icons FrontDefaultFrontFemale \`json:\\"icons\\" db:\\"icons\\"\`
-}type PokemonSpritesVersionsGenerationIiCrystal struct {
+}
+type PokemonSpritesVersionsGenerationIiCrystal struct {
     BackDefault string \`json:\\"back_default\\" db:\\"back_default\\"\`
     BackShiny string \`json:\\"back_shiny\\" db:\\"back_shiny\\"\`
     FrontDefault string \`json:\\"front_default\\" db:\\"front_default\\"\`
     FrontShiny string \`json:\\"front_shiny\\" db:\\"front_shiny\\"\`
-}type PokemonSpritesVersionsGenerationIiGold struct {
+}
+type PokemonSpritesVersionsGenerationIiGold struct {
     BackDefault string \`json:\\"back_default\\" db:\\"back_default\\"\`
     BackShiny string \`json:\\"back_shiny\\" db:\\"back_shiny\\"\`
     FrontDefault string \`json:\\"front_default\\" db:\\"front_default\\"\`
     FrontShiny string \`json:\\"front_shiny\\" db:\\"front_shiny\\"\`
-}type PokemonSpritesVersionsGenerationIiSilver struct {
+}
+type PokemonSpritesVersionsGenerationIiSilver struct {
     BackDefault string \`json:\\"back_default\\" db:\\"back_default\\"\`
     BackShiny string \`json:\\"back_shiny\\" db:\\"back_shiny\\"\`
     FrontDefault string \`json:\\"front_default\\" db:\\"front_default\\"\`
     FrontShiny string \`json:\\"front_shiny\\" db:\\"front_shiny\\"\`
-}type PokemonSpritesVersionsGenerationIiiEmerald struct {
+}
+type PokemonSpritesVersionsGenerationIiiEmerald struct {
     FrontDefault string \`json:\\"front_default\\" db:\\"front_default\\"\`
     FrontShiny string \`json:\\"front_shiny\\" db:\\"front_shiny\\"\`
-}type PokemonSpritesVersionsGenerationIiiFireredLeafgreen struct {
+}
+type PokemonSpritesVersionsGenerationIiiFireredLeafgreen struct {
     BackDefault string \`json:\\"back_default\\" db:\\"back_default\\"\`
     BackShiny string \`json:\\"back_shiny\\" db:\\"back_shiny\\"\`
     FrontDefault string \`json:\\"front_default\\" db:\\"front_default\\"\`
     FrontShiny string \`json:\\"front_shiny\\" db:\\"front_shiny\\"\`
-}type PokemonSpritesVersionsGenerationIiiRubySapphire struct {
+}
+type PokemonSpritesVersionsGenerationIiiRubySapphire struct {
     BackDefault string \`json:\\"back_default\\" db:\\"back_default\\"\`
     BackShiny string \`json:\\"back_shiny\\" db:\\"back_shiny\\"\`
     FrontDefault string \`json:\\"front_default\\" db:\\"front_default\\"\`
     FrontShiny string \`json:\\"front_shiny\\" db:\\"front_shiny\\"\`
-}type PokemonSpritesVersionsGenerationIvDiamondPearl struct {
-    BackDefault string \`json:\\"back_default\\" db:\\"back_default\\"\`
-    BackFemale string \`json:\\"back_female\\" db:\\"back_female\\"\`
-    BackShiny string \`json:\\"back_shiny\\" db:\\"back_shiny\\"\`
-    BackShinyFemale string \`json:\\"back_shiny_female\\" db:\\"back_shiny_female\\"\`
-    FrontDefault string \`json:\\"front_default\\" db:\\"front_default\\"\`
-    FrontFemale string \`json:\\"front_female\\" db:\\"front_female\\"\`
-    FrontShiny string \`json:\\"front_shiny\\" db:\\"front_shiny\\"\`
-    FrontShinyFemale string \`json:\\"front_shiny_female\\" db:\\"front_shiny_female\\"\`
-}type PokemonSpritesVersionsGenerationIvHeartgoldSoulsilver struct {
+}
+type PokemonSpritesVersionsGenerationIvDiamondPearl struct {
     BackDefault string \`json:\\"back_default\\" db:\\"back_default\\"\`
     BackFemale string \`json:\\"back_female\\" db:\\"back_female\\"\`
     BackShiny string \`json:\\"back_shiny\\" db:\\"back_shiny\\"\`
@@ -139,7 +154,8 @@ type PokemonAbilities struct {
     FrontFemale string \`json:\\"front_female\\" db:\\"front_female\\"\`
     FrontShiny string \`json:\\"front_shiny\\" db:\\"front_shiny\\"\`
     FrontShinyFemale string \`json:\\"front_shiny_female\\" db:\\"front_shiny_female\\"\`
-}type PokemonSpritesVersionsGenerationIvPlatinum struct {
+}
+type PokemonSpritesVersionsGenerationIvHeartgoldSoulsilver struct {
     BackDefault string \`json:\\"back_default\\" db:\\"back_default\\"\`
     BackFemale string \`json:\\"back_female\\" db:\\"back_female\\"\`
     BackShiny string \`json:\\"back_shiny\\" db:\\"back_shiny\\"\`
@@ -148,7 +164,18 @@ type PokemonAbilities struct {
     FrontFemale string \`json:\\"front_female\\" db:\\"front_female\\"\`
     FrontShiny string \`json:\\"front_shiny\\" db:\\"front_shiny\\"\`
     FrontShinyFemale string \`json:\\"front_shiny_female\\" db:\\"front_shiny_female\\"\`
-}type PokemonSpritesVersionsGenerationVBlackWhite struct {
+}
+type PokemonSpritesVersionsGenerationIvPlatinum struct {
+    BackDefault string \`json:\\"back_default\\" db:\\"back_default\\"\`
+    BackFemale string \`json:\\"back_female\\" db:\\"back_female\\"\`
+    BackShiny string \`json:\\"back_shiny\\" db:\\"back_shiny\\"\`
+    BackShinyFemale string \`json:\\"back_shiny_female\\" db:\\"back_shiny_female\\"\`
+    FrontDefault string \`json:\\"front_default\\" db:\\"front_default\\"\`
+    FrontFemale string \`json:\\"front_female\\" db:\\"front_female\\"\`
+    FrontShiny string \`json:\\"front_shiny\\" db:\\"front_shiny\\"\`
+    FrontShinyFemale string \`json:\\"front_shiny_female\\" db:\\"front_shiny_female\\"\`
+}
+type PokemonSpritesVersionsGenerationVBlackWhite struct {
     Animated PokemonSpritesVersionsGenerationVBlackWhiteAnimated \`json:\\"animated\\" db:\\"animated\\"\`
     BackDefault string \`json:\\"back_default\\" db:\\"back_default\\"\`
     BackFemale string \`json:\\"back_female\\" db:\\"back_female\\"\`
@@ -158,7 +185,8 @@ type PokemonAbilities struct {
     FrontFemale string \`json:\\"front_female\\" db:\\"front_female\\"\`
     FrontShiny string \`json:\\"front_shiny\\" db:\\"front_shiny\\"\`
     FrontShinyFemale string \`json:\\"front_shiny_female\\" db:\\"front_shiny_female\\"\`
-}type PokemonSpritesVersionsGenerationVBlackWhiteAnimated struct {
+}
+type PokemonSpritesVersionsGenerationVBlackWhiteAnimated struct {
     BackDefault string \`json:\\"back_default\\" db:\\"back_default\\"\`
     BackFemale string \`json:\\"back_female\\" db:\\"back_female\\"\`
     BackShiny string \`json:\\"back_shiny\\" db:\\"back_shiny\\"\`
@@ -167,18 +195,22 @@ type PokemonAbilities struct {
     FrontFemale string \`json:\\"front_female\\" db:\\"front_female\\"\`
     FrontShiny string \`json:\\"front_shiny\\" db:\\"front_shiny\\"\`
     FrontShinyFemale string \`json:\\"front_shiny_female\\" db:\\"front_shiny_female\\"\`
-}type NameUrl struct {
+}
+type NameUrl struct {
     Name string \`json:\\"name\\" db:\\"name\\"\`
     Url string \`json:\\"url\\" db:\\"url\\"\`
-}type FrontDefaultFrontFemale struct {
+}
+type FrontDefaultFrontFemale struct {
     FrontDefault string \`json:\\"front_default\\" db:\\"front_default\\"\`
     FrontFemale string \`json:\\"front_female\\" db:\\"front_female\\"\`
-}type RedBlueYellow struct {
+}
+type RedBlueYellow struct {
     BackDefault string \`json:\\"back_default\\" db:\\"back_default\\"\`
     BackGray string \`json:\\"back_gray\\" db:\\"back_gray\\"\`
     FrontDefault string \`json:\\"front_default\\" db:\\"front_default\\"\`
     FrontGray string \`json:\\"front_gray\\" db:\\"front_gray\\"\`
-}type GenerationViiOmegarubyAlphasapphireUltraSunUltraMoonXY struct {
+}
+type GenerationViiOmegarubyAlphasapphireUltraSunUltraMoonXY struct {
     FrontDefault string \`json:\\"front_default\\" db:\\"front_default\\"\`
     FrontFemale string \`json:\\"front_female\\" db:\\"front_female\\"\`
     FrontShiny string \`json:\\"front_shiny\\" db:\\"front_shiny\\"\`
@@ -212,19 +244,24 @@ type PokemonAbilities struct {
     Ability PokemonAbilitiesAbility \`json:\\"ability\\" db:\\"ability\\"\`
     IsHidden bool \`json:\\"is_hidden\\" db:\\"is_hidden\\"\`
     Slot int \`json:\\"slot\\" db:\\"slot\\"\`
-}type PokemonForms struct {
+}
+type PokemonForms struct {
     Name string \`json:\\"name\\" db:\\"name\\"\`
     Url string \`json:\\"url\\" db:\\"url\\"\`
-}type PokemonGameIndices struct {
+}
+type PokemonGameIndices struct {
     GameIndex int \`json:\\"game_index\\" db:\\"game_index\\"\`
     Version PokemonGameIndicesVersion \`json:\\"version\\" db:\\"version\\"\`
-}type PokemonMoves struct {
+}
+type PokemonMoves struct {
     Move PokemonMovesMove \`json:\\"move\\" db:\\"move\\"\`
     VersionGroupDetails []PokemonMovesVersionGroupDetails \`json:\\"version_group_details\\" db:\\"version_group_details\\"\`
-}type PokemonSpecies struct {
+}
+type PokemonSpecies struct {
     Name string \`json:\\"name\\" db:\\"name\\"\`
     Url string \`json:\\"url\\" db:\\"url\\"\`
-}type PokemonSprites struct {
+}
+type PokemonSprites struct {
     BackDefault string \`json:\\"back_default\\" db:\\"back_default\\"\`
     BackFemale string \`json:\\"back_female\\" db:\\"back_female\\"\`
     BackShiny string \`json:\\"back_shiny\\" db:\\"back_shiny\\"\`
@@ -235,36 +272,46 @@ type PokemonAbilities struct {
     FrontShinyFemale string \`json:\\"front_shiny_female\\" db:\\"front_shiny_female\\"\`
     Other PokemonSpritesOther \`json:\\"other\\" db:\\"other\\"\`
     Versions PokemonSpritesVersions \`json:\\"versions\\" db:\\"versions\\"\`
-}type PokemonStats struct {
+}
+type PokemonStats struct {
     BaseStat int \`json:\\"base_stat\\" db:\\"base_stat\\"\`
     Effort int \`json:\\"effort\\" db:\\"effort\\"\`
     Stat PokemonStatsStat \`json:\\"stat\\" db:\\"stat\\"\`
-}type PokemonTypes struct {
+}
+type PokemonTypes struct {
     Slot int \`json:\\"slot\\" db:\\"slot\\"\`
     Type PokemonTypesType \`json:\\"type\\" db:\\"type\\"\`
-}type PokemonAbilitiesAbility struct {
+}
+type PokemonAbilitiesAbility struct {
     Name string \`json:\\"name\\" db:\\"name\\"\`
     Url string \`json:\\"url\\" db:\\"url\\"\`
-}type PokemonGameIndicesVersion struct {
+}
+type PokemonGameIndicesVersion struct {
     Name string \`json:\\"name\\" db:\\"name\\"\`
     Url string \`json:\\"url\\" db:\\"url\\"\`
-}type PokemonMovesMove struct {
+}
+type PokemonMovesMove struct {
     Name string \`json:\\"name\\" db:\\"name\\"\`
     Url string \`json:\\"url\\" db:\\"url\\"\`
-}type PokemonMovesVersionGroupDetails struct {
+}
+type PokemonMovesVersionGroupDetails struct {
     LevelLearnedAt int \`json:\\"level_learned_at\\" db:\\"level_learned_at\\"\`
     MoveLearnMethod PokemonMovesVersionGroupDetailsMoveLearnMethod \`json:\\"move_learn_method\\" db:\\"move_learn_method\\"\`
     VersionGroup PokemonMovesVersionGroupDetailsVersionGroup \`json:\\"version_group\\" db:\\"version_group\\"\`
-}type PokemonMovesVersionGroupDetailsMoveLearnMethod struct {
+}
+type PokemonMovesVersionGroupDetailsMoveLearnMethod struct {
     Name NameEnum \`json:\\"name\\" db:\\"name\\"\`
     Url UrlEnum \`json:\\"url\\" db:\\"url\\"\`
-}type PokemonMovesVersionGroupDetailsVersionGroup struct {
+}
+type PokemonMovesVersionGroupDetailsVersionGroup struct {
     Name string \`json:\\"name\\" db:\\"name\\"\`
     Url string \`json:\\"url\\" db:\\"url\\"\`
-}type PokemonSpritesOther struct {
+}
+type PokemonSpritesOther struct {
     DreamWorld PokemonSpritesOtherDreamWorld \`json:\\"dream_world\\" db:\\"dream_world\\"\`
     OfficialArtwork PokemonSpritesOtherOfficialArtwork \`json:\\"official_artwork\\" db:\\"official_artwork\\"\`
-}type PokemonSpritesVersions struct {
+}
+type PokemonSpritesVersions struct {
     GenerationI PokemonSpritesVersionsGenerationI \`json:\\"generation_i\\" db:\\"generation_i\\"\`
     GenerationIi PokemonSpritesVersionsGenerationIi \`json:\\"generation_ii\\" db:\\"generation_ii\\"\`
     GenerationIii PokemonSpritesVersionsGenerationIii \`json:\\"generation_iii\\" db:\\"generation_iii\\"\`
@@ -273,84 +320,94 @@ type PokemonAbilities struct {
     GenerationVi PokemonSpritesVersionsGenerationVi \`json:\\"generation_vi\\" db:\\"generation_vi\\"\`
     GenerationVii PokemonSpritesVersionsGenerationVii \`json:\\"generation_vii\\" db:\\"generation_vii\\"\`
     GenerationViii PokemonSpritesVersionsGenerationViii \`json:\\"generation_viii\\" db:\\"generation_viii\\"\`
-}type PokemonSpritesOtherDreamWorld struct {
+}
+type PokemonSpritesOtherDreamWorld struct {
     FrontDefault string \`json:\\"front_default\\" db:\\"front_default\\"\`
     FrontFemale string \`json:\\"front_female\\" db:\\"front_female\\"\`
-}type PokemonSpritesOtherOfficialArtwork struct {
+}
+type PokemonSpritesOtherOfficialArtwork struct {
     FrontDefault string \`json:\\"front_default\\" db:\\"front_default\\"\`
-}type PokemonSpritesVersionsGenerationI struct {
+}
+type PokemonSpritesVersionsGenerationI struct {
     RedBlue PokemonSpritesVersionsGenerationIRedBlue \`json:\\"red_blue\\" db:\\"red_blue\\"\`
     Yellow PokemonSpritesVersionsGenerationIYellow \`json:\\"yellow\\" db:\\"yellow\\"\`
-}type PokemonSpritesVersionsGenerationIi struct {
+}
+type PokemonSpritesVersionsGenerationIi struct {
     Crystal PokemonSpritesVersionsGenerationIiCrystal \`json:\\"crystal\\" db:\\"crystal\\"\`
     Gold PokemonSpritesVersionsGenerationIiGold \`json:\\"gold\\" db:\\"gold\\"\`
     Silver PokemonSpritesVersionsGenerationIiSilver \`json:\\"silver\\" db:\\"silver\\"\`
-}type PokemonSpritesVersionsGenerationIii struct {
+}
+type PokemonSpritesVersionsGenerationIii struct {
     Emerald PokemonSpritesVersionsGenerationIiiEmerald \`json:\\"emerald\\" db:\\"emerald\\"\`
     FireredLeafgreen PokemonSpritesVersionsGenerationIiiFireredLeafgreen \`json:\\"firered_leafgreen\\" db:\\"firered_leafgreen\\"\`
     RubySapphire PokemonSpritesVersionsGenerationIiiRubySapphire \`json:\\"ruby_sapphire\\" db:\\"ruby_sapphire\\"\`
-}type PokemonSpritesVersionsGenerationIv struct {
+}
+type PokemonSpritesVersionsGenerationIv struct {
     DiamondPearl PokemonSpritesVersionsGenerationIvDiamondPearl \`json:\\"diamond_pearl\\" db:\\"diamond_pearl\\"\`
     HeartgoldSoulsilver PokemonSpritesVersionsGenerationIvHeartgoldSoulsilver \`json:\\"heartgold_soulsilver\\" db:\\"heartgold_soulsilver\\"\`
     Platinum PokemonSpritesVersionsGenerationIvPlatinum \`json:\\"platinum\\" db:\\"platinum\\"\`
-}type PokemonSpritesVersionsGenerationV struct {
+}
+type PokemonSpritesVersionsGenerationV struct {
     BlackWhite PokemonSpritesVersionsGenerationVBlackWhite \`json:\\"black_white\\" db:\\"black_white\\"\`
-}type PokemonSpritesVersionsGenerationVi struct {
+}
+type PokemonSpritesVersionsGenerationVi struct {
     OmegarubyAlphasapphire PokemonSpritesVersionsGenerationViOmegarubyAlphasapphire \`json:\\"omegaruby_alphasapphire\\" db:\\"omegaruby_alphasapphire\\"\`
     XY PokemonSpritesVersionsGenerationViXY \`json:\\"x_y\\" db:\\"x_y\\"\`
-}type PokemonSpritesVersionsGenerationVii struct {
+}
+type PokemonSpritesVersionsGenerationVii struct {
     Icons PokemonSpritesVersionsGenerationViiIcons \`json:\\"icons\\" db:\\"icons\\"\`
     UltraSunUltraMoon PokemonSpritesVersionsGenerationViiUltraSunUltraMoon \`json:\\"ultra_sun_ultra_moon\\" db:\\"ultra_sun_ultra_moon\\"\`
-}type PokemonSpritesVersionsGenerationViii struct {
+}
+type PokemonSpritesVersionsGenerationViii struct {
     Icons PokemonSpritesVersionsGenerationViiiIcons \`json:\\"icons\\" db:\\"icons\\"\`
-}type PokemonSpritesVersionsGenerationIRedBlue struct {
+}
+type PokemonSpritesVersionsGenerationIRedBlue struct {
     BackDefault string \`json:\\"back_default\\" db:\\"back_default\\"\`
     BackGray string \`json:\\"back_gray\\" db:\\"back_gray\\"\`
     FrontDefault string \`json:\\"front_default\\" db:\\"front_default\\"\`
     FrontGray string \`json:\\"front_gray\\" db:\\"front_gray\\"\`
-}type PokemonSpritesVersionsGenerationIYellow struct {
+}
+type PokemonSpritesVersionsGenerationIYellow struct {
     BackDefault string \`json:\\"back_default\\" db:\\"back_default\\"\`
     BackGray string \`json:\\"back_gray\\" db:\\"back_gray\\"\`
     FrontDefault string \`json:\\"front_default\\" db:\\"front_default\\"\`
     FrontGray string \`json:\\"front_gray\\" db:\\"front_gray\\"\`
-}type PokemonSpritesVersionsGenerationIiCrystal struct {
+}
+type PokemonSpritesVersionsGenerationIiCrystal struct {
     BackDefault string \`json:\\"back_default\\" db:\\"back_default\\"\`
     BackShiny string \`json:\\"back_shiny\\" db:\\"back_shiny\\"\`
     FrontDefault string \`json:\\"front_default\\" db:\\"front_default\\"\`
     FrontShiny string \`json:\\"front_shiny\\" db:\\"front_shiny\\"\`
-}type PokemonSpritesVersionsGenerationIiGold struct {
+}
+type PokemonSpritesVersionsGenerationIiGold struct {
     BackDefault string \`json:\\"back_default\\" db:\\"back_default\\"\`
     BackShiny string \`json:\\"back_shiny\\" db:\\"back_shiny\\"\`
     FrontDefault string \`json:\\"front_default\\" db:\\"front_default\\"\`
     FrontShiny string \`json:\\"front_shiny\\" db:\\"front_shiny\\"\`
-}type PokemonSpritesVersionsGenerationIiSilver struct {
+}
+type PokemonSpritesVersionsGenerationIiSilver struct {
     BackDefault string \`json:\\"back_default\\" db:\\"back_default\\"\`
     BackShiny string \`json:\\"back_shiny\\" db:\\"back_shiny\\"\`
     FrontDefault string \`json:\\"front_default\\" db:\\"front_default\\"\`
     FrontShiny string \`json:\\"front_shiny\\" db:\\"front_shiny\\"\`
-}type PokemonSpritesVersionsGenerationIiiEmerald struct {
+}
+type PokemonSpritesVersionsGenerationIiiEmerald struct {
     FrontDefault string \`json:\\"front_default\\" db:\\"front_default\\"\`
     FrontShiny string \`json:\\"front_shiny\\" db:\\"front_shiny\\"\`
-}type PokemonSpritesVersionsGenerationIiiFireredLeafgreen struct {
+}
+type PokemonSpritesVersionsGenerationIiiFireredLeafgreen struct {
     BackDefault string \`json:\\"back_default\\" db:\\"back_default\\"\`
     BackShiny string \`json:\\"back_shiny\\" db:\\"back_shiny\\"\`
     FrontDefault string \`json:\\"front_default\\" db:\\"front_default\\"\`
     FrontShiny string \`json:\\"front_shiny\\" db:\\"front_shiny\\"\`
-}type PokemonSpritesVersionsGenerationIiiRubySapphire struct {
+}
+type PokemonSpritesVersionsGenerationIiiRubySapphire struct {
     BackDefault string \`json:\\"back_default\\" db:\\"back_default\\"\`
     BackShiny string \`json:\\"back_shiny\\" db:\\"back_shiny\\"\`
     FrontDefault string \`json:\\"front_default\\" db:\\"front_default\\"\`
     FrontShiny string \`json:\\"front_shiny\\" db:\\"front_shiny\\"\`
-}type PokemonSpritesVersionsGenerationIvDiamondPearl struct {
-    BackDefault string \`json:\\"back_default\\" db:\\"back_default\\"\`
-    BackFemale string \`json:\\"back_female\\" db:\\"back_female\\"\`
-    BackShiny string \`json:\\"back_shiny\\" db:\\"back_shiny\\"\`
-    BackShinyFemale string \`json:\\"back_shiny_female\\" db:\\"back_shiny_female\\"\`
-    FrontDefault string \`json:\\"front_default\\" db:\\"front_default\\"\`
-    FrontFemale string \`json:\\"front_female\\" db:\\"front_female\\"\`
-    FrontShiny string \`json:\\"front_shiny\\" db:\\"front_shiny\\"\`
-    FrontShinyFemale string \`json:\\"front_shiny_female\\" db:\\"front_shiny_female\\"\`
-}type PokemonSpritesVersionsGenerationIvHeartgoldSoulsilver struct {
+}
+type PokemonSpritesVersionsGenerationIvDiamondPearl struct {
     BackDefault string \`json:\\"back_default\\" db:\\"back_default\\"\`
     BackFemale string \`json:\\"back_female\\" db:\\"back_female\\"\`
     BackShiny string \`json:\\"back_shiny\\" db:\\"back_shiny\\"\`
@@ -359,7 +416,8 @@ type PokemonAbilities struct {
     FrontFemale string \`json:\\"front_female\\" db:\\"front_female\\"\`
     FrontShiny string \`json:\\"front_shiny\\" db:\\"front_shiny\\"\`
     FrontShinyFemale string \`json:\\"front_shiny_female\\" db:\\"front_shiny_female\\"\`
-}type PokemonSpritesVersionsGenerationIvPlatinum struct {
+}
+type PokemonSpritesVersionsGenerationIvHeartgoldSoulsilver struct {
     BackDefault string \`json:\\"back_default\\" db:\\"back_default\\"\`
     BackFemale string \`json:\\"back_female\\" db:\\"back_female\\"\`
     BackShiny string \`json:\\"back_shiny\\" db:\\"back_shiny\\"\`
@@ -368,7 +426,18 @@ type PokemonAbilities struct {
     FrontFemale string \`json:\\"front_female\\" db:\\"front_female\\"\`
     FrontShiny string \`json:\\"front_shiny\\" db:\\"front_shiny\\"\`
     FrontShinyFemale string \`json:\\"front_shiny_female\\" db:\\"front_shiny_female\\"\`
-}type PokemonSpritesVersionsGenerationVBlackWhite struct {
+}
+type PokemonSpritesVersionsGenerationIvPlatinum struct {
+    BackDefault string \`json:\\"back_default\\" db:\\"back_default\\"\`
+    BackFemale string \`json:\\"back_female\\" db:\\"back_female\\"\`
+    BackShiny string \`json:\\"back_shiny\\" db:\\"back_shiny\\"\`
+    BackShinyFemale string \`json:\\"back_shiny_female\\" db:\\"back_shiny_female\\"\`
+    FrontDefault string \`json:\\"front_default\\" db:\\"front_default\\"\`
+    FrontFemale string \`json:\\"front_female\\" db:\\"front_female\\"\`
+    FrontShiny string \`json:\\"front_shiny\\" db:\\"front_shiny\\"\`
+    FrontShinyFemale string \`json:\\"front_shiny_female\\" db:\\"front_shiny_female\\"\`
+}
+type PokemonSpritesVersionsGenerationVBlackWhite struct {
     Animated PokemonSpritesVersionsGenerationVBlackWhiteAnimated \`json:\\"animated\\" db:\\"animated\\"\`
     BackDefault string \`json:\\"back_default\\" db:\\"back_default\\"\`
     BackFemale string \`json:\\"back_female\\" db:\\"back_female\\"\`
@@ -378,7 +447,8 @@ type PokemonAbilities struct {
     FrontFemale string \`json:\\"front_female\\" db:\\"front_female\\"\`
     FrontShiny string \`json:\\"front_shiny\\" db:\\"front_shiny\\"\`
     FrontShinyFemale string \`json:\\"front_shiny_female\\" db:\\"front_shiny_female\\"\`
-}type PokemonSpritesVersionsGenerationVBlackWhiteAnimated struct {
+}
+type PokemonSpritesVersionsGenerationVBlackWhiteAnimated struct {
     BackDefault string \`json:\\"back_default\\" db:\\"back_default\\"\`
     BackFemale string \`json:\\"back_female\\" db:\\"back_female\\"\`
     BackShiny string \`json:\\"back_shiny\\" db:\\"back_shiny\\"\`
@@ -387,31 +457,38 @@ type PokemonAbilities struct {
     FrontFemale string \`json:\\"front_female\\" db:\\"front_female\\"\`
     FrontShiny string \`json:\\"front_shiny\\" db:\\"front_shiny\\"\`
     FrontShinyFemale string \`json:\\"front_shiny_female\\" db:\\"front_shiny_female\\"\`
-}type PokemonSpritesVersionsGenerationViOmegarubyAlphasapphire struct {
+}
+type PokemonSpritesVersionsGenerationViOmegarubyAlphasapphire struct {
     FrontDefault string \`json:\\"front_default\\" db:\\"front_default\\"\`
     FrontFemale string \`json:\\"front_female\\" db:\\"front_female\\"\`
     FrontShiny string \`json:\\"front_shiny\\" db:\\"front_shiny\\"\`
     FrontShinyFemale string \`json:\\"front_shiny_female\\" db:\\"front_shiny_female\\"\`
-}type PokemonSpritesVersionsGenerationViXY struct {
+}
+type PokemonSpritesVersionsGenerationViXY struct {
     FrontDefault string \`json:\\"front_default\\" db:\\"front_default\\"\`
     FrontFemale string \`json:\\"front_female\\" db:\\"front_female\\"\`
     FrontShiny string \`json:\\"front_shiny\\" db:\\"front_shiny\\"\`
     FrontShinyFemale string \`json:\\"front_shiny_female\\" db:\\"front_shiny_female\\"\`
-}type PokemonSpritesVersionsGenerationViiIcons struct {
+}
+type PokemonSpritesVersionsGenerationViiIcons struct {
     FrontDefault string \`json:\\"front_default\\" db:\\"front_default\\"\`
     FrontFemale string \`json:\\"front_female\\" db:\\"front_female\\"\`
-}type PokemonSpritesVersionsGenerationViiUltraSunUltraMoon struct {
+}
+type PokemonSpritesVersionsGenerationViiUltraSunUltraMoon struct {
     FrontDefault string \`json:\\"front_default\\" db:\\"front_default\\"\`
     FrontFemale string \`json:\\"front_female\\" db:\\"front_female\\"\`
     FrontShiny string \`json:\\"front_shiny\\" db:\\"front_shiny\\"\`
     FrontShinyFemale string \`json:\\"front_shiny_female\\" db:\\"front_shiny_female\\"\`
-}type PokemonSpritesVersionsGenerationViiiIcons struct {
+}
+type PokemonSpritesVersionsGenerationViiiIcons struct {
     FrontDefault string \`json:\\"front_default\\" db:\\"front_default\\"\`
     FrontFemale string \`json:\\"front_female\\" db:\\"front_female\\"\`
-}type PokemonStatsStat struct {
+}
+type PokemonStatsStat struct {
     Name string \`json:\\"name\\" db:\\"name\\"\`
     Url string \`json:\\"url\\" db:\\"url\\"\`
-}type PokemonTypesType struct {
+}
+type PokemonTypesType struct {
     Name string \`json:\\"name\\" db:\\"name\\"\`
     Url string \`json:\\"url\\" db:\\"url\\"\`
 }"

@@ -152,7 +152,7 @@ const writer: IDataAnalyzerWriter = {
           )}`;
         })
         .join('\n') +
-      `\n)\n`;
+      `\n)`;
 
     schemaName = snakecase(schemaName);
 
@@ -175,7 +175,7 @@ const writer: IDataAnalyzerWriter = {
 
     const generatedSql = `${
       hasNestedTypes
-        ? `${getRecursive().join(';\n').trim()};\n`
+        ? `${getRecursive().join(';\n\n').trim()};\n`
         : `/* Note: no nested types detected */`
     }
 ${getCreateTableCode({ schemaName, fields: typeSummary.fields })}
