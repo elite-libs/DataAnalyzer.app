@@ -2,106 +2,106 @@
 
 exports[`#GoLang can emit deeply nested structs 1`] = `
 "type Pokemon struct {
-    Abilities []PokemonAbilities \`json:\\"abilities\\" db:\\"abilities\\"\`
-    BaseExperience int \`json:\\"base_experience\\" db:\\"base_experience\\"\`
-    Forms []PokemonForms \`json:\\"forms\\" db:\\"forms\\"\`
-    GameIndices []PokemonGameIndices \`json:\\"game_indices\\" db:\\"game_indices\\"\`
-    Height int \`json:\\"height\\" db:\\"height\\"\`
-    HeldItems []string \`json:\\"held_items\\" db:\\"held_items\\"\`
-    Id int \`json:\\"id\\" db:\\"id\\"\`
-    IsDefault bool \`json:\\"is_default\\" db:\\"is_default\\"\`
-    LocationAreaEncounters string \`json:\\"location_area_encounters\\" db:\\"location_area_encounters\\"\`
-    Moves []PokemonMoves \`json:\\"moves\\" db:\\"moves\\"\`
-    Name string \`json:\\"name\\" db:\\"name\\"\`
-    Order int \`json:\\"order\\" db:\\"order\\"\`
-    Species PokemonSpecies \`json:\\"species\\" db:\\"species\\"\`
-    Sprites PokemonSprites \`json:\\"sprites\\" db:\\"sprites\\"\`
-    Stats []PokemonStats \`json:\\"stats\\" db:\\"stats\\"\`
-    Types []PokemonTypes \`json:\\"types\\" db:\\"types\\"\`
-    Weight int \`json:\\"weight\\" db:\\"weight\\"\`
+    Abilities undefined \`json:\\"abilities\\" db:\\"abilities\\"\`
+    BaseExperience undefined \`json:\\"base_experience\\" db:\\"base_experience\\"\`
+    Forms undefined \`json:\\"forms\\" db:\\"forms\\"\`
+    GameIndices undefined \`json:\\"game_indices\\" db:\\"game_indices\\"\`
+    Height undefined \`json:\\"height\\" db:\\"height\\"\`
+    HeldItems undefined \`json:\\"held_items\\" db:\\"held_items\\"\`
+    Id undefined \`json:\\"id\\" db:\\"id\\"\`
+    IsDefault undefined \`json:\\"is_default\\" db:\\"is_default\\"\`
+    LocationAreaEncounters undefined \`json:\\"location_area_encounters\\" db:\\"location_area_encounters\\"\`
+    Moves undefined \`json:\\"moves\\" db:\\"moves\\"\`
+    Name undefined \`json:\\"name\\" db:\\"name\\"\`
+    Order undefined \`json:\\"order\\" db:\\"order\\"\`
+    Species undefined \`json:\\"species\\" db:\\"species\\"\`
+    Sprites undefined \`json:\\"sprites\\" db:\\"sprites\\"\`
+    Stats undefined \`json:\\"stats\\" db:\\"stats\\"\`
+    Types undefined \`json:\\"types\\" db:\\"types\\"\`
+    Weight undefined \`json:\\"weight\\" db:\\"weight\\"\`
 }
 
 
 type PokemonAbilities struct {
-    Ability PokemonAbilitiesAbility \`json:\\"ability\\" db:\\"ability\\"\`
-    IsHidden bool \`json:\\"is_hidden\\" db:\\"is_hidden\\"\`
-    Slot int \`json:\\"slot\\" db:\\"slot\\"\`
+    Ability undefined \`json:\\"ability\\" db:\\"ability\\"\`
+    IsHidden undefined \`json:\\"is_hidden\\" db:\\"is_hidden\\"\`
+    Slot undefined \`json:\\"slot\\" db:\\"slot\\"\`
 }
 
 
 type PokemonForms struct {
-    Name string \`json:\\"name\\" db:\\"name\\"\`
-    Url string \`json:\\"url\\" db:\\"url\\"\`
+    Name undefined \`json:\\"name\\" db:\\"name\\"\`
+    Url undefined \`json:\\"url\\" db:\\"url\\"\`
 }
 
 
 type PokemonGameIndices struct {
-    GameIndex int \`json:\\"game_index\\" db:\\"game_index\\"\`
-    Version PokemonGameIndicesVersion \`json:\\"version\\" db:\\"version\\"\`
+    GameIndex undefined \`json:\\"game_index\\" db:\\"game_index\\"\`
+    Version undefined \`json:\\"version\\" db:\\"version\\"\`
 }
 
 
 type PokemonMoves struct {
-    Move PokemonMovesMove \`json:\\"move\\" db:\\"move\\"\`
-    VersionGroupDetails []PokemonMovesVersionGroupDetails \`json:\\"version_group_details\\" db:\\"version_group_details\\"\`
+    Move undefined \`json:\\"move\\" db:\\"move\\"\`
+    VersionGroupDetails undefined \`json:\\"version_group_details\\" db:\\"version_group_details\\"\`
 }
 
 
 type PokemonSpecies struct {
-    Name string \`json:\\"name\\" db:\\"name\\"\`
-    Url string \`json:\\"url\\" db:\\"url\\"\`
+    Name undefined \`json:\\"name\\" db:\\"name\\"\`
+    Url undefined \`json:\\"url\\" db:\\"url\\"\`
 }
 
 
 type PokemonSprites struct {
-    BackDefault string \`json:\\"back_default\\" db:\\"back_default\\"\`
-    BackFemale string \`json:\\"back_female\\" db:\\"back_female\\"\`
-    BackShiny string \`json:\\"back_shiny\\" db:\\"back_shiny\\"\`
-    BackShinyFemale string \`json:\\"back_shiny_female\\" db:\\"back_shiny_female\\"\`
-    FrontDefault string \`json:\\"front_default\\" db:\\"front_default\\"\`
-    FrontFemale string \`json:\\"front_female\\" db:\\"front_female\\"\`
-    FrontShiny string \`json:\\"front_shiny\\" db:\\"front_shiny\\"\`
-    FrontShinyFemale string \`json:\\"front_shiny_female\\" db:\\"front_shiny_female\\"\`
-    Other PokemonSpritesOther \`json:\\"other\\" db:\\"other\\"\`
-    Versions PokemonSpritesVersions \`json:\\"versions\\" db:\\"versions\\"\`
+    BackDefault undefined \`json:\\"back_default\\" db:\\"back_default\\"\`
+    BackFemale undefined \`json:\\"back_female\\" db:\\"back_female\\"\`
+    BackShiny undefined \`json:\\"back_shiny\\" db:\\"back_shiny\\"\`
+    BackShinyFemale undefined \`json:\\"back_shiny_female\\" db:\\"back_shiny_female\\"\`
+    FrontDefault undefined \`json:\\"front_default\\" db:\\"front_default\\"\`
+    FrontFemale undefined \`json:\\"front_female\\" db:\\"front_female\\"\`
+    FrontShiny undefined \`json:\\"front_shiny\\" db:\\"front_shiny\\"\`
+    FrontShinyFemale undefined \`json:\\"front_shiny_female\\" db:\\"front_shiny_female\\"\`
+    Other undefined \`json:\\"other\\" db:\\"other\\"\`
+    Versions undefined \`json:\\"versions\\" db:\\"versions\\"\`
 }
 
 
 type PokemonStats struct {
-    BaseStat int \`json:\\"base_stat\\" db:\\"base_stat\\"\`
-    Effort int \`json:\\"effort\\" db:\\"effort\\"\`
-    Stat PokemonStatsStat \`json:\\"stat\\" db:\\"stat\\"\`
+    BaseStat undefined \`json:\\"base_stat\\" db:\\"base_stat\\"\`
+    Effort undefined \`json:\\"effort\\" db:\\"effort\\"\`
+    Stat undefined \`json:\\"stat\\" db:\\"stat\\"\`
 }
 
 
 type PokemonTypes struct {
-    Slot int \`json:\\"slot\\" db:\\"slot\\"\`
-    Type PokemonTypesType \`json:\\"type\\" db:\\"type\\"\`
+    Slot undefined \`json:\\"slot\\" db:\\"slot\\"\`
+    Type undefined \`json:\\"type\\" db:\\"type\\"\`
 }
 
 
 type PokemonAbilitiesAbility struct {
-    Name string \`json:\\"name\\" db:\\"name\\"\`
-    Url string \`json:\\"url\\" db:\\"url\\"\`
+    Name undefined \`json:\\"name\\" db:\\"name\\"\`
+    Url undefined \`json:\\"url\\" db:\\"url\\"\`
 }
 
 
 type PokemonGameIndicesVersion struct {
-    Name string \`json:\\"name\\" db:\\"name\\"\`
-    Url string \`json:\\"url\\" db:\\"url\\"\`
+    Name undefined \`json:\\"name\\" db:\\"name\\"\`
+    Url undefined \`json:\\"url\\" db:\\"url\\"\`
 }
 
 
 type PokemonMovesMove struct {
-    Name string \`json:\\"name\\" db:\\"name\\"\`
-    Url string \`json:\\"url\\" db:\\"url\\"\`
+    Name undefined \`json:\\"name\\" db:\\"name\\"\`
+    Url undefined \`json:\\"url\\" db:\\"url\\"\`
 }
 
 
 type PokemonMovesVersionGroupDetails struct {
-    LevelLearnedAt int \`json:\\"level_learned_at\\" db:\\"level_learned_at\\"\`
-    MoveLearnMethod PokemonMovesVersionGroupDetailsMoveLearnMethod \`json:\\"move_learn_method\\" db:\\"move_learn_method\\"\`
-    VersionGroup PokemonMovesVersionGroupDetailsVersionGroup \`json:\\"version_group\\" db:\\"version_group\\"\`
+    LevelLearnedAt undefined \`json:\\"level_learned_at\\" db:\\"level_learned_at\\"\`
+    MoveLearnMethod undefined \`json:\\"move_learn_method\\" db:\\"move_learn_method\\"\`
+    VersionGroup undefined \`json:\\"version_group\\" db:\\"version_group\\"\`
 }
 
 
@@ -110,14 +110,14 @@ type PokemonMovesVersionGroupDetailsMoveLearnMethod struct {
     Url UrlEnum \`json:\\"url\\" db:\\"url\\"\`
 }
 
-type NameEnum string
+type NameEnum int
 const(
     Egg NameEnum = \\"Egg\\"
     LevelUp NameEnum = \\"LevelUp\\"
     Machine NameEnum = \\"Machine\\"
     Tutor NameEnum = \\"Tutor\\"
 )
-type UrlEnum string
+type UrlEnum int
 const(
     HttpsPokeapiCoApiV2MoveLearnMethod1 UrlEnum = \\"HttpsPokeapiCoApiV2MoveLearnMethod1\\"
     HttpsPokeapiCoApiV2MoveLearnMethod2 UrlEnum = \\"HttpsPokeapiCoApiV2MoveLearnMethod2\\"
@@ -125,257 +125,257 @@ const(
     HttpsPokeapiCoApiV2MoveLearnMethod4 UrlEnum = \\"HttpsPokeapiCoApiV2MoveLearnMethod4\\"
 )
 type PokemonMovesVersionGroupDetailsVersionGroup struct {
-    Name string \`json:\\"name\\" db:\\"name\\"\`
-    Url string \`json:\\"url\\" db:\\"url\\"\`
+    Name undefined \`json:\\"name\\" db:\\"name\\"\`
+    Url undefined \`json:\\"url\\" db:\\"url\\"\`
 }
 
 
 type PokemonSpritesOther struct {
-    DreamWorld PokemonSpritesOtherDreamWorld \`json:\\"dream_world\\" db:\\"dream_world\\"\`
-    OfficialArtwork PokemonSpritesOtherOfficialArtwork \`json:\\"official_artwork\\" db:\\"official_artwork\\"\`
+    DreamWorld undefined \`json:\\"dream_world\\" db:\\"dream_world\\"\`
+    OfficialArtwork undefined \`json:\\"official_artwork\\" db:\\"official_artwork\\"\`
 }
 
 
 type PokemonSpritesVersions struct {
-    GenerationI PokemonSpritesVersionsGenerationI \`json:\\"generation_i\\" db:\\"generation_i\\"\`
-    GenerationIi PokemonSpritesVersionsGenerationIi \`json:\\"generation_ii\\" db:\\"generation_ii\\"\`
-    GenerationIii PokemonSpritesVersionsGenerationIii \`json:\\"generation_iii\\" db:\\"generation_iii\\"\`
-    GenerationIv PokemonSpritesVersionsGenerationIv \`json:\\"generation_iv\\" db:\\"generation_iv\\"\`
-    GenerationV PokemonSpritesVersionsGenerationV \`json:\\"generation_v\\" db:\\"generation_v\\"\`
-    GenerationVi PokemonSpritesVersionsGenerationVi \`json:\\"generation_vi\\" db:\\"generation_vi\\"\`
-    GenerationVii PokemonSpritesVersionsGenerationVii \`json:\\"generation_vii\\" db:\\"generation_vii\\"\`
-    GenerationViii PokemonSpritesVersionsGenerationViii \`json:\\"generation_viii\\" db:\\"generation_viii\\"\`
+    GenerationI undefined \`json:\\"generation_i\\" db:\\"generation_i\\"\`
+    GenerationIi undefined \`json:\\"generation_ii\\" db:\\"generation_ii\\"\`
+    GenerationIii undefined \`json:\\"generation_iii\\" db:\\"generation_iii\\"\`
+    GenerationIv undefined \`json:\\"generation_iv\\" db:\\"generation_iv\\"\`
+    GenerationV undefined \`json:\\"generation_v\\" db:\\"generation_v\\"\`
+    GenerationVi undefined \`json:\\"generation_vi\\" db:\\"generation_vi\\"\`
+    GenerationVii undefined \`json:\\"generation_vii\\" db:\\"generation_vii\\"\`
+    GenerationViii undefined \`json:\\"generation_viii\\" db:\\"generation_viii\\"\`
 }
 
 
 type PokemonSpritesOtherDreamWorld struct {
-    FrontDefault string \`json:\\"front_default\\" db:\\"front_default\\"\`
-    FrontFemale string \`json:\\"front_female\\" db:\\"front_female\\"\`
+    FrontDefault undefined \`json:\\"front_default\\" db:\\"front_default\\"\`
+    FrontFemale undefined \`json:\\"front_female\\" db:\\"front_female\\"\`
 }
 
 
 type PokemonSpritesOtherOfficialArtwork struct {
-    FrontDefault string \`json:\\"front_default\\" db:\\"front_default\\"\`
+    FrontDefault undefined \`json:\\"front_default\\" db:\\"front_default\\"\`
 }
 
 
 type PokemonSpritesVersionsGenerationI struct {
-    RedBlue PokemonSpritesVersionsGenerationIRedBlue \`json:\\"red_blue\\" db:\\"red_blue\\"\`
-    Yellow PokemonSpritesVersionsGenerationIYellow \`json:\\"yellow\\" db:\\"yellow\\"\`
+    RedBlue undefined \`json:\\"red_blue\\" db:\\"red_blue\\"\`
+    Yellow undefined \`json:\\"yellow\\" db:\\"yellow\\"\`
 }
 
 
 type PokemonSpritesVersionsGenerationIi struct {
-    Crystal PokemonSpritesVersionsGenerationIiCrystal \`json:\\"crystal\\" db:\\"crystal\\"\`
-    Gold PokemonSpritesVersionsGenerationIiGold \`json:\\"gold\\" db:\\"gold\\"\`
-    Silver PokemonSpritesVersionsGenerationIiSilver \`json:\\"silver\\" db:\\"silver\\"\`
+    Crystal undefined \`json:\\"crystal\\" db:\\"crystal\\"\`
+    Gold undefined \`json:\\"gold\\" db:\\"gold\\"\`
+    Silver undefined \`json:\\"silver\\" db:\\"silver\\"\`
 }
 
 
 type PokemonSpritesVersionsGenerationIii struct {
-    Emerald PokemonSpritesVersionsGenerationIiiEmerald \`json:\\"emerald\\" db:\\"emerald\\"\`
-    FireredLeafgreen PokemonSpritesVersionsGenerationIiiFireredLeafgreen \`json:\\"firered_leafgreen\\" db:\\"firered_leafgreen\\"\`
-    RubySapphire PokemonSpritesVersionsGenerationIiiRubySapphire \`json:\\"ruby_sapphire\\" db:\\"ruby_sapphire\\"\`
+    Emerald undefined \`json:\\"emerald\\" db:\\"emerald\\"\`
+    FireredLeafgreen undefined \`json:\\"firered_leafgreen\\" db:\\"firered_leafgreen\\"\`
+    RubySapphire undefined \`json:\\"ruby_sapphire\\" db:\\"ruby_sapphire\\"\`
 }
 
 
 type PokemonSpritesVersionsGenerationIv struct {
-    DiamondPearl PokemonSpritesVersionsGenerationIvDiamondPearl \`json:\\"diamond_pearl\\" db:\\"diamond_pearl\\"\`
-    HeartgoldSoulsilver PokemonSpritesVersionsGenerationIvHeartgoldSoulsilver \`json:\\"heartgold_soulsilver\\" db:\\"heartgold_soulsilver\\"\`
-    Platinum PokemonSpritesVersionsGenerationIvPlatinum \`json:\\"platinum\\" db:\\"platinum\\"\`
+    DiamondPearl undefined \`json:\\"diamond_pearl\\" db:\\"diamond_pearl\\"\`
+    HeartgoldSoulsilver undefined \`json:\\"heartgold_soulsilver\\" db:\\"heartgold_soulsilver\\"\`
+    Platinum undefined \`json:\\"platinum\\" db:\\"platinum\\"\`
 }
 
 
 type PokemonSpritesVersionsGenerationV struct {
-    BlackWhite PokemonSpritesVersionsGenerationVBlackWhite \`json:\\"black_white\\" db:\\"black_white\\"\`
+    BlackWhite undefined \`json:\\"black_white\\" db:\\"black_white\\"\`
 }
 
 
 type PokemonSpritesVersionsGenerationVi struct {
-    OmegarubyAlphasapphire PokemonSpritesVersionsGenerationViOmegarubyAlphasapphire \`json:\\"omegaruby_alphasapphire\\" db:\\"omegaruby_alphasapphire\\"\`
-    XY PokemonSpritesVersionsGenerationViXY \`json:\\"x_y\\" db:\\"x_y\\"\`
+    OmegarubyAlphasapphire undefined \`json:\\"omegaruby_alphasapphire\\" db:\\"omegaruby_alphasapphire\\"\`
+    XY undefined \`json:\\"x_y\\" db:\\"x_y\\"\`
 }
 
 
 type PokemonSpritesVersionsGenerationVii struct {
-    Icons PokemonSpritesVersionsGenerationViiIcons \`json:\\"icons\\" db:\\"icons\\"\`
-    UltraSunUltraMoon PokemonSpritesVersionsGenerationViiUltraSunUltraMoon \`json:\\"ultra_sun_ultra_moon\\" db:\\"ultra_sun_ultra_moon\\"\`
+    Icons undefined \`json:\\"icons\\" db:\\"icons\\"\`
+    UltraSunUltraMoon undefined \`json:\\"ultra_sun_ultra_moon\\" db:\\"ultra_sun_ultra_moon\\"\`
 }
 
 
 type PokemonSpritesVersionsGenerationViii struct {
-    Icons PokemonSpritesVersionsGenerationViiiIcons \`json:\\"icons\\" db:\\"icons\\"\`
+    Icons undefined \`json:\\"icons\\" db:\\"icons\\"\`
 }
 
 
 type PokemonSpritesVersionsGenerationIRedBlue struct {
-    BackDefault string \`json:\\"back_default\\" db:\\"back_default\\"\`
-    BackGray string \`json:\\"back_gray\\" db:\\"back_gray\\"\`
-    FrontDefault string \`json:\\"front_default\\" db:\\"front_default\\"\`
-    FrontGray string \`json:\\"front_gray\\" db:\\"front_gray\\"\`
+    BackDefault undefined \`json:\\"back_default\\" db:\\"back_default\\"\`
+    BackGray undefined \`json:\\"back_gray\\" db:\\"back_gray\\"\`
+    FrontDefault undefined \`json:\\"front_default\\" db:\\"front_default\\"\`
+    FrontGray undefined \`json:\\"front_gray\\" db:\\"front_gray\\"\`
 }
 
 
 type PokemonSpritesVersionsGenerationIYellow struct {
-    BackDefault string \`json:\\"back_default\\" db:\\"back_default\\"\`
-    BackGray string \`json:\\"back_gray\\" db:\\"back_gray\\"\`
-    FrontDefault string \`json:\\"front_default\\" db:\\"front_default\\"\`
-    FrontGray string \`json:\\"front_gray\\" db:\\"front_gray\\"\`
+    BackDefault undefined \`json:\\"back_default\\" db:\\"back_default\\"\`
+    BackGray undefined \`json:\\"back_gray\\" db:\\"back_gray\\"\`
+    FrontDefault undefined \`json:\\"front_default\\" db:\\"front_default\\"\`
+    FrontGray undefined \`json:\\"front_gray\\" db:\\"front_gray\\"\`
 }
 
 
 type PokemonSpritesVersionsGenerationIiCrystal struct {
-    BackDefault string \`json:\\"back_default\\" db:\\"back_default\\"\`
-    BackShiny string \`json:\\"back_shiny\\" db:\\"back_shiny\\"\`
-    FrontDefault string \`json:\\"front_default\\" db:\\"front_default\\"\`
-    FrontShiny string \`json:\\"front_shiny\\" db:\\"front_shiny\\"\`
+    BackDefault undefined \`json:\\"back_default\\" db:\\"back_default\\"\`
+    BackShiny undefined \`json:\\"back_shiny\\" db:\\"back_shiny\\"\`
+    FrontDefault undefined \`json:\\"front_default\\" db:\\"front_default\\"\`
+    FrontShiny undefined \`json:\\"front_shiny\\" db:\\"front_shiny\\"\`
 }
 
 
 type PokemonSpritesVersionsGenerationIiGold struct {
-    BackDefault string \`json:\\"back_default\\" db:\\"back_default\\"\`
-    BackShiny string \`json:\\"back_shiny\\" db:\\"back_shiny\\"\`
-    FrontDefault string \`json:\\"front_default\\" db:\\"front_default\\"\`
-    FrontShiny string \`json:\\"front_shiny\\" db:\\"front_shiny\\"\`
+    BackDefault undefined \`json:\\"back_default\\" db:\\"back_default\\"\`
+    BackShiny undefined \`json:\\"back_shiny\\" db:\\"back_shiny\\"\`
+    FrontDefault undefined \`json:\\"front_default\\" db:\\"front_default\\"\`
+    FrontShiny undefined \`json:\\"front_shiny\\" db:\\"front_shiny\\"\`
 }
 
 
 type PokemonSpritesVersionsGenerationIiSilver struct {
-    BackDefault string \`json:\\"back_default\\" db:\\"back_default\\"\`
-    BackShiny string \`json:\\"back_shiny\\" db:\\"back_shiny\\"\`
-    FrontDefault string \`json:\\"front_default\\" db:\\"front_default\\"\`
-    FrontShiny string \`json:\\"front_shiny\\" db:\\"front_shiny\\"\`
+    BackDefault undefined \`json:\\"back_default\\" db:\\"back_default\\"\`
+    BackShiny undefined \`json:\\"back_shiny\\" db:\\"back_shiny\\"\`
+    FrontDefault undefined \`json:\\"front_default\\" db:\\"front_default\\"\`
+    FrontShiny undefined \`json:\\"front_shiny\\" db:\\"front_shiny\\"\`
 }
 
 
 type PokemonSpritesVersionsGenerationIiiEmerald struct {
-    FrontDefault string \`json:\\"front_default\\" db:\\"front_default\\"\`
-    FrontShiny string \`json:\\"front_shiny\\" db:\\"front_shiny\\"\`
+    FrontDefault undefined \`json:\\"front_default\\" db:\\"front_default\\"\`
+    FrontShiny undefined \`json:\\"front_shiny\\" db:\\"front_shiny\\"\`
 }
 
 
 type PokemonSpritesVersionsGenerationIiiFireredLeafgreen struct {
-    BackDefault string \`json:\\"back_default\\" db:\\"back_default\\"\`
-    BackShiny string \`json:\\"back_shiny\\" db:\\"back_shiny\\"\`
-    FrontDefault string \`json:\\"front_default\\" db:\\"front_default\\"\`
-    FrontShiny string \`json:\\"front_shiny\\" db:\\"front_shiny\\"\`
+    BackDefault undefined \`json:\\"back_default\\" db:\\"back_default\\"\`
+    BackShiny undefined \`json:\\"back_shiny\\" db:\\"back_shiny\\"\`
+    FrontDefault undefined \`json:\\"front_default\\" db:\\"front_default\\"\`
+    FrontShiny undefined \`json:\\"front_shiny\\" db:\\"front_shiny\\"\`
 }
 
 
 type PokemonSpritesVersionsGenerationIiiRubySapphire struct {
-    BackDefault string \`json:\\"back_default\\" db:\\"back_default\\"\`
-    BackShiny string \`json:\\"back_shiny\\" db:\\"back_shiny\\"\`
-    FrontDefault string \`json:\\"front_default\\" db:\\"front_default\\"\`
-    FrontShiny string \`json:\\"front_shiny\\" db:\\"front_shiny\\"\`
+    BackDefault undefined \`json:\\"back_default\\" db:\\"back_default\\"\`
+    BackShiny undefined \`json:\\"back_shiny\\" db:\\"back_shiny\\"\`
+    FrontDefault undefined \`json:\\"front_default\\" db:\\"front_default\\"\`
+    FrontShiny undefined \`json:\\"front_shiny\\" db:\\"front_shiny\\"\`
 }
 
 
 type PokemonSpritesVersionsGenerationIvDiamondPearl struct {
-    BackDefault string \`json:\\"back_default\\" db:\\"back_default\\"\`
-    BackFemale string \`json:\\"back_female\\" db:\\"back_female\\"\`
-    BackShiny string \`json:\\"back_shiny\\" db:\\"back_shiny\\"\`
-    BackShinyFemale string \`json:\\"back_shiny_female\\" db:\\"back_shiny_female\\"\`
-    FrontDefault string \`json:\\"front_default\\" db:\\"front_default\\"\`
-    FrontFemale string \`json:\\"front_female\\" db:\\"front_female\\"\`
-    FrontShiny string \`json:\\"front_shiny\\" db:\\"front_shiny\\"\`
-    FrontShinyFemale string \`json:\\"front_shiny_female\\" db:\\"front_shiny_female\\"\`
+    BackDefault undefined \`json:\\"back_default\\" db:\\"back_default\\"\`
+    BackFemale undefined \`json:\\"back_female\\" db:\\"back_female\\"\`
+    BackShiny undefined \`json:\\"back_shiny\\" db:\\"back_shiny\\"\`
+    BackShinyFemale undefined \`json:\\"back_shiny_female\\" db:\\"back_shiny_female\\"\`
+    FrontDefault undefined \`json:\\"front_default\\" db:\\"front_default\\"\`
+    FrontFemale undefined \`json:\\"front_female\\" db:\\"front_female\\"\`
+    FrontShiny undefined \`json:\\"front_shiny\\" db:\\"front_shiny\\"\`
+    FrontShinyFemale undefined \`json:\\"front_shiny_female\\" db:\\"front_shiny_female\\"\`
 }
 
 
 type PokemonSpritesVersionsGenerationIvHeartgoldSoulsilver struct {
-    BackDefault string \`json:\\"back_default\\" db:\\"back_default\\"\`
-    BackFemale string \`json:\\"back_female\\" db:\\"back_female\\"\`
-    BackShiny string \`json:\\"back_shiny\\" db:\\"back_shiny\\"\`
-    BackShinyFemale string \`json:\\"back_shiny_female\\" db:\\"back_shiny_female\\"\`
-    FrontDefault string \`json:\\"front_default\\" db:\\"front_default\\"\`
-    FrontFemale string \`json:\\"front_female\\" db:\\"front_female\\"\`
-    FrontShiny string \`json:\\"front_shiny\\" db:\\"front_shiny\\"\`
-    FrontShinyFemale string \`json:\\"front_shiny_female\\" db:\\"front_shiny_female\\"\`
+    BackDefault undefined \`json:\\"back_default\\" db:\\"back_default\\"\`
+    BackFemale undefined \`json:\\"back_female\\" db:\\"back_female\\"\`
+    BackShiny undefined \`json:\\"back_shiny\\" db:\\"back_shiny\\"\`
+    BackShinyFemale undefined \`json:\\"back_shiny_female\\" db:\\"back_shiny_female\\"\`
+    FrontDefault undefined \`json:\\"front_default\\" db:\\"front_default\\"\`
+    FrontFemale undefined \`json:\\"front_female\\" db:\\"front_female\\"\`
+    FrontShiny undefined \`json:\\"front_shiny\\" db:\\"front_shiny\\"\`
+    FrontShinyFemale undefined \`json:\\"front_shiny_female\\" db:\\"front_shiny_female\\"\`
 }
 
 
 type PokemonSpritesVersionsGenerationIvPlatinum struct {
-    BackDefault string \`json:\\"back_default\\" db:\\"back_default\\"\`
-    BackFemale string \`json:\\"back_female\\" db:\\"back_female\\"\`
-    BackShiny string \`json:\\"back_shiny\\" db:\\"back_shiny\\"\`
-    BackShinyFemale string \`json:\\"back_shiny_female\\" db:\\"back_shiny_female\\"\`
-    FrontDefault string \`json:\\"front_default\\" db:\\"front_default\\"\`
-    FrontFemale string \`json:\\"front_female\\" db:\\"front_female\\"\`
-    FrontShiny string \`json:\\"front_shiny\\" db:\\"front_shiny\\"\`
-    FrontShinyFemale string \`json:\\"front_shiny_female\\" db:\\"front_shiny_female\\"\`
+    BackDefault undefined \`json:\\"back_default\\" db:\\"back_default\\"\`
+    BackFemale undefined \`json:\\"back_female\\" db:\\"back_female\\"\`
+    BackShiny undefined \`json:\\"back_shiny\\" db:\\"back_shiny\\"\`
+    BackShinyFemale undefined \`json:\\"back_shiny_female\\" db:\\"back_shiny_female\\"\`
+    FrontDefault undefined \`json:\\"front_default\\" db:\\"front_default\\"\`
+    FrontFemale undefined \`json:\\"front_female\\" db:\\"front_female\\"\`
+    FrontShiny undefined \`json:\\"front_shiny\\" db:\\"front_shiny\\"\`
+    FrontShinyFemale undefined \`json:\\"front_shiny_female\\" db:\\"front_shiny_female\\"\`
 }
 
 
 type PokemonSpritesVersionsGenerationVBlackWhite struct {
-    Animated PokemonSpritesVersionsGenerationVBlackWhiteAnimated \`json:\\"animated\\" db:\\"animated\\"\`
-    BackDefault string \`json:\\"back_default\\" db:\\"back_default\\"\`
-    BackFemale string \`json:\\"back_female\\" db:\\"back_female\\"\`
-    BackShiny string \`json:\\"back_shiny\\" db:\\"back_shiny\\"\`
-    BackShinyFemale string \`json:\\"back_shiny_female\\" db:\\"back_shiny_female\\"\`
-    FrontDefault string \`json:\\"front_default\\" db:\\"front_default\\"\`
-    FrontFemale string \`json:\\"front_female\\" db:\\"front_female\\"\`
-    FrontShiny string \`json:\\"front_shiny\\" db:\\"front_shiny\\"\`
-    FrontShinyFemale string \`json:\\"front_shiny_female\\" db:\\"front_shiny_female\\"\`
+    Animated undefined \`json:\\"animated\\" db:\\"animated\\"\`
+    BackDefault undefined \`json:\\"back_default\\" db:\\"back_default\\"\`
+    BackFemale undefined \`json:\\"back_female\\" db:\\"back_female\\"\`
+    BackShiny undefined \`json:\\"back_shiny\\" db:\\"back_shiny\\"\`
+    BackShinyFemale undefined \`json:\\"back_shiny_female\\" db:\\"back_shiny_female\\"\`
+    FrontDefault undefined \`json:\\"front_default\\" db:\\"front_default\\"\`
+    FrontFemale undefined \`json:\\"front_female\\" db:\\"front_female\\"\`
+    FrontShiny undefined \`json:\\"front_shiny\\" db:\\"front_shiny\\"\`
+    FrontShinyFemale undefined \`json:\\"front_shiny_female\\" db:\\"front_shiny_female\\"\`
 }
 
 
 type PokemonSpritesVersionsGenerationVBlackWhiteAnimated struct {
-    BackDefault string \`json:\\"back_default\\" db:\\"back_default\\"\`
-    BackFemale string \`json:\\"back_female\\" db:\\"back_female\\"\`
-    BackShiny string \`json:\\"back_shiny\\" db:\\"back_shiny\\"\`
-    BackShinyFemale string \`json:\\"back_shiny_female\\" db:\\"back_shiny_female\\"\`
-    FrontDefault string \`json:\\"front_default\\" db:\\"front_default\\"\`
-    FrontFemale string \`json:\\"front_female\\" db:\\"front_female\\"\`
-    FrontShiny string \`json:\\"front_shiny\\" db:\\"front_shiny\\"\`
-    FrontShinyFemale string \`json:\\"front_shiny_female\\" db:\\"front_shiny_female\\"\`
+    BackDefault undefined \`json:\\"back_default\\" db:\\"back_default\\"\`
+    BackFemale undefined \`json:\\"back_female\\" db:\\"back_female\\"\`
+    BackShiny undefined \`json:\\"back_shiny\\" db:\\"back_shiny\\"\`
+    BackShinyFemale undefined \`json:\\"back_shiny_female\\" db:\\"back_shiny_female\\"\`
+    FrontDefault undefined \`json:\\"front_default\\" db:\\"front_default\\"\`
+    FrontFemale undefined \`json:\\"front_female\\" db:\\"front_female\\"\`
+    FrontShiny undefined \`json:\\"front_shiny\\" db:\\"front_shiny\\"\`
+    FrontShinyFemale undefined \`json:\\"front_shiny_female\\" db:\\"front_shiny_female\\"\`
 }
 
 
 type PokemonSpritesVersionsGenerationViOmegarubyAlphasapphire struct {
-    FrontDefault string \`json:\\"front_default\\" db:\\"front_default\\"\`
-    FrontFemale string \`json:\\"front_female\\" db:\\"front_female\\"\`
-    FrontShiny string \`json:\\"front_shiny\\" db:\\"front_shiny\\"\`
-    FrontShinyFemale string \`json:\\"front_shiny_female\\" db:\\"front_shiny_female\\"\`
+    FrontDefault undefined \`json:\\"front_default\\" db:\\"front_default\\"\`
+    FrontFemale undefined \`json:\\"front_female\\" db:\\"front_female\\"\`
+    FrontShiny undefined \`json:\\"front_shiny\\" db:\\"front_shiny\\"\`
+    FrontShinyFemale undefined \`json:\\"front_shiny_female\\" db:\\"front_shiny_female\\"\`
 }
 
 
 type PokemonSpritesVersionsGenerationViXY struct {
-    FrontDefault string \`json:\\"front_default\\" db:\\"front_default\\"\`
-    FrontFemale string \`json:\\"front_female\\" db:\\"front_female\\"\`
-    FrontShiny string \`json:\\"front_shiny\\" db:\\"front_shiny\\"\`
-    FrontShinyFemale string \`json:\\"front_shiny_female\\" db:\\"front_shiny_female\\"\`
+    FrontDefault undefined \`json:\\"front_default\\" db:\\"front_default\\"\`
+    FrontFemale undefined \`json:\\"front_female\\" db:\\"front_female\\"\`
+    FrontShiny undefined \`json:\\"front_shiny\\" db:\\"front_shiny\\"\`
+    FrontShinyFemale undefined \`json:\\"front_shiny_female\\" db:\\"front_shiny_female\\"\`
 }
 
 
 type PokemonSpritesVersionsGenerationViiIcons struct {
-    FrontDefault string \`json:\\"front_default\\" db:\\"front_default\\"\`
-    FrontFemale string \`json:\\"front_female\\" db:\\"front_female\\"\`
+    FrontDefault undefined \`json:\\"front_default\\" db:\\"front_default\\"\`
+    FrontFemale undefined \`json:\\"front_female\\" db:\\"front_female\\"\`
 }
 
 
 type PokemonSpritesVersionsGenerationViiUltraSunUltraMoon struct {
-    FrontDefault string \`json:\\"front_default\\" db:\\"front_default\\"\`
-    FrontFemale string \`json:\\"front_female\\" db:\\"front_female\\"\`
-    FrontShiny string \`json:\\"front_shiny\\" db:\\"front_shiny\\"\`
-    FrontShinyFemale string \`json:\\"front_shiny_female\\" db:\\"front_shiny_female\\"\`
+    FrontDefault undefined \`json:\\"front_default\\" db:\\"front_default\\"\`
+    FrontFemale undefined \`json:\\"front_female\\" db:\\"front_female\\"\`
+    FrontShiny undefined \`json:\\"front_shiny\\" db:\\"front_shiny\\"\`
+    FrontShinyFemale undefined \`json:\\"front_shiny_female\\" db:\\"front_shiny_female\\"\`
 }
 
 
 type PokemonSpritesVersionsGenerationViiiIcons struct {
-    FrontDefault string \`json:\\"front_default\\" db:\\"front_default\\"\`
-    FrontFemale string \`json:\\"front_female\\" db:\\"front_female\\"\`
+    FrontDefault undefined \`json:\\"front_default\\" db:\\"front_default\\"\`
+    FrontFemale undefined \`json:\\"front_female\\" db:\\"front_female\\"\`
 }
 
 
 type PokemonStatsStat struct {
-    Name string \`json:\\"name\\" db:\\"name\\"\`
-    Url string \`json:\\"url\\" db:\\"url\\"\`
+    Name undefined \`json:\\"name\\" db:\\"name\\"\`
+    Url undefined \`json:\\"url\\" db:\\"url\\"\`
 }
 
 
 type PokemonTypesType struct {
-    Name string \`json:\\"name\\" db:\\"name\\"\`
-    Url string \`json:\\"url\\" db:\\"url\\"\`
+    Name undefined \`json:\\"name\\" db:\\"name\\"\`
+    Url undefined \`json:\\"url\\" db:\\"url\\"\`
 }
 
 
@@ -384,15 +384,15 @@ type PokemonTypesType struct {
 
 exports[`#GoLang can emit nested structs 1`] = `
 "type Users struct {
-    Id int \`json:\\"id\\" db:\\"id\\"\`
-    Name string \`json:\\"name\\" db:\\"name\\"\`
-    Notes []UserNotes \`json:\\"notes\\" db:\\"notes\\"\`
+    Id undefined \`json:\\"id\\" db:\\"id\\"\`
+    Name undefined \`json:\\"name\\" db:\\"name\\"\`
+    Notes undefined \`json:\\"notes\\" db:\\"notes\\"\`
 }
 
 
 type UserNotes struct {
-    Id int \`json:\\"id\\" db:\\"id\\"\`
-    Text string \`json:\\"text\\" db:\\"text\\"\`
+    Id undefined \`json:\\"id\\" db:\\"id\\"\`
+    Text undefined \`json:\\"text\\" db:\\"text\\"\`
 }
 
 
@@ -401,19 +401,19 @@ type UserNotes struct {
 
 exports[`#GoLang can emit structs with enum 1`] = `
 "type Users struct {
-    Id uuid.UUID \`json:\\"id\\" db:\\"id\\"\`
-    Email string \`json:\\"email\\" db:\\"email\\"\`
-    FirstName string \`json:\\"first_name\\" db:\\"first_name\\"\`
-    LastName string \`json:\\"last_name\\" db:\\"last_name\\"\`
-    IsActive bool \`json:\\"is_active\\" db:\\"is_active\\"\`
-    CreatedAt time.Time \`json:\\"created_at\\" db:\\"created_at\\"\`
-    ModifiedAt time.Time \`json:\\"modified_at\\" db:\\"modified_at\\"\`
-    CatchPhrase string \`json:\\"catch_phrase\\" db:\\"catch_phrase\\"\`
-    CompanyName string \`json:\\"company_name\\" db:\\"company_name\\"\`
+    Id undefined \`json:\\"id\\" db:\\"id\\"\`
+    Email undefined \`json:\\"email\\" db:\\"email\\"\`
+    FirstName undefined \`json:\\"first_name\\" db:\\"first_name\\"\`
+    LastName undefined \`json:\\"last_name\\" db:\\"last_name\\"\`
+    IsActive undefined \`json:\\"is_active\\" db:\\"is_active\\"\`
+    CreatedAt undefined \`json:\\"created_at\\" db:\\"created_at\\"\`
+    ModifiedAt undefined \`json:\\"modified_at\\" db:\\"modified_at\\"\`
+    CatchPhrase undefined \`json:\\"catch_phrase\\" db:\\"catch_phrase\\"\`
+    CompanyName undefined \`json:\\"company_name\\" db:\\"company_name\\"\`
     Credits CreditsEnum \`json:\\"credits\\" db:\\"credits\\"\`
-    SalesScore float32 \`json:\\"sales_score\\" db:\\"sales_score\\"\`
+    SalesScore undefined \`json:\\"sales_score\\" db:\\"sales_score\\"\`
     Location LocationEnum \`json:\\"location\\" db:\\"location\\"\`
-    Profile string \`json:\\"profile\\" db:\\"profile\\"\`
+    Profile undefined \`json:\\"profile\\" db:\\"profile\\"\`
 }
 
 type CreditsEnum int
@@ -427,173 +427,11 @@ const(
     15 CreditsEnum = 15
     20 CreditsEnum = 20
 )
-type LocationEnum string
+type LocationEnum int
 const(
     Denver LocationEnum = \\"Denver\\"
     Nyc LocationEnum = \\"Nyc\\"
     Remote LocationEnum = \\"Remote\\"
 )
 "
-`;
-
-exports[`#GoLang can emit structs with enum 2`] = `
-Object {
-  "fields": Object {
-    "catchPhrase": Object {
-      "count": 26,
-      "enum": null,
-      "identity": false,
-      "length": 48,
-      "nullable": false,
-      "type": "String",
-      "typeRef": undefined,
-      "typeRelationship": undefined,
-      "unique": false,
-    },
-    "companyName": Object {
-      "count": 26,
-      "enum": null,
-      "identity": false,
-      "length": 20,
-      "nullable": false,
-      "type": "String",
-      "typeRef": undefined,
-      "typeRelationship": undefined,
-      "unique": false,
-    },
-    "createdAt": Object {
-      "count": 26,
-      "enum": null,
-      "identity": false,
-      "nullable": false,
-      "type": "Date",
-      "typeRef": undefined,
-      "typeRelationship": undefined,
-      "unique": false,
-    },
-    "credits": Object {
-      "count": 26,
-      "enum": Array [
-        1,
-        15,
-        20,
-        10,
-        0,
-        11,
-        7,
-        9,
-      ],
-      "identity": false,
-      "nullable": false,
-      "type": "Number",
-      "typeRef": undefined,
-      "typeRelationship": undefined,
-      "unique": false,
-    },
-    "email": Object {
-      "count": 25,
-      "enum": null,
-      "identity": false,
-      "length": 29,
-      "nullable": false,
-      "type": "String",
-      "typeRef": undefined,
-      "typeRelationship": undefined,
-      "unique": false,
-    },
-    "firstName": Object {
-      "count": 25,
-      "enum": null,
-      "identity": false,
-      "length": 10,
-      "nullable": false,
-      "type": "String",
-      "typeRef": undefined,
-      "typeRelationship": undefined,
-      "unique": false,
-    },
-    "id": Object {
-      "count": 25,
-      "enum": null,
-      "identity": true,
-      "nullable": false,
-      "type": "UUID",
-      "typeRef": undefined,
-      "typeRelationship": undefined,
-      "unique": true,
-    },
-    "isActive": Object {
-      "count": 26,
-      "enum": null,
-      "identity": false,
-      "nullable": false,
-      "type": "Boolean",
-      "typeRef": undefined,
-      "typeRelationship": undefined,
-      "unique": false,
-    },
-    "lastName": Object {
-      "count": 25,
-      "enum": null,
-      "identity": false,
-      "length": 11,
-      "nullable": false,
-      "type": "String",
-      "typeRef": undefined,
-      "typeRelationship": undefined,
-      "unique": false,
-    },
-    "location": Object {
-      "count": 26,
-      "enum": Array [
-        "nyc",
-        "remote",
-        "denver",
-      ],
-      "identity": false,
-      "length": 6,
-      "nullable": false,
-      "type": "String",
-      "typeRef": undefined,
-      "typeRelationship": undefined,
-      "unique": false,
-    },
-    "modifiedAt": Object {
-      "count": 26,
-      "enum": null,
-      "identity": false,
-      "nullable": false,
-      "type": "Date",
-      "typeRef": undefined,
-      "typeRelationship": undefined,
-      "unique": false,
-    },
-    "profile": Object {
-      "count": 25,
-      "enum": null,
-      "identity": false,
-      "length": 234,
-      "nullable": true,
-      "type": "String",
-      "typeRef": undefined,
-      "typeRelationship": undefined,
-      "unique": true,
-    },
-    "salesScore": Object {
-      "count": 26,
-      "enum": null,
-      "identity": false,
-      "nullable": false,
-      "precision": 9,
-      "scale": 7,
-      "type": "Float",
-      "typeRef": undefined,
-      "typeRelationship": undefined,
-      "unique": false,
-    },
-  },
-  "nestedTypes": Object {},
-  "schemaName": "users",
-  "totalRows": 26,
-}
 `;

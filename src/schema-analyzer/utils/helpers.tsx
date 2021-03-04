@@ -2,7 +2,7 @@
 import { startCase, takeWhile } from 'lodash';
 import { mapValues } from 'lodash';
 import {
-  AggregateSummary,
+  IFlattenTypesOptions,
   FieldInfo,
   CombinedFieldInfo,
   TypeNameString,
@@ -11,23 +11,15 @@ import {
   NumericFieldInfo,
   FieldTypeSummary,
   SimpleFieldInfo,
-} from '..';
+} from '../../types';
 
 // const log = debug('schema-builder:helpers')
-interface IHelperOptions {
-  /** Percent of empty records indicating field is still non-null. (Error tolerance for bad data.) Default: 0.001 */
-  nullableRowsThreshold: number;
-  targetLength: keyof AggregateSummary;
-  targetScale: keyof AggregateSummary;
-  targetPrecision: keyof AggregateSummary;
-  targetValue: keyof AggregateSummary;
-}
 
 type CombinedFieldsDict = { [key: string]: CombinedFieldInfo };
 
 export function flattenTypes(
   results: TypeSummary<FieldInfo>,
-  options: IHelperOptions = {
+  options: IFlattenTypesOptions = {
     nullableRowsThreshold: 0.001,
     targetLength: 'max',
     targetPrecision: 'max',
@@ -64,7 +56,7 @@ export function flattenTypes(
 
 function _simplifyFieldInfo(
   fieldInfo: FieldInfo,
-  options: IHelperOptions,
+  options: IFlattenTypesOptions,
   name: string,
 ): CombinedFieldInfo {
   // fieldInfo.types
@@ -102,7 +94,7 @@ function _simplifyFieldInfo(
   //   arrayOfTypes[1][0] === '$ref'
   // ) {
   if (refFieldInfo) {
-    // console.log('REFTYPEFIELD', refTypeField);
+    // console.log('refTypeField', refTypeField);
     typeAliasRef = refFieldInfo.typeAlias;
     typeRelationship = refFieldInfo.typeRelationship;
   }

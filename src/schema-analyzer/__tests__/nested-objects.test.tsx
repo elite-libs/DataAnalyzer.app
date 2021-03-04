@@ -1,13 +1,9 @@
-import {
-  ISchemaAnalyzerOptions,
-  schemaAnalyzer,
-  helpers,
-  consolidateNestedTypes,
-} from '../';
+import { schemaAnalyzer, consolidateNestedTypes } from '../';
 import historicEvents from '../../../public/data/historic-events.json';
 // https://pokeapi.co/api/v2/pokemon/4
 import pokemonCharmander from '../../../public/data/pokemon-charmander.json';
 import usersNotes from '../../../public/data/user-notes.json';
+import { ISchemaAnalyzerOptions } from '../../types';
 
 describe('#nested objects', () => {
   // Uses data from http://history.muffinlabs.com/date/2/16
@@ -41,20 +37,21 @@ describe('#nested objects', () => {
     it('can find similar types by field name', async () => {
       try {
         const summary = await schemaAnalyzer('historicEvent', historicEvents, {
-          strictMatching: false,
-        });
-        const result = helpers.flattenTypes(summary, {
-          nullableRowsThreshold: 0.0001,
-          targetValue: 'p99',
-          targetLength: 'p99',
-          targetPrecision: 'p99',
-          targetScale: 'p99',
-        });
-        const consolidatedTypes = consolidateNestedTypes(result.nestedTypes, {
           consolidateTypes: 'field-names',
+          strictMatching: false,
+          debug: true,
+          flattenOptions: {
+            nullableRowsThreshold: 0.0001,
+            targetValue: 'p99',
+            targetLength: 'p99',
+            targetPrecision: 'p99',
+            targetScale: 'p99',
+          },
         });
-        result.nestedTypes = consolidatedTypes.nestedTypes;
-        expect(result.nestedTypes).toMatchSnapshot();
+        const result = summary.flatSchema;
+        if (summary.denseNestedTypes)
+          result.nestedTypes = summary.denseNestedTypes;
+        expect(summary.denseNestedChanges).toMatchSnapshot();
         // console.log(JSON.stringify(result, null, 2));
         // expect(result).toMatchSnapshot();
         expect(Object.keys(result.fields)).toStrictEqual([
@@ -75,6 +72,7 @@ describe('#nested objects', () => {
         // expect(
         //   Object.keys(result.nestedTypes?.['historicEvent.data']?.fields!),
         // ).toStrictEqual(['year', 'text', 'html', 'no_year_html', 'links']);
+        expect(result.nestedTypes).toMatchSnapshot();
       } catch (error) {
         console.error('ERROR:', error);
         throw error;
@@ -84,25 +82,17 @@ describe('#nested objects', () => {
       try {
         const summary = await schemaAnalyzer('Pokemon', pokemonCharmander, {
           strictMatching: false,
-        });
-        const result = helpers.flattenTypes(summary, {
-          nullableRowsThreshold: 0.0001,
-          targetValue: 'p99',
-          targetLength: 'p99',
-          targetPrecision: 'p99',
-          targetScale: 'p99',
-        });
-        expect(result.nestedTypes).toMatchSnapshot(
-          'Before consolidating types',
-        );
-        const consolidatedTypeResults = consolidateNestedTypes(
-          result.nestedTypes,
-          {
-            consolidateTypes: 'field-names-and-type',
+          consolidateTypes: 'field-names-and-type',
+          flattenOptions: {
+            nullableRowsThreshold: 0.0001,
+            targetValue: 'p99',
+            targetLength: 'p99',
+            targetPrecision: 'p99',
+            targetScale: 'p99',
           },
-        );
-        result.nestedTypes = consolidatedTypeResults.nestedTypes;
-        expect(result.nestedTypes).toMatchSnapshot('After consolidating types');
+        });
+        const result = summary.flatSchema;
+        expect(result).toMatchSnapshot('Consolidated types');
         // console.log(JSON.stringify(result, null, 2));
         // expect(result).toMatchSnapshot();
         expect(Object.keys(result.fields)).toStrictEqual([
@@ -133,14 +123,15 @@ describe('#nested objects', () => {
       try {
         const summary = await schemaAnalyzer('Pokemon', pokemonCharmander, {
           strictMatching: false,
+          flattenOptions: {
+            nullableRowsThreshold: 0.0001,
+            targetValue: 'p99',
+            targetLength: 'p99',
+            targetPrecision: 'p99',
+            targetScale: 'p99',
+          },
         });
-        const result = helpers.flattenTypes(summary, {
-          nullableRowsThreshold: 0.0001,
-          targetValue: 'p99',
-          targetLength: 'p99',
-          targetPrecision: 'p99',
-          targetScale: 'p99',
-        });
+        const result = summary.flatSchema;
         expect(result.nestedTypes).toMatchSnapshot(
           'Before consolidating types',
         );
@@ -180,46 +171,48 @@ describe('#nested objects', () => {
     try {
       const summary = await schemaAnalyzer('Pokemon', pokemonCharmander, {
         strictMatching: false,
+        consolidateTypes: undefined,
+        flattenOptions: {
+          nullableRowsThreshold: 0.0001,
+          targetValue: 'p99',
+          targetLength: 'p99',
+          targetPrecision: 'p99',
+          targetScale: 'p99',
+        },
       });
-      const result = helpers.flattenTypes(summary, {
-        nullableRowsThreshold: 0.0001,
-        targetValue: 'p99',
-        targetLength: 'p99',
-        targetPrecision: 'p99',
-        targetScale: 'p99',
-      });
-
-      const consolidatedTypes = consolidateNestedTypes(result.nestedTypes, {
-        consolidateTypes: undefined, //'field-names',
-      });
+      expect(summary.flatSchema).toMatchSnapshot();
     } catch (error) {
       console.error('ERROR:', error);
       throw error;
     }
   });
   it('can emit nested structs', async () => {
-    const options = { strictMatching: false };
+    const options: ISchemaAnalyzerOptions = {
+      strictMatching: false,
+      flattenOptions: {
+        targetLength: 'max',
+        targetPrecision: 'max',
+        targetScale: 'max',
+        targetValue: 'max',
+        nullableRowsThreshold: 0.001,
+      },
+    };
     const results = await schemaAnalyzer('User', usersNotes, options);
-    const flatResult = helpers.flattenTypes(results, {
-      targetLength: 'max',
-      targetPrecision: 'max',
-      targetScale: 'max',
-      targetValue: 'max',
-      nullableRowsThreshold: 0.001,
-    });
-    expect(flatResult).toMatchSnapshot();
+    expect(results.flatSchema).toMatchSnapshot();
   });
 
   it('can emit deeply nested structs', async () => {
-    const options = { strictMatching: false };
+    const options: ISchemaAnalyzerOptions = {
+      strictMatching: false,
+      flattenOptions: {
+        targetLength: 'max',
+        targetPrecision: 'max',
+        targetScale: 'max',
+        targetValue: 'max',
+        nullableRowsThreshold: 0.001,
+      },
+    };
     const results = await schemaAnalyzer('Pokemon', pokemonCharmander, options);
-    const flatResult = helpers.flattenTypes(results, {
-      targetLength: 'max',
-      targetPrecision: 'max',
-      targetScale: 'max',
-      targetValue: 'max',
-      nullableRowsThreshold: 0.001,
-    });
-    expect(flatResult).toMatchSnapshot();
+    expect(results.flatSchema).toMatchSnapshot();
   });
 });
