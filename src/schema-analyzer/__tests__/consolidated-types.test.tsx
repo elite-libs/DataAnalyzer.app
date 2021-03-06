@@ -7,6 +7,34 @@ import {
 } from '../utils/consolidate-nested-types';
 
 describe('#consolidated-types', () => {
+  it('#can resolve names for `EventResults` set', () => {
+    const input = {
+      'id|name': [
+        'EventResults._embedded.events.classifications.segment',
+        'EventResults._embedded.events.classifications.genre',
+        'EventResults._embedded.events.classifications.subGenre',
+        'EventResults._embedded.events._embedded.attractions.classifications.segment',
+        'EventResults._embedded.events._embedded.attractions.classifications.genre',
+        'EventResults._embedded.events._embedded.attractions.classifications.subGenre',
+      ],
+      href: [
+        'EventResults._embedded.events._links.self',
+        'EventResults._embedded.events._links.attractions',
+        'EventResults._embedded.events._links.venues',
+        'EventResults._embedded.events._embedded.venues._links.self',
+        'EventResults._embedded.events._embedded.attractions._links.self',
+      ],
+    };
+    const expected = {
+      'id|name': 'id.name',
+      href: 'href',
+    };
+    const results = mapValues(input, _inferTypeNames);
+    expect(results).toMatchSnapshot();
+    const assignedNames = _assignInferredNames(results, []);
+    expect(assignedNames).toStrictEqual(expected);
+    expect(assignedNames).toMatchSnapshot();
+  });
   it('#can resolve names for `historicEvent` set', () => {
     const input = {
       'Births|Deaths|Events': ['historicEvent.data'],

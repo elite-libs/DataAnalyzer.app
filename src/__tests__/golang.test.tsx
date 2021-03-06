@@ -3,6 +3,8 @@ import { schemaAnalyzer } from '../schema-analyzer/index';
 import usersNotes from '../../public/data/user-notes.json';
 import users from '../../public/data/users.example.json';
 import pokemonCharmander from '../../public/data/pokemon-charmander.json';
+import eventSearch from '../../public/data/ticketmaster-event-results.json';
+
 import { ISchemaAnalyzerOptions } from 'types';
 
 describe('#GoLang', () => {
@@ -74,6 +76,24 @@ describe('#GoLang', () => {
     const code = golang.render(results);
 
     expect(code).toMatchSnapshot();
+  });
+
+  it('can emit correctly prefixed type-names', async () => {
+    const results = await schemaAnalyzer('EventResults', eventSearch, {
+      strictMatching: false,
+      consolidateTypes: 'field-names',
+      debug: true,
+      flattenOptions: {
+        targetLength: 'max',
+        targetPrecision: 'max',
+        targetScale: 'max',
+        targetValue: 'max',
+        nullableRowsThreshold: 0.001,
+      },
+    });
+    const code = golang.render(results);
+
+    expect(code).toContain('type Links struct');
   });
 
   // it('can emit golang', async () => {
