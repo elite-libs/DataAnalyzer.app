@@ -18,24 +18,59 @@ import './DemoDataMenu.scss';
 // import { RootState } from 'store/rootReducer';
 // import { fromPairs, takeWhile } from 'lodash';
 
-export const sampleDataSets: Record<'label' | 'value' | 'schemaName', string>[] = [
-  { label: 'Users', value: '/data/users.example.json', schemaName: 'Users' },
-  { label: 'People', value: '/data/swapi-people.json', schemaName: 'People' },
+export interface DataSetInfo {
+  label: string;
+  value: string;
+  schemaName: string;
+  description?: string;
+  link? : string
+}
+
+export const sampleDataSets: DataSetInfo[] = [
+  {
+    label: 'Users',
+    value: '/data/users.example.json',
+    schemaName: 'Users',
+    description: 'Faker-generated data',
+  },
+  {
+    label: 'People',
+    value: '/data/swapi-people.json',
+    schemaName: 'People',
+    description: 'SWAPI (Star Wars API)',
+    link: 'https://swapi.dev/'
+  },
   {
     label: 'Property',
     value: '/data/real-estate.example.json',
     schemaName: 'Property',
+    description: 'Faker-generated Property Data',
   },
-  { label: 'Products', value: '/data/products-3000.csv', schemaName: 'Product' },
+  {
+    label: 'Products',
+    value: '/data/products-3000.csv',
+    schemaName: 'Product',
+    description: 'Open Source Product API from brocade.io',
+    link: 'https://www.brocade.io/documentation'
+  },
+  {
+    label: 'EventResults',
+    value: '/data/ticketmaster-event-results.json',
+    schemaName: 'EventResults',
+    description: 'TicketMaster™️ search results',
+    link: 'https://developer.ticketmaster.com/products-and-docs/apis/discovery-api/v2/#search-events-v2'
+  },
   {
     label: 'Events',
     value: '/data/historic-events.json',
     schemaName: 'HistoricEvent',
+    description: '',
   },
   {
     label: 'Pokemon',
     value: '/data/pokemon-charmander.json',
     schemaName: 'Pokemon',
+    description: '',
   },
 ];
 
