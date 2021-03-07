@@ -56,10 +56,12 @@ module.exports.${properCase(schemaName)} = ${camelCase(schemaName)}Model;\n`
 
     const getRecursive = () => {
       if (!options?.disableNestedTypes && hasNestedTypes) {
-        return Object.entries(typeSummary.nestedTypes!).map(([nestedName, results]) => {
-          // console.log('nested mongoose schema:', nestedName);
-          return getSchema(nestedName, results.fields);
-        });
+        return Object.entries(typeSummary.nestedTypes!)
+          .map(([nestedName, results]) => {
+            // console.log('nested mongoose schema:', nestedName);
+            return getSchema(nestedName, results.fields);
+          })
+          .join('\n');
       }
       return '';
     };
