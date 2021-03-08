@@ -23,7 +23,7 @@ const writer: IDataAnalyzerWriter = {
           .map(([fieldName, fieldInfo]) => {
             if (fieldInfo == null) return `// null field info !!!`;
             return `  ${camelCase(fieldName)}: {
-    type: "${fieldInfo.type}",
+    type: "${fieldInfo.typeRef || fieldInfo.type}",
     ${fieldInfo.unique ? 'unique: true,' : ''}
     ${fieldInfo.nullable ? '' : 'required: true,'}
     ${
@@ -65,14 +65,36 @@ module.exports.${properCase(schemaName)} = ${camelCase(schemaName)}Model;\n`
       }
       return '';
     };
-    return (
-      getHeader() +
-      removeBlankLines(
-        getSchema(results.schemaName!, typeSummary.fields) + getRecursive(),
-      )
+    let code = moveModuleExports(
+      getSchema(results.schemaName!, typeSummary.fields) + getRecursive(),
     );
+    return getHeader() + removeBlankLines(code);
   },
 };
+
+function moveModuleExports(code: string): string {
+  const mongooseModelLines = /^const.*mongoose.model.*$/gim;
+  const moduleLines = /^module\.exports.*$/gim;
+  let moduleMatch: null | string[] = moduleLines.exec(code);
+  let mongooseMatch: null | string[] = mongooseModelLines.exec(code);
+  const moduleConstLines: string[] = [];
+  const moduleExportLines: string[] = [];
+  while (Array.isArray(moduleMatch) && moduleMatch.length > 0) {
+    moduleExportLines.push(...moduleMatch);
+    moduleMatch = moduleLines.exec(code);
+  }
+  while (Array.isArray(mongooseMatch) && mongooseMatch.length > 0) {
+    moduleConstLines.push(...mongooseMatch);
+    mongooseMatch = mongooseModelLines.exec(code);
+  }
+
+  code =
+    code.replace(moduleLines, '').replace(mongooseModelLines, '') +
+    moduleConstLines.join('\n') +
+    '\n\n' +
+    moduleExportLines.join('\n');
+  return code;
+}
 
 export default writer;
 

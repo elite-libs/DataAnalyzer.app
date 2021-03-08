@@ -21,6 +21,7 @@ type Props = {
   actions?: typeof Button[] | null;
   className?: string | null;
   disabled?: boolean;
+  testId?: string;
 } & PaperProps;
 
 export default React.forwardRef<any, Props>((props, ref) => {
@@ -33,6 +34,7 @@ export default React.forwardRef<any, Props>((props, ref) => {
     actions,
     className,
     disabled,
+    testId,
   } = props;
 
   return (
@@ -54,7 +56,9 @@ export default React.forwardRef<any, Props>((props, ref) => {
               </Typography>
             )}
           </div>
-          <div className="panel-body">{children}</div>
+          <div className="panel-body" data-testid={testId}>
+            {children}
+          </div>
         </CardContent>
         {actions && (
           <CardActions>

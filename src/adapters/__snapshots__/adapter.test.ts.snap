@@ -79,7 +79,6 @@ exports.up = async function up(knex) {
     table.string(\\"skin_color\\", 20);
     table.string(\\"eye_color\\", 20).enum('blue', 'yellow', 'red', 'brown', 'blue-gray', 'black', 'orange', 'hazel').notNullable();
     table.string(\\"birth_year\\", 20);
-    table.string(\\"gender\\", 20).enum('male', 'n/a', 'female', 'hermaphrodite', 'none').notNullable();
     table.string(\\"homeworld\\", 60).notNullable();
     table.json(\\"films\\").notNullable();
     table.json(\\"species\\").notNullable();
@@ -123,6 +122,951 @@ exports.down = async function down(knex) {
   await knex.schema.dropTableIfExists(\\"users_big_int\\");
 };
 "
+`;
+
+exports[`#mongoose can emit module exports correctly 1`] = `
+"const mongoose = require(\\"mongoose\\");
+const {Schema, Model, Types} = mongoose;
+
+const Pokemon = new Schema({
+  abilities: {
+    type: \\"pokemon.abilities\\",
+    required: true,
+  },
+  baseExperience: {
+    type: \\"Number\\",
+    unique: true,
+    required: true,
+  },
+  forms: {
+    type: \\"pokemon.forms\\",
+    required: true,
+  },
+  gameIndices: {
+    type: \\"pokemon.game_indices\\",
+    required: true,
+  },
+  height: {
+    type: \\"Number\\",
+    unique: true,
+    required: true,
+  },
+  heldItems: {
+    type: \\"Array\\",
+    required: true,
+  },
+  id: {
+    type: \\"Number\\",
+    unique: true,
+    required: true,
+  },
+  isDefault: {
+    type: \\"Boolean\\",
+    required: true,
+  },
+  locationAreaEncounters: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  moves: {
+    type: \\"pokemon.moves\\",
+    required: true,
+  },
+  name: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  order: {
+    type: \\"Number\\",
+    unique: true,
+    required: true,
+  },
+  species: {
+    type: \\"pokemon.species\\",
+    required: true,
+  },
+  sprites: {
+    type: \\"pokemon.sprites\\",
+    required: true,
+  },
+  stats: {
+    type: \\"pokemon.stats\\",
+    required: true,
+  },
+  types: {
+    type: \\"pokemon.types\\",
+    required: true,
+  },
+  weight: {
+    type: \\"Number\\",
+    unique: true,
+    required: true,
+  }});
+const PokemonAbilities = new Schema({
+  ability: {
+    type: \\"pokemon.abilities.ability\\",
+    required: true,
+  },
+  isHidden: {
+    type: \\"Boolean\\",
+    required: true,
+  },
+  slot: {
+    type: \\"Number\\",
+    unique: true,
+    required: true,
+  }});
+const PokemonForms = new Schema({
+  name: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  url: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  }});
+const PokemonGameIndices = new Schema({
+  gameIndex: {
+    type: \\"Number\\",
+    required: true,
+  },
+  version: {
+    type: \\"pokemon.game_indices.version\\",
+    required: true,
+  }});
+const PokemonMoves = new Schema({
+  move: {
+    type: \\"pokemon.moves.move\\",
+    required: true,
+  },
+  versionGroupDetails: {
+    type: \\"pokemon.moves.version_group_details\\",
+    required: true,
+  }});
+const PokemonSpecies = new Schema({
+  name: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  url: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  }});
+const PokemonSprites = new Schema({
+  backDefault: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  backFemale: {
+    type: \\"Null\\",
+    required: true,
+  },
+  backShiny: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  backShinyFemale: {
+    type: \\"Null\\",
+    required: true,
+  },
+  frontDefault: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  frontFemale: {
+    type: \\"Null\\",
+    required: true,
+  },
+  frontShiny: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  frontShinyFemale: {
+    type: \\"Null\\",
+    required: true,
+  },
+  other: {
+    type: \\"pokemon.sprites.other\\",
+    required: true,
+  },
+  versions: {
+    type: \\"pokemon.sprites.versions\\",
+    required: true,
+  }});
+const PokemonStats = new Schema({
+  baseStat: {
+    type: \\"Number\\",
+    unique: true,
+    required: true,
+  },
+  effort: {
+    type: \\"Number\\",
+    required: true,
+  },
+  stat: {
+    type: \\"pokemon.stats.stat\\",
+    required: true,
+  }});
+const PokemonTypes = new Schema({
+  slot: {
+    type: \\"Number\\",
+    unique: true,
+    required: true,
+  },
+  type: {
+    type: \\"pokemon.types.type\\",
+    required: true,
+  }});
+const PokemonAbilitiesAbility = new Schema({
+  name: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  url: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  }});
+const PokemonGameIndicesVersion = new Schema({
+  name: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  url: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  }});
+const PokemonMovesMove = new Schema({
+  name: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  url: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  }});
+const PokemonMovesVersionGroupDetails = new Schema({
+  levelLearnedAt: {
+    type: \\"Number\\",
+    required: true,
+  },
+  moveLearnMethod: {
+    type: \\"pokemon.moves.version_group_details.move_learn_method\\",
+    required: true,
+  },
+  versionGroup: {
+    type: \\"pokemon.moves.version_group_details.version_group\\",
+    required: true,
+  }});
+const PokemonMovesVersionGroupDetailsMoveLearnMethod = new Schema({
+  name: {
+    type: \\"String\\",
+    required: true,
+    enum: [\\"machine\\", \\"tutor\\", \\"level-up\\", \\"egg\\"],
+  },
+  url: {
+    type: \\"String\\",
+    required: true,
+    enum: [\\"https://pokeapi.co/api/v2/move-learn-method/4/\\", \\"https://pokeapi.co/api/v2/move-learn-method/3/\\", \\"https://pokeapi.co/api/v2/move-learn-method/1/\\", \\"https://pokeapi.co/api/v2/move-learn-method/2/\\"],
+  }});
+const PokemonMovesVersionGroupDetailsVersionGroup = new Schema({
+  name: {
+    type: \\"String\\",
+    required: true,
+  },
+  url: {
+    type: \\"String\\",
+    required: true,
+  }});
+const PokemonSpritesOther = new Schema({
+  dreamWorld: {
+    type: \\"pokemon.sprites.other.dream_world\\",
+    required: true,
+  },
+  officialArtwork: {
+    type: \\"pokemon.sprites.other.official-artwork\\",
+    required: true,
+  }});
+const PokemonSpritesVersions = new Schema({
+  generationI: {
+    type: \\"pokemon.sprites.versions.generation-i\\",
+    required: true,
+  },
+  generationIi: {
+    type: \\"pokemon.sprites.versions.generation-ii\\",
+    required: true,
+  },
+  generationIii: {
+    type: \\"pokemon.sprites.versions.generation-iii\\",
+    required: true,
+  },
+  generationIv: {
+    type: \\"pokemon.sprites.versions.generation-iv\\",
+    required: true,
+  },
+  generationV: {
+    type: \\"pokemon.sprites.versions.generation-v\\",
+    required: true,
+  },
+  generationVi: {
+    type: \\"pokemon.sprites.versions.generation-vi\\",
+    required: true,
+  },
+  generationVii: {
+    type: \\"pokemon.sprites.versions.generation-vii\\",
+    required: true,
+  },
+  generationViii: {
+    type: \\"pokemon.sprites.versions.generation-viii\\",
+    required: true,
+  }});
+const PokemonSpritesOtherDreamWorld = new Schema({
+  frontDefault: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  frontFemale: {
+    type: \\"Null\\",
+    required: true,
+  }});
+const PokemonSpritesOtherOfficialArtwork = new Schema({
+  frontDefault: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  }});
+const PokemonSpritesVersionsGenerationI = new Schema({
+  redBlue: {
+    type: \\"pokemon.sprites.versions.generation-i.red-blue\\",
+    required: true,
+  },
+  yellow: {
+    type: \\"pokemon.sprites.versions.generation-i.yellow\\",
+    required: true,
+  }});
+const PokemonSpritesVersionsGenerationIi = new Schema({
+  crystal: {
+    type: \\"pokemon.sprites.versions.generation-ii.crystal\\",
+    required: true,
+  },
+  gold: {
+    type: \\"pokemon.sprites.versions.generation-ii.gold\\",
+    required: true,
+  },
+  silver: {
+    type: \\"pokemon.sprites.versions.generation-ii.silver\\",
+    required: true,
+  }});
+const PokemonSpritesVersionsGenerationIii = new Schema({
+  emerald: {
+    type: \\"pokemon.sprites.versions.generation-iii.emerald\\",
+    required: true,
+  },
+  fireredLeafgreen: {
+    type: \\"pokemon.sprites.versions.generation-iii.firered-leafgreen\\",
+    required: true,
+  },
+  rubySapphire: {
+    type: \\"pokemon.sprites.versions.generation-iii.ruby-sapphire\\",
+    required: true,
+  }});
+const PokemonSpritesVersionsGenerationIv = new Schema({
+  diamondPearl: {
+    type: \\"pokemon.sprites.versions.generation-iv.diamond-pearl\\",
+    required: true,
+  },
+  heartgoldSoulsilver: {
+    type: \\"pokemon.sprites.versions.generation-iv.heartgold-soulsilver\\",
+    required: true,
+  },
+  platinum: {
+    type: \\"pokemon.sprites.versions.generation-iv.platinum\\",
+    required: true,
+  }});
+const PokemonSpritesVersionsGenerationV = new Schema({
+  blackWhite: {
+    type: \\"pokemon.sprites.versions.generation-v.black-white\\",
+    required: true,
+  }});
+const PokemonSpritesVersionsGenerationVi = new Schema({
+  omegarubyAlphasapphire: {
+    type: \\"pokemon.sprites.versions.generation-vi.omegaruby-alphasapphire\\",
+    required: true,
+  },
+  xY: {
+    type: \\"pokemon.sprites.versions.generation-vi.x-y\\",
+    required: true,
+  }});
+const PokemonSpritesVersionsGenerationVii = new Schema({
+  icons: {
+    type: \\"pokemon.sprites.versions.generation-vii.icons\\",
+    required: true,
+  },
+  ultraSunUltraMoon: {
+    type: \\"pokemon.sprites.versions.generation-vii.ultra-sun-ultra-moon\\",
+    required: true,
+  }});
+const PokemonSpritesVersionsGenerationViii = new Schema({
+  icons: {
+    type: \\"pokemon.sprites.versions.generation-viii.icons\\",
+    required: true,
+  }});
+const PokemonSpritesVersionsGenerationIRedBlue = new Schema({
+  backDefault: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  backGray: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  frontDefault: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  frontGray: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  }});
+const PokemonSpritesVersionsGenerationIYellow = new Schema({
+  backDefault: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  backGray: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  frontDefault: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  frontGray: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  }});
+const PokemonSpritesVersionsGenerationIiCrystal = new Schema({
+  backDefault: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  backShiny: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  frontDefault: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  frontShiny: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  }});
+const PokemonSpritesVersionsGenerationIiGold = new Schema({
+  backDefault: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  backShiny: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  frontDefault: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  frontShiny: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  }});
+const PokemonSpritesVersionsGenerationIiSilver = new Schema({
+  backDefault: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  backShiny: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  frontDefault: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  frontShiny: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  }});
+const PokemonSpritesVersionsGenerationIiiEmerald = new Schema({
+  frontDefault: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  frontShiny: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  }});
+const PokemonSpritesVersionsGenerationIiiFireredLeafgreen = new Schema({
+  backDefault: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  backShiny: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  frontDefault: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  frontShiny: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  }});
+const PokemonSpritesVersionsGenerationIiiRubySapphire = new Schema({
+  backDefault: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  backShiny: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  frontDefault: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  frontShiny: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  }});
+const PokemonSpritesVersionsGenerationIvDiamondPearl = new Schema({
+  backDefault: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  backFemale: {
+    type: \\"Null\\",
+    required: true,
+  },
+  backShiny: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  backShinyFemale: {
+    type: \\"Null\\",
+    required: true,
+  },
+  frontDefault: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  frontFemale: {
+    type: \\"Null\\",
+    required: true,
+  },
+  frontShiny: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  frontShinyFemale: {
+    type: \\"Null\\",
+    required: true,
+  }});
+const PokemonSpritesVersionsGenerationIvHeartgoldSoulsilver = new Schema({
+  backDefault: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  backFemale: {
+    type: \\"Null\\",
+    required: true,
+  },
+  backShiny: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  backShinyFemale: {
+    type: \\"Null\\",
+    required: true,
+  },
+  frontDefault: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  frontFemale: {
+    type: \\"Null\\",
+    required: true,
+  },
+  frontShiny: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  frontShinyFemale: {
+    type: \\"Null\\",
+    required: true,
+  }});
+const PokemonSpritesVersionsGenerationIvPlatinum = new Schema({
+  backDefault: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  backFemale: {
+    type: \\"Null\\",
+    required: true,
+  },
+  backShiny: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  backShinyFemale: {
+    type: \\"Null\\",
+    required: true,
+  },
+  frontDefault: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  frontFemale: {
+    type: \\"Null\\",
+    required: true,
+  },
+  frontShiny: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  frontShinyFemale: {
+    type: \\"Null\\",
+    required: true,
+  }});
+const PokemonSpritesVersionsGenerationVBlackWhite = new Schema({
+  animated: {
+    type: \\"pokemon.sprites.versions.generation-v.black-white.animated\\",
+    required: true,
+  },
+  backDefault: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  backFemale: {
+    type: \\"Null\\",
+    required: true,
+  },
+  backShiny: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  backShinyFemale: {
+    type: \\"Null\\",
+    required: true,
+  },
+  frontDefault: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  frontFemale: {
+    type: \\"Null\\",
+    required: true,
+  },
+  frontShiny: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  frontShinyFemale: {
+    type: \\"Null\\",
+    required: true,
+  }});
+const PokemonSpritesVersionsGenerationVBlackWhiteAnimated = new Schema({
+  backDefault: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  backFemale: {
+    type: \\"Null\\",
+    required: true,
+  },
+  backShiny: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  backShinyFemale: {
+    type: \\"Null\\",
+    required: true,
+  },
+  frontDefault: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  frontFemale: {
+    type: \\"Null\\",
+    required: true,
+  },
+  frontShiny: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  frontShinyFemale: {
+    type: \\"Null\\",
+    required: true,
+  }});
+const PokemonSpritesVersionsGenerationViOmegarubyAlphasapphire = new Schema({
+  frontDefault: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  frontFemale: {
+    type: \\"Null\\",
+    required: true,
+  },
+  frontShiny: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  frontShinyFemale: {
+    type: \\"Null\\",
+    required: true,
+  }});
+const PokemonSpritesVersionsGenerationViXY = new Schema({
+  frontDefault: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  frontFemale: {
+    type: \\"Null\\",
+    required: true,
+  },
+  frontShiny: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  frontShinyFemale: {
+    type: \\"Null\\",
+    required: true,
+  }});
+const PokemonSpritesVersionsGenerationViiIcons = new Schema({
+  frontDefault: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  frontFemale: {
+    type: \\"Null\\",
+    required: true,
+  }});
+const PokemonSpritesVersionsGenerationViiUltraSunUltraMoon = new Schema({
+  frontDefault: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  frontFemale: {
+    type: \\"Null\\",
+    required: true,
+  },
+  frontShiny: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  frontShinyFemale: {
+    type: \\"Null\\",
+    required: true,
+  }});
+const PokemonSpritesVersionsGenerationViiiIcons = new Schema({
+  frontDefault: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  frontFemale: {
+    type: \\"Null\\",
+    required: true,
+  }});
+const PokemonStatsStat = new Schema({
+  name: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  url: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  }});
+const PokemonTypesType = new Schema({
+  name: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  },
+  url: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  }});
+const pokemonModel = mongoose.model(\\"pokemon\\", Pokemon);
+const pokemonAbilitiesModel = mongoose.model(\\"pokemonAbilities\\", PokemonAbilities);
+const pokemonFormsModel = mongoose.model(\\"pokemonForms\\", PokemonForms);
+const pokemonGameIndicesModel = mongoose.model(\\"pokemonGameIndices\\", PokemonGameIndices);
+const pokemonMovesModel = mongoose.model(\\"pokemonMoves\\", PokemonMoves);
+const pokemonSpeciesModel = mongoose.model(\\"pokemonSpecies\\", PokemonSpecies);
+const pokemonSpritesModel = mongoose.model(\\"pokemonSprites\\", PokemonSprites);
+const pokemonStatsModel = mongoose.model(\\"pokemonStats\\", PokemonStats);
+const pokemonTypesModel = mongoose.model(\\"pokemonTypes\\", PokemonTypes);
+const pokemonAbilitiesAbilityModel = mongoose.model(\\"pokemonAbilitiesAbility\\", PokemonAbilitiesAbility);
+const pokemonGameIndicesVersionModel = mongoose.model(\\"pokemonGameIndicesVersion\\", PokemonGameIndicesVersion);
+const pokemonMovesMoveModel = mongoose.model(\\"pokemonMovesMove\\", PokemonMovesMove);
+const pokemonMovesVersionGroupDetailsModel = mongoose.model(\\"pokemonMovesVersionGroupDetails\\", PokemonMovesVersionGroupDetails);
+const pokemonMovesVersionGroupDetailsMoveLearnMethodModel = mongoose.model(\\"pokemonMovesVersionGroupDetailsMoveLearnMethod\\", PokemonMovesVersionGroupDetailsMoveLearnMethod);
+const pokemonMovesVersionGroupDetailsVersionGroupModel = mongoose.model(\\"pokemonMovesVersionGroupDetailsVersionGroup\\", PokemonMovesVersionGroupDetailsVersionGroup);
+const pokemonSpritesOtherModel = mongoose.model(\\"pokemonSpritesOther\\", PokemonSpritesOther);
+const pokemonSpritesVersionsModel = mongoose.model(\\"pokemonSpritesVersions\\", PokemonSpritesVersions);
+const pokemonSpritesOtherDreamWorldModel = mongoose.model(\\"pokemonSpritesOtherDreamWorld\\", PokemonSpritesOtherDreamWorld);
+const pokemonSpritesOtherOfficialArtworkModel = mongoose.model(\\"pokemonSpritesOtherOfficialArtwork\\", PokemonSpritesOtherOfficialArtwork);
+const pokemonSpritesVersionsGenerationIModel = mongoose.model(\\"pokemonSpritesVersionsGenerationI\\", PokemonSpritesVersionsGenerationI);
+const pokemonSpritesVersionsGenerationIiModel = mongoose.model(\\"pokemonSpritesVersionsGenerationIi\\", PokemonSpritesVersionsGenerationIi);
+const pokemonSpritesVersionsGenerationIiiModel = mongoose.model(\\"pokemonSpritesVersionsGenerationIii\\", PokemonSpritesVersionsGenerationIii);
+const pokemonSpritesVersionsGenerationIvModel = mongoose.model(\\"pokemonSpritesVersionsGenerationIv\\", PokemonSpritesVersionsGenerationIv);
+const pokemonSpritesVersionsGenerationVModel = mongoose.model(\\"pokemonSpritesVersionsGenerationV\\", PokemonSpritesVersionsGenerationV);
+const pokemonSpritesVersionsGenerationViModel = mongoose.model(\\"pokemonSpritesVersionsGenerationVi\\", PokemonSpritesVersionsGenerationVi);
+const pokemonSpritesVersionsGenerationViiModel = mongoose.model(\\"pokemonSpritesVersionsGenerationVii\\", PokemonSpritesVersionsGenerationVii);
+const pokemonSpritesVersionsGenerationViiiModel = mongoose.model(\\"pokemonSpritesVersionsGenerationViii\\", PokemonSpritesVersionsGenerationViii);
+const pokemonSpritesVersionsGenerationIRedBlueModel = mongoose.model(\\"pokemonSpritesVersionsGenerationIRedBlue\\", PokemonSpritesVersionsGenerationIRedBlue);
+const pokemonSpritesVersionsGenerationIYellowModel = mongoose.model(\\"pokemonSpritesVersionsGenerationIYellow\\", PokemonSpritesVersionsGenerationIYellow);
+const pokemonSpritesVersionsGenerationIiCrystalModel = mongoose.model(\\"pokemonSpritesVersionsGenerationIiCrystal\\", PokemonSpritesVersionsGenerationIiCrystal);
+const pokemonSpritesVersionsGenerationIiGoldModel = mongoose.model(\\"pokemonSpritesVersionsGenerationIiGold\\", PokemonSpritesVersionsGenerationIiGold);
+const pokemonSpritesVersionsGenerationIiSilverModel = mongoose.model(\\"pokemonSpritesVersionsGenerationIiSilver\\", PokemonSpritesVersionsGenerationIiSilver);
+const pokemonSpritesVersionsGenerationIiiEmeraldModel = mongoose.model(\\"pokemonSpritesVersionsGenerationIiiEmerald\\", PokemonSpritesVersionsGenerationIiiEmerald);
+const pokemonSpritesVersionsGenerationIiiFireredLeafgreenModel = mongoose.model(\\"pokemonSpritesVersionsGenerationIiiFireredLeafgreen\\", PokemonSpritesVersionsGenerationIiiFireredLeafgreen);
+const pokemonSpritesVersionsGenerationIiiRubySapphireModel = mongoose.model(\\"pokemonSpritesVersionsGenerationIiiRubySapphire\\", PokemonSpritesVersionsGenerationIiiRubySapphire);
+const pokemonSpritesVersionsGenerationIvDiamondPearlModel = mongoose.model(\\"pokemonSpritesVersionsGenerationIvDiamondPearl\\", PokemonSpritesVersionsGenerationIvDiamondPearl);
+const pokemonSpritesVersionsGenerationIvHeartgoldSoulsilverModel = mongoose.model(\\"pokemonSpritesVersionsGenerationIvHeartgoldSoulsilver\\", PokemonSpritesVersionsGenerationIvHeartgoldSoulsilver);
+const pokemonSpritesVersionsGenerationIvPlatinumModel = mongoose.model(\\"pokemonSpritesVersionsGenerationIvPlatinum\\", PokemonSpritesVersionsGenerationIvPlatinum);
+const pokemonSpritesVersionsGenerationVBlackWhiteModel = mongoose.model(\\"pokemonSpritesVersionsGenerationVBlackWhite\\", PokemonSpritesVersionsGenerationVBlackWhite);
+const pokemonSpritesVersionsGenerationVBlackWhiteAnimatedModel = mongoose.model(\\"pokemonSpritesVersionsGenerationVBlackWhiteAnimated\\", PokemonSpritesVersionsGenerationVBlackWhiteAnimated);
+const pokemonSpritesVersionsGenerationViOmegarubyAlphasapphireModel = mongoose.model(\\"pokemonSpritesVersionsGenerationViOmegarubyAlphasapphire\\", PokemonSpritesVersionsGenerationViOmegarubyAlphasapphire);
+const pokemonSpritesVersionsGenerationViXYModel = mongoose.model(\\"pokemonSpritesVersionsGenerationViXY\\", PokemonSpritesVersionsGenerationViXY);
+const pokemonSpritesVersionsGenerationViiIconsModel = mongoose.model(\\"pokemonSpritesVersionsGenerationViiIcons\\", PokemonSpritesVersionsGenerationViiIcons);
+const pokemonSpritesVersionsGenerationViiUltraSunUltraMoonModel = mongoose.model(\\"pokemonSpritesVersionsGenerationViiUltraSunUltraMoon\\", PokemonSpritesVersionsGenerationViiUltraSunUltraMoon);
+const pokemonSpritesVersionsGenerationViiiIconsModel = mongoose.model(\\"pokemonSpritesVersionsGenerationViiiIcons\\", PokemonSpritesVersionsGenerationViiiIcons);
+const pokemonStatsStatModel = mongoose.model(\\"pokemonStatsStat\\", PokemonStatsStat);
+const pokemonTypesTypeModel = mongoose.model(\\"pokemonTypesType\\", PokemonTypesType);
+module.exports.Pokemon = pokemonModel;
+module.exports.PokemonAbilities = pokemonAbilitiesModel;
+module.exports.PokemonForms = pokemonFormsModel;
+module.exports.PokemonGameIndices = pokemonGameIndicesModel;
+module.exports.PokemonMoves = pokemonMovesModel;
+module.exports.PokemonSpecies = pokemonSpeciesModel;
+module.exports.PokemonSprites = pokemonSpritesModel;
+module.exports.PokemonStats = pokemonStatsModel;
+module.exports.PokemonTypes = pokemonTypesModel;
+module.exports.PokemonAbilitiesAbility = pokemonAbilitiesAbilityModel;
+module.exports.PokemonGameIndicesVersion = pokemonGameIndicesVersionModel;
+module.exports.PokemonMovesMove = pokemonMovesMoveModel;
+module.exports.PokemonMovesVersionGroupDetails = pokemonMovesVersionGroupDetailsModel;
+module.exports.PokemonMovesVersionGroupDetailsMoveLearnMethod = pokemonMovesVersionGroupDetailsMoveLearnMethodModel;
+module.exports.PokemonMovesVersionGroupDetailsVersionGroup = pokemonMovesVersionGroupDetailsVersionGroupModel;
+module.exports.PokemonSpritesOther = pokemonSpritesOtherModel;
+module.exports.PokemonSpritesVersions = pokemonSpritesVersionsModel;
+module.exports.PokemonSpritesOtherDreamWorld = pokemonSpritesOtherDreamWorldModel;
+module.exports.PokemonSpritesOtherOfficialArtwork = pokemonSpritesOtherOfficialArtworkModel;
+module.exports.PokemonSpritesVersionsGenerationI = pokemonSpritesVersionsGenerationIModel;
+module.exports.PokemonSpritesVersionsGenerationIi = pokemonSpritesVersionsGenerationIiModel;
+module.exports.PokemonSpritesVersionsGenerationIii = pokemonSpritesVersionsGenerationIiiModel;
+module.exports.PokemonSpritesVersionsGenerationIv = pokemonSpritesVersionsGenerationIvModel;
+module.exports.PokemonSpritesVersionsGenerationV = pokemonSpritesVersionsGenerationVModel;
+module.exports.PokemonSpritesVersionsGenerationVi = pokemonSpritesVersionsGenerationViModel;
+module.exports.PokemonSpritesVersionsGenerationVii = pokemonSpritesVersionsGenerationViiModel;
+module.exports.PokemonSpritesVersionsGenerationViii = pokemonSpritesVersionsGenerationViiiModel;
+module.exports.PokemonSpritesVersionsGenerationIRedBlue = pokemonSpritesVersionsGenerationIRedBlueModel;
+module.exports.PokemonSpritesVersionsGenerationIYellow = pokemonSpritesVersionsGenerationIYellowModel;
+module.exports.PokemonSpritesVersionsGenerationIiCrystal = pokemonSpritesVersionsGenerationIiCrystalModel;
+module.exports.PokemonSpritesVersionsGenerationIiGold = pokemonSpritesVersionsGenerationIiGoldModel;
+module.exports.PokemonSpritesVersionsGenerationIiSilver = pokemonSpritesVersionsGenerationIiSilverModel;
+module.exports.PokemonSpritesVersionsGenerationIiiEmerald = pokemonSpritesVersionsGenerationIiiEmeraldModel;
+module.exports.PokemonSpritesVersionsGenerationIiiFireredLeafgreen = pokemonSpritesVersionsGenerationIiiFireredLeafgreenModel;
+module.exports.PokemonSpritesVersionsGenerationIiiRubySapphire = pokemonSpritesVersionsGenerationIiiRubySapphireModel;
+module.exports.PokemonSpritesVersionsGenerationIvDiamondPearl = pokemonSpritesVersionsGenerationIvDiamondPearlModel;
+module.exports.PokemonSpritesVersionsGenerationIvHeartgoldSoulsilver = pokemonSpritesVersionsGenerationIvHeartgoldSoulsilverModel;
+module.exports.PokemonSpritesVersionsGenerationIvPlatinum = pokemonSpritesVersionsGenerationIvPlatinumModel;
+module.exports.PokemonSpritesVersionsGenerationVBlackWhite = pokemonSpritesVersionsGenerationVBlackWhiteModel;
+module.exports.PokemonSpritesVersionsGenerationVBlackWhiteAnimated = pokemonSpritesVersionsGenerationVBlackWhiteAnimatedModel;
+module.exports.PokemonSpritesVersionsGenerationViOmegarubyAlphasapphire = pokemonSpritesVersionsGenerationViOmegarubyAlphasapphireModel;
+module.exports.PokemonSpritesVersionsGenerationViXY = pokemonSpritesVersionsGenerationViXYModel;
+module.exports.PokemonSpritesVersionsGenerationViiIcons = pokemonSpritesVersionsGenerationViiIconsModel;
+module.exports.PokemonSpritesVersionsGenerationViiUltraSunUltraMoon = pokemonSpritesVersionsGenerationViiUltraSunUltraMoonModel;
+module.exports.PokemonSpritesVersionsGenerationViiiIcons = pokemonSpritesVersionsGenerationViiiIconsModel;
+module.exports.PokemonStatsStat = pokemonStatsStatModel;
+module.exports.PokemonTypesType = pokemonTypesTypeModel;"
 `;
 
 exports[`#mongoose can emit schema 1`] = `
@@ -185,10 +1129,8 @@ const Users = new Schema({
     type: \\"String\\",
     unique: true,
   }});
-
 const usersModel = mongoose.model(\\"users\\", Users);
-module.exports.Users = usersModel;
-"
+module.exports.Users = usersModel;"
 `;
 
 exports[`#mongoose can emit schema for people json 1`] = `
@@ -221,11 +1163,6 @@ const People = new Schema({
   },
   birthYear: {
     type: \\"String\\",
-  },
-  gender: {
-    type: \\"String\\",
-    required: true,
-    enum: [\\"male\\", \\"n/a\\", \\"female\\", \\"hermaphrodite\\", \\"none\\"],
   },
   homeworld: {
     type: \\"String\\",
@@ -267,10 +1204,8 @@ const People = new Schema({
     unique: true,
     required: true,
   }});
-
 const peopleModel = mongoose.model(\\"people\\", People);
-module.exports.People = peopleModel;
-"
+module.exports.People = peopleModel;"
 `;
 
 exports[`#mongoose can emit schema with nested types 1`] = `
@@ -288,12 +1223,9 @@ const Users = new Schema({
     required: true,
   },
   notes: {
-    type: \\"Array\\",
+    type: \\"users.notes\\",
     required: true,
   }});
-
-const usersModel = mongoose.model(\\"users\\", Users);
-module.exports.Users = usersModel;
 const UsersNotes = new Schema({
   id: {
     type: \\"Number\\",
@@ -304,10 +1236,10 @@ const UsersNotes = new Schema({
     type: \\"String\\",
     required: true,
   }});
-
+const usersModel = mongoose.model(\\"users\\", Users);
 const usersNotesModel = mongoose.model(\\"usersNotes\\", UsersNotes);
-module.exports.UsersNotes = usersNotesModel;
-"
+module.exports.Users = usersModel;
+module.exports.UsersNotes = usersNotesModel;"
 `;
 
 exports[`#typescript can emit interface for nested types 1`] = `
@@ -316,7 +1248,6 @@ exports[`#typescript can emit interface for nested types 1`] = `
   name: string;
   notes: UsersNotes[];
 };
-
 export interface UsersNotes {
   id: number;
   text: string;
@@ -333,7 +1264,6 @@ exports[`#typescript can emit interface for people json 1`] = `
   skinColor?: string  | null;
   eyeColor: \\"blue\\" | \\"yellow\\" | \\"red\\" | \\"brown\\" | \\"blue-gray\\" | \\"black\\" | \\"orange\\" | \\"hazel\\";
   birthYear?: string  | null;
-  gender: \\"male\\" | \\"n/a\\" | \\"female\\" | \\"hermaphrodite\\" | \\"none\\";
   homeworld: string;
   films: any[];
   species: any[];
@@ -344,7 +1274,6 @@ exports[`#typescript can emit interface for people json 1`] = `
   url: string;
   id: number;
 };
-
 "
 `;
 
@@ -364,6 +1293,5 @@ exports[`#typescript can emit interface(s) 1`] = `
   location: \\"nyc\\" | \\"remote\\" | \\"denver\\";
   profile?: string  | null;
 };
-
 "
 `;

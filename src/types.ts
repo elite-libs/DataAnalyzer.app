@@ -44,7 +44,7 @@ export type TypeNameStringDecimal =
   | 'Number';
 
 export interface ISchemaAnalyzerOptions {
-  onProgress?: progressCallback | undefined;
+  onProgress?: ProgressCallback | undefined;
   /** Required # of rows, default 100 */
   enumMinimumRowCount?: number | undefined;
   /** The maximum # unique enum values allowed before switching to `String` mode. For US States, 50 or so would be appropriate. Default 5. */
@@ -62,6 +62,11 @@ export interface ISchemaAnalyzerOptions {
   debug?: boolean;
   consolidateTypes?: IConsolidateTypesOptions['consolidateTypes'];
   flattenOptions?: IFlattenTypesOptions;
+  prefixNamingMode?: INamingOptions['prefixNamingMode'];
+}
+export interface INamingOptions {
+  prefixNamingMode?: 'full' | 'trim';
+  removePrefixStrings?: string[];
 }
 export interface IConsolidateTypesOptions {
   /** `consolidateTypes` is a flag/mode to indicate the shape matching behavior. */
@@ -211,9 +216,10 @@ export type AggregateSummary<T = number> = {
 /**
  * This callback is displayed as a global member.
  */
-export type progressCallback = (progress: {
+export type ProgressCallback = (progress: {
   totalRows: number;
   currentRow: number;
+  nestedTypes?: string[];
 }) => any;
 
 export interface IConsolidateTypesResults {

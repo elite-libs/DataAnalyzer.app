@@ -27,6 +27,7 @@ export default function SchemaNameField({ className = '' }: { className: string 
       </TooltipWrapper>
       <Input
         id="schema-name"
+        aria-label="Enter your schema name"
         onChange={(e) => dispatch(setSchemaName(e.target.value))}
         value={schemaName}
         startAdornment={

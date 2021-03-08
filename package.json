@@ -134,7 +134,7 @@
       "^@utils/(.*)$": "<rootDir>/src/schema-analyzer/utils/$1"
     },
     "transformIgnorePatterns": [
-      "node_modules/"
+      "node_modules/(?!react-syntax-highlighter|jsdom)"
     ],
     "globals": {
       "ts-jest": {

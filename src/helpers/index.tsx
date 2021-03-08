@@ -2,8 +2,14 @@ import { camelCase } from 'lodash';
 
 export const numericSorter = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
 
+export const removeTrailingSpace = (s: string, expectLen: number = -1): string => {
+  const newStr = s.replace(/[ \s?\n]+$/gim, '');
+  if (s.length !== newStr.length) return removeBlankLines(newStr, newStr.length);
+  return newStr;
+};
+
 export const removeBlankLines = (s: string, expectLen: number = -1): string => {
-  const newStr = s.replace(/^ +\n/gim, '');
+  const newStr = s.replace(/[\n\t ]+\n+/gim, '\n');
   if (s.length !== newStr.length) return removeBlankLines(newStr, newStr.length);
   return newStr;
 };

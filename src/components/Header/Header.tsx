@@ -49,7 +49,7 @@ export default function Header() {
         onClick: (e: any) => e.preventDefault(),
       };
 
-  console.log('location.pathname', location.pathname);
+  // console.log('location.pathname', location.pathname);
   return (
     <nav className="row row-block w-100">
       <h1 className="col-12 col-sm-6 col-md-4" title="Reset/Load Home Screen">

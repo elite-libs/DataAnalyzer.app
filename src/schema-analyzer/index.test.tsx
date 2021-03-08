@@ -157,7 +157,6 @@ describe('primary use-cases', () => {
     expect(results).toMatchSnapshot('peopleWithEnums');
     expect(results.fields?.id?.unique).toBeTruthy();
     expect(results.fields?.eye_color?.enum?.length).toBe(8);
-    expect(results.fields?.gender?.enum?.length).toBe(5);
   });
 
   it('handles null field data', async () => {

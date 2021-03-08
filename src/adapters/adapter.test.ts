@@ -8,6 +8,7 @@ import mongoose from './writer.mongoose';
 import users from '../../public/data/users.example.json';
 import usersSparse from '../../public/data/user_sparse-subtypes.json';
 import people from '../../public/data/swapi-people.json';
+import pokemon from '../../public/data/pokemon-charmander.json';
 // import commerceDeptNews from '../../public/data/commerce-dept-news.json';
 import path from 'path';
 import fs from 'fs';
@@ -166,7 +167,21 @@ describe('#mongoose', () => {
       },
     });
     const code = mongoose.render(results);
+    expect(code).toMatchSnapshot();
+  });
 
+  it('can emit module exports correctly', async () => {
+    const results = await schemaAnalyzer('pokemon', pokemon, {
+      strictMatching: false,
+      flattenOptions: {
+        targetLength: 'p99',
+        targetPrecision: 'p99',
+        targetScale: 'p99',
+        targetValue: 'p99',
+        nullableRowsThreshold: 0.001,
+      },
+    });
+    const code = mongoose.render(results);
     expect(code).toMatchSnapshot();
   });
 });

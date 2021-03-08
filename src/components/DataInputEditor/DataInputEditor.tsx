@@ -215,11 +215,11 @@ export function DataInputEditor(props: IAceEditorProps) {
           .split('&')
           .map((pairs) => pairs.split('=')),
       );
-      console.log({ hash, hashParts });
+      // console.log({ hash, hashParts });
       if (hashParts['demo']) {
-        console.log("hashParts['demo']", hashParts['demo']);
+        console.log('loading ', hashParts['demo']);
         const dataToLoad = filter(sampleDataSets, { schemaName: hashParts['demo'] });
-        console.log('dataToLoad', dataToLoad);
+        // console.log('dataToLoad', dataToLoad);
         if (dataToLoad && dataToLoad[0])
           loadData(dataToLoad[0].schemaName!, dataToLoad[0].value!);
       }
@@ -276,6 +276,7 @@ export function DataInputEditor(props: IAceEditorProps) {
 
   return (
     <Panel
+      testId="data-input"
       className={`data-input-editor ${props.className || ''}`}
       titleComponent={
         <div>
