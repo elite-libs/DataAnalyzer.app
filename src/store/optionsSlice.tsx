@@ -1,6 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AdapterNames } from 'adapters/writers';
-import type { IConsolidateTypesOptions, SupportedTargetLanguages } from 'types';
+import type {
+  INamingOptions,
+  IConsolidateTypesOptions,
+  SupportedTargetLanguages,
+} from 'types';
 
 export interface OptionsState {
   outputLanguage: SupportedTargetLanguages;
@@ -12,8 +16,9 @@ export interface OptionsState {
   nullableRowsThreshold: number;
   uniqueRowsThreshold: number;
   consolidateTypes: IConsolidateTypesOptions['consolidateTypes'];
+  prefixNamingMode: INamingOptions['prefixNamingMode'];
   readonly _timestamp?: number;
-  debug?: boolean;
+  readonly debug?: boolean;
 }
 
 let initialState: Readonly<OptionsState> = {
@@ -26,6 +31,7 @@ let initialState: Readonly<OptionsState> = {
   nullableRowsThreshold: 0.001,
   uniqueRowsThreshold: 1.0,
   consolidateTypes: 'field-names',
+  prefixNamingMode: 'trim',
   // _timestamp: Date.now(),
 };
 

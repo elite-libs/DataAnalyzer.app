@@ -1,5 +1,90 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`#consolidated-types #can resolve names for \`EventResults\` set 1`] = `
+Object {
+  "href": Object {
+    "alternatePrefixes": Object {
+      "abbreviated": "ER._embedded.events..",
+      "initials": "ER.E.E..",
+      "truncated": "_embedded.events..",
+    },
+    "exactMatches": Object {
+      "lastCommonKey": null,
+      "nextToLastCommonKey": "_links",
+    },
+    "pathSplitByLastCommonSubstring": Array [
+      "EventResults._embedded",
+      "events._links.self",
+    ],
+    "prefixMatches": Array [
+      "EventResults",
+      "_embedded",
+      "events",
+    ],
+    "setOperations": Object {
+      "difference": Array [],
+      "intersection": "EventResults._embedded.events._links",
+      "union": "EventResults._embedded.events._links.self.attractions.venues",
+      "xor": "",
+    },
+    "shape": "href",
+    "shapeBasedName": "href",
+    "suffixMatches": Array [],
+    "typePaths": Array [
+      "EventResults._embedded.events._links.self",
+      "EventResults._embedded.events._links.attractions",
+      "EventResults._embedded.events._links.venues",
+      "EventResults._embedded.events._embedded.venues._links.self",
+      "EventResults._embedded.events._embedded.attractions._links.self",
+    ],
+  },
+  "id|name": Object {
+    "alternatePrefixes": Object {
+      "abbreviated": "ER._embedded.events..",
+      "initials": "ER.E.E..",
+      "truncated": "_embedded.events..",
+    },
+    "exactMatches": Object {
+      "lastCommonKey": null,
+      "nextToLastCommonKey": "classifications",
+    },
+    "pathSplitByLastCommonSubstring": Array [
+      "EventResults._embedded",
+      "events.classifications.segment",
+    ],
+    "prefixMatches": Array [
+      "EventResults",
+      "_embedded",
+      "events",
+    ],
+    "setOperations": Object {
+      "difference": Array [],
+      "intersection": "EventResults._embedded.events.classifications",
+      "union": "EventResults._embedded.events.classifications.segment.genre.subGenre.attractions",
+      "xor": "",
+    },
+    "shape": "id|name",
+    "shapeBasedName": "id.name",
+    "suffixMatches": Array [],
+    "typePaths": Array [
+      "EventResults._embedded.events.classifications.segment",
+      "EventResults._embedded.events.classifications.genre",
+      "EventResults._embedded.events.classifications.subGenre",
+      "EventResults._embedded.events._embedded.attractions.classifications.segment",
+      "EventResults._embedded.events._embedded.attractions.classifications.genre",
+      "EventResults._embedded.events._embedded.attractions.classifications.subGenre",
+    ],
+  },
+}
+`;
+
+exports[`#consolidated-types #can resolve names for \`EventResults\` set 2`] = `
+Object {
+  "href": "href",
+  "id|name": "id.name",
+}
+`;
+
 exports[`#consolidated-types #can resolve names for \`historicEvent\` set 1`] = `
 Object {
   "Births|Deaths|Events": Object {

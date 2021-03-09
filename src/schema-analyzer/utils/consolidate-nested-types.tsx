@@ -65,7 +65,7 @@ export function consolidateNestedTypes(
       }
       return typeAliases;
     },
-    { shapeToType: {}, typeToShape: {}, shapeAlias: {} },
+    { shapeToType: {}, typeToShape: {} },
   );
   // console.log('typeAliases', typeAliases);
 
@@ -428,6 +428,11 @@ function assignInferredNames(
           __isNameFree(xorPathKeys.join('.'))
         )
           return xorPathKeys.join('.');
+
+        if (typePaths.length >= 3) {
+          const { shapeBasedName } = suggestionInfo;
+          return shapeBasedName;
+        }
       }
 
       return false;

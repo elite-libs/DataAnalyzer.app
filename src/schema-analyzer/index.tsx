@@ -15,8 +15,11 @@ import type {
   InternalFieldTypeData,
   AggregateSummary,
   IConsolidateTypesResults,
+  INamingOptions,
+  ProgressCallback,
 } from '../types';
 import { consolidateNestedTypes } from './utils/consolidate-nested-types';
+import { fromPairs } from 'lodash';
 export { helpers, consolidateNestedTypes };
 
 // const log = debug('schema-builder:main')
@@ -140,6 +143,7 @@ function _schemaAnalyzer(
     disableNestedTypes = false,
     enumMinimumRowCount = 25,
     enumAbsoluteLimit = 10,
+    prefixNamingMode = 'full',
     // // enumPercentThreshold = 0.01,
     // nullableRowsThreshold = 0.001,
   } = options;
@@ -151,6 +155,7 @@ function _schemaAnalyzer(
     schemaName,
     isEnumEnabled,
     disableNestedTypes,
+    prefixNamingMode,
     nestedData,
     strictMatching,
     onProgress,
@@ -245,10 +250,7 @@ function _schemaAnalyzer(
         ] => [fullTypeName, result]);
       }),
     ).then((resultPairs) => {
-      return resultPairs.reduce((nestedTypeSummary, nameAndDataPair) => {
-        nestedTypeSummary[nameAndDataPair[0]] = nameAndDataPair[1];
-        return nestedTypeSummary;
-      }, {});
+      return fromPairs(resultPairs);
     });
   }
 }
@@ -260,10 +262,19 @@ const _pivotRowsGroupedByType = ({
   schemaName,
   isEnumEnabled,
   disableNestedTypes,
+  prefixNamingMode,
   nestedData,
   strictMatching,
   onProgress,
-}: any) =>
+}: {
+  schemaName: string;
+  isEnumEnabled: boolean;
+  disableNestedTypes: boolean;
+  prefixNamingMode: INamingOptions['prefixNamingMode'];
+  nestedData: KeyValPair<unknown[]>;
+  strictMatching: boolean;
+  onProgress: ProgressCallback;
+}) =>
   function pivotRowsGroupedByType(docs: any[]) {
     const detectedSchema = {
       uniques: isEnumEnabled ? {} : null,
@@ -311,16 +322,15 @@ const _pivotRowsGroupedByType = ({
           typeof value === 'object' &&
           Object.keys(value).length >= 1;
 
-        // if (fieldName === 'created' && (isObjectWithKeys || isObjectArray)) {
-        //   console.trace('created', { value, isObjectWithKeys, isObjectArray });
-        // }
         if (!disableNestedTypes) {
           // TODO: Review hack pattern here (buffers too much, better association of custom types, see `$ref`)
           // Steps: 1. Check if Array of Objects, 2. Add to local `nestedData` to hold data for post-processing.
           if (isObjectArray || isObjectWithKeys) {
-            const keyPath = `${schemaName}.${fieldName}`;
+            const keyPath = `${
+              prefixNamingMode === 'full' ? `${schemaName}.` : ''
+            }${fieldName}`;
             nestedData[keyPath] = nestedData[keyPath] || [];
-            nestedData[keyPath].push(...(isObjectArray ? value : [value]));
+            nestedData[keyPath]!.push(...(isObjectArray ? value : [value]));
             typeFingerprint.$ref = typeFingerprint.$ref || {
               count: index,
               typeRelationship: isObjectArray ? 'one-to-many' : 'one-to-one',

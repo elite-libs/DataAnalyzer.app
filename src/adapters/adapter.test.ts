@@ -8,6 +8,7 @@ import mongoose from './writer.mongoose';
 import users from '../../public/data/users.example.json';
 import usersSparse from '../../public/data/user_sparse-subtypes.json';
 import people from '../../public/data/swapi-people.json';
+import pokemon from '../../public/data/pokemon-charmander.json';
 // import commerceDeptNews from '../../public/data/commerce-dept-news.json';
 import path from 'path';
 import fs from 'fs';
@@ -138,6 +139,24 @@ describe('#mongoose', () => {
     expect(code).toMatchSnapshot();
   });
 
+  it('can emit schema with better names', async () => {
+    const results = await schemaAnalyzer('Pokemon', pokemon, {
+      debug: true,
+      prefixNamingMode: 'trim',
+      strictMatching: false,
+      flattenOptions: {
+        targetLength: 'p99',
+        targetPrecision: 'p99',
+        targetScale: 'p99',
+        targetValue: 'p99',
+        nullableRowsThreshold: 0.001,
+      },
+    });
+    const code = mongoose.render(results);
+
+    expect(code).toMatchSnapshot();
+  });
+
   it('can emit schema for people json', async () => {
     const results = await schemaAnalyzer('people', people, {
       strictMatching: false,
@@ -166,7 +185,21 @@ describe('#mongoose', () => {
       },
     });
     const code = mongoose.render(results);
+    expect(code).toMatchSnapshot();
+  });
 
+  it('can emit module exports correctly', async () => {
+    const results = await schemaAnalyzer('pokemon', pokemon, {
+      strictMatching: false,
+      flattenOptions: {
+        targetLength: 'p99',
+        targetPrecision: 'p99',
+        targetScale: 'p99',
+        targetValue: 'p99',
+        nullableRowsThreshold: 0.001,
+      },
+    });
+    const code = mongoose.render(results);
     expect(code).toMatchSnapshot();
   });
 });

@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import copy from 'clipboard-copy';
 import Panel from 'components/Layouts/Panel';
-import { ghcolors } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { ghcolors } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 // import SyncOutlinedIcon from '@material-ui/icons/SyncOutlined';
 import FileCopy from '@material-ui/icons/FileCopyOutlined';
 import { CodeOutputIcon } from '../AppIcons';

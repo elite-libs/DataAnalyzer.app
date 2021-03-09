@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect } from 'react';
-// import { useHistory } from 'react-router';
 import { useForm } from 'react-hook-form';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -11,18 +10,18 @@ import Link from '@material-ui/core/Link';
 import { Link as RouteLink } from 'react-router-dom';
 
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import WarningIcon from '@material-ui/icons/Warning';
 // import SaveIcon from '@material-ui/icons/Save';
 // import CloseIcon from '@material-ui/icons/Close';
-import WarningIcon from '@material-ui/icons/Warning';
 import { Select, Slider } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { OptionsState, setOptions } from 'store/optionsSlice';
 import { setResults, setSchema } from 'store/analysisSlice';
 import { RootState } from 'store/rootReducer';
+import { convertFractionToPercent, formatPercent } from 'helpers';
 // import { pick } from 'lodash';
 
 import './AdvancedOptionsForm.scss';
-import { convertFractionToPercent, formatPercent } from 'helpers';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -51,30 +50,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// const marks = [
-//   {
-//     value: 0,
-//     label: '0°C',
-//   },
-//   {
-//     value: 20,
-//     label: '20°C',
-//   },
-//   {
-//     value: 37,
-//     label: '37°C',
-//   },
-//   {
-//     value: 100,
-//     label: '100°C',
-//   },
-// ];
-
 export default function AdvancedOptionsForm({ className = '' }) {
   // const history = useHistory();
   // const formRef$ = useRef<HTMLFormElement | undefined>();
   const dispatch = useDispatch();
-  const options = useSelector((state: RootState) => state.optionsActions);
+  const options = useSelector<RootState, OptionsState>(
+    (state: RootState) => state.optionsActions,
+  );
   // const {} = useSelector((state: RootState) => state.appStateActions);
   // const { schemaName } = useSelector((state) => state.analysisFeature);
   const classes = useStyles();
@@ -83,20 +65,6 @@ export default function AdvancedOptionsForm({ className = '' }) {
   const { register, watch, setValue, getValues } = methods;
 
   const [successClass, setSuccessClass] = React.useState<string>('');
-  // const currentValues = getValues();
-
-  // React.useEffect(() => {
-  //   console.log('Checking formRef$', formRef$.current);
-  //   const handleChange = (event) => {
-  //     console.log('changed!', event.target.value, getValues());
-  //   };
-  //   if (formRef$.current) {
-  //     formRef$.current.addEventListener('input', handleChange);
-  //   }
-  //   return () => formRef$?.current?.removeEventListener('input', handleChange);
-  // }, [formRef$, formRef$.current]);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  // const getInitialOptions = React.useMemo(() => options, []);
 
   useEffect(() => {
     if (successClass.length > 1) setTimeout(() => setSuccessClass(''), 1250); // remove the animate class
@@ -138,7 +106,13 @@ export default function AdvancedOptionsForm({ className = '' }) {
     }
   }, [dispatch]);
 
-  const { debug, nullableRowsThreshold, uniqueRowsThreshold, consolidateTypes } = watch();
+  const {
+    debug,
+    nullableRowsThreshold,
+    uniqueRowsThreshold,
+    consolidateTypes,
+    prefixNamingMode,
+  } = watch();
 
   /*formatPercent(
   100.0 * parseFloat( */
@@ -164,6 +138,7 @@ export default function AdvancedOptionsForm({ className = '' }) {
     register('debug', {});
     register('strictMatching', {});
     register('consolidateTypes', {});
+    register('prefixNamingMode', {});
     register('uniqueRowsThreshold', { min: 0.8, max: 1.0, valueAsNumber: true });
     register('nullableRowsThreshold', { min: 0.0, max: 0.1, valueAsNumber: true });
   }, [register]);
@@ -242,6 +217,40 @@ export default function AdvancedOptionsForm({ className = '' }) {
                       </option>
                       <option value={'field-names'}>Field Names</option>
                       <option value={'field-names-and-type'}>Field Name and Type</option>
+                    </Select>
+                  </section>
+                </fieldset>
+
+                <fieldset
+                  className={`form-group ${
+                    watch('prefixNamingMode') !== undefined ? 'show-warning' : ''
+                  }`}
+                >
+                  <legend className="mb-1">De-duplicate Similar Types</legend>
+                  <section className="input-group d-flex justify-content-between">
+                    <p>Detect Similarly Shaped Fields</p>
+                    <label className="warning-label">
+                      <WarningIcon color="error" className="warning-icon" />
+                    </label>
+
+                    <Select
+                      native
+                      placeholder={'Full'}
+                      id="prefixNamingModeSelect"
+                      // onChange={(e) =>
+                      //   setValue('prefixNamingMode', e.target.value as number[])
+                      // }
+                      onChange={(event, data) => {
+                        setValue('prefixNamingMode', event.target.value);
+                        onSubmit(getValues());
+                      }}
+                      inputProps={{
+                        id: 'prefixNamingMode',
+                      }}
+                      value={prefixNamingMode}
+                    >
+                      <option value={'full'}>Full</option>
+                      <option value={'trim'}>Trim</option>
                     </Select>
                   </section>
                 </fieldset>

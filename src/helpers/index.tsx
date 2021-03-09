@@ -2,13 +2,23 @@ import { camelCase } from 'lodash';
 
 export const numericSorter = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
 
-export const removeBlankLines = (s: string, expectLen: number = -1): string => {
-  const newStr = s.replace(/^ +\n/gim, '');
+export const removeTrailingSpace = (s: string, expectLen: number = -1): string => {
+  const newStr = s.replace(/[ \s?\n]+$/gim, '');
   if (s.length !== newStr.length) return removeBlankLines(newStr, newStr.length);
   return newStr;
 };
-export const properCase = (s: string) =>
-  s[0] && s[0].toUpperCase() + camelCase(s).slice(1);
+
+export const removeBlankLines = (s: string, expectLen: number = -1): string => {
+  const newStr = s.replace(/[\n\t ]+\n+/gim, '\n');
+  if (s.length !== newStr.length) return removeBlankLines(newStr, newStr.length);
+  return newStr;
+};
+
+export const properCase = (s: string) => {
+  s = camelCase(s);
+  s = s.replace(/^[^A-Z]/gim, '');
+  return s[0] && s[0].toUpperCase() + s.slice(1);
+};
 
 export const getElementSize = (
   selector: string,
