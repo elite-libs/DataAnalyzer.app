@@ -330,8 +330,8 @@ const _pivotRowsGroupedByType = ({
           // Steps: 1. Check if Array of Objects, 2. Add to local `nestedData` to hold data for post-processing.
           if (isObjectArray || isObjectWithKeys) {
             const keyPath = `${
-              prefixNamingMode === 'full' ? schemaName : ''
-            }.${fieldName}`;
+              prefixNamingMode === 'full' ? `${schemaName}.` : ''
+            }${fieldName}`;
             nestedData[keyPath] = nestedData[keyPath] || [];
             nestedData[keyPath].push(...(isObjectArray ? value : [value]));
             typeFingerprint.$ref = typeFingerprint.$ref || {
