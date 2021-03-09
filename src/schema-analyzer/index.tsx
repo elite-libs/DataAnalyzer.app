@@ -322,9 +322,6 @@ const _pivotRowsGroupedByType = ({
           typeof value === 'object' &&
           Object.keys(value).length >= 1;
 
-        // if (fieldName === 'created' && (isObjectWithKeys || isObjectArray)) {
-        //   console.trace('created', { value, isObjectWithKeys, isObjectArray });
-        // }
         if (!disableNestedTypes) {
           // TODO: Review hack pattern here (buffers too much, better association of custom types, see `$ref`)
           // Steps: 1. Check if Array of Objects, 2. Add to local `nestedData` to hold data for post-processing.
