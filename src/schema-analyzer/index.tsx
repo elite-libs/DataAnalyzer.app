@@ -333,7 +333,7 @@ const _pivotRowsGroupedByType = ({
               prefixNamingMode === 'full' ? `${schemaName}.` : ''
             }${fieldName}`;
             nestedData[keyPath] = nestedData[keyPath] || [];
-            nestedData[keyPath].push(...(isObjectArray ? value : [value]));
+            nestedData[keyPath]!.push(...(isObjectArray ? value : [value]));
             typeFingerprint.$ref = typeFingerprint.$ref || {
               count: index,
               typeRelationship: isObjectArray ? 'one-to-many' : 'one-to-one',
