@@ -9,7 +9,7 @@ export type TypeSummary<TFieldDetails = FieldInfo> = {
 export type DataAnalysisResults = TypeSummary<FieldInfo> & {
   flatTypeSummary: TypeSummary<CombinedFieldInfo>;
   // denseNestedTypes?: KeyValPair<TypeSummary<CombinedFieldInfo>>;
-  denseNestedChanges?: KeyValPair<string>;
+  renamedTypes?: KeyValPair<string>;
   // denseNestedChanges?: ChangeFieldDescription[];
   debug?: boolean;
   options: ISchemaAnalyzerOptions;

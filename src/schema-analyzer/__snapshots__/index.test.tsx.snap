@@ -73,7 +73,6 @@ Object {
 exports[`primary use-cases analyze all 3K+ rows in products.csv: productsResult 1`] = `
 Object {
   "debug": undefined,
-  "denseNestedChanges": undefined,
   "fields": Object {
     "Alcohol By Volume": Object {
       "enum": Array [
@@ -1400,6 +1399,7 @@ Object {
     "strictMatching": true,
     "uniqueRowsThreshold": 0.99,
   },
+  "renamedTypes": undefined,
   "schemaName": "products",
   "totalRows": 3135,
 }
@@ -1408,7 +1408,6 @@ Object {
 exports[`primary use-cases analyze inline csv: accountsCsvResult 1`] = `
 Object {
   "debug": undefined,
-  "denseNestedChanges": undefined,
   "fields": Object {
     "accountConfirmed": Object {
       "enum": undefined,
@@ -1717,6 +1716,7 @@ Object {
     "strictMatching": true,
     "uniqueRowsThreshold": 0.99,
   },
+  "renamedTypes": undefined,
   "schemaName": "sampleCsv",
   "totalRows": 5,
 }
@@ -1810,7 +1810,6 @@ Object {
 exports[`primary use-cases analyze people.json: peopleResult 1`] = `
 Object {
   "debug": undefined,
-  "denseNestedChanges": undefined,
   "fields": Object {
     "birth_year": Object {
       "enum": undefined,
@@ -2440,6 +2439,7 @@ Object {
     "strictMatching": true,
     "uniqueRowsThreshold": 0.99,
   },
+  "renamedTypes": undefined,
   "schemaName": "people",
   "totalRows": 40,
 }
@@ -2448,7 +2448,6 @@ Object {
 exports[`primary use-cases analyze properties.json: propertiesResult 1`] = `
 Object {
   "debug": undefined,
-  "denseNestedChanges": undefined,
   "fields": Object {
     "address1": Object {
       "enum": undefined,
@@ -5885,6 +5884,7 @@ Object {
   "options": Object {
     "disableNestedTypes": true,
   },
+  "renamedTypes": undefined,
   "schemaName": "properties",
   "totalRows": 100,
 }
@@ -5893,7 +5893,6 @@ Object {
 exports[`primary use-cases analyze top 250 rows in products.csv: productsResult_250 1`] = `
 Object {
   "debug": undefined,
-  "denseNestedChanges": undefined,
   "fields": Object {
     "Alcohol By Volume": Object {
       "enum": Array [
@@ -7099,6 +7098,7 @@ Object {
     "strictMatching": true,
     "uniqueRowsThreshold": 0.99,
   },
+  "renamedTypes": undefined,
   "schemaName": "products",
   "totalRows": 250,
 }
@@ -7438,7 +7438,6 @@ Object {
 exports[`primary use-cases analyze top 1250 rows in products.csv: productsResult_1250 1`] = `
 Object {
   "debug": undefined,
-  "denseNestedChanges": undefined,
   "fields": Object {
     "Alcohol By Volume": Object {
       "enum": Array [
@@ -8699,6 +8698,7 @@ Object {
     "strictMatching": true,
     "uniqueRowsThreshold": 0.99,
   },
+  "renamedTypes": undefined,
   "schemaName": "products",
   "totalRows": 1250,
 }
@@ -8707,7 +8707,6 @@ Object {
 exports[`primary use-cases analyze users.json: usersResult 1`] = `
 Object {
   "debug": undefined,
-  "denseNestedChanges": undefined,
   "fields": Object {
     "catchPhrase": Object {
       "enum": undefined,
@@ -9250,6 +9249,7 @@ Object {
     "strictMatching": true,
     "uniqueRowsThreshold": 0.99,
   },
+  "renamedTypes": undefined,
   "schemaName": "users",
   "totalRows": 26,
 }
@@ -9258,7 +9258,6 @@ Object {
 exports[`primary use-cases can analyze schema w/ enum options: propertiesResult_highEnumLimit 1`] = `
 Object {
   "debug": undefined,
-  "denseNestedChanges": undefined,
   "fields": Object {
     "address1": Object {
       "enum": undefined,
@@ -12387,6 +12386,7 @@ Object {
   "options": Object {
     "enumMinimumRowCount": 1000,
   },
+  "renamedTypes": undefined,
   "schemaName": "properties",
   "totalRows": 100,
 }
@@ -12395,7 +12395,6 @@ Object {
 exports[`primary use-cases can analyze schema w/ enum options: propertiesResult_highNullableLimit 1`] = `
 Object {
   "debug": undefined,
-  "denseNestedChanges": undefined,
   "fields": Object {
     "address1": Object {
       "enum": undefined,
@@ -15832,6 +15831,7 @@ Object {
   "options": Object {
     "nullableRowsThreshold": 0.25,
   },
+  "renamedTypes": undefined,
   "schemaName": "properties",
   "totalRows": 100,
 }
@@ -15840,7 +15840,6 @@ Object {
 exports[`primary use-cases can analyze schema w/ enum options: propertiesResult_lowEnumLimit 1`] = `
 Object {
   "debug": undefined,
-  "denseNestedChanges": undefined,
   "fields": Object {
     "address1": Object {
       "enum": undefined,
@@ -19277,6 +19276,7 @@ Object {
   "options": Object {
     "enumMinimumRowCount": 10,
   },
+  "renamedTypes": undefined,
   "schemaName": "properties",
   "totalRows": 100,
 }
@@ -19285,7 +19285,6 @@ Object {
 exports[`primary use-cases can analyze schema w/ enum options: propertiesResult_lowEnumLimitLoose 1`] = `
 Object {
   "debug": undefined,
-  "denseNestedChanges": undefined,
   "fields": Object {
     "address1": Object {
       "enum": undefined,
@@ -23207,6 +23206,7 @@ Object {
     "enumAbsoluteLimit": 30,
     "enumMinimumRowCount": 10,
   },
+  "renamedTypes": undefined,
   "schemaName": "properties",
   "totalRows": 100,
 }
@@ -23215,7 +23215,6 @@ Object {
 exports[`primary use-cases can analyze schema w/ enum options: propertiesResult_lowEnumLimitLoosePct 1`] = `
 Object {
   "debug": undefined,
-  "denseNestedChanges": undefined,
   "fields": Object {
     "address1": Object {
       "enum": undefined,
@@ -27137,6 +27136,7 @@ Object {
     "enumAbsoluteLimit": 30,
     "enumMinimumRowCount": 10,
   },
+  "renamedTypes": undefined,
   "schemaName": "properties",
   "totalRows": 100,
 }
@@ -27145,7 +27145,6 @@ Object {
 exports[`primary use-cases can analyze schema w/ enum options: propertiesResult_lowNullableLimit 1`] = `
 Object {
   "debug": undefined,
-  "denseNestedChanges": undefined,
   "fields": Object {
     "address1": Object {
       "enum": undefined,
@@ -30582,6 +30581,7 @@ Object {
   "options": Object {
     "nullableRowsThreshold": 0,
   },
+  "renamedTypes": undefined,
   "schemaName": "properties",
   "totalRows": 100,
 }
@@ -30590,7 +30590,6 @@ Object {
 exports[`primary use-cases can analyze schema w/ enum options: propertiesResult_notStrict 1`] = `
 Object {
   "debug": undefined,
-  "denseNestedChanges": undefined,
   "fields": Object {
     "address1": Object {
       "enum": undefined,
@@ -34140,6 +34139,7 @@ Object {
   "options": Object {
     "strictMatching": false,
   },
+  "renamedTypes": undefined,
   "schemaName": "properties",
   "totalRows": 100,
 }
@@ -34148,7 +34148,6 @@ Object {
 exports[`primary use-cases can handle dense nested types: denseNestedData 1`] = `
 Object {
   "debug": undefined,
-  "denseNestedChanges": undefined,
   "fields": Object {
     "id": Object {
       "enum": undefined,
@@ -34368,6 +34367,7 @@ Object {
     "strictMatching": true,
     "uniqueRowsThreshold": 0.99,
   },
+  "renamedTypes": undefined,
   "schemaName": "users",
   "totalRows": 12,
 }
@@ -34446,7 +34446,6 @@ Object {
 exports[`primary use-cases can handle nested types: nestedData 1`] = `
 Object {
   "debug": undefined,
-  "denseNestedChanges": undefined,
   "fields": Object {
     "id": Object {
       "enum": undefined,
@@ -34666,6 +34665,7 @@ Object {
     "strictMatching": true,
     "uniqueRowsThreshold": 0.99,
   },
+  "renamedTypes": undefined,
   "schemaName": "users",
   "totalRows": 5,
 }
@@ -34744,7 +34744,6 @@ Object {
 exports[`primary use-cases can handle sparsely nested types: sparseNestedData 1`] = `
 Object {
   "debug": undefined,
-  "denseNestedChanges": undefined,
   "fields": Object {
     "id": Object {
       "enum": undefined,
@@ -34965,6 +34964,7 @@ Object {
     "strictMatching": true,
     "uniqueRowsThreshold": 0.99,
   },
+  "renamedTypes": undefined,
   "schemaName": "users",
   "totalRows": 12,
 }
@@ -35044,7 +35044,6 @@ Object {
 exports[`primary use-cases handles null field data: nullFieldsSmall 1`] = `
 Object {
   "debug": undefined,
-  "denseNestedChanges": undefined,
   "fields": Object {
     "id": Object {
       "enum": undefined,
@@ -35163,6 +35162,7 @@ Object {
     "strictMatching": true,
     "uniqueRowsThreshold": 0.99,
   },
+  "renamedTypes": undefined,
   "schemaName": "notes",
   "totalRows": 3,
 }
@@ -35171,7 +35171,6 @@ Object {
 exports[`primary use-cases supports enum detection: peopleWithEnums 1`] = `
 Object {
   "debug": undefined,
-  "denseNestedChanges": undefined,
   "fields": Object {
     "birth_year": Object {
       "enum": undefined,
@@ -35867,6 +35866,7 @@ Object {
     "enumMinimumRowCount": 10,
     "strictMatching": false,
   },
+  "renamedTypes": undefined,
   "schemaName": "people",
   "totalRows": 40,
 }

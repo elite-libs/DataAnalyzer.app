@@ -115,7 +115,7 @@ function schemaAnalyzer(
         // denseNestedTypes: condensedResults
         //   ? condensedResults.nestedTypes
         //   : undefined,
-        denseNestedChanges: condensedResults
+        renamedTypes: condensedResults
           ? condensedResults.typeNameMap
           : undefined,
         debug: options.debug,

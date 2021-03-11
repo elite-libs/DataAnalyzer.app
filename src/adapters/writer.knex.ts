@@ -72,8 +72,7 @@ const writer: IDataAnalyzerWriter = {
       let schema: TypeSummary<CombinedFieldInfo> | undefined =
         nestedTypes[nestedTypeName];
       if (!schema) {
-        let nestedKey =
-          results.denseNestedChanges && results.denseNestedChanges[nestedTypeName];
+        let nestedKey = results.renamedTypes && results.renamedTypes[nestedTypeName];
         schema = nestedKey ? nestedTypes[nestedKey] : undefined;
       }
       if (schema?.fields == null)

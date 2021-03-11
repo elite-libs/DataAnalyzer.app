@@ -7765,7 +7765,6 @@ Object {
 exports[`#nested objects can parse nested objects (non-array) 1`] = `
 Object {
   "debug": undefined,
-  "denseNestedChanges": undefined,
   "fields": Object {
     "data": Object {
       "enum": undefined,
@@ -8857,6 +8856,7 @@ Object {
     "strictMatching": true,
     "uniqueRowsThreshold": 0.99,
   },
+  "renamedTypes": undefined,
   "schemaName": "historicEvent",
   "totalRows": 1,
 }
