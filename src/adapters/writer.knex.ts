@@ -144,11 +144,7 @@ const writer: IDataAnalyzerWriter = {
             return `    table.decimal("${name}"${sizePart})${appendChain};`;
           }
           if (identity && type === 'Number') {
-            if (value && BigInt(value) >= BIG_INTEGER_MIN) {
-              return `    table.bigIncrements("${name}");`;
-            } else {
-              return `    table.increments("${name}");`;
-            }
+            return `    table.increments("${name}");`;
           }
 
           if (
@@ -187,11 +183,7 @@ const writer: IDataAnalyzerWriter = {
           if (type === 'Timestamp') return `    table.timestamp("${name}"${sizePart})`;
           if (type === 'Currency') return `    table.float("${name}"${sizePart});`;
           if (type === 'Float') return `    table.float("${name}"${sizePart});`;
-          if (type === 'Number') {
-            return `    table.${
-              value != null && value > BIG_INTEGER_MIN ? 'bigInteger' : 'integer'
-            }("${name}")${appendChain};`;
-          }
+          if (type === 'Number') return `    table.integer("${name}")${appendChain};`;
           if (type === 'Email')
             return `    table.string("${name}"${sizePart})${appendChain};`;
           if (type === 'String')
