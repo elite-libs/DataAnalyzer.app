@@ -24,6 +24,7 @@ export function consolidateNestedTypes(
   { consolidateTypes }: IConsolidateTypesOptions,
 ): IConsolidateTypesResults {
   const nestedTypePairs = Object.entries(nestedTypes);
+  let typeNameMap: KeyValPair<string> = {};
 
   let getKey: any = null;
   if (consolidateTypes === 'field-names') {
@@ -47,7 +48,7 @@ export function consolidateNestedTypes(
         )
         .join('|');
   } else {
-    return { nestedTypes, changes: [] }; // bail out
+    return { nestedTypes, changes: [], typeNameMap: {} }; // bail out
   }
 
   const typeAliases = nestedTypePairs.reduce(
@@ -124,7 +125,7 @@ export function consolidateNestedTypes(
       }
     },
   );
-  // console.log('fieldsToReplace', fieldsToReplace);
+  //// console.log('fieldsToReplace', fieldsToReplace);
   //// console.log('remapedShapeNames', {
   ////   fieldsToReplace,
   ////   namedShapeAliases,
@@ -138,6 +139,10 @@ export function consolidateNestedTypes(
    */
   let updatedTypes = nestedTypes;
   fieldsToReplace.forEach((aliasInfo) => {
+    aliasInfo.targetTypes.forEach((originalName) => {
+      typeNameMap[originalName] = aliasInfo.alias;
+    });
+
     const matchNames = typeAliases.shapeToType[aliasInfo.shape];
     updatedTypes = replaceTypeAliases(
       updatedTypes,
@@ -146,7 +151,7 @@ export function consolidateNestedTypes(
     );
   });
   // console.log(`FINAL KEYS:`, Object.keys(updatedTypes), fieldsToReplace);
-  return { nestedTypes: updatedTypes, changes: fieldsToReplace };
+  return { nestedTypes: updatedTypes, changes: fieldsToReplace, typeNameMap };
 
   /*
    * Implement the logic to choose a name from available prefix/suffix strings.

@@ -202,7 +202,6 @@ describe('#knex', () => {
       },
     });
     const code = knex.render(results);
-
     expect(code).toMatchSnapshot();
   });
 
@@ -221,7 +220,6 @@ describe('#knex', () => {
       },
     });
     const code = knex.render(results);
-
     expect(code).toMatchSnapshot();
   });
 });

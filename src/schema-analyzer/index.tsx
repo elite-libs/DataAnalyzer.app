@@ -107,11 +107,6 @@ function schemaAnalyzer(
           flatTypeSummary.nestedTypes,
           options,
         );
-        condensedResults.changes.forEach((cfd) => {
-          cfd.targetTypes.forEach((tt) => {
-            typeNameMap[tt] = cfd.alias;
-          });
-        });
         flatTypeSummary.nestedTypes = condensedResults.nestedTypes;
       }
 
@@ -121,7 +116,9 @@ function schemaAnalyzer(
         // denseNestedTypes: condensedResults
         //   ? condensedResults.nestedTypes
         //   : undefined,
-        denseNestedChanges: condensedResults ? typeNameMap : undefined,
+        denseNestedChanges: condensedResults
+          ? condensedResults.typeNameMap
+          : undefined,
         debug: options.debug,
         options,
       };

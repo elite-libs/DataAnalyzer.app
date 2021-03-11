@@ -5,7 +5,7 @@ import { CombinedFieldInfo, KeyValPair, TypeSummary } from 'types';
 import { IDataAnalyzerWriter } from './writers';
 // const log = debug('writer:knex');
 
-const BIG_INTEGER_MIN = BigInt('2147483647');
+// const BIG_INTEGER_MIN = BigInt('2147483647');
 
 const instructionsForMultipleTypes = `// NOTE #1: You can break up multiple createTable's into different migration scripts
   // OR, you can chain the calls to .createTable()'s
@@ -54,9 +54,9 @@ const writer: IDataAnalyzerWriter = {
       nestedTypes &&
       typeof nestedTypes === 'object' &&
       Object.keys(nestedTypes).length > 0;
-    const nestedTypesEntries =
-      hasNestedTypes && nestedTypes ? Object.entries(nestedTypes) : {};
-    const nestedTypesKeys = hasNestedTypes && nestedTypes ? Object.keys(nestedTypes) : {};
+    // const nestedTypesEntries =
+    //   hasNestedTypes && nestedTypes ? Object.entries(nestedTypes) : {};
+    // const nestedTypesKeys = hasNestedTypes && nestedTypes ? Object.keys(nestedTypes) : {};
 
     // console.warn('nestedTypes', nestedTypes);
     function getFirstIdentityOrUniqueField(
@@ -68,11 +68,14 @@ const writer: IDataAnalyzerWriter = {
           `Error: Missing nested type data. Couldn't lookup '${nestedTypeName}'`,
         );
       // console.log('nestedTypes', Object.keys(nestedTypes));
-      const schema =
-        nestedTypes[nestedTypeName] ||
-        (results.denseNestedChanges &&
-          results.denseNestedChanges[nestedTypeName] &&
-          nestedTypes[results.denseNestedChanges[nestedTypeName]!]);
+
+      let schema: TypeSummary<CombinedFieldInfo> | undefined =
+        nestedTypes[nestedTypeName];
+      if (!schema) {
+        let nestedKey =
+          results.denseNestedChanges && results.denseNestedChanges[nestedTypeName];
+        schema = nestedKey ? nestedTypes[nestedKey] : undefined;
+      }
       if (schema?.fields == null)
         throw new Error(
           `Error: Failed to find nested schema for '${nestedTypeName}' inside ${Object.keys(
@@ -113,9 +116,7 @@ const writer: IDataAnalyzerWriter = {
             identity,
             unique,
             nullable,
-            value,
             enum: enumData,
-            // count: typeCount,
           } = fieldInfo;
 
           let length;
