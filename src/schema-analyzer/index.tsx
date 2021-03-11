@@ -91,7 +91,6 @@ function schemaAnalyzer(
     })
     .then((typeSummary) => {
       let condensedResults: IConsolidateTypesResults | null = null;
-      let typeNameMap: KeyValPair<string> = {};
 
       const flatTypeSummary = helpers.flattenTypes(
         typeSummary,
