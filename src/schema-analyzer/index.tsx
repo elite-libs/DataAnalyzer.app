@@ -91,6 +91,8 @@ function schemaAnalyzer(
     })
     .then((typeSummary) => {
       let condensedResults: IConsolidateTypesResults | null = null;
+      let typeNameMap: KeyValPair<string> = {};
+
       const flatTypeSummary = helpers.flattenTypes(
         typeSummary,
         options.flattenOptions,
@@ -105,6 +107,11 @@ function schemaAnalyzer(
           flatTypeSummary.nestedTypes,
           options,
         );
+        condensedResults.changes.forEach((cfd) => {
+          cfd.targetTypes.forEach((tt) => {
+            typeNameMap[tt] = cfd.alias;
+          });
+        });
         flatTypeSummary.nestedTypes = condensedResults.nestedTypes;
       }
 
@@ -114,9 +121,7 @@ function schemaAnalyzer(
         // denseNestedTypes: condensedResults
         //   ? condensedResults.nestedTypes
         //   : undefined,
-        denseNestedChanges: condensedResults
-          ? condensedResults.changes
-          : undefined,
+        denseNestedChanges: condensedResults ? typeNameMap : undefined,
         debug: options.debug,
         options,
       };

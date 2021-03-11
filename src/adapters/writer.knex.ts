@@ -1,6 +1,6 @@
 // import { mapValues } from 'lodash';
 import snakecase from 'lodash.snakecase';
-import { CombinedFieldInfo, KeyValPair } from 'types';
+import { CombinedFieldInfo, KeyValPair, TypeSummary } from 'types';
 // import debug from 'debug';
 import { IDataAnalyzerWriter } from './writers';
 // const log = debug('writer:knex');
@@ -50,8 +50,15 @@ const writer: IDataAnalyzerWriter = {
     let { options, schemaName } = results;
     const typeSummary = results.flatTypeSummary;
     const { nestedTypes } = typeSummary;
-    const hasNestedTypes = nestedTypes && Object.keys(nestedTypes!).length > 0;
+    const hasNestedTypes =
+      nestedTypes &&
+      typeof nestedTypes === 'object' &&
+      Object.keys(nestedTypes).length > 0;
+    const nestedTypesEntries =
+      hasNestedTypes && nestedTypes ? Object.entries(nestedTypes) : {};
+    const nestedTypesKeys = hasNestedTypes && nestedTypes ? Object.keys(nestedTypes) : {};
 
+    // console.warn('nestedTypes', nestedTypes);
     function getFirstIdentityOrUniqueField(
       nestedTypeName: string,
       preferUniqueOverFirstColumn = true,
@@ -60,9 +67,18 @@ const writer: IDataAnalyzerWriter = {
         throw new Error(
           `Error: Missing nested type data. Couldn't lookup '${nestedTypeName}'`,
         );
-      const schema = nestedTypes[nestedTypeName];
+      // console.log('nestedTypes', Object.keys(nestedTypes));
+      const schema =
+        nestedTypes[nestedTypeName] ||
+        (results.denseNestedChanges &&
+          results.denseNestedChanges[nestedTypeName] &&
+          nestedTypes[results.denseNestedChanges[nestedTypeName]!]);
       if (schema?.fields == null)
-        throw new Error(`Error: Failed to find nested schema for '${nestedTypeName}'`);
+        throw new Error(
+          `Error: Failed to find nested schema for '${nestedTypeName}' inside ${Object.keys(
+            nestedTypes,
+          ).join(', ')}`,
+        );
       const fieldSet = Object.entries<CombinedFieldInfo>(schema.fields);
       // locate by explicit identity indicator
       let identityField = fieldSet.find(([fieldName, fieldStats]) => {
@@ -205,11 +221,11 @@ const writer: IDataAnalyzerWriter = {
       if (!options?.disableNestedTypes && hasNestedTypes) {
         // console.log('nested schema detected', schemaName);
         // @ts-ignore
-        return Object.entries(nestedTypes!)
+        return Object.entries<TypeSummary<CombinedFieldInfo>>(typeSummary.nestedTypes)
           .reverse()
-          .map(([nestedName, results]) => {
+          .map(([nestedName, results], index) => {
             if (!results || !results.fields || !results)
-              return `// Error invalid field data //`;
+              throw Error(`Error invalid field data at index ${index}`);
             return getCreateTableCode({
               schemaName: snakecase(nestedName),
               fields: results.fields,

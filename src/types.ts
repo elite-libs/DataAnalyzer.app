@@ -9,7 +9,8 @@ export type TypeSummary<TFieldDetails = FieldInfo> = {
 export type DataAnalysisResults = TypeSummary<FieldInfo> & {
   flatTypeSummary: TypeSummary<CombinedFieldInfo>;
   // denseNestedTypes?: KeyValPair<TypeSummary<CombinedFieldInfo>>;
-  denseNestedChanges?: ChangeFieldDescription[];
+  denseNestedChanges?: KeyValPair<string>;
+  // denseNestedChanges?: ChangeFieldDescription[];
   debug?: boolean;
   options: ISchemaAnalyzerOptions;
 };
@@ -225,6 +226,7 @@ export type ProgressCallback = (progress: {
 export interface IConsolidateTypesResults {
   nestedTypes: KeyValPair<TypeSummary<CombinedFieldInfo>>;
   changes: ChangeFieldDescription[];
+  typeNameMap: KeyValPair<string>;
 }
 export interface ChangeFieldDescription {
   alias: string;

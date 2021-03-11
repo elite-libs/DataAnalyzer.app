@@ -1,0 +1,1212 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`#typescript can emit interface for nested types 1`] = `
+"export interface Users {
+  id: number;
+  name: string;
+  notes: UsersNotes[];
+};
+export interface UsersNotes {
+  id: number;
+  text: string;
+};
+"
+`;
+
+exports[`#typescript can emit interface for people json 1`] = `
+"export interface People {
+  name: string;
+  height?: number  | null;
+  mass?: number  | null;
+  hairColor: string;
+  skinColor?: string  | null;
+  eyeColor: \\"blue\\" | \\"yellow\\" | \\"red\\" | \\"brown\\" | \\"blue-gray\\" | \\"black\\" | \\"orange\\" | \\"hazel\\";
+  birthYear?: string  | null;
+  homeworld: string;
+  films: any[];
+  species: any[];
+  vehicles: any[];
+  starships: any[];
+  created: Date;
+  edited: Date;
+  url: string;
+  id: number;
+};
+"
+`;
+
+exports[`#typescript can emit interface(s) 1`] = `
+"export interface Users {
+  id: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  isActive: boolean;
+  createdAt: Date;
+  modifiedAt: Date;
+  catchPhrase: string;
+  companyName: string;
+  credits: \\"1\\" | \\"15\\" | \\"20\\" | \\"10\\" | \\"0\\" | \\"11\\" | \\"7\\" | \\"9\\";
+  salesScore: number;
+  location: \\"nyc\\" | \\"remote\\" | \\"denver\\";
+  profile?: string  | null;
+};
+"
+`;
+
+exports[`#typescript can emit migration for eventResults json 1`] = `
+"export interface EventResults {
+  links: EventResultsLinks;
+  embedded: EventResultsEmbedded;
+  page: EventResultsPage;
+};
+export interface EventResultsLinks {
+  self: EventResultsLinksSelf;
+  next: EventResultsLinksNext;
+};
+export interface EventResultsEmbedded {
+  events: EventResultsEmbeddedEvents[];
+};
+export interface EventResultsPage {
+  size: number;
+  totalElements: number;
+  totalPages: number;
+  number: number;
+};
+export interface EventResultsLinksSelf {
+  href: string;
+  templated: boolean;
+};
+export interface EventResultsLinksNext {
+  href: string;
+  templated: boolean;
+};
+export interface EventResultsEmbeddedEvents {
+  name: string;
+  type: string;
+  id: string;
+  test: boolean;
+  url: string;
+  locale: string;
+  images: EventResultsEmbeddedEventsImages[];
+  sales: EventResultsEmbeddedEventsSales;
+  dates: EventResultsEmbeddedEventsDates;
+  classifications: EventResultsEmbeddedEventsClassifications[];
+  promoter: EventResultsEmbeddedEventsPromoter;
+  links: EventResultsEmbeddedEventsLinks;
+  embedded: EventResultsEmbeddedEventsEmbedded;
+};
+export interface EventResultsEmbeddedEventsImages {
+  ratio: string;
+  url: string;
+  width: number;
+  height: number;
+  fallback: boolean;
+};
+export interface EventResultsEmbeddedEventsSales {
+  public: EventResultsEmbeddedEventsSalesPublic;
+};
+export interface EventResultsEmbeddedEventsDates {
+  start: EventResultsEmbeddedEventsDatesStart;
+  timezone: string;
+  status: EventResultsEmbeddedEventsDatesStatus;
+};
+export interface EventResultsEmbeddedEventsClassifications {
+  primary: boolean;
+  segment: EventResultsEmbeddedEventsClassificationsSegment;
+  genre: EventResultsEmbeddedEventsClassificationsGenre;
+  subGenre: EventResultsEmbeddedEventsClassificationsSubGenre;
+};
+export interface EventResultsEmbeddedEventsPromoter {
+  id: number;
+};
+export interface EventResultsEmbeddedEventsLinks {
+  self: EventResultsEmbeddedEventsLinksSelf;
+  attractions: EventResultsEmbeddedEventsLinksAttractions[];
+  venues: EventResultsEmbeddedEventsLinksVenues[];
+};
+export interface EventResultsEmbeddedEventsEmbedded {
+  venues: EventResultsEmbeddedEventsEmbeddedVenues[];
+  attractions: EventResultsEmbeddedEventsEmbeddedAttractions[];
+};
+export interface EventResultsEmbeddedEventsSalesPublic {
+  startDateTime: Date;
+  startTbd: boolean;
+  endDateTime: Date;
+};
+export interface EventResultsEmbeddedEventsDatesStart {
+  localDate: Date;
+  dateTbd: boolean;
+  dateTba: boolean;
+  timeTba: boolean;
+  noSpecificTime: boolean;
+};
+export interface EventResultsEmbeddedEventsDatesStatus {
+  code: string;
+};
+export interface EventResultsEmbeddedEventsClassificationsSegment {
+  id: string;
+  name: string;
+};
+export interface EventResultsEmbeddedEventsClassificationsGenre {
+  id: string;
+  name: string;
+};
+export interface EventResultsEmbeddedEventsClassificationsSubGenre {
+  id: string;
+  name: string;
+};
+export interface EventResultsEmbeddedEventsLinksSelf {
+  href: string;
+};
+export interface EventResultsEmbeddedEventsLinksAttractions {
+  href: string;
+};
+export interface EventResultsEmbeddedEventsLinksVenues {
+  href: string;
+};
+export interface EventResultsEmbeddedEventsEmbeddedVenues {
+  name: string;
+  type: string;
+  id: string;
+  test: boolean;
+  locale: string;
+  postalCode: number;
+  timezone: string;
+  city: EventResultsEmbeddedEventsEmbeddedVenuesCity;
+  state: EventResultsEmbeddedEventsEmbeddedVenuesState;
+  country: EventResultsEmbeddedEventsEmbeddedVenuesCountry;
+  address: EventResultsEmbeddedEventsEmbeddedVenuesAddress;
+  location: EventResultsEmbeddedEventsEmbeddedVenuesLocation;
+  markets: EventResultsEmbeddedEventsEmbeddedVenuesMarkets[];
+  links: EventResultsEmbeddedEventsEmbeddedVenuesLinks;
+};
+export interface EventResultsEmbeddedEventsEmbeddedAttractions {
+  name: string;
+  type: string;
+  id: string;
+  test: boolean;
+  locale: string;
+  images: EventResultsEmbeddedEventsEmbeddedAttractionsImages[];
+  classifications: EventResultsEmbeddedEventsEmbeddedAttractionsClassifications[];
+  links: EventResultsEmbeddedEventsEmbeddedAttractionsLinks;
+};
+export interface EventResultsEmbeddedEventsEmbeddedVenuesCity {
+  name: string;
+};
+export interface EventResultsEmbeddedEventsEmbeddedVenuesState {
+  name: string;
+  stateCode: string;
+};
+export interface EventResultsEmbeddedEventsEmbeddedVenuesCountry {
+  name: string;
+  countryCode: string;
+};
+export interface EventResultsEmbeddedEventsEmbeddedVenuesAddress {
+  line1: string;
+};
+export interface EventResultsEmbeddedEventsEmbeddedVenuesLocation {
+  longitude: number;
+  latitude: number;
+};
+export interface EventResultsEmbeddedEventsEmbeddedVenuesMarkets {
+  id: number;
+};
+export interface EventResultsEmbeddedEventsEmbeddedVenuesLinks {
+  self: EventResultsEmbeddedEventsEmbeddedVenuesLinksSelf;
+};
+export interface EventResultsEmbeddedEventsEmbeddedVenuesLinksSelf {
+  href: string;
+};
+export interface EventResultsEmbeddedEventsEmbeddedAttractionsImages {
+  ratio: string;
+  url: string;
+  width: number;
+  height: number;
+  fallback: boolean;
+};
+export interface EventResultsEmbeddedEventsEmbeddedAttractionsClassifications {
+  primary: boolean;
+  segment: EventResultsEmbeddedEventsEmbeddedAttractionsClassificationsSegment;
+  genre: EventResultsEmbeddedEventsEmbeddedAttractionsClassificationsGenre;
+  subGenre: EventResultsEmbeddedEventsEmbeddedAttractionsClassificationsSubGenre;
+};
+export interface EventResultsEmbeddedEventsEmbeddedAttractionsLinks {
+  self: EventResultsEmbeddedEventsEmbeddedAttractionsLinksSelf;
+};
+export interface EventResultsEmbeddedEventsEmbeddedAttractionsClassificationsSegment {
+  id: string;
+  name: string;
+};
+export interface EventResultsEmbeddedEventsEmbeddedAttractionsClassificationsGenre {
+  id: string;
+  name: string;
+};
+export interface EventResultsEmbeddedEventsEmbeddedAttractionsClassificationsSubGenre {
+  id: string;
+  name: string;
+};
+export interface EventResultsEmbeddedEventsEmbeddedAttractionsLinksSelf {
+  href: string;
+};
+"
+`;
+
+exports[`#typescript can emit migration for eventResults json, w/ dense & trim fields 1`] = `
+"export interface EventResults {
+  links: Links;
+  embedded: Embedded;
+  page: Page;
+};
+export interface Links {
+  self: Self;
+};
+export interface Embedded {
+  venues: Venues[];
+  attractions: Attractions[];
+};
+export interface Page {
+  size: number;
+  totalElements: number;
+  totalPages: number;
+  number: number;
+};
+export interface Self {
+  href: string;
+};
+export interface Next {
+  href: string;
+  templated: boolean;
+};
+export interface Events {
+  name: string;
+  type: string;
+  id: string;
+  test: boolean;
+  url: string;
+  locale: string;
+  images: Images[];
+  sales: Sales;
+  dates: Dates;
+  classifications: Classifications[];
+  promoter: Promoter;
+  links: Links;
+  embedded: Embedded;
+};
+export interface Images {
+  ratio: string;
+  url: string;
+  width: number;
+  height: number;
+  fallback: boolean;
+};
+export interface Sales {
+  public: Public;
+};
+export interface Dates {
+  start: Start;
+  timezone: string;
+  status: Status;
+};
+export interface Classifications {
+  primary: boolean;
+  segment: IdName;
+  genre: IdName;
+  subGenre: IdName;
+};
+export interface Promoter {
+  id: number;
+};
+export interface Public {
+  startDateTime: Date;
+  startTbd: boolean;
+  endDateTime: Date;
+};
+export interface Start {
+  localDate: Date;
+  dateTbd: boolean;
+  dateTba: boolean;
+  timeTba: boolean;
+  noSpecificTime: boolean;
+};
+export interface Status {
+  code: string;
+};
+export interface Attractions {
+  name: string;
+  type: string;
+  id: string;
+  test: boolean;
+  locale: string;
+  images: Images[];
+  classifications: Classifications[];
+  links: Links;
+};
+export interface Venues {
+  name: string;
+  type: string;
+  id: string;
+  test: boolean;
+  locale: string;
+  postalCode: number;
+  timezone: string;
+  city: City;
+  state: State;
+  country: Country;
+  address: Address;
+  location: Location;
+  markets: Markets[];
+  links: Links;
+};
+export interface City {
+  name: string;
+};
+export interface State {
+  name: string;
+  stateCode: string;
+};
+export interface Country {
+  name: string;
+  countryCode: string;
+};
+export interface Address {
+  line1: string;
+};
+export interface Location {
+  longitude: number;
+  latitude: number;
+};
+export interface Markets {
+  id: number;
+};
+export interface IdName {
+  id: string;
+  name: string;
+};
+"
+`;
+
+exports[`#typescript can emit migration for eventResults json, w/ dense fields 1`] = `
+"export interface EventResults {
+  links: EventResultsLinks;
+  embedded: EventResultsEmbedded;
+  page: EventResultsPage;
+};
+export interface EventResultsLinks {
+  self: HrefTemplated;
+  next: HrefTemplated;
+};
+export interface EventResultsEmbedded {
+  events: EventResultsEmbeddedEvents[];
+};
+export interface EventResultsPage {
+  size: number;
+  totalElements: number;
+  totalPages: number;
+  number: number;
+};
+export interface EventResultsEmbeddedEvents {
+  name: string;
+  type: string;
+  id: string;
+  test: boolean;
+  url: string;
+  locale: string;
+  images: Images[];
+  sales: EventResultsEmbeddedEventsSales;
+  dates: EventResultsEmbeddedEventsDates;
+  classifications: Classifications[];
+  promoter: EventResultsEmbeddedEventsPromoter;
+  links: EventResultsEmbeddedEventsLinks;
+  embedded: EventResultsEmbeddedEventsEmbedded;
+};
+export interface EventResultsEmbeddedEventsSales {
+  public: EventResultsEmbeddedEventsSalesPublic;
+};
+export interface EventResultsEmbeddedEventsDates {
+  start: EventResultsEmbeddedEventsDatesStart;
+  timezone: string;
+  status: EventResultsEmbeddedEventsDatesStatus;
+};
+export interface EventResultsEmbeddedEventsPromoter {
+  id: number;
+};
+export interface EventResultsEmbeddedEventsLinks {
+  self: Href;
+  attractions: Href[];
+  venues: Href[];
+};
+export interface EventResultsEmbeddedEventsEmbedded {
+  venues: EventResultsEmbeddedEventsEmbeddedVenues[];
+  attractions: EventResultsEmbeddedEventsEmbeddedAttractions[];
+};
+export interface EventResultsEmbeddedEventsSalesPublic {
+  startDateTime: Date;
+  startTbd: boolean;
+  endDateTime: Date;
+};
+export interface EventResultsEmbeddedEventsDatesStart {
+  localDate: Date;
+  dateTbd: boolean;
+  dateTba: boolean;
+  timeTba: boolean;
+  noSpecificTime: boolean;
+};
+export interface EventResultsEmbeddedEventsDatesStatus {
+  code: string;
+};
+export interface EventResultsEmbeddedEventsEmbeddedVenues {
+  name: string;
+  type: string;
+  id: string;
+  test: boolean;
+  locale: string;
+  postalCode: number;
+  timezone: string;
+  city: EventResultsEmbeddedEventsEmbeddedVenuesCity;
+  state: EventResultsEmbeddedEventsEmbeddedVenuesState;
+  country: EventResultsEmbeddedEventsEmbeddedVenuesCountry;
+  address: EventResultsEmbeddedEventsEmbeddedVenuesAddress;
+  location: EventResultsEmbeddedEventsEmbeddedVenuesLocation;
+  markets: EventResultsEmbeddedEventsEmbeddedVenuesMarkets[];
+  links: Links;
+};
+export interface EventResultsEmbeddedEventsEmbeddedAttractions {
+  name: string;
+  type: string;
+  id: string;
+  test: boolean;
+  locale: string;
+  images: Images[];
+  classifications: Classifications[];
+  links: Links;
+};
+export interface EventResultsEmbeddedEventsEmbeddedVenuesCity {
+  name: string;
+};
+export interface EventResultsEmbeddedEventsEmbeddedVenuesState {
+  name: string;
+  stateCode: string;
+};
+export interface EventResultsEmbeddedEventsEmbeddedVenuesCountry {
+  name: string;
+  countryCode: string;
+};
+export interface EventResultsEmbeddedEventsEmbeddedVenuesAddress {
+  line1: string;
+};
+export interface EventResultsEmbeddedEventsEmbeddedVenuesLocation {
+  longitude: number;
+  latitude: number;
+};
+export interface EventResultsEmbeddedEventsEmbeddedVenuesMarkets {
+  id: number;
+};
+export interface HrefTemplated {
+  href: string;
+  templated: boolean;
+};
+export interface Images {
+  ratio: string;
+  url: string;
+  width: number;
+  height: number;
+  fallback: boolean;
+};
+export interface Classifications {
+  primary: boolean;
+  segment: IdName;
+  genre: IdName;
+  subGenre: IdName;
+};
+export interface IdName {
+  id: string;
+  name: string;
+};
+export interface Href {
+  href: string;
+};
+export interface Links {
+  self: Href;
+};
+"
+`;
+
+exports[`#typescript can emit migration for pokemon json 1`] = `
+"export interface Pokemon {
+  abilities: PokemonAbilities[];
+  baseExperience: number;
+  forms: PokemonForms[];
+  gameIndices: PokemonGameIndices[];
+  height: number;
+  heldItems: any[];
+  id: number;
+  isDefault: boolean;
+  locationAreaEncounters: string;
+  moves: PokemonMoves[];
+  name: string;
+  order: number;
+  species: PokemonSpecies;
+  sprites: PokemonSprites;
+  stats: PokemonStats[];
+  types: PokemonTypes[];
+  weight: number;
+};
+export interface PokemonAbilities {
+  ability: PokemonAbilitiesAbility;
+  isHidden: boolean;
+  slot: number;
+};
+export interface PokemonForms {
+  name: string;
+  url: string;
+};
+export interface PokemonGameIndices {
+  gameIndex: number;
+  version: PokemonGameIndicesVersion;
+};
+export interface PokemonMoves {
+  move: PokemonMovesMove;
+  versionGroupDetails: PokemonMovesVersionGroupDetails[];
+};
+export interface PokemonSpecies {
+  name: string;
+  url: string;
+};
+export interface PokemonSprites {
+  backDefault: string;
+  backFemale: string;
+  backShiny: string;
+  backShinyFemale: string;
+  frontDefault: string;
+  frontFemale: string;
+  frontShiny: string;
+  frontShinyFemale: string;
+  other: PokemonSpritesOther;
+  versions: PokemonSpritesVersions;
+};
+export interface PokemonStats {
+  baseStat: number;
+  effort: number;
+  stat: PokemonStatsStat;
+};
+export interface PokemonTypes {
+  slot: number;
+  type: PokemonTypesType;
+};
+export interface PokemonAbilitiesAbility {
+  name: string;
+  url: string;
+};
+export interface PokemonGameIndicesVersion {
+  name: string;
+  url: string;
+};
+export interface PokemonMovesMove {
+  name: string;
+  url: string;
+};
+export interface PokemonMovesVersionGroupDetails {
+  levelLearnedAt: number;
+  moveLearnMethod: PokemonMovesVersionGroupDetailsMoveLearnMethod;
+  versionGroup: PokemonMovesVersionGroupDetailsVersionGroup;
+};
+export interface PokemonMovesVersionGroupDetailsMoveLearnMethod {
+  name: \\"machine\\" | \\"tutor\\" | \\"level-up\\" | \\"egg\\";
+  url: \\"https://pokeapi.co/api/v2/move-learn-method/4/\\" | \\"https://pokeapi.co/api/v2/move-learn-method/3/\\" | \\"https://pokeapi.co/api/v2/move-learn-method/1/\\" | \\"https://pokeapi.co/api/v2/move-learn-method/2/\\";
+};
+export interface PokemonMovesVersionGroupDetailsVersionGroup {
+  name: string;
+  url: string;
+};
+export interface PokemonSpritesOther {
+  dreamWorld: PokemonSpritesOtherDreamWorld;
+  officialArtwork: PokemonSpritesOtherOfficialArtwork;
+};
+export interface PokemonSpritesVersions {
+  generationI: PokemonSpritesVersionsGenerationI;
+  generationIi: PokemonSpritesVersionsGenerationIi;
+  generationIii: PokemonSpritesVersionsGenerationIii;
+  generationIv: PokemonSpritesVersionsGenerationIv;
+  generationV: PokemonSpritesVersionsGenerationV;
+  generationVi: PokemonSpritesVersionsGenerationVi;
+  generationVii: PokemonSpritesVersionsGenerationVii;
+  generationViii: PokemonSpritesVersionsGenerationViii;
+};
+export interface PokemonSpritesOtherDreamWorld {
+  frontDefault: string;
+  frontFemale: string;
+};
+export interface PokemonSpritesOtherOfficialArtwork {
+  frontDefault: string;
+};
+export interface PokemonSpritesVersionsGenerationI {
+  redBlue: PokemonSpritesVersionsGenerationIRedBlue;
+  yellow: PokemonSpritesVersionsGenerationIYellow;
+};
+export interface PokemonSpritesVersionsGenerationIi {
+  crystal: PokemonSpritesVersionsGenerationIiCrystal;
+  gold: PokemonSpritesVersionsGenerationIiGold;
+  silver: PokemonSpritesVersionsGenerationIiSilver;
+};
+export interface PokemonSpritesVersionsGenerationIii {
+  emerald: PokemonSpritesVersionsGenerationIiiEmerald;
+  fireredLeafgreen: PokemonSpritesVersionsGenerationIiiFireredLeafgreen;
+  rubySapphire: PokemonSpritesVersionsGenerationIiiRubySapphire;
+};
+export interface PokemonSpritesVersionsGenerationIv {
+  diamondPearl: PokemonSpritesVersionsGenerationIvDiamondPearl;
+  heartgoldSoulsilver: PokemonSpritesVersionsGenerationIvHeartgoldSoulsilver;
+  platinum: PokemonSpritesVersionsGenerationIvPlatinum;
+};
+export interface PokemonSpritesVersionsGenerationV {
+  blackWhite: PokemonSpritesVersionsGenerationVBlackWhite;
+};
+export interface PokemonSpritesVersionsGenerationVi {
+  omegarubyAlphasapphire: PokemonSpritesVersionsGenerationViOmegarubyAlphasapphire;
+  xY: PokemonSpritesVersionsGenerationViXY;
+};
+export interface PokemonSpritesVersionsGenerationVii {
+  icons: PokemonSpritesVersionsGenerationViiIcons;
+  ultraSunUltraMoon: PokemonSpritesVersionsGenerationViiUltraSunUltraMoon;
+};
+export interface PokemonSpritesVersionsGenerationViii {
+  icons: PokemonSpritesVersionsGenerationViiiIcons;
+};
+export interface PokemonSpritesVersionsGenerationIRedBlue {
+  backDefault: string;
+  backGray: string;
+  frontDefault: string;
+  frontGray: string;
+};
+export interface PokemonSpritesVersionsGenerationIYellow {
+  backDefault: string;
+  backGray: string;
+  frontDefault: string;
+  frontGray: string;
+};
+export interface PokemonSpritesVersionsGenerationIiCrystal {
+  backDefault: string;
+  backShiny: string;
+  frontDefault: string;
+  frontShiny: string;
+};
+export interface PokemonSpritesVersionsGenerationIiGold {
+  backDefault: string;
+  backShiny: string;
+  frontDefault: string;
+  frontShiny: string;
+};
+export interface PokemonSpritesVersionsGenerationIiSilver {
+  backDefault: string;
+  backShiny: string;
+  frontDefault: string;
+  frontShiny: string;
+};
+export interface PokemonSpritesVersionsGenerationIiiEmerald {
+  frontDefault: string;
+  frontShiny: string;
+};
+export interface PokemonSpritesVersionsGenerationIiiFireredLeafgreen {
+  backDefault: string;
+  backShiny: string;
+  frontDefault: string;
+  frontShiny: string;
+};
+export interface PokemonSpritesVersionsGenerationIiiRubySapphire {
+  backDefault: string;
+  backShiny: string;
+  frontDefault: string;
+  frontShiny: string;
+};
+export interface PokemonSpritesVersionsGenerationIvDiamondPearl {
+  backDefault: string;
+  backFemale: string;
+  backShiny: string;
+  backShinyFemale: string;
+  frontDefault: string;
+  frontFemale: string;
+  frontShiny: string;
+  frontShinyFemale: string;
+};
+export interface PokemonSpritesVersionsGenerationIvHeartgoldSoulsilver {
+  backDefault: string;
+  backFemale: string;
+  backShiny: string;
+  backShinyFemale: string;
+  frontDefault: string;
+  frontFemale: string;
+  frontShiny: string;
+  frontShinyFemale: string;
+};
+export interface PokemonSpritesVersionsGenerationIvPlatinum {
+  backDefault: string;
+  backFemale: string;
+  backShiny: string;
+  backShinyFemale: string;
+  frontDefault: string;
+  frontFemale: string;
+  frontShiny: string;
+  frontShinyFemale: string;
+};
+export interface PokemonSpritesVersionsGenerationVBlackWhite {
+  animated: PokemonSpritesVersionsGenerationVBlackWhiteAnimated;
+  backDefault: string;
+  backFemale: string;
+  backShiny: string;
+  backShinyFemale: string;
+  frontDefault: string;
+  frontFemale: string;
+  frontShiny: string;
+  frontShinyFemale: string;
+};
+export interface PokemonSpritesVersionsGenerationVBlackWhiteAnimated {
+  backDefault: string;
+  backFemale: string;
+  backShiny: string;
+  backShinyFemale: string;
+  frontDefault: string;
+  frontFemale: string;
+  frontShiny: string;
+  frontShinyFemale: string;
+};
+export interface PokemonSpritesVersionsGenerationViOmegarubyAlphasapphire {
+  frontDefault: string;
+  frontFemale: string;
+  frontShiny: string;
+  frontShinyFemale: string;
+};
+export interface PokemonSpritesVersionsGenerationViXY {
+  frontDefault: string;
+  frontFemale: string;
+  frontShiny: string;
+  frontShinyFemale: string;
+};
+export interface PokemonSpritesVersionsGenerationViiIcons {
+  frontDefault: string;
+  frontFemale: string;
+};
+export interface PokemonSpritesVersionsGenerationViiUltraSunUltraMoon {
+  frontDefault: string;
+  frontFemale: string;
+  frontShiny: string;
+  frontShinyFemale: string;
+};
+export interface PokemonSpritesVersionsGenerationViiiIcons {
+  frontDefault: string;
+  frontFemale: string;
+};
+export interface PokemonStatsStat {
+  name: string;
+  url: string;
+};
+export interface PokemonTypesType {
+  name: string;
+  url: string;
+};
+"
+`;
+
+exports[`#typescript can emit migration for pokemon json, w/ dense & trim fields 1`] = `
+"export interface Pokemon {
+  abilities: Abilities[];
+  baseExperience: number;
+  forms: Forms[];
+  gameIndices: GameIndices[];
+  height: number;
+  heldItems: any[];
+  id: number;
+  isDefault: boolean;
+  locationAreaEncounters: string;
+  moves: Moves[];
+  name: string;
+  order: number;
+  species: Species;
+  sprites: Sprites;
+  stats: Stats[];
+  types: Types[];
+  weight: number;
+};
+export interface Abilities {
+  ability: NameUrl;
+  isHidden: boolean;
+  slot: number;
+};
+export interface GameIndices {
+  gameIndex: number;
+  version: NameUrl;
+};
+export interface Moves {
+  move: NameUrl;
+  versionGroupDetails: VersionGroupDetails[];
+};
+export interface Sprites {
+  backDefault: string;
+  backFemale: string;
+  backShiny: string;
+  backShinyFemale: string;
+  frontDefault: string;
+  frontFemale: string;
+  frontShiny: string;
+  frontShinyFemale: string;
+  other: Other;
+  versions: Versions;
+};
+export interface Stats {
+  baseStat: number;
+  effort: number;
+  stat: NameUrl;
+};
+export interface Types {
+  slot: number;
+  type: NameUrl;
+};
+export interface VersionGroupDetails {
+  levelLearnedAt: number;
+  moveLearnMethod: NameUrl;
+  versionGroup: NameUrl;
+};
+export interface Other {
+  dreamWorld: FrontDefaultFrontFemale;
+  officialArtwork: OfficialArtwork;
+};
+export interface Versions {
+  generationI: GenerationI;
+  generationIi: GenerationIi;
+  generationIii: GenerationIii;
+  generationIv: GenerationIv;
+  generationV: GenerationV;
+  generationVi: GenerationVi;
+  generationVii: GenerationVii;
+  generationViii: GenerationViii;
+};
+export interface OfficialArtwork {
+  frontDefault: string;
+};
+export interface GenerationI {
+  redBlue: RedBlueYellow;
+  yellow: RedBlueYellow;
+};
+export interface GenerationIi {
+  crystal: Crystal;
+  gold: Gold;
+  silver: Silver;
+};
+export interface GenerationIii {
+  emerald: Emerald;
+  fireredLeafgreen: FireredLeafgreen;
+  rubySapphire: RubySapphire;
+};
+export interface GenerationIv {
+  diamondPearl: AnimatedDiamondPearlHeartgoldSoulsilverPlatinum;
+  heartgoldSoulsilver: AnimatedDiamondPearlHeartgoldSoulsilverPlatinum;
+  platinum: AnimatedDiamondPearlHeartgoldSoulsilverPlatinum;
+};
+export interface GenerationV {
+  blackWhite: BlackWhite;
+};
+export interface GenerationVi {
+  omegarubyAlphasapphire: OmegarubyAlphasapphireUltraSunUltraMoonXY;
+  xY: OmegarubyAlphasapphireUltraSunUltraMoonXY;
+};
+export interface GenerationVii {
+  icons: FrontDefaultFrontFemale;
+  ultraSunUltraMoon: OmegarubyAlphasapphireUltraSunUltraMoonXY;
+};
+export interface GenerationViii {
+  icons: FrontDefaultFrontFemale;
+};
+export interface Crystal {
+  backDefault: string;
+  backShiny: string;
+  frontDefault: string;
+  frontShiny: string;
+};
+export interface Gold {
+  backDefault: string;
+  backShiny: string;
+  frontDefault: string;
+  frontShiny: string;
+};
+export interface Silver {
+  backDefault: string;
+  backShiny: string;
+  frontDefault: string;
+  frontShiny: string;
+};
+export interface Emerald {
+  frontDefault: string;
+  frontShiny: string;
+};
+export interface FireredLeafgreen {
+  backDefault: string;
+  backShiny: string;
+  frontDefault: string;
+  frontShiny: string;
+};
+export interface RubySapphire {
+  backDefault: string;
+  backShiny: string;
+  frontDefault: string;
+  frontShiny: string;
+};
+export interface BlackWhite {
+  animated: AnimatedDiamondPearlHeartgoldSoulsilverPlatinum;
+  backDefault: string;
+  backFemale: string;
+  backShiny: string;
+  backShinyFemale: string;
+  frontDefault: string;
+  frontFemale: string;
+  frontShiny: string;
+  frontShinyFemale: string;
+};
+export interface NameUrl {
+  name: string;
+  url: string;
+};
+export interface FrontDefaultFrontFemale {
+  frontDefault: string;
+  frontFemale: string;
+};
+export interface RedBlueYellow {
+  backDefault: string;
+  backGray: string;
+  frontDefault: string;
+  frontGray: string;
+};
+export interface AnimatedDiamondPearlHeartgoldSoulsilverPlatinum {
+  backDefault: string;
+  backFemale: string;
+  backShiny: string;
+  backShinyFemale: string;
+  frontDefault: string;
+  frontFemale: string;
+  frontShiny: string;
+  frontShinyFemale: string;
+};
+export interface OmegarubyAlphasapphireUltraSunUltraMoonXY {
+  frontDefault: string;
+  frontFemale: string;
+  frontShiny: string;
+  frontShinyFemale: string;
+};
+"
+`;
+
+exports[`#typescript can emit migration for pokemon json, w/ dense fields 1`] = `
+"export interface Pokemon {
+  abilities: PokemonAbilities[];
+  baseExperience: number;
+  forms: PokemonForms[];
+  gameIndices: PokemonGameIndices[];
+  height: number;
+  heldItems: any[];
+  id: number;
+  isDefault: boolean;
+  locationAreaEncounters: string;
+  moves: PokemonMoves[];
+  name: string;
+  order: number;
+  species: PokemonSpecies;
+  sprites: PokemonSprites;
+  stats: PokemonStats[];
+  types: PokemonTypes[];
+  weight: number;
+};
+export interface PokemonAbilities {
+  ability: NameUrl;
+  isHidden: boolean;
+  slot: number;
+};
+export interface PokemonGameIndices {
+  gameIndex: number;
+  version: NameUrl;
+};
+export interface PokemonMoves {
+  move: NameUrl;
+  versionGroupDetails: PokemonMovesVersionGroupDetails[];
+};
+export interface PokemonSprites {
+  backDefault: string;
+  backFemale: string;
+  backShiny: string;
+  backShinyFemale: string;
+  frontDefault: string;
+  frontFemale: string;
+  frontShiny: string;
+  frontShinyFemale: string;
+  other: PokemonSpritesOther;
+  versions: PokemonSpritesVersions;
+};
+export interface PokemonStats {
+  baseStat: number;
+  effort: number;
+  stat: NameUrl;
+};
+export interface PokemonTypes {
+  slot: number;
+  type: NameUrl;
+};
+export interface PokemonMovesVersionGroupDetails {
+  levelLearnedAt: number;
+  moveLearnMethod: NameUrl;
+  versionGroup: NameUrl;
+};
+export interface PokemonSpritesOther {
+  dreamWorld: FrontDefaultFrontFemale;
+  officialArtwork: PokemonSpritesOtherOfficialArtwork;
+};
+export interface PokemonSpritesVersions {
+  generationI: PokemonSpritesVersionsGenerationI;
+  generationIi: PokemonSpritesVersionsGenerationIi;
+  generationIii: PokemonSpritesVersionsGenerationIii;
+  generationIv: PokemonSpritesVersionsGenerationIv;
+  generationV: PokemonSpritesVersionsGenerationV;
+  generationVi: PokemonSpritesVersionsGenerationVi;
+  generationVii: PokemonSpritesVersionsGenerationVii;
+  generationViii: PokemonSpritesVersionsGenerationViii;
+};
+export interface PokemonSpritesOtherOfficialArtwork {
+  frontDefault: string;
+};
+export interface PokemonSpritesVersionsGenerationI {
+  redBlue: RedBlueYellow;
+  yellow: RedBlueYellow;
+};
+export interface PokemonSpritesVersionsGenerationIi {
+  crystal: PokemonSpritesVersionsGenerationIiCrystal;
+  gold: PokemonSpritesVersionsGenerationIiGold;
+  silver: PokemonSpritesVersionsGenerationIiSilver;
+};
+export interface PokemonSpritesVersionsGenerationIii {
+  emerald: PokemonSpritesVersionsGenerationIiiEmerald;
+  fireredLeafgreen: PokemonSpritesVersionsGenerationIiiFireredLeafgreen;
+  rubySapphire: PokemonSpritesVersionsGenerationIiiRubySapphire;
+};
+export interface PokemonSpritesVersionsGenerationIv {
+  diamondPearl: PokemonSpritesVersionsGenerationIvDiamondPearl;
+  heartgoldSoulsilver: PokemonSpritesVersionsGenerationIvHeartgoldSoulsilver;
+  platinum: PokemonSpritesVersionsGenerationIvPlatinum;
+};
+export interface PokemonSpritesVersionsGenerationV {
+  blackWhite: PokemonSpritesVersionsGenerationVBlackWhite;
+};
+export interface PokemonSpritesVersionsGenerationVi {
+  omegarubyAlphasapphire: GenerationViiOmegarubyAlphasapphireUltraSunUltraMoonXY;
+  xY: GenerationViiOmegarubyAlphasapphireUltraSunUltraMoonXY;
+};
+export interface PokemonSpritesVersionsGenerationVii {
+  icons: FrontDefaultFrontFemale;
+  ultraSunUltraMoon: GenerationViiOmegarubyAlphasapphireUltraSunUltraMoonXY;
+};
+export interface PokemonSpritesVersionsGenerationViii {
+  icons: FrontDefaultFrontFemale;
+};
+export interface PokemonSpritesVersionsGenerationIiCrystal {
+  backDefault: string;
+  backShiny: string;
+  frontDefault: string;
+  frontShiny: string;
+};
+export interface PokemonSpritesVersionsGenerationIiGold {
+  backDefault: string;
+  backShiny: string;
+  frontDefault: string;
+  frontShiny: string;
+};
+export interface PokemonSpritesVersionsGenerationIiSilver {
+  backDefault: string;
+  backShiny: string;
+  frontDefault: string;
+  frontShiny: string;
+};
+export interface PokemonSpritesVersionsGenerationIiiEmerald {
+  frontDefault: string;
+  frontShiny: string;
+};
+export interface PokemonSpritesVersionsGenerationIiiFireredLeafgreen {
+  backDefault: string;
+  backShiny: string;
+  frontDefault: string;
+  frontShiny: string;
+};
+export interface PokemonSpritesVersionsGenerationIiiRubySapphire {
+  backDefault: string;
+  backShiny: string;
+  frontDefault: string;
+  frontShiny: string;
+};
+export interface PokemonSpritesVersionsGenerationIvDiamondPearl {
+  backDefault: string;
+  backFemale: string;
+  backShiny: string;
+  backShinyFemale: string;
+  frontDefault: string;
+  frontFemale: string;
+  frontShiny: string;
+  frontShinyFemale: string;
+};
+export interface PokemonSpritesVersionsGenerationIvHeartgoldSoulsilver {
+  backDefault: string;
+  backFemale: string;
+  backShiny: string;
+  backShinyFemale: string;
+  frontDefault: string;
+  frontFemale: string;
+  frontShiny: string;
+  frontShinyFemale: string;
+};
+export interface PokemonSpritesVersionsGenerationIvPlatinum {
+  backDefault: string;
+  backFemale: string;
+  backShiny: string;
+  backShinyFemale: string;
+  frontDefault: string;
+  frontFemale: string;
+  frontShiny: string;
+  frontShinyFemale: string;
+};
+export interface PokemonSpritesVersionsGenerationVBlackWhite {
+  animated: PokemonSpritesVersionsGenerationVBlackWhiteAnimated;
+  backDefault: string;
+  backFemale: string;
+  backShiny: string;
+  backShinyFemale: string;
+  frontDefault: string;
+  frontFemale: string;
+  frontShiny: string;
+  frontShinyFemale: string;
+};
+export interface PokemonSpritesVersionsGenerationVBlackWhiteAnimated {
+  backDefault: string;
+  backFemale: string;
+  backShiny: string;
+  backShinyFemale: string;
+  frontDefault: string;
+  frontFemale: string;
+  frontShiny: string;
+  frontShinyFemale: string;
+};
+export interface NameUrl {
+  name: string;
+  url: string;
+};
+export interface FrontDefaultFrontFemale {
+  frontDefault: string;
+  frontFemale: string;
+};
+export interface RedBlueYellow {
+  backDefault: string;
+  backGray: string;
+  frontDefault: string;
+  frontGray: string;
+};
+export interface GenerationViiOmegarubyAlphasapphireUltraSunUltraMoonXY {
+  frontDefault: string;
+  frontFemale: string;
+  frontShiny: string;
+  frontShinyFemale: string;
+};
+"
+`;
