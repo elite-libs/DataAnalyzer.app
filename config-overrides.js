@@ -11,7 +11,7 @@ module.exports = {
     })(config, env);
 
     config.module.rules.unshift({
-      test: /\.worker\.ts$/,
+      test: /\.worker\.tsx?$/,
       use: {
         loader: 'worker-loader',
         options: {

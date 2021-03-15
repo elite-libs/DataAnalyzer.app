@@ -12,10 +12,10 @@ import {
 } from 'components/AppIcons';
 
 import { AdapterNames, render } from 'adapters/writers';
-import { schemaAnalyzer } from 'schema-analyzer/index';
-import { setOptions } from 'store/optionsSlice';
+// import { schemaAnalyzer } from 'schema-analyzer/index';
+import { OptionsState, setOptions } from 'store/optionsSlice';
 import { setResults, setSchema } from 'store/analysisSlice';
-import { setParserError } from 'store/appStateSlice';
+import { setParserError, setAnalysisProgress } from 'store/appStateSlice';
 import { useAnalytics } from 'hooks/useAnalytics';
 import { useAutoSnackbar } from 'hooks/useAutoSnackbar';
 import { ButtonGroup } from '@material-ui/core';
@@ -27,6 +27,7 @@ import useViewportSize from 'hooks/useViewportSize';
 import { SupportedTargetLanguages } from 'types';
 
 import './OutputButtons.scss';
+import { schemaAnalyzerWorker } from 'schema-analyzer/schema-analyzer-worker';
 
 type OutputMode = [
   adapterKey: AdapterNames,
@@ -55,13 +56,15 @@ export const OutputButtons = ({ size = 'medium', className = '' }: Props) => {
   const { enqueueSnackbar } = useAutoSnackbar();
 
   const dispatch = useDispatch();
-  const { inputData, parsedInput } = useSelector(
+  const { inputData, parsedInput, currentAnalysisProgress } = useSelector(
     (state: RootState) => state.appStateActions,
   );
   const { results, schemaName } = useSelector(
     (state: RootState) => state.analysisFeature,
   );
-  const options = useSelector((state: RootState) => state.optionsActions);
+  const options = useSelector<RootState, OptionsState>(
+    (state: RootState) => state.optionsActions,
+  );
   const hasParsedInputData = Boolean(results);
   // console.log({ hasParsedInputData });
   const schemaLinkProps = inputData
@@ -88,17 +91,29 @@ export const OutputButtons = ({ size = 'medium', className = '' }: Props) => {
         value: parsedInputData.length,
       });
     }
-    const schema = await schemaAnalyzer(schemaName!, parsedInputData!, options);
+    const schema = await schemaAnalyzerWorker(
+      schemaName!,
+      parsedInputData!,
+      {
+        ...options,
+      },
+      (totalRows, currentRow) => {
+        const completionPercent = (currentRow / totalRows) * 100;
+        // if (completionPercent % 10 === 0)
+        console.log(`progress ${completionPercent}`);
+        dispatch(setAnalysisProgress(completionPercent || 0));
+      },
+    );
     dispatch(setSchema(schema || null));
     return schema ? schema : null;
   }
   async function renderCode(outputAdapter = options.outputAdapter) {
     const schema = await getTypeSummary();
-    console.log('about to generate code', outputAdapter, schema);
+    console.log('about to generate', outputAdapter, schema?.flatTypeSummary);
     const generatedCode = render(outputAdapter, schema!);
 
     dispatch(setResults(generatedCode));
-    console.info('generated code', generatedCode);
+    // console.info('generated code', generatedCode);
     return generatedCode;
   }
   async function handleAdapterSelected(adapter?: AdapterNames) {
@@ -169,7 +184,7 @@ export const OutputButtons = ({ size = 'medium', className = '' }: Props) => {
               }`}
             />
           }
-          <span>Step #2/3</span>
+          <span>Step #2/3 - {currentAnalysisProgress}</span>
         </div>
       }
       subTitle={'Select Output'}

@@ -4,10 +4,10 @@
     "baseUrl": "src",
     "target": "ES2019",
     "lib": [
-      "ESNext.BigInt",
-      "es2019",
       "dom",
       "dom.iterable",
+      "es2019",
+      "ESNext.BigInt",
       "esnext"
     ],
     "downlevelIteration": true,

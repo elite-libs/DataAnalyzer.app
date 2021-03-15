@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 type State = {
+  currentAnalysisProgress?: number;
   statusMessage: string | null;
   statusIsError?: boolean;
   parsedInput?: any | any[];
@@ -45,6 +46,10 @@ const slice = createSlice({
       state.parserError = action.payload;
       return state;
     },
+    setAnalysisProgress(state, action: PayloadAction<number>) {
+      state.currentAnalysisProgress = action.payload;
+      return state;
+    },
     resetAppState(state) {
       state = { ...initialState };
       return state;
@@ -60,6 +65,7 @@ export const {
   setParsedInput,
   setInputData,
   setParserError,
+  setAnalysisProgress,
 } = slice.actions;
 
 export default appStateActions;
