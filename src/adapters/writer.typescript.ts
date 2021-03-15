@@ -1,4 +1,4 @@
-import { camelCase } from 'lodash';
+import camelCase from 'lodash/camelCase';
 import { properCase, removeBlankLines } from 'helpers';
 import { IDataAnalyzerWriter } from './writers';
 import { CombinedFieldInfo, KeyValPair } from 'types';
