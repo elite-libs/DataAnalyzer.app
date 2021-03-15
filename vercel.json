@@ -1,7 +1,7 @@
 {
   "headers": [
     {
-      "source": "/service-worker.js",
+      "source": "/(.*)worker.js",
       "headers": [
         {
           "key": "Cache-Control",
@@ -26,7 +26,7 @@
       "headers": [{ "key": "Content-Type", "value": "text/json; charset=utf-8" }]
     },
     {
-      "source": "/images/(.*).js",
+      "source": "/(.*).js",
       "headers": [
         { "key": "Content-Type", "value": "application/javascript; charset=utf-8" }
       ]
