@@ -123,6 +123,7 @@
     "sass-resources-loader": "^2.1.1",
     "ts-jest": "^26.5.1"
   },
+  "license": "MIT",
   "jest": {
     "collectCoverage": true,
     "preset": "ts-jest/presets/js-with-babel",

@@ -1,5 +1,5 @@
 import { schemaAnalyzer } from './schema-analyzer';
-import { expose, proxy } from 'comlink';
+import { expose } from 'comlink';
 import { DataAnalysisResults, ISchemaAnalyzerOptions, ProgressCallback } from 'types';
 
 export default {} as typeof Worker & { new (): Worker };
@@ -8,7 +8,7 @@ export default {} as typeof Worker & { new (): Worker };
  * Comlink/CreateReactApp Guide: https://github.com/dominique-mueller/create-react-app-typescript-web-worker-setup#bonus-using-comlink
  */
 
-console.log('[schemaAnalyzerWorker] Running.');
+console.log('[schemaAnalyzerWorker] Loaded.');
 
 const api = {
   schemaAnalyzer: function (
@@ -31,12 +31,8 @@ const api = {
     },
     onProgress?: ProgressCallback | undefined,
   ): Promise<DataAnalysisResults> {
-    return schemaAnalyzer(
-      schemaName,
-      input,
-      options,
-      onProgress ? proxy(onProgress) : undefined,
-    );
+    console.log('[schemaAnalyzerWorker] Running.');
+    return schemaAnalyzer(schemaName, input, options, onProgress);
   },
 };
 

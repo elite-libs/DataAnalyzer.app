@@ -21,8 +21,12 @@ export const schemaAnalyzerWorker = (
   options: ISchemaAnalyzerOptions | undefined,
   onProgress?: ProgressCallback | undefined,
 ): Promise<DataAnalysisResults> => {
+  // console.trace('Starting schemaAnalyzerWorker for', schemaName);
   if (onProgress) {
+    // console.log('[schemaAnalyzerWorker] Proxying onProgress...');
     onProgress = Comlink.proxy(onProgress);
+  } else {
+    // console.log('[schemaAnalyzerWorker] No onProgress handler...');
   }
   return analyzerWorkerApi.schemaAnalyzer(
     schemaName,

@@ -226,9 +226,9 @@ export default function AdvancedOptionsForm({ className = '' }) {
                     watch('prefixNamingMode') !== undefined ? 'show-warning' : ''
                   }`}
                 >
-                  <legend className="mb-1">De-duplicate Similar Types</legend>
+                  <legend className="mb-1">Cleanup Generated Names</legend>
                   <section className="input-group d-flex justify-content-between">
-                    <p>Detect Similarly Shaped Fields</p>
+                    <p>Optionally use shorter Type/Schema names</p>
                     <label className="warning-label">
                       <WarningIcon color="error" className="warning-icon" />
                     </label>
@@ -249,8 +249,10 @@ export default function AdvancedOptionsForm({ className = '' }) {
                       }}
                       value={prefixNamingMode}
                     >
-                      <option value={'full'}>Full</option>
-                      <option value={'trim'}>Trim</option>
+                      <option value={'full'}>
+                        Full - Prefix all sub-types with parent
+                      </option>
+                      <option value={'trim'}>Trim - No naming prefix</option>
                     </Select>
                   </section>
                 </fieldset>

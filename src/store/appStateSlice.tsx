@@ -16,6 +16,7 @@ let initialState: State = {
   parsedInput: undefined,
   inputData: '\n\n\n\n\n\n\n\n\n\n',
   parserError: undefined,
+  currentAnalysisProgress: undefined,
 };
 
 const slice = createSlice({
@@ -37,6 +38,7 @@ const slice = createSlice({
     },
     setParsedInput(state, action: PayloadAction<any>) {
       if (action.payload != null) {
+        state.currentAnalysisProgress = undefined;
         state.parsedInput = action.payload;
         state.parserError = undefined;
       }

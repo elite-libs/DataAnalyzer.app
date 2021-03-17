@@ -80,7 +80,7 @@ function schemaAnalyzer(
 ): Promise<DataAnalysisResults> {
   if (!schemaName || schemaName.length < 1)
     return Promise.reject(Error('A SchemaName must be provided.'));
-  return _schemaAnalyzer(schemaName, input, options)
+  return _schemaAnalyzer(schemaName, input, options, onProgress)
     .then((nestedSchemaTypes) => {
       const schemaWithUnpackedData = extractNestedTypes(nestedSchemaTypes);
       schemaWithUnpackedData.nestedTypes = mapValues(
@@ -355,13 +355,10 @@ const _pivotRowsGroupedByType = ({
       const isDone = index + 1 === totalRows;
       const progressFrequencyModulo =
         totalRows >= 2500 ? 50 : totalRows >= 1000 ? 25 : 10;
-      const showProgress = isDone || index % progressFrequencyModulo === 0;
+      const showProgress = !isDone && index % progressFrequencyModulo === 0;
 
-      if (onProgress) {
-        // console.// #debug: log"FIRE.onProgress:", totalRows, index + 1);
-        // setImmediate(() => {
+      if (onProgress && showProgress) {
         onProgress(totalRows, index + 1);
-        // });
       }
       return schema;
     }, detectedSchema);

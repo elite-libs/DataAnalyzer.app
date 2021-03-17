@@ -28,6 +28,7 @@ import { SupportedTargetLanguages } from 'types';
 
 import './OutputButtons.scss';
 import { schemaAnalyzerWorker } from 'schema-analyzer/schema-analyzer-worker';
+// import LinearWithValueLabel from 'components/ProgressBar';
 
 type OutputMode = [
   adapterKey: AdapterNames,
@@ -99,8 +100,7 @@ export const OutputButtons = ({ size = 'medium', className = '' }: Props) => {
       },
       (totalRows, currentRow) => {
         const completionPercent = (currentRow / totalRows) * 100;
-        // if (completionPercent % 10 === 0)
-        console.log(`progress ${completionPercent}`);
+        if (completionPercent % 2 === 0) console.log(`progress ${completionPercent}`);
         dispatch(setAnalysisProgress(completionPercent || 0));
       },
     );
@@ -184,7 +184,7 @@ export const OutputButtons = ({ size = 'medium', className = '' }: Props) => {
               }`}
             />
           }
-          <span>Step #2/3 - {currentAnalysisProgress}</span>
+          <span>Step #2/3</span>
         </div>
       }
       subTitle={'Select Output'}
@@ -226,6 +226,9 @@ export const OutputButtons = ({ size = 'medium', className = '' }: Props) => {
           );
         })}
       </ButtonGroup>
+      {/* {parsedInput && currentAnalysisProgress !== undefined && (
+        <LinearWithValueLabel progress={currentAnalysisProgress} />
+      )} */}
     </Panel>
   );
 };
