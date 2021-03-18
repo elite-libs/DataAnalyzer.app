@@ -5,20 +5,20 @@
       "headers": [
         {
           "key": "Cache-Control",
-          "value": "public, max-age=0, must-revalidate"
+          "value": "public, max-age=31536000, must-revalidate"
         }
       ]
     },
     {
-      "source": "/images/(.*).png",
+      "source": "/(.*).png",
       "headers": [{ "key": "Content-Type", "value": "image/png" }]
     },
     {
-      "source": "/images/(.*).svg",
+      "source": "/(.*).svg",
       "headers": [{ "key": "Content-Type", "value": "image/svg+xml" }]
     },
     {
-      "source": "/images/(.*).jpg",
+      "source": "/(.*).jpg",
       "headers": [{ "key": "Content-Type", "value": "image/jpeg" }]
     },
     {
@@ -26,13 +26,24 @@
       "headers": [{ "key": "Content-Type", "value": "text/json; charset=utf-8" }]
     },
     {
-      "source": "/(.*).js",
+      "source": "/(.*)chunk.js",
       "headers": [
-        { "key": "Content-Type", "value": "application/javascript; charset=utf-8" }
+        { "key": "Content-Type", "value": "application/javascript; charset=utf-8" },
+        { "key": "Cache-Control", "value": "immutable, max-age=3153600" }
       ]
     },
     {
-      "source": "/images/(.*).csv",
+      "source": "/(.*).js",
+      "headers": [
+        { "key": "Content-Type", "value": "application/javascript; charset=utf-8" },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/(.*).csv",
       "headers": [{ "key": "Content-Type", "value": "text/plain; charset=utf-8" }]
     },
     {

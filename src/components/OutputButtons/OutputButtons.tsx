@@ -57,7 +57,7 @@ export const OutputButtons = ({ size = 'medium', className = '' }: Props) => {
   const { enqueueSnackbar } = useAutoSnackbar();
 
   const dispatch = useDispatch();
-  const { inputData, parsedInput, currentAnalysisProgress } = useSelector(
+  const { inputData, parsedInput } = useSelector(
     (state: RootState) => state.appStateActions,
   );
   const { results, schemaName } = useSelector(

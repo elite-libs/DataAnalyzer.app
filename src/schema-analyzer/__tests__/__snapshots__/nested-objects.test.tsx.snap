@@ -8852,7 +8852,6 @@ Object {
       "targetValue": "p99",
     },
     "nullableRowsThreshold": 0.001,
-    "onProgress": [Function],
     "strictMatching": true,
     "uniqueRowsThreshold": 0.99,
   },

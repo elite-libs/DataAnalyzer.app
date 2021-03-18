@@ -5,15 +5,11 @@ import {
   ProgressCallback,
   schemaAnalyzerFn,
 } from 'types';
-import AnalyzerWorker from '../analyzer.worker';
+// import AnalyzerWorker from '../analyzer.worker';
 /**
  * Comlink/CreateReactApp Guide: https://github.com/dominique-mueller/create-react-app-typescript-web-worker-setup#bonus-using-comlink
  */
 // Instantiate worker
-const analyzerWorkerInstance: Worker = new AnalyzerWorker();
-const analyzerWorkerApi: { schemaAnalyzer: schemaAnalyzerFn } = Comlink.wrap(
-  analyzerWorkerInstance,
-);
 
 export const schemaAnalyzerWorker = (
   schemaName: string,
@@ -21,17 +17,23 @@ export const schemaAnalyzerWorker = (
   options: ISchemaAnalyzerOptions | undefined,
   onProgress?: ProgressCallback | undefined,
 ): Promise<DataAnalysisResults> => {
-  // console.trace('Starting schemaAnalyzerWorker for', schemaName);
-  if (onProgress) {
-    // console.log('[schemaAnalyzerWorker] Proxying onProgress...');
-    onProgress = Comlink.proxy(onProgress);
-  } else {
-    // console.log('[schemaAnalyzerWorker] No onProgress handler...');
-  }
-  return analyzerWorkerApi.schemaAnalyzer(
-    schemaName,
-    input,
-    options,
-    onProgress,
-  );
+  return import('../analyzer.worker').then(({ default: AnalyzerWorker }) => {
+    const analyzerWorkerInstance: Worker = new AnalyzerWorker();
+    const analyzerWorkerApi: {
+      schemaAnalyzer: schemaAnalyzerFn;
+    } = Comlink.wrap(analyzerWorkerInstance);
+    // console.trace('Starting schemaAnalyzerWorker for', schemaName);
+    if (onProgress) {
+      // console.log('[schemaAnalyzerWorker] Proxying onProgress...');
+      onProgress = Comlink.proxy(onProgress);
+    } else {
+      // console.log('[schemaAnalyzerWorker] No onProgress handler...');
+    }
+    return analyzerWorkerApi.schemaAnalyzer(
+      schemaName,
+      input,
+      options,
+      onProgress,
+    );
+  });
 };
