@@ -5,7 +5,7 @@
       "headers": [
         {
           "key": "Cache-Control",
-          "value": "public, max-age=31536000, must-revalidate"
+          "value": "max-age=86400, stale-while-revalidate=31536000"
         }
       ]
     },
@@ -29,7 +29,10 @@
       "source": "/(.*)chunk.js",
       "headers": [
         { "key": "Content-Type", "value": "application/javascript; charset=utf-8" },
-        { "key": "Cache-Control", "value": "immutable, max-age=3153600" }
+        {
+          "key": "Cache-Control",
+          "value": "max-age=86400, stale-while-revalidate=31536000"
+        }
       ]
     },
     {
@@ -38,7 +41,7 @@
         { "key": "Content-Type", "value": "application/javascript; charset=utf-8" },
         {
           "key": "Cache-Control",
-          "value": "public, max-age=31536000, must-revalidate"
+          "value": "max-age=86400, stale-while-revalidate=31536000"
         }
       ]
     },
@@ -49,6 +52,10 @@
     {
       "source": "/(.*)",
       "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "max-age=86400, stale-while-revalidate=31536000"
+        },
         {
           "key": "X-Content-Type-Options",
           "value": "nosniff"
