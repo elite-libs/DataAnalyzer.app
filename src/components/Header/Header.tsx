@@ -68,7 +68,12 @@ export default function Header() {
         <Link component={RouteLink} to="/about" title="View README">
           <InfoOutlinedIcon fontSize="small" color="action" />
         </Link>
-        <Link target="_blank" href={pkg.repository.url}>
+        <Link
+          target="_blank"
+          rel="noreferrer"
+          href={pkg.repository.url}
+          title="View on GitHub"
+        >
           <GitHubIcon fontSize="small" color="action" />
         </Link>
         <Link
