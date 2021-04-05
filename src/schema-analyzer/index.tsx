@@ -2,7 +2,6 @@
 // import debug from 'debug'
 import { detectTypes, MetaChecks } from './utils/type-helpers';
 import * as helpers from './utils/helpers';
-import { mapValues } from 'lodash';
 import type {
   KeyValPair,
   ISchemaAnalyzerOptions,
@@ -19,7 +18,8 @@ import type {
   ProgressCallback,
 } from '../types';
 import { consolidateNestedTypes } from './utils/consolidate-nested-types';
-import { fromPairs } from 'lodash';
+import fromPairs from 'lodash/fromPairs';
+import mapValues from 'lodash/mapValues';
 export { helpers, consolidateNestedTypes };
 
 // const log = debug('schema-builder:main')

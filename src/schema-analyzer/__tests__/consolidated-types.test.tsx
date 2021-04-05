@@ -1,4 +1,4 @@
-import { mapValues } from 'lodash';
+import mapValues from 'lodash/mapValues';
 import historicEvents from '../../../public/data/historic-events.json';
 import pokemonCharmander from '../../../public/data/pokemon-charmander.json';
 import {
