@@ -1,3 +1,4 @@
+import 'helpers/fix-fast-refresh-hmr';
 import { schemaAnalyzer } from './schema-analyzer';
 import { expose } from 'comlink';
 import { DataAnalysisResults, ISchemaAnalyzerOptions, ProgressCallback } from 'types';
