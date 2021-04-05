@@ -61,11 +61,11 @@
     "preset": "ts-jest/presets/js-with-babel",
     "verbose": true,
     "moduleNameMapper": {
-      "images/(.*)$": "<rootDir>/public/images/$1",
-      "data/(.*)$": "<rootDir>/public/data/$1",
-      "@src/(.*)$": "<rootDir>/src/$1",
-      "@components/(.*)$": "<rootDir>/src/components/$1",
-      "@utils/(.*)$": "<rootDir>/src/schema-analyzer/utils/$1"
+      "^images/(.*)$": "<rootDir>/public/images/$1",
+      "^data/(.*)$": "<rootDir>/public/data/$1",
+      "^@src/(.*)$": "<rootDir>/src/$1",
+      "^@components/(.*)$": "<rootDir>/src/components/$1",
+      "^@utils/(.*)$": "<rootDir>/src/schema-analyzer/utils/$1"
     },
     "transformIgnorePatterns": [
       "node_modules/(?!react-syntax-highlighter|jsdom)"
@@ -159,6 +159,6 @@
     "sass-resources-loader": "2.1.1",
     "ts-jest": "26.5.1",
     "webpack-cli": "4.5.0",
-    "worker-loader": "^3.0.8"
+    "worker-loader": "3.0.8"
   }
 }
