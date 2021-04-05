@@ -1,6 +1,7 @@
 import { properCase, numericSorter } from 'helpers';
 import { IDataAnalyzerWriter } from './writers';
-import { map, snakeCase } from 'lodash';
+import snakeCase from 'lodash/snakeCase';
+import map from 'lodash/map';
 import { CombinedFieldInfo, KeyValPair } from 'types';
 
 const typeMap: { [k: string]: string } = {

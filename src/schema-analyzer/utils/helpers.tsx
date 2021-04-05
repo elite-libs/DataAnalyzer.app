@@ -1,6 +1,8 @@
 // import debug from 'debug'
-import { startCase, takeWhile } from 'lodash';
-import { mapValues } from 'lodash';
+import mapValues from 'lodash/mapValues';
+import startCase from 'lodash/startCase';
+import takeWhile from 'lodash/takeWhile';
+
 import {
   IFlattenTypesOptions,
   FieldInfo,
