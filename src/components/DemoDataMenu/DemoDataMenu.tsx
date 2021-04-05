@@ -2,19 +2,28 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setSchemaName } from 'store/analysisSlice';
 import { setInputData } from 'store/appStateSlice';
+// import { RootState } from 'store/rootReducer';
+// import Chip from '@material-ui/core/Chip';
+// import SyncIcon from '@material-ui/icons/Sync';
+// import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
+// import CloudDoneIcon from '@material-ui/icons/CloudDone';
+// import { SnackbarKey } from 'notistack';
 import TooltipWrapper from '../TooltipWrapper';
+// import { InfoOutlined } from '@material-ui/icons';
 import { useHistory } from 'react-router-dom';
 import { useAutoSnackbar } from 'hooks/useAutoSnackbar';
 import { useAnalytics } from 'hooks/useAnalytics';
 
 import './DemoDataMenu.scss';
+// import { RootState } from 'store/rootReducer';
+// import { fromPairs, takeWhile } from 'lodash';
 
 export interface DataSetInfo {
   label: string;
   value: string;
   schemaName: string;
   description?: string;
-  link?: string;
+  link? : string
 }
 
 export const sampleDataSets: DataSetInfo[] = [
@@ -29,7 +38,7 @@ export const sampleDataSets: DataSetInfo[] = [
     value: '/data/swapi-people.json',
     schemaName: 'People',
     description: 'SWAPI (Star Wars API)',
-    link: 'https://swapi.dev/',
+    link: 'https://swapi.dev/'
   },
   {
     label: 'Property',
@@ -42,15 +51,14 @@ export const sampleDataSets: DataSetInfo[] = [
     value: '/data/products-3000.csv',
     schemaName: 'Product',
     description: 'Open Source Product API from brocade.io',
-    link: 'https://www.brocade.io/documentation',
+    link: 'https://www.brocade.io/documentation'
   },
   {
     label: 'EventResults',
     value: '/data/ticketmaster-event-results.json',
     schemaName: 'EventResults',
     description: 'TicketMaster™️ search results',
-    link:
-      'https://developer.ticketmaster.com/products-and-docs/apis/discovery-api/v2/#search-events-v2',
+    link: 'https://developer.ticketmaster.com/products-and-docs/apis/discovery-api/v2/#search-events-v2'
   },
   {
     label: 'Events',

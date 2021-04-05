@@ -1,7 +1,8 @@
-import snakeCase from 'lodash/snakeCase';
+// import { mapValues } from 'lodash';
+import snakecase from 'lodash.snakecase';
 import { CombinedFieldInfo, KeyValPair } from 'types';
-import type { IDataAnalyzerWriter } from './writers';
 // import debug from 'debug';
+import { IDataAnalyzerWriter } from './writers';
 // const log = debug('writer:knex');
 
 const BIG_INTEGER_MIN = BigInt('2147483647');
@@ -88,7 +89,7 @@ const writer: IDataAnalyzerWriter = {
       `knex.schema.createTable("${schemaName}", (table) => {\n` +
       Object.entries<CombinedFieldInfo>(fields)
         .map(([fieldName, fieldInfo]) => {
-          const name = snakeCase(fieldName);
+          const name = snakecase(fieldName);
           const {
             type,
             typeRef,
@@ -156,7 +157,7 @@ const writer: IDataAnalyzerWriter = {
             return `    table.integer("${name}").references("${getFirstIdentityOrUniqueField(
               typeRef,
               false,
-            )}").inTable('${snakeCase(typeRef)}'); // note: ${typeRelationship}`;
+            )}").inTable('${snakecase(typeRef)}'); // note: ${typeRelationship}`;
 
           if (type === 'Unknown')
             return `    table.text("${name}"${sizePart})${appendChain};`;
@@ -192,11 +193,11 @@ const writer: IDataAnalyzerWriter = {
         .join('\n') +
       `\n  })\n`;
 
-    schemaName = snakeCase(schemaName);
+    schemaName = snakecase(schemaName);
 
     const getAllDropTables = () => {
       if (!options?.disableNestedTypes && hasNestedTypes) {
-        return [...Object.keys(nestedTypes!).reverse().map(snakeCase), schemaName];
+        return [...Object.keys(nestedTypes!).reverse().map(snakecase), schemaName];
       }
       return [schemaName];
     };
@@ -210,7 +211,7 @@ const writer: IDataAnalyzerWriter = {
             if (!results || !results.fields || !results)
               return `// Error invalid field data //`;
             return getCreateTableCode({
-              schemaName: snakeCase(nestedName),
+              schemaName: snakecase(nestedName),
               fields: results.fields,
             });
           });

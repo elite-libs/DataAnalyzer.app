@@ -19,6 +19,7 @@ import { OptionsState, setOptions } from 'store/optionsSlice';
 import { setResults, setSchema } from 'store/analysisSlice';
 import { RootState } from 'store/rootReducer';
 import { convertFractionToPercent, formatPercent } from 'helpers';
+// import { pick } from 'lodash';
 
 import './AdvancedOptionsForm.scss';
 

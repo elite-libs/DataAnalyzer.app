@@ -1,6 +1,5 @@
 {
   "name": "data-analyzer",
-  "description": "Generate data-smart code using any JSON/CSV!",
   "version": "1.5.0",
   "private": false,
   "homepage": "/",
@@ -10,84 +9,6 @@
   },
   "engines": {
     "node": "< 14"
-  },
-  "scripts": {
-    "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
-    "test": "react-app-rewired test",
-    "eject": "react-scripts eject",
-    "lint": "npx prettier -w \"{app,src,__{tests,mocks}__}/**/*.{ts,tsx,js,jsx}\"",
-    "postinstall": "cd src/schema-analyzer && npm install"
-  },
-  "eslintConfig": {
-    "parserOptions": {
-      "ecmaVersion": 2020,
-      "ecmaFeatures": {
-        "jsx": true
-      }
-    },
-    "env": {
-      "es6": true,
-      "node": true,
-      "browser": true,
-      "jest": true
-    },
-    "plugins": [
-      "import",
-      "node",
-      "promise",
-      "prettier"
-    ],
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "jest": {
-    "collectCoverage": true,
-    "preset": "ts-jest/presets/js-with-babel",
-    "verbose": true,
-    "moduleNameMapper": {
-      "^images/(.*)$": "<rootDir>/public/images/$1",
-      "^data/(.*)$": "<rootDir>/public/data/$1",
-      "^@src/(.*)$": "<rootDir>/src/$1",
-      "^@components/(.*)$": "<rootDir>/src/components/$1",
-      "^@utils/(.*)$": "<rootDir>/src/schema-analyzer/utils/$1"
-    },
-    "transformIgnorePatterns": [
-      "node_modules/(?!react-syntax-highlighter|jsdom)"
-    ],
-    "globals": {
-      "ts-jest": {
-        "tsconfig": "tsconfig.json"
-      }
-    }
-  },
-  "prettier": {
-    "printWidth": 90,
-    "trailingComma": "all",
-    "tabWidth": 2,
-    "semi": true,
-    "singleQuote": true
-  },
-  "eslint": {
-    "rules": {
-      "@typescript-eslint/no-redeclare": [
-        "off"
-      ]
-    }
   },
   "dependencies": {
     "@material-ui/core": "^4.11.2",
@@ -137,6 +58,50 @@
     "typescript": "^4.1.3",
     "web-vitals": "^0.2.4"
   },
+  "scripts": {
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-scripts eject",
+    "lint": "npx prettier -w \"{app,src,__{tests,mocks}__}/**/*.{ts,tsx,js,jsx}\"",
+    "postinstall": "cd src/schema-analyzer && npm install"
+  },
+  "eslintConfig": {
+    "parserOptions": {
+      "ecmaVersion": 2020,
+      "ecmaFeatures": {
+        "jsx": true
+      }
+    },
+    "env": {
+      "es6": true,
+      "node": true,
+      "browser": true,
+      "jest": true
+    },
+    "plugins": [
+      "import",
+      "node",
+      "promise",
+      "prettier"
+    ],
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
   "devDependencies": {
     "@types/debug": "^4.1.5",
     "@types/lodash.camelcase": "^4.3.6",
@@ -153,10 +118,42 @@
     "prettier": "2.2.1",
     "react-app-rewire-alias": "^0.2.1",
     "react-app-rewire-scss-loaders": "^0.1.2",
-    "react-app-rewire-webpack-bundle-analyzer": "^1.1.0",
     "react-app-rewired": "^2.1.8",
     "sass-resources-loader": "^2.1.1",
-    "ts-jest": "^26.5.1",
-    "webpack-cli": "^4.5.0"
+    "ts-jest": "^26.5.1"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "preset": "ts-jest/presets/js-with-babel",
+    "verbose": true,
+    "moduleNameMapper": {
+      "^images/(.*)$": "<rootDir>/public/images/$1",
+      "^data/(.*)$": "<rootDir>/public/data/$1",
+      "^@src/(.*)$": "<rootDir>/src/$1",
+      "^@components/(.*)$": "<rootDir>/src/components/$1",
+      "^@utils/(.*)$": "<rootDir>/src/schema-analyzer/utils/$1"
+    },
+    "transformIgnorePatterns": [
+      "node_modules/(?!react-syntax-highlighter|jsdom)"
+    ],
+    "globals": {
+      "ts-jest": {
+        "tsconfig": "tsconfig.json"
+      }
+    }
+  },
+  "prettier": {
+    "printWidth": 90,
+    "trailingComma": "all",
+    "tabWidth": 2,
+    "semi": true,
+    "singleQuote": true
+  },
+  "eslint": {
+    "rules": {
+      "@typescript-eslint/no-redeclare": [
+        "off"
+      ]
+    }
   }
 }

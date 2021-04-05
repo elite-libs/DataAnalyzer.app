@@ -1,4 +1,4 @@
-import camelCase from 'lodash/camelCase';
+import { camelCase } from 'lodash';
 
 export const numericSorter = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
 

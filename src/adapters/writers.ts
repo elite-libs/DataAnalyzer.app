@@ -12,8 +12,7 @@ import type {
   DataAnalysisResults,
   KeyValPair,
 } from 'types';
-import snakeCase from 'lodash/snakeCase';
-import omit from 'lodash/omit';
+import { snakeCase, omit } from 'lodash';
 
 export interface IDataAnalyzerWriter {
   render(results: DataAnalysisResults): string;

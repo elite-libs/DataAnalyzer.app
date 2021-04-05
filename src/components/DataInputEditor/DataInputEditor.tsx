@@ -11,9 +11,7 @@ import {
   setParserError,
   setStatusMessage,
 } from 'store/appStateSlice';
-import filter from 'lodash/filter';
-import fromPairs from 'lodash/fromPairs';
-import throttle from 'lodash/throttle';
+import { filter, fromPairs, throttle } from 'lodash';
 
 import { RootState } from 'store/rootReducer';
 import { CheckCircleIcon, ErrorIcon } from 'components/AppIcons';
