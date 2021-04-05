@@ -1,24 +1,24 @@
 {
   "headers": [
     {
-      "source": "/service-worker.js",
+      "source": "/(.*)worker.js",
       "headers": [
         {
           "key": "Cache-Control",
-          "value": "public, max-age=0, must-revalidate"
+          "value": "max-age=2678400, stale-while-revalidate=31536000"
         }
       ]
     },
     {
-      "source": "/images/(.*).png",
+      "source": "/(.*).png",
       "headers": [{ "key": "Content-Type", "value": "image/png" }]
     },
     {
-      "source": "/images/(.*).svg",
+      "source": "/(.*).svg",
       "headers": [{ "key": "Content-Type", "value": "image/svg+xml" }]
     },
     {
-      "source": "/images/(.*).jpg",
+      "source": "/(.*).jpg",
       "headers": [{ "key": "Content-Type", "value": "image/jpeg" }]
     },
     {
@@ -26,16 +26,36 @@
       "headers": [{ "key": "Content-Type", "value": "text/json; charset=utf-8" }]
     },
     {
-      "source": "/images/(.*).js",
-      "headers": [{ "key": "Content-Type", "value": "application/javascript; charset=utf-8" }]
+      "source": "/(.*)chunk.js",
+      "headers": [
+        { "key": "Content-Type", "value": "application/javascript; charset=utf-8" },
+        {
+          "key": "Cache-Control",
+          "value": "max-age=2678400, stale-while-revalidate=31536000"
+        }
+      ]
     },
     {
-      "source": "/images/(.*).csv",
+      "source": "/(.*).js",
+      "headers": [
+        { "key": "Content-Type", "value": "application/javascript; charset=utf-8" },
+        {
+          "key": "Cache-Control",
+          "value": "max-age=2678400, stale-while-revalidate=31536000"
+        }
+      ]
+    },
+    {
+      "source": "/(.*).csv",
       "headers": [{ "key": "Content-Type", "value": "text/plain; charset=utf-8" }]
     },
     {
       "source": "/(.*)",
       "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "max-age=2678400, stale-while-revalidate=31536000"
+        },
         {
           "key": "X-Content-Type-Options",
           "value": "nosniff"
@@ -47,6 +67,14 @@
         {
           "key": "X-XSS-Protection",
           "value": "1; mode=block"
+        },
+        {
+          "key": "Cross-Origin-Embedder-Policy",
+          "value": "require-corp"
+        },
+        {
+          "key": "Cross-Origin-Opener-Policy",
+          "value": "same-origin"
         }
       ]
     }

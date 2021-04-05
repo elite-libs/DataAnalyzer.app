@@ -1,4 +1,12 @@
 /* eslint-disable @typescript-eslint/no-redeclare */
+
+export type schemaAnalyzerFn = (
+  schemaName: string,
+  input: any[] | { [k: string]: any },
+  options: ISchemaAnalyzerOptions | undefined,
+  onProgress?: ProgressCallback | undefined,
+) => Promise<DataAnalysisResults>;
+
 export type TypeSummary<TFieldDetails = FieldInfo> = {
   schemaName: string;
   fields: KeyValPair<TFieldDetails>;
@@ -9,7 +17,8 @@ export type TypeSummary<TFieldDetails = FieldInfo> = {
 export type DataAnalysisResults = TypeSummary<FieldInfo> & {
   flatTypeSummary: TypeSummary<CombinedFieldInfo>;
   // denseNestedTypes?: KeyValPair<TypeSummary<CombinedFieldInfo>>;
-  denseNestedChanges?: ChangeFieldDescription[];
+  renamedTypes?: KeyValPair<string>;
+  // denseNestedChanges?: ChangeFieldDescription[];
   debug?: boolean;
   options: ISchemaAnalyzerOptions;
 };
@@ -44,7 +53,6 @@ export type TypeNameStringDecimal =
   | 'Number';
 
 export interface ISchemaAnalyzerOptions {
-  onProgress?: ProgressCallback | undefined;
   /** Required # of rows, default 100 */
   enumMinimumRowCount?: number | undefined;
   /** The maximum # unique enum values allowed before switching to `String` mode. For US States, 50 or so would be appropriate. Default 5. */
@@ -216,15 +224,16 @@ export type AggregateSummary<T = number> = {
 /**
  * This callback is displayed as a global member.
  */
-export type ProgressCallback = (progress: {
-  totalRows: number;
-  currentRow: number;
-  nestedTypes?: string[];
-}) => any;
+export type ProgressCallback = (
+  totalRows: number,
+  currentRow: number,
+  nestedTypes?: string[],
+) => any;
 
 export interface IConsolidateTypesResults {
   nestedTypes: KeyValPair<TypeSummary<CombinedFieldInfo>>;
   changes: ChangeFieldDescription[];
+  typeNameMap: KeyValPair<string>;
 }
 export interface ChangeFieldDescription {
   alias: string;

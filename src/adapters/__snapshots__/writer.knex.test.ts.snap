@@ -1,0 +1,1938 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`#knex can emit migration 1`] = `
+"// More info: http://knexjs.org/#Schema-createTable
+
+exports.up = async function up(knex) {
+  
+  /* Note: no nested types detected */
+
+  // Create the main table
+  return knex.schema.createTable(\\"users\\", (table) => {
+    table.uuid(\\"id\\").notNullable().primary();
+    table.string(\\"email\\", 40).notNullable();
+    table.string(\\"first_name\\", 20).notNullable();
+    table.string(\\"last_name\\", 20).notNullable();
+    table.boolean(\\"is_active\\").notNullable();
+    table.datetime(\\"created_at\\").notNullable();
+    table.datetime(\\"modified_at\\").notNullable();
+    table.string(\\"catch_phrase\\", 60).notNullable();
+    table.string(\\"company_name\\", 20).notNullable();
+    table.integer(\\"credits\\").enum('1', '15', '20', '10', '0', '11', '7', '9').notNullable();
+    table.decimal(\\"sales_score\\", 10, 8).notNullable();
+    table.string(\\"location\\", 20).enum('nyc', 'remote', 'denver').notNullable();
+    table.string(\\"profile\\", 400).unique();
+  })
+
+};
+
+exports.down = async function down(knex) {
+  await knex.schema.dropTableIfExists(\\"users\\");
+};
+"
+`;
+
+exports[`#knex can emit migration for eventResults json 1`] = `
+"// More info: http://knexjs.org/#Schema-createTable
+
+exports.up = async function up(knex) {
+  // NOTE #1: You can break up multiple createTable's into different migration scripts
+  // OR, you can chain the calls to .createTable()'s
+  // NOTE #2: make sure any tables are created before it's relations (tables) are setup.
+
+  await knex.schema.createTable(\\"event_results_embedded_events_embedded_attractions_links_self\\", (table) => {
+    table.string(\\"href\\", 60).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"event_results_embedded_events_embedded_attractions_classifications_sub_genre\\", (table) => {
+    table.string(\\"id\\", 20).notNullable().unique();
+    table.string(\\"name\\", 20).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"event_results_embedded_events_embedded_attractions_classifications_genre\\", (table) => {
+    table.string(\\"id\\", 20).notNullable().unique();
+    table.string(\\"name\\", 20).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"event_results_embedded_events_embedded_attractions_classifications_segment\\", (table) => {
+    table.string(\\"id\\", 20).notNullable().unique();
+    table.string(\\"name\\", 20).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"event_results_embedded_events_embedded_attractions_links\\", (table) => {
+    table.integer(\\"self\\").references(\\"href\\").inTable('event_results_embedded_events_embedded_attractions_links_self'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"event_results_embedded_events_embedded_attractions_classifications\\", (table) => {
+    table.boolean(\\"primary\\").notNullable();
+    table.integer(\\"segment\\").references(\\"id\\").inTable('event_results_embedded_events_embedded_attractions_classifications_segment'); // note: one-to-one
+    table.integer(\\"genre\\").references(\\"id\\").inTable('event_results_embedded_events_embedded_attractions_classifications_genre'); // note: one-to-one
+    table.integer(\\"sub_genre\\").references(\\"id\\").inTable('event_results_embedded_events_embedded_attractions_classifications_sub_genre'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"event_results_embedded_events_embedded_attractions_images\\", (table) => {
+    table.string(\\"ratio\\", 20).notNullable();
+    table.string(\\"url\\", 200).notNullable().unique();
+    table.integer(\\"width\\").notNullable();
+    table.integer(\\"height\\").notNullable().unique();
+    table.boolean(\\"fallback\\").notNullable();
+  })
+
+  await knex.schema.createTable(\\"event_results_embedded_events_embedded_venues_links_self\\", (table) => {
+    table.string(\\"href\\", 60).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"event_results_embedded_events_embedded_venues_links\\", (table) => {
+    table.integer(\\"self\\").references(\\"href\\").inTable('event_results_embedded_events_embedded_venues_links_self'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"event_results_embedded_events_embedded_venues_markets\\", (table) => {
+    table.increments(\\"id\\");
+  })
+
+  await knex.schema.createTable(\\"event_results_embedded_events_embedded_venues_location\\", (table) => {
+    table.decimal(\\"longitude\\", 12, 8).notNullable();
+    table.decimal(\\"latitude\\", 11, 8).notNullable();
+  })
+
+  await knex.schema.createTable(\\"event_results_embedded_events_embedded_venues_address\\", (table) => {
+    table.string(\\"line_1\\", 20).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"event_results_embedded_events_embedded_venues_country\\", (table) => {
+    table.string(\\"name\\", 40).notNullable().unique();
+    table.string(\\"country_code\\", 20).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"event_results_embedded_events_embedded_venues_state\\", (table) => {
+    table.string(\\"name\\", 20).notNullable().unique();
+    table.string(\\"state_code\\", 20).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"event_results_embedded_events_embedded_venues_city\\", (table) => {
+    table.string(\\"name\\", 20).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"event_results_embedded_events_embedded_attractions\\", (table) => {
+    table.string(\\"name\\", 40).notNullable().unique();
+    table.string(\\"type\\", 20).notNullable().unique();
+    table.string(\\"id\\", 20).notNullable().unique();
+    table.boolean(\\"test\\").notNullable();
+    table.string(\\"locale\\", 20).notNullable().unique();
+    table.integer(\\"images\\").references(\\"ratio\\").inTable('event_results_embedded_events_embedded_attractions_images'); // note: one-to-many
+    table.integer(\\"classifications\\").references(\\"primary\\").inTable('event_results_embedded_events_embedded_attractions_classifications'); // note: one-to-many
+    table.integer(\\"links\\").references(\\"self\\").inTable('event_results_embedded_events_embedded_attractions_links'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"event_results_embedded_events_embedded_venues\\", (table) => {
+    table.string(\\"name\\", 20).notNullable().unique();
+    table.string(\\"type\\", 20).notNullable().unique();
+    table.string(\\"id\\", 20).notNullable().unique();
+    table.boolean(\\"test\\").notNullable();
+    table.string(\\"locale\\", 20).notNullable().unique();
+    table.integer(\\"postal_code\\").notNullable().unique();
+    table.string(\\"timezone\\", 20).notNullable().unique();
+    table.integer(\\"city\\").references(\\"name\\").inTable('event_results_embedded_events_embedded_venues_city'); // note: one-to-one
+    table.integer(\\"state\\").references(\\"name\\").inTable('event_results_embedded_events_embedded_venues_state'); // note: one-to-one
+    table.integer(\\"country\\").references(\\"name\\").inTable('event_results_embedded_events_embedded_venues_country'); // note: one-to-one
+    table.integer(\\"address\\").references(\\"line1\\").inTable('event_results_embedded_events_embedded_venues_address'); // note: one-to-one
+    table.integer(\\"location\\").references(\\"longitude\\").inTable('event_results_embedded_events_embedded_venues_location'); // note: one-to-one
+    table.integer(\\"markets\\").references(\\"id\\").inTable('event_results_embedded_events_embedded_venues_markets'); // note: one-to-many
+    table.integer(\\"links\\").references(\\"self\\").inTable('event_results_embedded_events_embedded_venues_links'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"event_results_embedded_events_links_venues\\", (table) => {
+    table.string(\\"href\\", 60).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"event_results_embedded_events_links_attractions\\", (table) => {
+    table.string(\\"href\\", 60).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"event_results_embedded_events_links_self\\", (table) => {
+    table.string(\\"href\\", 60).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"event_results_embedded_events_classifications_sub_genre\\", (table) => {
+    table.string(\\"id\\", 20).notNullable().unique();
+    table.string(\\"name\\", 20).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"event_results_embedded_events_classifications_genre\\", (table) => {
+    table.string(\\"id\\", 20).notNullable().unique();
+    table.string(\\"name\\", 20).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"event_results_embedded_events_classifications_segment\\", (table) => {
+    table.string(\\"id\\", 20).notNullable().unique();
+    table.string(\\"name\\", 20).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"event_results_embedded_events_dates_status\\", (table) => {
+    table.string(\\"code\\", 20).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"event_results_embedded_events_dates_start\\", (table) => {
+    table.datetime(\\"local_date\\").notNullable();
+    table.boolean(\\"date_tbd\\").notNullable();
+    table.boolean(\\"date_tba\\").notNullable();
+    table.boolean(\\"time_tba\\").notNullable();
+    table.boolean(\\"no_specific_time\\").notNullable();
+  })
+
+  await knex.schema.createTable(\\"event_results_embedded_events_sales_public\\", (table) => {
+    table.datetime(\\"start_date_time\\").notNullable();
+    table.boolean(\\"start_tbd\\").notNullable();
+    table.datetime(\\"end_date_time\\").notNullable();
+  })
+
+  await knex.schema.createTable(\\"event_results_embedded_events_embedded\\", (table) => {
+    table.integer(\\"venues\\").references(\\"name\\").inTable('event_results_embedded_events_embedded_venues'); // note: one-to-many
+    table.integer(\\"attractions\\").references(\\"name\\").inTable('event_results_embedded_events_embedded_attractions'); // note: one-to-many
+  })
+
+  await knex.schema.createTable(\\"event_results_embedded_events_links\\", (table) => {
+    table.integer(\\"self\\").references(\\"href\\").inTable('event_results_embedded_events_links_self'); // note: one-to-one
+    table.integer(\\"attractions\\").references(\\"href\\").inTable('event_results_embedded_events_links_attractions'); // note: one-to-many
+    table.integer(\\"venues\\").references(\\"href\\").inTable('event_results_embedded_events_links_venues'); // note: one-to-many
+  })
+
+  await knex.schema.createTable(\\"event_results_embedded_events_promoter\\", (table) => {
+    table.increments(\\"id\\");
+  })
+
+  await knex.schema.createTable(\\"event_results_embedded_events_classifications\\", (table) => {
+    table.boolean(\\"primary\\").notNullable();
+    table.integer(\\"segment\\").references(\\"id\\").inTable('event_results_embedded_events_classifications_segment'); // note: one-to-one
+    table.integer(\\"genre\\").references(\\"id\\").inTable('event_results_embedded_events_classifications_genre'); // note: one-to-one
+    table.integer(\\"sub_genre\\").references(\\"id\\").inTable('event_results_embedded_events_classifications_sub_genre'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"event_results_embedded_events_dates\\", (table) => {
+    table.integer(\\"start\\").references(\\"localDate\\").inTable('event_results_embedded_events_dates_start'); // note: one-to-one
+    table.string(\\"timezone\\", 20).notNullable().unique();
+    table.integer(\\"status\\").references(\\"code\\").inTable('event_results_embedded_events_dates_status'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"event_results_embedded_events_sales\\", (table) => {
+    table.integer(\\"public\\").references(\\"startDateTime\\").inTable('event_results_embedded_events_sales_public'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"event_results_embedded_events_images\\", (table) => {
+    table.string(\\"ratio\\", 20).notNullable();
+    table.string(\\"url\\", 200).notNullable().unique();
+    table.integer(\\"width\\").notNullable();
+    table.integer(\\"height\\").notNullable().unique();
+    table.boolean(\\"fallback\\").notNullable();
+  })
+
+  await knex.schema.createTable(\\"event_results_embedded_events\\", (table) => {
+    table.string(\\"name\\", 60).notNullable().unique();
+    table.string(\\"type\\", 20).notNullable().unique();
+    table.string(\\"id\\", 20).notNullable().unique();
+    table.boolean(\\"test\\").notNullable();
+    table.string(\\"url\\", 60).notNullable().unique();
+    table.string(\\"locale\\", 20).notNullable().unique();
+    table.integer(\\"images\\").references(\\"ratio\\").inTable('event_results_embedded_events_images'); // note: one-to-many
+    table.integer(\\"sales\\").references(\\"public\\").inTable('event_results_embedded_events_sales'); // note: one-to-one
+    table.integer(\\"dates\\").references(\\"start\\").inTable('event_results_embedded_events_dates'); // note: one-to-one
+    table.integer(\\"classifications\\").references(\\"primary\\").inTable('event_results_embedded_events_classifications'); // note: one-to-many
+    table.integer(\\"promoter\\").references(\\"id\\").inTable('event_results_embedded_events_promoter'); // note: one-to-one
+    table.integer(\\"links\\").references(\\"self\\").inTable('event_results_embedded_events_links'); // note: one-to-one
+    table.integer(\\"embedded\\").references(\\"venues\\").inTable('event_results_embedded_events_embedded'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"event_results_links_next\\", (table) => {
+    table.string(\\"href\\", 60).notNullable().unique();
+    table.boolean(\\"templated\\").notNullable();
+  })
+
+  await knex.schema.createTable(\\"event_results_links_self\\", (table) => {
+    table.string(\\"href\\", 60).notNullable().unique();
+    table.boolean(\\"templated\\").notNullable();
+  })
+
+  await knex.schema.createTable(\\"event_results_page\\", (table) => {
+    table.integer(\\"size\\").notNullable().unique();
+    table.integer(\\"total_elements\\").notNullable().unique();
+    table.integer(\\"total_pages\\").notNullable().unique();
+    table.integer(\\"number\\").notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"event_results_embedded\\", (table) => {
+    table.integer(\\"events\\").references(\\"name\\").inTable('event_results_embedded_events'); // note: one-to-many
+  })
+
+  await knex.schema.createTable(\\"event_results_links\\", (table) => {
+    table.integer(\\"self\\").references(\\"href\\").inTable('event_results_links_self'); // note: one-to-one
+    table.integer(\\"next\\").references(\\"href\\").inTable('event_results_links_next'); // note: one-to-one
+  })
+
+
+
+  // Create the main table
+  return knex.schema.createTable(\\"event_results\\", (table) => {
+    table.integer(\\"links\\").references(\\"self\\").inTable('event_results_links'); // note: one-to-one
+    table.integer(\\"embedded\\").references(\\"events\\").inTable('event_results_embedded'); // note: one-to-one
+    table.integer(\\"page\\").references(\\"size\\").inTable('event_results_page'); // note: one-to-one
+  })
+
+};
+
+exports.down = async function down(knex) {
+  await knex.schema.dropTableIfExists(\\"event_results_embedded_events_embedded_attractions_links_self\\");
+  await knex.schema.dropTableIfExists(\\"event_results_embedded_events_embedded_attractions_classifications_sub_genre\\");
+  await knex.schema.dropTableIfExists(\\"event_results_embedded_events_embedded_attractions_classifications_genre\\");
+  await knex.schema.dropTableIfExists(\\"event_results_embedded_events_embedded_attractions_classifications_segment\\");
+  await knex.schema.dropTableIfExists(\\"event_results_embedded_events_embedded_attractions_links\\");
+  await knex.schema.dropTableIfExists(\\"event_results_embedded_events_embedded_attractions_classifications\\");
+  await knex.schema.dropTableIfExists(\\"event_results_embedded_events_embedded_attractions_images\\");
+  await knex.schema.dropTableIfExists(\\"event_results_embedded_events_embedded_venues_links_self\\");
+  await knex.schema.dropTableIfExists(\\"event_results_embedded_events_embedded_venues_links\\");
+  await knex.schema.dropTableIfExists(\\"event_results_embedded_events_embedded_venues_markets\\");
+  await knex.schema.dropTableIfExists(\\"event_results_embedded_events_embedded_venues_location\\");
+  await knex.schema.dropTableIfExists(\\"event_results_embedded_events_embedded_venues_address\\");
+  await knex.schema.dropTableIfExists(\\"event_results_embedded_events_embedded_venues_country\\");
+  await knex.schema.dropTableIfExists(\\"event_results_embedded_events_embedded_venues_state\\");
+  await knex.schema.dropTableIfExists(\\"event_results_embedded_events_embedded_venues_city\\");
+  await knex.schema.dropTableIfExists(\\"event_results_embedded_events_embedded_attractions\\");
+  await knex.schema.dropTableIfExists(\\"event_results_embedded_events_embedded_venues\\");
+  await knex.schema.dropTableIfExists(\\"event_results_embedded_events_links_venues\\");
+  await knex.schema.dropTableIfExists(\\"event_results_embedded_events_links_attractions\\");
+  await knex.schema.dropTableIfExists(\\"event_results_embedded_events_links_self\\");
+  await knex.schema.dropTableIfExists(\\"event_results_embedded_events_classifications_sub_genre\\");
+  await knex.schema.dropTableIfExists(\\"event_results_embedded_events_classifications_genre\\");
+  await knex.schema.dropTableIfExists(\\"event_results_embedded_events_classifications_segment\\");
+  await knex.schema.dropTableIfExists(\\"event_results_embedded_events_dates_status\\");
+  await knex.schema.dropTableIfExists(\\"event_results_embedded_events_dates_start\\");
+  await knex.schema.dropTableIfExists(\\"event_results_embedded_events_sales_public\\");
+  await knex.schema.dropTableIfExists(\\"event_results_embedded_events_embedded\\");
+  await knex.schema.dropTableIfExists(\\"event_results_embedded_events_links\\");
+  await knex.schema.dropTableIfExists(\\"event_results_embedded_events_promoter\\");
+  await knex.schema.dropTableIfExists(\\"event_results_embedded_events_classifications\\");
+  await knex.schema.dropTableIfExists(\\"event_results_embedded_events_dates\\");
+  await knex.schema.dropTableIfExists(\\"event_results_embedded_events_sales\\");
+  await knex.schema.dropTableIfExists(\\"event_results_embedded_events_images\\");
+  await knex.schema.dropTableIfExists(\\"event_results_embedded_events\\");
+  await knex.schema.dropTableIfExists(\\"event_results_links_next\\");
+  await knex.schema.dropTableIfExists(\\"event_results_links_self\\");
+  await knex.schema.dropTableIfExists(\\"event_results_page\\");
+  await knex.schema.dropTableIfExists(\\"event_results_embedded\\");
+  await knex.schema.dropTableIfExists(\\"event_results_links\\");
+  await knex.schema.dropTableIfExists(\\"event_results\\");
+};
+"
+`;
+
+exports[`#knex can emit migration for eventResults json, w/ dense & trim fields 1`] = `
+"// More info: http://knexjs.org/#Schema-createTable
+
+exports.up = async function up(knex) {
+  // NOTE #1: You can break up multiple createTable's into different migration scripts
+  // OR, you can chain the calls to .createTable()'s
+  // NOTE #2: make sure any tables are created before it's relations (tables) are setup.
+
+  await knex.schema.createTable(\\"id_name\\", (table) => {
+    table.string(\\"id\\", 20).notNullable().unique();
+    table.string(\\"name\\", 20).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"markets\\", (table) => {
+    table.increments(\\"id\\");
+  })
+
+  await knex.schema.createTable(\\"location\\", (table) => {
+    table.decimal(\\"longitude\\", 12, 8).notNullable();
+    table.decimal(\\"latitude\\", 11, 8).notNullable();
+  })
+
+  await knex.schema.createTable(\\"address\\", (table) => {
+    table.string(\\"line_1\\", 20).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"country\\", (table) => {
+    table.string(\\"name\\", 40).notNullable().unique();
+    table.string(\\"country_code\\", 20).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"state\\", (table) => {
+    table.string(\\"name\\", 20).notNullable().unique();
+    table.string(\\"state_code\\", 20).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"city\\", (table) => {
+    table.string(\\"name\\", 20).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"venues\\", (table) => {
+    table.string(\\"name\\", 20).notNullable().unique();
+    table.string(\\"type\\", 20).notNullable().unique();
+    table.string(\\"id\\", 20).notNullable().unique();
+    table.boolean(\\"test\\").notNullable();
+    table.string(\\"locale\\", 20).notNullable().unique();
+    table.integer(\\"postal_code\\").notNullable().unique();
+    table.string(\\"timezone\\", 20).notNullable().unique();
+    table.integer(\\"city\\").references(\\"name\\").inTable('city'); // note: one-to-one
+    table.integer(\\"state\\").references(\\"name\\").inTable('state'); // note: one-to-one
+    table.integer(\\"country\\").references(\\"name\\").inTable('country'); // note: one-to-one
+    table.integer(\\"address\\").references(\\"line1\\").inTable('address'); // note: one-to-one
+    table.integer(\\"location\\").references(\\"longitude\\").inTable('location'); // note: one-to-one
+    table.integer(\\"markets\\").references(\\"id\\").inTable('markets'); // note: one-to-many
+    table.integer(\\"links\\").references(\\"self\\").inTable('links'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"attractions\\", (table) => {
+    table.string(\\"name\\", 40).notNullable().unique();
+    table.string(\\"type\\", 20).notNullable().unique();
+    table.string(\\"id\\", 20).notNullable().unique();
+    table.boolean(\\"test\\").notNullable();
+    table.string(\\"locale\\", 20).notNullable().unique();
+    table.integer(\\"images\\").references(\\"ratio\\").inTable('images'); // note: one-to-many
+    table.integer(\\"classifications\\").references(\\"primary\\").inTable('classifications'); // note: one-to-many
+    table.integer(\\"links\\").references(\\"self\\").inTable('links'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"status\\", (table) => {
+    table.string(\\"code\\", 20).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"start\\", (table) => {
+    table.datetime(\\"local_date\\").notNullable();
+    table.boolean(\\"date_tbd\\").notNullable();
+    table.boolean(\\"date_tba\\").notNullable();
+    table.boolean(\\"time_tba\\").notNullable();
+    table.boolean(\\"no_specific_time\\").notNullable();
+  })
+
+  await knex.schema.createTable(\\"public\\", (table) => {
+    table.datetime(\\"start_date_time\\").notNullable();
+    table.boolean(\\"start_tbd\\").notNullable();
+    table.datetime(\\"end_date_time\\").notNullable();
+  })
+
+  await knex.schema.createTable(\\"promoter\\", (table) => {
+    table.increments(\\"id\\");
+  })
+
+  await knex.schema.createTable(\\"classifications\\", (table) => {
+    table.boolean(\\"primary\\").notNullable();
+    table.integer(\\"segment\\").references(\\"id\\").inTable('id_name'); // note: one-to-one
+    table.integer(\\"genre\\").references(\\"id\\").inTable('id_name'); // note: one-to-one
+    table.integer(\\"sub_genre\\").references(\\"id\\").inTable('id_name'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"dates\\", (table) => {
+    table.integer(\\"start\\").references(\\"localDate\\").inTable('start'); // note: one-to-one
+    table.string(\\"timezone\\", 20).notNullable().unique();
+    table.integer(\\"status\\").references(\\"code\\").inTable('status'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"sales\\", (table) => {
+    table.integer(\\"public\\").references(\\"startDateTime\\").inTable('public'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"images\\", (table) => {
+    table.string(\\"ratio\\", 20).notNullable();
+    table.string(\\"url\\", 200).notNullable().unique();
+    table.integer(\\"width\\").notNullable();
+    table.integer(\\"height\\").notNullable().unique();
+    table.boolean(\\"fallback\\").notNullable();
+  })
+
+  await knex.schema.createTable(\\"events\\", (table) => {
+    table.string(\\"name\\", 60).notNullable().unique();
+    table.string(\\"type\\", 20).notNullable().unique();
+    table.string(\\"id\\", 20).notNullable().unique();
+    table.boolean(\\"test\\").notNullable();
+    table.string(\\"url\\", 60).notNullable().unique();
+    table.string(\\"locale\\", 20).notNullable().unique();
+    table.integer(\\"images\\").references(\\"ratio\\").inTable('images'); // note: one-to-many
+    table.integer(\\"sales\\").references(\\"public\\").inTable('sales'); // note: one-to-one
+    table.integer(\\"dates\\").references(\\"start\\").inTable('dates'); // note: one-to-one
+    table.integer(\\"classifications\\").references(\\"primary\\").inTable('classifications'); // note: one-to-many
+    table.integer(\\"promoter\\").references(\\"id\\").inTable('promoter'); // note: one-to-one
+    table.integer(\\"links\\").references(\\"self\\").inTable('links'); // note: one-to-one
+    table.integer(\\"embedded\\").references(\\"venues\\").inTable('embedded'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"next\\", (table) => {
+    table.string(\\"href\\", 60).notNullable().unique();
+    table.boolean(\\"templated\\").notNullable();
+  })
+
+  await knex.schema.createTable(\\"self\\", (table) => {
+    table.string(\\"href\\", 60).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"page\\", (table) => {
+    table.integer(\\"size\\").notNullable().unique();
+    table.integer(\\"total_elements\\").notNullable().unique();
+    table.integer(\\"total_pages\\").notNullable().unique();
+    table.integer(\\"number\\").notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"embedded\\", (table) => {
+    table.integer(\\"venues\\").references(\\"name\\").inTable('venues'); // note: one-to-many
+    table.integer(\\"attractions\\").references(\\"name\\").inTable('attractions'); // note: one-to-many
+  })
+
+  await knex.schema.createTable(\\"links\\", (table) => {
+    table.integer(\\"self\\").references(\\"href\\").inTable('self'); // note: one-to-one
+  })
+
+
+
+  // Create the main table
+  return knex.schema.createTable(\\"event_results\\", (table) => {
+    table.integer(\\"links\\").references(\\"self\\").inTable('links'); // note: one-to-one
+    table.integer(\\"embedded\\").references(\\"venues\\").inTable('embedded'); // note: one-to-one
+    table.integer(\\"page\\").references(\\"size\\").inTable('page'); // note: one-to-one
+  })
+
+};
+
+exports.down = async function down(knex) {
+  await knex.schema.dropTableIfExists(\\"id_name\\");
+  await knex.schema.dropTableIfExists(\\"markets\\");
+  await knex.schema.dropTableIfExists(\\"location\\");
+  await knex.schema.dropTableIfExists(\\"address\\");
+  await knex.schema.dropTableIfExists(\\"country\\");
+  await knex.schema.dropTableIfExists(\\"state\\");
+  await knex.schema.dropTableIfExists(\\"city\\");
+  await knex.schema.dropTableIfExists(\\"venues\\");
+  await knex.schema.dropTableIfExists(\\"attractions\\");
+  await knex.schema.dropTableIfExists(\\"status\\");
+  await knex.schema.dropTableIfExists(\\"start\\");
+  await knex.schema.dropTableIfExists(\\"public\\");
+  await knex.schema.dropTableIfExists(\\"promoter\\");
+  await knex.schema.dropTableIfExists(\\"classifications\\");
+  await knex.schema.dropTableIfExists(\\"dates\\");
+  await knex.schema.dropTableIfExists(\\"sales\\");
+  await knex.schema.dropTableIfExists(\\"images\\");
+  await knex.schema.dropTableIfExists(\\"events\\");
+  await knex.schema.dropTableIfExists(\\"next\\");
+  await knex.schema.dropTableIfExists(\\"self\\");
+  await knex.schema.dropTableIfExists(\\"page\\");
+  await knex.schema.dropTableIfExists(\\"embedded\\");
+  await knex.schema.dropTableIfExists(\\"links\\");
+  await knex.schema.dropTableIfExists(\\"event_results\\");
+};
+"
+`;
+
+exports[`#knex can emit migration for eventResults json, w/ dense fields 1`] = `
+"// More info: http://knexjs.org/#Schema-createTable
+
+exports.up = async function up(knex) {
+  // NOTE #1: You can break up multiple createTable's into different migration scripts
+  // OR, you can chain the calls to .createTable()'s
+  // NOTE #2: make sure any tables are created before it's relations (tables) are setup.
+
+  await knex.schema.createTable(\\"links\\", (table) => {
+    table.integer(\\"self\\").references(\\"href\\").inTable('href'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"href\\", (table) => {
+    table.string(\\"href\\", 60).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"id_name\\", (table) => {
+    table.string(\\"id\\", 20).notNullable().unique();
+    table.string(\\"name\\", 20).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"classifications\\", (table) => {
+    table.boolean(\\"primary\\").notNullable();
+    table.integer(\\"segment\\").references(\\"id\\").inTable('id_name'); // note: one-to-one
+    table.integer(\\"genre\\").references(\\"id\\").inTable('id_name'); // note: one-to-one
+    table.integer(\\"sub_genre\\").references(\\"id\\").inTable('id_name'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"images\\", (table) => {
+    table.string(\\"ratio\\", 20).notNullable();
+    table.string(\\"url\\", 200).notNullable().unique();
+    table.integer(\\"width\\").notNullable();
+    table.integer(\\"height\\").notNullable().unique();
+    table.boolean(\\"fallback\\").notNullable();
+  })
+
+  await knex.schema.createTable(\\"href_templated\\", (table) => {
+    table.string(\\"href\\", 60).notNullable().unique();
+    table.boolean(\\"templated\\").notNullable();
+  })
+
+  await knex.schema.createTable(\\"event_results_embedded_events_embedded_venues_markets\\", (table) => {
+    table.increments(\\"id\\");
+  })
+
+  await knex.schema.createTable(\\"event_results_embedded_events_embedded_venues_location\\", (table) => {
+    table.decimal(\\"longitude\\", 12, 8).notNullable();
+    table.decimal(\\"latitude\\", 11, 8).notNullable();
+  })
+
+  await knex.schema.createTable(\\"event_results_embedded_events_embedded_venues_address\\", (table) => {
+    table.string(\\"line_1\\", 20).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"event_results_embedded_events_embedded_venues_country\\", (table) => {
+    table.string(\\"name\\", 40).notNullable().unique();
+    table.string(\\"country_code\\", 20).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"event_results_embedded_events_embedded_venues_state\\", (table) => {
+    table.string(\\"name\\", 20).notNullable().unique();
+    table.string(\\"state_code\\", 20).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"event_results_embedded_events_embedded_venues_city\\", (table) => {
+    table.string(\\"name\\", 20).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"event_results_embedded_events_embedded_attractions\\", (table) => {
+    table.string(\\"name\\", 40).notNullable().unique();
+    table.string(\\"type\\", 20).notNullable().unique();
+    table.string(\\"id\\", 20).notNullable().unique();
+    table.boolean(\\"test\\").notNullable();
+    table.string(\\"locale\\", 20).notNullable().unique();
+    table.integer(\\"images\\").references(\\"ratio\\").inTable('images'); // note: one-to-many
+    table.integer(\\"classifications\\").references(\\"primary\\").inTable('classifications'); // note: one-to-many
+    table.integer(\\"links\\").references(\\"self\\").inTable('links'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"event_results_embedded_events_embedded_venues\\", (table) => {
+    table.string(\\"name\\", 20).notNullable().unique();
+    table.string(\\"type\\", 20).notNullable().unique();
+    table.string(\\"id\\", 20).notNullable().unique();
+    table.boolean(\\"test\\").notNullable();
+    table.string(\\"locale\\", 20).notNullable().unique();
+    table.integer(\\"postal_code\\").notNullable().unique();
+    table.string(\\"timezone\\", 20).notNullable().unique();
+    table.integer(\\"city\\").references(\\"name\\").inTable('event_results_embedded_events_embedded_venues_city'); // note: one-to-one
+    table.integer(\\"state\\").references(\\"name\\").inTable('event_results_embedded_events_embedded_venues_state'); // note: one-to-one
+    table.integer(\\"country\\").references(\\"name\\").inTable('event_results_embedded_events_embedded_venues_country'); // note: one-to-one
+    table.integer(\\"address\\").references(\\"line1\\").inTable('event_results_embedded_events_embedded_venues_address'); // note: one-to-one
+    table.integer(\\"location\\").references(\\"longitude\\").inTable('event_results_embedded_events_embedded_venues_location'); // note: one-to-one
+    table.integer(\\"markets\\").references(\\"id\\").inTable('event_results_embedded_events_embedded_venues_markets'); // note: one-to-many
+    table.integer(\\"links\\").references(\\"self\\").inTable('links'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"event_results_embedded_events_dates_status\\", (table) => {
+    table.string(\\"code\\", 20).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"event_results_embedded_events_dates_start\\", (table) => {
+    table.datetime(\\"local_date\\").notNullable();
+    table.boolean(\\"date_tbd\\").notNullable();
+    table.boolean(\\"date_tba\\").notNullable();
+    table.boolean(\\"time_tba\\").notNullable();
+    table.boolean(\\"no_specific_time\\").notNullable();
+  })
+
+  await knex.schema.createTable(\\"event_results_embedded_events_sales_public\\", (table) => {
+    table.datetime(\\"start_date_time\\").notNullable();
+    table.boolean(\\"start_tbd\\").notNullable();
+    table.datetime(\\"end_date_time\\").notNullable();
+  })
+
+  await knex.schema.createTable(\\"event_results_embedded_events_embedded\\", (table) => {
+    table.integer(\\"venues\\").references(\\"name\\").inTable('event_results_embedded_events_embedded_venues'); // note: one-to-many
+    table.integer(\\"attractions\\").references(\\"name\\").inTable('event_results_embedded_events_embedded_attractions'); // note: one-to-many
+  })
+
+  await knex.schema.createTable(\\"event_results_embedded_events_links\\", (table) => {
+    table.integer(\\"self\\").references(\\"href\\").inTable('href'); // note: one-to-one
+    table.integer(\\"attractions\\").references(\\"href\\").inTable('href'); // note: one-to-many
+    table.integer(\\"venues\\").references(\\"href\\").inTable('href'); // note: one-to-many
+  })
+
+  await knex.schema.createTable(\\"event_results_embedded_events_promoter\\", (table) => {
+    table.increments(\\"id\\");
+  })
+
+  await knex.schema.createTable(\\"event_results_embedded_events_dates\\", (table) => {
+    table.integer(\\"start\\").references(\\"localDate\\").inTable('event_results_embedded_events_dates_start'); // note: one-to-one
+    table.string(\\"timezone\\", 20).notNullable().unique();
+    table.integer(\\"status\\").references(\\"code\\").inTable('event_results_embedded_events_dates_status'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"event_results_embedded_events_sales\\", (table) => {
+    table.integer(\\"public\\").references(\\"startDateTime\\").inTable('event_results_embedded_events_sales_public'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"event_results_embedded_events\\", (table) => {
+    table.string(\\"name\\", 60).notNullable().unique();
+    table.string(\\"type\\", 20).notNullable().unique();
+    table.string(\\"id\\", 20).notNullable().unique();
+    table.boolean(\\"test\\").notNullable();
+    table.string(\\"url\\", 60).notNullable().unique();
+    table.string(\\"locale\\", 20).notNullable().unique();
+    table.integer(\\"images\\").references(\\"ratio\\").inTable('images'); // note: one-to-many
+    table.integer(\\"sales\\").references(\\"public\\").inTable('event_results_embedded_events_sales'); // note: one-to-one
+    table.integer(\\"dates\\").references(\\"start\\").inTable('event_results_embedded_events_dates'); // note: one-to-one
+    table.integer(\\"classifications\\").references(\\"primary\\").inTable('classifications'); // note: one-to-many
+    table.integer(\\"promoter\\").references(\\"id\\").inTable('event_results_embedded_events_promoter'); // note: one-to-one
+    table.integer(\\"links\\").references(\\"self\\").inTable('event_results_embedded_events_links'); // note: one-to-one
+    table.integer(\\"embedded\\").references(\\"venues\\").inTable('event_results_embedded_events_embedded'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"event_results_page\\", (table) => {
+    table.integer(\\"size\\").notNullable().unique();
+    table.integer(\\"total_elements\\").notNullable().unique();
+    table.integer(\\"total_pages\\").notNullable().unique();
+    table.integer(\\"number\\").notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"event_results_embedded\\", (table) => {
+    table.integer(\\"events\\").references(\\"name\\").inTable('event_results_embedded_events'); // note: one-to-many
+  })
+
+  await knex.schema.createTable(\\"event_results_links\\", (table) => {
+    table.integer(\\"self\\").references(\\"href\\").inTable('href_templated'); // note: one-to-one
+    table.integer(\\"next\\").references(\\"href\\").inTable('href_templated'); // note: one-to-one
+  })
+
+
+
+  // Create the main table
+  return knex.schema.createTable(\\"event_results\\", (table) => {
+    table.integer(\\"links\\").references(\\"self\\").inTable('event_results_links'); // note: one-to-one
+    table.integer(\\"embedded\\").references(\\"events\\").inTable('event_results_embedded'); // note: one-to-one
+    table.integer(\\"page\\").references(\\"size\\").inTable('event_results_page'); // note: one-to-one
+  })
+
+};
+
+exports.down = async function down(knex) {
+  await knex.schema.dropTableIfExists(\\"links\\");
+  await knex.schema.dropTableIfExists(\\"href\\");
+  await knex.schema.dropTableIfExists(\\"id_name\\");
+  await knex.schema.dropTableIfExists(\\"classifications\\");
+  await knex.schema.dropTableIfExists(\\"images\\");
+  await knex.schema.dropTableIfExists(\\"href_templated\\");
+  await knex.schema.dropTableIfExists(\\"event_results_embedded_events_embedded_venues_markets\\");
+  await knex.schema.dropTableIfExists(\\"event_results_embedded_events_embedded_venues_location\\");
+  await knex.schema.dropTableIfExists(\\"event_results_embedded_events_embedded_venues_address\\");
+  await knex.schema.dropTableIfExists(\\"event_results_embedded_events_embedded_venues_country\\");
+  await knex.schema.dropTableIfExists(\\"event_results_embedded_events_embedded_venues_state\\");
+  await knex.schema.dropTableIfExists(\\"event_results_embedded_events_embedded_venues_city\\");
+  await knex.schema.dropTableIfExists(\\"event_results_embedded_events_embedded_attractions\\");
+  await knex.schema.dropTableIfExists(\\"event_results_embedded_events_embedded_venues\\");
+  await knex.schema.dropTableIfExists(\\"event_results_embedded_events_dates_status\\");
+  await knex.schema.dropTableIfExists(\\"event_results_embedded_events_dates_start\\");
+  await knex.schema.dropTableIfExists(\\"event_results_embedded_events_sales_public\\");
+  await knex.schema.dropTableIfExists(\\"event_results_embedded_events_embedded\\");
+  await knex.schema.dropTableIfExists(\\"event_results_embedded_events_links\\");
+  await knex.schema.dropTableIfExists(\\"event_results_embedded_events_promoter\\");
+  await knex.schema.dropTableIfExists(\\"event_results_embedded_events_dates\\");
+  await knex.schema.dropTableIfExists(\\"event_results_embedded_events_sales\\");
+  await knex.schema.dropTableIfExists(\\"event_results_embedded_events\\");
+  await knex.schema.dropTableIfExists(\\"event_results_page\\");
+  await knex.schema.dropTableIfExists(\\"event_results_embedded\\");
+  await knex.schema.dropTableIfExists(\\"event_results_links\\");
+  await knex.schema.dropTableIfExists(\\"event_results\\");
+};
+"
+`;
+
+exports[`#knex can emit migration for long fields 1`] = `
+"// More info: http://knexjs.org/#Schema-createTable
+
+exports.up = async function up(knex) {
+  
+  /* Note: no nested types detected */
+
+  // Create the main table
+  return knex.schema.createTable(\\"users\\", (table) => {
+    table.uuid(\\"id\\").notNullable().primary();
+    table.string(\\"email\\", 40).notNullable();
+    table.string(\\"first_name\\", 20).notNullable();
+    table.string(\\"last_name\\", 20).notNullable();
+    table.boolean(\\"is_active\\").notNullable();
+    table.datetime(\\"created_at\\").notNullable();
+    table.datetime(\\"modified_at\\").notNullable();
+    table.string(\\"catch_phrase\\", 60).notNullable();
+    table.string(\\"company_name\\", 20).notNullable();
+    table.integer(\\"credits\\").enum('1', '15', '20', '10', '0', '11', '7', '9').notNullable();
+    table.decimal(\\"sales_score\\", 10, 8).notNullable();
+    table.string(\\"location\\", 20).enum('nyc', 'remote', 'denver').notNullable();
+    table.string(\\"profile\\", 600).unique();
+  })
+
+};
+
+exports.down = async function down(knex) {
+  await knex.schema.dropTableIfExists(\\"users\\");
+};
+"
+`;
+
+exports[`#knex can emit migration for long fields 2`] = `
+"// More info: http://knexjs.org/#Schema-createTable
+
+exports.up = async function up(knex) {
+  
+  /* Note: no nested types detected */
+
+  // Create the main table
+  return knex.schema.createTable(\\"users\\", (table) => {
+    table.uuid(\\"id\\").notNullable().primary();
+    table.string(\\"email\\", 40).notNullable();
+    table.string(\\"first_name\\", 20).notNullable();
+    table.string(\\"last_name\\", 20).notNullable();
+    table.boolean(\\"is_active\\").notNullable();
+    table.datetime(\\"created_at\\").notNullable();
+    table.datetime(\\"modified_at\\").notNullable();
+    table.string(\\"catch_phrase\\", 60).notNullable();
+    table.string(\\"company_name\\", 20).notNullable();
+    table.integer(\\"credits\\").enum('1', '15', '20', '10', '0', '11', '7', '9').notNullable();
+    table.decimal(\\"sales_score\\", 10, 8).notNullable();
+    table.string(\\"location\\", 20).enum('nyc', 'remote', 'denver').notNullable();
+    table.string(\\"profile\\", 800).unique();
+  })
+
+};
+
+exports.down = async function down(knex) {
+  await knex.schema.dropTableIfExists(\\"users\\");
+};
+"
+`;
+
+exports[`#knex can emit migration for long fields 3`] = `
+"// More info: http://knexjs.org/#Schema-createTable
+
+exports.up = async function up(knex) {
+  
+  /* Note: no nested types detected */
+
+  // Create the main table
+  return knex.schema.createTable(\\"users\\", (table) => {
+    table.uuid(\\"id\\").notNullable().primary();
+    table.string(\\"email\\", 40).notNullable();
+    table.string(\\"first_name\\", 20).notNullable();
+    table.string(\\"last_name\\", 20).notNullable();
+    table.boolean(\\"is_active\\").notNullable();
+    table.datetime(\\"created_at\\").notNullable();
+    table.datetime(\\"modified_at\\").notNullable();
+    table.string(\\"catch_phrase\\", 60).notNullable();
+    table.string(\\"company_name\\", 20).notNullable();
+    table.integer(\\"credits\\").enum('1', '15', '20', '10', '0', '11', '7', '9').notNullable();
+    table.decimal(\\"sales_score\\", 10, 8).notNullable();
+    table.string(\\"location\\", 20).enum('nyc', 'remote', 'denver').notNullable();
+    table.string(\\"profile\\", 1000).unique();
+  })
+
+};
+
+exports.down = async function down(knex) {
+  await knex.schema.dropTableIfExists(\\"users\\");
+};
+"
+`;
+
+exports[`#knex can emit migration for long fields 4`] = `
+"// More info: http://knexjs.org/#Schema-createTable
+
+exports.up = async function up(knex) {
+  
+  /* Note: no nested types detected */
+
+  // Create the main table
+  return knex.schema.createTable(\\"users\\", (table) => {
+    table.uuid(\\"id\\").notNullable().primary();
+    table.string(\\"email\\", 40).notNullable();
+    table.string(\\"first_name\\", 20).notNullable();
+    table.string(\\"last_name\\", 20).notNullable();
+    table.boolean(\\"is_active\\").notNullable();
+    table.datetime(\\"created_at\\").notNullable();
+    table.datetime(\\"modified_at\\").notNullable();
+    table.string(\\"catch_phrase\\", 60).notNullable();
+    table.string(\\"company_name\\", 20).notNullable();
+    table.integer(\\"credits\\").enum('1', '15', '20', '10', '0', '11', '7', '9').notNullable();
+    table.decimal(\\"sales_score\\", 10, 8).notNullable();
+    table.string(\\"location\\", 20).enum('nyc', 'remote', 'denver').notNullable();
+    table.string(\\"profile\\", 2000).unique();
+  })
+
+};
+
+exports.down = async function down(knex) {
+  await knex.schema.dropTableIfExists(\\"users\\");
+};
+"
+`;
+
+exports[`#knex can emit migration for long fields 5`] = `
+"// More info: http://knexjs.org/#Schema-createTable
+
+exports.up = async function up(knex) {
+  
+  /* Note: no nested types detected */
+
+  // Create the main table
+  return knex.schema.createTable(\\"users\\", (table) => {
+    table.uuid(\\"id\\").notNullable().primary();
+    table.string(\\"email\\", 40).notNullable();
+    table.string(\\"first_name\\", 20).notNullable();
+    table.string(\\"last_name\\", 20).notNullable();
+    table.boolean(\\"is_active\\").notNullable();
+    table.datetime(\\"created_at\\").notNullable();
+    table.datetime(\\"modified_at\\").notNullable();
+    table.string(\\"catch_phrase\\", 60).notNullable();
+    table.string(\\"company_name\\", 20).notNullable();
+    table.integer(\\"credits\\").enum('1', '15', '20', '10', '0', '11', '7', '9').notNullable();
+    table.decimal(\\"sales_score\\", 10, 8).notNullable();
+    table.string(\\"location\\", 20).enum('nyc', 'remote', 'denver').notNullable();
+    table.string(\\"profile\\", 4000).unique();
+  })
+
+};
+
+exports.down = async function down(knex) {
+  await knex.schema.dropTableIfExists(\\"users\\");
+};
+"
+`;
+
+exports[`#knex can emit migration for long fields 6`] = `
+"// More info: http://knexjs.org/#Schema-createTable
+
+exports.up = async function up(knex) {
+  
+  /* Note: no nested types detected */
+
+  // Create the main table
+  return knex.schema.createTable(\\"users\\", (table) => {
+    table.uuid(\\"id\\").notNullable().primary();
+    table.string(\\"email\\", 40).notNullable();
+    table.string(\\"first_name\\", 20).notNullable();
+    table.string(\\"last_name\\", 20).notNullable();
+    table.boolean(\\"is_active\\").notNullable();
+    table.datetime(\\"created_at\\").notNullable();
+    table.datetime(\\"modified_at\\").notNullable();
+    table.string(\\"catch_phrase\\", 60).notNullable();
+    table.string(\\"company_name\\", 20).notNullable();
+    table.integer(\\"credits\\").enum('1', '15', '20', '10', '0', '11', '7', '9').notNullable();
+    table.decimal(\\"sales_score\\", 10, 8).notNullable();
+    table.string(\\"location\\", 20).enum('nyc', 'remote', 'denver').notNullable();
+    table.string(\\"profile\\", 8000).unique();
+  })
+
+};
+
+exports.down = async function down(knex) {
+  await knex.schema.dropTableIfExists(\\"users\\");
+};
+"
+`;
+
+exports[`#knex can emit migration for nested type 1`] = `
+"// More info: http://knexjs.org/#Schema-createTable
+
+exports.up = async function up(knex) {
+  // NOTE #1: You can break up multiple createTable's into different migration scripts
+  // OR, you can chain the calls to .createTable()'s
+  // NOTE #2: make sure any tables are created before it's relations (tables) are setup.
+
+  await knex.schema.createTable(\\"users_notes\\", (table) => {
+    table.increments(\\"id\\");
+    table.string(\\"text\\", 20).notNullable();
+  })
+
+
+
+  // Create the main table
+  return knex.schema.createTable(\\"users\\", (table) => {
+    table.increments(\\"id\\");
+    table.string(\\"name\\", 20).notNullable();
+    table.integer(\\"notes\\").references(\\"id\\").inTable('users_notes'); // note: one-to-many
+  })
+
+};
+
+exports.down = async function down(knex) {
+  await knex.schema.dropTableIfExists(\\"users_notes\\");
+  await knex.schema.dropTableIfExists(\\"users\\");
+};
+"
+`;
+
+exports[`#knex can emit migration for people json 1`] = `
+"// More info: http://knexjs.org/#Schema-createTable
+
+exports.up = async function up(knex) {
+  
+  /* Note: no nested types detected */
+
+  // Create the main table
+  return knex.schema.createTable(\\"people\\", (table) => {
+    table.string(\\"name\\", 40).notNullable().unique();
+    table.integer(\\"height\\");
+    table.integer(\\"mass\\");
+    table.string(\\"hair_color\\", 20).notNullable();
+    table.string(\\"skin_color\\", 20);
+    table.string(\\"eye_color\\", 20).enum('blue', 'yellow', 'red', 'brown', 'blue-gray', 'black', 'orange', 'hazel').notNullable();
+    table.string(\\"birth_year\\", 20);
+    table.string(\\"homeworld\\", 60).notNullable();
+    table.json(\\"films\\").notNullable();
+    table.json(\\"species\\").notNullable();
+    table.json(\\"vehicles\\").notNullable();
+    table.json(\\"starships\\").notNullable();
+    table.datetime(\\"created\\").notNullable();
+    table.datetime(\\"edited\\").notNullable();
+    table.string(\\"url\\", 60).notNullable().unique();
+    table.increments(\\"id\\");
+  })
+
+};
+
+exports.down = async function down(knex) {
+  await knex.schema.dropTableIfExists(\\"people\\");
+};
+"
+`;
+
+exports[`#knex can emit migration for pokemon json 1`] = `
+"// More info: http://knexjs.org/#Schema-createTable
+
+exports.up = async function up(knex) {
+  // NOTE #1: You can break up multiple createTable's into different migration scripts
+  // OR, you can chain the calls to .createTable()'s
+  // NOTE #2: make sure any tables are created before it's relations (tables) are setup.
+
+  await knex.schema.createTable(\\"pokemon_types_type\\", (table) => {
+    table.string(\\"name\\", 20).notNullable().unique();
+    table.string(\\"url\\", 40).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"pokemon_stats_stat\\", (table) => {
+    table.string(\\"name\\", 20).notNullable().unique();
+    table.string(\\"url\\", 40).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"pokemon_sprites_versions_generation_viii_icons\\", (table) => {
+    table.string(\\"front_default\\", 200).notNullable().unique();
+    table.text(\\"front_female\\").notNullable();
+  })
+
+  await knex.schema.createTable(\\"pokemon_sprites_versions_generation_vii_ultra_sun_ultra_moon\\", (table) => {
+    table.string(\\"front_default\\", 200).notNullable().unique();
+    table.text(\\"front_female\\").notNullable();
+    table.string(\\"front_shiny\\", 200).notNullable().unique();
+    table.text(\\"front_shiny_female\\").notNullable();
+  })
+
+  await knex.schema.createTable(\\"pokemon_sprites_versions_generation_vii_icons\\", (table) => {
+    table.string(\\"front_default\\", 200).notNullable().unique();
+    table.text(\\"front_female\\").notNullable();
+  })
+
+  await knex.schema.createTable(\\"pokemon_sprites_versions_generation_vi_x_y\\", (table) => {
+    table.string(\\"front_default\\", 200).notNullable().unique();
+    table.text(\\"front_female\\").notNullable();
+    table.string(\\"front_shiny\\", 200).notNullable().unique();
+    table.text(\\"front_shiny_female\\").notNullable();
+  })
+
+  await knex.schema.createTable(\\"pokemon_sprites_versions_generation_vi_omegaruby_alphasapphire\\", (table) => {
+    table.string(\\"front_default\\", 200).notNullable().unique();
+    table.text(\\"front_female\\").notNullable();
+    table.string(\\"front_shiny\\", 200).notNullable().unique();
+    table.text(\\"front_shiny_female\\").notNullable();
+  })
+
+  await knex.schema.createTable(\\"pokemon_sprites_versions_generation_v_black_white_animated\\", (table) => {
+    table.string(\\"back_default\\", 200).notNullable().unique();
+    table.text(\\"back_female\\").notNullable();
+    table.string(\\"back_shiny\\", 200).notNullable().unique();
+    table.text(\\"back_shiny_female\\").notNullable();
+    table.string(\\"front_default\\", 200).notNullable().unique();
+    table.text(\\"front_female\\").notNullable();
+    table.string(\\"front_shiny\\", 200).notNullable().unique();
+    table.text(\\"front_shiny_female\\").notNullable();
+  })
+
+  await knex.schema.createTable(\\"pokemon_sprites_versions_generation_v_black_white\\", (table) => {
+    table.integer(\\"animated\\").references(\\"back_default\\").inTable('pokemon_sprites_versions_generation_v_black_white_animated'); // note: one-to-one
+    table.string(\\"back_default\\", 200).notNullable().unique();
+    table.text(\\"back_female\\").notNullable();
+    table.string(\\"back_shiny\\", 200).notNullable().unique();
+    table.text(\\"back_shiny_female\\").notNullable();
+    table.string(\\"front_default\\", 200).notNullable().unique();
+    table.text(\\"front_female\\").notNullable();
+    table.string(\\"front_shiny\\", 200).notNullable().unique();
+    table.text(\\"front_shiny_female\\").notNullable();
+  })
+
+  await knex.schema.createTable(\\"pokemon_sprites_versions_generation_iv_platinum\\", (table) => {
+    table.string(\\"back_default\\", 200).notNullable().unique();
+    table.text(\\"back_female\\").notNullable();
+    table.string(\\"back_shiny\\", 200).notNullable().unique();
+    table.text(\\"back_shiny_female\\").notNullable();
+    table.string(\\"front_default\\", 200).notNullable().unique();
+    table.text(\\"front_female\\").notNullable();
+    table.string(\\"front_shiny\\", 200).notNullable().unique();
+    table.text(\\"front_shiny_female\\").notNullable();
+  })
+
+  await knex.schema.createTable(\\"pokemon_sprites_versions_generation_iv_heartgold_soulsilver\\", (table) => {
+    table.string(\\"back_default\\", 200).notNullable().unique();
+    table.text(\\"back_female\\").notNullable();
+    table.string(\\"back_shiny\\", 200).notNullable().unique();
+    table.text(\\"back_shiny_female\\").notNullable();
+    table.string(\\"front_default\\", 200).notNullable().unique();
+    table.text(\\"front_female\\").notNullable();
+    table.string(\\"front_shiny\\", 200).notNullable().unique();
+    table.text(\\"front_shiny_female\\").notNullable();
+  })
+
+  await knex.schema.createTable(\\"pokemon_sprites_versions_generation_iv_diamond_pearl\\", (table) => {
+    table.string(\\"back_default\\", 200).notNullable().unique();
+    table.text(\\"back_female\\").notNullable();
+    table.string(\\"back_shiny\\", 200).notNullable().unique();
+    table.text(\\"back_shiny_female\\").notNullable();
+    table.string(\\"front_default\\", 200).notNullable().unique();
+    table.text(\\"front_female\\").notNullable();
+    table.string(\\"front_shiny\\", 200).notNullable().unique();
+    table.text(\\"front_shiny_female\\").notNullable();
+  })
+
+  await knex.schema.createTable(\\"pokemon_sprites_versions_generation_iii_ruby_sapphire\\", (table) => {
+    table.string(\\"back_default\\", 200).notNullable().unique();
+    table.string(\\"back_shiny\\", 200).notNullable().unique();
+    table.string(\\"front_default\\", 200).notNullable().unique();
+    table.string(\\"front_shiny\\", 200).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"pokemon_sprites_versions_generation_iii_firered_leafgreen\\", (table) => {
+    table.string(\\"back_default\\", 200).notNullable().unique();
+    table.string(\\"back_shiny\\", 200).notNullable().unique();
+    table.string(\\"front_default\\", 200).notNullable().unique();
+    table.string(\\"front_shiny\\", 200).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"pokemon_sprites_versions_generation_iii_emerald\\", (table) => {
+    table.string(\\"front_default\\", 200).notNullable().unique();
+    table.string(\\"front_shiny\\", 200).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"pokemon_sprites_versions_generation_ii_silver\\", (table) => {
+    table.string(\\"back_default\\", 200).notNullable().unique();
+    table.string(\\"back_shiny\\", 200).notNullable().unique();
+    table.string(\\"front_default\\", 200).notNullable().unique();
+    table.string(\\"front_shiny\\", 200).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"pokemon_sprites_versions_generation_ii_gold\\", (table) => {
+    table.string(\\"back_default\\", 200).notNullable().unique();
+    table.string(\\"back_shiny\\", 200).notNullable().unique();
+    table.string(\\"front_default\\", 200).notNullable().unique();
+    table.string(\\"front_shiny\\", 200).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"pokemon_sprites_versions_generation_ii_crystal\\", (table) => {
+    table.string(\\"back_default\\", 200).notNullable().unique();
+    table.string(\\"back_shiny\\", 200).notNullable().unique();
+    table.string(\\"front_default\\", 200).notNullable().unique();
+    table.string(\\"front_shiny\\", 200).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"pokemon_sprites_versions_generation_i_yellow\\", (table) => {
+    table.string(\\"back_default\\", 200).notNullable().unique();
+    table.string(\\"back_gray\\", 200).notNullable().unique();
+    table.string(\\"front_default\\", 200).notNullable().unique();
+    table.string(\\"front_gray\\", 200).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"pokemon_sprites_versions_generation_i_red_blue\\", (table) => {
+    table.string(\\"back_default\\", 200).notNullable().unique();
+    table.string(\\"back_gray\\", 200).notNullable().unique();
+    table.string(\\"front_default\\", 200).notNullable().unique();
+    table.string(\\"front_gray\\", 200).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"pokemon_sprites_versions_generation_viii\\", (table) => {
+    table.integer(\\"icons\\").references(\\"front_default\\").inTable('pokemon_sprites_versions_generation_viii_icons'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"pokemon_sprites_versions_generation_vii\\", (table) => {
+    table.integer(\\"icons\\").references(\\"front_default\\").inTable('pokemon_sprites_versions_generation_vii_icons'); // note: one-to-one
+    table.integer(\\"ultra_sun_ultra_moon\\").references(\\"front_default\\").inTable('pokemon_sprites_versions_generation_vii_ultra_sun_ultra_moon'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"pokemon_sprites_versions_generation_vi\\", (table) => {
+    table.integer(\\"omegaruby_alphasapphire\\").references(\\"front_default\\").inTable('pokemon_sprites_versions_generation_vi_omegaruby_alphasapphire'); // note: one-to-one
+    table.integer(\\"x_y\\").references(\\"front_default\\").inTable('pokemon_sprites_versions_generation_vi_x_y'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"pokemon_sprites_versions_generation_v\\", (table) => {
+    table.integer(\\"black_white\\").references(\\"animated\\").inTable('pokemon_sprites_versions_generation_v_black_white'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"pokemon_sprites_versions_generation_iv\\", (table) => {
+    table.integer(\\"diamond_pearl\\").references(\\"back_default\\").inTable('pokemon_sprites_versions_generation_iv_diamond_pearl'); // note: one-to-one
+    table.integer(\\"heartgold_soulsilver\\").references(\\"back_default\\").inTable('pokemon_sprites_versions_generation_iv_heartgold_soulsilver'); // note: one-to-one
+    table.integer(\\"platinum\\").references(\\"back_default\\").inTable('pokemon_sprites_versions_generation_iv_platinum'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"pokemon_sprites_versions_generation_iii\\", (table) => {
+    table.integer(\\"emerald\\").references(\\"front_default\\").inTable('pokemon_sprites_versions_generation_iii_emerald'); // note: one-to-one
+    table.integer(\\"firered_leafgreen\\").references(\\"back_default\\").inTable('pokemon_sprites_versions_generation_iii_firered_leafgreen'); // note: one-to-one
+    table.integer(\\"ruby_sapphire\\").references(\\"back_default\\").inTable('pokemon_sprites_versions_generation_iii_ruby_sapphire'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"pokemon_sprites_versions_generation_ii\\", (table) => {
+    table.integer(\\"crystal\\").references(\\"back_default\\").inTable('pokemon_sprites_versions_generation_ii_crystal'); // note: one-to-one
+    table.integer(\\"gold\\").references(\\"back_default\\").inTable('pokemon_sprites_versions_generation_ii_gold'); // note: one-to-one
+    table.integer(\\"silver\\").references(\\"back_default\\").inTable('pokemon_sprites_versions_generation_ii_silver'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"pokemon_sprites_versions_generation_i\\", (table) => {
+    table.integer(\\"red_blue\\").references(\\"back_default\\").inTable('pokemon_sprites_versions_generation_i_red_blue'); // note: one-to-one
+    table.integer(\\"yellow\\").references(\\"back_default\\").inTable('pokemon_sprites_versions_generation_i_yellow'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"pokemon_sprites_other_official_artwork\\", (table) => {
+    table.string(\\"front_default\\", 200).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"pokemon_sprites_other_dream_world\\", (table) => {
+    table.string(\\"front_default\\", 100).notNullable().unique();
+    table.text(\\"front_female\\").notNullable();
+  })
+
+  await knex.schema.createTable(\\"pokemon_sprites_versions\\", (table) => {
+    table.integer(\\"generation_i\\").references(\\"red-blue\\").inTable('pokemon_sprites_versions_generation_i'); // note: one-to-one
+    table.integer(\\"generation_ii\\").references(\\"crystal\\").inTable('pokemon_sprites_versions_generation_ii'); // note: one-to-one
+    table.integer(\\"generation_iii\\").references(\\"emerald\\").inTable('pokemon_sprites_versions_generation_iii'); // note: one-to-one
+    table.integer(\\"generation_iv\\").references(\\"diamond-pearl\\").inTable('pokemon_sprites_versions_generation_iv'); // note: one-to-one
+    table.integer(\\"generation_v\\").references(\\"black-white\\").inTable('pokemon_sprites_versions_generation_v'); // note: one-to-one
+    table.integer(\\"generation_vi\\").references(\\"omegaruby-alphasapphire\\").inTable('pokemon_sprites_versions_generation_vi'); // note: one-to-one
+    table.integer(\\"generation_vii\\").references(\\"icons\\").inTable('pokemon_sprites_versions_generation_vii'); // note: one-to-one
+    table.integer(\\"generation_viii\\").references(\\"icons\\").inTable('pokemon_sprites_versions_generation_viii'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"pokemon_sprites_other\\", (table) => {
+    table.integer(\\"dream_world\\").references(\\"front_default\\").inTable('pokemon_sprites_other_dream_world'); // note: one-to-one
+    table.integer(\\"official_artwork\\").references(\\"front_default\\").inTable('pokemon_sprites_other_official_artwork'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"pokemon_moves_version_group_details_version_group\\", (table) => {
+    table.string(\\"name\\", 40).notNullable();
+    table.string(\\"url\\", 60).notNullable();
+  })
+
+  await knex.schema.createTable(\\"pokemon_moves_version_group_details_move_learn_method\\", (table) => {
+    table.string(\\"name\\", 20).enum('machine', 'tutor', 'level-up', 'egg').notNullable();
+    table.string(\\"url\\", 60).enum('https://pokeapi.co/api/v2/move-learn-method/4/', 'https://pokeapi.co/api/v2/move-learn-method/3/', 'https://pokeapi.co/api/v2/move-learn-method/1/', 'https://pokeapi.co/api/v2/move-learn-method/2/').notNullable();
+  })
+
+  await knex.schema.createTable(\\"pokemon_moves_version_group_details\\", (table) => {
+    table.integer(\\"level_learned_at\\").notNullable();
+    table.integer(\\"move_learn_method\\").references(\\"name\\").inTable('pokemon_moves_version_group_details_move_learn_method'); // note: one-to-one
+    table.integer(\\"version_group\\").references(\\"name\\").inTable('pokemon_moves_version_group_details_version_group'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"pokemon_moves_move\\", (table) => {
+    table.string(\\"name\\", 20).notNullable().unique();
+    table.string(\\"url\\", 40).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"pokemon_game_indices_version\\", (table) => {
+    table.string(\\"name\\", 20).notNullable().unique();
+    table.string(\\"url\\", 40).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"pokemon_abilities_ability\\", (table) => {
+    table.string(\\"name\\", 20).notNullable().unique();
+    table.string(\\"url\\", 40).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"pokemon_types\\", (table) => {
+    table.integer(\\"slot\\").notNullable().unique();
+    table.integer(\\"type\\").references(\\"name\\").inTable('pokemon_types_type'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"pokemon_stats\\", (table) => {
+    table.integer(\\"base_stat\\").notNullable().unique();
+    table.integer(\\"effort\\").notNullable();
+    table.integer(\\"stat\\").references(\\"name\\").inTable('pokemon_stats_stat'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"pokemon_sprites\\", (table) => {
+    table.string(\\"back_default\\", 100).notNullable().unique();
+    table.text(\\"back_female\\").notNullable();
+    table.string(\\"back_shiny\\", 100).notNullable().unique();
+    table.text(\\"back_shiny_female\\").notNullable();
+    table.string(\\"front_default\\", 80).notNullable().unique();
+    table.text(\\"front_female\\").notNullable();
+    table.string(\\"front_shiny\\", 100).notNullable().unique();
+    table.text(\\"front_shiny_female\\").notNullable();
+    table.integer(\\"other\\").references(\\"dream_world\\").inTable('pokemon_sprites_other'); // note: one-to-one
+    table.integer(\\"versions\\").references(\\"generation-i\\").inTable('pokemon_sprites_versions'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"pokemon_species\\", (table) => {
+    table.string(\\"name\\", 20).notNullable().unique();
+    table.string(\\"url\\", 60).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"pokemon_moves\\", (table) => {
+    table.integer(\\"move\\").references(\\"name\\").inTable('pokemon_moves_move'); // note: one-to-one
+    table.integer(\\"version_group_details\\").references(\\"level_learned_at\\").inTable('pokemon_moves_version_group_details'); // note: one-to-many
+  })
+
+  await knex.schema.createTable(\\"pokemon_game_indices\\", (table) => {
+    table.integer(\\"game_index\\").notNullable();
+    table.integer(\\"version\\").references(\\"name\\").inTable('pokemon_game_indices_version'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"pokemon_forms\\", (table) => {
+    table.string(\\"name\\", 20).notNullable().unique();
+    table.string(\\"url\\", 60).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"pokemon_abilities\\", (table) => {
+    table.integer(\\"ability\\").references(\\"name\\").inTable('pokemon_abilities_ability'); // note: one-to-one
+    table.boolean(\\"is_hidden\\").notNullable();
+    table.integer(\\"slot\\").notNullable().unique();
+  })
+
+
+
+  // Create the main table
+  return knex.schema.createTable(\\"pokemon\\", (table) => {
+    table.integer(\\"abilities\\").references(\\"ability\\").inTable('pokemon_abilities'); // note: one-to-many
+    table.integer(\\"base_experience\\").notNullable().unique();
+    table.integer(\\"forms\\").references(\\"name\\").inTable('pokemon_forms'); // note: one-to-many
+    table.integer(\\"game_indices\\").references(\\"game_index\\").inTable('pokemon_game_indices'); // note: one-to-many
+    table.integer(\\"height\\").notNullable().unique();
+    table.json(\\"held_items\\").notNullable();
+    table.increments(\\"id\\");
+    table.boolean(\\"is_default\\").notNullable();
+    table.string(\\"location_area_encounters\\", 60).notNullable().unique();
+    table.integer(\\"moves\\").references(\\"move\\").inTable('pokemon_moves'); // note: one-to-many
+    table.string(\\"name\\", 20).notNullable().unique();
+    table.integer(\\"order\\").notNullable().unique();
+    table.integer(\\"species\\").references(\\"name\\").inTable('pokemon_species'); // note: one-to-one
+    table.integer(\\"sprites\\").references(\\"back_default\\").inTable('pokemon_sprites'); // note: one-to-one
+    table.integer(\\"stats\\").references(\\"base_stat\\").inTable('pokemon_stats'); // note: one-to-many
+    table.integer(\\"types\\").references(\\"slot\\").inTable('pokemon_types'); // note: one-to-many
+    table.integer(\\"weight\\").notNullable().unique();
+  })
+
+};
+
+exports.down = async function down(knex) {
+  await knex.schema.dropTableIfExists(\\"pokemon_types_type\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_stats_stat\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_sprites_versions_generation_viii_icons\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_sprites_versions_generation_vii_ultra_sun_ultra_moon\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_sprites_versions_generation_vii_icons\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_sprites_versions_generation_vi_x_y\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_sprites_versions_generation_vi_omegaruby_alphasapphire\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_sprites_versions_generation_v_black_white_animated\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_sprites_versions_generation_v_black_white\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_sprites_versions_generation_iv_platinum\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_sprites_versions_generation_iv_heartgold_soulsilver\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_sprites_versions_generation_iv_diamond_pearl\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_sprites_versions_generation_iii_ruby_sapphire\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_sprites_versions_generation_iii_firered_leafgreen\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_sprites_versions_generation_iii_emerald\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_sprites_versions_generation_ii_silver\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_sprites_versions_generation_ii_gold\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_sprites_versions_generation_ii_crystal\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_sprites_versions_generation_i_yellow\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_sprites_versions_generation_i_red_blue\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_sprites_versions_generation_viii\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_sprites_versions_generation_vii\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_sprites_versions_generation_vi\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_sprites_versions_generation_v\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_sprites_versions_generation_iv\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_sprites_versions_generation_iii\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_sprites_versions_generation_ii\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_sprites_versions_generation_i\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_sprites_other_official_artwork\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_sprites_other_dream_world\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_sprites_versions\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_sprites_other\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_moves_version_group_details_version_group\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_moves_version_group_details_move_learn_method\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_moves_version_group_details\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_moves_move\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_game_indices_version\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_abilities_ability\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_types\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_stats\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_sprites\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_species\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_moves\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_game_indices\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_forms\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_abilities\\");
+  await knex.schema.dropTableIfExists(\\"pokemon\\");
+};
+"
+`;
+
+exports[`#knex can emit migration for pokemon json, w/ dense & trim fields 1`] = `
+"// More info: http://knexjs.org/#Schema-createTable
+
+exports.up = async function up(knex) {
+  // NOTE #1: You can break up multiple createTable's into different migration scripts
+  // OR, you can chain the calls to .createTable()'s
+  // NOTE #2: make sure any tables are created before it's relations (tables) are setup.
+
+  await knex.schema.createTable(\\"omegaruby_alphasapphire_ultra_sun_ultra_moon_x_y\\", (table) => {
+    table.string(\\"front_default\\", 200).notNullable().unique();
+    table.text(\\"front_female\\").notNullable();
+    table.string(\\"front_shiny\\", 200).notNullable().unique();
+    table.text(\\"front_shiny_female\\").notNullable();
+  })
+
+  await knex.schema.createTable(\\"animated_diamond_pearl_heartgold_soulsilver_platinum\\", (table) => {
+    table.string(\\"back_default\\", 200).notNullable().unique();
+    table.text(\\"back_female\\").notNullable();
+    table.string(\\"back_shiny\\", 200).notNullable().unique();
+    table.text(\\"back_shiny_female\\").notNullable();
+    table.string(\\"front_default\\", 200).notNullable().unique();
+    table.text(\\"front_female\\").notNullable();
+    table.string(\\"front_shiny\\", 200).notNullable().unique();
+    table.text(\\"front_shiny_female\\").notNullable();
+  })
+
+  await knex.schema.createTable(\\"red_blue_yellow\\", (table) => {
+    table.string(\\"back_default\\", 200).notNullable().unique();
+    table.string(\\"back_gray\\", 200).notNullable().unique();
+    table.string(\\"front_default\\", 200).notNullable().unique();
+    table.string(\\"front_gray\\", 200).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"front_default_front_female\\", (table) => {
+    table.string(\\"front_default\\", 100).notNullable().unique();
+    table.text(\\"front_female\\").notNullable();
+  })
+
+  await knex.schema.createTable(\\"name_url\\", (table) => {
+    table.string(\\"name\\", 20).notNullable().unique();
+    table.string(\\"url\\", 60).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"black_white\\", (table) => {
+    table.integer(\\"animated\\").references(\\"back_default\\").inTable('animated_diamond_pearl_heartgold_soulsilver_platinum'); // note: one-to-one
+    table.string(\\"back_default\\", 200).notNullable().unique();
+    table.text(\\"back_female\\").notNullable();
+    table.string(\\"back_shiny\\", 200).notNullable().unique();
+    table.text(\\"back_shiny_female\\").notNullable();
+    table.string(\\"front_default\\", 200).notNullable().unique();
+    table.text(\\"front_female\\").notNullable();
+    table.string(\\"front_shiny\\", 200).notNullable().unique();
+    table.text(\\"front_shiny_female\\").notNullable();
+  })
+
+  await knex.schema.createTable(\\"ruby_sapphire\\", (table) => {
+    table.string(\\"back_default\\", 200).notNullable().unique();
+    table.string(\\"back_shiny\\", 200).notNullable().unique();
+    table.string(\\"front_default\\", 200).notNullable().unique();
+    table.string(\\"front_shiny\\", 200).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"firered_leafgreen\\", (table) => {
+    table.string(\\"back_default\\", 200).notNullable().unique();
+    table.string(\\"back_shiny\\", 200).notNullable().unique();
+    table.string(\\"front_default\\", 200).notNullable().unique();
+    table.string(\\"front_shiny\\", 200).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"emerald\\", (table) => {
+    table.string(\\"front_default\\", 200).notNullable().unique();
+    table.string(\\"front_shiny\\", 200).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"silver\\", (table) => {
+    table.string(\\"back_default\\", 200).notNullable().unique();
+    table.string(\\"back_shiny\\", 200).notNullable().unique();
+    table.string(\\"front_default\\", 200).notNullable().unique();
+    table.string(\\"front_shiny\\", 200).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"gold\\", (table) => {
+    table.string(\\"back_default\\", 200).notNullable().unique();
+    table.string(\\"back_shiny\\", 200).notNullable().unique();
+    table.string(\\"front_default\\", 200).notNullable().unique();
+    table.string(\\"front_shiny\\", 200).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"crystal\\", (table) => {
+    table.string(\\"back_default\\", 200).notNullable().unique();
+    table.string(\\"back_shiny\\", 200).notNullable().unique();
+    table.string(\\"front_default\\", 200).notNullable().unique();
+    table.string(\\"front_shiny\\", 200).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"generation_viii\\", (table) => {
+    table.integer(\\"icons\\").references(\\"front_default\\").inTable('front_default_front_female'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"generation_vii\\", (table) => {
+    table.integer(\\"icons\\").references(\\"front_default\\").inTable('front_default_front_female'); // note: one-to-one
+    table.integer(\\"ultra_sun_ultra_moon\\").references(\\"front_default\\").inTable('omegaruby_alphasapphire_ultra_sun_ultra_moon_x_y'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"generation_vi\\", (table) => {
+    table.integer(\\"omegaruby_alphasapphire\\").references(\\"front_default\\").inTable('omegaruby_alphasapphire_ultra_sun_ultra_moon_x_y'); // note: one-to-one
+    table.integer(\\"x_y\\").references(\\"front_default\\").inTable('omegaruby_alphasapphire_ultra_sun_ultra_moon_x_y'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"generation_v\\", (table) => {
+    table.integer(\\"black_white\\").references(\\"animated\\").inTable('black_white'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"generation_iv\\", (table) => {
+    table.integer(\\"diamond_pearl\\").references(\\"back_default\\").inTable('animated_diamond_pearl_heartgold_soulsilver_platinum'); // note: one-to-one
+    table.integer(\\"heartgold_soulsilver\\").references(\\"back_default\\").inTable('animated_diamond_pearl_heartgold_soulsilver_platinum'); // note: one-to-one
+    table.integer(\\"platinum\\").references(\\"back_default\\").inTable('animated_diamond_pearl_heartgold_soulsilver_platinum'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"generation_iii\\", (table) => {
+    table.integer(\\"emerald\\").references(\\"front_default\\").inTable('emerald'); // note: one-to-one
+    table.integer(\\"firered_leafgreen\\").references(\\"back_default\\").inTable('firered_leafgreen'); // note: one-to-one
+    table.integer(\\"ruby_sapphire\\").references(\\"back_default\\").inTable('ruby_sapphire'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"generation_ii\\", (table) => {
+    table.integer(\\"crystal\\").references(\\"back_default\\").inTable('crystal'); // note: one-to-one
+    table.integer(\\"gold\\").references(\\"back_default\\").inTable('gold'); // note: one-to-one
+    table.integer(\\"silver\\").references(\\"back_default\\").inTable('silver'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"generation_i\\", (table) => {
+    table.integer(\\"red_blue\\").references(\\"back_default\\").inTable('red_blue_yellow'); // note: one-to-one
+    table.integer(\\"yellow\\").references(\\"back_default\\").inTable('red_blue_yellow'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"official_artwork\\", (table) => {
+    table.string(\\"front_default\\", 200).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"versions\\", (table) => {
+    table.integer(\\"generation_i\\").references(\\"red-blue\\").inTable('generation_i'); // note: one-to-one
+    table.integer(\\"generation_ii\\").references(\\"crystal\\").inTable('generation_ii'); // note: one-to-one
+    table.integer(\\"generation_iii\\").references(\\"emerald\\").inTable('generation_iii'); // note: one-to-one
+    table.integer(\\"generation_iv\\").references(\\"diamond-pearl\\").inTable('generation_iv'); // note: one-to-one
+    table.integer(\\"generation_v\\").references(\\"black-white\\").inTable('generation_v'); // note: one-to-one
+    table.integer(\\"generation_vi\\").references(\\"omegaruby-alphasapphire\\").inTable('generation_vi'); // note: one-to-one
+    table.integer(\\"generation_vii\\").references(\\"icons\\").inTable('generation_vii'); // note: one-to-one
+    table.integer(\\"generation_viii\\").references(\\"icons\\").inTable('generation_viii'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"other\\", (table) => {
+    table.integer(\\"dream_world\\").references(\\"front_default\\").inTable('front_default_front_female'); // note: one-to-one
+    table.integer(\\"official_artwork\\").references(\\"front_default\\").inTable('official_artwork'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"version_group_details\\", (table) => {
+    table.integer(\\"level_learned_at\\").notNullable();
+    table.integer(\\"move_learn_method\\").references(\\"name\\").inTable('name_url'); // note: one-to-one
+    table.integer(\\"version_group\\").references(\\"name\\").inTable('name_url'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"types\\", (table) => {
+    table.integer(\\"slot\\").notNullable().unique();
+    table.integer(\\"type\\").references(\\"name\\").inTable('name_url'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"stats\\", (table) => {
+    table.integer(\\"base_stat\\").notNullable().unique();
+    table.integer(\\"effort\\").notNullable();
+    table.integer(\\"stat\\").references(\\"name\\").inTable('name_url'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"sprites\\", (table) => {
+    table.string(\\"back_default\\", 100).notNullable().unique();
+    table.text(\\"back_female\\").notNullable();
+    table.string(\\"back_shiny\\", 100).notNullable().unique();
+    table.text(\\"back_shiny_female\\").notNullable();
+    table.string(\\"front_default\\", 80).notNullable().unique();
+    table.text(\\"front_female\\").notNullable();
+    table.string(\\"front_shiny\\", 100).notNullable().unique();
+    table.text(\\"front_shiny_female\\").notNullable();
+    table.integer(\\"other\\").references(\\"dream_world\\").inTable('other'); // note: one-to-one
+    table.integer(\\"versions\\").references(\\"generation-i\\").inTable('versions'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"moves\\", (table) => {
+    table.integer(\\"move\\").references(\\"name\\").inTable('name_url'); // note: one-to-one
+    table.integer(\\"version_group_details\\").references(\\"level_learned_at\\").inTable('version_group_details'); // note: one-to-many
+  })
+
+  await knex.schema.createTable(\\"game_indices\\", (table) => {
+    table.integer(\\"game_index\\").notNullable();
+    table.integer(\\"version\\").references(\\"name\\").inTable('name_url'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"abilities\\", (table) => {
+    table.integer(\\"ability\\").references(\\"name\\").inTable('name_url'); // note: one-to-one
+    table.boolean(\\"is_hidden\\").notNullable();
+    table.integer(\\"slot\\").notNullable().unique();
+  })
+
+
+
+  // Create the main table
+  return knex.schema.createTable(\\"pokemon\\", (table) => {
+    table.integer(\\"abilities\\").references(\\"ability\\").inTable('abilities'); // note: one-to-many
+    table.integer(\\"base_experience\\").notNullable().unique();
+    table.integer(\\"forms\\").references(\\"name\\").inTable('forms'); // note: one-to-many
+    table.integer(\\"game_indices\\").references(\\"game_index\\").inTable('game_indices'); // note: one-to-many
+    table.integer(\\"height\\").notNullable().unique();
+    table.json(\\"held_items\\").notNullable();
+    table.increments(\\"id\\");
+    table.boolean(\\"is_default\\").notNullable();
+    table.string(\\"location_area_encounters\\", 60).notNullable().unique();
+    table.integer(\\"moves\\").references(\\"move\\").inTable('moves'); // note: one-to-many
+    table.string(\\"name\\", 20).notNullable().unique();
+    table.integer(\\"order\\").notNullable().unique();
+    table.integer(\\"species\\").references(\\"name\\").inTable('species'); // note: one-to-one
+    table.integer(\\"sprites\\").references(\\"back_default\\").inTable('sprites'); // note: one-to-one
+    table.integer(\\"stats\\").references(\\"base_stat\\").inTable('stats'); // note: one-to-many
+    table.integer(\\"types\\").references(\\"slot\\").inTable('types'); // note: one-to-many
+    table.integer(\\"weight\\").notNullable().unique();
+  })
+
+};
+
+exports.down = async function down(knex) {
+  await knex.schema.dropTableIfExists(\\"omegaruby_alphasapphire_ultra_sun_ultra_moon_x_y\\");
+  await knex.schema.dropTableIfExists(\\"animated_diamond_pearl_heartgold_soulsilver_platinum\\");
+  await knex.schema.dropTableIfExists(\\"red_blue_yellow\\");
+  await knex.schema.dropTableIfExists(\\"front_default_front_female\\");
+  await knex.schema.dropTableIfExists(\\"name_url\\");
+  await knex.schema.dropTableIfExists(\\"black_white\\");
+  await knex.schema.dropTableIfExists(\\"ruby_sapphire\\");
+  await knex.schema.dropTableIfExists(\\"firered_leafgreen\\");
+  await knex.schema.dropTableIfExists(\\"emerald\\");
+  await knex.schema.dropTableIfExists(\\"silver\\");
+  await knex.schema.dropTableIfExists(\\"gold\\");
+  await knex.schema.dropTableIfExists(\\"crystal\\");
+  await knex.schema.dropTableIfExists(\\"generation_viii\\");
+  await knex.schema.dropTableIfExists(\\"generation_vii\\");
+  await knex.schema.dropTableIfExists(\\"generation_vi\\");
+  await knex.schema.dropTableIfExists(\\"generation_v\\");
+  await knex.schema.dropTableIfExists(\\"generation_iv\\");
+  await knex.schema.dropTableIfExists(\\"generation_iii\\");
+  await knex.schema.dropTableIfExists(\\"generation_ii\\");
+  await knex.schema.dropTableIfExists(\\"generation_i\\");
+  await knex.schema.dropTableIfExists(\\"official_artwork\\");
+  await knex.schema.dropTableIfExists(\\"versions\\");
+  await knex.schema.dropTableIfExists(\\"other\\");
+  await knex.schema.dropTableIfExists(\\"version_group_details\\");
+  await knex.schema.dropTableIfExists(\\"types\\");
+  await knex.schema.dropTableIfExists(\\"stats\\");
+  await knex.schema.dropTableIfExists(\\"sprites\\");
+  await knex.schema.dropTableIfExists(\\"moves\\");
+  await knex.schema.dropTableIfExists(\\"game_indices\\");
+  await knex.schema.dropTableIfExists(\\"abilities\\");
+  await knex.schema.dropTableIfExists(\\"pokemon\\");
+};
+"
+`;
+
+exports[`#knex can emit migration for pokemon json, w/ dense fields 1`] = `
+"// More info: http://knexjs.org/#Schema-createTable
+
+exports.up = async function up(knex) {
+  // NOTE #1: You can break up multiple createTable's into different migration scripts
+  // OR, you can chain the calls to .createTable()'s
+  // NOTE #2: make sure any tables are created before it's relations (tables) are setup.
+
+  await knex.schema.createTable(\\"generation_vii_omegaruby_alphasapphire_ultra_sun_ultra_moon_x_y\\", (table) => {
+    table.string(\\"front_default\\", 200).notNullable().unique();
+    table.text(\\"front_female\\").notNullable();
+    table.string(\\"front_shiny\\", 200).notNullable().unique();
+    table.text(\\"front_shiny_female\\").notNullable();
+  })
+
+  await knex.schema.createTable(\\"red_blue_yellow\\", (table) => {
+    table.string(\\"back_default\\", 200).notNullable().unique();
+    table.string(\\"back_gray\\", 200).notNullable().unique();
+    table.string(\\"front_default\\", 200).notNullable().unique();
+    table.string(\\"front_gray\\", 200).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"front_default_front_female\\", (table) => {
+    table.string(\\"front_default\\", 100).notNullable().unique();
+    table.text(\\"front_female\\").notNullable();
+  })
+
+  await knex.schema.createTable(\\"name_url\\", (table) => {
+    table.string(\\"name\\", 20).notNullable().unique();
+    table.string(\\"url\\", 60).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"pokemon_sprites_versions_generation_v_black_white_animated\\", (table) => {
+    table.string(\\"back_default\\", 200).notNullable().unique();
+    table.text(\\"back_female\\").notNullable();
+    table.string(\\"back_shiny\\", 200).notNullable().unique();
+    table.text(\\"back_shiny_female\\").notNullable();
+    table.string(\\"front_default\\", 200).notNullable().unique();
+    table.text(\\"front_female\\").notNullable();
+    table.string(\\"front_shiny\\", 200).notNullable().unique();
+    table.text(\\"front_shiny_female\\").notNullable();
+  })
+
+  await knex.schema.createTable(\\"pokemon_sprites_versions_generation_v_black_white\\", (table) => {
+    table.integer(\\"animated\\").references(\\"back_default\\").inTable('pokemon_sprites_versions_generation_v_black_white_animated'); // note: one-to-one
+    table.string(\\"back_default\\", 200).notNullable().unique();
+    table.text(\\"back_female\\").notNullable();
+    table.string(\\"back_shiny\\", 200).notNullable().unique();
+    table.text(\\"back_shiny_female\\").notNullable();
+    table.string(\\"front_default\\", 200).notNullable().unique();
+    table.text(\\"front_female\\").notNullable();
+    table.string(\\"front_shiny\\", 200).notNullable().unique();
+    table.text(\\"front_shiny_female\\").notNullable();
+  })
+
+  await knex.schema.createTable(\\"pokemon_sprites_versions_generation_iv_platinum\\", (table) => {
+    table.string(\\"back_default\\", 200).notNullable().unique();
+    table.text(\\"back_female\\").notNullable();
+    table.string(\\"back_shiny\\", 200).notNullable().unique();
+    table.text(\\"back_shiny_female\\").notNullable();
+    table.string(\\"front_default\\", 200).notNullable().unique();
+    table.text(\\"front_female\\").notNullable();
+    table.string(\\"front_shiny\\", 200).notNullable().unique();
+    table.text(\\"front_shiny_female\\").notNullable();
+  })
+
+  await knex.schema.createTable(\\"pokemon_sprites_versions_generation_iv_heartgold_soulsilver\\", (table) => {
+    table.string(\\"back_default\\", 200).notNullable().unique();
+    table.text(\\"back_female\\").notNullable();
+    table.string(\\"back_shiny\\", 200).notNullable().unique();
+    table.text(\\"back_shiny_female\\").notNullable();
+    table.string(\\"front_default\\", 200).notNullable().unique();
+    table.text(\\"front_female\\").notNullable();
+    table.string(\\"front_shiny\\", 200).notNullable().unique();
+    table.text(\\"front_shiny_female\\").notNullable();
+  })
+
+  await knex.schema.createTable(\\"pokemon_sprites_versions_generation_iv_diamond_pearl\\", (table) => {
+    table.string(\\"back_default\\", 200).notNullable().unique();
+    table.text(\\"back_female\\").notNullable();
+    table.string(\\"back_shiny\\", 200).notNullable().unique();
+    table.text(\\"back_shiny_female\\").notNullable();
+    table.string(\\"front_default\\", 200).notNullable().unique();
+    table.text(\\"front_female\\").notNullable();
+    table.string(\\"front_shiny\\", 200).notNullable().unique();
+    table.text(\\"front_shiny_female\\").notNullable();
+  })
+
+  await knex.schema.createTable(\\"pokemon_sprites_versions_generation_iii_ruby_sapphire\\", (table) => {
+    table.string(\\"back_default\\", 200).notNullable().unique();
+    table.string(\\"back_shiny\\", 200).notNullable().unique();
+    table.string(\\"front_default\\", 200).notNullable().unique();
+    table.string(\\"front_shiny\\", 200).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"pokemon_sprites_versions_generation_iii_firered_leafgreen\\", (table) => {
+    table.string(\\"back_default\\", 200).notNullable().unique();
+    table.string(\\"back_shiny\\", 200).notNullable().unique();
+    table.string(\\"front_default\\", 200).notNullable().unique();
+    table.string(\\"front_shiny\\", 200).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"pokemon_sprites_versions_generation_iii_emerald\\", (table) => {
+    table.string(\\"front_default\\", 200).notNullable().unique();
+    table.string(\\"front_shiny\\", 200).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"pokemon_sprites_versions_generation_ii_silver\\", (table) => {
+    table.string(\\"back_default\\", 200).notNullable().unique();
+    table.string(\\"back_shiny\\", 200).notNullable().unique();
+    table.string(\\"front_default\\", 200).notNullable().unique();
+    table.string(\\"front_shiny\\", 200).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"pokemon_sprites_versions_generation_ii_gold\\", (table) => {
+    table.string(\\"back_default\\", 200).notNullable().unique();
+    table.string(\\"back_shiny\\", 200).notNullable().unique();
+    table.string(\\"front_default\\", 200).notNullable().unique();
+    table.string(\\"front_shiny\\", 200).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"pokemon_sprites_versions_generation_ii_crystal\\", (table) => {
+    table.string(\\"back_default\\", 200).notNullable().unique();
+    table.string(\\"back_shiny\\", 200).notNullable().unique();
+    table.string(\\"front_default\\", 200).notNullable().unique();
+    table.string(\\"front_shiny\\", 200).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"pokemon_sprites_versions_generation_viii\\", (table) => {
+    table.integer(\\"icons\\").references(\\"front_default\\").inTable('front_default_front_female'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"pokemon_sprites_versions_generation_vii\\", (table) => {
+    table.integer(\\"icons\\").references(\\"front_default\\").inTable('front_default_front_female'); // note: one-to-one
+    table.integer(\\"ultra_sun_ultra_moon\\").references(\\"front_default\\").inTable('generation_vii_omegaruby_alphasapphire_ultra_sun_ultra_moon_x_y'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"pokemon_sprites_versions_generation_vi\\", (table) => {
+    table.integer(\\"omegaruby_alphasapphire\\").references(\\"front_default\\").inTable('generation_vii_omegaruby_alphasapphire_ultra_sun_ultra_moon_x_y'); // note: one-to-one
+    table.integer(\\"x_y\\").references(\\"front_default\\").inTable('generation_vii_omegaruby_alphasapphire_ultra_sun_ultra_moon_x_y'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"pokemon_sprites_versions_generation_v\\", (table) => {
+    table.integer(\\"black_white\\").references(\\"animated\\").inTable('pokemon_sprites_versions_generation_v_black_white'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"pokemon_sprites_versions_generation_iv\\", (table) => {
+    table.integer(\\"diamond_pearl\\").references(\\"back_default\\").inTable('pokemon_sprites_versions_generation_iv_diamond_pearl'); // note: one-to-one
+    table.integer(\\"heartgold_soulsilver\\").references(\\"back_default\\").inTable('pokemon_sprites_versions_generation_iv_heartgold_soulsilver'); // note: one-to-one
+    table.integer(\\"platinum\\").references(\\"back_default\\").inTable('pokemon_sprites_versions_generation_iv_platinum'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"pokemon_sprites_versions_generation_iii\\", (table) => {
+    table.integer(\\"emerald\\").references(\\"front_default\\").inTable('pokemon_sprites_versions_generation_iii_emerald'); // note: one-to-one
+    table.integer(\\"firered_leafgreen\\").references(\\"back_default\\").inTable('pokemon_sprites_versions_generation_iii_firered_leafgreen'); // note: one-to-one
+    table.integer(\\"ruby_sapphire\\").references(\\"back_default\\").inTable('pokemon_sprites_versions_generation_iii_ruby_sapphire'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"pokemon_sprites_versions_generation_ii\\", (table) => {
+    table.integer(\\"crystal\\").references(\\"back_default\\").inTable('pokemon_sprites_versions_generation_ii_crystal'); // note: one-to-one
+    table.integer(\\"gold\\").references(\\"back_default\\").inTable('pokemon_sprites_versions_generation_ii_gold'); // note: one-to-one
+    table.integer(\\"silver\\").references(\\"back_default\\").inTable('pokemon_sprites_versions_generation_ii_silver'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"pokemon_sprites_versions_generation_i\\", (table) => {
+    table.integer(\\"red_blue\\").references(\\"back_default\\").inTable('red_blue_yellow'); // note: one-to-one
+    table.integer(\\"yellow\\").references(\\"back_default\\").inTable('red_blue_yellow'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"pokemon_sprites_other_official_artwork\\", (table) => {
+    table.string(\\"front_default\\", 200).notNullable().unique();
+  })
+
+  await knex.schema.createTable(\\"pokemon_sprites_versions\\", (table) => {
+    table.integer(\\"generation_i\\").references(\\"red-blue\\").inTable('pokemon_sprites_versions_generation_i'); // note: one-to-one
+    table.integer(\\"generation_ii\\").references(\\"crystal\\").inTable('pokemon_sprites_versions_generation_ii'); // note: one-to-one
+    table.integer(\\"generation_iii\\").references(\\"emerald\\").inTable('pokemon_sprites_versions_generation_iii'); // note: one-to-one
+    table.integer(\\"generation_iv\\").references(\\"diamond-pearl\\").inTable('pokemon_sprites_versions_generation_iv'); // note: one-to-one
+    table.integer(\\"generation_v\\").references(\\"black-white\\").inTable('pokemon_sprites_versions_generation_v'); // note: one-to-one
+    table.integer(\\"generation_vi\\").references(\\"omegaruby-alphasapphire\\").inTable('pokemon_sprites_versions_generation_vi'); // note: one-to-one
+    table.integer(\\"generation_vii\\").references(\\"icons\\").inTable('pokemon_sprites_versions_generation_vii'); // note: one-to-one
+    table.integer(\\"generation_viii\\").references(\\"icons\\").inTable('pokemon_sprites_versions_generation_viii'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"pokemon_sprites_other\\", (table) => {
+    table.integer(\\"dream_world\\").references(\\"front_default\\").inTable('front_default_front_female'); // note: one-to-one
+    table.integer(\\"official_artwork\\").references(\\"front_default\\").inTable('pokemon_sprites_other_official_artwork'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"pokemon_moves_version_group_details\\", (table) => {
+    table.integer(\\"level_learned_at\\").notNullable();
+    table.integer(\\"move_learn_method\\").references(\\"name\\").inTable('name_url'); // note: one-to-one
+    table.integer(\\"version_group\\").references(\\"name\\").inTable('name_url'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"pokemon_types\\", (table) => {
+    table.integer(\\"slot\\").notNullable().unique();
+    table.integer(\\"type\\").references(\\"name\\").inTable('name_url'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"pokemon_stats\\", (table) => {
+    table.integer(\\"base_stat\\").notNullable().unique();
+    table.integer(\\"effort\\").notNullable();
+    table.integer(\\"stat\\").references(\\"name\\").inTable('name_url'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"pokemon_sprites\\", (table) => {
+    table.string(\\"back_default\\", 100).notNullable().unique();
+    table.text(\\"back_female\\").notNullable();
+    table.string(\\"back_shiny\\", 100).notNullable().unique();
+    table.text(\\"back_shiny_female\\").notNullable();
+    table.string(\\"front_default\\", 80).notNullable().unique();
+    table.text(\\"front_female\\").notNullable();
+    table.string(\\"front_shiny\\", 100).notNullable().unique();
+    table.text(\\"front_shiny_female\\").notNullable();
+    table.integer(\\"other\\").references(\\"dream_world\\").inTable('pokemon_sprites_other'); // note: one-to-one
+    table.integer(\\"versions\\").references(\\"generation-i\\").inTable('pokemon_sprites_versions'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"pokemon_moves\\", (table) => {
+    table.integer(\\"move\\").references(\\"name\\").inTable('name_url'); // note: one-to-one
+    table.integer(\\"version_group_details\\").references(\\"level_learned_at\\").inTable('pokemon_moves_version_group_details'); // note: one-to-many
+  })
+
+  await knex.schema.createTable(\\"pokemon_game_indices\\", (table) => {
+    table.integer(\\"game_index\\").notNullable();
+    table.integer(\\"version\\").references(\\"name\\").inTable('name_url'); // note: one-to-one
+  })
+
+  await knex.schema.createTable(\\"pokemon_abilities\\", (table) => {
+    table.integer(\\"ability\\").references(\\"name\\").inTable('name_url'); // note: one-to-one
+    table.boolean(\\"is_hidden\\").notNullable();
+    table.integer(\\"slot\\").notNullable().unique();
+  })
+
+
+
+  // Create the main table
+  return knex.schema.createTable(\\"pokemon\\", (table) => {
+    table.integer(\\"abilities\\").references(\\"ability\\").inTable('pokemon_abilities'); // note: one-to-many
+    table.integer(\\"base_experience\\").notNullable().unique();
+    table.integer(\\"forms\\").references(\\"name\\").inTable('pokemon_forms'); // note: one-to-many
+    table.integer(\\"game_indices\\").references(\\"game_index\\").inTable('pokemon_game_indices'); // note: one-to-many
+    table.integer(\\"height\\").notNullable().unique();
+    table.json(\\"held_items\\").notNullable();
+    table.increments(\\"id\\");
+    table.boolean(\\"is_default\\").notNullable();
+    table.string(\\"location_area_encounters\\", 60).notNullable().unique();
+    table.integer(\\"moves\\").references(\\"move\\").inTable('pokemon_moves'); // note: one-to-many
+    table.string(\\"name\\", 20).notNullable().unique();
+    table.integer(\\"order\\").notNullable().unique();
+    table.integer(\\"species\\").references(\\"name\\").inTable('pokemon_species'); // note: one-to-one
+    table.integer(\\"sprites\\").references(\\"back_default\\").inTable('pokemon_sprites'); // note: one-to-one
+    table.integer(\\"stats\\").references(\\"base_stat\\").inTable('pokemon_stats'); // note: one-to-many
+    table.integer(\\"types\\").references(\\"slot\\").inTable('pokemon_types'); // note: one-to-many
+    table.integer(\\"weight\\").notNullable().unique();
+  })
+
+};
+
+exports.down = async function down(knex) {
+  await knex.schema.dropTableIfExists(\\"generation_vii_omegaruby_alphasapphire_ultra_sun_ultra_moon_x_y\\");
+  await knex.schema.dropTableIfExists(\\"red_blue_yellow\\");
+  await knex.schema.dropTableIfExists(\\"front_default_front_female\\");
+  await knex.schema.dropTableIfExists(\\"name_url\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_sprites_versions_generation_v_black_white_animated\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_sprites_versions_generation_v_black_white\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_sprites_versions_generation_iv_platinum\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_sprites_versions_generation_iv_heartgold_soulsilver\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_sprites_versions_generation_iv_diamond_pearl\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_sprites_versions_generation_iii_ruby_sapphire\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_sprites_versions_generation_iii_firered_leafgreen\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_sprites_versions_generation_iii_emerald\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_sprites_versions_generation_ii_silver\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_sprites_versions_generation_ii_gold\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_sprites_versions_generation_ii_crystal\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_sprites_versions_generation_viii\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_sprites_versions_generation_vii\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_sprites_versions_generation_vi\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_sprites_versions_generation_v\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_sprites_versions_generation_iv\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_sprites_versions_generation_iii\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_sprites_versions_generation_ii\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_sprites_versions_generation_i\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_sprites_other_official_artwork\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_sprites_versions\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_sprites_other\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_moves_version_group_details\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_types\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_stats\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_sprites\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_moves\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_game_indices\\");
+  await knex.schema.dropTableIfExists(\\"pokemon_abilities\\");
+  await knex.schema.dropTableIfExists(\\"pokemon\\");
+};
+"
+`;

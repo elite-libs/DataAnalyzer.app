@@ -297,12 +297,17 @@ describe('primary use-cases', () => {
 describe('progress api', () => {
   it('can run onProgress callback, until done', () => {
     const onProgress = jest.fn();
-    return schemaAnalyzer('users', userNotes, { onProgress }).then((result) => {
+    return schemaAnalyzer(
+      'users',
+      userNotes,
+      { strictMatching: false },
+      onProgress,
+    ).then((result) => {
       // const progMock = onProgress.mock.calls
       const mockRunCount = onProgress.mock.instances.length;
       // const lastCall = progMock[progMock.length - 1]
       expect(result.fields.name).toBeDefined();
-      expect(mockRunCount).toBeGreaterThan(1);
+      expect(mockRunCount).toBeGreaterThan(0);
     });
   });
 });

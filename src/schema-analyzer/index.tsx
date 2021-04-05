@@ -60,7 +60,6 @@ function schemaAnalyzer(
   schemaName: string,
   input: any[] | { [k: string]: any },
   options: ISchemaAnalyzerOptions | undefined = {
-    onProgress: ({ totalRows, currentRow }) => {},
     strictMatching: true,
     disableNestedTypes: false,
     enumMinimumRowCount: 100,
@@ -76,11 +75,12 @@ function schemaAnalyzer(
       targetScale: 'p99',
     },
   },
+  onProgress?: ProgressCallback | undefined,
   // _nestedData?: { [key: string]: unknown },
 ): Promise<DataAnalysisResults> {
   if (!schemaName || schemaName.length < 1)
     return Promise.reject(Error('A SchemaName must be provided.'));
-  return _schemaAnalyzer(schemaName, input, options)
+  return _schemaAnalyzer(schemaName, input, options, onProgress)
     .then((nestedSchemaTypes) => {
       const schemaWithUnpackedData = extractNestedTypes(nestedSchemaTypes);
       schemaWithUnpackedData.nestedTypes = mapValues(
@@ -91,6 +91,7 @@ function schemaAnalyzer(
     })
     .then((typeSummary) => {
       let condensedResults: IConsolidateTypesResults | null = null;
+
       const flatTypeSummary = helpers.flattenTypes(
         typeSummary,
         options.flattenOptions,
@@ -114,8 +115,8 @@ function schemaAnalyzer(
         // denseNestedTypes: condensedResults
         //   ? condensedResults.nestedTypes
         //   : undefined,
-        denseNestedChanges: condensedResults
-          ? condensedResults.changes
+        renamedTypes: condensedResults
+          ? condensedResults.typeNameMap
           : undefined,
         debug: options.debug,
         options,
@@ -127,7 +128,7 @@ function _schemaAnalyzer(
   schemaName: string,
   input: any[] | { [k: string]: any },
   options: ISchemaAnalyzerOptions,
-  // _nestedData?: { [key: string]: unknown },
+  onProgress?: ProgressCallback | undefined,
 ): Promise<TypeSummary<FieldInfo>> {
   if (!input) throw Error('Input Data must be an Object or Array of Objects');
   if (!Array.isArray(input) && typeof input !== 'object')
@@ -138,7 +139,6 @@ function _schemaAnalyzer(
   if (typeof input[0] !== 'object')
     throw Error('Input Data must be an Array of Objects');
   const {
-    onProgress = ({ totalRows, currentRow }) => {},
     strictMatching = true,
     disableNestedTypes = false,
     enumMinimumRowCount = 25,
@@ -273,7 +273,7 @@ const _pivotRowsGroupedByType = ({
   prefixNamingMode: INamingOptions['prefixNamingMode'];
   nestedData: KeyValPair<unknown[]>;
   strictMatching: boolean;
-  onProgress: ProgressCallback;
+  onProgress?: ProgressCallback;
 }) =>
   function pivotRowsGroupedByType(docs: any[]) {
     const detectedSchema = {
@@ -355,17 +355,10 @@ const _pivotRowsGroupedByType = ({
       const isDone = index + 1 === totalRows;
       const progressFrequencyModulo =
         totalRows >= 2500 ? 50 : totalRows >= 1000 ? 25 : 10;
-      const showProgress = isDone || index % progressFrequencyModulo === 0;
+      const showProgress = !isDone && index % progressFrequencyModulo === 0;
 
       if (onProgress && showProgress) {
-        // console.// #debug: log"FIRE.onProgress:", totalRows, index + 1);
-        // setImmediate(() => {
-        onProgress({
-          totalRows: totalRows,
-          currentRow: index + 1,
-          nestedTypes: nestedData && Object.keys(nestedData),
-        });
-        // });
+        onProgress(totalRows, index + 1);
       }
       return schema;
     }, detectedSchema);

@@ -21,7 +21,6 @@ describe('#GoLang', () => {
     };
     const results = await schemaAnalyzer('users', users, options);
     const code = golang.render(results);
-
     expect(code).toMatchSnapshot();
   });
 
@@ -38,7 +37,6 @@ describe('#GoLang', () => {
     };
     const results = await schemaAnalyzer('User', usersNotes, options);
     const code = golang.render(results);
-
     expect(code).toMatchSnapshot();
   });
 
@@ -55,7 +53,6 @@ describe('#GoLang', () => {
     };
     const results = await schemaAnalyzer('Pokemon', pokemonCharmander, options);
     const code = golang.render(results);
-
     expect(code).toMatchSnapshot();
   });
 
@@ -74,7 +71,6 @@ describe('#GoLang', () => {
     };
     const results = await schemaAnalyzer('Pokemon', pokemonCharmander, options);
     const code = golang.render(results);
-
     expect(code).toMatchSnapshot();
   });
 
@@ -92,19 +88,6 @@ describe('#GoLang', () => {
       },
     });
     const code = golang.render(results);
-
     expect(code).toContain('type Links struct');
   });
-
-  // it('can emit golang', async () => {
-  //   const options = { strictMatching: false };
-  //   const results = await schemaAnalyzer('users', usersSparse, options);
-
-  //   expect(results.fields.id).toBeDefined();
-  //   expect(results.fields.id?.unique).toBe(true);
-  //   expect(results.fields.id?.identity).toBe(true);
-  //   expect(results.fields.id?.nullable).toBe(false);
-  // });
 });
-
-// golang

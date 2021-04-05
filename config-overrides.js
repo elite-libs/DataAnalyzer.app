@@ -12,6 +12,17 @@ module.exports = function override(config, env) {
     resources: [path.resolve(__dirname, 'src/theme', '_variables.scss')],
   })(config, env);
 
+  config.module.rules.unshift({
+    test: /\.worker\.tsx?$/,
+    use: {
+      loader: 'worker-loader',
+      options: {
+        // Use directory structure & typical names of chunks produces by "react-scripts"
+        filename: 'static/js/[name].[contenthash:8].js',
+      },
+    },
+  });
+
   // Add bundle analyzer visualization
   if (env !== 'development') {
     config = rewireWebpackBundleAnalyzer(config, env, {

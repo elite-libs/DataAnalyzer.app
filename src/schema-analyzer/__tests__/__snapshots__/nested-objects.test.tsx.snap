@@ -1,26 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`#nested objects #de-duplicating subtypes can find similar types by field name 1`] = `
-Array [
-  Object {
-    "alias": "Births.Deaths.Events",
-    "shape": "html|links|no_year_html|text|year",
-    "targetTypes": Array [
-      "historicEvent.data.Events",
-      "historicEvent.data.Births",
-      "historicEvent.data.Deaths",
-    ],
-  },
-  Object {
-    "alias": "links",
-    "shape": "link|title",
-    "targetTypes": Array [
-      "historicEvent.data.Events.links",
-      "historicEvent.data.Births.links",
-      "historicEvent.data.Deaths.links",
-    ],
-  },
-]
+Object {
+  "historicEvent.data.Births": "Births.Deaths.Events",
+  "historicEvent.data.Births.links": "links",
+  "historicEvent.data.Deaths": "Births.Deaths.Events",
+  "historicEvent.data.Deaths.links": "links",
+  "historicEvent.data.Events": "Births.Deaths.Events",
+  "historicEvent.data.Events.links": "links",
+}
 `;
 
 exports[`#nested objects #de-duplicating subtypes can find similar types by field name 2`] = `
@@ -7777,7 +7765,6 @@ Object {
 exports[`#nested objects can parse nested objects (non-array) 1`] = `
 Object {
   "debug": undefined,
-  "denseNestedChanges": undefined,
   "fields": Object {
     "data": Object {
       "enum": undefined,
@@ -8865,10 +8852,10 @@ Object {
       "targetValue": "p99",
     },
     "nullableRowsThreshold": 0.001,
-    "onProgress": [Function],
     "strictMatching": true,
     "uniqueRowsThreshold": 0.99,
   },
+  "renamedTypes": undefined,
   "schemaName": "historicEvent",
   "totalRows": 1,
 }

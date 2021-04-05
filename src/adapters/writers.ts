@@ -53,7 +53,7 @@ function getSummary(typeSummary: DataAnalysisResults, options: ISchemaAnalyzerOp
   const { nestedTypes } = typeSummary;
   const nestedTypeNames: string[] = nestedTypes != null ? Object.keys(nestedTypes) : [];
   const nestedCount = nestedTypeNames.length;
-  const consolidatedTypes = typeSummary.denseNestedChanges
+  const consolidatedTypes = typeSummary.renamedTypes
     ? typeSummary.flatTypeSummary.nestedTypes
     : null;
   const consolidatedTypeNames = consolidatedTypes ? Object.keys(consolidatedTypes) : null;

@@ -1,10 +1,10 @@
 import snakeCase from 'lodash/snakeCase';
-import { CombinedFieldInfo, KeyValPair } from 'types';
+import type { CombinedFieldInfo, KeyValPair, TypeSummary } from 'types';
 import type { IDataAnalyzerWriter } from './writers';
 // import debug from 'debug';
 // const log = debug('writer:knex');
 
-const BIG_INTEGER_MIN = BigInt('2147483647');
+// const BIG_INTEGER_MIN = BigInt('2147483647');
 
 const instructionsForMultipleTypes = `// NOTE #1: You can break up multiple createTable's into different migration scripts
   // OR, you can chain the calls to .createTable()'s
@@ -49,8 +49,15 @@ const writer: IDataAnalyzerWriter = {
     let { options, schemaName } = results;
     const typeSummary = results.flatTypeSummary;
     const { nestedTypes } = typeSummary;
-    const hasNestedTypes = nestedTypes && Object.keys(nestedTypes!).length > 0;
+    const hasNestedTypes =
+      nestedTypes &&
+      typeof nestedTypes === 'object' &&
+      Object.keys(nestedTypes).length > 0;
+    // const nestedTypesEntries =
+    //   hasNestedTypes && nestedTypes ? Object.entries(nestedTypes) : {};
+    // const nestedTypesKeys = hasNestedTypes && nestedTypes ? Object.keys(nestedTypes) : {};
 
+    // console.warn('nestedTypes', nestedTypes);
     function getFirstIdentityOrUniqueField(
       nestedTypeName: string,
       preferUniqueOverFirstColumn = true,
@@ -59,9 +66,20 @@ const writer: IDataAnalyzerWriter = {
         throw new Error(
           `Error: Missing nested type data. Couldn't lookup '${nestedTypeName}'`,
         );
-      const schema = nestedTypes[nestedTypeName];
+      // console.log('nestedTypes', Object.keys(nestedTypes));
+
+      let schema: TypeSummary<CombinedFieldInfo> | undefined =
+        nestedTypes[nestedTypeName];
+      if (!schema) {
+        let nestedKey = results.renamedTypes && results.renamedTypes[nestedTypeName];
+        schema = nestedKey ? nestedTypes[nestedKey] : undefined;
+      }
       if (schema?.fields == null)
-        throw new Error(`Error: Failed to find nested schema for '${nestedTypeName}'`);
+        throw new Error(
+          `Error: Failed to find nested schema for '${nestedTypeName}' inside ${Object.keys(
+            nestedTypes,
+          ).join(', ')}`,
+        );
       const fieldSet = Object.entries<CombinedFieldInfo>(schema.fields);
       // locate by explicit identity indicator
       let identityField = fieldSet.find(([fieldName, fieldStats]) => {
@@ -96,9 +114,7 @@ const writer: IDataAnalyzerWriter = {
             identity,
             unique,
             nullable,
-            value,
             enum: enumData,
-            // count: typeCount,
           } = fieldInfo;
 
           let length;
@@ -127,11 +143,7 @@ const writer: IDataAnalyzerWriter = {
             return `    table.decimal("${name}"${sizePart})${appendChain};`;
           }
           if (identity && type === 'Number') {
-            if (value && BigInt(value) >= BIG_INTEGER_MIN) {
-              return `    table.bigIncrements("${name}");`;
-            } else {
-              return `    table.increments("${name}");`;
-            }
+            return `    table.increments("${name}");`;
           }
 
           if (
@@ -170,11 +182,7 @@ const writer: IDataAnalyzerWriter = {
           if (type === 'Timestamp') return `    table.timestamp("${name}"${sizePart})`;
           if (type === 'Currency') return `    table.float("${name}"${sizePart});`;
           if (type === 'Float') return `    table.float("${name}"${sizePart});`;
-          if (type === 'Number') {
-            return `    table.${
-              value != null && value > BIG_INTEGER_MIN ? 'bigInteger' : 'integer'
-            }("${name}")${appendChain};`;
-          }
+          if (type === 'Number') return `    table.integer("${name}")${appendChain};`;
           if (type === 'Email')
             return `    table.string("${name}"${sizePart})${appendChain};`;
           if (type === 'String')
@@ -204,11 +212,11 @@ const writer: IDataAnalyzerWriter = {
       if (!options?.disableNestedTypes && hasNestedTypes) {
         // console.log('nested schema detected', schemaName);
         // @ts-ignore
-        return Object.entries(nestedTypes!)
+        return Object.entries<TypeSummary<CombinedFieldInfo>>(typeSummary.nestedTypes)
           .reverse()
-          .map(([nestedName, results]) => {
+          .map(([nestedName, results], index) => {
             if (!results || !results.fields || !results)
-              return `// Error invalid field data //`;
+              throw Error(`Error invalid field data at index ${index}`);
             return getCreateTableCode({
               schemaName: snakeCase(nestedName),
               fields: results.fields,
