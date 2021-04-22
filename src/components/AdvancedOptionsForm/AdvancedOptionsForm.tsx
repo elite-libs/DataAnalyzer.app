@@ -144,7 +144,7 @@ export default function AdvancedOptionsForm({ className = '' }) {
 
   return (
     <>
-      <Card
+      {/* <Card
         raised={false}
         // raised={true}
         className={classes.root}
@@ -156,202 +156,200 @@ export default function AdvancedOptionsForm({ className = '' }) {
             </Link>
           }
           title={<h2 className={classes.title}>Settings</h2>}
-        ></CardHeader>
-        <section style={{ zIndex: 500 }} className={classes.panel + ' ' + successClass}>
-          <form
-            className={'schema-options ' + className + ' ' + classes.form}
-            // onSubmit={handleSubmit(onSubmit)}
-            // onInput={handleSubmit(onSubmit)}
-            // onChange={handleSubmit(onSubmit)}
-            // ref={formRef$}
-          >
-            <Paper elevation={2} variant="outlined">
-              <CardContent className={`px-3 bg-white ${classes.panelContent}`}>
-                <fieldset className="form-group">
-                  <legend className="mb-1">Global Rules</legend>
-                  <section className="input-group d-flex justify-content-between">
-                    <p>Exclusive Type Matching</p>
-                    <Checkbox
-                      name="strictMatching"
-                      style={{ padding: '0' }}
-                      onChange={(event, checked) => {
-                        setValue('strictMatching', checked);
-                        onSubmit(getValues());
-                      }}
-                      checked={options.strictMatching}
-                    />
-                  </section>
-                </fieldset>
+        ></CardHeader> */}
+      {/* <section style={{ zIndex: 500 }} className={classes.panel + ' ' + successClass}> */}
+      <form
+        className={'schema-options ' + className + ' ' + classes.form}
+        // onSubmit={handleSubmit(onSubmit)}
+        // onInput={handleSubmit(onSubmit)}
+        // onChange={handleSubmit(onSubmit)}
+        // ref={formRef$}
+      >
+        <Paper elevation={2} variant="outlined">
+          <CardContent className={`px-3 bg-white ${classes.panelContent}`}>
+            <fieldset className="form-group">
+              <legend className="mb-1">Global Rules</legend>
+              <section className="input-group d-flex justify-content-between">
+                <p>Exclusive Type Matching</p>
+                <Checkbox
+                  name="strictMatching"
+                  style={{ padding: '0' }}
+                  onChange={(event, checked) => {
+                    setValue('strictMatching', checked);
+                    onSubmit(getValues());
+                  }}
+                  checked={options.strictMatching}
+                />
+              </section>
+            </fieldset>
 
-                <fieldset
-                  className={`form-group ${
-                    watch('consolidateTypes') !== undefined ? 'show-warning' : ''
-                  }`}
+            <fieldset
+              className={`form-group ${
+                watch('consolidateTypes') !== undefined ? 'show-warning' : ''
+              }`}
+            >
+              <legend className="mb-1">De-duplicate Similar Types</legend>
+              <section className="input-group d-flex justify-content-between">
+                <p>Detect Similarly Shaped Fields</p>
+                <label className="warning-label">
+                  <WarningIcon color="error" className="warning-icon" />
+                </label>
+
+                <Select
+                  native
+                  placeholder={'Not enabled'}
+                  id="consolidateTypesSelect"
+                  // onChange={(e) =>
+                  //   setValue('consolidateTypes', e.target.value as number[])
+                  // }
+                  onChange={(event, data) => {
+                    setValue('consolidateTypes', event.target.value);
+                    onSubmit(getValues());
+                  }}
+                  inputProps={{
+                    id: 'consolidateTypes',
+                  }}
+                  value={consolidateTypes}
                 >
-                  <legend className="mb-1">De-duplicate Similar Types</legend>
-                  <section className="input-group d-flex justify-content-between">
-                    <p>Detect Similarly Shaped Fields</p>
-                    <label className="warning-label">
-                      <WarningIcon color="error" className="warning-icon" />
-                    </label>
+                  <option aria-label="None" value={''}>
+                    Not Enabled
+                  </option>
+                  <option value={'field-names'}>Field Names</option>
+                  <option value={'field-names-and-type'}>Field Name and Type</option>
+                </Select>
+              </section>
+            </fieldset>
 
-                    <Select
-                      native
-                      placeholder={'Not enabled'}
-                      id="consolidateTypesSelect"
-                      // onChange={(e) =>
-                      //   setValue('consolidateTypes', e.target.value as number[])
-                      // }
-                      onChange={(event, data) => {
-                        setValue('consolidateTypes', event.target.value);
-                        onSubmit(getValues());
-                      }}
-                      inputProps={{
-                        id: 'consolidateTypes',
-                      }}
-                      value={consolidateTypes}
-                    >
-                      <option aria-label="None" value={''}>
-                        Not Enabled
-                      </option>
-                      <option value={'field-names'}>Field Names</option>
-                      <option value={'field-names-and-type'}>Field Name and Type</option>
-                    </Select>
-                  </section>
-                </fieldset>
+            <fieldset
+              className={`form-group ${
+                watch('prefixNamingMode') !== undefined ? 'show-warning' : ''
+              }`}
+            >
+              <legend className="mb-1">Cleanup Generated Names</legend>
+              <section className="input-group d-flex justify-content-between">
+                <p>Optionally use shorter Type/Schema names</p>
+                <label className="warning-label">
+                  <WarningIcon color="error" className="warning-icon" />
+                </label>
 
-                <fieldset
-                  className={`form-group ${
-                    watch('prefixNamingMode') !== undefined ? 'show-warning' : ''
-                  }`}
+                <Select
+                  native
+                  placeholder={'Full'}
+                  id="prefixNamingModeSelect"
+                  // onChange={(e) =>
+                  //   setValue('prefixNamingMode', e.target.value as number[])
+                  // }
+                  onChange={(event, data) => {
+                    setValue('prefixNamingMode', event.target.value);
+                    onSubmit(getValues());
+                  }}
+                  inputProps={{
+                    id: 'prefixNamingMode',
+                  }}
+                  value={prefixNamingMode}
                 >
-                  <legend className="mb-1">Cleanup Generated Names</legend>
-                  <section className="input-group d-flex justify-content-between">
-                    <p>Optionally use shorter Type/Schema names</p>
-                    <label className="warning-label">
-                      <WarningIcon color="error" className="warning-icon" />
-                    </label>
+                  <option value={'full'}>Full - Prefix all sub-types with parent</option>
+                  <option value={'trim'}>Trim - No naming prefix</option>
+                </Select>
+              </section>
+            </fieldset>
 
-                    <Select
-                      native
-                      placeholder={'Full'}
-                      id="prefixNamingModeSelect"
-                      // onChange={(e) =>
-                      //   setValue('prefixNamingMode', e.target.value as number[])
-                      // }
-                      onChange={(event, data) => {
-                        setValue('prefixNamingMode', event.target.value);
-                        onSubmit(getValues());
-                      }}
-                      inputProps={{
-                        id: 'prefixNamingMode',
-                      }}
-                      value={prefixNamingMode}
-                    >
-                      <option value={'full'}>
-                        Full - Prefix all sub-types with parent
-                      </option>
-                      <option value={'trim'}>Trim - No naming prefix</option>
-                    </Select>
-                  </section>
-                </fieldset>
+            <fieldset className="form-group">
+              <legend className="mb-1">Enumerations</legend>
 
-                <fieldset className="form-group">
-                  <legend className="mb-1">Enumerations</legend>
+              <label className="input-group d-flex justify-content-between">
+                <p>Min. Rows for Enumerations</p>
+                <input
+                  type="number"
+                  name="enumMinimumRowCount"
+                  defaultValue={100}
+                  min={0}
+                  max={10000}
+                  step={10}
+                  title="Between 0-10000, Default: 100"
+                  ref={register({ min: 0, max: 10000, valueAsNumber: true })}
+                  // onChange
+                  {...autoSaveHandlers}
+                />
+              </label>
+              <label className="input-group d-flex justify-content-between">
+                <p>Enumeration Item Limit</p>
+                <input
+                  type="number"
+                  name="enumAbsoluteLimit"
+                  defaultValue={10}
+                  min={0}
+                  max={100}
+                  step={1}
+                  title="Between 0-100, Default=10"
+                  ref={register({ min: 0, max: 100, valueAsNumber: true })}
+                  {...autoSaveHandlers}
+                />
+              </label>
+            </fieldset>
 
-                  <label className="input-group d-flex justify-content-between">
-                    <p>Min. Rows for Enumerations</p>
-                    <input
-                      type="number"
-                      name="enumMinimumRowCount"
-                      defaultValue={100}
-                      min={0}
-                      max={10000}
-                      step={10}
-                      title="Between 0-10000, Default: 100"
-                      ref={register({ min: 0, max: 10000, valueAsNumber: true })}
-                      // onChange
-                      {...autoSaveHandlers}
-                    />
-                  </label>
-                  <label className="input-group d-flex justify-content-between">
-                    <p>Enumeration Item Limit</p>
-                    <input
-                      type="number"
-                      name="enumAbsoluteLimit"
-                      defaultValue={10}
-                      min={0}
-                      max={100}
-                      step={1}
-                      title="Between 0-100, Default=10"
-                      ref={register({ min: 0, max: 100, valueAsNumber: true })}
-                      {...autoSaveHandlers}
-                    />
-                  </label>
-                </fieldset>
+            <fieldset className="form-group slider-input">
+              <legend className="mb-1">Null Detection</legend>
+              <label className="input-group d-flex justify-content-between">
+                <p>Empty field limit</p>
+                <Slider
+                  value={nullableRowsThreshold}
+                  getAriaValueText={formatPercent}
+                  valueLabelFormat={formatPercent}
+                  min={0.0}
+                  max={0.1}
+                  step={0.005}
+                  valueLabelDisplay="on"
+                  // style={{ flex: '0 0 50%' }}
+                  onChange={(e, data) => {
+                    setValue('nullableRowsThreshold', data);
+                    onSubmit(getValues());
+                  }}
+                />
+                <span>{formatPercent(displayNullableRowsThreshold)}</span>
+              </label>
+            </fieldset>
 
-                <fieldset className="form-group slider-input">
-                  <legend className="mb-1">Null Detection</legend>
-                  <label className="input-group d-flex justify-content-between">
-                    <p>Empty field limit</p>
-                    <Slider
-                      value={nullableRowsThreshold}
-                      getAriaValueText={formatPercent}
-                      valueLabelFormat={formatPercent}
-                      min={0.0}
-                      max={0.1}
-                      step={0.005}
-                      valueLabelDisplay="on"
-                      // style={{ flex: '0 0 50%' }}
-                      onChange={(e, data) => {
-                        setValue('nullableRowsThreshold', data);
-                        onSubmit(getValues());
-                      }}
-                    />
-                    <span>{formatPercent(displayNullableRowsThreshold)}</span>
-                  </label>
-                </fieldset>
-
-                <fieldset className="form-group slider-input">
-                  <legend className="mb-1">Uniqueness Detection</legend>
-                  <label className="input-group d-flex justify-content-between">
-                    <p>Unique values required</p>
-                    <Slider
-                      value={uniqueRowsThreshold}
-                      getAriaValueText={convertFractionToPercent}
-                      valueLabelFormat={convertFractionToPercent}
-                      min={0.8}
-                      max={1.0}
-                      step={0.005}
-                      valueLabelDisplay="on"
-                      onChange={(e, data) => {
-                        setValue('uniqueRowsThreshold', data);
-                        onSubmit(getValues());
-                      }}
-                    />
-                    <span>{formatPercent(Math.abs(Number(uniqueRowsThreshold)))}</span>
-                  </label>
-                </fieldset>
-                <fieldset className="form-group">
-                  <legend className="mb-1">Debug Mode</legend>
-                  <section className="input-group d-flex justify-content-between">
-                    <p>Append `TypeSummary` results JSON in your generated code.</p>
-                    <Checkbox
-                      name="debug"
-                      style={{ padding: '0' }}
-                      onChange={(event, checked) => {
-                        setValue('debug', checked);
-                        onSubmit(getValues());
-                      }}
-                      checked={Boolean(debug)}
-                    />
-                  </section>
-                </fieldset>
-              </CardContent>
-            </Paper>
-          </form>
-        </section>
-      </Card>
+            <fieldset className="form-group slider-input">
+              <legend className="mb-1">Uniqueness Detection</legend>
+              <label className="input-group d-flex justify-content-between">
+                <p>Unique values required</p>
+                <Slider
+                  value={uniqueRowsThreshold}
+                  getAriaValueText={convertFractionToPercent}
+                  valueLabelFormat={convertFractionToPercent}
+                  min={0.8}
+                  max={1.0}
+                  step={0.005}
+                  valueLabelDisplay="on"
+                  onChange={(e, data) => {
+                    setValue('uniqueRowsThreshold', data);
+                    onSubmit(getValues());
+                  }}
+                />
+                <span>{formatPercent(Math.abs(Number(uniqueRowsThreshold)))}</span>
+              </label>
+            </fieldset>
+            <fieldset className="form-group">
+              <legend className="mb-1">Debug Mode</legend>
+              <section className="input-group d-flex justify-content-between">
+                <p>Append `TypeSummary` results JSON in your generated code.</p>
+                <Checkbox
+                  name="debug"
+                  style={{ padding: '0' }}
+                  onChange={(event, checked) => {
+                    setValue('debug', checked);
+                    onSubmit(getValues());
+                  }}
+                  checked={Boolean(debug)}
+                />
+              </section>
+            </fieldset>
+          </CardContent>
+        </Paper>
+      </form>
+      {/* </section>
+      </Card> */}
     </>
   );
 }
