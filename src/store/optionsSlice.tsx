@@ -31,7 +31,7 @@ let initialState: Readonly<OptionsState> = {
   nullableRowsThreshold: 0.001,
   uniqueRowsThreshold: 1.0,
   consolidateTypes: 'field-names',
-  prefixNamingMode: 'trim',
+  prefixNamingMode: 'full',
   // _timestamp: Date.now(),
 };
 
