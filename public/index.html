@@ -7,43 +7,25 @@
     <meta name="theme-color" content="#000000" />
     <meta
       name="description"
-      content="Convert any JSON (or CSV) data into type-aware code for TypeScript, MongoDB, Postgres, and more!"
+      content="Convert any JSON (or CSV) data into type-aware code! Supports TypeScript Interfaces, GoLang Structs, MongoDB/Mongoose Schemas, and Postgres SQL!"
     />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Lato&family=Roboto&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Lato&family=Roboto&display=swap&text=text=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!%2522%23%24%25%26'()*%2B%2C-.%2F0123456789%3A%3B%3C%3D%3E%3F%40%5B%5D%5E_`%7B%7C%7D~"
       rel="stylesheet"
     />
-    <!-- <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.4.1/simplex/bootstrap.min.css"
-      integrity="sha256-/4UzLn5f/mN0z/yFORPgU0Q+4NroVby3o9b5z887fuA="
-      crossorigin="anonymous"
-    />
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-      crossorigin="anonymous"
-    /> -->
     <title>DataAnalyzer.app - JSON to Code Generator</title>
     <meta property="og:title" content="DataAnalyzer.app - Data to Code Generator" />
     <meta
       property="og:description"
-      content="Convert any JSON (or CSV) data into type-aware code for TypeScript, GoLang, MongoDB, Postgres, and more!"
+      content="Turn JSON or CSV data into TypeScript Interfaces, GoLang Structs, MongoDB/Mongoose Schemas, or Postgres SQL!"
     />
     <meta property="og:type" content="website" />
-
     <meta property="og:url" content="%PUBLIC_URL%" />
     <meta property="twitter:creator" content="@justsml" />
     <meta property="twitter:card" content="summary_large_image" />
-
     <meta
       property="og:image"
       content="%PUBLIC_URL%/images/DataAnalyzer-EventData-Screenshot.png"
@@ -53,21 +35,9 @@
     <meta property="og:image:type" content="image/png" />
     <meta
       property="og:image:alt"
-      content="Data inspector & detector for generating code for TypeScript, Postgres and more."
+      content="Turn any data into TypeScript Interfaces, GoLang Structs, MongoDB/Mongoose Schemas, or Postgres SQL!"
     />
     <meta property="fb:app_id" content="863108964261458" />
-    <!-- <meta
-      property="og:image"
-      content="%PUBLIC_URL%/images/DataAnalyzerScreen_TypeScript-SocialImage.png"
-    />
-    <meta
-      property="twitter:image"
-      content="%PUBLIC_URL%/images/DataAnalyzerScreen_TypeScript-SocialImage.png"
-    />
-    <meta
-      property="og:image:alt"
-      content="Preview of automatically generated TypeScript from input JSON or CSV data."
-    /> -->
     <style>
       .disclaimer {
         position: fixed;
@@ -80,7 +50,6 @@
         padding-right: 1rem;
         pointer-events: none;
         z-index: -1;
-        /* visibility: hidden; */
       }
     </style>
 
@@ -95,13 +64,12 @@
     </script>
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-
     <div id="root"></div>
 
     <section class="disclaimer">
       © 2020-2021 Dan Levy. All trademarks, service marks and company names are the
       property of their respective owners.
     </section>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
   </body>
 </html>
