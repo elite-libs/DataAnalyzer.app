@@ -1,4 +1,4 @@
-import csvParse from 'csv-parse';
+// import csvParse from 'csv-parse';
 import type { IReaderAdapter } from './readers';
 
 const csvReader: IReaderAdapter = {
@@ -10,19 +10,21 @@ const csvReader: IReaderAdapter = {
   },
 
   parse(content: string) {
-    return new Promise((resolve, reject) => {
-      csvParse(
-        content,
-        {
-          columns: true,
-          trim: true,
-          skip_empty_lines: true,
-        },
-        (err, results, info) => {
-          if (err) return reject(err);
-          resolve(results);
-        },
-      );
+    return import('csv-parse').then(({ default: csvParse }) => {
+      return new Promise((resolve, reject) => {
+        csvParse(
+          content,
+          {
+            columns: true,
+            trim: true,
+            skip_empty_lines: true,
+          },
+          (err, results, info) => {
+            if (err) return reject(err);
+            resolve(results);
+          },
+        );
+      });
     });
   },
 };
