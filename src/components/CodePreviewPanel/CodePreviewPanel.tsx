@@ -4,6 +4,8 @@ import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx';
 import ts from 'react-syntax-highlighter/dist/esm/languages/prism/typescript';
 import golang from 'react-syntax-highlighter/dist/esm/languages/prism/go';
+import sql from 'react-syntax-highlighter/dist/esm/languages/prism/sql';
+
 import ghcolors from 'react-syntax-highlighter/dist/esm/styles/prism/ghcolors';
 // import { ghcolors } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
@@ -31,6 +33,7 @@ export type ICodePreviewPanelProps = {
 SyntaxHighlighter.registerLanguage('javascript', jsx);
 SyntaxHighlighter.registerLanguage('typescript', ts);
 SyntaxHighlighter.registerLanguage('go', golang);
+SyntaxHighlighter.registerLanguage('sql', sql);
 
 export default function CodePreviewPanel({
   language = 'typescript',
@@ -82,7 +85,7 @@ export default function CodePreviewPanel({
   return (
     <Panel
       disabled={!isPanelSuccessState}
-      className={`code-viewer ${
+      className={`code-viewer lang-${outputLanguage} ${
         isPanelSuccessState ? 'panel-success' : 'panel-error'
       } ${className}`.trim()}
       titleComponent={

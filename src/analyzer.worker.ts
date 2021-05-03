@@ -9,7 +9,7 @@ export default {} as typeof Worker & { new (): Worker };
  * Comlink/CreateReactApp Guide: https://github.com/dominique-mueller/create-react-app-typescript-web-worker-setup#bonus-using-comlink
  */
 
-console.log('[schemaAnalyzerWorker] Loaded.');
+// console.log('[schemaAnalyzerWorker] Loaded.');
 
 const api = {
   schemaAnalyzer: function (
@@ -32,7 +32,7 @@ const api = {
     },
     onProgress?: ProgressCallback | undefined,
   ): Promise<DataAnalysisResults> {
-    console.log('[schemaAnalyzerWorker] Running.');
+    // console.log('[schemaAnalyzerWorker] Running.');
     return schemaAnalyzer(schemaName, input, options, onProgress);
   },
 };

@@ -42,7 +42,7 @@ const outputOptions: OutputMode[] = [
   ['golang', 'GoLang', 'go', <GoLangIcon />],
   ['knex', 'Knex', 'typescript', <KnexIcon />],
   ['mongoose', 'Mongoose (MongoDB)', 'typescript', <MongoDbIcon />],
-  ['sql', 'SQL "CREATE"', 'typescript', <PostgresIcon />],
+  ['sql', 'SQL "CREATE"', 'sql', <PostgresIcon />],
 ];
 
 type Props = {
