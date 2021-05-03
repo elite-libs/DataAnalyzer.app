@@ -1,10 +1,10 @@
 import React, { ReactNode } from 'react';
 import { useSelector } from 'react-redux';
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
-import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx';
 import ts from 'react-syntax-highlighter/dist/esm/languages/prism/typescript';
 import golang from 'react-syntax-highlighter/dist/esm/languages/prism/go';
 import sql from 'react-syntax-highlighter/dist/esm/languages/prism/sql';
+import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx';
 
 import ghcolors from 'react-syntax-highlighter/dist/esm/styles/prism/ghcolors';
 // import { ghcolors } from 'react-syntax-highlighter/dist/cjs/styles/prism';
