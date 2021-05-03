@@ -1,13 +1,13 @@
 import React, { ReactNode } from 'react';
 import { useSelector } from 'react-redux';
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
-import ts from 'react-syntax-highlighter/dist/esm/languages/prism/typescript';
-import golang from 'react-syntax-highlighter/dist/esm/languages/prism/go';
-import sql from 'react-syntax-highlighter/dist/esm/languages/prism/sql';
-import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx';
+import ts from 'react-syntax-highlighter/dist/cjs/languages/prism/typescript';
+import golang from 'react-syntax-highlighter/dist/cjs/languages/prism/go';
+import sql from 'react-syntax-highlighter/dist/cjs/languages/prism/sql';
+import jsx from 'react-syntax-highlighter/dist/cjs/languages/prism/jsx';
 
-import ghcolors from 'react-syntax-highlighter/dist/esm/styles/prism/ghcolors';
-// import { ghcolors } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import ghColors from 'react-syntax-highlighter/dist/cjs/styles/prism/ghcolors';
+// import { ghColors } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
 import copy from 'clipboard-copy';
 import Panel from 'components/Layouts/Panel';
@@ -111,7 +111,7 @@ export default function CodePreviewPanel({
 
       <SyntaxHighlighter
         language={outputLanguage}
-        style={ghcolors}
+        style={ghColors}
         showLineNumbers={true}
         customStyle={{ margin: 0, overflowY: 'auto', paddingTop: '1.5rem' }}
         codeTagProps={{ style: { fontSize: '0.8rem' } }}

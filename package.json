@@ -2,6 +2,7 @@
   "name": "data-analyzer",
   "description": "Generate data-smart code using any JSON/CSV!",
   "version": "1.6.0",
+  "type": "commonjs",
   "private": false,
   "homepage": "/",
   "license": "MIT",
@@ -69,7 +70,7 @@
       "^@utils/(.*)$": "<rootDir>/src/schema-analyzer/utils/$1"
     },
     "transformIgnorePatterns": [
-      "node_modules/(?!react-syntax-highlighter|jsdom)"
+      "node_modules/(?!(react-syntax-highlighter)|(jsdom)|(refractor))"
     ],
     "globals": {
       "ts-jest": {
