@@ -123,7 +123,7 @@ export const DemoDataMenu = () => {
         // _loadingSnackMessage = null;
         enqueueSnackbar(`Loaded "${name}" Dataset 🎉`, {
           variant: 'success',
-          autoHideDuration: 3000,
+          autoHideDuration: 2000,
           anchorOrigin: { horizontal: 'right', vertical: 'top' },
         });
         history.push('/');
