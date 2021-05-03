@@ -353,7 +353,7 @@ const _pivotRowsGroupedByType = ({
 
       const totalRows = schema.totalRows;
       const isDone = index + 1 === totalRows;
-      const progressFrequencyModulo = 10;
+      const progressFrequencyModulo = 100;
       // totalRows >= 2500 ? 20 : totalRows >= 1000 ? 25 : 10;
       const showProgress = !isDone && index % progressFrequencyModulo === 0;
 
