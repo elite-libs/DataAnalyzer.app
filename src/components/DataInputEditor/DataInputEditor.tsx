@@ -1,7 +1,7 @@
 import React from 'react';
 import AceEditor, { IAceEditorProps } from 'react-ace';
-import 'ace-builds/src-noconflict/mode-javascript';
-import 'ace-builds/src-noconflict/theme-github';
+import 'ace-builds/src-min-noconflict/mode-javascript';
+import 'ace-builds/src-min-noconflict/theme-github';
 import { useDispatch, useSelector } from 'react-redux';
 import { parse } from 'adapters/readers';
 import {

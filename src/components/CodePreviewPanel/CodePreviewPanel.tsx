@@ -1,9 +1,13 @@
 import React, { ReactNode } from 'react';
 import { useSelector } from 'react-redux';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
+import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx';
+import ts from 'react-syntax-highlighter/dist/esm/languages/prism/typescript';
+import ghcolors from 'react-syntax-highlighter/dist/esm/styles/prism/ghcolors';
+// import { ghcolors } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+
 import copy from 'clipboard-copy';
 import Panel from 'components/Layouts/Panel';
-import { ghcolors } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 // import SyncOutlinedIcon from '@material-ui/icons/SyncOutlined';
 import FileCopy from '@material-ui/icons/FileCopyOutlined';
 import { CodeOutputIcon } from '../AppIcons';
@@ -22,6 +26,10 @@ export type ICodePreviewPanelProps = {
   maxHeight?: Property.Height;
   className?: string;
 };
+
+// SyntaxHighlighter.registerLanguage('jsx', jsx);
+SyntaxHighlighter.registerLanguage('javascript', jsx);
+SyntaxHighlighter.registerLanguage('typescript', ts);
 
 export default function CodePreviewPanel({
   language = 'typescript',
