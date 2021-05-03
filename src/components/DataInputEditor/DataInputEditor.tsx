@@ -1,7 +1,7 @@
 import React from 'react';
 import AceEditor, { IAceEditorProps } from 'react-ace';
-import 'ace-builds/src-noconflict/mode-javascript';
-import 'ace-builds/src-noconflict/theme-github';
+import 'ace-builds/src-min-noconflict/mode-javascript';
+import 'ace-builds/src-min-noconflict/theme-github';
 import { useDispatch, useSelector } from 'react-redux';
 import { parse } from 'adapters/readers';
 import {
@@ -189,7 +189,7 @@ export function DataInputEditor(props: IAceEditorProps) {
         // _loadingSnackMessage = null;
         enqueueSnackbar(`Loaded "${name}" Dataset 🎉`, {
           variant: 'success',
-          autoHideDuration: 3000,
+          autoHideDuration: 2000,
           anchorOrigin: { horizontal: 'right', vertical: 'top' },
         });
         history.push('/');
@@ -219,7 +219,7 @@ export function DataInputEditor(props: IAceEditorProps) {
       );
       // console.log({ hash, hashParts });
       if (hashParts['demo']) {
-        console.log('loading ', hashParts['demo']);
+        // console.log('loading ', hashParts['demo']);
         const dataToLoad = filter(sampleDataSets, { schemaName: hashParts['demo'] });
         // console.log('dataToLoad', dataToLoad);
         if (dataToLoad && dataToLoad[0])

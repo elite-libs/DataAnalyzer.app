@@ -62,7 +62,7 @@ export function getSavedOptions() {
     const optionsJson = localStorage.getItem('analyzer.options');
     if (optionsJson && optionsJson.length > 1) {
       let opts = JSON.parse(optionsJson);
-      console.log('restoring saved settings:', optionsJson, opts);
+      // console.log('restoring saved settings:', optionsJson, opts);
       return opts;
     }
   } catch (error) {

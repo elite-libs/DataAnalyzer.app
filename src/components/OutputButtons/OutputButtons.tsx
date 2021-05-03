@@ -42,7 +42,7 @@ const outputOptions: OutputMode[] = [
   ['golang', 'GoLang', 'go', <GoLangIcon />],
   ['knex', 'Knex', 'typescript', <KnexIcon />],
   ['mongoose', 'Mongoose (MongoDB)', 'typescript', <MongoDbIcon />],
-  ['sql', 'SQL "CREATE"', 'typescript', <PostgresIcon />],
+  ['sql', 'SQL "CREATE"', 'sql', <PostgresIcon />],
 ];
 
 type Props = {
@@ -99,9 +99,12 @@ export const OutputButtons = ({ size = 'medium', className = '' }: Props) => {
         ...options,
       },
       (totalRows, currentRow) => {
-        const completionPercent = (currentRow / totalRows) * 100;
-        if (completionPercent % 2 === 0) console.log(`progress ${completionPercent}`);
-        dispatch(setAnalysisProgress(completionPercent || 0));
+        const completionPercent = ((currentRow / totalRows) * 100).toFixed(2);
+        if (completionPercent) {
+          // if (completionPercent % 2 === 0)
+          console.log(`progress ${completionPercent}`);
+          dispatch(setAnalysisProgress(completionPercent || '0'));
+        }
       },
     );
     dispatch(setSchema(schema || null));
@@ -109,7 +112,12 @@ export const OutputButtons = ({ size = 'medium', className = '' }: Props) => {
   }
   async function renderCode(outputAdapter = options.outputAdapter) {
     const schema = await getTypeSummary();
-    console.log('about to generate', outputAdapter, schema?.flatTypeSummary);
+    console.log(
+      'about to generate',
+      outputAdapter,
+      '\nfor schema results',
+      schema?.flatTypeSummary,
+    );
     const generatedCode = render(outputAdapter, schema!);
 
     dispatch(setResults(generatedCode));

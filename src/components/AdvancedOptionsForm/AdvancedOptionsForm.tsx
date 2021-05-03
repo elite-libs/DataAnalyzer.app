@@ -76,7 +76,7 @@ export default function AdvancedOptionsForm({ className = '' }) {
         nullableRowsThreshold: data.nullableRowsThreshold, // / 100.0
         uniqueRowsThreshold: data.uniqueRowsThreshold, // / 100.0
       };
-      console.log('Saved Options', updatedOptions);
+      // console.log('Saved Options', updatedOptions);
       localStorage.setItem('analyzer.options', JSON.stringify(updatedOptions));
 
       dispatch(setOptions(updatedOptions));
@@ -100,7 +100,7 @@ export default function AdvancedOptionsForm({ className = '' }) {
     if (optionsJson && optionsJson.length > 1) {
       let opts = JSON.parse(optionsJson);
       // opts = pick(opts, Object.keys(_initialOptions));
-      console.log('restoring saved settings:', optionsJson, opts);
+      // console.log('restoring saved settings:', optionsJson, opts);
       dispatch(setOptions(opts));
     }
   }, [dispatch]);

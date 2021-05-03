@@ -1,9 +1,16 @@
 import React, { ReactNode } from 'react';
 import { useSelector } from 'react-redux';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
+import ts from 'react-syntax-highlighter/dist/cjs/languages/prism/typescript';
+import golang from 'react-syntax-highlighter/dist/cjs/languages/prism/go';
+import sql from 'react-syntax-highlighter/dist/cjs/languages/prism/sql';
+import jsx from 'react-syntax-highlighter/dist/cjs/languages/prism/jsx';
+
+import ghColors from 'react-syntax-highlighter/dist/cjs/styles/prism/ghcolors';
+// import { ghColors } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+
 import copy from 'clipboard-copy';
 import Panel from 'components/Layouts/Panel';
-import { ghcolors } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 // import SyncOutlinedIcon from '@material-ui/icons/SyncOutlined';
 import FileCopy from '@material-ui/icons/FileCopyOutlined';
 import { CodeOutputIcon } from '../AppIcons';
@@ -22,6 +29,11 @@ export type ICodePreviewPanelProps = {
   maxHeight?: Property.Height;
   className?: string;
 };
+
+SyntaxHighlighter.registerLanguage('javascript', jsx);
+SyntaxHighlighter.registerLanguage('typescript', ts);
+SyntaxHighlighter.registerLanguage('go', golang);
+SyntaxHighlighter.registerLanguage('sql', sql);
 
 export default function CodePreviewPanel({
   language = 'typescript',
@@ -73,7 +85,7 @@ export default function CodePreviewPanel({
   return (
     <Panel
       disabled={!isPanelSuccessState}
-      className={`code-viewer ${
+      className={`code-viewer lang-${outputLanguage} ${
         isPanelSuccessState ? 'panel-success' : 'panel-error'
       } ${className}`.trim()}
       titleComponent={
@@ -99,7 +111,7 @@ export default function CodePreviewPanel({
 
       <SyntaxHighlighter
         language={outputLanguage}
-        style={ghcolors}
+        style={ghColors}
         showLineNumbers={true}
         customStyle={{ margin: 0, overflowY: 'auto', paddingTop: '1.5rem' }}
         codeTagProps={{ style: { fontSize: '0.8rem' } }}

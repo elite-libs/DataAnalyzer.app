@@ -252,7 +252,12 @@ export interface KeyValPair<TValue> {
   [id: string]: TValue;
 }
 
-export type SupportedTargetLanguages = 'typescript' | 'go' | 'json' | 'javascript';
+export type SupportedTargetLanguages =
+  | 'typescript'
+  | 'go'
+  | 'json'
+  | 'javascript'
+  | 'sql';
 
 export type TypeNameSuggestion = {
   readonly typePaths: string[];
