@@ -101,7 +101,7 @@ export const OutputButtons = ({ size = 'medium', className = '' }: Props) => {
       (totalRows, currentRow) => {
         const completionPercent = (currentRow / totalRows) * 100;
         // if (completionPercent % 2 === 0)
-        console.log(`progress ${completionPercent}`);
+        console.log(`progress ${completionPercent.toFixed(2)}`);
         dispatch(setAnalysisProgress(completionPercent || 0));
       },
     );
