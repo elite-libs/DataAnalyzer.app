@@ -100,7 +100,8 @@ export const OutputButtons = ({ size = 'medium', className = '' }: Props) => {
       },
       (totalRows, currentRow) => {
         const completionPercent = (currentRow / totalRows) * 100;
-        if (completionPercent % 2 === 0) console.log(`progress ${completionPercent}`);
+        // if (completionPercent % 2 === 0)
+        console.log(`progress ${completionPercent}`);
         dispatch(setAnalysisProgress(completionPercent || 0));
       },
     );
@@ -109,7 +110,12 @@ export const OutputButtons = ({ size = 'medium', className = '' }: Props) => {
   }
   async function renderCode(outputAdapter = options.outputAdapter) {
     const schema = await getTypeSummary();
-    console.log('about to generate', outputAdapter, schema?.flatTypeSummary);
+    console.log(
+      'about to generate',
+      outputAdapter,
+      '\nfor schema results',
+      schema?.flatTypeSummary,
+    );
     const generatedCode = render(outputAdapter, schema!);
 
     dispatch(setResults(generatedCode));

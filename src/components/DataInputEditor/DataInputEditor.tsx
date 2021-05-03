@@ -219,7 +219,7 @@ export function DataInputEditor(props: IAceEditorProps) {
       );
       // console.log({ hash, hashParts });
       if (hashParts['demo']) {
-        console.log('loading ', hashParts['demo']);
+        // console.log('loading ', hashParts['demo']);
         const dataToLoad = filter(sampleDataSets, { schemaName: hashParts['demo'] });
         // console.log('dataToLoad', dataToLoad);
         if (dataToLoad && dataToLoad[0])
