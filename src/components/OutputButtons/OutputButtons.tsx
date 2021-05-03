@@ -99,10 +99,12 @@ export const OutputButtons = ({ size = 'medium', className = '' }: Props) => {
         ...options,
       },
       (totalRows, currentRow) => {
-        const completionPercent = (currentRow / totalRows) * 100;
-        // if (completionPercent % 2 === 0)
-        console.log(`progress ${completionPercent.toFixed(2)}`);
-        dispatch(setAnalysisProgress(completionPercent || 0));
+        const completionPercent = ((currentRow / totalRows) * 100).toFixed(2);
+        if (completionPercent) {
+          // if (completionPercent % 2 === 0)
+          console.log(`progress ${completionPercent}`);
+          dispatch(setAnalysisProgress(completionPercent || '0'));
+        }
       },
     );
     dispatch(setSchema(schema || null));
