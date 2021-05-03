@@ -225,6 +225,7 @@ Some of these (`Email`) are aliases of a base type (`String`). See code for more
 - https://github.com/jvilk/MakeTypes
 - https://github.com/SweetIQ/schemats
 - https://github.com/vojtechhabarta/typescript-generator
+- https://github.com/drwpow/openapi-typescript
 
 [1]: https://github.com/justsml/DataAnalyzer.app/blob/main/src/components/SchemaTools/adapters/writer.typescript.ts
 [2]: https://github.com/justsml/DataAnalyzer.app/blob/main/src/components/SchemaTools/adapters/writer.knex.ts
