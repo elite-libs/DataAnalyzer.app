@@ -1936,3 +1936,25 @@ exports.down = async function down(knex) {
 };
 "
 `;
+
+exports[`#knex can handle bigint 1`] = `
+"// More info: http://knexjs.org/#Schema-createTable
+
+exports.up = async function up(knex) {
+  
+  /* Note: no nested types detected */
+
+  // Create the main table
+  return knex.schema.createTable(\\"users\\", (table) => {
+    table.decimal(\\"id\\", null).notNullable().primary(); // NOTE: \`decimal(name, null)\` is typically larger than \`bigInteger(name)\`
+    table.string(\\"username\\", 20).notNullable().unique();
+    table.string(\\"email\\").notNullable().unique(); // Note: Email 'subtype' detected
+  })
+
+};
+
+exports.down = async function down(knex) {
+  await knex.schema.dropTableIfExists(\\"users\\");
+};
+"
+`;

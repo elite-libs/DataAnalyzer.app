@@ -2,9 +2,9 @@ import { properCase, numericSorter } from 'helpers';
 import { IDataAnalyzerWriter } from './writers';
 import snakeCase from 'lodash/snakeCase';
 import map from 'lodash/map';
-import { CombinedFieldInfo, KeyValPair } from 'types';
+import { CombinedFieldInfo, KeyValPair, TypeNameString } from 'types';
 
-const typeMap: { [k: string]: string } = {
+const typeMap: Record<TypeNameString, string> = {
   $ref: 'string',
   Unknown: 'string',
   ObjectId: 'ObjectId',
@@ -15,6 +15,7 @@ const typeMap: { [k: string]: string } = {
   Currency: 'number',
   Float: 'float32',
   Number: 'int',
+  BigNumber: 'big.Int', // [See math/big library](https://pkg.go.dev/math/big)
   Email: 'string',
   String: 'string',
   Array: '[]string',

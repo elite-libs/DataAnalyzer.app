@@ -119,7 +119,6 @@ const writer: IDataAnalyzerWriter = {
                 REFERENCES ${snakecase(typeRef)} (${snakecase(
               typeRef,
             )}_id), // TODO: Verify column names`;
-
           if (type === 'Unknown')
             return `    ${name}    VARCHAR(${sizePart})   ${appendChain},`;
           if (type === 'ObjectId') return `    ${name}    VARCHAR(24)   ${appendChain},`;
@@ -127,6 +126,8 @@ const writer: IDataAnalyzerWriter = {
             return `    ${name}    UUID    ${sizePart}  ${appendChain},`;
           if (type === 'Boolean')
             return `    ${name}    BOOLEAN    ${sizePart}  ${appendChain},`;
+          if (type === 'BigNumber')
+            return `    ${name}    NUMERIC(100, 20), // BigInt in JavaScript is arbitrary precision, and much larger than Postgres' \`bigint\`, IMPORTANT: for postgres use \`NUMERIC\` without size specified, for other engines: adjust the precision and scale as small as possible!!!`;
           if (type === 'Date')
             return `    ${name}    TIMESTAMP    ${sizePart}  ${appendChain},`;
           if (type === 'Timestamp') return `    ${name}    TIMESTAMP    ${appendChain},`;

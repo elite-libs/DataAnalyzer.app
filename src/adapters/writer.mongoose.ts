@@ -23,7 +23,7 @@ const writer: IDataAnalyzerWriter = {
           .map(([fieldName, fieldInfo]) => {
             if (fieldInfo == null) return `// null field info !!!`;
             return `  ${camelCase(fieldName)}: {
-    type: "${fieldInfo.typeRef || fieldInfo.type}",
+    type: "${fieldInfo.typeRef || fieldInfo.type.replace('BigNumber', 'Decimal128')}",
     ${fieldInfo.unique ? 'unique: true,' : ''}
     ${fieldInfo.nullable ? '' : 'required: true,'}
     ${

@@ -544,3 +544,14 @@ const(
 )
 "
 `;
+
+exports[`#GoLang can handle bigint 1`] = `
+"type Users struct {
+    Id big.Int \`json:\\"id\\" db:\\"id\\"\`
+    Username string \`json:\\"username\\" db:\\"username\\"\`
+    Email string \`json:\\"email\\" db:\\"email\\"\`
+}
+
+
+"
+`;

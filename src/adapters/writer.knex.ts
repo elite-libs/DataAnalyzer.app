@@ -27,6 +27,10 @@ const getFieldLengthArg = (fieldName: string, maxLength: number) => {
   return 20;
 };
 
+interface IRenderOptions {
+  preferUniqueOverFirstColumn: boolean;
+}
+
 /**
  * @returns TypeMetadata
  *
@@ -44,8 +48,11 @@ const getFieldLengthArg = (fieldName: string, maxLength: number) => {
 // const getMetadataByTypeName = (typeName, types) => {
 //   return types.find((field) => field[0].toLowerCase() === typeName.toLowerCase())
 // }
-const writer: IDataAnalyzerWriter = {
-  render(results) {
+const writer: IDataAnalyzerWriter<IRenderOptions> = {
+  render(
+    results,
+    { preferUniqueOverFirstColumn } = { preferUniqueOverFirstColumn: false },
+  ) {
     let { options, schemaName } = results;
     const typeSummary = results.flatTypeSummary;
     const { nestedTypes } = typeSummary;
@@ -62,11 +69,7 @@ const writer: IDataAnalyzerWriter = {
       nestedTypeName: string,
       preferUniqueOverFirstColumn = true,
     ): string {
-      if (nestedTypes == null)
-        throw new Error(
-          `Error: Missing nested type data. Couldn't lookup '${nestedTypeName}'`,
-        );
-      // console.log('nestedTypes', Object.keys(nestedTypes));
+      if (nestedTypes == null) throw new Error(`No nested type: '${nestedTypeName}'`);
 
       let schema: TypeSummary<CombinedFieldInfo> | undefined =
         nestedTypes[nestedTypeName];
@@ -75,23 +78,20 @@ const writer: IDataAnalyzerWriter = {
         schema = nestedKey ? nestedTypes[nestedKey] : undefined;
       }
       if (schema?.fields == null)
-        throw new Error(
-          `Error: Failed to find nested schema for '${nestedTypeName}' inside ${Object.keys(
-            nestedTypes,
-          ).join(', ')}`,
-        );
+        throw new Error(`No type: '${nestedTypeName}' in ${Object.keys(nestedTypes)}`);
       const fieldSet = Object.entries<CombinedFieldInfo>(schema.fields);
       // locate by explicit identity indicator
       let identityField = fieldSet.find(([fieldName, fieldStats]) => {
         return fieldStats.identity ? true : false;
       });
-      if (identityField) return identityField[0];
-      // No solid ID col found, fallback to preferUniqueOverFirstColumn
+      // If no solid ID col found, fallback to first unique if preferUniqueOverFirstColumn
       if (preferUniqueOverFirstColumn) {
         // next check for unique fields :shrug: :fingers_crossed:
         identityField = fieldSet.find(([fieldName, fieldStats]) => {
           return fieldStats.unique ? true : false;
         });
+      } else {
+        if (identityField) return identityField[0];
       }
       return fieldSet[0] && fieldSet[0][0] ? fieldSet[0][0] : '__unknown__';
     }
@@ -167,7 +167,7 @@ const writer: IDataAnalyzerWriter = {
           if (typeRef)
             return `    table.integer("${name}").references("${getFirstIdentityOrUniqueField(
               typeRef,
-              false,
+              preferUniqueOverFirstColumn,
             )}").inTable('${snakeCase(typeRef)}'); // note: ${typeRelationship}`;
 
           if (type === 'Unknown')
@@ -180,11 +180,14 @@ const writer: IDataAnalyzerWriter = {
           if (type === 'Date')
             return `    table.datetime("${name}"${sizePart})${appendChain};`;
           if (type === 'Timestamp') return `    table.timestamp("${name}"${sizePart})`;
-          if (type === 'Currency') return `    table.float("${name}"${sizePart});`;
+          if (type === 'Currency')
+            return `    table.specificType("${name}"${sizePart}); // change to float or decimal if money no supported`;
           if (type === 'Float') return `    table.float("${name}"${sizePart});`;
+          if (type === 'BigNumber')
+            return `    table.decimal("${name}", null)${appendChain}; // NOTE: \`decimal(name, null)\` is typically larger than \`bigInteger(name)\``;
           if (type === 'Number') return `    table.integer("${name}")${appendChain};`;
           if (type === 'Email')
-            return `    table.string("${name}"${sizePart})${appendChain};`;
+            return `    table.string("${name}"${sizePart})${appendChain}; // Note: Email 'subtype' detected`;
           if (type === 'String')
             return `    table.string("${name}"${sizePart})${appendChain};`;
           if (type === 'Array')

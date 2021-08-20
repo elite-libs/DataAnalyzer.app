@@ -5950,3 +5950,22 @@ const usersNotesModel = mongoose.model(\\"usersNotes\\", UsersNotes);
 module.exports.Users = usersModel;
 module.exports.UsersNotes = usersNotesModel;"
 `;
+
+exports[`#mongoose can handle bigint 1`] = `
+"const mongoose = require(\\"mongoose\\");
+const {Schema, Model, Types} = mongoose;
+
+const Users = new Schema({
+  id: {
+    type: \\"Decimal128\\",
+    unique: true,
+    required: true,
+  },
+  username: {
+    type: \\"String\\",
+    unique: true,
+    required: true,
+  }});
+const usersModel = mongoose.model(\\"users\\", Users);
+module.exports.Users = usersModel;"
+`;

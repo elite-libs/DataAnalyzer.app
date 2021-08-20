@@ -1210,3 +1210,12 @@ export interface GenerationViiOmegarubyAlphasapphireUltraSunUltraMoonXY {
 };
 "
 `;
+
+exports[`#typescript can handle bigint 1`] = `
+"export interface Users {
+  id: bigint;
+  username: string;
+  email: string;
+};
+"
+`;
