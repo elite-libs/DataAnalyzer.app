@@ -14,6 +14,7 @@ import {
   TYPE_STRING,
   TYPE_ARRAY,
   TYPE_OBJECT,
+  TYPE_BIGNUMBER,
 } from './type-helpers';
 
 describe('Multiple Type Matching', () => {
@@ -38,6 +39,7 @@ describe('Multiple Type Matching', () => {
     expect(matchResult).toContain('ObjectId');
     expect(matchResult).toContain('String');
     expect(matchResult.length).toBe(2);
+    expect(detectTypes('123456789012345678901234')).toEqual(['ObjectId', 'BigNumber', 'Number', 'String']);
   });
   it('correctly handles UUID', () => {
     const matchResult = detectTypes('AB0E1569-B8A1-430F-94BE-B03E5C73FA22');
@@ -193,7 +195,18 @@ describe('Type Detectors', () => {
     expect(TYPE_NUMBER.check('1.1')).toBeTruthy();
     expect(TYPE_NUMBER.check('1.1234567890')).toBeTruthy();
     expect(TYPE_NUMBER.check('-1.10000')).toBeTruthy();
+    expect(TYPE_NUMBER.check('9007199254740991')).toBeTruthy(); // Number.MAX_SAFE_INTEGER
+    expect(TYPE_NUMBER.check('9007199254740992')).toBeTruthy(); // Number.MAX_SAFE_INTEGER + 1
+    
     expect(TYPE_NUMBER.check(null)).toBeFalsy();
+  });
+  it('can detect big number', () => {
+    expect(TYPE_BIGNUMBER.check('420')).toBeFalsy();
+    expect(TYPE_BIGNUMBER.check('1.1')).toBeFalsy();
+    expect(TYPE_BIGNUMBER.check('12345678901234567890')).toBeTruthy();
+    expect(TYPE_BIGNUMBER.check('9007199254740991')).toBeFalsy(); // Number.MAX_SAFE_INTEGER
+    expect(TYPE_BIGNUMBER.check('9007199254740992')).toBeTruthy(); // Number.MAX_SAFE_INTEGER + 1
+    expect(TYPE_BIGNUMBER.check(null)).toBeFalsy();
   });
   it('can detect null', () => {
     expect(TYPE_NULL.check(null)).toBeTruthy();

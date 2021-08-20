@@ -196,7 +196,21 @@ const TYPE_NUMBER: ITypeMatcher = {
     );
   },
 };
-const TYPE_EMAIL: ITypeMatcher = {
+const TYPE_BIGNUMBER: ITypeMatcher = {
+  type: 'BigNumber',
+  check: (value, fieldName) => {
+    if (hasLeadingZero.test(String(value))) return false;
+    try {
+      return !!(
+        value !== null &&
+        typeof value === 'string' &&
+        BigInt(value) && BigInt(value) > Number.MAX_SAFE_INTEGER
+      );
+    } catch (e) {
+      return false;
+    }
+  },
+};const TYPE_EMAIL: ITypeMatcher = {
   type: 'Email',
   supersedes: ['String'],
   check: isEmailShaped,
@@ -231,6 +245,7 @@ const prioritizedTypes = [
   TYPE_TIMESTAMP,
   TYPE_CURRENCY,
   TYPE_FLOAT,
+  TYPE_BIGNUMBER,
   TYPE_NUMBER,
   TYPE_NULL,
   TYPE_EMAIL,
@@ -251,6 +266,7 @@ const typeRankings = {
   [TYPE_TIMESTAMP.type]: 5,
   [TYPE_CURRENCY.type]: 6,
   [TYPE_FLOAT.type]: 7,
+  [TYPE_BIGNUMBER.type]: 7.5,
   [TYPE_NUMBER.type]: 8,
   [TYPE_NULL.type]: 10,
   [TYPE_EMAIL.type]: 11,
@@ -272,6 +288,7 @@ export {
   TYPE_TIMESTAMP,
   TYPE_CURRENCY,
   TYPE_FLOAT,
+  TYPE_BIGNUMBER,
   TYPE_NUMBER,
   TYPE_NULL,
   TYPE_EMAIL,

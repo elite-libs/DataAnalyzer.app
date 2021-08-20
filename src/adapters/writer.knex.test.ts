@@ -31,6 +31,28 @@ describe('#knex', () => {
     expect(code).toMatchSnapshot();
   });
 
+  it('can handle bigint', async () => {
+    const results = await schemaAnalyzer(
+      'users',
+      { id: '12345678901234567890', username: 'Dan', email: 'dan@example.com' },
+      {
+        debug: true,
+        strictMatching: false,
+
+        flattenOptions: {
+          targetLength: 'p99',
+          targetPrecision: 'p99',
+          targetScale: 'p99',
+          targetValue: 'p99',
+          nullableRowsThreshold: 0.001,
+        },
+      },
+    );
+    const code = knex.render(results);
+    expect(code).toMatch(/id.*decimal.*null/gi);
+    expect(code).toMatchSnapshot();
+  });
+
   it('can emit migration for long fields', async () => {
     const getDataBigField = (fieldLength: number) => {
       let usersWithNChar = [...users];

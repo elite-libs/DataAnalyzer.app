@@ -34,6 +34,7 @@ export type TypeNameString =
   | 'Timestamp'
   | 'Currency'
   | 'Float'
+  | 'BigNumber'
   | 'Number'
   | 'Email'
   | 'String'
@@ -44,13 +45,14 @@ export type TypeNameString =
 export type TypeNameStringComposite = 'String' | 'Email' | 'Array';
 
 export const TypeNameStringComposite = ['String', 'Email', 'Array'];
-export const TypeNameStringDecimal = ['Date', 'Timestamp', 'Currency', 'Float', 'Number'];
+export const TypeNameStringDecimal = ['Date', 'Timestamp', 'Currency', 'Float', 'Number', 'BigNumber'];
 export type TypeNameStringDecimal =
   | 'Date'
   | 'Timestamp'
   | 'Currency'
   | 'Float'
-  | 'Number';
+  | 'Number'
+  | 'BigNumber';
 
 export interface ISchemaAnalyzerOptions {
   /** Required # of rows, default 100 */

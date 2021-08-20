@@ -1,8 +1,8 @@
 import camelCase from 'lodash/camelCase';
 import { properCase, removeBlankLines } from 'helpers';
 import { IDataAnalyzerWriter } from './writers';
-import { CombinedFieldInfo, KeyValPair } from 'types';
-const typeMap: { [k: string]: string } = {
+import { CombinedFieldInfo, KeyValPair, TypeNameString } from 'types';
+const typeMap: Record<TypeNameString, string> = {
   $ref: 'string',
   Unknown: 'string',
   ObjectId: 'Types.ObjectId',
@@ -12,6 +12,7 @@ const typeMap: { [k: string]: string } = {
   Timestamp: 'Date',
   Currency: 'number',
   Float: 'number',
+  BigNumber: 'bigint',
   Number: 'number',
   Email: 'string',
   String: 'string',

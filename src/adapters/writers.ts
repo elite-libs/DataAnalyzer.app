@@ -15,8 +15,11 @@ import type {
 import snakeCase from 'lodash/snakeCase';
 import omit from 'lodash/omit';
 
-export interface IDataAnalyzerWriter {
-  render(results: DataAnalysisResults): string;
+export interface IDataAnalyzerWriter<TRenderOptions = unknown> {
+  render(
+    results: DataAnalysisResults,
+    renderOptions?: TRenderOptions | undefined,
+  ): string;
 }
 // export interface IRenderArgs {
 //   schemaName: string;

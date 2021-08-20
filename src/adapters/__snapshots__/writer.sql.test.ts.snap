@@ -1903,3 +1903,14 @@ CREATE TABLE pokemon (
 
 "
 `;
+
+exports[`#sql can handle bigint 1`] = `
+"/* Note: no nested types detected */
+CREATE TABLE users (
+    id    NUMERIC(100, 20), // BigInt in JavaScript is arbitrary precision, and much larger than Postgres' \`bigint\`, IMPORTANT: for postgres use \`NUMERIC\` without size specified, for other engines: adjust the precision and scale as small as possible!!!
+    username    VARCHAR(20)  NOT NULL  UNIQUE,
+    email    VARCHAR  NOT NULL  UNIQUE,
+)
+
+"
+`;

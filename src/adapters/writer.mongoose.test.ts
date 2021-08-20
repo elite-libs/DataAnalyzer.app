@@ -33,6 +33,27 @@ describe('#mongoose', () => {
     expect(code).toMatchSnapshot();
   });
 
+  it('can handle bigint', async () => {
+    const results = await schemaAnalyzer(
+      'users',
+      { id: '12345678901234567890', username: 'Dan' },
+      {
+        debug: true,
+        strictMatching: false,
+        flattenOptions: {
+          targetLength: 'p99',
+          targetPrecision: 'p99',
+          targetScale: 'p99',
+          targetValue: 'p99',
+          nullableRowsThreshold: 0.001,
+        },
+      },
+    );
+    const code = mongoose.render(results);
+    expect(code).toContain('Decimal128');
+    expect(code).toMatchSnapshot();
+  });
+
   it('can emit schema with better names', async () => {
     const results = await schemaAnalyzer('Pokemon', pokemon, {
       debug: true,
