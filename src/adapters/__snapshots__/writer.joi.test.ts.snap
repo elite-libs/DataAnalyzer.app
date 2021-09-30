@@ -1,0 +1,4823 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`#joi can emit migration for eventResults json 1`] = `
+"const Joi = require(\\"joi\\");
+
+export const EventResultsSchema = Joi.object({
+  links: Joi.object()
+    .required()
+  }
+,
+  embedded: Joi.object()
+    .required()
+  }
+,
+  page: Joi.object()
+    .required()
+  }
+});
+export const EventResultsLinksSchema = Joi.object({
+  self: Joi.object()
+    .required()
+  }
+,
+  next: Joi.object()
+    .required()
+  }
+});
+export const EventResultsEmbeddedSchema = Joi.object({
+  events: Joi.array()
+    .required()
+  }
+});
+export const EventResultsPageSchema = Joi.object({
+  size: Joi.number()
+    .required()
+  }
+,
+  totalElements: Joi.number()
+    .required()
+  }
+,
+  totalPages: Joi.number()
+    .required()
+  }
+,
+  number: Joi.number()
+    .required()
+  }
+});
+export const EventResultsLinksSelfSchema = Joi.object({
+  href: Joi.string()
+    .required()
+  }
+,
+  templated: Joi.boolean()
+    .required()
+  }
+});
+export const EventResultsLinksNextSchema = Joi.object({
+  href: Joi.string()
+    .required()
+  }
+,
+  templated: Joi.boolean()
+    .required()
+  }
+});
+export const EventResultsEmbeddedEventsSchema = Joi.object({
+  name: Joi.string()
+    .required()
+  }
+,
+  type: Joi.string()
+    .required()
+  }
+,
+  id: Joi.string()
+    .required()
+  }
+,
+  test: Joi.boolean()
+    .required()
+  }
+,
+  url: Joi.string()
+    .required()
+  }
+,
+  locale: Joi.string()
+    .required()
+  }
+,
+  images: Joi.array()
+    .required()
+  }
+,
+  sales: Joi.object()
+    .required()
+  }
+,
+  dates: Joi.object()
+    .required()
+  }
+,
+  classifications: Joi.array()
+    .required()
+  }
+,
+  promoter: Joi.object()
+    .required()
+  }
+,
+  links: Joi.object()
+    .required()
+  }
+,
+  embedded: Joi.object()
+    .required()
+  }
+});
+export const EventResultsEmbeddedEventsImagesSchema = Joi.object({
+  ratio: Joi.string()
+    .required()
+  }
+,
+  url: Joi.string()
+    .required()
+  }
+,
+  width: Joi.number()
+    .required()
+  }
+,
+  height: Joi.number()
+    .required()
+  }
+,
+  fallback: Joi.boolean()
+    .required()
+  }
+});
+export const EventResultsEmbeddedEventsSalesSchema = Joi.object({
+  public: Joi.object()
+    .required()
+  }
+});
+export const EventResultsEmbeddedEventsDatesSchema = Joi.object({
+  start: Joi.object()
+    .required()
+  }
+,
+  timezone: Joi.string()
+    .required()
+  }
+,
+  status: Joi.object()
+    .required()
+  }
+});
+export const EventResultsEmbeddedEventsClassificationsSchema = Joi.object({
+  primary: Joi.boolean()
+    .required()
+  }
+,
+  segment: Joi.object()
+    .required()
+  }
+,
+  genre: Joi.object()
+    .required()
+  }
+,
+  subGenre: Joi.object()
+    .required()
+  }
+});
+export const EventResultsEmbeddedEventsPromoterSchema = Joi.object({
+  id: Joi.number()
+    .required()
+  }
+});
+export const EventResultsEmbeddedEventsLinksSchema = Joi.object({
+  self: Joi.object()
+    .required()
+  }
+,
+  attractions: Joi.array()
+    .required()
+  }
+,
+  venues: Joi.array()
+    .required()
+  }
+});
+export const EventResultsEmbeddedEventsEmbeddedSchema = Joi.object({
+  venues: Joi.array()
+    .required()
+  }
+,
+  attractions: Joi.array()
+    .required()
+  }
+});
+export const EventResultsEmbeddedEventsSalesPublicSchema = Joi.object({
+  startDateTime: Joi.date()
+    .required()
+  }
+,
+  startTbd: Joi.boolean()
+    .required()
+  }
+,
+  endDateTime: Joi.date()
+    .required()
+  }
+});
+export const EventResultsEmbeddedEventsDatesStartSchema = Joi.object({
+  localDate: Joi.date()
+    .required()
+  }
+,
+  dateTbd: Joi.boolean()
+    .required()
+  }
+,
+  dateTba: Joi.boolean()
+    .required()
+  }
+,
+  timeTba: Joi.boolean()
+    .required()
+  }
+,
+  noSpecificTime: Joi.boolean()
+    .required()
+  }
+});
+export const EventResultsEmbeddedEventsDatesStatusSchema = Joi.object({
+  code: Joi.string()
+    .required()
+  }
+});
+export const EventResultsEmbeddedEventsClassificationsSegmentSchema = Joi.object({
+  id: Joi.string()
+    .required()
+  }
+,
+  name: Joi.string()
+    .required()
+  }
+});
+export const EventResultsEmbeddedEventsClassificationsGenreSchema = Joi.object({
+  id: Joi.string()
+    .required()
+  }
+,
+  name: Joi.string()
+    .required()
+  }
+});
+export const EventResultsEmbeddedEventsClassificationsSubGenreSchema = Joi.object({
+  id: Joi.string()
+    .required()
+  }
+,
+  name: Joi.string()
+    .required()
+  }
+});
+export const EventResultsEmbeddedEventsLinksSelfSchema = Joi.object({
+  href: Joi.string()
+    .required()
+  }
+});
+export const EventResultsEmbeddedEventsLinksAttractionsSchema = Joi.object({
+  href: Joi.string()
+    .required()
+  }
+});
+export const EventResultsEmbeddedEventsLinksVenuesSchema = Joi.object({
+  href: Joi.string()
+    .required()
+  }
+});
+export const EventResultsEmbeddedEventsEmbeddedVenuesSchema = Joi.object({
+  name: Joi.string()
+    .required()
+  }
+,
+  type: Joi.string()
+    .required()
+  }
+,
+  id: Joi.string()
+    .required()
+  }
+,
+  test: Joi.boolean()
+    .required()
+  }
+,
+  locale: Joi.string()
+    .required()
+  }
+,
+  postalCode: Joi.number()
+    .required()
+  }
+,
+  timezone: Joi.string()
+    .required()
+  }
+,
+  city: Joi.object()
+    .required()
+  }
+,
+  state: Joi.object()
+    .required()
+  }
+,
+  country: Joi.object()
+    .required()
+  }
+,
+  address: Joi.object()
+    .required()
+  }
+,
+  location: Joi.object()
+    .required()
+  }
+,
+  markets: Joi.array()
+    .required()
+  }
+,
+  links: Joi.object()
+    .required()
+  }
+});
+export const EventResultsEmbeddedEventsEmbeddedAttractionsSchema = Joi.object({
+  name: Joi.string()
+    .required()
+  }
+,
+  type: Joi.string()
+    .required()
+  }
+,
+  id: Joi.string()
+    .required()
+  }
+,
+  test: Joi.boolean()
+    .required()
+  }
+,
+  locale: Joi.string()
+    .required()
+  }
+,
+  images: Joi.array()
+    .required()
+  }
+,
+  classifications: Joi.array()
+    .required()
+  }
+,
+  links: Joi.object()
+    .required()
+  }
+});
+export const EventResultsEmbeddedEventsEmbeddedVenuesCitySchema = Joi.object({
+  name: Joi.string()
+    .required()
+  }
+});
+export const EventResultsEmbeddedEventsEmbeddedVenuesStateSchema = Joi.object({
+  name: Joi.string()
+    .required()
+  }
+,
+  stateCode: Joi.string()
+    .required()
+  }
+});
+export const EventResultsEmbeddedEventsEmbeddedVenuesCountrySchema = Joi.object({
+  name: Joi.string()
+    .required()
+  }
+,
+  countryCode: Joi.string()
+    .required()
+  }
+});
+export const EventResultsEmbeddedEventsEmbeddedVenuesAddressSchema = Joi.object({
+  line1: Joi.string()
+    .required()
+  }
+});
+export const EventResultsEmbeddedEventsEmbeddedVenuesLocationSchema = Joi.object({
+  longitude: Joi.number()
+    .required()
+  }
+,
+  latitude: Joi.number()
+    .required()
+  }
+});
+export const EventResultsEmbeddedEventsEmbeddedVenuesMarketsSchema = Joi.object({
+  id: Joi.number()
+    .required()
+  }
+});
+export const EventResultsEmbeddedEventsEmbeddedVenuesLinksSchema = Joi.object({
+  self: Joi.object()
+    .required()
+  }
+});
+export const EventResultsEmbeddedEventsEmbeddedVenuesLinksSelfSchema = Joi.object({
+  href: Joi.string()
+    .required()
+  }
+});
+export const EventResultsEmbeddedEventsEmbeddedAttractionsImagesSchema = Joi.object({
+  ratio: Joi.string()
+    .required()
+  }
+,
+  url: Joi.string()
+    .required()
+  }
+,
+  width: Joi.number()
+    .required()
+  }
+,
+  height: Joi.number()
+    .required()
+  }
+,
+  fallback: Joi.boolean()
+    .required()
+  }
+});
+export const EventResultsEmbeddedEventsEmbeddedAttractionsClassificationsSchema = Joi.object({
+  primary: Joi.boolean()
+    .required()
+  }
+,
+  segment: Joi.object()
+    .required()
+  }
+,
+  genre: Joi.object()
+    .required()
+  }
+,
+  subGenre: Joi.object()
+    .required()
+  }
+});
+export const EventResultsEmbeddedEventsEmbeddedAttractionsLinksSchema = Joi.object({
+  self: Joi.object()
+    .required()
+  }
+});
+export const EventResultsEmbeddedEventsEmbeddedAttractionsClassificationsSegmentSchema = Joi.object({
+  id: Joi.string()
+    .required()
+  }
+,
+  name: Joi.string()
+    .required()
+  }
+});
+export const EventResultsEmbeddedEventsEmbeddedAttractionsClassificationsGenreSchema = Joi.object({
+  id: Joi.string()
+    .required()
+  }
+,
+  name: Joi.string()
+    .required()
+  }
+});
+export const EventResultsEmbeddedEventsEmbeddedAttractionsClassificationsSubGenreSchema = Joi.object({
+  id: Joi.string()
+    .required()
+  }
+,
+  name: Joi.string()
+    .required()
+  }
+});
+export const EventResultsEmbeddedEventsEmbeddedAttractionsLinksSelfSchema = Joi.object({
+  href: Joi.string()
+    .required()
+  }
+});
+"
+`;
+
+exports[`#joi can emit migration for eventResults json, w/ dense & trim fields 1`] = `
+"const Joi = require(\\"joi\\");
+
+export const EventResultsSchema = Joi.object({
+  links: Joi.object()
+    .required()
+  }
+,
+  embedded: Joi.object()
+    .required()
+  }
+,
+  page: Joi.object()
+    .required()
+  }
+});
+export const LinksSchema = Joi.object({
+  self: Joi.object()
+    .required()
+  }
+});
+export const EmbeddedSchema = Joi.object({
+  venues: Joi.array()
+    .required()
+  }
+,
+  attractions: Joi.array()
+    .required()
+  }
+});
+export const PageSchema = Joi.object({
+  size: Joi.number()
+    .required()
+  }
+,
+  totalElements: Joi.number()
+    .required()
+  }
+,
+  totalPages: Joi.number()
+    .required()
+  }
+,
+  number: Joi.number()
+    .required()
+  }
+});
+export const SelfSchema = Joi.object({
+  href: Joi.string()
+    .required()
+  }
+});
+export const NextSchema = Joi.object({
+  href: Joi.string()
+    .required()
+  }
+,
+  templated: Joi.boolean()
+    .required()
+  }
+});
+export const EventsSchema = Joi.object({
+  name: Joi.string()
+    .required()
+  }
+,
+  type: Joi.string()
+    .required()
+  }
+,
+  id: Joi.string()
+    .required()
+  }
+,
+  test: Joi.boolean()
+    .required()
+  }
+,
+  url: Joi.string()
+    .required()
+  }
+,
+  locale: Joi.string()
+    .required()
+  }
+,
+  images: Joi.array()
+    .required()
+  }
+,
+  sales: Joi.object()
+    .required()
+  }
+,
+  dates: Joi.object()
+    .required()
+  }
+,
+  classifications: Joi.array()
+    .required()
+  }
+,
+  promoter: Joi.object()
+    .required()
+  }
+,
+  links: Joi.object()
+    .required()
+  }
+,
+  embedded: Joi.object()
+    .required()
+  }
+});
+export const ImagesSchema = Joi.object({
+  ratio: Joi.string()
+    .required()
+  }
+,
+  url: Joi.string()
+    .required()
+  }
+,
+  width: Joi.number()
+    .required()
+  }
+,
+  height: Joi.number()
+    .required()
+  }
+,
+  fallback: Joi.boolean()
+    .required()
+  }
+});
+export const SalesSchema = Joi.object({
+  public: Joi.object()
+    .required()
+  }
+});
+export const DatesSchema = Joi.object({
+  start: Joi.object()
+    .required()
+  }
+,
+  timezone: Joi.string()
+    .required()
+  }
+,
+  status: Joi.object()
+    .required()
+  }
+});
+export const ClassificationsSchema = Joi.object({
+  primary: Joi.boolean()
+    .required()
+  }
+,
+  segment: Joi.object()
+    .required()
+  }
+,
+  genre: Joi.object()
+    .required()
+  }
+,
+  subGenre: Joi.object()
+    .required()
+  }
+});
+export const PromoterSchema = Joi.object({
+  id: Joi.number()
+    .required()
+  }
+});
+export const PublicSchema = Joi.object({
+  startDateTime: Joi.date()
+    .required()
+  }
+,
+  startTbd: Joi.boolean()
+    .required()
+  }
+,
+  endDateTime: Joi.date()
+    .required()
+  }
+});
+export const StartSchema = Joi.object({
+  localDate: Joi.date()
+    .required()
+  }
+,
+  dateTbd: Joi.boolean()
+    .required()
+  }
+,
+  dateTba: Joi.boolean()
+    .required()
+  }
+,
+  timeTba: Joi.boolean()
+    .required()
+  }
+,
+  noSpecificTime: Joi.boolean()
+    .required()
+  }
+});
+export const StatusSchema = Joi.object({
+  code: Joi.string()
+    .required()
+  }
+});
+export const AttractionsSchema = Joi.object({
+  name: Joi.string()
+    .required()
+  }
+,
+  type: Joi.string()
+    .required()
+  }
+,
+  id: Joi.string()
+    .required()
+  }
+,
+  test: Joi.boolean()
+    .required()
+  }
+,
+  locale: Joi.string()
+    .required()
+  }
+,
+  images: Joi.array()
+    .required()
+  }
+,
+  classifications: Joi.array()
+    .required()
+  }
+,
+  links: Joi.object()
+    .required()
+  }
+});
+export const VenuesSchema = Joi.object({
+  name: Joi.string()
+    .required()
+  }
+,
+  type: Joi.string()
+    .required()
+  }
+,
+  id: Joi.string()
+    .required()
+  }
+,
+  test: Joi.boolean()
+    .required()
+  }
+,
+  locale: Joi.string()
+    .required()
+  }
+,
+  postalCode: Joi.number()
+    .required()
+  }
+,
+  timezone: Joi.string()
+    .required()
+  }
+,
+  city: Joi.object()
+    .required()
+  }
+,
+  state: Joi.object()
+    .required()
+  }
+,
+  country: Joi.object()
+    .required()
+  }
+,
+  address: Joi.object()
+    .required()
+  }
+,
+  location: Joi.object()
+    .required()
+  }
+,
+  markets: Joi.array()
+    .required()
+  }
+,
+  links: Joi.object()
+    .required()
+  }
+});
+export const CitySchema = Joi.object({
+  name: Joi.string()
+    .required()
+  }
+});
+export const StateSchema = Joi.object({
+  name: Joi.string()
+    .required()
+  }
+,
+  stateCode: Joi.string()
+    .required()
+  }
+});
+export const CountrySchema = Joi.object({
+  name: Joi.string()
+    .required()
+  }
+,
+  countryCode: Joi.string()
+    .required()
+  }
+});
+export const AddressSchema = Joi.object({
+  line1: Joi.string()
+    .required()
+  }
+});
+export const LocationSchema = Joi.object({
+  longitude: Joi.number()
+    .required()
+  }
+,
+  latitude: Joi.number()
+    .required()
+  }
+});
+export const MarketsSchema = Joi.object({
+  id: Joi.number()
+    .required()
+  }
+});
+export const IdNameSchema = Joi.object({
+  id: Joi.string()
+    .required()
+  }
+,
+  name: Joi.string()
+    .required()
+  }
+});
+"
+`;
+
+exports[`#joi can emit migration for eventResults json, w/ dense fields 1`] = `
+"const Joi = require(\\"joi\\");
+
+export const EventResultsSchema = Joi.object({
+  links: Joi.object()
+    .required()
+  }
+,
+  embedded: Joi.object()
+    .required()
+  }
+,
+  page: Joi.object()
+    .required()
+  }
+});
+export const EventResultsLinksSchema = Joi.object({
+  self: Joi.object()
+    .required()
+  }
+,
+  next: Joi.object()
+    .required()
+  }
+});
+export const EventResultsEmbeddedSchema = Joi.object({
+  events: Joi.array()
+    .required()
+  }
+});
+export const EventResultsPageSchema = Joi.object({
+  size: Joi.number()
+    .required()
+  }
+,
+  totalElements: Joi.number()
+    .required()
+  }
+,
+  totalPages: Joi.number()
+    .required()
+  }
+,
+  number: Joi.number()
+    .required()
+  }
+});
+export const EventResultsEmbeddedEventsSchema = Joi.object({
+  name: Joi.string()
+    .required()
+  }
+,
+  type: Joi.string()
+    .required()
+  }
+,
+  id: Joi.string()
+    .required()
+  }
+,
+  test: Joi.boolean()
+    .required()
+  }
+,
+  url: Joi.string()
+    .required()
+  }
+,
+  locale: Joi.string()
+    .required()
+  }
+,
+  images: Joi.array()
+    .required()
+  }
+,
+  sales: Joi.object()
+    .required()
+  }
+,
+  dates: Joi.object()
+    .required()
+  }
+,
+  classifications: Joi.array()
+    .required()
+  }
+,
+  promoter: Joi.object()
+    .required()
+  }
+,
+  links: Joi.object()
+    .required()
+  }
+,
+  embedded: Joi.object()
+    .required()
+  }
+});
+export const EventResultsEmbeddedEventsSalesSchema = Joi.object({
+  public: Joi.object()
+    .required()
+  }
+});
+export const EventResultsEmbeddedEventsDatesSchema = Joi.object({
+  start: Joi.object()
+    .required()
+  }
+,
+  timezone: Joi.string()
+    .required()
+  }
+,
+  status: Joi.object()
+    .required()
+  }
+});
+export const EventResultsEmbeddedEventsPromoterSchema = Joi.object({
+  id: Joi.number()
+    .required()
+  }
+});
+export const EventResultsEmbeddedEventsLinksSchema = Joi.object({
+  self: Joi.object()
+    .required()
+  }
+,
+  attractions: Joi.array()
+    .required()
+  }
+,
+  venues: Joi.array()
+    .required()
+  }
+});
+export const EventResultsEmbeddedEventsEmbeddedSchema = Joi.object({
+  venues: Joi.array()
+    .required()
+  }
+,
+  attractions: Joi.array()
+    .required()
+  }
+});
+export const EventResultsEmbeddedEventsSalesPublicSchema = Joi.object({
+  startDateTime: Joi.date()
+    .required()
+  }
+,
+  startTbd: Joi.boolean()
+    .required()
+  }
+,
+  endDateTime: Joi.date()
+    .required()
+  }
+});
+export const EventResultsEmbeddedEventsDatesStartSchema = Joi.object({
+  localDate: Joi.date()
+    .required()
+  }
+,
+  dateTbd: Joi.boolean()
+    .required()
+  }
+,
+  dateTba: Joi.boolean()
+    .required()
+  }
+,
+  timeTba: Joi.boolean()
+    .required()
+  }
+,
+  noSpecificTime: Joi.boolean()
+    .required()
+  }
+});
+export const EventResultsEmbeddedEventsDatesStatusSchema = Joi.object({
+  code: Joi.string()
+    .required()
+  }
+});
+export const EventResultsEmbeddedEventsEmbeddedVenuesSchema = Joi.object({
+  name: Joi.string()
+    .required()
+  }
+,
+  type: Joi.string()
+    .required()
+  }
+,
+  id: Joi.string()
+    .required()
+  }
+,
+  test: Joi.boolean()
+    .required()
+  }
+,
+  locale: Joi.string()
+    .required()
+  }
+,
+  postalCode: Joi.number()
+    .required()
+  }
+,
+  timezone: Joi.string()
+    .required()
+  }
+,
+  city: Joi.object()
+    .required()
+  }
+,
+  state: Joi.object()
+    .required()
+  }
+,
+  country: Joi.object()
+    .required()
+  }
+,
+  address: Joi.object()
+    .required()
+  }
+,
+  location: Joi.object()
+    .required()
+  }
+,
+  markets: Joi.array()
+    .required()
+  }
+,
+  links: Joi.object()
+    .required()
+  }
+});
+export const EventResultsEmbeddedEventsEmbeddedAttractionsSchema = Joi.object({
+  name: Joi.string()
+    .required()
+  }
+,
+  type: Joi.string()
+    .required()
+  }
+,
+  id: Joi.string()
+    .required()
+  }
+,
+  test: Joi.boolean()
+    .required()
+  }
+,
+  locale: Joi.string()
+    .required()
+  }
+,
+  images: Joi.array()
+    .required()
+  }
+,
+  classifications: Joi.array()
+    .required()
+  }
+,
+  links: Joi.object()
+    .required()
+  }
+});
+export const EventResultsEmbeddedEventsEmbeddedVenuesCitySchema = Joi.object({
+  name: Joi.string()
+    .required()
+  }
+});
+export const EventResultsEmbeddedEventsEmbeddedVenuesStateSchema = Joi.object({
+  name: Joi.string()
+    .required()
+  }
+,
+  stateCode: Joi.string()
+    .required()
+  }
+});
+export const EventResultsEmbeddedEventsEmbeddedVenuesCountrySchema = Joi.object({
+  name: Joi.string()
+    .required()
+  }
+,
+  countryCode: Joi.string()
+    .required()
+  }
+});
+export const EventResultsEmbeddedEventsEmbeddedVenuesAddressSchema = Joi.object({
+  line1: Joi.string()
+    .required()
+  }
+});
+export const EventResultsEmbeddedEventsEmbeddedVenuesLocationSchema = Joi.object({
+  longitude: Joi.number()
+    .required()
+  }
+,
+  latitude: Joi.number()
+    .required()
+  }
+});
+export const EventResultsEmbeddedEventsEmbeddedVenuesMarketsSchema = Joi.object({
+  id: Joi.number()
+    .required()
+  }
+});
+export const HrefTemplatedSchema = Joi.object({
+  href: Joi.string()
+    .required()
+  }
+,
+  templated: Joi.boolean()
+    .required()
+  }
+});
+export const ImagesSchema = Joi.object({
+  ratio: Joi.string()
+    .required()
+  }
+,
+  url: Joi.string()
+    .required()
+  }
+,
+  width: Joi.number()
+    .required()
+  }
+,
+  height: Joi.number()
+    .required()
+  }
+,
+  fallback: Joi.boolean()
+    .required()
+  }
+});
+export const ClassificationsSchema = Joi.object({
+  primary: Joi.boolean()
+    .required()
+  }
+,
+  segment: Joi.object()
+    .required()
+  }
+,
+  genre: Joi.object()
+    .required()
+  }
+,
+  subGenre: Joi.object()
+    .required()
+  }
+});
+export const IdNameSchema = Joi.object({
+  id: Joi.string()
+    .required()
+  }
+,
+  name: Joi.string()
+    .required()
+  }
+});
+export const HrefSchema = Joi.object({
+  href: Joi.string()
+    .required()
+  }
+});
+export const LinksSchema = Joi.object({
+  self: Joi.object()
+    .required()
+  }
+});
+"
+`;
+
+exports[`#joi can emit migration for pokemon json 1`] = `
+"const Joi = require(\\"joi\\");
+
+export const PokemonSchema = Joi.object({
+  abilities: Joi.object()
+    .required()
+  }
+,
+  baseExperience: Joi.number()
+    .required()
+  }
+,
+  forms: Joi.array()
+    .required()
+  }
+,
+  gameIndices: Joi.object()
+    .required()
+  }
+,
+  height: Joi.number()
+    .required()
+  }
+,
+  heldItems: Joi.array()
+    .required()
+  }
+,
+  id: Joi.number()
+    .required()
+  }
+,
+  isDefault: Joi.boolean()
+    .required()
+  }
+,
+  locationAreaEncounters: Joi.string()
+    .required()
+  }
+,
+  moves: Joi.object()
+    .required()
+  }
+,
+  name: Joi.string()
+    .required()
+  }
+,
+  order: Joi.number()
+    .required()
+  }
+,
+  species: Joi.object()
+    .required()
+  }
+,
+  sprites: Joi.object()
+    .required()
+  }
+,
+  stats: Joi.object()
+    .required()
+  }
+,
+  types: Joi.array()
+    .required()
+  }
+,
+  weight: Joi.number()
+    .required()
+  }
+});
+export const PokemonAbilitiesSchema = Joi.object({
+  ability: Joi.object()
+    .required()
+  }
+,
+  isHidden: Joi.boolean()
+    .required()
+  }
+,
+  slot: Joi.number()
+    .required()
+  }
+});
+export const PokemonFormsSchema = Joi.object({
+  name: Joi.string()
+    .required()
+  }
+,
+  url: Joi.string()
+    .required()
+  }
+});
+export const PokemonGameIndicesSchema = Joi.object({
+  gameIndex: Joi.number()
+    .required()
+  }
+,
+  version: Joi.object()
+    .required()
+  }
+});
+export const PokemonMovesSchema = Joi.object({
+  move: Joi.object()
+    .required()
+  }
+,
+  versionGroupDetails: Joi.array()
+    .required()
+  }
+});
+export const PokemonSpeciesSchema = Joi.object({
+  name: Joi.string()
+    .required()
+  }
+,
+  url: Joi.string()
+    .required()
+  }
+});
+export const PokemonSpritesSchema = Joi.object({
+  backDefault: Joi.string()
+    .required()
+  }
+,
+  backFemale: Joi.any()
+    .required()
+  }
+,
+  backShiny: Joi.string()
+    .required()
+  }
+,
+  backShinyFemale: Joi.any()
+    .required()
+  }
+,
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontFemale: Joi.any()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+,
+  frontShinyFemale: Joi.any()
+    .required()
+  }
+,
+  other: Joi.object()
+    .required()
+  }
+,
+  versions: Joi.object()
+    .required()
+  }
+});
+export const PokemonStatsSchema = Joi.object({
+  baseStat: Joi.number()
+    .required()
+  }
+,
+  effort: Joi.number()
+    .required()
+  }
+,
+  stat: Joi.object()
+    .required()
+  }
+});
+export const PokemonTypesSchema = Joi.object({
+  slot: Joi.number()
+    .required()
+  }
+,
+  type: Joi.object()
+    .required()
+  }
+});
+export const PokemonAbilitiesAbilitySchema = Joi.object({
+  name: Joi.string()
+    .required()
+  }
+,
+  url: Joi.string()
+    .required()
+  }
+});
+export const PokemonGameIndicesVersionSchema = Joi.object({
+  name: Joi.string()
+    .required()
+  }
+,
+  url: Joi.string()
+    .required()
+  }
+});
+export const PokemonMovesMoveSchema = Joi.object({
+  name: Joi.string()
+    .required()
+  }
+,
+  url: Joi.string()
+    .required()
+  }
+});
+export const PokemonMovesVersionGroupDetailsSchema = Joi.object({
+  levelLearnedAt: Joi.number()
+    .required()
+  }
+,
+  moveLearnMethod: Joi.object()
+    .required()
+  }
+,
+  versionGroup: Joi.object()
+    .required()
+  }
+});
+export const PokemonMovesVersionGroupDetailsMoveLearnMethodSchema = Joi.object({
+  name: Joi.string()
+    .required()
+    .enum([\\"machine\\", \\"tutor\\", \\"level-up\\", \\"egg\\"])
+  }
+,
+  url: Joi.string()
+    .required()
+    .enum([\\"https://pokeapi.co/api/v2/move-learn-method/4/\\", \\"https://pokeapi.co/api/v2/move-learn-method/3/\\", \\"https://pokeapi.co/api/v2/move-learn-method/1/\\", \\"https://pokeapi.co/api/v2/move-learn-method/2/\\"])
+  }
+});
+export const PokemonMovesVersionGroupDetailsVersionGroupSchema = Joi.object({
+  name: Joi.string()
+    .required()
+  }
+,
+  url: Joi.string()
+    .required()
+  }
+});
+export const PokemonSpritesOtherSchema = Joi.object({
+  dreamWorld: Joi.object()
+    .required()
+  }
+,
+  officialArtwork: Joi.object()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsSchema = Joi.object({
+  generationI: Joi.object()
+    .required()
+  }
+,
+  generationIi: Joi.object()
+    .required()
+  }
+,
+  generationIii: Joi.object()
+    .required()
+  }
+,
+  generationIv: Joi.object()
+    .required()
+  }
+,
+  generationV: Joi.object()
+    .required()
+  }
+,
+  generationVi: Joi.object()
+    .required()
+  }
+,
+  generationVii: Joi.object()
+    .required()
+  }
+,
+  generationViii: Joi.object()
+    .required()
+  }
+});
+export const PokemonSpritesOtherDreamWorldSchema = Joi.object({
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontFemale: Joi.any()
+    .required()
+  }
+});
+export const PokemonSpritesOtherOfficialArtworkSchema = Joi.object({
+  frontDefault: Joi.string()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationISchema = Joi.object({
+  redBlue: Joi.object()
+    .required()
+  }
+,
+  yellow: Joi.object()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationIiSchema = Joi.object({
+  crystal: Joi.object()
+    .required()
+  }
+,
+  gold: Joi.object()
+    .required()
+  }
+,
+  silver: Joi.object()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationIiiSchema = Joi.object({
+  emerald: Joi.object()
+    .required()
+  }
+,
+  fireredLeafgreen: Joi.object()
+    .required()
+  }
+,
+  rubySapphire: Joi.object()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationIvSchema = Joi.object({
+  diamondPearl: Joi.object()
+    .required()
+  }
+,
+  heartgoldSoulsilver: Joi.object()
+    .required()
+  }
+,
+  platinum: Joi.object()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationVSchema = Joi.object({
+  blackWhite: Joi.object()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationViSchema = Joi.object({
+  omegarubyAlphasapphire: Joi.object()
+    .required()
+  }
+,
+  xY: Joi.object()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationViiSchema = Joi.object({
+  icons: Joi.object()
+    .required()
+  }
+,
+  ultraSunUltraMoon: Joi.object()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationViiiSchema = Joi.object({
+  icons: Joi.object()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationIRedBlueSchema = Joi.object({
+  backDefault: Joi.string()
+    .required()
+  }
+,
+  backGray: Joi.string()
+    .required()
+  }
+,
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontGray: Joi.string()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationIYellowSchema = Joi.object({
+  backDefault: Joi.string()
+    .required()
+  }
+,
+  backGray: Joi.string()
+    .required()
+  }
+,
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontGray: Joi.string()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationIiCrystalSchema = Joi.object({
+  backDefault: Joi.string()
+    .required()
+  }
+,
+  backShiny: Joi.string()
+    .required()
+  }
+,
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationIiGoldSchema = Joi.object({
+  backDefault: Joi.string()
+    .required()
+  }
+,
+  backShiny: Joi.string()
+    .required()
+  }
+,
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationIiSilverSchema = Joi.object({
+  backDefault: Joi.string()
+    .required()
+  }
+,
+  backShiny: Joi.string()
+    .required()
+  }
+,
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationIiiEmeraldSchema = Joi.object({
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationIiiFireredLeafgreenSchema = Joi.object({
+  backDefault: Joi.string()
+    .required()
+  }
+,
+  backShiny: Joi.string()
+    .required()
+  }
+,
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationIiiRubySapphireSchema = Joi.object({
+  backDefault: Joi.string()
+    .required()
+  }
+,
+  backShiny: Joi.string()
+    .required()
+  }
+,
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationIvDiamondPearlSchema = Joi.object({
+  backDefault: Joi.string()
+    .required()
+  }
+,
+  backFemale: Joi.any()
+    .required()
+  }
+,
+  backShiny: Joi.string()
+    .required()
+  }
+,
+  backShinyFemale: Joi.any()
+    .required()
+  }
+,
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontFemale: Joi.any()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+,
+  frontShinyFemale: Joi.any()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationIvHeartgoldSoulsilverSchema = Joi.object({
+  backDefault: Joi.string()
+    .required()
+  }
+,
+  backFemale: Joi.any()
+    .required()
+  }
+,
+  backShiny: Joi.string()
+    .required()
+  }
+,
+  backShinyFemale: Joi.any()
+    .required()
+  }
+,
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontFemale: Joi.any()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+,
+  frontShinyFemale: Joi.any()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationIvPlatinumSchema = Joi.object({
+  backDefault: Joi.string()
+    .required()
+  }
+,
+  backFemale: Joi.any()
+    .required()
+  }
+,
+  backShiny: Joi.string()
+    .required()
+  }
+,
+  backShinyFemale: Joi.any()
+    .required()
+  }
+,
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontFemale: Joi.any()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+,
+  frontShinyFemale: Joi.any()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationVBlackWhiteSchema = Joi.object({
+  animated: Joi.object()
+    .required()
+  }
+,
+  backDefault: Joi.string()
+    .required()
+  }
+,
+  backFemale: Joi.any()
+    .required()
+  }
+,
+  backShiny: Joi.string()
+    .required()
+  }
+,
+  backShinyFemale: Joi.any()
+    .required()
+  }
+,
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontFemale: Joi.any()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+,
+  frontShinyFemale: Joi.any()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationVBlackWhiteAnimatedSchema = Joi.object({
+  backDefault: Joi.string()
+    .required()
+  }
+,
+  backFemale: Joi.any()
+    .required()
+  }
+,
+  backShiny: Joi.string()
+    .required()
+  }
+,
+  backShinyFemale: Joi.any()
+    .required()
+  }
+,
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontFemale: Joi.any()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+,
+  frontShinyFemale: Joi.any()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationViOmegarubyAlphasapphireSchema = Joi.object({
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontFemale: Joi.any()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+,
+  frontShinyFemale: Joi.any()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationViXYSchema = Joi.object({
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontFemale: Joi.any()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+,
+  frontShinyFemale: Joi.any()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationViiIconsSchema = Joi.object({
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontFemale: Joi.any()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationViiUltraSunUltraMoonSchema = Joi.object({
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontFemale: Joi.any()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+,
+  frontShinyFemale: Joi.any()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationViiiIconsSchema = Joi.object({
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontFemale: Joi.any()
+    .required()
+  }
+});
+export const PokemonStatsStatSchema = Joi.object({
+  name: Joi.string()
+    .required()
+  }
+,
+  url: Joi.string()
+    .required()
+  }
+});
+export const PokemonTypesTypeSchema = Joi.object({
+  name: Joi.string()
+    .required()
+  }
+,
+  url: Joi.string()
+    .required()
+  }
+});
+"
+`;
+
+exports[`#joi can emit migration for pokemon json, w/ dense & trim fields 1`] = `
+"const Joi = require(\\"joi\\");
+
+export const PokemonSchema = Joi.object({
+  abilities: Joi.object()
+    .required()
+  }
+,
+  baseExperience: Joi.number()
+    .required()
+  }
+,
+  forms: Joi.array()
+    .required()
+  }
+,
+  gameIndices: Joi.object()
+    .required()
+  }
+,
+  height: Joi.number()
+    .required()
+  }
+,
+  heldItems: Joi.array()
+    .required()
+  }
+,
+  id: Joi.number()
+    .required()
+  }
+,
+  isDefault: Joi.boolean()
+    .required()
+  }
+,
+  locationAreaEncounters: Joi.string()
+    .required()
+  }
+,
+  moves: Joi.object()
+    .required()
+  }
+,
+  name: Joi.string()
+    .required()
+  }
+,
+  order: Joi.number()
+    .required()
+  }
+,
+  species: Joi.object()
+    .required()
+  }
+,
+  sprites: Joi.object()
+    .required()
+  }
+,
+  stats: Joi.object()
+    .required()
+  }
+,
+  types: Joi.array()
+    .required()
+  }
+,
+  weight: Joi.number()
+    .required()
+  }
+});
+export const AbilitiesSchema = Joi.object({
+  ability: Joi.object()
+    .required()
+  }
+,
+  isHidden: Joi.boolean()
+    .required()
+  }
+,
+  slot: Joi.number()
+    .required()
+  }
+});
+export const GameIndicesSchema = Joi.object({
+  gameIndex: Joi.number()
+    .required()
+  }
+,
+  version: Joi.object()
+    .required()
+  }
+});
+export const MovesSchema = Joi.object({
+  move: Joi.object()
+    .required()
+  }
+,
+  versionGroupDetails: Joi.array()
+    .required()
+  }
+});
+export const SpritesSchema = Joi.object({
+  backDefault: Joi.string()
+    .required()
+  }
+,
+  backFemale: Joi.any()
+    .required()
+  }
+,
+  backShiny: Joi.string()
+    .required()
+  }
+,
+  backShinyFemale: Joi.any()
+    .required()
+  }
+,
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontFemale: Joi.any()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+,
+  frontShinyFemale: Joi.any()
+    .required()
+  }
+,
+  other: Joi.object()
+    .required()
+  }
+,
+  versions: Joi.object()
+    .required()
+  }
+});
+export const StatsSchema = Joi.object({
+  baseStat: Joi.number()
+    .required()
+  }
+,
+  effort: Joi.number()
+    .required()
+  }
+,
+  stat: Joi.object()
+    .required()
+  }
+});
+export const TypesSchema = Joi.object({
+  slot: Joi.number()
+    .required()
+  }
+,
+  type: Joi.object()
+    .required()
+  }
+});
+export const VersionGroupDetailsSchema = Joi.object({
+  levelLearnedAt: Joi.number()
+    .required()
+  }
+,
+  moveLearnMethod: Joi.object()
+    .required()
+  }
+,
+  versionGroup: Joi.object()
+    .required()
+  }
+});
+export const OtherSchema = Joi.object({
+  dreamWorld: Joi.object()
+    .required()
+  }
+,
+  officialArtwork: Joi.object()
+    .required()
+  }
+});
+export const VersionsSchema = Joi.object({
+  generationI: Joi.object()
+    .required()
+  }
+,
+  generationIi: Joi.object()
+    .required()
+  }
+,
+  generationIii: Joi.object()
+    .required()
+  }
+,
+  generationIv: Joi.object()
+    .required()
+  }
+,
+  generationV: Joi.object()
+    .required()
+  }
+,
+  generationVi: Joi.object()
+    .required()
+  }
+,
+  generationVii: Joi.object()
+    .required()
+  }
+,
+  generationViii: Joi.object()
+    .required()
+  }
+});
+export const OfficialArtworkSchema = Joi.object({
+  frontDefault: Joi.string()
+    .required()
+  }
+});
+export const GenerationISchema = Joi.object({
+  redBlue: Joi.object()
+    .required()
+  }
+,
+  yellow: Joi.object()
+    .required()
+  }
+});
+export const GenerationIiSchema = Joi.object({
+  crystal: Joi.object()
+    .required()
+  }
+,
+  gold: Joi.object()
+    .required()
+  }
+,
+  silver: Joi.object()
+    .required()
+  }
+});
+export const GenerationIiiSchema = Joi.object({
+  emerald: Joi.object()
+    .required()
+  }
+,
+  fireredLeafgreen: Joi.object()
+    .required()
+  }
+,
+  rubySapphire: Joi.object()
+    .required()
+  }
+});
+export const GenerationIvSchema = Joi.object({
+  diamondPearl: Joi.object()
+    .required()
+  }
+,
+  heartgoldSoulsilver: Joi.object()
+    .required()
+  }
+,
+  platinum: Joi.object()
+    .required()
+  }
+});
+export const GenerationVSchema = Joi.object({
+  blackWhite: Joi.object()
+    .required()
+  }
+});
+export const GenerationViSchema = Joi.object({
+  omegarubyAlphasapphire: Joi.object()
+    .required()
+  }
+,
+  xY: Joi.object()
+    .required()
+  }
+});
+export const GenerationViiSchema = Joi.object({
+  icons: Joi.object()
+    .required()
+  }
+,
+  ultraSunUltraMoon: Joi.object()
+    .required()
+  }
+});
+export const GenerationViiiSchema = Joi.object({
+  icons: Joi.object()
+    .required()
+  }
+});
+export const CrystalSchema = Joi.object({
+  backDefault: Joi.string()
+    .required()
+  }
+,
+  backShiny: Joi.string()
+    .required()
+  }
+,
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+});
+export const GoldSchema = Joi.object({
+  backDefault: Joi.string()
+    .required()
+  }
+,
+  backShiny: Joi.string()
+    .required()
+  }
+,
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+});
+export const SilverSchema = Joi.object({
+  backDefault: Joi.string()
+    .required()
+  }
+,
+  backShiny: Joi.string()
+    .required()
+  }
+,
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+});
+export const EmeraldSchema = Joi.object({
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+});
+export const FireredLeafgreenSchema = Joi.object({
+  backDefault: Joi.string()
+    .required()
+  }
+,
+  backShiny: Joi.string()
+    .required()
+  }
+,
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+});
+export const RubySapphireSchema = Joi.object({
+  backDefault: Joi.string()
+    .required()
+  }
+,
+  backShiny: Joi.string()
+    .required()
+  }
+,
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+});
+export const BlackWhiteSchema = Joi.object({
+  animated: Joi.object()
+    .required()
+  }
+,
+  backDefault: Joi.string()
+    .required()
+  }
+,
+  backFemale: Joi.any()
+    .required()
+  }
+,
+  backShiny: Joi.string()
+    .required()
+  }
+,
+  backShinyFemale: Joi.any()
+    .required()
+  }
+,
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontFemale: Joi.any()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+,
+  frontShinyFemale: Joi.any()
+    .required()
+  }
+});
+export const NameUrlSchema = Joi.object({
+  name: Joi.string()
+    .required()
+  }
+,
+  url: Joi.string()
+    .required()
+  }
+});
+export const FrontDefaultFrontFemaleSchema = Joi.object({
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontFemale: Joi.any()
+    .required()
+  }
+});
+export const RedBlueYellowSchema = Joi.object({
+  backDefault: Joi.string()
+    .required()
+  }
+,
+  backGray: Joi.string()
+    .required()
+  }
+,
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontGray: Joi.string()
+    .required()
+  }
+});
+export const AnimatedDiamondPearlHeartgoldSoulsilverPlatinumSchema = Joi.object({
+  backDefault: Joi.string()
+    .required()
+  }
+,
+  backFemale: Joi.any()
+    .required()
+  }
+,
+  backShiny: Joi.string()
+    .required()
+  }
+,
+  backShinyFemale: Joi.any()
+    .required()
+  }
+,
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontFemale: Joi.any()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+,
+  frontShinyFemale: Joi.any()
+    .required()
+  }
+});
+export const OmegarubyAlphasapphireUltraSunUltraMoonXYSchema = Joi.object({
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontFemale: Joi.any()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+,
+  frontShinyFemale: Joi.any()
+    .required()
+  }
+});
+"
+`;
+
+exports[`#joi can emit migration for pokemon json, w/ dense fields 1`] = `
+"const Joi = require(\\"joi\\");
+
+export const PokemonSchema = Joi.object({
+  abilities: Joi.object()
+    .required()
+  }
+,
+  baseExperience: Joi.number()
+    .required()
+  }
+,
+  forms: Joi.array()
+    .required()
+  }
+,
+  gameIndices: Joi.object()
+    .required()
+  }
+,
+  height: Joi.number()
+    .required()
+  }
+,
+  heldItems: Joi.array()
+    .required()
+  }
+,
+  id: Joi.number()
+    .required()
+  }
+,
+  isDefault: Joi.boolean()
+    .required()
+  }
+,
+  locationAreaEncounters: Joi.string()
+    .required()
+  }
+,
+  moves: Joi.object()
+    .required()
+  }
+,
+  name: Joi.string()
+    .required()
+  }
+,
+  order: Joi.number()
+    .required()
+  }
+,
+  species: Joi.object()
+    .required()
+  }
+,
+  sprites: Joi.object()
+    .required()
+  }
+,
+  stats: Joi.object()
+    .required()
+  }
+,
+  types: Joi.array()
+    .required()
+  }
+,
+  weight: Joi.number()
+    .required()
+  }
+});
+export const PokemonAbilitiesSchema = Joi.object({
+  ability: Joi.object()
+    .required()
+  }
+,
+  isHidden: Joi.boolean()
+    .required()
+  }
+,
+  slot: Joi.number()
+    .required()
+  }
+});
+export const PokemonGameIndicesSchema = Joi.object({
+  gameIndex: Joi.number()
+    .required()
+  }
+,
+  version: Joi.object()
+    .required()
+  }
+});
+export const PokemonMovesSchema = Joi.object({
+  move: Joi.object()
+    .required()
+  }
+,
+  versionGroupDetails: Joi.array()
+    .required()
+  }
+});
+export const PokemonSpritesSchema = Joi.object({
+  backDefault: Joi.string()
+    .required()
+  }
+,
+  backFemale: Joi.any()
+    .required()
+  }
+,
+  backShiny: Joi.string()
+    .required()
+  }
+,
+  backShinyFemale: Joi.any()
+    .required()
+  }
+,
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontFemale: Joi.any()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+,
+  frontShinyFemale: Joi.any()
+    .required()
+  }
+,
+  other: Joi.object()
+    .required()
+  }
+,
+  versions: Joi.object()
+    .required()
+  }
+});
+export const PokemonStatsSchema = Joi.object({
+  baseStat: Joi.number()
+    .required()
+  }
+,
+  effort: Joi.number()
+    .required()
+  }
+,
+  stat: Joi.object()
+    .required()
+  }
+});
+export const PokemonTypesSchema = Joi.object({
+  slot: Joi.number()
+    .required()
+  }
+,
+  type: Joi.object()
+    .required()
+  }
+});
+export const PokemonMovesVersionGroupDetailsSchema = Joi.object({
+  levelLearnedAt: Joi.number()
+    .required()
+  }
+,
+  moveLearnMethod: Joi.object()
+    .required()
+  }
+,
+  versionGroup: Joi.object()
+    .required()
+  }
+});
+export const PokemonSpritesOtherSchema = Joi.object({
+  dreamWorld: Joi.object()
+    .required()
+  }
+,
+  officialArtwork: Joi.object()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsSchema = Joi.object({
+  generationI: Joi.object()
+    .required()
+  }
+,
+  generationIi: Joi.object()
+    .required()
+  }
+,
+  generationIii: Joi.object()
+    .required()
+  }
+,
+  generationIv: Joi.object()
+    .required()
+  }
+,
+  generationV: Joi.object()
+    .required()
+  }
+,
+  generationVi: Joi.object()
+    .required()
+  }
+,
+  generationVii: Joi.object()
+    .required()
+  }
+,
+  generationViii: Joi.object()
+    .required()
+  }
+});
+export const PokemonSpritesOtherOfficialArtworkSchema = Joi.object({
+  frontDefault: Joi.string()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationISchema = Joi.object({
+  redBlue: Joi.object()
+    .required()
+  }
+,
+  yellow: Joi.object()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationIiSchema = Joi.object({
+  crystal: Joi.object()
+    .required()
+  }
+,
+  gold: Joi.object()
+    .required()
+  }
+,
+  silver: Joi.object()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationIiiSchema = Joi.object({
+  emerald: Joi.object()
+    .required()
+  }
+,
+  fireredLeafgreen: Joi.object()
+    .required()
+  }
+,
+  rubySapphire: Joi.object()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationIvSchema = Joi.object({
+  diamondPearl: Joi.object()
+    .required()
+  }
+,
+  heartgoldSoulsilver: Joi.object()
+    .required()
+  }
+,
+  platinum: Joi.object()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationVSchema = Joi.object({
+  blackWhite: Joi.object()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationViSchema = Joi.object({
+  omegarubyAlphasapphire: Joi.object()
+    .required()
+  }
+,
+  xY: Joi.object()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationViiSchema = Joi.object({
+  icons: Joi.object()
+    .required()
+  }
+,
+  ultraSunUltraMoon: Joi.object()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationViiiSchema = Joi.object({
+  icons: Joi.object()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationIiCrystalSchema = Joi.object({
+  backDefault: Joi.string()
+    .required()
+  }
+,
+  backShiny: Joi.string()
+    .required()
+  }
+,
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationIiGoldSchema = Joi.object({
+  backDefault: Joi.string()
+    .required()
+  }
+,
+  backShiny: Joi.string()
+    .required()
+  }
+,
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationIiSilverSchema = Joi.object({
+  backDefault: Joi.string()
+    .required()
+  }
+,
+  backShiny: Joi.string()
+    .required()
+  }
+,
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationIiiEmeraldSchema = Joi.object({
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationIiiFireredLeafgreenSchema = Joi.object({
+  backDefault: Joi.string()
+    .required()
+  }
+,
+  backShiny: Joi.string()
+    .required()
+  }
+,
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationIiiRubySapphireSchema = Joi.object({
+  backDefault: Joi.string()
+    .required()
+  }
+,
+  backShiny: Joi.string()
+    .required()
+  }
+,
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationIvDiamondPearlSchema = Joi.object({
+  backDefault: Joi.string()
+    .required()
+  }
+,
+  backFemale: Joi.any()
+    .required()
+  }
+,
+  backShiny: Joi.string()
+    .required()
+  }
+,
+  backShinyFemale: Joi.any()
+    .required()
+  }
+,
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontFemale: Joi.any()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+,
+  frontShinyFemale: Joi.any()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationIvHeartgoldSoulsilverSchema = Joi.object({
+  backDefault: Joi.string()
+    .required()
+  }
+,
+  backFemale: Joi.any()
+    .required()
+  }
+,
+  backShiny: Joi.string()
+    .required()
+  }
+,
+  backShinyFemale: Joi.any()
+    .required()
+  }
+,
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontFemale: Joi.any()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+,
+  frontShinyFemale: Joi.any()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationIvPlatinumSchema = Joi.object({
+  backDefault: Joi.string()
+    .required()
+  }
+,
+  backFemale: Joi.any()
+    .required()
+  }
+,
+  backShiny: Joi.string()
+    .required()
+  }
+,
+  backShinyFemale: Joi.any()
+    .required()
+  }
+,
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontFemale: Joi.any()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+,
+  frontShinyFemale: Joi.any()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationVBlackWhiteSchema = Joi.object({
+  animated: Joi.object()
+    .required()
+  }
+,
+  backDefault: Joi.string()
+    .required()
+  }
+,
+  backFemale: Joi.any()
+    .required()
+  }
+,
+  backShiny: Joi.string()
+    .required()
+  }
+,
+  backShinyFemale: Joi.any()
+    .required()
+  }
+,
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontFemale: Joi.any()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+,
+  frontShinyFemale: Joi.any()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationVBlackWhiteAnimatedSchema = Joi.object({
+  backDefault: Joi.string()
+    .required()
+  }
+,
+  backFemale: Joi.any()
+    .required()
+  }
+,
+  backShiny: Joi.string()
+    .required()
+  }
+,
+  backShinyFemale: Joi.any()
+    .required()
+  }
+,
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontFemale: Joi.any()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+,
+  frontShinyFemale: Joi.any()
+    .required()
+  }
+});
+export const NameUrlSchema = Joi.object({
+  name: Joi.string()
+    .required()
+  }
+,
+  url: Joi.string()
+    .required()
+  }
+});
+export const FrontDefaultFrontFemaleSchema = Joi.object({
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontFemale: Joi.any()
+    .required()
+  }
+});
+export const RedBlueYellowSchema = Joi.object({
+  backDefault: Joi.string()
+    .required()
+  }
+,
+  backGray: Joi.string()
+    .required()
+  }
+,
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontGray: Joi.string()
+    .required()
+  }
+});
+export const GenerationViiOmegarubyAlphasapphireUltraSunUltraMoonXYSchema = Joi.object({
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontFemale: Joi.any()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+,
+  frontShinyFemale: Joi.any()
+    .required()
+  }
+});
+"
+`;
+
+exports[`#joi can emit module exports correctly 1`] = `
+"const Joi = require(\\"joi\\");
+
+export const PokemonSchema = Joi.object({
+  abilities: Joi.object()
+    .required()
+  }
+,
+  baseExperience: Joi.number()
+    .required()
+  }
+,
+  forms: Joi.array()
+    .required()
+  }
+,
+  gameIndices: Joi.object()
+    .required()
+  }
+,
+  height: Joi.number()
+    .required()
+  }
+,
+  heldItems: Joi.array()
+    .required()
+  }
+,
+  id: Joi.number()
+    .required()
+  }
+,
+  isDefault: Joi.boolean()
+    .required()
+  }
+,
+  locationAreaEncounters: Joi.string()
+    .required()
+  }
+,
+  moves: Joi.object()
+    .required()
+  }
+,
+  name: Joi.string()
+    .required()
+  }
+,
+  order: Joi.number()
+    .required()
+  }
+,
+  species: Joi.object()
+    .required()
+  }
+,
+  sprites: Joi.object()
+    .required()
+  }
+,
+  stats: Joi.object()
+    .required()
+  }
+,
+  types: Joi.array()
+    .required()
+  }
+,
+  weight: Joi.number()
+    .required()
+  }
+});
+export const PokemonAbilitiesSchema = Joi.object({
+  ability: Joi.object()
+    .required()
+  }
+,
+  isHidden: Joi.boolean()
+    .required()
+  }
+,
+  slot: Joi.number()
+    .required()
+  }
+});
+export const PokemonFormsSchema = Joi.object({
+  name: Joi.string()
+    .required()
+  }
+,
+  url: Joi.string()
+    .required()
+  }
+});
+export const PokemonGameIndicesSchema = Joi.object({
+  gameIndex: Joi.number()
+    .required()
+  }
+,
+  version: Joi.object()
+    .required()
+  }
+});
+export const PokemonMovesSchema = Joi.object({
+  move: Joi.object()
+    .required()
+  }
+,
+  versionGroupDetails: Joi.array()
+    .required()
+  }
+});
+export const PokemonSpeciesSchema = Joi.object({
+  name: Joi.string()
+    .required()
+  }
+,
+  url: Joi.string()
+    .required()
+  }
+});
+export const PokemonSpritesSchema = Joi.object({
+  backDefault: Joi.string()
+    .required()
+  }
+,
+  backFemale: Joi.any()
+    .required()
+  }
+,
+  backShiny: Joi.string()
+    .required()
+  }
+,
+  backShinyFemale: Joi.any()
+    .required()
+  }
+,
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontFemale: Joi.any()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+,
+  frontShinyFemale: Joi.any()
+    .required()
+  }
+,
+  other: Joi.object()
+    .required()
+  }
+,
+  versions: Joi.object()
+    .required()
+  }
+});
+export const PokemonStatsSchema = Joi.object({
+  baseStat: Joi.number()
+    .required()
+  }
+,
+  effort: Joi.number()
+    .required()
+  }
+,
+  stat: Joi.object()
+    .required()
+  }
+});
+export const PokemonTypesSchema = Joi.object({
+  slot: Joi.number()
+    .required()
+  }
+,
+  type: Joi.object()
+    .required()
+  }
+});
+export const PokemonAbilitiesAbilitySchema = Joi.object({
+  name: Joi.string()
+    .required()
+  }
+,
+  url: Joi.string()
+    .required()
+  }
+});
+export const PokemonGameIndicesVersionSchema = Joi.object({
+  name: Joi.string()
+    .required()
+  }
+,
+  url: Joi.string()
+    .required()
+  }
+});
+export const PokemonMovesMoveSchema = Joi.object({
+  name: Joi.string()
+    .required()
+  }
+,
+  url: Joi.string()
+    .required()
+  }
+});
+export const PokemonMovesVersionGroupDetailsSchema = Joi.object({
+  levelLearnedAt: Joi.number()
+    .required()
+  }
+,
+  moveLearnMethod: Joi.object()
+    .required()
+  }
+,
+  versionGroup: Joi.object()
+    .required()
+  }
+});
+export const PokemonMovesVersionGroupDetailsMoveLearnMethodSchema = Joi.object({
+  name: Joi.string()
+    .required()
+    .enum([\\"machine\\", \\"tutor\\", \\"level-up\\", \\"egg\\"])
+  }
+,
+  url: Joi.string()
+    .required()
+    .enum([\\"https://pokeapi.co/api/v2/move-learn-method/4/\\", \\"https://pokeapi.co/api/v2/move-learn-method/3/\\", \\"https://pokeapi.co/api/v2/move-learn-method/1/\\", \\"https://pokeapi.co/api/v2/move-learn-method/2/\\"])
+  }
+});
+export const PokemonMovesVersionGroupDetailsVersionGroupSchema = Joi.object({
+  name: Joi.string()
+    .required()
+  }
+,
+  url: Joi.string()
+    .required()
+  }
+});
+export const PokemonSpritesOtherSchema = Joi.object({
+  dreamWorld: Joi.object()
+    .required()
+  }
+,
+  officialArtwork: Joi.object()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsSchema = Joi.object({
+  generationI: Joi.object()
+    .required()
+  }
+,
+  generationIi: Joi.object()
+    .required()
+  }
+,
+  generationIii: Joi.object()
+    .required()
+  }
+,
+  generationIv: Joi.object()
+    .required()
+  }
+,
+  generationV: Joi.object()
+    .required()
+  }
+,
+  generationVi: Joi.object()
+    .required()
+  }
+,
+  generationVii: Joi.object()
+    .required()
+  }
+,
+  generationViii: Joi.object()
+    .required()
+  }
+});
+export const PokemonSpritesOtherDreamWorldSchema = Joi.object({
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontFemale: Joi.any()
+    .required()
+  }
+});
+export const PokemonSpritesOtherOfficialArtworkSchema = Joi.object({
+  frontDefault: Joi.string()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationISchema = Joi.object({
+  redBlue: Joi.object()
+    .required()
+  }
+,
+  yellow: Joi.object()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationIiSchema = Joi.object({
+  crystal: Joi.object()
+    .required()
+  }
+,
+  gold: Joi.object()
+    .required()
+  }
+,
+  silver: Joi.object()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationIiiSchema = Joi.object({
+  emerald: Joi.object()
+    .required()
+  }
+,
+  fireredLeafgreen: Joi.object()
+    .required()
+  }
+,
+  rubySapphire: Joi.object()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationIvSchema = Joi.object({
+  diamondPearl: Joi.object()
+    .required()
+  }
+,
+  heartgoldSoulsilver: Joi.object()
+    .required()
+  }
+,
+  platinum: Joi.object()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationVSchema = Joi.object({
+  blackWhite: Joi.object()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationViSchema = Joi.object({
+  omegarubyAlphasapphire: Joi.object()
+    .required()
+  }
+,
+  xY: Joi.object()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationViiSchema = Joi.object({
+  icons: Joi.object()
+    .required()
+  }
+,
+  ultraSunUltraMoon: Joi.object()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationViiiSchema = Joi.object({
+  icons: Joi.object()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationIRedBlueSchema = Joi.object({
+  backDefault: Joi.string()
+    .required()
+  }
+,
+  backGray: Joi.string()
+    .required()
+  }
+,
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontGray: Joi.string()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationIYellowSchema = Joi.object({
+  backDefault: Joi.string()
+    .required()
+  }
+,
+  backGray: Joi.string()
+    .required()
+  }
+,
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontGray: Joi.string()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationIiCrystalSchema = Joi.object({
+  backDefault: Joi.string()
+    .required()
+  }
+,
+  backShiny: Joi.string()
+    .required()
+  }
+,
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationIiGoldSchema = Joi.object({
+  backDefault: Joi.string()
+    .required()
+  }
+,
+  backShiny: Joi.string()
+    .required()
+  }
+,
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationIiSilverSchema = Joi.object({
+  backDefault: Joi.string()
+    .required()
+  }
+,
+  backShiny: Joi.string()
+    .required()
+  }
+,
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationIiiEmeraldSchema = Joi.object({
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationIiiFireredLeafgreenSchema = Joi.object({
+  backDefault: Joi.string()
+    .required()
+  }
+,
+  backShiny: Joi.string()
+    .required()
+  }
+,
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationIiiRubySapphireSchema = Joi.object({
+  backDefault: Joi.string()
+    .required()
+  }
+,
+  backShiny: Joi.string()
+    .required()
+  }
+,
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationIvDiamondPearlSchema = Joi.object({
+  backDefault: Joi.string()
+    .required()
+  }
+,
+  backFemale: Joi.any()
+    .required()
+  }
+,
+  backShiny: Joi.string()
+    .required()
+  }
+,
+  backShinyFemale: Joi.any()
+    .required()
+  }
+,
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontFemale: Joi.any()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+,
+  frontShinyFemale: Joi.any()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationIvHeartgoldSoulsilverSchema = Joi.object({
+  backDefault: Joi.string()
+    .required()
+  }
+,
+  backFemale: Joi.any()
+    .required()
+  }
+,
+  backShiny: Joi.string()
+    .required()
+  }
+,
+  backShinyFemale: Joi.any()
+    .required()
+  }
+,
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontFemale: Joi.any()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+,
+  frontShinyFemale: Joi.any()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationIvPlatinumSchema = Joi.object({
+  backDefault: Joi.string()
+    .required()
+  }
+,
+  backFemale: Joi.any()
+    .required()
+  }
+,
+  backShiny: Joi.string()
+    .required()
+  }
+,
+  backShinyFemale: Joi.any()
+    .required()
+  }
+,
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontFemale: Joi.any()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+,
+  frontShinyFemale: Joi.any()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationVBlackWhiteSchema = Joi.object({
+  animated: Joi.object()
+    .required()
+  }
+,
+  backDefault: Joi.string()
+    .required()
+  }
+,
+  backFemale: Joi.any()
+    .required()
+  }
+,
+  backShiny: Joi.string()
+    .required()
+  }
+,
+  backShinyFemale: Joi.any()
+    .required()
+  }
+,
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontFemale: Joi.any()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+,
+  frontShinyFemale: Joi.any()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationVBlackWhiteAnimatedSchema = Joi.object({
+  backDefault: Joi.string()
+    .required()
+  }
+,
+  backFemale: Joi.any()
+    .required()
+  }
+,
+  backShiny: Joi.string()
+    .required()
+  }
+,
+  backShinyFemale: Joi.any()
+    .required()
+  }
+,
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontFemale: Joi.any()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+,
+  frontShinyFemale: Joi.any()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationViOmegarubyAlphasapphireSchema = Joi.object({
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontFemale: Joi.any()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+,
+  frontShinyFemale: Joi.any()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationViXYSchema = Joi.object({
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontFemale: Joi.any()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+,
+  frontShinyFemale: Joi.any()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationViiIconsSchema = Joi.object({
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontFemale: Joi.any()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationViiUltraSunUltraMoonSchema = Joi.object({
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontFemale: Joi.any()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+,
+  frontShinyFemale: Joi.any()
+    .required()
+  }
+});
+export const PokemonSpritesVersionsGenerationViiiIconsSchema = Joi.object({
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontFemale: Joi.any()
+    .required()
+  }
+});
+export const PokemonStatsStatSchema = Joi.object({
+  name: Joi.string()
+    .required()
+  }
+,
+  url: Joi.string()
+    .required()
+  }
+});
+export const PokemonTypesTypeSchema = Joi.object({
+  name: Joi.string()
+    .required()
+  }
+,
+  url: Joi.string()
+    .required()
+  }
+});
+"
+`;
+
+exports[`#joi can emit schema 1`] = `
+"const Joi = require(\\"joi\\");
+
+export const UsersSchema = Joi.object({
+  id: Joi.string().guid())
+    .required()
+  }
+,
+  email: Joi.string()
+    .required()
+  }
+,
+  firstName: Joi.string()
+    .required()
+  }
+,
+  lastName: Joi.string()
+    .required()
+  }
+,
+  isActive: Joi.boolean()
+    .required()
+  }
+,
+  createdAt: Joi.date()
+    .required()
+  }
+,
+  modifiedAt: Joi.date()
+    .required()
+  }
+,
+  catchPhrase: Joi.string()
+    .required()
+  }
+,
+  companyName: Joi.string()
+    .required()
+  }
+,
+  credits: Joi.number()
+    .required()
+    .enum([\\"1\\", \\"15\\", \\"20\\", \\"10\\", \\"0\\", \\"11\\", \\"7\\", \\"9\\"])
+  }
+,
+  salesScore: Joi.number()
+    .required()
+  }
+,
+  location: Joi.string()
+    .required()
+    .enum([\\"nyc\\", \\"remote\\", \\"denver\\"])
+  }
+,
+  profile: Joi.string()
+  }
+});
+"
+`;
+
+exports[`#joi can emit schema for people json 1`] = `
+"const Joi = require(\\"joi\\");
+
+export const PeopleSchema = Joi.object({
+  name: Joi.string()
+    .required()
+  }
+,
+  height: Joi.number()
+  }
+,
+  mass: Joi.number()
+  }
+,
+  hairColor: Joi.string()
+    .required()
+  }
+,
+  skinColor: Joi.string()
+  }
+,
+  eyeColor: Joi.string()
+    .required()
+    .enum([\\"blue\\", \\"yellow\\", \\"red\\", \\"brown\\", \\"blue-gray\\", \\"black\\", \\"orange\\", \\"hazel\\"])
+  }
+,
+  birthYear: Joi.string()
+  }
+,
+  homeworld: Joi.string()
+    .required()
+  }
+,
+  films: Joi.array()
+    .required()
+  }
+,
+  species: Joi.array()
+    .required()
+  }
+,
+  vehicles: Joi.array()
+    .required()
+  }
+,
+  starships: Joi.array()
+    .required()
+  }
+,
+  created: Joi.date()
+    .required()
+  }
+,
+  edited: Joi.date()
+    .required()
+  }
+,
+  url: Joi.string()
+    .required()
+  }
+,
+  id: Joi.number()
+    .required()
+  }
+});
+"
+`;
+
+exports[`#joi can emit schema with better names 1`] = `
+"const Joi = require(\\"joi\\");
+
+export const PokemonSchema = Joi.object({
+  abilities: Joi.object()
+    .required()
+  }
+,
+  baseExperience: Joi.number()
+    .required()
+  }
+,
+  forms: Joi.array()
+    .required()
+  }
+,
+  gameIndices: Joi.object()
+    .required()
+  }
+,
+  height: Joi.number()
+    .required()
+  }
+,
+  heldItems: Joi.array()
+    .required()
+  }
+,
+  id: Joi.number()
+    .required()
+  }
+,
+  isDefault: Joi.boolean()
+    .required()
+  }
+,
+  locationAreaEncounters: Joi.string()
+    .required()
+  }
+,
+  moves: Joi.object()
+    .required()
+  }
+,
+  name: Joi.string()
+    .required()
+  }
+,
+  order: Joi.number()
+    .required()
+  }
+,
+  species: Joi.object()
+    .required()
+  }
+,
+  sprites: Joi.object()
+    .required()
+  }
+,
+  stats: Joi.object()
+    .required()
+  }
+,
+  types: Joi.array()
+    .required()
+  }
+,
+  weight: Joi.number()
+    .required()
+  }
+});
+export const AbilitiesSchema = Joi.object({
+  ability: Joi.object()
+    .required()
+  }
+,
+  isHidden: Joi.boolean()
+    .required()
+  }
+,
+  slot: Joi.number()
+    .required()
+  }
+});
+export const FormsSchema = Joi.object({
+  name: Joi.string()
+    .required()
+  }
+,
+  url: Joi.string()
+    .required()
+  }
+});
+export const GameIndicesSchema = Joi.object({
+  gameIndex: Joi.number()
+    .required()
+  }
+,
+  version: Joi.object()
+    .required()
+  }
+});
+export const MovesSchema = Joi.object({
+  move: Joi.object()
+    .required()
+  }
+,
+  versionGroupDetails: Joi.array()
+    .required()
+  }
+});
+export const SpeciesSchema = Joi.object({
+  name: Joi.string()
+    .required()
+  }
+,
+  url: Joi.string()
+    .required()
+  }
+});
+export const SpritesSchema = Joi.object({
+  backDefault: Joi.string()
+    .required()
+  }
+,
+  backFemale: Joi.any()
+    .required()
+  }
+,
+  backShiny: Joi.string()
+    .required()
+  }
+,
+  backShinyFemale: Joi.any()
+    .required()
+  }
+,
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontFemale: Joi.any()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+,
+  frontShinyFemale: Joi.any()
+    .required()
+  }
+,
+  other: Joi.object()
+    .required()
+  }
+,
+  versions: Joi.object()
+    .required()
+  }
+});
+export const StatsSchema = Joi.object({
+  baseStat: Joi.number()
+    .required()
+  }
+,
+  effort: Joi.number()
+    .required()
+  }
+,
+  stat: Joi.object()
+    .required()
+  }
+});
+export const TypesSchema = Joi.object({
+  slot: Joi.number()
+    .required()
+  }
+,
+  type: Joi.object()
+    .required()
+  }
+});
+export const AbilitySchema = Joi.object({
+  name: Joi.string()
+    .required()
+  }
+,
+  url: Joi.string()
+    .required()
+  }
+});
+export const VersionSchema = Joi.object({
+  name: Joi.string()
+    .required()
+  }
+,
+  url: Joi.string()
+    .required()
+  }
+});
+export const MoveSchema = Joi.object({
+  name: Joi.string()
+    .required()
+  }
+,
+  url: Joi.string()
+    .required()
+  }
+});
+export const VersionGroupDetailsSchema = Joi.object({
+  levelLearnedAt: Joi.number()
+    .required()
+  }
+,
+  moveLearnMethod: Joi.object()
+    .required()
+  }
+,
+  versionGroup: Joi.object()
+    .required()
+  }
+});
+export const MoveLearnMethodSchema = Joi.object({
+  name: Joi.string()
+    .required()
+    .enum([\\"machine\\", \\"tutor\\", \\"level-up\\", \\"egg\\"])
+  }
+,
+  url: Joi.string()
+    .required()
+    .enum([\\"https://pokeapi.co/api/v2/move-learn-method/4/\\", \\"https://pokeapi.co/api/v2/move-learn-method/3/\\", \\"https://pokeapi.co/api/v2/move-learn-method/1/\\", \\"https://pokeapi.co/api/v2/move-learn-method/2/\\"])
+  }
+});
+export const VersionGroupSchema = Joi.object({
+  name: Joi.string()
+    .required()
+  }
+,
+  url: Joi.string()
+    .required()
+  }
+});
+export const OtherSchema = Joi.object({
+  dreamWorld: Joi.object()
+    .required()
+  }
+,
+  officialArtwork: Joi.object()
+    .required()
+  }
+});
+export const VersionsSchema = Joi.object({
+  generationI: Joi.object()
+    .required()
+  }
+,
+  generationIi: Joi.object()
+    .required()
+  }
+,
+  generationIii: Joi.object()
+    .required()
+  }
+,
+  generationIv: Joi.object()
+    .required()
+  }
+,
+  generationV: Joi.object()
+    .required()
+  }
+,
+  generationVi: Joi.object()
+    .required()
+  }
+,
+  generationVii: Joi.object()
+    .required()
+  }
+,
+  generationViii: Joi.object()
+    .required()
+  }
+});
+export const DreamWorldSchema = Joi.object({
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontFemale: Joi.any()
+    .required()
+  }
+});
+export const OfficialArtworkSchema = Joi.object({
+  frontDefault: Joi.string()
+    .required()
+  }
+});
+export const GenerationISchema = Joi.object({
+  redBlue: Joi.object()
+    .required()
+  }
+,
+  yellow: Joi.object()
+    .required()
+  }
+});
+export const GenerationIiSchema = Joi.object({
+  crystal: Joi.object()
+    .required()
+  }
+,
+  gold: Joi.object()
+    .required()
+  }
+,
+  silver: Joi.object()
+    .required()
+  }
+});
+export const GenerationIiiSchema = Joi.object({
+  emerald: Joi.object()
+    .required()
+  }
+,
+  fireredLeafgreen: Joi.object()
+    .required()
+  }
+,
+  rubySapphire: Joi.object()
+    .required()
+  }
+});
+export const GenerationIvSchema = Joi.object({
+  diamondPearl: Joi.object()
+    .required()
+  }
+,
+  heartgoldSoulsilver: Joi.object()
+    .required()
+  }
+,
+  platinum: Joi.object()
+    .required()
+  }
+});
+export const GenerationVSchema = Joi.object({
+  blackWhite: Joi.object()
+    .required()
+  }
+});
+export const GenerationViSchema = Joi.object({
+  omegarubyAlphasapphire: Joi.object()
+    .required()
+  }
+,
+  xY: Joi.object()
+    .required()
+  }
+});
+export const GenerationViiSchema = Joi.object({
+  icons: Joi.object()
+    .required()
+  }
+,
+  ultraSunUltraMoon: Joi.object()
+    .required()
+  }
+});
+export const GenerationViiiSchema = Joi.object({
+  icons: Joi.object()
+    .required()
+  }
+});
+export const RedBlueSchema = Joi.object({
+  backDefault: Joi.string()
+    .required()
+  }
+,
+  backGray: Joi.string()
+    .required()
+  }
+,
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontGray: Joi.string()
+    .required()
+  }
+});
+export const YellowSchema = Joi.object({
+  backDefault: Joi.string()
+    .required()
+  }
+,
+  backGray: Joi.string()
+    .required()
+  }
+,
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontGray: Joi.string()
+    .required()
+  }
+});
+export const CrystalSchema = Joi.object({
+  backDefault: Joi.string()
+    .required()
+  }
+,
+  backShiny: Joi.string()
+    .required()
+  }
+,
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+});
+export const GoldSchema = Joi.object({
+  backDefault: Joi.string()
+    .required()
+  }
+,
+  backShiny: Joi.string()
+    .required()
+  }
+,
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+});
+export const SilverSchema = Joi.object({
+  backDefault: Joi.string()
+    .required()
+  }
+,
+  backShiny: Joi.string()
+    .required()
+  }
+,
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+});
+export const EmeraldSchema = Joi.object({
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+});
+export const FireredLeafgreenSchema = Joi.object({
+  backDefault: Joi.string()
+    .required()
+  }
+,
+  backShiny: Joi.string()
+    .required()
+  }
+,
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+});
+export const RubySapphireSchema = Joi.object({
+  backDefault: Joi.string()
+    .required()
+  }
+,
+  backShiny: Joi.string()
+    .required()
+  }
+,
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+});
+export const DiamondPearlSchema = Joi.object({
+  backDefault: Joi.string()
+    .required()
+  }
+,
+  backFemale: Joi.any()
+    .required()
+  }
+,
+  backShiny: Joi.string()
+    .required()
+  }
+,
+  backShinyFemale: Joi.any()
+    .required()
+  }
+,
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontFemale: Joi.any()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+,
+  frontShinyFemale: Joi.any()
+    .required()
+  }
+});
+export const HeartgoldSoulsilverSchema = Joi.object({
+  backDefault: Joi.string()
+    .required()
+  }
+,
+  backFemale: Joi.any()
+    .required()
+  }
+,
+  backShiny: Joi.string()
+    .required()
+  }
+,
+  backShinyFemale: Joi.any()
+    .required()
+  }
+,
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontFemale: Joi.any()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+,
+  frontShinyFemale: Joi.any()
+    .required()
+  }
+});
+export const PlatinumSchema = Joi.object({
+  backDefault: Joi.string()
+    .required()
+  }
+,
+  backFemale: Joi.any()
+    .required()
+  }
+,
+  backShiny: Joi.string()
+    .required()
+  }
+,
+  backShinyFemale: Joi.any()
+    .required()
+  }
+,
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontFemale: Joi.any()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+,
+  frontShinyFemale: Joi.any()
+    .required()
+  }
+});
+export const BlackWhiteSchema = Joi.object({
+  animated: Joi.object()
+    .required()
+  }
+,
+  backDefault: Joi.string()
+    .required()
+  }
+,
+  backFemale: Joi.any()
+    .required()
+  }
+,
+  backShiny: Joi.string()
+    .required()
+  }
+,
+  backShinyFemale: Joi.any()
+    .required()
+  }
+,
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontFemale: Joi.any()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+,
+  frontShinyFemale: Joi.any()
+    .required()
+  }
+});
+export const AnimatedSchema = Joi.object({
+  backDefault: Joi.string()
+    .required()
+  }
+,
+  backFemale: Joi.any()
+    .required()
+  }
+,
+  backShiny: Joi.string()
+    .required()
+  }
+,
+  backShinyFemale: Joi.any()
+    .required()
+  }
+,
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontFemale: Joi.any()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+,
+  frontShinyFemale: Joi.any()
+    .required()
+  }
+});
+export const OmegarubyAlphasapphireSchema = Joi.object({
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontFemale: Joi.any()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+,
+  frontShinyFemale: Joi.any()
+    .required()
+  }
+});
+export const XYSchema = Joi.object({
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontFemale: Joi.any()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+,
+  frontShinyFemale: Joi.any()
+    .required()
+  }
+});
+export const IconsSchema = Joi.object({
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontFemale: Joi.any()
+    .required()
+  }
+});
+export const UltraSunUltraMoonSchema = Joi.object({
+  frontDefault: Joi.string()
+    .required()
+  }
+,
+  frontFemale: Joi.any()
+    .required()
+  }
+,
+  frontShiny: Joi.string()
+    .required()
+  }
+,
+  frontShinyFemale: Joi.any()
+    .required()
+  }
+});
+export const StatSchema = Joi.object({
+  name: Joi.string()
+    .required()
+  }
+,
+  url: Joi.string()
+    .required()
+  }
+});
+export const TypeSchema = Joi.object({
+  name: Joi.string()
+    .required()
+  }
+,
+  url: Joi.string()
+    .required()
+  }
+});
+"
+`;
+
+exports[`#joi can emit schema with nested types 1`] = `
+"const Joi = require(\\"joi\\");
+
+export const UsersSchema = Joi.object({
+  id: Joi.number()
+    .required()
+  }
+,
+  name: Joi.string()
+    .required()
+  }
+,
+  notes: Joi.array()
+    .required()
+  }
+});
+export const UsersNotesSchema = Joi.object({
+  id: Joi.number()
+    .required()
+  }
+,
+  text: Joi.string()
+    .required()
+  }
+});
+"
+`;
