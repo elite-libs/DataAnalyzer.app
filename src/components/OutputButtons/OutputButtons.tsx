@@ -117,6 +117,7 @@ export const OutputButtons = ({ size = 'medium', className = '' }: Props) => {
       outputAdapter,
       '\nfor schema results',
       schema?.flatTypeSummary,
+      schema,
     );
     const generatedCode = render(outputAdapter, schema!);
 

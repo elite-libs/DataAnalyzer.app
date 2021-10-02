@@ -2097,21 +2097,13 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*":
+"@types/react@*", "@types/react@^17.0.26":
   version "17.0.26"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.26.tgz#960ea4b3518cc154ed7df3b35656c508df653331"
   integrity sha512-MXxuXrH2xOcv5cp/su4oz69dNQnSA90JjFw5HBd5wifw6Ihi94j7dRJm7qNsB30tnruXSCPc9qmlhGop4nh9Hw==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
-    csstype "^3.0.2"
-
-"@types/react@16.9.53":
-  version "16.9.53"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.53.tgz#40cd4f8b8d6b9528aedd1fff8fcffe7a112a3d23"
-  integrity sha512-4nW60Sd4L7+WMXH1D6jCdVftuW7j4Za6zdp6tJ33Rqv0nk1ZAmQKML9ZLD4H0dehA3FZxXR/GM8gXplf82oNGw==
-  dependencies:
-    "@types/prop-types" "*"
     csstype "^3.0.2"
 
 "@types/recoil@0.0.1":
@@ -2569,18 +2561,6 @@ adjust-sourcemap-loader@3.0.0:
   dependencies:
     loader-utils "^2.0.0"
     regex-parser "^2.2.11"
-
-ag-grid-community@^26.0.0:
-  version "26.1.0"
-  resolved "https://registry.yarnpkg.com/ag-grid-community/-/ag-grid-community-26.1.0.tgz#d4ee3e9591b351a5ae477a21dd3dc44491ccd7fa"
-  integrity sha512-vGnbiaxN6TxsDGcC2uIOrgjx+zwXlBK99aYiWcuiyzSPvNpz1fG29nSNx/fMeVRzc3FOru8h8vvk41vszh5AMg==
-
-ag-grid-react@^26.0.0:
-  version "26.1.0"
-  resolved "https://registry.yarnpkg.com/ag-grid-react/-/ag-grid-react-26.1.0.tgz#113f5da813e756561e7b74176b346680f5a56eb8"
-  integrity sha512-W+NTwpbCbMUCYadqn7GFPi+zWzU5UBklVPoKxjx3BkFIa/63Mb0dLm/ynr/hLIRVQCZriUBlHPFU7QrZJXptLg==
-  dependencies:
-    prop-types "^15.6.2"
 
 agent-base@6:
   version "6.0.2"
@@ -10628,6 +10608,11 @@ pretty-format@^27.0.0, pretty-format@^27.2.4:
     ansi-regex "^5.0.1"
     ansi-styles "^5.0.0"
     react-is "^17.0.1"
+
+primereact@^6.6.0:
+  version "6.6.0"
+  resolved "https://registry.yarnpkg.com/primereact/-/primereact-6.6.0.tgz#9a6915101bc2fa1fe6d6d6ef8e554aa85d062e5b"
+  integrity sha512-onoowjhlOz9Kcjna1DYEKWTGjKah4MjqZchm9E3BkcWjeXoCLv3F5QnIo8eVF9q+xymEK/6Oh7zHlfCJYyWwDw==
 
 prismjs@^1.22.0:
   version "1.25.0"

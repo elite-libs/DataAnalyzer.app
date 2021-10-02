@@ -158,6 +158,9 @@ class SchemaExplorer extends React.Component<Props, State> {
   }
 
   render() {
+    if (this.state) {
+      console.log('state!');
+    }
     if (this.state.options) {
       const { chartHeight } = this.state;
       return (

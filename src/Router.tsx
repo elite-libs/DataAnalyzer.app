@@ -7,7 +7,7 @@ import Header from 'components/Header/Header';
 import LoadingSpinner from 'components/LoadingSpinner';
 import useViewportSize from 'hooks/useViewportSize';
 import type { RootState } from 'store/rootReducer';
-import SchemaDesigner from 'components/SchemaDesigner/SchemaDesigner';
+import SchemaReport from 'components/SchemaReport/SchemaReport';
 
 // import './index.scss';
 
@@ -68,7 +68,7 @@ function Router() {
                 <SchemaExplorerComponent />
               </Route>
               <Route path="/schema/designer">
-                <SchemaDesigner />
+                <SchemaReport />
               </Route>
               <Route>
                 <NotFoundPage />

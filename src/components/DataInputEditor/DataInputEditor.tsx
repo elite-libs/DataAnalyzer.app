@@ -91,10 +91,12 @@ export function DataInputEditor(props: IAceEditorProps) {
         );
       }
     } catch (error) {
-      dispatch(setParserError(error.message));
-      console.warn('[Normal behavior] Auto-parser failed:', error);
-      dispatch(setParsedInput(null));
-      dispatch(setStatusMessage(`Invalid input: ${error.message}`));
+      if (error instanceof Error) {
+        dispatch(setParserError(error.message));
+        console.warn('[Normal behavior] Auto-parser failed:', error);
+        dispatch(setParsedInput(null));
+        dispatch(setStatusMessage(`Invalid input: ${error.message}`));
+      }
     }
   }, 100);
 
