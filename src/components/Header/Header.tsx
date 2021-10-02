@@ -134,6 +134,29 @@ export default function Header() {
             </div>
           </TooltipWrapper>
         </Link>
+        <Link
+          component={RouteLink}
+          {...schemaLinkProps}
+          className={location.pathname === `/schema/designer` ? 'active' : ''}
+          to="/schema/designer"
+        >
+          <TooltipWrapper
+            tooltipContent={
+              messages.inputDataMissing || messages.schemaNeeded || `Edit your schema!`
+            }
+          >
+            <div className="d-flex align-items-center">
+              <AssessmentOutlinedIcon
+                htmlColor={
+                  location.pathname === `/schema/designer`
+                    ? palette.success.main
+                    : palette.grey[300]
+                }
+              />
+              <span className="d-md-inline-block d-none">Schema Designer</span>
+            </div>
+          </TooltipWrapper>
+        </Link>
       </Breadcrumbs>
     </nav>
   );

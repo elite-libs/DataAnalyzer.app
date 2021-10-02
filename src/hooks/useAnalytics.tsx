@@ -3,11 +3,11 @@
  * https://medium.com/@marco.baldessari/tracking-custom-events-with-google-analytics-in-202-58fbf128e7e9
  */
 
-type CustomEventArgs = {
-  category: AppEventCategory;
+type CustomEventArgs<TValueType = number | null> = {
   action: AppEventAction;
+  category: AppEventCategory;
   label?: string | null;
-  value?: number | null;
+  value?: TValueType;
   nonInteraction?: boolean;
   // transport?: any;
   // hitCallback: Function;
@@ -20,7 +20,8 @@ export type AppEventCategory =
   | 'parseData.csv'
   | 'analysis.results'
   | 'code.results'
-  | 'explorer.view';
+  | 'explorer.view'
+  | 'designer.view';
 
 export type AppEventAction =
   | 'success'
