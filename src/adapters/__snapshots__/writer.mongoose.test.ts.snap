@@ -4980,8 +4980,87 @@ const People = new Schema({
     unique: true,
     required: true,
   }});
+const PeopleFilms = new Schema({
+  0: {
+    type: \\"String\\",
+    required: true,
+    enum: [\\"https://star-wars-api.example/api/films/2/\\", \\"https://star-wars-api.example/api/films/5/\\", \\"https://star-wars-api.example/api/films/1/\\", \\"https://star-wars-api.example/api/films/6/\\", \\"https://star-wars-api.example/api/films/4/\\", \\"https://star-wars-api.example/api/films/3/\\"],
+  },
+  1: {
+    type: \\"String\\",
+    required: true,
+    enum: [\\"https://star-wars-api.example/api/films/6/\\", \\"https://star-wars-api.example/api/films/5/\\", \\"https://star-wars-api.example/api/films/4/\\", \\"https://star-wars-api.example/api/films/1/\\", \\"https://star-wars-api.example/api/films/3/\\", \\"https://star-wars-api.example/api/films/7/\\"],
+  },
+  2: {
+    type: \\"String\\",
+    required: true,
+    enum: [\\"https://star-wars-api.example/api/films/3/\\", \\"https://star-wars-api.example/api/films/4/\\", \\"https://star-wars-api.example/api/films/1/\\", \\"https://star-wars-api.example/api/films/6/\\"],
+  },
+  3: {
+    type: \\"String\\",
+    required: true,
+    enum: [\\"https://star-wars-api.example/api/films/1/\\", \\"https://star-wars-api.example/api/films/6/\\", \\"https://star-wars-api.example/api/films/7/\\"],
+  },
+  4: {
+    type: \\"String\\",
+    required: true,
+    enum: [\\"https://star-wars-api.example/api/films/7/\\", \\"https://star-wars-api.example/api/films/3/\\"],
+  },
+  5: {
+    type: \\"String\\",
+    required: true,
+    enum: [\\"https://star-wars-api.example/api/films/1/\\"],
+  },
+  6: {
+    type: \\"String\\",
+    required: true,
+    enum: [\\"https://star-wars-api.example/api/films/7/\\"],
+  }});
+const PeopleSpecies = new Schema({
+  0: {
+    type: \\"String\\",
+    required: true,
+  }});
+const PeopleVehicles = new Schema({
+  0: {
+    type: \\"String\\",
+    required: true,
+  },
+  1: {
+    type: \\"String\\",
+    required: true,
+  }});
+const PeopleStarships = new Schema({
+  0: {
+    type: \\"String\\",
+    required: true,
+  },
+  1: {
+    type: \\"String\\",
+    required: true,
+  },
+  2: {
+    type: \\"String\\",
+    required: true,
+  },
+  3: {
+    type: \\"String\\",
+    required: true,
+  },
+  4: {
+    type: \\"String\\",
+    required: true,
+  }});
 const peopleModel = mongoose.model(\\"people\\", People);
-module.exports.People = peopleModel;"
+const peopleFilmsModel = mongoose.model(\\"peopleFilms\\", PeopleFilms);
+const peopleSpeciesModel = mongoose.model(\\"peopleSpecies\\", PeopleSpecies);
+const peopleVehiclesModel = mongoose.model(\\"peopleVehicles\\", PeopleVehicles);
+const peopleStarshipsModel = mongoose.model(\\"peopleStarships\\", PeopleStarships);
+module.exports.People = peopleModel;
+module.exports.PeopleFilms = peopleFilmsModel;
+module.exports.PeopleSpecies = peopleSpeciesModel;
+module.exports.PeopleVehicles = peopleVehiclesModel;
+module.exports.PeopleStarships = peopleStarshipsModel;"
 `;
 
 exports[`#mongoose can emit schema with better names 1`] = `

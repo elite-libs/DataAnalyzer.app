@@ -159,6 +159,18 @@ describe('primary use-cases', () => {
     expect(results.fields?.eye_color?.enum?.length).toBe(8);
   });
 
+  it('supports typed list/array detection', async () => {
+    const results = await schemaAnalyzer('people', people, {
+      strictMatching: false,
+      enumMinimumRowCount: 1000,
+      enumAbsoluteLimit: -1,
+    });
+    expect(results).toMatchSnapshot('peopleWithEnums');
+    console.log('results.fields?.films?.types', results.fields?.films?.types);
+    expect(results.fields?.films?.types.Array).toBeTruthy();
+    expect(results.fields?.films?.types.Array?.typeAlias).toBe('string');
+  });
+
   it('handles null field data', async () => {
     const data = [
       { id: 997, text: 'hello', sparseField: null },

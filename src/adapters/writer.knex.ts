@@ -181,13 +181,13 @@ const writer: IDataAnalyzerWriter<IRenderOptions> = {
             return `    table.datetime("${name}"${sizePart})${appendChain};`;
           if (type === 'Timestamp') return `    table.timestamp("${name}"${sizePart})`;
           if (type === 'Currency')
-            return `    table.specificType("${name}"${sizePart}); // change to float or decimal if money no supported`;
+            return `    table.specificType("${name}", "MONEY"); // NOTE: change to currency, float or decimal if "money" not supported`;
           if (type === 'Float') return `    table.float("${name}"${sizePart});`;
           if (type === 'BigNumber')
-            return `    table.decimal("${name}", null)${appendChain}; // NOTE: \`decimal(name, null)\` is typically larger than \`bigInteger(name)\``;
+            return `    table.decimal("${name}", null)${appendChain}; // NOTE: \`decimal(colName, null)\` is typically larger than \`bigInteger(colName)\``;
           if (type === 'Number') return `    table.integer("${name}")${appendChain};`;
           if (type === 'Email')
-            return `    table.string("${name}"${sizePart})${appendChain}; // Note: Email 'subtype' detected`;
+            return `    table.string("${name}"${sizePart})${appendChain}; // NOTE: Email 'subtype' detected`;
           if (type === 'String')
             return `    table.string("${name}"${sizePart})${appendChain};`;
           if (type === 'Array')

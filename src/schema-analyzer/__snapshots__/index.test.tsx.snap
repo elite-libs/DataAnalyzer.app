@@ -560,6 +560,7 @@ Object {
       "types": Object {
         "Boolean": Object {
           "count": 1,
+          "value": undefined,
         },
         "Number": Object {
           "count": 2,
@@ -1416,9 +1417,11 @@ Object {
       "types": Object {
         "Boolean": Object {
           "count": 4,
+          "value": undefined,
         },
         "Unknown": Object {
           "count": 1,
+          "value": undefined,
         },
       },
       "unique": undefined,
@@ -1805,643 +1808,6 @@ Object {
 }
 `;
 
-exports[`primary use-cases analyze people.json: peopleResult 1`] = `
-Object {
-  "debug": undefined,
-  "fields": Object {
-    "birth_year": Object {
-      "enum": undefined,
-      "identity": false,
-      "nullCount": 20,
-      "nullable": true,
-      "types": Object {
-        "Null": Object {
-          "count": 10,
-        },
-        "String": Object {
-          "count": 30,
-          "length": Object {
-            "max": 7,
-            "mean": 5.3,
-            "min": 4,
-            "p25": 5,
-            "p33": 5,
-            "p50": 5,
-            "p66": 5,
-            "p75": 5,
-            "p99": 7,
-          },
-        },
-      },
-      "unique": false,
-      "uniqueCount": 27,
-    },
-    "created": Object {
-      "enum": undefined,
-      "identity": false,
-      "nullCount": 0,
-      "nullable": undefined,
-      "types": Object {
-        "Date": Object {
-          "count": 40,
-          "value": Object {
-            "max": "2014-12-19T17:55:43.348Z",
-            "mean": "1963-04-16T14:35:27.920Z",
-            "min": "0000-01-01T00:00:00.000Z",
-            "p25": "2014-12-10T16:20:44.310Z",
-            "p33": "2014-12-10T16:49:14.582Z",
-            "p50": "2014-12-15T12:49:32.457Z",
-            "p66": "2014-12-18T11:12:38.895Z",
-            "p75": "2014-12-19T16:54:53.618Z",
-            "p99": "2014-12-19T17:55:43.348Z",
-          },
-        },
-      },
-      "unique": undefined,
-      "uniqueCount": 0,
-    },
-    "edited": Object {
-      "enum": undefined,
-      "identity": false,
-      "nullCount": 0,
-      "nullable": undefined,
-      "types": Object {
-        "Date": Object {
-          "count": 40,
-          "value": Object {
-            "max": "2014-12-20T21:17:56.891Z",
-            "mean": "2014-12-20T21:17:50.514Z",
-            "min": "2014-12-20T21:17:50.309Z",
-            "p25": "2014-12-20T21:17:50.327Z",
-            "p33": "2014-12-20T21:17:50.334Z",
-            "p50": "2014-12-20T21:17:50.349Z",
-            "p66": "2014-12-20T21:17:50.364Z",
-            "p75": "2014-12-20T21:17:50.375Z",
-            "p99": "2014-12-20T21:17:50.399Z",
-          },
-        },
-      },
-      "unique": undefined,
-      "uniqueCount": 0,
-    },
-    "eye_color": Object {
-      "enum": undefined,
-      "identity": false,
-      "nullCount": 0,
-      "nullable": false,
-      "types": Object {
-        "String": Object {
-          "count": 40,
-          "length": Object {
-            "max": 9,
-            "mean": 4.8,
-            "min": 3,
-            "p25": 4,
-            "p33": 4,
-            "p50": 5,
-            "p66": 5,
-            "p75": 6,
-            "p99": 9,
-          },
-        },
-      },
-      "unique": false,
-      "uniqueCount": 8,
-    },
-    "films": Object {
-      "enum": undefined,
-      "identity": false,
-      "nullCount": 0,
-      "nullable": undefined,
-      "types": Object {
-        "Array": Object {
-          "count": 40,
-          "length": Object {
-            "max": 7,
-            "mean": 2.525,
-            "min": 1,
-            "p25": 1,
-            "p33": 1,
-            "p50": 2,
-            "p66": 3,
-            "p75": 4,
-            "p99": 7,
-          },
-        },
-      },
-      "unique": undefined,
-      "uniqueCount": 0,
-    },
-    "hair_color": Object {
-      "enum": undefined,
-      "identity": false,
-      "nullCount": 0,
-      "nullable": false,
-      "types": Object {
-        "String": Object {
-          "count": 40,
-          "length": Object {
-            "max": 13,
-            "mean": 5,
-            "min": 3,
-            "p25": 4,
-            "p33": 4,
-            "p50": 5,
-            "p66": 5,
-            "p75": 5,
-            "p99": 13,
-          },
-        },
-      },
-      "unique": false,
-      "uniqueCount": 11,
-    },
-    "height": Object {
-      "enum": undefined,
-      "identity": false,
-      "nullCount": 2,
-      "nullable": true,
-      "types": Object {
-        "Null": Object {
-          "count": 1,
-        },
-        "Number": Object {
-          "count": 39,
-          "value": Object {
-            "max": 228,
-            "mean": 169.23076923076923,
-            "min": 66,
-            "p25": 182,
-            "p33": 228,
-            "p50": 170,
-            "p66": 180,
-            "p75": 193,
-            "p99": 183,
-          },
-        },
-      },
-      "unique": false,
-      "uniqueCount": 29,
-    },
-    "homeworld": Object {
-      "enum": undefined,
-      "identity": false,
-      "nullCount": 0,
-      "nullable": false,
-      "types": Object {
-        "String": Object {
-          "count": 40,
-          "length": Object {
-            "max": 45,
-            "mean": 44.525,
-            "min": 44,
-            "p25": 44,
-            "p33": 44,
-            "p50": 45,
-            "p66": 45,
-            "p75": 45,
-            "p99": 45,
-          },
-        },
-      },
-      "unique": false,
-      "uniqueCount": 23,
-    },
-    "id": Object {
-      "enum": undefined,
-      "identity": true,
-      "nullCount": 0,
-      "nullable": false,
-      "types": Object {
-        "Number": Object {
-          "count": 40,
-          "value": Object {
-            "max": 42,
-            "mean": 21.275,
-            "min": 1,
-            "p25": 11,
-            "p33": 14,
-            "p50": 22,
-            "p66": 28,
-            "p75": 32,
-            "p99": 42,
-          },
-        },
-      },
-      "unique": true,
-      "uniqueCount": 40,
-    },
-    "mass": Object {
-      "enum": undefined,
-      "identity": false,
-      "nullCount": 16,
-      "nullable": true,
-      "types": Object {
-        "Float": Object {
-          "count": 1,
-          "precision": Object {
-            "max": 3,
-            "mean": 3,
-            "min": 3,
-            "p25": 3,
-            "p33": 3,
-            "p50": 3,
-            "p66": 3,
-            "p75": 3,
-            "p99": 3,
-          },
-          "scale": Object {
-            "max": 1,
-            "mean": 1,
-            "min": 1,
-            "p25": 1,
-            "p33": 1,
-            "p50": 1,
-            "p66": 1,
-            "p75": 1,
-            "p99": 1,
-          },
-          "value": Object {
-            "max": 78.2,
-            "mean": 78.2,
-            "min": 78.2,
-            "p25": 78.2,
-            "p33": 78.2,
-            "p50": 78.2,
-            "p66": 78.2,
-            "p75": 78.2,
-            "p99": 78.2,
-          },
-        },
-        "Null": Object {
-          "count": 8,
-        },
-        "Number": Object {
-          "count": 31,
-          "value": Object {
-            "max": 140,
-            "mean": 77.83333333333333,
-            "min": 17,
-            "p25": 32,
-            "p33": 77,
-            "p50": 110,
-            "p66": 113,
-            "p75": 83,
-            "p99": 40,
-          },
-        },
-      },
-      "unique": false,
-      "uniqueCount": 24,
-    },
-    "name": Object {
-      "enum": undefined,
-      "identity": false,
-      "nullCount": 0,
-      "nullable": false,
-      "types": Object {
-        "String": Object {
-          "count": 40,
-          "length": Object {
-            "max": 21,
-            "mean": 10.7,
-            "min": 4,
-            "p25": 7,
-            "p33": 9,
-            "p50": 11,
-            "p66": 13,
-            "p75": 14,
-            "p99": 21,
-          },
-        },
-      },
-      "unique": true,
-      "uniqueCount": 40,
-    },
-    "skin_color": Object {
-      "enum": undefined,
-      "identity": false,
-      "nullCount": 2,
-      "nullable": true,
-      "types": Object {
-        "Null": Object {
-          "count": 1,
-        },
-        "String": Object {
-          "count": 39,
-          "length": Object {
-            "max": 16,
-            "mean": 5.717948717948718,
-            "min": 4,
-            "p25": 4,
-            "p33": 4,
-            "p50": 5,
-            "p66": 5,
-            "p75": 5,
-            "p99": 16,
-          },
-        },
-      },
-      "unique": false,
-      "uniqueCount": 18,
-    },
-    "species": Object {
-      "enum": undefined,
-      "identity": false,
-      "nullCount": 0,
-      "nullable": undefined,
-      "types": Object {
-        "Array": Object {
-          "count": 40,
-          "length": Object {
-            "max": 1,
-            "mean": 1,
-            "min": 1,
-            "p25": 1,
-            "p33": 1,
-            "p50": 1,
-            "p66": 1,
-            "p75": 1,
-            "p99": 1,
-          },
-        },
-      },
-      "unique": undefined,
-      "uniqueCount": 0,
-    },
-    "starships": Object {
-      "enum": undefined,
-      "identity": false,
-      "nullCount": 0,
-      "nullable": undefined,
-      "types": Object {
-        "Array": Object {
-          "count": 40,
-          "length": Object {
-            "max": 5,
-            "mean": 1.6428571428571428,
-            "min": 1,
-            "p25": 1,
-            "p33": 1,
-            "p50": 1,
-            "p66": 2,
-            "p75": 2,
-            "p99": 5,
-          },
-        },
-      },
-      "unique": undefined,
-      "uniqueCount": 0,
-    },
-    "url": Object {
-      "enum": undefined,
-      "identity": false,
-      "nullCount": 0,
-      "nullable": false,
-      "types": Object {
-        "String": Object {
-          "count": 40,
-          "length": Object {
-            "max": 44,
-            "mean": 43.775,
-            "min": 43,
-            "p25": 44,
-            "p33": 44,
-            "p50": 44,
-            "p66": 44,
-            "p75": 44,
-            "p99": 44,
-          },
-        },
-      },
-      "unique": true,
-      "uniqueCount": 40,
-    },
-    "vehicles": Object {
-      "enum": undefined,
-      "identity": false,
-      "nullCount": 0,
-      "nullable": undefined,
-      "types": Object {
-        "Array": Object {
-          "count": 40,
-          "length": Object {
-            "max": 2,
-            "mean": 1.2857142857142858,
-            "min": 1,
-            "p25": 1,
-            "p33": 1,
-            "p50": 1,
-            "p66": 1,
-            "p75": 2,
-            "p99": 2,
-          },
-        },
-      },
-      "unique": undefined,
-      "uniqueCount": 0,
-    },
-  },
-  "flatTypeSummary": Object {
-    "fields": Object {
-      "birth_year": Object {
-        "count": 30,
-        "enum": null,
-        "identity": false,
-        "length": 7,
-        "nullable": true,
-        "type": "String",
-        "typeRef": undefined,
-        "typeRelationship": undefined,
-        "unique": false,
-      },
-      "created": Object {
-        "count": 40,
-        "enum": null,
-        "identity": false,
-        "nullable": false,
-        "type": "Date",
-        "typeRef": undefined,
-        "typeRelationship": undefined,
-        "unique": false,
-      },
-      "edited": Object {
-        "count": 40,
-        "enum": null,
-        "identity": false,
-        "nullable": false,
-        "type": "Date",
-        "typeRef": undefined,
-        "typeRelationship": undefined,
-        "unique": false,
-      },
-      "eye_color": Object {
-        "count": 40,
-        "enum": null,
-        "identity": false,
-        "length": 9,
-        "nullable": false,
-        "type": "String",
-        "typeRef": undefined,
-        "typeRelationship": undefined,
-        "unique": false,
-      },
-      "films": Object {
-        "count": 40,
-        "enum": null,
-        "identity": false,
-        "length": 7,
-        "nullable": false,
-        "type": "Array",
-        "typeRef": undefined,
-        "typeRelationship": undefined,
-        "unique": false,
-      },
-      "hair_color": Object {
-        "count": 40,
-        "enum": null,
-        "identity": false,
-        "length": 13,
-        "nullable": false,
-        "type": "String",
-        "typeRef": undefined,
-        "typeRelationship": undefined,
-        "unique": false,
-      },
-      "height": Object {
-        "count": 39,
-        "enum": null,
-        "identity": false,
-        "nullable": true,
-        "type": "Number",
-        "typeRef": undefined,
-        "typeRelationship": undefined,
-        "unique": false,
-      },
-      "homeworld": Object {
-        "count": 40,
-        "enum": null,
-        "identity": false,
-        "length": 45,
-        "nullable": false,
-        "type": "String",
-        "typeRef": undefined,
-        "typeRelationship": undefined,
-        "unique": false,
-      },
-      "id": Object {
-        "count": 40,
-        "enum": null,
-        "identity": true,
-        "nullable": false,
-        "type": "Number",
-        "typeRef": undefined,
-        "typeRelationship": undefined,
-        "unique": true,
-      },
-      "mass": Object {
-        "count": 31,
-        "enum": null,
-        "identity": false,
-        "nullable": true,
-        "type": "Number",
-        "typeRef": undefined,
-        "typeRelationship": undefined,
-        "unique": false,
-      },
-      "name": Object {
-        "count": 40,
-        "enum": null,
-        "identity": false,
-        "length": 21,
-        "nullable": false,
-        "type": "String",
-        "typeRef": undefined,
-        "typeRelationship": undefined,
-        "unique": true,
-      },
-      "skin_color": Object {
-        "count": 39,
-        "enum": null,
-        "identity": false,
-        "length": 16,
-        "nullable": true,
-        "type": "String",
-        "typeRef": undefined,
-        "typeRelationship": undefined,
-        "unique": false,
-      },
-      "species": Object {
-        "count": 40,
-        "enum": null,
-        "identity": false,
-        "length": 1,
-        "nullable": false,
-        "type": "Array",
-        "typeRef": undefined,
-        "typeRelationship": undefined,
-        "unique": false,
-      },
-      "starships": Object {
-        "count": 40,
-        "enum": null,
-        "identity": false,
-        "length": 5,
-        "nullable": false,
-        "type": "Array",
-        "typeRef": undefined,
-        "typeRelationship": undefined,
-        "unique": false,
-      },
-      "url": Object {
-        "count": 40,
-        "enum": null,
-        "identity": false,
-        "length": 44,
-        "nullable": false,
-        "type": "String",
-        "typeRef": undefined,
-        "typeRelationship": undefined,
-        "unique": true,
-      },
-      "vehicles": Object {
-        "count": 40,
-        "enum": null,
-        "identity": false,
-        "length": 2,
-        "nullable": false,
-        "type": "Array",
-        "typeRef": undefined,
-        "typeRelationship": undefined,
-        "unique": false,
-      },
-    },
-    "nestedTypes": Object {},
-    "schemaName": "people",
-    "totalRows": 40,
-  },
-  "nestedTypes": Object {},
-  "options": Object {
-    "disableNestedTypes": false,
-    "enumAbsoluteLimit": 5,
-    "enumMinimumRowCount": 100,
-    "flattenOptions": Object {
-      "nullableRowsThreshold": 0.0001,
-      "targetLength": "p99",
-      "targetPrecision": "p99",
-      "targetScale": "p99",
-      "targetValue": "p99",
-    },
-    "nullableRowsThreshold": 0.001,
-    "strictMatching": true,
-    "uniqueRowsThreshold": 0.99,
-  },
-  "renamedTypes": undefined,
-  "schemaName": "people",
-  "totalRows": 40,
-}
-`;
-
 exports[`primary use-cases analyze properties.json: propertiesResult 1`] = `
 Object {
   "debug": undefined,
@@ -2620,6 +1986,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 20,
+          "value": undefined,
         },
         "String": Object {
           "count": 80,
@@ -2657,6 +2024,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 6,
+          "value": undefined,
         },
         "String": Object {
           "count": 94,
@@ -2718,6 +2086,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 7,
+          "value": undefined,
         },
         "String": Object {
           "count": 93,
@@ -2779,6 +2148,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 7,
+          "value": undefined,
         },
         "String": Object {
           "count": 93,
@@ -2835,6 +2205,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 11,
+          "value": undefined,
         },
         "String": Object {
           "count": 89,
@@ -2862,6 +2233,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 5,
+          "value": undefined,
         },
         "String": Object {
           "count": 95,
@@ -2918,6 +2290,7 @@ Object {
       "types": Object {
         "UUID": Object {
           "count": 100,
+          "value": undefined,
         },
       },
       "unique": true,
@@ -3241,7 +2614,7 @@ Object {
     },
     "listingId": Object {
       "enum": undefined,
-      "identity": false,
+      "identity": true,
       "nullCount": 0,
       "nullable": false,
       "types": Object {
@@ -3275,6 +2648,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 17,
+          "value": undefined,
         },
         "String": Object {
           "count": 83,
@@ -3306,6 +2680,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 18,
+          "value": undefined,
         },
         "String": Object {
           "count": 82,
@@ -3337,6 +2712,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 19,
+          "value": undefined,
         },
         "String": Object {
           "count": 81,
@@ -3368,6 +2744,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 13,
+          "value": undefined,
         },
         "String": Object {
           "count": 87,
@@ -3399,6 +2776,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 17,
+          "value": undefined,
         },
         "String": Object {
           "count": 83,
@@ -3430,6 +2808,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 17,
+          "value": undefined,
         },
         "String": Object {
           "count": 83,
@@ -3461,6 +2840,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 14,
+          "value": undefined,
         },
         "String": Object {
           "count": 86,
@@ -3492,6 +2872,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 19,
+          "value": undefined,
         },
         "String": Object {
           "count": 81,
@@ -3523,6 +2904,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 19,
+          "value": undefined,
         },
         "String": Object {
           "count": 81,
@@ -3554,6 +2936,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 19,
+          "value": undefined,
         },
         "String": Object {
           "count": 81,
@@ -3585,6 +2968,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 17,
+          "value": undefined,
         },
         "String": Object {
           "count": 83,
@@ -3616,6 +3000,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 12,
+          "value": undefined,
         },
         "String": Object {
           "count": 88,
@@ -3647,6 +3032,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 19,
+          "value": undefined,
         },
         "String": Object {
           "count": 81,
@@ -3678,6 +3064,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 24,
+          "value": undefined,
         },
         "String": Object {
           "count": 76,
@@ -3709,6 +3096,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 17,
+          "value": undefined,
         },
         "String": Object {
           "count": 83,
@@ -3740,6 +3128,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 13,
+          "value": undefined,
         },
         "String": Object {
           "count": 87,
@@ -3771,6 +3160,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 13,
+          "value": undefined,
         },
         "String": Object {
           "count": 87,
@@ -3802,6 +3192,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 22,
+          "value": undefined,
         },
         "String": Object {
           "count": 78,
@@ -3906,6 +3297,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 10,
+          "value": undefined,
         },
         "String": Object {
           "count": 90,
@@ -5154,7 +4546,7 @@ Object {
       "listingId": Object {
         "count": 100,
         "enum": null,
-        "identity": false,
+        "identity": true,
         "nullable": false,
         "type": "Number",
         "typeRef": undefined,
@@ -7879,6 +7271,7 @@ Object {
       "types": Object {
         "Boolean": Object {
           "count": 1,
+          "value": undefined,
         },
         "String": Object {
           "count": 1249,
@@ -8807,6 +8200,7 @@ Object {
       "types": Object {
         "Boolean": Object {
           "count": 1,
+          "value": undefined,
         },
         "Email": Object {
           "count": 21,
@@ -8859,6 +8253,7 @@ Object {
       "types": Object {
         "Boolean": Object {
           "count": 1,
+          "value": undefined,
         },
         "String": Object {
           "count": 25,
@@ -8900,6 +8295,7 @@ Object {
         },
         "UUID": Object {
           "count": 25,
+          "value": undefined,
         },
       },
       "unique": true,
@@ -8913,6 +8309,7 @@ Object {
       "types": Object {
         "Boolean": Object {
           "count": 26,
+          "value": undefined,
         },
       },
       "unique": undefined,
@@ -8926,6 +8323,7 @@ Object {
       "types": Object {
         "Boolean": Object {
           "count": 1,
+          "value": undefined,
         },
         "String": Object {
           "count": 25,
@@ -9001,6 +8399,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 4,
+          "value": undefined,
         },
         "Number": Object {
           "count": 1,
@@ -9427,6 +8826,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 20,
+          "value": undefined,
         },
         "String": Object {
           "count": 80,
@@ -9454,6 +8854,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 6,
+          "value": undefined,
         },
         "String": Object {
           "count": 94,
@@ -9505,6 +8906,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 7,
+          "value": undefined,
         },
         "String": Object {
           "count": 93,
@@ -9556,6 +8958,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 7,
+          "value": undefined,
         },
         "String": Object {
           "count": 93,
@@ -9607,6 +9010,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 11,
+          "value": undefined,
         },
         "String": Object {
           "count": 89,
@@ -9634,6 +9038,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 5,
+          "value": undefined,
         },
         "String": Object {
           "count": 95,
@@ -9685,6 +9090,7 @@ Object {
       "types": Object {
         "UUID": Object {
           "count": 100,
+          "value": undefined,
         },
       },
       "unique": true,
@@ -10002,7 +9408,7 @@ Object {
     },
     "listingId": Object {
       "enum": undefined,
-      "identity": false,
+      "identity": true,
       "nullCount": 0,
       "nullable": false,
       "types": Object {
@@ -10032,6 +9438,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 17,
+          "value": undefined,
         },
         "String": Object {
           "count": 83,
@@ -10059,6 +9466,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 18,
+          "value": undefined,
         },
         "String": Object {
           "count": 82,
@@ -10086,6 +9494,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 19,
+          "value": undefined,
         },
         "String": Object {
           "count": 81,
@@ -10113,6 +9522,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 13,
+          "value": undefined,
         },
         "String": Object {
           "count": 87,
@@ -10140,6 +9550,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 17,
+          "value": undefined,
         },
         "String": Object {
           "count": 83,
@@ -10167,6 +9578,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 17,
+          "value": undefined,
         },
         "String": Object {
           "count": 83,
@@ -10194,6 +9606,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 14,
+          "value": undefined,
         },
         "String": Object {
           "count": 86,
@@ -10221,6 +9634,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 19,
+          "value": undefined,
         },
         "String": Object {
           "count": 81,
@@ -10248,6 +9662,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 19,
+          "value": undefined,
         },
         "String": Object {
           "count": 81,
@@ -10275,6 +9690,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 19,
+          "value": undefined,
         },
         "String": Object {
           "count": 81,
@@ -10302,6 +9718,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 17,
+          "value": undefined,
         },
         "String": Object {
           "count": 83,
@@ -10329,6 +9746,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 12,
+          "value": undefined,
         },
         "String": Object {
           "count": 88,
@@ -10356,6 +9774,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 19,
+          "value": undefined,
         },
         "String": Object {
           "count": 81,
@@ -10383,6 +9802,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 24,
+          "value": undefined,
         },
         "String": Object {
           "count": 76,
@@ -10410,6 +9830,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 17,
+          "value": undefined,
         },
         "String": Object {
           "count": 83,
@@ -10437,6 +9858,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 13,
+          "value": undefined,
         },
         "String": Object {
           "count": 87,
@@ -10464,6 +9886,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 13,
+          "value": undefined,
         },
         "String": Object {
           "count": 87,
@@ -10491,6 +9914,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 22,
+          "value": undefined,
         },
         "String": Object {
           "count": 78,
@@ -10588,6 +10012,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 10,
+          "value": undefined,
         },
         "String": Object {
           "count": 90,
@@ -11761,7 +11186,7 @@ Object {
       "listingId": Object {
         "count": 100,
         "enum": null,
-        "identity": false,
+        "identity": true,
         "nullable": false,
         "type": "Number",
         "typeRef": undefined,
@@ -12564,6 +11989,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 20,
+          "value": undefined,
         },
         "String": Object {
           "count": 80,
@@ -12601,6 +12027,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 6,
+          "value": undefined,
         },
         "String": Object {
           "count": 94,
@@ -12662,6 +12089,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 7,
+          "value": undefined,
         },
         "String": Object {
           "count": 93,
@@ -12723,6 +12151,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 7,
+          "value": undefined,
         },
         "String": Object {
           "count": 93,
@@ -12779,6 +12208,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 11,
+          "value": undefined,
         },
         "String": Object {
           "count": 89,
@@ -12806,6 +12236,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 5,
+          "value": undefined,
         },
         "String": Object {
           "count": 95,
@@ -12862,6 +12293,7 @@ Object {
       "types": Object {
         "UUID": Object {
           "count": 100,
+          "value": undefined,
         },
       },
       "unique": true,
@@ -13185,7 +12617,7 @@ Object {
     },
     "listingId": Object {
       "enum": undefined,
-      "identity": false,
+      "identity": true,
       "nullCount": 0,
       "nullable": false,
       "types": Object {
@@ -13219,6 +12651,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 17,
+          "value": undefined,
         },
         "String": Object {
           "count": 83,
@@ -13250,6 +12683,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 18,
+          "value": undefined,
         },
         "String": Object {
           "count": 82,
@@ -13281,6 +12715,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 19,
+          "value": undefined,
         },
         "String": Object {
           "count": 81,
@@ -13312,6 +12747,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 13,
+          "value": undefined,
         },
         "String": Object {
           "count": 87,
@@ -13343,6 +12779,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 17,
+          "value": undefined,
         },
         "String": Object {
           "count": 83,
@@ -13374,6 +12811,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 17,
+          "value": undefined,
         },
         "String": Object {
           "count": 83,
@@ -13405,6 +12843,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 14,
+          "value": undefined,
         },
         "String": Object {
           "count": 86,
@@ -13436,6 +12875,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 19,
+          "value": undefined,
         },
         "String": Object {
           "count": 81,
@@ -13467,6 +12907,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 19,
+          "value": undefined,
         },
         "String": Object {
           "count": 81,
@@ -13498,6 +12939,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 19,
+          "value": undefined,
         },
         "String": Object {
           "count": 81,
@@ -13529,6 +12971,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 17,
+          "value": undefined,
         },
         "String": Object {
           "count": 83,
@@ -13560,6 +13003,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 12,
+          "value": undefined,
         },
         "String": Object {
           "count": 88,
@@ -13591,6 +13035,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 19,
+          "value": undefined,
         },
         "String": Object {
           "count": 81,
@@ -13622,6 +13067,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 24,
+          "value": undefined,
         },
         "String": Object {
           "count": 76,
@@ -13653,6 +13099,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 17,
+          "value": undefined,
         },
         "String": Object {
           "count": 83,
@@ -13684,6 +13131,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 13,
+          "value": undefined,
         },
         "String": Object {
           "count": 87,
@@ -13715,6 +13163,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 13,
+          "value": undefined,
         },
         "String": Object {
           "count": 87,
@@ -13746,6 +13195,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 22,
+          "value": undefined,
         },
         "String": Object {
           "count": 78,
@@ -13850,6 +13300,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 10,
+          "value": undefined,
         },
         "String": Object {
           "count": 90,
@@ -15098,7 +14549,7 @@ Object {
       "listingId": Object {
         "count": 100,
         "enum": null,
-        "identity": false,
+        "identity": true,
         "nullable": false,
         "type": "Number",
         "typeRef": undefined,
@@ -16009,6 +15460,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 20,
+          "value": undefined,
         },
         "String": Object {
           "count": 80,
@@ -16046,6 +15498,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 6,
+          "value": undefined,
         },
         "String": Object {
           "count": 94,
@@ -16107,6 +15560,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 7,
+          "value": undefined,
         },
         "String": Object {
           "count": 93,
@@ -16168,6 +15622,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 7,
+          "value": undefined,
         },
         "String": Object {
           "count": 93,
@@ -16224,6 +15679,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 11,
+          "value": undefined,
         },
         "String": Object {
           "count": 89,
@@ -16251,6 +15707,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 5,
+          "value": undefined,
         },
         "String": Object {
           "count": 95,
@@ -16307,6 +15764,7 @@ Object {
       "types": Object {
         "UUID": Object {
           "count": 100,
+          "value": undefined,
         },
       },
       "unique": true,
@@ -16630,7 +16088,7 @@ Object {
     },
     "listingId": Object {
       "enum": undefined,
-      "identity": false,
+      "identity": true,
       "nullCount": 0,
       "nullable": false,
       "types": Object {
@@ -16664,6 +16122,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 17,
+          "value": undefined,
         },
         "String": Object {
           "count": 83,
@@ -16695,6 +16154,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 18,
+          "value": undefined,
         },
         "String": Object {
           "count": 82,
@@ -16726,6 +16186,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 19,
+          "value": undefined,
         },
         "String": Object {
           "count": 81,
@@ -16757,6 +16218,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 13,
+          "value": undefined,
         },
         "String": Object {
           "count": 87,
@@ -16788,6 +16250,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 17,
+          "value": undefined,
         },
         "String": Object {
           "count": 83,
@@ -16819,6 +16282,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 17,
+          "value": undefined,
         },
         "String": Object {
           "count": 83,
@@ -16850,6 +16314,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 14,
+          "value": undefined,
         },
         "String": Object {
           "count": 86,
@@ -16881,6 +16346,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 19,
+          "value": undefined,
         },
         "String": Object {
           "count": 81,
@@ -16912,6 +16378,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 19,
+          "value": undefined,
         },
         "String": Object {
           "count": 81,
@@ -16943,6 +16410,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 19,
+          "value": undefined,
         },
         "String": Object {
           "count": 81,
@@ -16974,6 +16442,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 17,
+          "value": undefined,
         },
         "String": Object {
           "count": 83,
@@ -17005,6 +16474,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 12,
+          "value": undefined,
         },
         "String": Object {
           "count": 88,
@@ -17036,6 +16506,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 19,
+          "value": undefined,
         },
         "String": Object {
           "count": 81,
@@ -17067,6 +16538,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 24,
+          "value": undefined,
         },
         "String": Object {
           "count": 76,
@@ -17098,6 +16570,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 17,
+          "value": undefined,
         },
         "String": Object {
           "count": 83,
@@ -17129,6 +16602,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 13,
+          "value": undefined,
         },
         "String": Object {
           "count": 87,
@@ -17160,6 +16634,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 13,
+          "value": undefined,
         },
         "String": Object {
           "count": 87,
@@ -17191,6 +16666,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 22,
+          "value": undefined,
         },
         "String": Object {
           "count": 78,
@@ -17295,6 +16771,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 10,
+          "value": undefined,
         },
         "String": Object {
           "count": 90,
@@ -18543,7 +18020,7 @@ Object {
       "listingId": Object {
         "count": 100,
         "enum": null,
-        "identity": false,
+        "identity": true,
         "nullable": false,
         "type": "Number",
         "typeRef": undefined,
@@ -19469,6 +18946,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 20,
+          "value": undefined,
         },
         "String": Object {
           "count": 80,
@@ -19506,6 +18984,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 6,
+          "value": undefined,
         },
         "String": Object {
           "count": 94,
@@ -19586,6 +19065,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 7,
+          "value": undefined,
         },
         "String": Object {
           "count": 93,
@@ -19665,6 +19145,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 7,
+          "value": undefined,
         },
         "String": Object {
           "count": 93,
@@ -19740,6 +19221,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 11,
+          "value": undefined,
         },
         "String": Object {
           "count": 89,
@@ -19783,6 +19265,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 5,
+          "value": undefined,
         },
         "String": Object {
           "count": 95,
@@ -19839,6 +19322,7 @@ Object {
       "types": Object {
         "UUID": Object {
           "count": 100,
+          "value": undefined,
         },
       },
       "unique": true,
@@ -20219,7 +19703,7 @@ Object {
     },
     "listingId": Object {
       "enum": undefined,
-      "identity": false,
+      "identity": true,
       "nullCount": 0,
       "nullable": false,
       "types": Object {
@@ -20253,6 +19737,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 17,
+          "value": undefined,
         },
         "String": Object {
           "count": 83,
@@ -20284,6 +19769,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 18,
+          "value": undefined,
         },
         "String": Object {
           "count": 82,
@@ -20315,6 +19801,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 19,
+          "value": undefined,
         },
         "String": Object {
           "count": 81,
@@ -20346,6 +19833,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 13,
+          "value": undefined,
         },
         "String": Object {
           "count": 87,
@@ -20377,6 +19865,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 17,
+          "value": undefined,
         },
         "String": Object {
           "count": 83,
@@ -20408,6 +19897,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 17,
+          "value": undefined,
         },
         "String": Object {
           "count": 83,
@@ -20439,6 +19929,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 14,
+          "value": undefined,
         },
         "String": Object {
           "count": 86,
@@ -20470,6 +19961,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 19,
+          "value": undefined,
         },
         "String": Object {
           "count": 81,
@@ -20501,6 +19993,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 19,
+          "value": undefined,
         },
         "String": Object {
           "count": 81,
@@ -20532,6 +20025,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 19,
+          "value": undefined,
         },
         "String": Object {
           "count": 81,
@@ -20563,6 +20057,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 17,
+          "value": undefined,
         },
         "String": Object {
           "count": 83,
@@ -20594,6 +20089,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 12,
+          "value": undefined,
         },
         "String": Object {
           "count": 88,
@@ -20625,6 +20121,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 19,
+          "value": undefined,
         },
         "String": Object {
           "count": 81,
@@ -20656,6 +20153,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 24,
+          "value": undefined,
         },
         "String": Object {
           "count": 76,
@@ -20687,6 +20185,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 17,
+          "value": undefined,
         },
         "String": Object {
           "count": 83,
@@ -20718,6 +20217,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 13,
+          "value": undefined,
         },
         "String": Object {
           "count": 87,
@@ -20749,6 +20249,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 13,
+          "value": undefined,
         },
         "String": Object {
           "count": 87,
@@ -20780,6 +20281,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 22,
+          "value": undefined,
         },
         "String": Object {
           "count": 78,
@@ -20884,6 +20386,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 10,
+          "value": undefined,
         },
         "String": Object {
           "count": 90,
@@ -22374,7 +21877,7 @@ Object {
       "listingId": Object {
         "count": 100,
         "enum": null,
-        "identity": false,
+        "identity": true,
         "nullable": false,
         "type": "Number",
         "typeRef": undefined,
@@ -23399,6 +22902,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 20,
+          "value": undefined,
         },
         "String": Object {
           "count": 80,
@@ -23436,6 +22940,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 6,
+          "value": undefined,
         },
         "String": Object {
           "count": 94,
@@ -23516,6 +23021,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 7,
+          "value": undefined,
         },
         "String": Object {
           "count": 93,
@@ -23595,6 +23101,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 7,
+          "value": undefined,
         },
         "String": Object {
           "count": 93,
@@ -23670,6 +23177,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 11,
+          "value": undefined,
         },
         "String": Object {
           "count": 89,
@@ -23713,6 +23221,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 5,
+          "value": undefined,
         },
         "String": Object {
           "count": 95,
@@ -23769,6 +23278,7 @@ Object {
       "types": Object {
         "UUID": Object {
           "count": 100,
+          "value": undefined,
         },
       },
       "unique": true,
@@ -24149,7 +23659,7 @@ Object {
     },
     "listingId": Object {
       "enum": undefined,
-      "identity": false,
+      "identity": true,
       "nullCount": 0,
       "nullable": false,
       "types": Object {
@@ -24183,6 +23693,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 17,
+          "value": undefined,
         },
         "String": Object {
           "count": 83,
@@ -24214,6 +23725,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 18,
+          "value": undefined,
         },
         "String": Object {
           "count": 82,
@@ -24245,6 +23757,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 19,
+          "value": undefined,
         },
         "String": Object {
           "count": 81,
@@ -24276,6 +23789,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 13,
+          "value": undefined,
         },
         "String": Object {
           "count": 87,
@@ -24307,6 +23821,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 17,
+          "value": undefined,
         },
         "String": Object {
           "count": 83,
@@ -24338,6 +23853,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 17,
+          "value": undefined,
         },
         "String": Object {
           "count": 83,
@@ -24369,6 +23885,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 14,
+          "value": undefined,
         },
         "String": Object {
           "count": 86,
@@ -24400,6 +23917,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 19,
+          "value": undefined,
         },
         "String": Object {
           "count": 81,
@@ -24431,6 +23949,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 19,
+          "value": undefined,
         },
         "String": Object {
           "count": 81,
@@ -24462,6 +23981,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 19,
+          "value": undefined,
         },
         "String": Object {
           "count": 81,
@@ -24493,6 +24013,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 17,
+          "value": undefined,
         },
         "String": Object {
           "count": 83,
@@ -24524,6 +24045,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 12,
+          "value": undefined,
         },
         "String": Object {
           "count": 88,
@@ -24555,6 +24077,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 19,
+          "value": undefined,
         },
         "String": Object {
           "count": 81,
@@ -24586,6 +24109,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 24,
+          "value": undefined,
         },
         "String": Object {
           "count": 76,
@@ -24617,6 +24141,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 17,
+          "value": undefined,
         },
         "String": Object {
           "count": 83,
@@ -24648,6 +24173,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 13,
+          "value": undefined,
         },
         "String": Object {
           "count": 87,
@@ -24679,6 +24205,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 13,
+          "value": undefined,
         },
         "String": Object {
           "count": 87,
@@ -24710,6 +24237,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 22,
+          "value": undefined,
         },
         "String": Object {
           "count": 78,
@@ -24814,6 +24342,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 10,
+          "value": undefined,
         },
         "String": Object {
           "count": 90,
@@ -26304,7 +25833,7 @@ Object {
       "listingId": Object {
         "count": 100,
         "enum": null,
-        "identity": false,
+        "identity": true,
         "nullable": false,
         "type": "Number",
         "typeRef": undefined,
@@ -27314,6 +26843,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 20,
+          "value": undefined,
         },
         "String": Object {
           "count": 80,
@@ -27351,6 +26881,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 6,
+          "value": undefined,
         },
         "String": Object {
           "count": 94,
@@ -27412,6 +26943,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 7,
+          "value": undefined,
         },
         "String": Object {
           "count": 93,
@@ -27473,6 +27005,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 7,
+          "value": undefined,
         },
         "String": Object {
           "count": 93,
@@ -27529,6 +27062,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 11,
+          "value": undefined,
         },
         "String": Object {
           "count": 89,
@@ -27556,6 +27090,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 5,
+          "value": undefined,
         },
         "String": Object {
           "count": 95,
@@ -27612,6 +27147,7 @@ Object {
       "types": Object {
         "UUID": Object {
           "count": 100,
+          "value": undefined,
         },
       },
       "unique": true,
@@ -27935,7 +27471,7 @@ Object {
     },
     "listingId": Object {
       "enum": undefined,
-      "identity": false,
+      "identity": true,
       "nullCount": 0,
       "nullable": false,
       "types": Object {
@@ -27969,6 +27505,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 17,
+          "value": undefined,
         },
         "String": Object {
           "count": 83,
@@ -28000,6 +27537,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 18,
+          "value": undefined,
         },
         "String": Object {
           "count": 82,
@@ -28031,6 +27569,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 19,
+          "value": undefined,
         },
         "String": Object {
           "count": 81,
@@ -28062,6 +27601,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 13,
+          "value": undefined,
         },
         "String": Object {
           "count": 87,
@@ -28093,6 +27633,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 17,
+          "value": undefined,
         },
         "String": Object {
           "count": 83,
@@ -28124,6 +27665,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 17,
+          "value": undefined,
         },
         "String": Object {
           "count": 83,
@@ -28155,6 +27697,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 14,
+          "value": undefined,
         },
         "String": Object {
           "count": 86,
@@ -28186,6 +27729,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 19,
+          "value": undefined,
         },
         "String": Object {
           "count": 81,
@@ -28217,6 +27761,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 19,
+          "value": undefined,
         },
         "String": Object {
           "count": 81,
@@ -28248,6 +27793,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 19,
+          "value": undefined,
         },
         "String": Object {
           "count": 81,
@@ -28279,6 +27825,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 17,
+          "value": undefined,
         },
         "String": Object {
           "count": 83,
@@ -28310,6 +27857,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 12,
+          "value": undefined,
         },
         "String": Object {
           "count": 88,
@@ -28341,6 +27889,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 19,
+          "value": undefined,
         },
         "String": Object {
           "count": 81,
@@ -28372,6 +27921,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 24,
+          "value": undefined,
         },
         "String": Object {
           "count": 76,
@@ -28403,6 +27953,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 17,
+          "value": undefined,
         },
         "String": Object {
           "count": 83,
@@ -28434,6 +27985,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 13,
+          "value": undefined,
         },
         "String": Object {
           "count": 87,
@@ -28465,6 +28017,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 13,
+          "value": undefined,
         },
         "String": Object {
           "count": 87,
@@ -28496,6 +28049,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 22,
+          "value": undefined,
         },
         "String": Object {
           "count": 78,
@@ -28600,6 +28154,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 10,
+          "value": undefined,
         },
         "String": Object {
           "count": 90,
@@ -29848,7 +29403,7 @@ Object {
       "listingId": Object {
         "count": 100,
         "enum": null,
-        "identity": false,
+        "identity": true,
         "nullable": false,
         "type": "Number",
         "typeRef": undefined,
@@ -30787,6 +30342,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 20,
+          "value": undefined,
         },
         "String": Object {
           "count": 100,
@@ -30824,6 +30380,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 6,
+          "value": undefined,
         },
         "String": Object {
           "count": 94,
@@ -30885,6 +30442,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 7,
+          "value": undefined,
         },
         "String": Object {
           "count": 93,
@@ -30946,6 +30504,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 7,
+          "value": undefined,
         },
         "String": Object {
           "count": 93,
@@ -31002,6 +30561,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 11,
+          "value": undefined,
         },
         "String": Object {
           "count": 89,
@@ -31029,6 +30589,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 5,
+          "value": undefined,
         },
         "String": Object {
           "count": 95,
@@ -31099,6 +30660,7 @@ Object {
         },
         "UUID": Object {
           "count": 100,
+          "value": undefined,
         },
       },
       "unique": true,
@@ -31450,7 +31012,7 @@ Object {
     },
     "listingId": Object {
       "enum": undefined,
-      "identity": false,
+      "identity": true,
       "nullCount": 0,
       "nullable": false,
       "types": Object {
@@ -31484,6 +31046,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 17,
+          "value": undefined,
         },
         "String": Object {
           "count": 83,
@@ -31515,6 +31078,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 18,
+          "value": undefined,
         },
         "String": Object {
           "count": 82,
@@ -31546,6 +31110,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 19,
+          "value": undefined,
         },
         "String": Object {
           "count": 81,
@@ -31577,6 +31142,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 13,
+          "value": undefined,
         },
         "String": Object {
           "count": 87,
@@ -31608,6 +31174,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 17,
+          "value": undefined,
         },
         "String": Object {
           "count": 83,
@@ -31639,6 +31206,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 17,
+          "value": undefined,
         },
         "String": Object {
           "count": 83,
@@ -31670,6 +31238,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 14,
+          "value": undefined,
         },
         "String": Object {
           "count": 86,
@@ -31701,6 +31270,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 19,
+          "value": undefined,
         },
         "String": Object {
           "count": 81,
@@ -31732,6 +31302,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 19,
+          "value": undefined,
         },
         "String": Object {
           "count": 81,
@@ -31763,6 +31334,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 19,
+          "value": undefined,
         },
         "String": Object {
           "count": 81,
@@ -31794,6 +31366,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 17,
+          "value": undefined,
         },
         "String": Object {
           "count": 83,
@@ -31825,6 +31398,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 12,
+          "value": undefined,
         },
         "String": Object {
           "count": 88,
@@ -31856,6 +31430,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 19,
+          "value": undefined,
         },
         "String": Object {
           "count": 81,
@@ -31887,6 +31462,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 24,
+          "value": undefined,
         },
         "String": Object {
           "count": 76,
@@ -31918,6 +31494,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 17,
+          "value": undefined,
         },
         "String": Object {
           "count": 83,
@@ -31949,6 +31526,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 13,
+          "value": undefined,
         },
         "String": Object {
           "count": 87,
@@ -31980,6 +31558,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 13,
+          "value": undefined,
         },
         "String": Object {
           "count": 87,
@@ -32011,6 +31590,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 22,
+          "value": undefined,
         },
         "String": Object {
           "count": 78,
@@ -32157,6 +31737,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 10,
+          "value": undefined,
         },
         "String": Object {
           "count": 90,
@@ -33405,7 +32986,7 @@ Object {
       "listingId": Object {
         "count": 100,
         "enum": null,
-        "identity": false,
+        "identity": true,
         "nullable": false,
         "type": "Number",
         "typeRef": undefined,
@@ -34215,6 +33796,8 @@ Object {
             "p75": 12,
             "p99": 12,
           },
+          "typeAlias": "Unknown",
+          "value": undefined,
         },
       },
       "unique": undefined,
@@ -34512,6 +34095,8 @@ Object {
             "p75": 3,
             "p99": 3,
           },
+          "typeAlias": "Object",
+          "value": undefined,
         },
       },
       "unique": undefined,
@@ -34809,6 +34394,8 @@ Object {
             "p75": 3,
             "p99": 3,
           },
+          "typeAlias": "Unknown",
+          "value": undefined,
         },
       },
       "unique": undefined,
@@ -35068,6 +34655,7 @@ Object {
       "types": Object {
         "Null": Object {
           "count": 1,
+          "value": undefined,
         },
       },
       "unique": undefined,
@@ -35155,709 +34743,5 @@ Object {
   "renamedTypes": undefined,
   "schemaName": "notes",
   "totalRows": 3,
-}
-`;
-
-exports[`primary use-cases supports enum detection: peopleWithEnums 1`] = `
-Object {
-  "debug": undefined,
-  "fields": Object {
-    "birth_year": Object {
-      "enum": undefined,
-      "identity": false,
-      "nullCount": 20,
-      "nullable": true,
-      "types": Object {
-        "Null": Object {
-          "count": 10,
-        },
-        "String": Object {
-          "count": 30,
-          "length": Object {
-            "max": 7,
-            "mean": 5.3,
-            "min": 4,
-            "p25": 5,
-            "p33": 5,
-            "p50": 5,
-            "p66": 5,
-            "p75": 5,
-            "p99": 7,
-          },
-        },
-      },
-      "unique": false,
-      "uniqueCount": 27,
-    },
-    "created": Object {
-      "enum": undefined,
-      "identity": false,
-      "nullCount": 0,
-      "nullable": false,
-      "types": Object {
-        "Date": Object {
-          "count": 40,
-          "value": Object {
-            "max": "2014-12-19T17:55:43.348Z",
-            "mean": "1963-04-16T14:35:27.920Z",
-            "min": "0000-01-01T00:00:00.000Z",
-            "p25": "2014-12-10T16:20:44.310Z",
-            "p33": "2014-12-10T16:49:14.582Z",
-            "p50": "2014-12-15T12:49:32.457Z",
-            "p66": "2014-12-18T11:12:38.895Z",
-            "p75": "2014-12-19T16:54:53.618Z",
-            "p99": "2014-12-19T17:55:43.348Z",
-          },
-        },
-        "Object": Object {
-          "count": 3,
-        },
-        "String": Object {
-          "count": 37,
-          "length": Object {
-            "max": 27,
-            "mean": 27,
-            "min": 27,
-            "p25": 27,
-            "p33": 27,
-            "p50": 27,
-            "p66": 27,
-            "p75": 27,
-            "p99": 27,
-          },
-        },
-      },
-      "unique": false,
-      "uniqueCount": 37,
-    },
-    "edited": Object {
-      "enum": undefined,
-      "identity": false,
-      "nullCount": 0,
-      "nullable": false,
-      "types": Object {
-        "Date": Object {
-          "count": 40,
-          "value": Object {
-            "max": "2014-12-20T21:17:56.891Z",
-            "mean": "2014-12-20T21:17:50.514Z",
-            "min": "2014-12-20T21:17:50.309Z",
-            "p25": "2014-12-20T21:17:50.327Z",
-            "p33": "2014-12-20T21:17:50.334Z",
-            "p50": "2014-12-20T21:17:50.349Z",
-            "p66": "2014-12-20T21:17:50.364Z",
-            "p75": "2014-12-20T21:17:50.375Z",
-            "p99": "2014-12-20T21:17:50.399Z",
-          },
-        },
-        "String": Object {
-          "count": 40,
-          "length": Object {
-            "max": 27,
-            "mean": 27,
-            "min": 27,
-            "p25": 27,
-            "p33": 27,
-            "p50": 27,
-            "p66": 27,
-            "p75": 27,
-            "p99": 27,
-          },
-        },
-      },
-      "unique": true,
-      "uniqueCount": 40,
-    },
-    "eye_color": Object {
-      "enum": Array [
-        "blue",
-        "yellow",
-        "red",
-        "brown",
-        "blue-gray",
-        "black",
-        "orange",
-        "hazel",
-      ],
-      "identity": false,
-      "nullCount": 0,
-      "nullable": false,
-      "types": Object {
-        "String": Object {
-          "count": 40,
-          "length": Object {
-            "max": 9,
-            "mean": 4.8,
-            "min": 3,
-            "p25": 4,
-            "p33": 4,
-            "p50": 5,
-            "p66": 5,
-            "p75": 6,
-            "p99": 9,
-          },
-        },
-      },
-      "unique": false,
-      "uniqueCount": 8,
-    },
-    "films": Object {
-      "enum": undefined,
-      "identity": false,
-      "nullCount": 0,
-      "nullable": undefined,
-      "types": Object {
-        "Array": Object {
-          "count": 40,
-          "length": Object {
-            "max": 7,
-            "mean": 2.525,
-            "min": 1,
-            "p25": 1,
-            "p33": 1,
-            "p50": 2,
-            "p66": 3,
-            "p75": 4,
-            "p99": 7,
-          },
-        },
-      },
-      "unique": undefined,
-      "uniqueCount": 0,
-    },
-    "hair_color": Object {
-      "enum": undefined,
-      "identity": false,
-      "nullCount": 0,
-      "nullable": false,
-      "types": Object {
-        "String": Object {
-          "count": 40,
-          "length": Object {
-            "max": 13,
-            "mean": 5,
-            "min": 3,
-            "p25": 4,
-            "p33": 4,
-            "p50": 5,
-            "p66": 5,
-            "p75": 5,
-            "p99": 13,
-          },
-        },
-      },
-      "unique": false,
-      "uniqueCount": 11,
-    },
-    "height": Object {
-      "enum": undefined,
-      "identity": false,
-      "nullCount": 2,
-      "nullable": true,
-      "types": Object {
-        "Null": Object {
-          "count": 1,
-        },
-        "Number": Object {
-          "count": 39,
-          "value": Object {
-            "max": 228,
-            "mean": 169.23076923076923,
-            "min": 66,
-            "p25": 182,
-            "p33": 228,
-            "p50": 170,
-            "p66": 180,
-            "p75": 193,
-            "p99": 183,
-          },
-        },
-        "String": Object {
-          "count": 39,
-          "length": Object {
-            "max": 3,
-            "mean": 2.8974358974358974,
-            "min": 2,
-            "p25": 3,
-            "p33": 3,
-            "p50": 3,
-            "p66": 3,
-            "p75": 3,
-            "p99": 3,
-          },
-        },
-      },
-      "unique": false,
-      "uniqueCount": 29,
-    },
-    "homeworld": Object {
-      "enum": undefined,
-      "identity": false,
-      "nullCount": 0,
-      "nullable": false,
-      "types": Object {
-        "String": Object {
-          "count": 40,
-          "length": Object {
-            "max": 45,
-            "mean": 44.525,
-            "min": 44,
-            "p25": 44,
-            "p33": 44,
-            "p50": 45,
-            "p66": 45,
-            "p75": 45,
-            "p99": 45,
-          },
-        },
-      },
-      "unique": false,
-      "uniqueCount": 23,
-    },
-    "id": Object {
-      "enum": undefined,
-      "identity": true,
-      "nullCount": 0,
-      "nullable": false,
-      "types": Object {
-        "Number": Object {
-          "count": 40,
-          "value": Object {
-            "max": 42,
-            "mean": 21.275,
-            "min": 1,
-            "p25": 11,
-            "p33": 14,
-            "p50": 22,
-            "p66": 28,
-            "p75": 32,
-            "p99": 42,
-          },
-        },
-      },
-      "unique": true,
-      "uniqueCount": 40,
-    },
-    "mass": Object {
-      "enum": undefined,
-      "identity": false,
-      "nullCount": 16,
-      "nullable": true,
-      "types": Object {
-        "Float": Object {
-          "count": 1,
-          "precision": Object {
-            "max": 3,
-            "mean": 3,
-            "min": 3,
-            "p25": 3,
-            "p33": 3,
-            "p50": 3,
-            "p66": 3,
-            "p75": 3,
-            "p99": 3,
-          },
-          "scale": Object {
-            "max": 1,
-            "mean": 1,
-            "min": 1,
-            "p25": 1,
-            "p33": 1,
-            "p50": 1,
-            "p66": 1,
-            "p75": 1,
-            "p99": 1,
-          },
-          "value": Object {
-            "max": 78.2,
-            "mean": 78.2,
-            "min": 78.2,
-            "p25": 78.2,
-            "p33": 78.2,
-            "p50": 78.2,
-            "p66": 78.2,
-            "p75": 78.2,
-            "p99": 78.2,
-          },
-        },
-        "Null": Object {
-          "count": 8,
-        },
-        "Number": Object {
-          "count": 32,
-          "value": Object {
-            "max": 140,
-            "mean": 77.84516129032258,
-            "min": 17,
-            "p25": 32,
-            "p33": 84,
-            "p50": 110,
-            "p66": 113,
-            "p75": 83,
-            "p99": 40,
-          },
-        },
-        "String": Object {
-          "count": 32,
-          "length": Object {
-            "max": 4,
-            "mean": 2.28125,
-            "min": 2,
-            "p25": 2,
-            "p33": 2,
-            "p50": 2,
-            "p66": 2,
-            "p75": 3,
-            "p99": 4,
-          },
-        },
-      },
-      "unique": false,
-      "uniqueCount": 25,
-    },
-    "name": Object {
-      "enum": undefined,
-      "identity": false,
-      "nullCount": 0,
-      "nullable": false,
-      "types": Object {
-        "String": Object {
-          "count": 40,
-          "length": Object {
-            "max": 21,
-            "mean": 10.7,
-            "min": 4,
-            "p25": 7,
-            "p33": 9,
-            "p50": 11,
-            "p66": 13,
-            "p75": 14,
-            "p99": 21,
-          },
-        },
-      },
-      "unique": true,
-      "uniqueCount": 40,
-    },
-    "skin_color": Object {
-      "enum": undefined,
-      "identity": false,
-      "nullCount": 2,
-      "nullable": true,
-      "types": Object {
-        "Null": Object {
-          "count": 1,
-        },
-        "String": Object {
-          "count": 39,
-          "length": Object {
-            "max": 16,
-            "mean": 5.717948717948718,
-            "min": 4,
-            "p25": 4,
-            "p33": 4,
-            "p50": 5,
-            "p66": 5,
-            "p75": 5,
-            "p99": 16,
-          },
-        },
-      },
-      "unique": false,
-      "uniqueCount": 18,
-    },
-    "species": Object {
-      "enum": undefined,
-      "identity": false,
-      "nullCount": 0,
-      "nullable": undefined,
-      "types": Object {
-        "Array": Object {
-          "count": 40,
-          "length": Object {
-            "max": 1,
-            "mean": 1,
-            "min": 1,
-            "p25": 1,
-            "p33": 1,
-            "p50": 1,
-            "p66": 1,
-            "p75": 1,
-            "p99": 1,
-          },
-        },
-      },
-      "unique": undefined,
-      "uniqueCount": 0,
-    },
-    "starships": Object {
-      "enum": undefined,
-      "identity": false,
-      "nullCount": 0,
-      "nullable": undefined,
-      "types": Object {
-        "Array": Object {
-          "count": 40,
-          "length": Object {
-            "max": 5,
-            "mean": 1.6428571428571428,
-            "min": 1,
-            "p25": 1,
-            "p33": 1,
-            "p50": 1,
-            "p66": 2,
-            "p75": 2,
-            "p99": 5,
-          },
-        },
-      },
-      "unique": undefined,
-      "uniqueCount": 0,
-    },
-    "url": Object {
-      "enum": undefined,
-      "identity": false,
-      "nullCount": 0,
-      "nullable": false,
-      "types": Object {
-        "String": Object {
-          "count": 40,
-          "length": Object {
-            "max": 44,
-            "mean": 43.775,
-            "min": 43,
-            "p25": 44,
-            "p33": 44,
-            "p50": 44,
-            "p66": 44,
-            "p75": 44,
-            "p99": 44,
-          },
-        },
-      },
-      "unique": true,
-      "uniqueCount": 40,
-    },
-    "vehicles": Object {
-      "enum": undefined,
-      "identity": false,
-      "nullCount": 0,
-      "nullable": undefined,
-      "types": Object {
-        "Array": Object {
-          "count": 40,
-          "length": Object {
-            "max": 2,
-            "mean": 1.2857142857142858,
-            "min": 1,
-            "p25": 1,
-            "p33": 1,
-            "p50": 1,
-            "p66": 1,
-            "p75": 2,
-            "p99": 2,
-          },
-        },
-      },
-      "unique": undefined,
-      "uniqueCount": 0,
-    },
-  },
-  "flatTypeSummary": Object {
-    "fields": Object {
-      "birth_year": Object {
-        "count": 30,
-        "enum": null,
-        "identity": false,
-        "length": 7,
-        "nullable": true,
-        "type": "String",
-        "typeRef": undefined,
-        "typeRelationship": undefined,
-        "unique": false,
-      },
-      "created": Object {
-        "count": 40,
-        "enum": null,
-        "identity": false,
-        "nullable": false,
-        "type": "Date",
-        "typeRef": undefined,
-        "typeRelationship": undefined,
-        "unique": false,
-      },
-      "edited": Object {
-        "count": 40,
-        "enum": null,
-        "identity": false,
-        "nullable": false,
-        "type": "Date",
-        "typeRef": undefined,
-        "typeRelationship": undefined,
-        "unique": true,
-      },
-      "eye_color": Object {
-        "count": 40,
-        "enum": Array [
-          "blue",
-          "yellow",
-          "red",
-          "brown",
-          "blue-gray",
-          "black",
-          "orange",
-          "hazel",
-        ],
-        "identity": false,
-        "length": 9,
-        "nullable": false,
-        "type": "String",
-        "typeRef": undefined,
-        "typeRelationship": undefined,
-        "unique": false,
-      },
-      "films": Object {
-        "count": 40,
-        "enum": null,
-        "identity": false,
-        "length": 7,
-        "nullable": false,
-        "type": "Array",
-        "typeRef": undefined,
-        "typeRelationship": undefined,
-        "unique": false,
-      },
-      "hair_color": Object {
-        "count": 40,
-        "enum": null,
-        "identity": false,
-        "length": 13,
-        "nullable": false,
-        "type": "String",
-        "typeRef": undefined,
-        "typeRelationship": undefined,
-        "unique": false,
-      },
-      "height": Object {
-        "count": 39,
-        "enum": null,
-        "identity": false,
-        "nullable": true,
-        "type": "Number",
-        "typeRef": undefined,
-        "typeRelationship": undefined,
-        "unique": false,
-      },
-      "homeworld": Object {
-        "count": 40,
-        "enum": null,
-        "identity": false,
-        "length": 45,
-        "nullable": false,
-        "type": "String",
-        "typeRef": undefined,
-        "typeRelationship": undefined,
-        "unique": false,
-      },
-      "id": Object {
-        "count": 40,
-        "enum": null,
-        "identity": true,
-        "nullable": false,
-        "type": "Number",
-        "typeRef": undefined,
-        "typeRelationship": undefined,
-        "unique": true,
-      },
-      "mass": Object {
-        "count": 32,
-        "enum": null,
-        "identity": false,
-        "nullable": true,
-        "type": "Number",
-        "typeRef": undefined,
-        "typeRelationship": undefined,
-        "unique": false,
-      },
-      "name": Object {
-        "count": 40,
-        "enum": null,
-        "identity": false,
-        "length": 21,
-        "nullable": false,
-        "type": "String",
-        "typeRef": undefined,
-        "typeRelationship": undefined,
-        "unique": true,
-      },
-      "skin_color": Object {
-        "count": 39,
-        "enum": null,
-        "identity": false,
-        "length": 16,
-        "nullable": true,
-        "type": "String",
-        "typeRef": undefined,
-        "typeRelationship": undefined,
-        "unique": false,
-      },
-      "species": Object {
-        "count": 40,
-        "enum": null,
-        "identity": false,
-        "length": 1,
-        "nullable": false,
-        "type": "Array",
-        "typeRef": undefined,
-        "typeRelationship": undefined,
-        "unique": false,
-      },
-      "starships": Object {
-        "count": 40,
-        "enum": null,
-        "identity": false,
-        "length": 5,
-        "nullable": false,
-        "type": "Array",
-        "typeRef": undefined,
-        "typeRelationship": undefined,
-        "unique": false,
-      },
-      "url": Object {
-        "count": 40,
-        "enum": null,
-        "identity": false,
-        "length": 44,
-        "nullable": false,
-        "type": "String",
-        "typeRef": undefined,
-        "typeRelationship": undefined,
-        "unique": true,
-      },
-      "vehicles": Object {
-        "count": 40,
-        "enum": null,
-        "identity": false,
-        "length": 2,
-        "nullable": false,
-        "type": "Array",
-        "typeRef": undefined,
-        "typeRelationship": undefined,
-        "unique": false,
-      },
-    },
-    "nestedTypes": Object {},
-    "schemaName": "people",
-    "totalRows": 40,
-  },
-  "nestedTypes": Object {},
-  "options": Object {
-    "enumAbsoluteLimit": 8,
-    "enumMinimumRowCount": 10,
-    "strictMatching": false,
-  },
-  "renamedTypes": undefined,
-  "schemaName": "people",
-  "totalRows": 40,
 }
 `;

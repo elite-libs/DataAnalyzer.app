@@ -73,7 +73,7 @@ exports.up = async function up(knex) {
   await knex.schema.createTable(\\"event_results_embedded_events_embedded_attractions_images\\", (table) => {
     table.string(\\"ratio\\", 20).notNullable();
     table.string(\\"url\\", 200).notNullable().unique();
-    table.integer(\\"width\\").notNullable();
+    table.increments(\\"width\\");
     table.integer(\\"height\\").notNullable().unique();
     table.boolean(\\"fallback\\").notNullable();
   })
@@ -119,7 +119,7 @@ exports.up = async function up(knex) {
     table.string(\\"id\\", 20).notNullable().unique();
     table.boolean(\\"test\\").notNullable();
     table.string(\\"locale\\", 20).notNullable().unique();
-    table.integer(\\"images\\").references(\\"ratio\\").inTable('event_results_embedded_events_embedded_attractions_images'); // note: one-to-many
+    table.integer(\\"images\\").references(\\"width\\").inTable('event_results_embedded_events_embedded_attractions_images'); // note: one-to-many
     table.integer(\\"classifications\\").references(\\"primary\\").inTable('event_results_embedded_events_embedded_attractions_classifications'); // note: one-to-many
     table.integer(\\"links\\").references(\\"self\\").inTable('event_results_embedded_events_embedded_attractions_links'); // note: one-to-one
   })
@@ -221,7 +221,7 @@ exports.up = async function up(knex) {
   await knex.schema.createTable(\\"event_results_embedded_events_images\\", (table) => {
     table.string(\\"ratio\\", 20).notNullable();
     table.string(\\"url\\", 200).notNullable().unique();
-    table.integer(\\"width\\").notNullable();
+    table.increments(\\"width\\");
     table.integer(\\"height\\").notNullable().unique();
     table.boolean(\\"fallback\\").notNullable();
   })
@@ -233,7 +233,7 @@ exports.up = async function up(knex) {
     table.boolean(\\"test\\").notNullable();
     table.string(\\"url\\", 60).notNullable().unique();
     table.string(\\"locale\\", 20).notNullable().unique();
-    table.integer(\\"images\\").references(\\"ratio\\").inTable('event_results_embedded_events_images'); // note: one-to-many
+    table.integer(\\"images\\").references(\\"width\\").inTable('event_results_embedded_events_images'); // note: one-to-many
     table.integer(\\"sales\\").references(\\"public\\").inTable('event_results_embedded_events_sales'); // note: one-to-one
     table.integer(\\"dates\\").references(\\"start\\").inTable('event_results_embedded_events_dates'); // note: one-to-one
     table.integer(\\"classifications\\").references(\\"primary\\").inTable('event_results_embedded_events_classifications'); // note: one-to-many
@@ -387,7 +387,7 @@ exports.up = async function up(knex) {
     table.string(\\"id\\", 20).notNullable().unique();
     table.boolean(\\"test\\").notNullable();
     table.string(\\"locale\\", 20).notNullable().unique();
-    table.integer(\\"images\\").references(\\"ratio\\").inTable('images'); // note: one-to-many
+    table.integer(\\"images\\").references(\\"width\\").inTable('images'); // note: one-to-many
     table.integer(\\"classifications\\").references(\\"primary\\").inTable('classifications'); // note: one-to-many
     table.integer(\\"links\\").references(\\"self\\").inTable('links'); // note: one-to-one
   })
@@ -434,7 +434,7 @@ exports.up = async function up(knex) {
   await knex.schema.createTable(\\"images\\", (table) => {
     table.string(\\"ratio\\", 20).notNullable();
     table.string(\\"url\\", 200).notNullable().unique();
-    table.integer(\\"width\\").notNullable();
+    table.increments(\\"width\\");
     table.integer(\\"height\\").notNullable().unique();
     table.boolean(\\"fallback\\").notNullable();
   })
@@ -446,7 +446,7 @@ exports.up = async function up(knex) {
     table.boolean(\\"test\\").notNullable();
     table.string(\\"url\\", 60).notNullable().unique();
     table.string(\\"locale\\", 20).notNullable().unique();
-    table.integer(\\"images\\").references(\\"ratio\\").inTable('images'); // note: one-to-many
+    table.integer(\\"images\\").references(\\"width\\").inTable('images'); // note: one-to-many
     table.integer(\\"sales\\").references(\\"public\\").inTable('sales'); // note: one-to-one
     table.integer(\\"dates\\").references(\\"start\\").inTable('dates'); // note: one-to-one
     table.integer(\\"classifications\\").references(\\"primary\\").inTable('classifications'); // note: one-to-many
@@ -551,7 +551,7 @@ exports.up = async function up(knex) {
   await knex.schema.createTable(\\"images\\", (table) => {
     table.string(\\"ratio\\", 20).notNullable();
     table.string(\\"url\\", 200).notNullable().unique();
-    table.integer(\\"width\\").notNullable();
+    table.increments(\\"width\\");
     table.integer(\\"height\\").notNullable().unique();
     table.boolean(\\"fallback\\").notNullable();
   })
@@ -594,7 +594,7 @@ exports.up = async function up(knex) {
     table.string(\\"id\\", 20).notNullable().unique();
     table.boolean(\\"test\\").notNullable();
     table.string(\\"locale\\", 20).notNullable().unique();
-    table.integer(\\"images\\").references(\\"ratio\\").inTable('images'); // note: one-to-many
+    table.integer(\\"images\\").references(\\"width\\").inTable('images'); // note: one-to-many
     table.integer(\\"classifications\\").references(\\"primary\\").inTable('classifications'); // note: one-to-many
     table.integer(\\"links\\").references(\\"self\\").inTable('links'); // note: one-to-one
   })
@@ -666,7 +666,7 @@ exports.up = async function up(knex) {
     table.boolean(\\"test\\").notNullable();
     table.string(\\"url\\", 60).notNullable().unique();
     table.string(\\"locale\\", 20).notNullable().unique();
-    table.integer(\\"images\\").references(\\"ratio\\").inTable('images'); // note: one-to-many
+    table.integer(\\"images\\").references(\\"width\\").inTable('images'); // note: one-to-many
     table.integer(\\"sales\\").references(\\"public\\").inTable('event_results_embedded_events_sales'); // note: one-to-one
     table.integer(\\"dates\\").references(\\"start\\").inTable('event_results_embedded_events_dates'); // note: one-to-one
     table.integer(\\"classifications\\").references(\\"primary\\").inTable('classifications'); // note: one-to-many
@@ -961,8 +961,38 @@ exports[`#knex can emit migration for people json 1`] = `
 "// More info: http://knexjs.org/#Schema-createTable
 
 exports.up = async function up(knex) {
-  
-  /* Note: no nested types detected */
+  // NOTE #1: You can break up multiple createTable's into different migration scripts
+  // OR, you can chain the calls to .createTable()'s
+  // NOTE #2: make sure any tables are created before it's relations (tables) are setup.
+
+  await knex.schema.createTable(\\"people_starships\\", (table) => {
+    table.string(\\"0\\", 60).notNullable();
+    table.string(\\"1\\", 60).notNullable();
+    table.string(\\"2\\", 60).notNullable();
+    table.string(\\"3\\", 60).notNullable();
+    table.string(\\"4\\", 60).notNullable();
+  })
+
+  await knex.schema.createTable(\\"people_vehicles\\", (table) => {
+    table.string(\\"0\\", 60).notNullable();
+    table.string(\\"1\\", 60).notNullable();
+  })
+
+  await knex.schema.createTable(\\"people_species\\", (table) => {
+    table.string(\\"0\\", 60).notNullable();
+  })
+
+  await knex.schema.createTable(\\"people_films\\", (table) => {
+    table.string(\\"0\\", 60).enum('https://star-wars-api.example/api/films/2/', 'https://star-wars-api.example/api/films/5/', 'https://star-wars-api.example/api/films/1/', 'https://star-wars-api.example/api/films/6/', 'https://star-wars-api.example/api/films/4/', 'https://star-wars-api.example/api/films/3/').notNullable();
+    table.string(\\"1\\", 60).enum('https://star-wars-api.example/api/films/6/', 'https://star-wars-api.example/api/films/5/', 'https://star-wars-api.example/api/films/4/', 'https://star-wars-api.example/api/films/1/', 'https://star-wars-api.example/api/films/3/', 'https://star-wars-api.example/api/films/7/').notNullable();
+    table.string(\\"2\\", 60).enum('https://star-wars-api.example/api/films/3/', 'https://star-wars-api.example/api/films/4/', 'https://star-wars-api.example/api/films/1/', 'https://star-wars-api.example/api/films/6/').notNullable();
+    table.string(\\"3\\", 60).enum('https://star-wars-api.example/api/films/1/', 'https://star-wars-api.example/api/films/6/', 'https://star-wars-api.example/api/films/7/').notNullable();
+    table.string(\\"4\\", 60).enum('https://star-wars-api.example/api/films/7/', 'https://star-wars-api.example/api/films/3/').notNullable();
+    table.string(\\"5\\", 60).enum('https://star-wars-api.example/api/films/1/').notNullable();
+    table.string(\\"6\\", 60).enum('https://star-wars-api.example/api/films/7/').notNullable();
+  })
+
+
 
   // Create the main table
   return knex.schema.createTable(\\"people\\", (table) => {
@@ -987,6 +1017,10 @@ exports.up = async function up(knex) {
 };
 
 exports.down = async function down(knex) {
+  await knex.schema.dropTableIfExists(\\"people_starships\\");
+  await knex.schema.dropTableIfExists(\\"people_vehicles\\");
+  await knex.schema.dropTableIfExists(\\"people_species\\");
+  await knex.schema.dropTableIfExists(\\"people_films\\");
   await knex.schema.dropTableIfExists(\\"people\\");
 };
 "
@@ -1946,9 +1980,9 @@ exports.up = async function up(knex) {
 
   // Create the main table
   return knex.schema.createTable(\\"users\\", (table) => {
-    table.decimal(\\"id\\", null).notNullable().primary(); // NOTE: \`decimal(name, null)\` is typically larger than \`bigInteger(name)\`
+    table.decimal(\\"id\\", null).notNullable().primary(); // NOTE: \`decimal(colName, null)\` is typically larger than \`bigInteger(colName)\`
     table.string(\\"username\\", 20).notNullable().unique();
-    table.string(\\"email\\").notNullable().unique(); // Note: Email 'subtype' detected
+    table.string(\\"email\\").notNullable().unique(); // NOTE: Email 'subtype' detected
   })
 
 };

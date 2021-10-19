@@ -18,7 +18,33 @@ CREATE TABLE users (
 `;
 
 exports[`#sql can emit interface for people json 1`] = `
-"/* Note: no nested types detected */
+"CREATE TABLE people_films (
+    0    VARCHAR(60)  NOT NULL,
+    1    VARCHAR(60)  NOT NULL,
+    2    VARCHAR(60)  NOT NULL,
+    3    VARCHAR(60)  NOT NULL,
+    4    VARCHAR(60)  NOT NULL,
+    5    VARCHAR(60)  NOT NULL,
+    6    VARCHAR(60)  NOT NULL,
+);
+
+CREATE TABLE people_species (
+    0    VARCHAR(60)  NOT NULL,
+);
+
+CREATE TABLE people_vehicles (
+    0    VARCHAR(60)  NOT NULL,
+    1    VARCHAR(60)  NOT NULL,
+);
+
+CREATE TABLE people_starships (
+    0    VARCHAR(60)  NOT NULL,
+    1    VARCHAR(60)  NOT NULL,
+    2    VARCHAR(60)  NOT NULL,
+    3    VARCHAR(60)  NOT NULL,
+    4    VARCHAR(60)  NOT NULL,
+);
+
 CREATE TABLE people (
     name    VARCHAR(40)  NOT NULL  UNIQUE,
     height    INT,
@@ -128,7 +154,7 @@ CREATE TABLE event_results_embedded_events (
 CREATE TABLE event_results_embedded_events_images (
     ratio    VARCHAR(20)  NOT NULL,
     url    VARCHAR(200)  NOT NULL  UNIQUE,
-    width    INT NOT NULL,
+    width    SERIAL NOT NULL  PRIMARY KEY,
     height    INT NOT NULL  UNIQUE,
     fallback    BOOLEAN      NOT NULL,
 );
@@ -320,7 +346,7 @@ CREATE TABLE event_results_embedded_events_embedded_venues_links_self (
 CREATE TABLE event_results_embedded_events_embedded_attractions_images (
     ratio    VARCHAR(20)  NOT NULL,
     url    VARCHAR(200)  NOT NULL  UNIQUE,
-    width    INT NOT NULL,
+    width    SERIAL NOT NULL  PRIMARY KEY,
     height    INT NOT NULL  UNIQUE,
     fallback    BOOLEAN      NOT NULL,
 );
@@ -443,7 +469,7 @@ CREATE TABLE events (
 CREATE TABLE images (
     ratio    VARCHAR(20)  NOT NULL,
     url    VARCHAR(200)  NOT NULL  UNIQUE,
-    width    INT NOT NULL,
+    width    SERIAL NOT NULL  PRIMARY KEY,
     height    INT NOT NULL  UNIQUE,
     fallback    BOOLEAN      NOT NULL,
 );
@@ -789,7 +815,7 @@ CREATE TABLE href_templated (
 CREATE TABLE images (
     ratio    VARCHAR(20)  NOT NULL,
     url    VARCHAR(200)  NOT NULL  UNIQUE,
-    width    INT NOT NULL,
+    width    SERIAL NOT NULL  PRIMARY KEY,
     height    INT NOT NULL  UNIQUE,
     fallback    BOOLEAN      NOT NULL,
 );

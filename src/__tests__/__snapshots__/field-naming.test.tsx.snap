@@ -1064,7 +1064,7 @@ Object {
       "width": Object {
         "count": 10,
         "enum": null,
-        "identity": false,
+        "identity": true,
         "nullable": false,
         "type": "Number",
         "typeRef": undefined,

@@ -32,6 +32,29 @@ exports[`#typescript can emit interface for people json 1`] = `
   url: string;
   id: number;
 };
+export interface PeopleFilms {
+  0: \\"https://star-wars-api.example/api/films/2/\\" | \\"https://star-wars-api.example/api/films/5/\\" | \\"https://star-wars-api.example/api/films/1/\\" | \\"https://star-wars-api.example/api/films/6/\\" | \\"https://star-wars-api.example/api/films/4/\\" | \\"https://star-wars-api.example/api/films/3/\\";
+  1: \\"https://star-wars-api.example/api/films/6/\\" | \\"https://star-wars-api.example/api/films/5/\\" | \\"https://star-wars-api.example/api/films/4/\\" | \\"https://star-wars-api.example/api/films/1/\\" | \\"https://star-wars-api.example/api/films/3/\\" | \\"https://star-wars-api.example/api/films/7/\\";
+  2: \\"https://star-wars-api.example/api/films/3/\\" | \\"https://star-wars-api.example/api/films/4/\\" | \\"https://star-wars-api.example/api/films/1/\\" | \\"https://star-wars-api.example/api/films/6/\\";
+  3: \\"https://star-wars-api.example/api/films/1/\\" | \\"https://star-wars-api.example/api/films/6/\\" | \\"https://star-wars-api.example/api/films/7/\\";
+  4: \\"https://star-wars-api.example/api/films/7/\\" | \\"https://star-wars-api.example/api/films/3/\\";
+  5: \\"https://star-wars-api.example/api/films/1/\\";
+  6: \\"https://star-wars-api.example/api/films/7/\\";
+};
+export interface PeopleSpecies {
+  0: string;
+};
+export interface PeopleVehicles {
+  0: string;
+  1: string;
+};
+export interface PeopleStarships {
+  0: string;
+  1: string;
+  2: string;
+  3: string;
+  4: string;
+};
 "
 `;
 

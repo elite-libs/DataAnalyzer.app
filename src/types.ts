@@ -14,6 +14,11 @@ export type TypeSummary<TFieldDetails = FieldInfo> = {
   nestedTypes?: KeyValPair<TypeSummary<TFieldDetails>>;
 };
 
+export type ArrayTypeInfo = {
+  fieldName: string;
+  subType: TypeNameString;
+};
+
 export type DataAnalysisResults = TypeSummary<FieldInfo> & {
   flatTypeSummary: TypeSummary<CombinedFieldInfo>;
   // denseNestedTypes?: KeyValPair<TypeSummary<CombinedFieldInfo>>;
@@ -45,14 +50,21 @@ export type TypeNameString =
 export type TypeNameStringComposite = 'String' | 'Email' | 'Array';
 
 export const TypeNameStringComposite = ['String', 'Email', 'Array'];
-export const TypeNameStringDecimal = ['Date', 'Timestamp', 'Currency', 'Float', 'Number', 'BigNumber'];
+export const TypeNameStringDecimal = [
+  'Date',
+  'Timestamp',
+  'Currency',
+  'Float',
+  'BigNumber',
+  'Number',
+];
 export type TypeNameStringDecimal =
   | 'Date'
   | 'Timestamp'
   | 'Currency'
   | 'Float'
-  | 'Number'
-  | 'BigNumber';
+  | 'BigNumber'
+  | 'Number';
 
 export interface ISchemaAnalyzerOptions {
   /** Required # of rows, default 100 */
@@ -94,6 +106,7 @@ export type TypedFieldObject<T> = {
   Timestamp?: T | undefined;
   Currency?: T | undefined;
   Float?: T | undefined;
+  BigNumber?: T | undefined;
   Number?: T | undefined;
   Email?: T | undefined;
   String?: T | undefined;
@@ -194,7 +207,7 @@ export type InternalFieldTypeData = {
   /** Used to indicate a non-array nested type (one-to-one relationship) */
   typeRelationship?: 'one-to-one' | 'one-to-many';
   /** for nested type support. */
-  typeAlias?: string | undefined;
+  typeAlias?: string | string[] | undefined;
   /** array of values, pre processing into an AggregateSummary */
   value?: any[] | undefined;
   /** array of string (or decimal) sizes, pre processing into an AggregateSummary */

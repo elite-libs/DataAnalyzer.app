@@ -11,6 +11,8 @@ import {
   isUuid,
 } from './type-detectors';
 import { FieldInfo, TypeDescriptorName, TypeNameString } from '../../types';
+import countBy from 'lodash/countBy';
+import toPairs from 'lodash/toPairs';
 
 const hasLeadingZero = /^0+\d/;
 
@@ -68,8 +70,28 @@ function detectTypes(value: any, strictMatching = false) {
     },
     [],
   );
-  return strictMatching ? [matchedTypes[0]] : matchedTypes;
+  return strictMatching ? [matchedTypes[0]!] : matchedTypes;
   // : matchedTypes.filter((type) => excludedTypes.indexOf(type) === -1);
+}
+
+function getTypedArrayTypes(values: any[], strictMatching = false) {
+  const innerTypes = values
+    .map((item) =>
+      detectTypes(item, strictMatching).filter(
+        (typeName) => typeName !== 'Unknown',
+      ),
+    )
+    .flat();
+  const primitiveTypeCounts = getRankedCounts(innerTypes);
+  return primitiveTypeCounts;
+}
+
+function getRankedCounts(list: string[]) {
+  return toPairs(countBy(list)).sort((a, b) => b[1] - a[1]);
+}
+
+function getTopRankedElement(list: string[]) {
+  return getRankedCounts(list)[0]?.[0];
 }
 
 /**
@@ -204,13 +226,15 @@ const TYPE_BIGNUMBER: ITypeMatcher = {
       return !!(
         value !== null &&
         typeof value === 'string' &&
-        BigInt(value) && BigInt(value) > Number.MAX_SAFE_INTEGER
+        BigInt(value) &&
+        BigInt(value) > Number.MAX_SAFE_INTEGER
       );
     } catch (e) {
       return false;
     }
   },
-};const TYPE_EMAIL: ITypeMatcher = {
+};
+const TYPE_EMAIL: ITypeMatcher = {
   type: 'Email',
   supersedes: ['String'],
   check: isEmailShaped,
@@ -270,12 +294,15 @@ const typeRankings = {
   [TYPE_NUMBER.type]: 8,
   [TYPE_NULL.type]: 10,
   [TYPE_EMAIL.type]: 11,
-  [TYPE_STRING.type]: 12,
   [TYPE_ARRAY.type]: 13,
+  [TYPE_STRING.type]: 13.5,
   [TYPE_OBJECT.type]: 14,
 };
 
 export {
+  getTypedArrayTypes,
+  getRankedCounts,
+  getTopRankedElement,
   typeRankings,
   prioritizedTypes,
   detectTypes,

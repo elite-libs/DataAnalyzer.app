@@ -1,8 +1,15 @@
 /* eslint-disable @typescript-eslint/no-redeclare */
 // import debug from 'debug'
-import { detectTypes, MetaChecks } from './utils/type-helpers';
+import {
+  detectTypes,
+  getRankedCounts,
+  getTopRankedElement,
+  getTypedArrayTypes,
+  MetaChecks,
+} from './utils/type-helpers';
 import * as helpers from './utils/helpers';
 import type {
+  ArrayTypeInfo,
   KeyValPair,
   ISchemaAnalyzerOptions,
   DataAnalysisResults,
@@ -20,11 +27,10 @@ import type {
 import { consolidateNestedTypes } from './utils/consolidate-nested-types';
 import fromPairs from 'lodash/fromPairs';
 import mapValues from 'lodash/mapValues';
+
 export { helpers, consolidateNestedTypes };
 
-// const log = debug('schema-builder:main')
-
-// export { schemaAnalyzer, pivotFieldDataByType, getNumberRangeStats, isValidDate }
+const identityPattern = /^(guid)|(uuid)|(id)|(_id)$/i;
 
 function isValidDate(date: string | Date | any): false | Date {
   date = date instanceof Date ? date : new Date(date);
@@ -137,7 +143,9 @@ function _schemaAnalyzer(
   if (!Array.isArray(input)) input = [input];
   if (input.length < 1) throw Error('1 record required. 100+ recommended.');
   if (typeof input[0] !== 'object')
-    throw Error('Input Data must be an Array of Objects');
+    throw Error(
+      'Input Data must be an Array of Objects. `input[0] === ' + input[0] + '`',
+    );
   const {
     strictMatching = true,
     disableNestedTypes = false,
@@ -200,7 +208,7 @@ function _schemaAnalyzer(
 
             const isIdentity =
               (typesInfo.Number || typesInfo.UUID || typesInfo.ObjectId) &&
-              /^(gu|uu|_)?id/i.test(fieldName);
+              identityPattern.test(fieldName);
 
             if (isIdentity && (!fInfo.unique || fInfo.nullable)) {
               // TODO: Verify uniqueness & totalRow checks are coming out correct.
@@ -238,16 +246,26 @@ function _schemaAnalyzer(
       })
   );
 
-  function nestedSchemaAnalyzer(nestedData: { [s: string]: any[] }) {
+  function nestedSchemaAnalyzer(nestedData: {
+    [s: string]: any[];
+  }): Promise<Record<string, TypeSummary<FieldInfo> | ArrayTypeInfo>> {
     return Promise.all(
       Object.entries(nestedData).map(([fullTypeName, data]) => {
         // const nameParts = fullTypeName.split('.');
         // const nameSuffix = nameParts[nameParts.length - 1];
-
-        return _schemaAnalyzer(fullTypeName!, data, options).then((result): [
-          string,
-          TypeSummary<FieldInfo>,
-        ] => [fullTypeName, result]);
+        if (Array.isArray(data) && typeof data[0] !== 'object') {
+          // Handle primitive array
+          const primitiveTypeInfo: ArrayTypeInfo = {
+            fieldName: fullTypeName,
+            subType: getTypedArrayTypes(data),
+          };
+          return Promise.resolve([fullTypeName, primitiveTypeInfo]);
+        } else {
+          return _schemaAnalyzer(fullTypeName!, data, options).then((result): [
+            string,
+            TypeSummary<FieldInfo>,
+          ] => [fullTypeName, result]);
+        }
       }),
     ).then((resultPairs) => {
       return fromPairs(resultPairs);
@@ -282,7 +300,7 @@ const _pivotRowsGroupedByType = ({
       totalRows: null,
     };
     // #debug: log`  About to examine every row & cell. Found ${docs.length} records...`)
-    const pivotedSchema = docs.reduce(function evaluateSchemaLevel(
+    return docs.reduce(function evaluateSchemaLevel(
       schema: {
         totalRows: number;
         uniques: { [x: string]: any[] };
@@ -317,25 +335,50 @@ const _pivotRowsGroupedByType = ({
           value.length >= 1 &&
           typeof value[0] === 'object';
         const isObjectWithKeys =
-          !Array.isArray(value) &&
           value != null &&
+          !Array.isArray(value) &&
           typeof value === 'object' &&
           Object.keys(value).length >= 1;
+        const isJsonScalarType = (value) =>
+          typeof value !== 'object' &&
+          typeof value !== 'function' &&
+          typeof value !== 'symbol' &&
+          typeof value !== 'bigint';
+        const isPrimitiveArray = (value) =>
+          Array.isArray(value) && value.every(isJsonScalarType);
 
-        if (!disableNestedTypes) {
-          // TODO: Review hack pattern here (buffers too much, better association of custom types, see `$ref`)
-          // Steps: 1. Check if Array of Objects, 2. Add to local `nestedData` to hold data for post-processing.
-          if (isObjectArray || isObjectWithKeys) {
-            const keyPath = `${
-              prefixNamingMode === 'full' ? `${schemaName}.` : ''
-            }${fieldName}`;
-            nestedData[keyPath] = nestedData[keyPath] || [];
-            nestedData[keyPath]!.push(...(isObjectArray ? value : [value]));
-            typeFingerprint.$ref = typeFingerprint.$ref || {
-              count: index,
-              typeRelationship: isObjectArray ? 'one-to-many' : 'one-to-one',
-            };
-            typeFingerprint.$ref.typeAlias = keyPath;
+        const addNestedDataForPostProcessing = () => {
+          const keyPath = `${
+            prefixNamingMode === 'full' ? `${schemaName}.` : ''
+          }${fieldName}`;
+          nestedData[keyPath] = nestedData[keyPath] || [];
+          nestedData[keyPath]!.push(
+            ...(Array.isArray(value) ? value : [value]),
+          );
+          return keyPath;
+        };
+        if (isPrimitiveArray(value) && value.length >= 1 && !isObjectArray) {
+          addNestedDataForPostProcessing();
+          const primitiveTypeCounts = getTypedArrayTypes(value, strictMatching);
+          const topSubType = primitiveTypeCounts[0]?.[0];
+          typeFingerprint.Array = typeFingerprint.Array || {
+            count: index,
+            typeRelationship: undefined,
+            typeAlias: topSubType || 'Unknown',
+          };
+          typeFingerprint.Array.typeAlias = topSubType || 'Unknown';
+        } else {
+          if (!disableNestedTypes) {
+            // TODO: Review hack pattern here (buffers too much, better association of custom types, see `$ref`)
+            // Steps: 1. Check if Array of Objects, 2. Add to local `nestedData` to hold data for post-processing.
+            if (isObjectArray || isObjectWithKeys) {
+              const keyPath = addNestedDataForPostProcessing();
+              typeFingerprint.$ref = typeFingerprint.$ref || {
+                count: index,
+                typeRelationship: isObjectArray ? 'one-to-many' : 'one-to-one',
+              };
+              typeFingerprint.$ref.typeAlias = keyPath;
+            }
           }
         }
 
@@ -363,8 +406,6 @@ const _pivotRowsGroupedByType = ({
       }
       return schema;
     }, detectedSchema);
-    // #debug//log('  Extracted data points from Field Type analysis')
-    return pivotedSchema;
   };
 
 function condenseFieldData({
@@ -398,11 +439,17 @@ function condenseFieldData({
       if (pivotedData.Null?.count != null && pivotedData.Null.count >= 0) {
         fieldSummary[fieldName]!.nullCount = pivotedData.Null.count;
       }
-
+      if (
+        pivotedData.Array?.typeAlias != null &&
+        Array.isArray(pivotedData.Array.typeAlias)
+      ) {
+        const typeCounts = getRankedCounts(pivotedData.Array.typeAlias);
+        fieldSummary[fieldName]!.types.Array!.typeAlias = typeCounts[0]?.[0];
+      }
       if (pivotedData.$ref?.count ?? 0 > 1) {
         // Prevent overriding the $ref type label
         // 1. Find the first $ref
-        const refType = fieldsData[fieldName]!.find(
+        const typeRef = fieldsData[fieldName]!.find(
           (typeRefs) => typeRefs.$ref,
         );
         // if (!fieldSummary[fieldName]?.types?.$ref) {
@@ -410,10 +457,13 @@ function condenseFieldData({
         // }
         fieldSummary[
           fieldName
-        ]!.types.$ref!.typeAlias = refType!.$ref!.typeAlias;
+          // NOTE: the following Array check shouldn't be necessary, just making TS happy.
+        ]!.types.$ref!.typeAlias = Array.isArray(typeRef!.$ref!.typeAlias)
+          ? typeRef!.$ref!.typeAlias.join(', ')
+          : typeRef!.$ref!.typeAlias;
         fieldSummary[
           fieldName
-        ]!.types.$ref!.typeRelationship = refType!.$ref!.typeRelationship;
+        ]!.types.$ref!.typeRelationship = typeRef!.$ref!.typeRelationship;
       }
 
       // check for enum fields
@@ -453,11 +503,15 @@ function pivotFieldDataByType(
   // #debug: log`Processing ${typeSizeData.length} type guesses`)
   return typeSizeData.reduce((pivotedData, currentTypeGuesses) => {
     Object.entries(currentTypeGuesses).map(
-      ([typeName, { value, length, scale, precision }]: [
+      ([typeName, { value, length, scale, precision, typeAlias }]: [
         typeName: string,
         data: any,
       ]) => {
-        pivotedData[typeName] = pivotedData[typeName] || { typeName, count: 0 };
+        pivotedData[typeName] = pivotedData[typeName] || {
+          typeName,
+          count: 0,
+          value: [],
+        };
         // if (!pivotedData[typeName].count) pivotedData[typeName].count = 0
         if (Number.isFinite(length) && !pivotedData[typeName].length)
           pivotedData[typeName].length = [];
@@ -465,18 +519,22 @@ function pivotFieldDataByType(
           pivotedData[typeName].scale = [];
         if (Number.isFinite(precision) && !pivotedData[typeName].precision)
           pivotedData[typeName].precision = [];
-        if (
-          (Number.isFinite(value) || typeof value === 'string') &&
-          !pivotedData[typeName].value
-        )
-          pivotedData[typeName].value = [];
+        // if (
+        //   (Number.isFinite(value) || typeof value === 'string') &&
+        //   !pivotedData[typeName].value
+        // )
+        //   pivotedData[typeName].value = [];
 
+        if (typeAlias)
+          pivotedData[typeName].typeAlias =
+            pivotedData[typeName].typeAlias || [];
         pivotedData[typeName].count++;
         // if (invalid != null) pivotedData[typeName].invalid++
         if (length) pivotedData[typeName].length.push(length);
         if (scale) pivotedData[typeName].scale.push(scale);
         if (precision) pivotedData[typeName].precision.push(precision);
         if (value) pivotedData[typeName].value.push(value);
+        if (typeAlias) pivotedData[typeName].typeAlias.push(typeAlias);
         // pivotedData[typeName].rank = typeRankings[typeName]
         return pivotedData[typeName];
       },
@@ -514,9 +572,11 @@ function condenseFieldSizes(
         //   'pivotedDataByType.$ref',
         //   JSON.stringify(pivotedDataByType.$ref, null, 2),
         // );
-        aggregateSummary[
-          typeName
-        ]!.typeAlias = pivotedDataByType.$ref!.typeAlias;
+        aggregateSummary[typeName]!.typeAlias = Array.isArray(
+          pivotedDataByType.$ref!.typeAlias,
+        )
+          ? getTopRankedElement(pivotedDataByType.$ref!.typeAlias)
+          : pivotedDataByType.$ref!.typeAlias;
         aggregateSummary[
           typeName
         ]!.typeRelationship = pivotedDataByType.$ref!.typeRelationship;
@@ -581,7 +641,13 @@ function getFieldMetadata({
 
       if (typeGuess === 'Array') {
         length = value.length;
-        analysis[typeGuess] = { ...analysis[typeGuess], count, length };
+        analysis[typeGuess] = {
+          ...analysis[typeGuess],
+          count,
+          length,
+          typeAlias:
+            getTypedArrayTypes(value, strictMatching)[0]?.[0] || 'Unknown',
+        };
       }
       if (typeGuess === 'Float') {
         value = parseFloat(`${value}`);
@@ -603,6 +669,10 @@ function getFieldMetadata({
       }
       if (typeGuess === 'Number') {
         value = Number(value);
+        analysis[typeGuess] = { ...analysis[typeGuess], count, value };
+      }
+      if (typeGuess === 'BigNumber') {
+        value = BigInt(value);
         analysis[typeGuess] = { ...analysis[typeGuess], count, value };
       }
       if (typeGuess === 'Date' || typeGuess === 'Timestamp') {
@@ -642,12 +712,28 @@ function getNumberRangeStats(
   const sortedNumbers = numbers
     .slice()
     .sort((a, b) => (a < b ? -1 : a === b ? 0 : 1));
-  const sum = numbers.reduce((a, b) => a + b, 0);
+
+  const sumBigInt = (numbers: any[]) =>
+    numbers.reduce((a, b) => BigInt(a) + BigInt(b), BigInt(0));
+  let sum: number | bigint = 0;
+  try {
+    sum = numbers.reduce((a, b) => a + b, 0);
+  } catch (error) {
+    try {
+      sum = sumBigInt(numbers);
+    } catch (error) {
+      sum = NaN;
+    }
+  }
   if (useSortedDataForPercentiles) numbers = sortedNumbers;
+
   return {
     // size: numbers.length,
     min: sortedNumbers[0],
-    mean: sum / numbers.length,
+    mean:
+      typeof sum === 'bigint'
+        ? Number((sum / BigInt(numbers.length)).toString())
+        : sum / numbers.length,
     max: sortedNumbers[numbers.length - 1],
     p25: numbers[parseInt((numbers.length * 0.25).toString(), 10)],
     p33: numbers[parseInt((numbers.length * 0.33).toString(), 10)],
