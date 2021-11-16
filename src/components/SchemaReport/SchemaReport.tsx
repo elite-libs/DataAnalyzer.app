@@ -105,6 +105,12 @@ const SchemaReport = ({
             body={checkboxFactory('identity')}
           />
           <Column
+            field="identity"
+            header="Identity"
+            sortable
+            body={checkboxFactory('identity')}
+          />
+          <Column
             field="nullable"
             header="Nullable"
             sortable
@@ -155,6 +161,7 @@ const renderEnumBadges = (rowData) => {
 };
 
 const rowTypeInfoExpansion = (data) => {
+  console.log(data);
   return (
     <div className="types-subtable">
       <h5>Types for {data.name}</h5>
