@@ -2,15 +2,15 @@
 
 exports[`#sql can emit interface for nested types 1`] = `
 "CREATE TABLE users_notes (
-    id    SERIAL NOT NULL  PRIMARY KEY,
+    id    BIGSERIAL NOT NULL  PRIMARY KEY,
     text    VARCHAR(20)  NOT NULL,
 );
 
 CREATE TABLE users (
-    id    SERIAL NOT NULL  PRIMARY KEY,
+    id    BIGSERIAL NOT NULL  PRIMARY KEY,
     name    VARCHAR(20)  NOT NULL,
     notes  INT NOT NULL,
-            FOREIGN KEY (notes) 
+            FOREIGN KEY (notes)
                 REFERENCES users_notes (users_notes_id), // TODO: Verify column names
 )
 
@@ -35,7 +35,7 @@ CREATE TABLE people (
     created    TIMESTAMP      NOT NULL  UNIQUE,
     edited    TIMESTAMP      NOT NULL  UNIQUE,
     url    VARCHAR(60)  NOT NULL  UNIQUE,
-    id    SERIAL NOT NULL  PRIMARY KEY,
+    id    BIGSERIAL NOT NULL  PRIMARY KEY,
 )
 
 "
@@ -65,16 +65,16 @@ CREATE TABLE users (
 exports[`#sql can emit migration for eventResults json 1`] = `
 "CREATE TABLE event_results_links (
     self  INT NOT NULL,
-            FOREIGN KEY (self) 
+            FOREIGN KEY (self)
                 REFERENCES event_results_links_self (event_results_links_self_id), // TODO: Verify column names
     next  INT NOT NULL,
-            FOREIGN KEY (next) 
+            FOREIGN KEY (next)
                 REFERENCES event_results_links_next (event_results_links_next_id), // TODO: Verify column names
 );
 
 CREATE TABLE event_results_embedded (
     events  INT NOT NULL,
-            FOREIGN KEY (events) 
+            FOREIGN KEY (events)
                 REFERENCES event_results_embedded_events (event_results_embedded_events_id), // TODO: Verify column names
 );
 
@@ -103,25 +103,25 @@ CREATE TABLE event_results_embedded_events (
     url    VARCHAR(60)  NOT NULL  UNIQUE,
     locale    VARCHAR(20)  NOT NULL  UNIQUE,
     images  INT NOT NULL,
-            FOREIGN KEY (images) 
+            FOREIGN KEY (images)
                 REFERENCES event_results_embedded_events_images (event_results_embedded_events_images_id), // TODO: Verify column names
     sales  INT NOT NULL,
-            FOREIGN KEY (sales) 
+            FOREIGN KEY (sales)
                 REFERENCES event_results_embedded_events_sales (event_results_embedded_events_sales_id), // TODO: Verify column names
     dates  INT NOT NULL,
-            FOREIGN KEY (dates) 
+            FOREIGN KEY (dates)
                 REFERENCES event_results_embedded_events_dates (event_results_embedded_events_dates_id), // TODO: Verify column names
     classifications  INT NOT NULL,
-            FOREIGN KEY (classifications) 
+            FOREIGN KEY (classifications)
                 REFERENCES event_results_embedded_events_classifications (event_results_embedded_events_classifications_id), // TODO: Verify column names
     promoter  INT NOT NULL,
-            FOREIGN KEY (promoter) 
+            FOREIGN KEY (promoter)
                 REFERENCES event_results_embedded_events_promoter (event_results_embedded_events_promoter_id), // TODO: Verify column names
     links  INT NOT NULL,
-            FOREIGN KEY (links) 
+            FOREIGN KEY (links)
                 REFERENCES event_results_embedded_events_links (event_results_embedded_events_links_id), // TODO: Verify column names
     embedded  INT NOT NULL,
-            FOREIGN KEY (embedded) 
+            FOREIGN KEY (embedded)
                 REFERENCES event_results_embedded_events_embedded (event_results_embedded_events_embedded_id), // TODO: Verify column names
 );
 
@@ -135,55 +135,55 @@ CREATE TABLE event_results_embedded_events_images (
 
 CREATE TABLE event_results_embedded_events_sales (
     public  INT NOT NULL,
-            FOREIGN KEY (public) 
+            FOREIGN KEY (public)
                 REFERENCES event_results_embedded_events_sales_public (event_results_embedded_events_sales_public_id), // TODO: Verify column names
 );
 
 CREATE TABLE event_results_embedded_events_dates (
     start  INT NOT NULL,
-            FOREIGN KEY (start) 
+            FOREIGN KEY (start)
                 REFERENCES event_results_embedded_events_dates_start (event_results_embedded_events_dates_start_id), // TODO: Verify column names
     timezone    VARCHAR(20)  NOT NULL  UNIQUE,
     status  INT NOT NULL,
-            FOREIGN KEY (status) 
+            FOREIGN KEY (status)
                 REFERENCES event_results_embedded_events_dates_status (event_results_embedded_events_dates_status_id), // TODO: Verify column names
 );
 
 CREATE TABLE event_results_embedded_events_classifications (
     primary    BOOLEAN      NOT NULL,
     segment  INT NOT NULL,
-            FOREIGN KEY (segment) 
+            FOREIGN KEY (segment)
                 REFERENCES event_results_embedded_events_classifications_segment (event_results_embedded_events_classifications_segment_id), // TODO: Verify column names
     genre  INT NOT NULL,
-            FOREIGN KEY (genre) 
+            FOREIGN KEY (genre)
                 REFERENCES event_results_embedded_events_classifications_genre (event_results_embedded_events_classifications_genre_id), // TODO: Verify column names
     sub_genre  INT NOT NULL,
-            FOREIGN KEY (sub_genre) 
+            FOREIGN KEY (sub_genre)
                 REFERENCES event_results_embedded_events_classifications_sub_genre (event_results_embedded_events_classifications_sub_genre_id), // TODO: Verify column names
 );
 
 CREATE TABLE event_results_embedded_events_promoter (
-    id    SERIAL NOT NULL  PRIMARY KEY,
+    id    BIGSERIAL NOT NULL  PRIMARY KEY,
 );
 
 CREATE TABLE event_results_embedded_events_links (
     self  INT NOT NULL,
-            FOREIGN KEY (self) 
+            FOREIGN KEY (self)
                 REFERENCES event_results_embedded_events_links_self (event_results_embedded_events_links_self_id), // TODO: Verify column names
     attractions  INT NOT NULL,
-            FOREIGN KEY (attractions) 
+            FOREIGN KEY (attractions)
                 REFERENCES event_results_embedded_events_links_attractions (event_results_embedded_events_links_attractions_id), // TODO: Verify column names
     venues  INT NOT NULL,
-            FOREIGN KEY (venues) 
+            FOREIGN KEY (venues)
                 REFERENCES event_results_embedded_events_links_venues (event_results_embedded_events_links_venues_id), // TODO: Verify column names
 );
 
 CREATE TABLE event_results_embedded_events_embedded (
     venues  INT NOT NULL,
-            FOREIGN KEY (venues) 
+            FOREIGN KEY (venues)
                 REFERENCES event_results_embedded_events_embedded_venues (event_results_embedded_events_embedded_venues_id), // TODO: Verify column names
     attractions  INT NOT NULL,
-            FOREIGN KEY (attractions) 
+            FOREIGN KEY (attractions)
                 REFERENCES event_results_embedded_events_embedded_attractions (event_results_embedded_events_embedded_attractions_id), // TODO: Verify column names
 );
 
@@ -241,25 +241,25 @@ CREATE TABLE event_results_embedded_events_embedded_venues (
     postal_code    INT NOT NULL  UNIQUE,
     timezone    VARCHAR(20)  NOT NULL  UNIQUE,
     city  INT NOT NULL,
-            FOREIGN KEY (city) 
+            FOREIGN KEY (city)
                 REFERENCES event_results_embedded_events_embedded_venues_city (event_results_embedded_events_embedded_venues_city_id), // TODO: Verify column names
     state  INT NOT NULL,
-            FOREIGN KEY (state) 
+            FOREIGN KEY (state)
                 REFERENCES event_results_embedded_events_embedded_venues_state (event_results_embedded_events_embedded_venues_state_id), // TODO: Verify column names
     country  INT NOT NULL,
-            FOREIGN KEY (country) 
+            FOREIGN KEY (country)
                 REFERENCES event_results_embedded_events_embedded_venues_country (event_results_embedded_events_embedded_venues_country_id), // TODO: Verify column names
     address  INT NOT NULL,
-            FOREIGN KEY (address) 
+            FOREIGN KEY (address)
                 REFERENCES event_results_embedded_events_embedded_venues_address (event_results_embedded_events_embedded_venues_address_id), // TODO: Verify column names
     location  INT NOT NULL,
-            FOREIGN KEY (location) 
+            FOREIGN KEY (location)
                 REFERENCES event_results_embedded_events_embedded_venues_location (event_results_embedded_events_embedded_venues_location_id), // TODO: Verify column names
     markets  INT NOT NULL,
-            FOREIGN KEY (markets) 
+            FOREIGN KEY (markets)
                 REFERENCES event_results_embedded_events_embedded_venues_markets (event_results_embedded_events_embedded_venues_markets_id), // TODO: Verify column names
     links  INT NOT NULL,
-            FOREIGN KEY (links) 
+            FOREIGN KEY (links)
                 REFERENCES event_results_embedded_events_embedded_venues_links (event_results_embedded_events_embedded_venues_links_id), // TODO: Verify column names
 );
 
@@ -270,13 +270,13 @@ CREATE TABLE event_results_embedded_events_embedded_attractions (
     test    BOOLEAN      NOT NULL,
     locale    VARCHAR(20)  NOT NULL  UNIQUE,
     images  INT NOT NULL,
-            FOREIGN KEY (images) 
+            FOREIGN KEY (images)
                 REFERENCES event_results_embedded_events_embedded_attractions_images (event_results_embedded_events_embedded_attractions_images_id), // TODO: Verify column names
     classifications  INT NOT NULL,
-            FOREIGN KEY (classifications) 
+            FOREIGN KEY (classifications)
                 REFERENCES event_results_embedded_events_embedded_attractions_classifications (event_results_embedded_events_embedded_attractions_classifications_id), // TODO: Verify column names
     links  INT NOT NULL,
-            FOREIGN KEY (links) 
+            FOREIGN KEY (links)
                 REFERENCES event_results_embedded_events_embedded_attractions_links (event_results_embedded_events_embedded_attractions_links_id), // TODO: Verify column names
 );
 
@@ -304,12 +304,12 @@ CREATE TABLE event_results_embedded_events_embedded_venues_location (
 );
 
 CREATE TABLE event_results_embedded_events_embedded_venues_markets (
-    id    SERIAL NOT NULL  PRIMARY KEY,
+    id    BIGSERIAL NOT NULL  PRIMARY KEY,
 );
 
 CREATE TABLE event_results_embedded_events_embedded_venues_links (
     self  INT NOT NULL,
-            FOREIGN KEY (self) 
+            FOREIGN KEY (self)
                 REFERENCES event_results_embedded_events_embedded_venues_links_self (event_results_embedded_events_embedded_venues_links_self_id), // TODO: Verify column names
 );
 
@@ -328,19 +328,19 @@ CREATE TABLE event_results_embedded_events_embedded_attractions_images (
 CREATE TABLE event_results_embedded_events_embedded_attractions_classifications (
     primary    BOOLEAN      NOT NULL,
     segment  INT NOT NULL,
-            FOREIGN KEY (segment) 
+            FOREIGN KEY (segment)
                 REFERENCES event_results_embedded_events_embedded_attractions_classifications_segment (event_results_embedded_events_embedded_attractions_classifications_segment_id), // TODO: Verify column names
     genre  INT NOT NULL,
-            FOREIGN KEY (genre) 
+            FOREIGN KEY (genre)
                 REFERENCES event_results_embedded_events_embedded_attractions_classifications_genre (event_results_embedded_events_embedded_attractions_classifications_genre_id), // TODO: Verify column names
     sub_genre  INT NOT NULL,
-            FOREIGN KEY (sub_genre) 
+            FOREIGN KEY (sub_genre)
                 REFERENCES event_results_embedded_events_embedded_attractions_classifications_sub_genre (event_results_embedded_events_embedded_attractions_classifications_sub_genre_id), // TODO: Verify column names
 );
 
 CREATE TABLE event_results_embedded_events_embedded_attractions_links (
     self  INT NOT NULL,
-            FOREIGN KEY (self) 
+            FOREIGN KEY (self)
                 REFERENCES event_results_embedded_events_embedded_attractions_links_self (event_results_embedded_events_embedded_attractions_links_self_id), // TODO: Verify column names
 );
 
@@ -365,13 +365,13 @@ CREATE TABLE event_results_embedded_events_embedded_attractions_links_self (
 
 CREATE TABLE event_results (
     links  INT NOT NULL,
-            FOREIGN KEY (links) 
+            FOREIGN KEY (links)
                 REFERENCES event_results_links (event_results_links_id), // TODO: Verify column names
     embedded  INT NOT NULL,
-            FOREIGN KEY (embedded) 
+            FOREIGN KEY (embedded)
                 REFERENCES event_results_embedded (event_results_embedded_id), // TODO: Verify column names
     page  INT NOT NULL,
-            FOREIGN KEY (page) 
+            FOREIGN KEY (page)
                 REFERENCES event_results_page (event_results_page_id), // TODO: Verify column names
 )
 
@@ -381,16 +381,16 @@ CREATE TABLE event_results (
 exports[`#sql can emit migration for eventResults json, w/ dense & trim fields 1`] = `
 "CREATE TABLE links (
     self  INT NOT NULL,
-            FOREIGN KEY (self) 
+            FOREIGN KEY (self)
                 REFERENCES self (self_id), // TODO: Verify column names
 );
 
 CREATE TABLE embedded (
     venues  INT NOT NULL,
-            FOREIGN KEY (venues) 
+            FOREIGN KEY (venues)
                 REFERENCES venues (venues_id), // TODO: Verify column names
     attractions  INT NOT NULL,
-            FOREIGN KEY (attractions) 
+            FOREIGN KEY (attractions)
                 REFERENCES attractions (attractions_id), // TODO: Verify column names
 );
 
@@ -418,25 +418,25 @@ CREATE TABLE events (
     url    VARCHAR(60)  NOT NULL  UNIQUE,
     locale    VARCHAR(20)  NOT NULL  UNIQUE,
     images  INT NOT NULL,
-            FOREIGN KEY (images) 
+            FOREIGN KEY (images)
                 REFERENCES images (images_id), // TODO: Verify column names
     sales  INT NOT NULL,
-            FOREIGN KEY (sales) 
+            FOREIGN KEY (sales)
                 REFERENCES sales (sales_id), // TODO: Verify column names
     dates  INT NOT NULL,
-            FOREIGN KEY (dates) 
+            FOREIGN KEY (dates)
                 REFERENCES dates (dates_id), // TODO: Verify column names
     classifications  INT NOT NULL,
-            FOREIGN KEY (classifications) 
+            FOREIGN KEY (classifications)
                 REFERENCES classifications (classifications_id), // TODO: Verify column names
     promoter  INT NOT NULL,
-            FOREIGN KEY (promoter) 
+            FOREIGN KEY (promoter)
                 REFERENCES promoter (promoter_id), // TODO: Verify column names
     links  INT NOT NULL,
-            FOREIGN KEY (links) 
+            FOREIGN KEY (links)
                 REFERENCES links (links_id), // TODO: Verify column names
     embedded  INT NOT NULL,
-            FOREIGN KEY (embedded) 
+            FOREIGN KEY (embedded)
                 REFERENCES embedded (embedded_id), // TODO: Verify column names
 );
 
@@ -450,35 +450,35 @@ CREATE TABLE images (
 
 CREATE TABLE sales (
     public  INT NOT NULL,
-            FOREIGN KEY (public) 
+            FOREIGN KEY (public)
                 REFERENCES public (public_id), // TODO: Verify column names
 );
 
 CREATE TABLE dates (
     start  INT NOT NULL,
-            FOREIGN KEY (start) 
+            FOREIGN KEY (start)
                 REFERENCES start (start_id), // TODO: Verify column names
     timezone    VARCHAR(20)  NOT NULL  UNIQUE,
     status  INT NOT NULL,
-            FOREIGN KEY (status) 
+            FOREIGN KEY (status)
                 REFERENCES status (status_id), // TODO: Verify column names
 );
 
 CREATE TABLE classifications (
     primary    BOOLEAN      NOT NULL,
     segment  INT NOT NULL,
-            FOREIGN KEY (segment) 
+            FOREIGN KEY (segment)
                 REFERENCES id_name (id_name_id), // TODO: Verify column names
     genre  INT NOT NULL,
-            FOREIGN KEY (genre) 
+            FOREIGN KEY (genre)
                 REFERENCES id_name (id_name_id), // TODO: Verify column names
     sub_genre  INT NOT NULL,
-            FOREIGN KEY (sub_genre) 
+            FOREIGN KEY (sub_genre)
                 REFERENCES id_name (id_name_id), // TODO: Verify column names
 );
 
 CREATE TABLE promoter (
-    id    SERIAL NOT NULL  PRIMARY KEY,
+    id    BIGSERIAL NOT NULL  PRIMARY KEY,
 );
 
 CREATE TABLE public (
@@ -506,13 +506,13 @@ CREATE TABLE attractions (
     test    BOOLEAN      NOT NULL,
     locale    VARCHAR(20)  NOT NULL  UNIQUE,
     images  INT NOT NULL,
-            FOREIGN KEY (images) 
+            FOREIGN KEY (images)
                 REFERENCES images (images_id), // TODO: Verify column names
     classifications  INT NOT NULL,
-            FOREIGN KEY (classifications) 
+            FOREIGN KEY (classifications)
                 REFERENCES classifications (classifications_id), // TODO: Verify column names
     links  INT NOT NULL,
-            FOREIGN KEY (links) 
+            FOREIGN KEY (links)
                 REFERENCES links (links_id), // TODO: Verify column names
 );
 
@@ -525,25 +525,25 @@ CREATE TABLE venues (
     postal_code    INT NOT NULL  UNIQUE,
     timezone    VARCHAR(20)  NOT NULL  UNIQUE,
     city  INT NOT NULL,
-            FOREIGN KEY (city) 
+            FOREIGN KEY (city)
                 REFERENCES city (city_id), // TODO: Verify column names
     state  INT NOT NULL,
-            FOREIGN KEY (state) 
+            FOREIGN KEY (state)
                 REFERENCES state (state_id), // TODO: Verify column names
     country  INT NOT NULL,
-            FOREIGN KEY (country) 
+            FOREIGN KEY (country)
                 REFERENCES country (country_id), // TODO: Verify column names
     address  INT NOT NULL,
-            FOREIGN KEY (address) 
+            FOREIGN KEY (address)
                 REFERENCES address (address_id), // TODO: Verify column names
     location  INT NOT NULL,
-            FOREIGN KEY (location) 
+            FOREIGN KEY (location)
                 REFERENCES location (location_id), // TODO: Verify column names
     markets  INT NOT NULL,
-            FOREIGN KEY (markets) 
+            FOREIGN KEY (markets)
                 REFERENCES markets (markets_id), // TODO: Verify column names
     links  INT NOT NULL,
-            FOREIGN KEY (links) 
+            FOREIGN KEY (links)
                 REFERENCES links (links_id), // TODO: Verify column names
 );
 
@@ -571,7 +571,7 @@ CREATE TABLE location (
 );
 
 CREATE TABLE markets (
-    id    SERIAL NOT NULL  PRIMARY KEY,
+    id    BIGSERIAL NOT NULL  PRIMARY KEY,
 );
 
 CREATE TABLE id_name (
@@ -581,13 +581,13 @@ CREATE TABLE id_name (
 
 CREATE TABLE event_results (
     links  INT NOT NULL,
-            FOREIGN KEY (links) 
+            FOREIGN KEY (links)
                 REFERENCES links (links_id), // TODO: Verify column names
     embedded  INT NOT NULL,
-            FOREIGN KEY (embedded) 
+            FOREIGN KEY (embedded)
                 REFERENCES embedded (embedded_id), // TODO: Verify column names
     page  INT NOT NULL,
-            FOREIGN KEY (page) 
+            FOREIGN KEY (page)
                 REFERENCES page (page_id), // TODO: Verify column names
 )
 
@@ -597,16 +597,16 @@ CREATE TABLE event_results (
 exports[`#sql can emit migration for eventResults json, w/ dense fields 1`] = `
 "CREATE TABLE event_results_links (
     self  INT NOT NULL,
-            FOREIGN KEY (self) 
+            FOREIGN KEY (self)
                 REFERENCES href_templated (href_templated_id), // TODO: Verify column names
     next  INT NOT NULL,
-            FOREIGN KEY (next) 
+            FOREIGN KEY (next)
                 REFERENCES href_templated (href_templated_id), // TODO: Verify column names
 );
 
 CREATE TABLE event_results_embedded (
     events  INT NOT NULL,
-            FOREIGN KEY (events) 
+            FOREIGN KEY (events)
                 REFERENCES event_results_embedded_events (event_results_embedded_events_id), // TODO: Verify column names
 );
 
@@ -625,66 +625,66 @@ CREATE TABLE event_results_embedded_events (
     url    VARCHAR(60)  NOT NULL  UNIQUE,
     locale    VARCHAR(20)  NOT NULL  UNIQUE,
     images  INT NOT NULL,
-            FOREIGN KEY (images) 
+            FOREIGN KEY (images)
                 REFERENCES images (images_id), // TODO: Verify column names
     sales  INT NOT NULL,
-            FOREIGN KEY (sales) 
+            FOREIGN KEY (sales)
                 REFERENCES event_results_embedded_events_sales (event_results_embedded_events_sales_id), // TODO: Verify column names
     dates  INT NOT NULL,
-            FOREIGN KEY (dates) 
+            FOREIGN KEY (dates)
                 REFERENCES event_results_embedded_events_dates (event_results_embedded_events_dates_id), // TODO: Verify column names
     classifications  INT NOT NULL,
-            FOREIGN KEY (classifications) 
+            FOREIGN KEY (classifications)
                 REFERENCES classifications (classifications_id), // TODO: Verify column names
     promoter  INT NOT NULL,
-            FOREIGN KEY (promoter) 
+            FOREIGN KEY (promoter)
                 REFERENCES event_results_embedded_events_promoter (event_results_embedded_events_promoter_id), // TODO: Verify column names
     links  INT NOT NULL,
-            FOREIGN KEY (links) 
+            FOREIGN KEY (links)
                 REFERENCES event_results_embedded_events_links (event_results_embedded_events_links_id), // TODO: Verify column names
     embedded  INT NOT NULL,
-            FOREIGN KEY (embedded) 
+            FOREIGN KEY (embedded)
                 REFERENCES event_results_embedded_events_embedded (event_results_embedded_events_embedded_id), // TODO: Verify column names
 );
 
 CREATE TABLE event_results_embedded_events_sales (
     public  INT NOT NULL,
-            FOREIGN KEY (public) 
+            FOREIGN KEY (public)
                 REFERENCES event_results_embedded_events_sales_public (event_results_embedded_events_sales_public_id), // TODO: Verify column names
 );
 
 CREATE TABLE event_results_embedded_events_dates (
     start  INT NOT NULL,
-            FOREIGN KEY (start) 
+            FOREIGN KEY (start)
                 REFERENCES event_results_embedded_events_dates_start (event_results_embedded_events_dates_start_id), // TODO: Verify column names
     timezone    VARCHAR(20)  NOT NULL  UNIQUE,
     status  INT NOT NULL,
-            FOREIGN KEY (status) 
+            FOREIGN KEY (status)
                 REFERENCES event_results_embedded_events_dates_status (event_results_embedded_events_dates_status_id), // TODO: Verify column names
 );
 
 CREATE TABLE event_results_embedded_events_promoter (
-    id    SERIAL NOT NULL  PRIMARY KEY,
+    id    BIGSERIAL NOT NULL  PRIMARY KEY,
 );
 
 CREATE TABLE event_results_embedded_events_links (
     self  INT NOT NULL,
-            FOREIGN KEY (self) 
+            FOREIGN KEY (self)
                 REFERENCES href (href_id), // TODO: Verify column names
     attractions  INT NOT NULL,
-            FOREIGN KEY (attractions) 
+            FOREIGN KEY (attractions)
                 REFERENCES href (href_id), // TODO: Verify column names
     venues  INT NOT NULL,
-            FOREIGN KEY (venues) 
+            FOREIGN KEY (venues)
                 REFERENCES href (href_id), // TODO: Verify column names
 );
 
 CREATE TABLE event_results_embedded_events_embedded (
     venues  INT NOT NULL,
-            FOREIGN KEY (venues) 
+            FOREIGN KEY (venues)
                 REFERENCES event_results_embedded_events_embedded_venues (event_results_embedded_events_embedded_venues_id), // TODO: Verify column names
     attractions  INT NOT NULL,
-            FOREIGN KEY (attractions) 
+            FOREIGN KEY (attractions)
                 REFERENCES event_results_embedded_events_embedded_attractions (event_results_embedded_events_embedded_attractions_id), // TODO: Verify column names
 );
 
@@ -715,25 +715,25 @@ CREATE TABLE event_results_embedded_events_embedded_venues (
     postal_code    INT NOT NULL  UNIQUE,
     timezone    VARCHAR(20)  NOT NULL  UNIQUE,
     city  INT NOT NULL,
-            FOREIGN KEY (city) 
+            FOREIGN KEY (city)
                 REFERENCES event_results_embedded_events_embedded_venues_city (event_results_embedded_events_embedded_venues_city_id), // TODO: Verify column names
     state  INT NOT NULL,
-            FOREIGN KEY (state) 
+            FOREIGN KEY (state)
                 REFERENCES event_results_embedded_events_embedded_venues_state (event_results_embedded_events_embedded_venues_state_id), // TODO: Verify column names
     country  INT NOT NULL,
-            FOREIGN KEY (country) 
+            FOREIGN KEY (country)
                 REFERENCES event_results_embedded_events_embedded_venues_country (event_results_embedded_events_embedded_venues_country_id), // TODO: Verify column names
     address  INT NOT NULL,
-            FOREIGN KEY (address) 
+            FOREIGN KEY (address)
                 REFERENCES event_results_embedded_events_embedded_venues_address (event_results_embedded_events_embedded_venues_address_id), // TODO: Verify column names
     location  INT NOT NULL,
-            FOREIGN KEY (location) 
+            FOREIGN KEY (location)
                 REFERENCES event_results_embedded_events_embedded_venues_location (event_results_embedded_events_embedded_venues_location_id), // TODO: Verify column names
     markets  INT NOT NULL,
-            FOREIGN KEY (markets) 
+            FOREIGN KEY (markets)
                 REFERENCES event_results_embedded_events_embedded_venues_markets (event_results_embedded_events_embedded_venues_markets_id), // TODO: Verify column names
     links  INT NOT NULL,
-            FOREIGN KEY (links) 
+            FOREIGN KEY (links)
                 REFERENCES links (links_id), // TODO: Verify column names
 );
 
@@ -744,13 +744,13 @@ CREATE TABLE event_results_embedded_events_embedded_attractions (
     test    BOOLEAN      NOT NULL,
     locale    VARCHAR(20)  NOT NULL  UNIQUE,
     images  INT NOT NULL,
-            FOREIGN KEY (images) 
+            FOREIGN KEY (images)
                 REFERENCES images (images_id), // TODO: Verify column names
     classifications  INT NOT NULL,
-            FOREIGN KEY (classifications) 
+            FOREIGN KEY (classifications)
                 REFERENCES classifications (classifications_id), // TODO: Verify column names
     links  INT NOT NULL,
-            FOREIGN KEY (links) 
+            FOREIGN KEY (links)
                 REFERENCES links (links_id), // TODO: Verify column names
 );
 
@@ -778,7 +778,7 @@ CREATE TABLE event_results_embedded_events_embedded_venues_location (
 );
 
 CREATE TABLE event_results_embedded_events_embedded_venues_markets (
-    id    SERIAL NOT NULL  PRIMARY KEY,
+    id    BIGSERIAL NOT NULL  PRIMARY KEY,
 );
 
 CREATE TABLE href_templated (
@@ -797,13 +797,13 @@ CREATE TABLE images (
 CREATE TABLE classifications (
     primary    BOOLEAN      NOT NULL,
     segment  INT NOT NULL,
-            FOREIGN KEY (segment) 
+            FOREIGN KEY (segment)
                 REFERENCES id_name (id_name_id), // TODO: Verify column names
     genre  INT NOT NULL,
-            FOREIGN KEY (genre) 
+            FOREIGN KEY (genre)
                 REFERENCES id_name (id_name_id), // TODO: Verify column names
     sub_genre  INT NOT NULL,
-            FOREIGN KEY (sub_genre) 
+            FOREIGN KEY (sub_genre)
                 REFERENCES id_name (id_name_id), // TODO: Verify column names
 );
 
@@ -818,19 +818,19 @@ CREATE TABLE href (
 
 CREATE TABLE links (
     self  INT NOT NULL,
-            FOREIGN KEY (self) 
+            FOREIGN KEY (self)
                 REFERENCES href (href_id), // TODO: Verify column names
 );
 
 CREATE TABLE event_results (
     links  INT NOT NULL,
-            FOREIGN KEY (links) 
+            FOREIGN KEY (links)
                 REFERENCES event_results_links (event_results_links_id), // TODO: Verify column names
     embedded  INT NOT NULL,
-            FOREIGN KEY (embedded) 
+            FOREIGN KEY (embedded)
                 REFERENCES event_results_embedded (event_results_embedded_id), // TODO: Verify column names
     page  INT NOT NULL,
-            FOREIGN KEY (page) 
+            FOREIGN KEY (page)
                 REFERENCES event_results_page (event_results_page_id), // TODO: Verify column names
 )
 
@@ -840,7 +840,7 @@ CREATE TABLE event_results (
 exports[`#sql can emit migration for pokemon json 1`] = `
 "CREATE TABLE pokemon_abilities (
     ability  INT NOT NULL,
-            FOREIGN KEY (ability) 
+            FOREIGN KEY (ability)
                 REFERENCES pokemon_abilities_ability (pokemon_abilities_ability_id), // TODO: Verify column names
     is_hidden    BOOLEAN      NOT NULL,
     slot    INT NOT NULL  UNIQUE,
@@ -854,16 +854,16 @@ CREATE TABLE pokemon_forms (
 CREATE TABLE pokemon_game_indices (
     game_index    INT NOT NULL,
     version  INT NOT NULL,
-            FOREIGN KEY (version) 
+            FOREIGN KEY (version)
                 REFERENCES pokemon_game_indices_version (pokemon_game_indices_version_id), // TODO: Verify column names
 );
 
 CREATE TABLE pokemon_moves (
     move  INT NOT NULL,
-            FOREIGN KEY (move) 
+            FOREIGN KEY (move)
                 REFERENCES pokemon_moves_move (pokemon_moves_move_id), // TODO: Verify column names
     version_group_details  INT NOT NULL,
-            FOREIGN KEY (version_group_details) 
+            FOREIGN KEY (version_group_details)
                 REFERENCES pokemon_moves_version_group_details (pokemon_moves_version_group_details_id), // TODO: Verify column names
 );
 
@@ -882,10 +882,10 @@ CREATE TABLE pokemon_sprites (
     front_shiny    VARCHAR(100)  NOT NULL  UNIQUE,
     front_shiny_female    TEXT   NOT NULL, // WARNING: Not enough data in column to determine type, fallback to TEXT
     other  INT NOT NULL,
-            FOREIGN KEY (other) 
+            FOREIGN KEY (other)
                 REFERENCES pokemon_sprites_other (pokemon_sprites_other_id), // TODO: Verify column names
     versions  INT NOT NULL,
-            FOREIGN KEY (versions) 
+            FOREIGN KEY (versions)
                 REFERENCES pokemon_sprites_versions (pokemon_sprites_versions_id), // TODO: Verify column names
 );
 
@@ -893,14 +893,14 @@ CREATE TABLE pokemon_stats (
     base_stat    INT NOT NULL  UNIQUE,
     effort    INT NOT NULL,
     stat  INT NOT NULL,
-            FOREIGN KEY (stat) 
+            FOREIGN KEY (stat)
                 REFERENCES pokemon_stats_stat (pokemon_stats_stat_id), // TODO: Verify column names
 );
 
 CREATE TABLE pokemon_types (
     slot    INT NOT NULL  UNIQUE,
     type  INT NOT NULL,
-            FOREIGN KEY (type) 
+            FOREIGN KEY (type)
                 REFERENCES pokemon_types_type (pokemon_types_type_id), // TODO: Verify column names
 );
 
@@ -922,10 +922,10 @@ CREATE TABLE pokemon_moves_move (
 CREATE TABLE pokemon_moves_version_group_details (
     level_learned_at    INT NOT NULL,
     move_learn_method  INT NOT NULL,
-            FOREIGN KEY (move_learn_method) 
+            FOREIGN KEY (move_learn_method)
                 REFERENCES pokemon_moves_version_group_details_move_learn_method (pokemon_moves_version_group_details_move_learn_method_id), // TODO: Verify column names
     version_group  INT NOT NULL,
-            FOREIGN KEY (version_group) 
+            FOREIGN KEY (version_group)
                 REFERENCES pokemon_moves_version_group_details_version_group (pokemon_moves_version_group_details_version_group_id), // TODO: Verify column names
 );
 
@@ -941,37 +941,37 @@ CREATE TABLE pokemon_moves_version_group_details_version_group (
 
 CREATE TABLE pokemon_sprites_other (
     dream_world  INT NOT NULL,
-            FOREIGN KEY (dream_world) 
+            FOREIGN KEY (dream_world)
                 REFERENCES pokemon_sprites_other_dream_world (pokemon_sprites_other_dream_world_id), // TODO: Verify column names
     official_artwork  INT NOT NULL,
-            FOREIGN KEY (official_artwork) 
+            FOREIGN KEY (official_artwork)
                 REFERENCES pokemon_sprites_other_official_artwork (pokemon_sprites_other_official_artwork_id), // TODO: Verify column names
 );
 
 CREATE TABLE pokemon_sprites_versions (
     generation_i  INT NOT NULL,
-            FOREIGN KEY (generation_i) 
+            FOREIGN KEY (generation_i)
                 REFERENCES pokemon_sprites_versions_generation_i (pokemon_sprites_versions_generation_i_id), // TODO: Verify column names
     generation_ii  INT NOT NULL,
-            FOREIGN KEY (generation_ii) 
+            FOREIGN KEY (generation_ii)
                 REFERENCES pokemon_sprites_versions_generation_ii (pokemon_sprites_versions_generation_ii_id), // TODO: Verify column names
     generation_iii  INT NOT NULL,
-            FOREIGN KEY (generation_iii) 
+            FOREIGN KEY (generation_iii)
                 REFERENCES pokemon_sprites_versions_generation_iii (pokemon_sprites_versions_generation_iii_id), // TODO: Verify column names
     generation_iv  INT NOT NULL,
-            FOREIGN KEY (generation_iv) 
+            FOREIGN KEY (generation_iv)
                 REFERENCES pokemon_sprites_versions_generation_iv (pokemon_sprites_versions_generation_iv_id), // TODO: Verify column names
     generation_v  INT NOT NULL,
-            FOREIGN KEY (generation_v) 
+            FOREIGN KEY (generation_v)
                 REFERENCES pokemon_sprites_versions_generation_v (pokemon_sprites_versions_generation_v_id), // TODO: Verify column names
     generation_vi  INT NOT NULL,
-            FOREIGN KEY (generation_vi) 
+            FOREIGN KEY (generation_vi)
                 REFERENCES pokemon_sprites_versions_generation_vi (pokemon_sprites_versions_generation_vi_id), // TODO: Verify column names
     generation_vii  INT NOT NULL,
-            FOREIGN KEY (generation_vii) 
+            FOREIGN KEY (generation_vii)
                 REFERENCES pokemon_sprites_versions_generation_vii (pokemon_sprites_versions_generation_vii_id), // TODO: Verify column names
     generation_viii  INT NOT NULL,
-            FOREIGN KEY (generation_viii) 
+            FOREIGN KEY (generation_viii)
                 REFERENCES pokemon_sprites_versions_generation_viii (pokemon_sprites_versions_generation_viii_id), // TODO: Verify column names
 );
 
@@ -986,76 +986,76 @@ CREATE TABLE pokemon_sprites_other_official_artwork (
 
 CREATE TABLE pokemon_sprites_versions_generation_i (
     red_blue  INT NOT NULL,
-            FOREIGN KEY (red_blue) 
+            FOREIGN KEY (red_blue)
                 REFERENCES pokemon_sprites_versions_generation_i_red_blue (pokemon_sprites_versions_generation_i_red_blue_id), // TODO: Verify column names
     yellow  INT NOT NULL,
-            FOREIGN KEY (yellow) 
+            FOREIGN KEY (yellow)
                 REFERENCES pokemon_sprites_versions_generation_i_yellow (pokemon_sprites_versions_generation_i_yellow_id), // TODO: Verify column names
 );
 
 CREATE TABLE pokemon_sprites_versions_generation_ii (
     crystal  INT NOT NULL,
-            FOREIGN KEY (crystal) 
+            FOREIGN KEY (crystal)
                 REFERENCES pokemon_sprites_versions_generation_ii_crystal (pokemon_sprites_versions_generation_ii_crystal_id), // TODO: Verify column names
     gold  INT NOT NULL,
-            FOREIGN KEY (gold) 
+            FOREIGN KEY (gold)
                 REFERENCES pokemon_sprites_versions_generation_ii_gold (pokemon_sprites_versions_generation_ii_gold_id), // TODO: Verify column names
     silver  INT NOT NULL,
-            FOREIGN KEY (silver) 
+            FOREIGN KEY (silver)
                 REFERENCES pokemon_sprites_versions_generation_ii_silver (pokemon_sprites_versions_generation_ii_silver_id), // TODO: Verify column names
 );
 
 CREATE TABLE pokemon_sprites_versions_generation_iii (
     emerald  INT NOT NULL,
-            FOREIGN KEY (emerald) 
+            FOREIGN KEY (emerald)
                 REFERENCES pokemon_sprites_versions_generation_iii_emerald (pokemon_sprites_versions_generation_iii_emerald_id), // TODO: Verify column names
     firered_leafgreen  INT NOT NULL,
-            FOREIGN KEY (firered_leafgreen) 
+            FOREIGN KEY (firered_leafgreen)
                 REFERENCES pokemon_sprites_versions_generation_iii_firered_leafgreen (pokemon_sprites_versions_generation_iii_firered_leafgreen_id), // TODO: Verify column names
     ruby_sapphire  INT NOT NULL,
-            FOREIGN KEY (ruby_sapphire) 
+            FOREIGN KEY (ruby_sapphire)
                 REFERENCES pokemon_sprites_versions_generation_iii_ruby_sapphire (pokemon_sprites_versions_generation_iii_ruby_sapphire_id), // TODO: Verify column names
 );
 
 CREATE TABLE pokemon_sprites_versions_generation_iv (
     diamond_pearl  INT NOT NULL,
-            FOREIGN KEY (diamond_pearl) 
+            FOREIGN KEY (diamond_pearl)
                 REFERENCES pokemon_sprites_versions_generation_iv_diamond_pearl (pokemon_sprites_versions_generation_iv_diamond_pearl_id), // TODO: Verify column names
     heartgold_soulsilver  INT NOT NULL,
-            FOREIGN KEY (heartgold_soulsilver) 
+            FOREIGN KEY (heartgold_soulsilver)
                 REFERENCES pokemon_sprites_versions_generation_iv_heartgold_soulsilver (pokemon_sprites_versions_generation_iv_heartgold_soulsilver_id), // TODO: Verify column names
     platinum  INT NOT NULL,
-            FOREIGN KEY (platinum) 
+            FOREIGN KEY (platinum)
                 REFERENCES pokemon_sprites_versions_generation_iv_platinum (pokemon_sprites_versions_generation_iv_platinum_id), // TODO: Verify column names
 );
 
 CREATE TABLE pokemon_sprites_versions_generation_v (
     black_white  INT NOT NULL,
-            FOREIGN KEY (black_white) 
+            FOREIGN KEY (black_white)
                 REFERENCES pokemon_sprites_versions_generation_v_black_white (pokemon_sprites_versions_generation_v_black_white_id), // TODO: Verify column names
 );
 
 CREATE TABLE pokemon_sprites_versions_generation_vi (
     omegaruby_alphasapphire  INT NOT NULL,
-            FOREIGN KEY (omegaruby_alphasapphire) 
+            FOREIGN KEY (omegaruby_alphasapphire)
                 REFERENCES pokemon_sprites_versions_generation_vi_omegaruby_alphasapphire (pokemon_sprites_versions_generation_vi_omegaruby_alphasapphire_id), // TODO: Verify column names
     x_y  INT NOT NULL,
-            FOREIGN KEY (x_y) 
+            FOREIGN KEY (x_y)
                 REFERENCES pokemon_sprites_versions_generation_vi_x_y (pokemon_sprites_versions_generation_vi_x_y_id), // TODO: Verify column names
 );
 
 CREATE TABLE pokemon_sprites_versions_generation_vii (
     icons  INT NOT NULL,
-            FOREIGN KEY (icons) 
+            FOREIGN KEY (icons)
                 REFERENCES pokemon_sprites_versions_generation_vii_icons (pokemon_sprites_versions_generation_vii_icons_id), // TODO: Verify column names
     ultra_sun_ultra_moon  INT NOT NULL,
-            FOREIGN KEY (ultra_sun_ultra_moon) 
+            FOREIGN KEY (ultra_sun_ultra_moon)
                 REFERENCES pokemon_sprites_versions_generation_vii_ultra_sun_ultra_moon (pokemon_sprites_versions_generation_vii_ultra_sun_ultra_moon_id), // TODO: Verify column names
 );
 
 CREATE TABLE pokemon_sprites_versions_generation_viii (
     icons  INT NOT NULL,
-            FOREIGN KEY (icons) 
+            FOREIGN KEY (icons)
                 REFERENCES pokemon_sprites_versions_generation_viii_icons (pokemon_sprites_versions_generation_viii_icons_id), // TODO: Verify column names
 );
 
@@ -1148,7 +1148,7 @@ CREATE TABLE pokemon_sprites_versions_generation_iv_platinum (
 
 CREATE TABLE pokemon_sprites_versions_generation_v_black_white (
     animated  INT NOT NULL,
-            FOREIGN KEY (animated) 
+            FOREIGN KEY (animated)
                 REFERENCES pokemon_sprites_versions_generation_v_black_white_animated (pokemon_sprites_versions_generation_v_black_white_animated_id), // TODO: Verify column names
     back_default    VARCHAR(200)  NOT NULL  UNIQUE,
     back_female    TEXT   NOT NULL, // WARNING: Not enough data in column to determine type, fallback to TEXT
@@ -1214,36 +1214,36 @@ CREATE TABLE pokemon_types_type (
 
 CREATE TABLE pokemon (
     abilities  INT NOT NULL,
-            FOREIGN KEY (abilities) 
+            FOREIGN KEY (abilities)
                 REFERENCES pokemon_abilities (pokemon_abilities_id), // TODO: Verify column names
     base_experience    INT NOT NULL  UNIQUE,
     forms  INT NOT NULL,
-            FOREIGN KEY (forms) 
+            FOREIGN KEY (forms)
                 REFERENCES pokemon_forms (pokemon_forms_id), // TODO: Verify column names
     game_indices  INT NOT NULL,
-            FOREIGN KEY (game_indices) 
+            FOREIGN KEY (game_indices)
                 REFERENCES pokemon_game_indices (pokemon_game_indices_id), // TODO: Verify column names
     height    INT NOT NULL  UNIQUE,
     held_items    JSONB    NOT NULL,
-    id    SERIAL NOT NULL  PRIMARY KEY,
+    id    BIGSERIAL NOT NULL  PRIMARY KEY,
     is_default    BOOLEAN      NOT NULL,
     location_area_encounters    VARCHAR(60)  NOT NULL  UNIQUE,
     moves  INT NOT NULL,
-            FOREIGN KEY (moves) 
+            FOREIGN KEY (moves)
                 REFERENCES pokemon_moves (pokemon_moves_id), // TODO: Verify column names
     name    VARCHAR(20)  NOT NULL  UNIQUE,
     order    INT NOT NULL  UNIQUE,
     species  INT NOT NULL,
-            FOREIGN KEY (species) 
+            FOREIGN KEY (species)
                 REFERENCES pokemon_species (pokemon_species_id), // TODO: Verify column names
     sprites  INT NOT NULL,
-            FOREIGN KEY (sprites) 
+            FOREIGN KEY (sprites)
                 REFERENCES pokemon_sprites (pokemon_sprites_id), // TODO: Verify column names
     stats  INT NOT NULL,
-            FOREIGN KEY (stats) 
+            FOREIGN KEY (stats)
                 REFERENCES pokemon_stats (pokemon_stats_id), // TODO: Verify column names
     types  INT NOT NULL,
-            FOREIGN KEY (types) 
+            FOREIGN KEY (types)
                 REFERENCES pokemon_types (pokemon_types_id), // TODO: Verify column names
     weight    INT NOT NULL  UNIQUE,
 )
@@ -1254,7 +1254,7 @@ CREATE TABLE pokemon (
 exports[`#sql can emit migration for pokemon json, w/ dense & trim fields 1`] = `
 "CREATE TABLE abilities (
     ability  INT NOT NULL,
-            FOREIGN KEY (ability) 
+            FOREIGN KEY (ability)
                 REFERENCES name_url (name_url_id), // TODO: Verify column names
     is_hidden    BOOLEAN      NOT NULL,
     slot    INT NOT NULL  UNIQUE,
@@ -1263,16 +1263,16 @@ exports[`#sql can emit migration for pokemon json, w/ dense & trim fields 1`] = 
 CREATE TABLE game_indices (
     game_index    INT NOT NULL,
     version  INT NOT NULL,
-            FOREIGN KEY (version) 
+            FOREIGN KEY (version)
                 REFERENCES name_url (name_url_id), // TODO: Verify column names
 );
 
 CREATE TABLE moves (
     move  INT NOT NULL,
-            FOREIGN KEY (move) 
+            FOREIGN KEY (move)
                 REFERENCES name_url (name_url_id), // TODO: Verify column names
     version_group_details  INT NOT NULL,
-            FOREIGN KEY (version_group_details) 
+            FOREIGN KEY (version_group_details)
                 REFERENCES version_group_details (version_group_details_id), // TODO: Verify column names
 );
 
@@ -1286,10 +1286,10 @@ CREATE TABLE sprites (
     front_shiny    VARCHAR(100)  NOT NULL  UNIQUE,
     front_shiny_female    TEXT   NOT NULL, // WARNING: Not enough data in column to determine type, fallback to TEXT
     other  INT NOT NULL,
-            FOREIGN KEY (other) 
+            FOREIGN KEY (other)
                 REFERENCES other (other_id), // TODO: Verify column names
     versions  INT NOT NULL,
-            FOREIGN KEY (versions) 
+            FOREIGN KEY (versions)
                 REFERENCES versions (versions_id), // TODO: Verify column names
 );
 
@@ -1297,60 +1297,60 @@ CREATE TABLE stats (
     base_stat    INT NOT NULL  UNIQUE,
     effort    INT NOT NULL,
     stat  INT NOT NULL,
-            FOREIGN KEY (stat) 
+            FOREIGN KEY (stat)
                 REFERENCES name_url (name_url_id), // TODO: Verify column names
 );
 
 CREATE TABLE types (
     slot    INT NOT NULL  UNIQUE,
     type  INT NOT NULL,
-            FOREIGN KEY (type) 
+            FOREIGN KEY (type)
                 REFERENCES name_url (name_url_id), // TODO: Verify column names
 );
 
 CREATE TABLE version_group_details (
     level_learned_at    INT NOT NULL,
     move_learn_method  INT NOT NULL,
-            FOREIGN KEY (move_learn_method) 
+            FOREIGN KEY (move_learn_method)
                 REFERENCES name_url (name_url_id), // TODO: Verify column names
     version_group  INT NOT NULL,
-            FOREIGN KEY (version_group) 
+            FOREIGN KEY (version_group)
                 REFERENCES name_url (name_url_id), // TODO: Verify column names
 );
 
 CREATE TABLE other (
     dream_world  INT NOT NULL,
-            FOREIGN KEY (dream_world) 
+            FOREIGN KEY (dream_world)
                 REFERENCES front_default_front_female (front_default_front_female_id), // TODO: Verify column names
     official_artwork  INT NOT NULL,
-            FOREIGN KEY (official_artwork) 
+            FOREIGN KEY (official_artwork)
                 REFERENCES official_artwork (official_artwork_id), // TODO: Verify column names
 );
 
 CREATE TABLE versions (
     generation_i  INT NOT NULL,
-            FOREIGN KEY (generation_i) 
+            FOREIGN KEY (generation_i)
                 REFERENCES generation_i (generation_i_id), // TODO: Verify column names
     generation_ii  INT NOT NULL,
-            FOREIGN KEY (generation_ii) 
+            FOREIGN KEY (generation_ii)
                 REFERENCES generation_ii (generation_ii_id), // TODO: Verify column names
     generation_iii  INT NOT NULL,
-            FOREIGN KEY (generation_iii) 
+            FOREIGN KEY (generation_iii)
                 REFERENCES generation_iii (generation_iii_id), // TODO: Verify column names
     generation_iv  INT NOT NULL,
-            FOREIGN KEY (generation_iv) 
+            FOREIGN KEY (generation_iv)
                 REFERENCES generation_iv (generation_iv_id), // TODO: Verify column names
     generation_v  INT NOT NULL,
-            FOREIGN KEY (generation_v) 
+            FOREIGN KEY (generation_v)
                 REFERENCES generation_v (generation_v_id), // TODO: Verify column names
     generation_vi  INT NOT NULL,
-            FOREIGN KEY (generation_vi) 
+            FOREIGN KEY (generation_vi)
                 REFERENCES generation_vi (generation_vi_id), // TODO: Verify column names
     generation_vii  INT NOT NULL,
-            FOREIGN KEY (generation_vii) 
+            FOREIGN KEY (generation_vii)
                 REFERENCES generation_vii (generation_vii_id), // TODO: Verify column names
     generation_viii  INT NOT NULL,
-            FOREIGN KEY (generation_viii) 
+            FOREIGN KEY (generation_viii)
                 REFERENCES generation_viii (generation_viii_id), // TODO: Verify column names
 );
 
@@ -1360,76 +1360,76 @@ CREATE TABLE official_artwork (
 
 CREATE TABLE generation_i (
     red_blue  INT NOT NULL,
-            FOREIGN KEY (red_blue) 
+            FOREIGN KEY (red_blue)
                 REFERENCES red_blue_yellow (red_blue_yellow_id), // TODO: Verify column names
     yellow  INT NOT NULL,
-            FOREIGN KEY (yellow) 
+            FOREIGN KEY (yellow)
                 REFERENCES red_blue_yellow (red_blue_yellow_id), // TODO: Verify column names
 );
 
 CREATE TABLE generation_ii (
     crystal  INT NOT NULL,
-            FOREIGN KEY (crystal) 
+            FOREIGN KEY (crystal)
                 REFERENCES crystal (crystal_id), // TODO: Verify column names
     gold  INT NOT NULL,
-            FOREIGN KEY (gold) 
+            FOREIGN KEY (gold)
                 REFERENCES gold (gold_id), // TODO: Verify column names
     silver  INT NOT NULL,
-            FOREIGN KEY (silver) 
+            FOREIGN KEY (silver)
                 REFERENCES silver (silver_id), // TODO: Verify column names
 );
 
 CREATE TABLE generation_iii (
     emerald  INT NOT NULL,
-            FOREIGN KEY (emerald) 
+            FOREIGN KEY (emerald)
                 REFERENCES emerald (emerald_id), // TODO: Verify column names
     firered_leafgreen  INT NOT NULL,
-            FOREIGN KEY (firered_leafgreen) 
+            FOREIGN KEY (firered_leafgreen)
                 REFERENCES firered_leafgreen (firered_leafgreen_id), // TODO: Verify column names
     ruby_sapphire  INT NOT NULL,
-            FOREIGN KEY (ruby_sapphire) 
+            FOREIGN KEY (ruby_sapphire)
                 REFERENCES ruby_sapphire (ruby_sapphire_id), // TODO: Verify column names
 );
 
 CREATE TABLE generation_iv (
     diamond_pearl  INT NOT NULL,
-            FOREIGN KEY (diamond_pearl) 
+            FOREIGN KEY (diamond_pearl)
                 REFERENCES animated_diamond_pearl_heartgold_soulsilver_platinum (animated_diamond_pearl_heartgold_soulsilver_platinum_id), // TODO: Verify column names
     heartgold_soulsilver  INT NOT NULL,
-            FOREIGN KEY (heartgold_soulsilver) 
+            FOREIGN KEY (heartgold_soulsilver)
                 REFERENCES animated_diamond_pearl_heartgold_soulsilver_platinum (animated_diamond_pearl_heartgold_soulsilver_platinum_id), // TODO: Verify column names
     platinum  INT NOT NULL,
-            FOREIGN KEY (platinum) 
+            FOREIGN KEY (platinum)
                 REFERENCES animated_diamond_pearl_heartgold_soulsilver_platinum (animated_diamond_pearl_heartgold_soulsilver_platinum_id), // TODO: Verify column names
 );
 
 CREATE TABLE generation_v (
     black_white  INT NOT NULL,
-            FOREIGN KEY (black_white) 
+            FOREIGN KEY (black_white)
                 REFERENCES black_white (black_white_id), // TODO: Verify column names
 );
 
 CREATE TABLE generation_vi (
     omegaruby_alphasapphire  INT NOT NULL,
-            FOREIGN KEY (omegaruby_alphasapphire) 
+            FOREIGN KEY (omegaruby_alphasapphire)
                 REFERENCES omegaruby_alphasapphire_ultra_sun_ultra_moon_x_y (omegaruby_alphasapphire_ultra_sun_ultra_moon_x_y_id), // TODO: Verify column names
     x_y  INT NOT NULL,
-            FOREIGN KEY (x_y) 
+            FOREIGN KEY (x_y)
                 REFERENCES omegaruby_alphasapphire_ultra_sun_ultra_moon_x_y (omegaruby_alphasapphire_ultra_sun_ultra_moon_x_y_id), // TODO: Verify column names
 );
 
 CREATE TABLE generation_vii (
     icons  INT NOT NULL,
-            FOREIGN KEY (icons) 
+            FOREIGN KEY (icons)
                 REFERENCES front_default_front_female (front_default_front_female_id), // TODO: Verify column names
     ultra_sun_ultra_moon  INT NOT NULL,
-            FOREIGN KEY (ultra_sun_ultra_moon) 
+            FOREIGN KEY (ultra_sun_ultra_moon)
                 REFERENCES omegaruby_alphasapphire_ultra_sun_ultra_moon_x_y (omegaruby_alphasapphire_ultra_sun_ultra_moon_x_y_id), // TODO: Verify column names
 );
 
 CREATE TABLE generation_viii (
     icons  INT NOT NULL,
-            FOREIGN KEY (icons) 
+            FOREIGN KEY (icons)
                 REFERENCES front_default_front_female (front_default_front_female_id), // TODO: Verify column names
 );
 
@@ -1475,7 +1475,7 @@ CREATE TABLE ruby_sapphire (
 
 CREATE TABLE black_white (
     animated  INT NOT NULL,
-            FOREIGN KEY (animated) 
+            FOREIGN KEY (animated)
                 REFERENCES animated_diamond_pearl_heartgold_soulsilver_platinum (animated_diamond_pearl_heartgold_soulsilver_platinum_id), // TODO: Verify column names
     back_default    VARCHAR(200)  NOT NULL  UNIQUE,
     back_female    TEXT   NOT NULL, // WARNING: Not enough data in column to determine type, fallback to TEXT
@@ -1524,36 +1524,36 @@ CREATE TABLE omegaruby_alphasapphire_ultra_sun_ultra_moon_x_y (
 
 CREATE TABLE pokemon (
     abilities  INT NOT NULL,
-            FOREIGN KEY (abilities) 
+            FOREIGN KEY (abilities)
                 REFERENCES abilities (abilities_id), // TODO: Verify column names
     base_experience    INT NOT NULL  UNIQUE,
     forms  INT NOT NULL,
-            FOREIGN KEY (forms) 
+            FOREIGN KEY (forms)
                 REFERENCES forms (forms_id), // TODO: Verify column names
     game_indices  INT NOT NULL,
-            FOREIGN KEY (game_indices) 
+            FOREIGN KEY (game_indices)
                 REFERENCES game_indices (game_indices_id), // TODO: Verify column names
     height    INT NOT NULL  UNIQUE,
     held_items    JSONB    NOT NULL,
-    id    SERIAL NOT NULL  PRIMARY KEY,
+    id    BIGSERIAL NOT NULL  PRIMARY KEY,
     is_default    BOOLEAN      NOT NULL,
     location_area_encounters    VARCHAR(60)  NOT NULL  UNIQUE,
     moves  INT NOT NULL,
-            FOREIGN KEY (moves) 
+            FOREIGN KEY (moves)
                 REFERENCES moves (moves_id), // TODO: Verify column names
     name    VARCHAR(20)  NOT NULL  UNIQUE,
     order    INT NOT NULL  UNIQUE,
     species  INT NOT NULL,
-            FOREIGN KEY (species) 
+            FOREIGN KEY (species)
                 REFERENCES species (species_id), // TODO: Verify column names
     sprites  INT NOT NULL,
-            FOREIGN KEY (sprites) 
+            FOREIGN KEY (sprites)
                 REFERENCES sprites (sprites_id), // TODO: Verify column names
     stats  INT NOT NULL,
-            FOREIGN KEY (stats) 
+            FOREIGN KEY (stats)
                 REFERENCES stats (stats_id), // TODO: Verify column names
     types  INT NOT NULL,
-            FOREIGN KEY (types) 
+            FOREIGN KEY (types)
                 REFERENCES types (types_id), // TODO: Verify column names
     weight    INT NOT NULL  UNIQUE,
 )
@@ -1564,7 +1564,7 @@ CREATE TABLE pokemon (
 exports[`#sql can emit migration for pokemon json, w/ dense fields 1`] = `
 "CREATE TABLE pokemon_abilities (
     ability  INT NOT NULL,
-            FOREIGN KEY (ability) 
+            FOREIGN KEY (ability)
                 REFERENCES name_url (name_url_id), // TODO: Verify column names
     is_hidden    BOOLEAN      NOT NULL,
     slot    INT NOT NULL  UNIQUE,
@@ -1573,16 +1573,16 @@ exports[`#sql can emit migration for pokemon json, w/ dense fields 1`] = `
 CREATE TABLE pokemon_game_indices (
     game_index    INT NOT NULL,
     version  INT NOT NULL,
-            FOREIGN KEY (version) 
+            FOREIGN KEY (version)
                 REFERENCES name_url (name_url_id), // TODO: Verify column names
 );
 
 CREATE TABLE pokemon_moves (
     move  INT NOT NULL,
-            FOREIGN KEY (move) 
+            FOREIGN KEY (move)
                 REFERENCES name_url (name_url_id), // TODO: Verify column names
     version_group_details  INT NOT NULL,
-            FOREIGN KEY (version_group_details) 
+            FOREIGN KEY (version_group_details)
                 REFERENCES pokemon_moves_version_group_details (pokemon_moves_version_group_details_id), // TODO: Verify column names
 );
 
@@ -1596,10 +1596,10 @@ CREATE TABLE pokemon_sprites (
     front_shiny    VARCHAR(100)  NOT NULL  UNIQUE,
     front_shiny_female    TEXT   NOT NULL, // WARNING: Not enough data in column to determine type, fallback to TEXT
     other  INT NOT NULL,
-            FOREIGN KEY (other) 
+            FOREIGN KEY (other)
                 REFERENCES pokemon_sprites_other (pokemon_sprites_other_id), // TODO: Verify column names
     versions  INT NOT NULL,
-            FOREIGN KEY (versions) 
+            FOREIGN KEY (versions)
                 REFERENCES pokemon_sprites_versions (pokemon_sprites_versions_id), // TODO: Verify column names
 );
 
@@ -1607,60 +1607,60 @@ CREATE TABLE pokemon_stats (
     base_stat    INT NOT NULL  UNIQUE,
     effort    INT NOT NULL,
     stat  INT NOT NULL,
-            FOREIGN KEY (stat) 
+            FOREIGN KEY (stat)
                 REFERENCES name_url (name_url_id), // TODO: Verify column names
 );
 
 CREATE TABLE pokemon_types (
     slot    INT NOT NULL  UNIQUE,
     type  INT NOT NULL,
-            FOREIGN KEY (type) 
+            FOREIGN KEY (type)
                 REFERENCES name_url (name_url_id), // TODO: Verify column names
 );
 
 CREATE TABLE pokemon_moves_version_group_details (
     level_learned_at    INT NOT NULL,
     move_learn_method  INT NOT NULL,
-            FOREIGN KEY (move_learn_method) 
+            FOREIGN KEY (move_learn_method)
                 REFERENCES name_url (name_url_id), // TODO: Verify column names
     version_group  INT NOT NULL,
-            FOREIGN KEY (version_group) 
+            FOREIGN KEY (version_group)
                 REFERENCES name_url (name_url_id), // TODO: Verify column names
 );
 
 CREATE TABLE pokemon_sprites_other (
     dream_world  INT NOT NULL,
-            FOREIGN KEY (dream_world) 
+            FOREIGN KEY (dream_world)
                 REFERENCES front_default_front_female (front_default_front_female_id), // TODO: Verify column names
     official_artwork  INT NOT NULL,
-            FOREIGN KEY (official_artwork) 
+            FOREIGN KEY (official_artwork)
                 REFERENCES pokemon_sprites_other_official_artwork (pokemon_sprites_other_official_artwork_id), // TODO: Verify column names
 );
 
 CREATE TABLE pokemon_sprites_versions (
     generation_i  INT NOT NULL,
-            FOREIGN KEY (generation_i) 
+            FOREIGN KEY (generation_i)
                 REFERENCES pokemon_sprites_versions_generation_i (pokemon_sprites_versions_generation_i_id), // TODO: Verify column names
     generation_ii  INT NOT NULL,
-            FOREIGN KEY (generation_ii) 
+            FOREIGN KEY (generation_ii)
                 REFERENCES pokemon_sprites_versions_generation_ii (pokemon_sprites_versions_generation_ii_id), // TODO: Verify column names
     generation_iii  INT NOT NULL,
-            FOREIGN KEY (generation_iii) 
+            FOREIGN KEY (generation_iii)
                 REFERENCES pokemon_sprites_versions_generation_iii (pokemon_sprites_versions_generation_iii_id), // TODO: Verify column names
     generation_iv  INT NOT NULL,
-            FOREIGN KEY (generation_iv) 
+            FOREIGN KEY (generation_iv)
                 REFERENCES pokemon_sprites_versions_generation_iv (pokemon_sprites_versions_generation_iv_id), // TODO: Verify column names
     generation_v  INT NOT NULL,
-            FOREIGN KEY (generation_v) 
+            FOREIGN KEY (generation_v)
                 REFERENCES pokemon_sprites_versions_generation_v (pokemon_sprites_versions_generation_v_id), // TODO: Verify column names
     generation_vi  INT NOT NULL,
-            FOREIGN KEY (generation_vi) 
+            FOREIGN KEY (generation_vi)
                 REFERENCES pokemon_sprites_versions_generation_vi (pokemon_sprites_versions_generation_vi_id), // TODO: Verify column names
     generation_vii  INT NOT NULL,
-            FOREIGN KEY (generation_vii) 
+            FOREIGN KEY (generation_vii)
                 REFERENCES pokemon_sprites_versions_generation_vii (pokemon_sprites_versions_generation_vii_id), // TODO: Verify column names
     generation_viii  INT NOT NULL,
-            FOREIGN KEY (generation_viii) 
+            FOREIGN KEY (generation_viii)
                 REFERENCES pokemon_sprites_versions_generation_viii (pokemon_sprites_versions_generation_viii_id), // TODO: Verify column names
 );
 
@@ -1670,76 +1670,76 @@ CREATE TABLE pokemon_sprites_other_official_artwork (
 
 CREATE TABLE pokemon_sprites_versions_generation_i (
     red_blue  INT NOT NULL,
-            FOREIGN KEY (red_blue) 
+            FOREIGN KEY (red_blue)
                 REFERENCES red_blue_yellow (red_blue_yellow_id), // TODO: Verify column names
     yellow  INT NOT NULL,
-            FOREIGN KEY (yellow) 
+            FOREIGN KEY (yellow)
                 REFERENCES red_blue_yellow (red_blue_yellow_id), // TODO: Verify column names
 );
 
 CREATE TABLE pokemon_sprites_versions_generation_ii (
     crystal  INT NOT NULL,
-            FOREIGN KEY (crystal) 
+            FOREIGN KEY (crystal)
                 REFERENCES pokemon_sprites_versions_generation_ii_crystal (pokemon_sprites_versions_generation_ii_crystal_id), // TODO: Verify column names
     gold  INT NOT NULL,
-            FOREIGN KEY (gold) 
+            FOREIGN KEY (gold)
                 REFERENCES pokemon_sprites_versions_generation_ii_gold (pokemon_sprites_versions_generation_ii_gold_id), // TODO: Verify column names
     silver  INT NOT NULL,
-            FOREIGN KEY (silver) 
+            FOREIGN KEY (silver)
                 REFERENCES pokemon_sprites_versions_generation_ii_silver (pokemon_sprites_versions_generation_ii_silver_id), // TODO: Verify column names
 );
 
 CREATE TABLE pokemon_sprites_versions_generation_iii (
     emerald  INT NOT NULL,
-            FOREIGN KEY (emerald) 
+            FOREIGN KEY (emerald)
                 REFERENCES pokemon_sprites_versions_generation_iii_emerald (pokemon_sprites_versions_generation_iii_emerald_id), // TODO: Verify column names
     firered_leafgreen  INT NOT NULL,
-            FOREIGN KEY (firered_leafgreen) 
+            FOREIGN KEY (firered_leafgreen)
                 REFERENCES pokemon_sprites_versions_generation_iii_firered_leafgreen (pokemon_sprites_versions_generation_iii_firered_leafgreen_id), // TODO: Verify column names
     ruby_sapphire  INT NOT NULL,
-            FOREIGN KEY (ruby_sapphire) 
+            FOREIGN KEY (ruby_sapphire)
                 REFERENCES pokemon_sprites_versions_generation_iii_ruby_sapphire (pokemon_sprites_versions_generation_iii_ruby_sapphire_id), // TODO: Verify column names
 );
 
 CREATE TABLE pokemon_sprites_versions_generation_iv (
     diamond_pearl  INT NOT NULL,
-            FOREIGN KEY (diamond_pearl) 
+            FOREIGN KEY (diamond_pearl)
                 REFERENCES pokemon_sprites_versions_generation_iv_diamond_pearl (pokemon_sprites_versions_generation_iv_diamond_pearl_id), // TODO: Verify column names
     heartgold_soulsilver  INT NOT NULL,
-            FOREIGN KEY (heartgold_soulsilver) 
+            FOREIGN KEY (heartgold_soulsilver)
                 REFERENCES pokemon_sprites_versions_generation_iv_heartgold_soulsilver (pokemon_sprites_versions_generation_iv_heartgold_soulsilver_id), // TODO: Verify column names
     platinum  INT NOT NULL,
-            FOREIGN KEY (platinum) 
+            FOREIGN KEY (platinum)
                 REFERENCES pokemon_sprites_versions_generation_iv_platinum (pokemon_sprites_versions_generation_iv_platinum_id), // TODO: Verify column names
 );
 
 CREATE TABLE pokemon_sprites_versions_generation_v (
     black_white  INT NOT NULL,
-            FOREIGN KEY (black_white) 
+            FOREIGN KEY (black_white)
                 REFERENCES pokemon_sprites_versions_generation_v_black_white (pokemon_sprites_versions_generation_v_black_white_id), // TODO: Verify column names
 );
 
 CREATE TABLE pokemon_sprites_versions_generation_vi (
     omegaruby_alphasapphire  INT NOT NULL,
-            FOREIGN KEY (omegaruby_alphasapphire) 
+            FOREIGN KEY (omegaruby_alphasapphire)
                 REFERENCES generation_vii_omegaruby_alphasapphire_ultra_sun_ultra_moon_x_y (generation_vii_omegaruby_alphasapphire_ultra_sun_ultra_moon_x_y_id), // TODO: Verify column names
     x_y  INT NOT NULL,
-            FOREIGN KEY (x_y) 
+            FOREIGN KEY (x_y)
                 REFERENCES generation_vii_omegaruby_alphasapphire_ultra_sun_ultra_moon_x_y (generation_vii_omegaruby_alphasapphire_ultra_sun_ultra_moon_x_y_id), // TODO: Verify column names
 );
 
 CREATE TABLE pokemon_sprites_versions_generation_vii (
     icons  INT NOT NULL,
-            FOREIGN KEY (icons) 
+            FOREIGN KEY (icons)
                 REFERENCES front_default_front_female (front_default_front_female_id), // TODO: Verify column names
     ultra_sun_ultra_moon  INT NOT NULL,
-            FOREIGN KEY (ultra_sun_ultra_moon) 
+            FOREIGN KEY (ultra_sun_ultra_moon)
                 REFERENCES generation_vii_omegaruby_alphasapphire_ultra_sun_ultra_moon_x_y (generation_vii_omegaruby_alphasapphire_ultra_sun_ultra_moon_x_y_id), // TODO: Verify column names
 );
 
 CREATE TABLE pokemon_sprites_versions_generation_viii (
     icons  INT NOT NULL,
-            FOREIGN KEY (icons) 
+            FOREIGN KEY (icons)
                 REFERENCES front_default_front_female (front_default_front_female_id), // TODO: Verify column names
 );
 
@@ -1818,7 +1818,7 @@ CREATE TABLE pokemon_sprites_versions_generation_iv_platinum (
 
 CREATE TABLE pokemon_sprites_versions_generation_v_black_white (
     animated  INT NOT NULL,
-            FOREIGN KEY (animated) 
+            FOREIGN KEY (animated)
                 REFERENCES pokemon_sprites_versions_generation_v_black_white_animated (pokemon_sprites_versions_generation_v_black_white_animated_id), // TODO: Verify column names
     back_default    VARCHAR(200)  NOT NULL  UNIQUE,
     back_female    TEXT   NOT NULL, // WARNING: Not enough data in column to determine type, fallback to TEXT
@@ -1867,36 +1867,36 @@ CREATE TABLE generation_vii_omegaruby_alphasapphire_ultra_sun_ultra_moon_x_y (
 
 CREATE TABLE pokemon (
     abilities  INT NOT NULL,
-            FOREIGN KEY (abilities) 
+            FOREIGN KEY (abilities)
                 REFERENCES pokemon_abilities (pokemon_abilities_id), // TODO: Verify column names
     base_experience    INT NOT NULL  UNIQUE,
     forms  INT NOT NULL,
-            FOREIGN KEY (forms) 
+            FOREIGN KEY (forms)
                 REFERENCES pokemon_forms (pokemon_forms_id), // TODO: Verify column names
     game_indices  INT NOT NULL,
-            FOREIGN KEY (game_indices) 
+            FOREIGN KEY (game_indices)
                 REFERENCES pokemon_game_indices (pokemon_game_indices_id), // TODO: Verify column names
     height    INT NOT NULL  UNIQUE,
     held_items    JSONB    NOT NULL,
-    id    SERIAL NOT NULL  PRIMARY KEY,
+    id    BIGSERIAL NOT NULL  PRIMARY KEY,
     is_default    BOOLEAN      NOT NULL,
     location_area_encounters    VARCHAR(60)  NOT NULL  UNIQUE,
     moves  INT NOT NULL,
-            FOREIGN KEY (moves) 
+            FOREIGN KEY (moves)
                 REFERENCES pokemon_moves (pokemon_moves_id), // TODO: Verify column names
     name    VARCHAR(20)  NOT NULL  UNIQUE,
     order    INT NOT NULL  UNIQUE,
     species  INT NOT NULL,
-            FOREIGN KEY (species) 
+            FOREIGN KEY (species)
                 REFERENCES pokemon_species (pokemon_species_id), // TODO: Verify column names
     sprites  INT NOT NULL,
-            FOREIGN KEY (sprites) 
+            FOREIGN KEY (sprites)
                 REFERENCES pokemon_sprites (pokemon_sprites_id), // TODO: Verify column names
     stats  INT NOT NULL,
-            FOREIGN KEY (stats) 
+            FOREIGN KEY (stats)
                 REFERENCES pokemon_stats (pokemon_stats_id), // TODO: Verify column names
     types  INT NOT NULL,
-            FOREIGN KEY (types) 
+            FOREIGN KEY (types)
                 REFERENCES pokemon_types (pokemon_types_id), // TODO: Verify column names
     weight    INT NOT NULL  UNIQUE,
 )
