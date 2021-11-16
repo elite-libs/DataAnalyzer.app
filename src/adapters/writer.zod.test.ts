@@ -2,20 +2,14 @@
 /* eslint-disable import/first */
 import { schemaAnalyzer } from '../schema-analyzer/index';
 
-import knex from './writer.knex';
-import typescript from './writer.typescript';
-import joi from './writer.joi';
+import zod from './writer.zod';
 import users from '../../public/data/users.example.json';
 import usersSparse from '../../public/data/user_sparse-subtypes.json';
 import people from '../../public/data/swapi-people.json';
 import pokemon from '../../public/data/pokemon-charmander.json';
 import eventResults from '../../public/data/ticketmaster-event-results.json';
 
-import path from 'path';
-import fs from 'fs';
-import csvParse from 'csv-parse';
-
-describe('#joi', () => {
+describe('#zod', () => {
   it('can emit schema', async () => {
     const results = await schemaAnalyzer('users', users, {
       debug: true,
@@ -28,7 +22,7 @@ describe('#joi', () => {
         nullableRowsThreshold: 0.001,
       },
     });
-    const code = joi.render(results);
+    const code = zod.render(results);
 
     expect(code).toMatchSnapshot();
   });
@@ -46,7 +40,7 @@ describe('#joi', () => {
         nullableRowsThreshold: 0.001,
       },
     });
-    const code = joi.render(results);
+    const code = zod.render(results);
 
     expect(code).toMatchSnapshot();
   });
@@ -62,7 +56,7 @@ describe('#joi', () => {
         nullableRowsThreshold: 0.001,
       },
     });
-    const code = joi.render(results);
+    const code = zod.render(results);
 
     expect(code).toMatchSnapshot();
   });
@@ -78,7 +72,7 @@ describe('#joi', () => {
         nullableRowsThreshold: 0.001,
       },
     });
-    const code = joi.render(results);
+    const code = zod.render(results);
     expect(code).toMatchSnapshot();
   });
 
@@ -93,7 +87,7 @@ describe('#joi', () => {
         nullableRowsThreshold: 0.001,
       },
     });
-    const code = joi.render(results);
+    const code = zod.render(results);
     expect(code).toMatchSnapshot();
   });
   it('can emit migration for pokemon json', async () => {
@@ -109,7 +103,7 @@ describe('#joi', () => {
         nullableRowsThreshold: 0.001,
       },
     });
-    const code = joi.render(results);
+    const code = zod.render(results);
     expect(code).toMatchSnapshot();
   });
 
@@ -128,7 +122,7 @@ describe('#joi', () => {
       },
     });
     // await writeJson('build/mongooseResults.json', results);
-    const code = joi.render(results);
+    const code = zod.render(results);
     expect(code).toMatchSnapshot();
   });
 
@@ -146,7 +140,7 @@ describe('#joi', () => {
         nullableRowsThreshold: 0.001,
       },
     });
-    const code = joi.render(results);
+    const code = zod.render(results);
     expect(code).toMatchSnapshot();
   });
 
@@ -163,7 +157,7 @@ describe('#joi', () => {
         nullableRowsThreshold: 0.001,
       },
     });
-    const code = joi.render(results);
+    const code = zod.render(results);
     expect(code).toMatchSnapshot();
   });
 
@@ -181,7 +175,7 @@ describe('#joi', () => {
         nullableRowsThreshold: 0.001,
       },
     });
-    const code = joi.render(results);
+    const code = zod.render(results);
     expect(code).toMatchSnapshot();
   });
 
@@ -199,7 +193,7 @@ describe('#joi', () => {
         nullableRowsThreshold: 0.001,
       },
     });
-    const code = joi.render(results);
+    const code = zod.render(results);
     expect(code).toMatchSnapshot();
   });
 });

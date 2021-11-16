@@ -144,18 +144,20 @@ export const OutputButtons = ({ size = 'medium', className = '' }: Props) => {
         },
       );
     } catch (error) {
-      trackCustomEvent({
-        action: 'fail',
-        category: 'code.results',
-        value: error.message,
-      });
-      console.error(`Error: Couldn't process input data!`, error);
-      dispatch(setParserError(error.message));
-      dispatch(setSchema(null));
-      enqueueSnackbar(`Error: ${error.message}`, {
-        variant: 'error',
-        autoHideDuration: 6000,
-      });
+      if (error instanceof Error) {
+        trackCustomEvent({
+          action: 'fail',
+          category: 'code.results',
+          label: error.message,
+        });
+        console.error(`Error: Couldn't process input data!`, error);
+        dispatch(setParserError(error.message));
+        dispatch(setSchema(null));
+        enqueueSnackbar(`Error: ${error.message}`, {
+          variant: 'error',
+          autoHideDuration: 6000,
+        });
+      }
     }
     // console.timeEnd(`Processing:${adapter}`);
   }

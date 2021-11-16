@@ -33,6 +33,7 @@ const writers = {
   mongoose: mongooseWriter,
   knex: knexWriter,
   sql: sqlWriter,
+  zod: zodWriter,
 };
 
 export type AdapterNames = keyof typeof writers;
