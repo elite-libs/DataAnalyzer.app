@@ -2,10 +2,10 @@ import camelCase from 'lodash/camelCase';
 import trim from 'lodash/trim';
 import {
   CombinedFieldInfo,
-  FieldTypeSummary,
-  NumericFieldInfo,
-  TypeNameStringComposite,
-  TypeNameStringDecimal,
+  // FieldTypeSummary,
+  // NumericFieldInfo,
+  // TypeNameStringComposite,
+  // TypeNameStringDecimal,
 } from 'types';
 import { properCase, removeBlankLines } from 'helpers';
 import { KeyValPair } from 'types';
@@ -132,7 +132,7 @@ export const ${properCase(schemaName)}Schema = z.object({\n` +
     let code = moveModuleExports(
       getSchema(results.schemaName!, typeSummary.fields) + getRecursive(),
     );
-    return getHeader() + code + '\n';
+    return getHeader() + removeBlankLines(code) + '\n';
   },
 };
 

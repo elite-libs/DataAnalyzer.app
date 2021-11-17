@@ -18,12 +18,12 @@ const productCsv: Promise<any[]> = parseCsv(
   ),
 ).catch((err) => void console.error(err) || []);
 
-const usersCsv: Promise<any[]> = parseCsv(
-  fs.readFileSync(
-    path.resolve(__dirname, '../../public/data/users-alt.csv'),
-    'utf8',
-  ),
-).catch((err) => void console.error(err) || []);
+// const usersCsv: Promise<any[]> = parseCsv(
+//   fs.readFileSync(
+//     path.resolve(__dirname, '../../public/data/users-alt.csv'),
+//     'utf8',
+//   ),
+// ).catch((err) => void console.error(err) || []);
 
 // process.on('unhandledRejection', (reason, promise) => {
 //   // promise.catch(
@@ -67,7 +67,7 @@ function parseCsv(content): Promise<any[]> {
   });
 }
 
-const isCI = process.env.CI;
+// const isCI = process.env.CI;
 
 describe('handles invalid usage', () => {
   it('handles missing arguments', () => {
