@@ -22,9 +22,9 @@ export const EventResultsEmbeddedSchema = z.object({
 
 
 export const EventResultsPageSchema = z.object({
-  size: z.number().required().max(1),
-  totalElements: z.number().required().max(87958),
-  totalPages: z.number().required().max(87958),
+  size: z.number().required(),
+  totalElements: z.number().required(),
+  totalPages: z.number().required(),
   number: z.number().required()
 });
 
@@ -61,8 +61,8 @@ export const EventResultsEmbeddedEventsSchema = z.object({
 export const EventResultsEmbeddedEventsImagesSchema = z.object({
   ratio: z.string().required(),
   url: z.string().required(),
-  width: z.number().required().max(2048),
-  height: z.number().required().max(1152),
+  width: z.number().required(),
+  height: z.number().required(),
   fallback: z.boolean().required()
 });
 
@@ -88,7 +88,7 @@ export const EventResultsEmbeddedEventsClassificationsSchema = z.object({
 
 
 export const EventResultsEmbeddedEventsPromoterSchema = z.object({
-  id: z.number().required().max(682)
+  id: z.number().required()
 });
 
 
@@ -165,7 +165,7 @@ export const EventResultsEmbeddedEventsEmbeddedVenuesSchema = z.object({
   id: z.string().required(),
   test: z.boolean().required(),
   locale: z.string().required(),
-  postalCode: z.number().required().max(33178),
+  postalCode: z.number().required(),
   timezone: z.string().required(),
   city: z.lazy(() => EventResultsEmbeddedEventsEmbeddedVenuesCitySchema),
   state: z.lazy(() => EventResultsEmbeddedEventsEmbeddedVenuesStateSchema),
@@ -212,13 +212,13 @@ export const EventResultsEmbeddedEventsEmbeddedVenuesAddressSchema = z.object({
 
 
 export const EventResultsEmbeddedEventsEmbeddedVenuesLocationSchema = z.object({
-  longitude: z.number().required().max(-80.33854298),
-  latitude: z.number().required().max(25.81260379)
+  longitude: z.number().required(),
+  latitude: z.number().required()
 });
 
 
 export const EventResultsEmbeddedEventsEmbeddedVenuesMarketsSchema = z.object({
-  id: z.number().required().max(15)
+  id: z.number().required()
 });
 
 
@@ -235,8 +235,8 @@ export const EventResultsEmbeddedEventsEmbeddedVenuesLinksSelfSchema = z.object(
 export const EventResultsEmbeddedEventsEmbeddedAttractionsImagesSchema = z.object({
   ratio: z.string().required(),
   url: z.string().required(),
-  width: z.number().required().max(2048),
-  height: z.number().required().max(1152),
+  width: z.number().required(),
+  height: z.number().required(),
   fallback: z.boolean().required()
 });
 
@@ -276,7 +276,46 @@ export const EventResultsEmbeddedEventsEmbeddedAttractionsLinksSelfSchema = z.ob
   href: z.string().required()
 });
 
-
+export type EventResults = z.infer<typeof EventResultsSchema>;
+export type EventResultsLinks = z.infer<typeof EventResultsLinksSchema>;
+export type EventResultsEmbedded = z.infer<typeof EventResultsEmbeddedSchema>;
+export type EventResultsPage = z.infer<typeof EventResultsPageSchema>;
+export type EventResultsLinksSelf = z.infer<typeof EventResultsLinksSelfSchema>;
+export type EventResultsLinksNext = z.infer<typeof EventResultsLinksNextSchema>;
+export type EventResultsEmbeddedEvents = z.infer<typeof EventResultsEmbeddedEventsSchema>;
+export type EventResultsEmbeddedEventsImages = z.infer<typeof EventResultsEmbeddedEventsImagesSchema>;
+export type EventResultsEmbeddedEventsSales = z.infer<typeof EventResultsEmbeddedEventsSalesSchema>;
+export type EventResultsEmbeddedEventsDates = z.infer<typeof EventResultsEmbeddedEventsDatesSchema>;
+export type EventResultsEmbeddedEventsClassifications = z.infer<typeof EventResultsEmbeddedEventsClassificationsSchema>;
+export type EventResultsEmbeddedEventsPromoter = z.infer<typeof EventResultsEmbeddedEventsPromoterSchema>;
+export type EventResultsEmbeddedEventsLinks = z.infer<typeof EventResultsEmbeddedEventsLinksSchema>;
+export type EventResultsEmbeddedEventsEmbedded = z.infer<typeof EventResultsEmbeddedEventsEmbeddedSchema>;
+export type EventResultsEmbeddedEventsSalesPublic = z.infer<typeof EventResultsEmbeddedEventsSalesPublicSchema>;
+export type EventResultsEmbeddedEventsDatesStart = z.infer<typeof EventResultsEmbeddedEventsDatesStartSchema>;
+export type EventResultsEmbeddedEventsDatesStatus = z.infer<typeof EventResultsEmbeddedEventsDatesStatusSchema>;
+export type EventResultsEmbeddedEventsClassificationsSegment = z.infer<typeof EventResultsEmbeddedEventsClassificationsSegmentSchema>;
+export type EventResultsEmbeddedEventsClassificationsGenre = z.infer<typeof EventResultsEmbeddedEventsClassificationsGenreSchema>;
+export type EventResultsEmbeddedEventsClassificationsSubGenre = z.infer<typeof EventResultsEmbeddedEventsClassificationsSubGenreSchema>;
+export type EventResultsEmbeddedEventsLinksSelf = z.infer<typeof EventResultsEmbeddedEventsLinksSelfSchema>;
+export type EventResultsEmbeddedEventsLinksAttractions = z.infer<typeof EventResultsEmbeddedEventsLinksAttractionsSchema>;
+export type EventResultsEmbeddedEventsLinksVenues = z.infer<typeof EventResultsEmbeddedEventsLinksVenuesSchema>;
+export type EventResultsEmbeddedEventsEmbeddedVenues = z.infer<typeof EventResultsEmbeddedEventsEmbeddedVenuesSchema>;
+export type EventResultsEmbeddedEventsEmbeddedAttractions = z.infer<typeof EventResultsEmbeddedEventsEmbeddedAttractionsSchema>;
+export type EventResultsEmbeddedEventsEmbeddedVenuesCity = z.infer<typeof EventResultsEmbeddedEventsEmbeddedVenuesCitySchema>;
+export type EventResultsEmbeddedEventsEmbeddedVenuesState = z.infer<typeof EventResultsEmbeddedEventsEmbeddedVenuesStateSchema>;
+export type EventResultsEmbeddedEventsEmbeddedVenuesCountry = z.infer<typeof EventResultsEmbeddedEventsEmbeddedVenuesCountrySchema>;
+export type EventResultsEmbeddedEventsEmbeddedVenuesAddress = z.infer<typeof EventResultsEmbeddedEventsEmbeddedVenuesAddressSchema>;
+export type EventResultsEmbeddedEventsEmbeddedVenuesLocation = z.infer<typeof EventResultsEmbeddedEventsEmbeddedVenuesLocationSchema>;
+export type EventResultsEmbeddedEventsEmbeddedVenuesMarkets = z.infer<typeof EventResultsEmbeddedEventsEmbeddedVenuesMarketsSchema>;
+export type EventResultsEmbeddedEventsEmbeddedVenuesLinks = z.infer<typeof EventResultsEmbeddedEventsEmbeddedVenuesLinksSchema>;
+export type EventResultsEmbeddedEventsEmbeddedVenuesLinksSelf = z.infer<typeof EventResultsEmbeddedEventsEmbeddedVenuesLinksSelfSchema>;
+export type EventResultsEmbeddedEventsEmbeddedAttractionsImages = z.infer<typeof EventResultsEmbeddedEventsEmbeddedAttractionsImagesSchema>;
+export type EventResultsEmbeddedEventsEmbeddedAttractionsClassifications = z.infer<typeof EventResultsEmbeddedEventsEmbeddedAttractionsClassificationsSchema>;
+export type EventResultsEmbeddedEventsEmbeddedAttractionsLinks = z.infer<typeof EventResultsEmbeddedEventsEmbeddedAttractionsLinksSchema>;
+export type EventResultsEmbeddedEventsEmbeddedAttractionsClassificationsSegment = z.infer<typeof EventResultsEmbeddedEventsEmbeddedAttractionsClassificationsSegmentSchema>;
+export type EventResultsEmbeddedEventsEmbeddedAttractionsClassificationsGenre = z.infer<typeof EventResultsEmbeddedEventsEmbeddedAttractionsClassificationsGenreSchema>;
+export type EventResultsEmbeddedEventsEmbeddedAttractionsClassificationsSubGenre = z.infer<typeof EventResultsEmbeddedEventsEmbeddedAttractionsClassificationsSubGenreSchema>;
+export type EventResultsEmbeddedEventsEmbeddedAttractionsLinksSelf = z.infer<typeof EventResultsEmbeddedEventsEmbeddedAttractionsLinksSelfSchema>;
 "
 `;
 
@@ -285,8 +324,8 @@ exports[`#zod can emit migration for eventResults json, w/ dense & trim fields 1
 
 
 export const EventResultsSchema = z.object({
-  links: z.lazy(() => _inksSchema),
-  embedded: z.lazy(() => _mbeddedSchema),
+  links: z.lazy(() => LinksSchema),
+  embedded: z.lazy(() => EmbeddedSchema),
   page: z.lazy(() => PageSchema)
 });
 
@@ -302,9 +341,9 @@ export const EmbeddedSchema = z.object({
 
 
 export const PageSchema = z.object({
-  size: z.number().required().max(1),
-  totalElements: z.number().required().max(87958),
-  totalPages: z.number().required().max(87958),
+  size: z.number().required(),
+  totalElements: z.number().required(),
+  totalPages: z.number().required(),
   number: z.number().required()
 });
 
@@ -332,16 +371,16 @@ export const EventsSchema = z.object({
   dates: z.lazy(() => DatesSchema),
   classifications: z.lazy(() => ClassificationsSchema),
   promoter: z.lazy(() => PromoterSchema),
-  links: z.lazy(() => _inksSchema),
-  embedded: z.lazy(() => _mbeddedSchema)
+  links: z.lazy(() => LinksSchema),
+  embedded: z.lazy(() => EmbeddedSchema)
 });
 
 
 export const ImagesSchema = z.object({
   ratio: z.string().required(),
   url: z.string().required(),
-  width: z.number().required().max(2048),
-  height: z.number().required().max(1152),
+  width: z.number().required(),
+  height: z.number().required(),
   fallback: z.boolean().required()
 });
 
@@ -367,7 +406,7 @@ export const ClassificationsSchema = z.object({
 
 
 export const PromoterSchema = z.object({
-  id: z.number().required().max(682)
+  id: z.number().required()
 });
 
 
@@ -400,7 +439,7 @@ export const AttractionsSchema = z.object({
   locale: z.string().required(),
   images: z.lazy(() => ImagesSchema),
   classifications: z.lazy(() => ClassificationsSchema),
-  links: z.lazy(() => _inksSchema)
+  links: z.lazy(() => LinksSchema)
 });
 
 
@@ -410,7 +449,7 @@ export const VenuesSchema = z.object({
   id: z.string().required(),
   test: z.boolean().required(),
   locale: z.string().required(),
-  postalCode: z.number().required().max(33178),
+  postalCode: z.number().required(),
   timezone: z.string().required(),
   city: z.lazy(() => CitySchema),
   state: z.lazy(() => StateSchema),
@@ -418,7 +457,7 @@ export const VenuesSchema = z.object({
   address: z.lazy(() => AddressSchema),
   location: z.lazy(() => LocationSchema),
   markets: z.lazy(() => MarketsSchema),
-  links: z.lazy(() => _inksSchema)
+  links: z.lazy(() => LinksSchema)
 });
 
 
@@ -445,13 +484,13 @@ export const AddressSchema = z.object({
 
 
 export const LocationSchema = z.object({
-  longitude: z.number().required().max(-80.33854298),
-  latitude: z.number().required().max(25.81260379)
+  longitude: z.number().required(),
+  latitude: z.number().required()
 });
 
 
 export const MarketsSchema = z.object({
-  id: z.number().required().max(15)
+  id: z.number().required()
 });
 
 
@@ -460,7 +499,30 @@ export const IdNameSchema = z.object({
   name: z.string().required()
 });
 
-
+export type EventResults = z.infer<typeof EventResultsSchema>;
+export type Links = z.infer<typeof LinksSchema>;
+export type Embedded = z.infer<typeof EmbeddedSchema>;
+export type Page = z.infer<typeof PageSchema>;
+export type Self = z.infer<typeof SelfSchema>;
+export type Next = z.infer<typeof NextSchema>;
+export type Events = z.infer<typeof EventsSchema>;
+export type Images = z.infer<typeof ImagesSchema>;
+export type Sales = z.infer<typeof SalesSchema>;
+export type Dates = z.infer<typeof DatesSchema>;
+export type Classifications = z.infer<typeof ClassificationsSchema>;
+export type Promoter = z.infer<typeof PromoterSchema>;
+export type Public = z.infer<typeof PublicSchema>;
+export type Start = z.infer<typeof StartSchema>;
+export type Status = z.infer<typeof StatusSchema>;
+export type Attractions = z.infer<typeof AttractionsSchema>;
+export type Venues = z.infer<typeof VenuesSchema>;
+export type City = z.infer<typeof CitySchema>;
+export type State = z.infer<typeof StateSchema>;
+export type Country = z.infer<typeof CountrySchema>;
+export type Address = z.infer<typeof AddressSchema>;
+export type Location = z.infer<typeof LocationSchema>;
+export type Markets = z.infer<typeof MarketsSchema>;
+export type IdName = z.infer<typeof IdNameSchema>;
 "
 `;
 
@@ -486,9 +548,9 @@ export const EventResultsEmbeddedSchema = z.object({
 
 
 export const EventResultsPageSchema = z.object({
-  size: z.number().required().max(1),
-  totalElements: z.number().required().max(87958),
-  totalPages: z.number().required().max(87958),
+  size: z.number().required(),
+  totalElements: z.number().required(),
+  totalPages: z.number().required(),
   number: z.number().required()
 });
 
@@ -523,7 +585,7 @@ export const EventResultsEmbeddedEventsDatesSchema = z.object({
 
 
 export const EventResultsEmbeddedEventsPromoterSchema = z.object({
-  id: z.number().required().max(682)
+  id: z.number().required()
 });
 
 
@@ -567,7 +629,7 @@ export const EventResultsEmbeddedEventsEmbeddedVenuesSchema = z.object({
   id: z.string().required(),
   test: z.boolean().required(),
   locale: z.string().required(),
-  postalCode: z.number().required().max(33178),
+  postalCode: z.number().required(),
   timezone: z.string().required(),
   city: z.lazy(() => EventResultsEmbeddedEventsEmbeddedVenuesCitySchema),
   state: z.lazy(() => EventResultsEmbeddedEventsEmbeddedVenuesStateSchema),
@@ -575,7 +637,7 @@ export const EventResultsEmbeddedEventsEmbeddedVenuesSchema = z.object({
   address: z.lazy(() => EventResultsEmbeddedEventsEmbeddedVenuesAddressSchema),
   location: z.lazy(() => EventResultsEmbeddedEventsEmbeddedVenuesLocationSchema),
   markets: z.lazy(() => EventResultsEmbeddedEventsEmbeddedVenuesMarketsSchema),
-  links: z.lazy(() => _inksSchema)
+  links: z.lazy(() => LinksSchema)
 });
 
 
@@ -587,7 +649,7 @@ export const EventResultsEmbeddedEventsEmbeddedAttractionsSchema = z.object({
   locale: z.string().required(),
   images: z.lazy(() => ImagesSchema),
   classifications: z.lazy(() => ClassificationsSchema),
-  links: z.lazy(() => _inksSchema)
+  links: z.lazy(() => LinksSchema)
 });
 
 
@@ -614,13 +676,13 @@ export const EventResultsEmbeddedEventsEmbeddedVenuesAddressSchema = z.object({
 
 
 export const EventResultsEmbeddedEventsEmbeddedVenuesLocationSchema = z.object({
-  longitude: z.number().required().max(-80.33854298),
-  latitude: z.number().required().max(25.81260379)
+  longitude: z.number().required(),
+  latitude: z.number().required()
 });
 
 
 export const EventResultsEmbeddedEventsEmbeddedVenuesMarketsSchema = z.object({
-  id: z.number().required().max(15)
+  id: z.number().required()
 });
 
 
@@ -633,8 +695,8 @@ export const HrefTemplatedSchema = z.object({
 export const ImagesSchema = z.object({
   ratio: z.string().required(),
   url: z.string().required(),
-  width: z.number().required().max(2048),
-  height: z.number().required().max(1152),
+  width: z.number().required(),
+  height: z.number().required(),
   fallback: z.boolean().required()
 });
 
@@ -662,7 +724,33 @@ export const LinksSchema = z.object({
   self: z.lazy(() => HrefSchema)
 });
 
-
+export type EventResults = z.infer<typeof EventResultsSchema>;
+export type EventResultsLinks = z.infer<typeof EventResultsLinksSchema>;
+export type EventResultsEmbedded = z.infer<typeof EventResultsEmbeddedSchema>;
+export type EventResultsPage = z.infer<typeof EventResultsPageSchema>;
+export type EventResultsEmbeddedEvents = z.infer<typeof EventResultsEmbeddedEventsSchema>;
+export type EventResultsEmbeddedEventsSales = z.infer<typeof EventResultsEmbeddedEventsSalesSchema>;
+export type EventResultsEmbeddedEventsDates = z.infer<typeof EventResultsEmbeddedEventsDatesSchema>;
+export type EventResultsEmbeddedEventsPromoter = z.infer<typeof EventResultsEmbeddedEventsPromoterSchema>;
+export type EventResultsEmbeddedEventsLinks = z.infer<typeof EventResultsEmbeddedEventsLinksSchema>;
+export type EventResultsEmbeddedEventsEmbedded = z.infer<typeof EventResultsEmbeddedEventsEmbeddedSchema>;
+export type EventResultsEmbeddedEventsSalesPublic = z.infer<typeof EventResultsEmbeddedEventsSalesPublicSchema>;
+export type EventResultsEmbeddedEventsDatesStart = z.infer<typeof EventResultsEmbeddedEventsDatesStartSchema>;
+export type EventResultsEmbeddedEventsDatesStatus = z.infer<typeof EventResultsEmbeddedEventsDatesStatusSchema>;
+export type EventResultsEmbeddedEventsEmbeddedVenues = z.infer<typeof EventResultsEmbeddedEventsEmbeddedVenuesSchema>;
+export type EventResultsEmbeddedEventsEmbeddedAttractions = z.infer<typeof EventResultsEmbeddedEventsEmbeddedAttractionsSchema>;
+export type EventResultsEmbeddedEventsEmbeddedVenuesCity = z.infer<typeof EventResultsEmbeddedEventsEmbeddedVenuesCitySchema>;
+export type EventResultsEmbeddedEventsEmbeddedVenuesState = z.infer<typeof EventResultsEmbeddedEventsEmbeddedVenuesStateSchema>;
+export type EventResultsEmbeddedEventsEmbeddedVenuesCountry = z.infer<typeof EventResultsEmbeddedEventsEmbeddedVenuesCountrySchema>;
+export type EventResultsEmbeddedEventsEmbeddedVenuesAddress = z.infer<typeof EventResultsEmbeddedEventsEmbeddedVenuesAddressSchema>;
+export type EventResultsEmbeddedEventsEmbeddedVenuesLocation = z.infer<typeof EventResultsEmbeddedEventsEmbeddedVenuesLocationSchema>;
+export type EventResultsEmbeddedEventsEmbeddedVenuesMarkets = z.infer<typeof EventResultsEmbeddedEventsEmbeddedVenuesMarketsSchema>;
+export type HrefTemplated = z.infer<typeof HrefTemplatedSchema>;
+export type Images = z.infer<typeof ImagesSchema>;
+export type Classifications = z.infer<typeof ClassificationsSchema>;
+export type IdName = z.infer<typeof IdNameSchema>;
+export type Href = z.infer<typeof HrefSchema>;
+export type Links = z.infer<typeof LinksSchema>;
 "
 `;
 
@@ -672,28 +760,28 @@ exports[`#zod can emit migration for pokemon json 1`] = `
 
 export const PokemonSchema = z.object({
   abilities: z.lazy(() => PokemonAbilitiesSchema),
-  baseExperience: z.number().required().max(62),
+  baseExperience: z.number().required(),
   forms: z.lazy(() => PokemonFormsSchema),
   gameIndices: z.lazy(() => PokemonGameIndicesSchema),
-  height: z.number().required().max(6),
+  height: z.number().required(),
   heldItems: z.array().required(),
-  id: z.number().required().max(4),
+  id: z.number().required(),
   isDefault: z.boolean().required(),
   locationAreaEncounters: z.string().required(),
   moves: z.lazy(() => PokemonMovesSchema),
   name: z.string().required(),
-  order: z.number().required().max(5),
+  order: z.number().required(),
   species: z.lazy(() => PokemonSpeciesSchema),
   sprites: z.lazy(() => PokemonSpritesSchema),
   stats: z.lazy(() => PokemonStatsSchema),
   types: z.lazy(() => PokemonTypesSchema),
-  weight: z.number().required().max(85)
+  weight: z.number().required()
 });
 
 export const PokemonAbilitiesSchema = z.object({
   ability: z.lazy(() => PokemonAbilitiesAbilitySchema),
   isHidden: z.boolean().required(),
-  slot: z.number().required().max(3)
+  slot: z.number().required()
 });
 
 
@@ -704,7 +792,7 @@ export const PokemonFormsSchema = z.object({
 
 
 export const PokemonGameIndicesSchema = z.object({
-  gameIndex: z.number().required().max(176),
+  gameIndex: z.number().required(),
   version: z.lazy(() => PokemonGameIndicesVersionSchema)
 });
 
@@ -736,14 +824,14 @@ export const PokemonSpritesSchema = z.object({
 
 
 export const PokemonStatsSchema = z.object({
-  baseStat: z.number().required().max(65),
-  effort: z.number().required().max(1),
+  baseStat: z.number().required(),
+  effort: z.number().required(),
   stat: z.lazy(() => PokemonStatsStatSchema)
 });
 
 
 export const PokemonTypesSchema = z.object({
-  slot: z.number().required().max(1),
+  slot: z.number().required(),
   type: z.lazy(() => PokemonTypesTypeSchema)
 });
 
@@ -767,7 +855,7 @@ export const PokemonMovesMoveSchema = z.object({
 
 
 export const PokemonMovesVersionGroupDetailsSchema = z.object({
-  levelLearnedAt: z.number().required().max(49),
+  levelLearnedAt: z.number().required(),
   moveLearnMethod: z.lazy(() => PokemonMovesVersionGroupDetailsMoveLearnMethodSchema),
   versionGroup: z.lazy(() => PokemonMovesVersionGroupDetailsVersionGroupSchema)
 });
@@ -1033,7 +1121,53 @@ export const PokemonTypesTypeSchema = z.object({
   url: z.string().required()
 });
 
-
+export type Pokemon = z.infer<typeof PokemonSchema>;
+export type PokemonAbilities = z.infer<typeof PokemonAbilitiesSchema>;
+export type PokemonForms = z.infer<typeof PokemonFormsSchema>;
+export type PokemonGameIndices = z.infer<typeof PokemonGameIndicesSchema>;
+export type PokemonMoves = z.infer<typeof PokemonMovesSchema>;
+export type PokemonSpecies = z.infer<typeof PokemonSpeciesSchema>;
+export type PokemonSprites = z.infer<typeof PokemonSpritesSchema>;
+export type PokemonStats = z.infer<typeof PokemonStatsSchema>;
+export type PokemonTypes = z.infer<typeof PokemonTypesSchema>;
+export type PokemonAbilitiesAbility = z.infer<typeof PokemonAbilitiesAbilitySchema>;
+export type PokemonGameIndicesVersion = z.infer<typeof PokemonGameIndicesVersionSchema>;
+export type PokemonMovesMove = z.infer<typeof PokemonMovesMoveSchema>;
+export type PokemonMovesVersionGroupDetails = z.infer<typeof PokemonMovesVersionGroupDetailsSchema>;
+export type PokemonMovesVersionGroupDetailsMoveLearnMethod = z.infer<typeof PokemonMovesVersionGroupDetailsMoveLearnMethodSchema>;
+export type PokemonMovesVersionGroupDetailsVersionGroup = z.infer<typeof PokemonMovesVersionGroupDetailsVersionGroupSchema>;
+export type PokemonSpritesOther = z.infer<typeof PokemonSpritesOtherSchema>;
+export type PokemonSpritesVersions = z.infer<typeof PokemonSpritesVersionsSchema>;
+export type PokemonSpritesOtherDreamWorld = z.infer<typeof PokemonSpritesOtherDreamWorldSchema>;
+export type PokemonSpritesOtherOfficialArtwork = z.infer<typeof PokemonSpritesOtherOfficialArtworkSchema>;
+export type PokemonSpritesVersionsGenerationI = z.infer<typeof PokemonSpritesVersionsGenerationISchema>;
+export type PokemonSpritesVersionsGenerationIi = z.infer<typeof PokemonSpritesVersionsGenerationIiSchema>;
+export type PokemonSpritesVersionsGenerationIii = z.infer<typeof PokemonSpritesVersionsGenerationIiiSchema>;
+export type PokemonSpritesVersionsGenerationIv = z.infer<typeof PokemonSpritesVersionsGenerationIvSchema>;
+export type PokemonSpritesVersionsGenerationV = z.infer<typeof PokemonSpritesVersionsGenerationVSchema>;
+export type PokemonSpritesVersionsGenerationVi = z.infer<typeof PokemonSpritesVersionsGenerationViSchema>;
+export type PokemonSpritesVersionsGenerationVii = z.infer<typeof PokemonSpritesVersionsGenerationViiSchema>;
+export type PokemonSpritesVersionsGenerationViii = z.infer<typeof PokemonSpritesVersionsGenerationViiiSchema>;
+export type PokemonSpritesVersionsGenerationIRedBlue = z.infer<typeof PokemonSpritesVersionsGenerationIRedBlueSchema>;
+export type PokemonSpritesVersionsGenerationIYellow = z.infer<typeof PokemonSpritesVersionsGenerationIYellowSchema>;
+export type PokemonSpritesVersionsGenerationIiCrystal = z.infer<typeof PokemonSpritesVersionsGenerationIiCrystalSchema>;
+export type PokemonSpritesVersionsGenerationIiGold = z.infer<typeof PokemonSpritesVersionsGenerationIiGoldSchema>;
+export type PokemonSpritesVersionsGenerationIiSilver = z.infer<typeof PokemonSpritesVersionsGenerationIiSilverSchema>;
+export type PokemonSpritesVersionsGenerationIiiEmerald = z.infer<typeof PokemonSpritesVersionsGenerationIiiEmeraldSchema>;
+export type PokemonSpritesVersionsGenerationIiiFireredLeafgreen = z.infer<typeof PokemonSpritesVersionsGenerationIiiFireredLeafgreenSchema>;
+export type PokemonSpritesVersionsGenerationIiiRubySapphire = z.infer<typeof PokemonSpritesVersionsGenerationIiiRubySapphireSchema>;
+export type PokemonSpritesVersionsGenerationIvDiamondPearl = z.infer<typeof PokemonSpritesVersionsGenerationIvDiamondPearlSchema>;
+export type PokemonSpritesVersionsGenerationIvHeartgoldSoulsilver = z.infer<typeof PokemonSpritesVersionsGenerationIvHeartgoldSoulsilverSchema>;
+export type PokemonSpritesVersionsGenerationIvPlatinum = z.infer<typeof PokemonSpritesVersionsGenerationIvPlatinumSchema>;
+export type PokemonSpritesVersionsGenerationVBlackWhite = z.infer<typeof PokemonSpritesVersionsGenerationVBlackWhiteSchema>;
+export type PokemonSpritesVersionsGenerationVBlackWhiteAnimated = z.infer<typeof PokemonSpritesVersionsGenerationVBlackWhiteAnimatedSchema>;
+export type PokemonSpritesVersionsGenerationViOmegarubyAlphasapphire = z.infer<typeof PokemonSpritesVersionsGenerationViOmegarubyAlphasapphireSchema>;
+export type PokemonSpritesVersionsGenerationViXY = z.infer<typeof PokemonSpritesVersionsGenerationViXYSchema>;
+export type PokemonSpritesVersionsGenerationViiIcons = z.infer<typeof PokemonSpritesVersionsGenerationViiIconsSchema>;
+export type PokemonSpritesVersionsGenerationViiUltraSunUltraMoon = z.infer<typeof PokemonSpritesVersionsGenerationViiUltraSunUltraMoonSchema>;
+export type PokemonSpritesVersionsGenerationViiiIcons = z.infer<typeof PokemonSpritesVersionsGenerationViiiIconsSchema>;
+export type PokemonStatsStat = z.infer<typeof PokemonStatsStatSchema>;
+export type PokemonTypesType = z.infer<typeof PokemonTypesTypeSchema>;
 "
 `;
 
@@ -1043,33 +1177,33 @@ exports[`#zod can emit migration for pokemon json, w/ dense & trim fields 1`] = 
 
 export const PokemonSchema = z.object({
   abilities: z.lazy(() => AbilitiesSchema),
-  baseExperience: z.number().required().max(62),
+  baseExperience: z.number().required(),
   forms: z.lazy(() => FormsSchema),
   gameIndices: z.lazy(() => GameIndicesSchema),
-  height: z.number().required().max(6),
+  height: z.number().required(),
   heldItems: z.array().required(),
-  id: z.number().required().max(4),
+  id: z.number().required(),
   isDefault: z.boolean().required(),
   locationAreaEncounters: z.string().required(),
   moves: z.lazy(() => MovesSchema),
   name: z.string().required(),
-  order: z.number().required().max(5),
+  order: z.number().required(),
   species: z.lazy(() => SpeciesSchema),
   sprites: z.lazy(() => SpritesSchema),
   stats: z.lazy(() => StatsSchema),
   types: z.lazy(() => TypesSchema),
-  weight: z.number().required().max(85)
+  weight: z.number().required()
 });
 
 export const AbilitiesSchema = z.object({
   ability: z.lazy(() => NameUrlSchema),
   isHidden: z.boolean().required(),
-  slot: z.number().required().max(3)
+  slot: z.number().required()
 });
 
 
 export const GameIndicesSchema = z.object({
-  gameIndex: z.number().required().max(176),
+  gameIndex: z.number().required(),
   version: z.lazy(() => NameUrlSchema)
 });
 
@@ -1095,20 +1229,20 @@ export const SpritesSchema = z.object({
 
 
 export const StatsSchema = z.object({
-  baseStat: z.number().required().max(65),
-  effort: z.number().required().max(1),
+  baseStat: z.number().required(),
+  effort: z.number().required(),
   stat: z.lazy(() => NameUrlSchema)
 });
 
 
 export const TypesSchema = z.object({
-  slot: z.number().required().max(1),
+  slot: z.number().required(),
   type: z.lazy(() => NameUrlSchema)
 });
 
 
 export const VersionGroupDetailsSchema = z.object({
-  levelLearnedAt: z.number().required().max(49),
+  levelLearnedAt: z.number().required(),
   moveLearnMethod: z.lazy(() => NameUrlSchema),
   versionGroup: z.lazy(() => NameUrlSchema)
 });
@@ -1284,7 +1418,37 @@ export const OmegarubyAlphasapphireUltraSunUltraMoonXYSchema = z.object({
   frontShinyFemale: z.any().required()
 });
 
-
+export type Pokemon = z.infer<typeof PokemonSchema>;
+export type Abilities = z.infer<typeof AbilitiesSchema>;
+export type GameIndices = z.infer<typeof GameIndicesSchema>;
+export type Moves = z.infer<typeof MovesSchema>;
+export type Sprites = z.infer<typeof SpritesSchema>;
+export type Stats = z.infer<typeof StatsSchema>;
+export type Types = z.infer<typeof TypesSchema>;
+export type VersionGroupDetails = z.infer<typeof VersionGroupDetailsSchema>;
+export type Other = z.infer<typeof OtherSchema>;
+export type Versions = z.infer<typeof VersionsSchema>;
+export type OfficialArtwork = z.infer<typeof OfficialArtworkSchema>;
+export type GenerationI = z.infer<typeof GenerationISchema>;
+export type GenerationIi = z.infer<typeof GenerationIiSchema>;
+export type GenerationIii = z.infer<typeof GenerationIiiSchema>;
+export type GenerationIv = z.infer<typeof GenerationIvSchema>;
+export type GenerationV = z.infer<typeof GenerationVSchema>;
+export type GenerationVi = z.infer<typeof GenerationViSchema>;
+export type GenerationVii = z.infer<typeof GenerationViiSchema>;
+export type GenerationViii = z.infer<typeof GenerationViiiSchema>;
+export type Crystal = z.infer<typeof CrystalSchema>;
+export type Gold = z.infer<typeof GoldSchema>;
+export type Silver = z.infer<typeof SilverSchema>;
+export type Emerald = z.infer<typeof EmeraldSchema>;
+export type FireredLeafgreen = z.infer<typeof FireredLeafgreenSchema>;
+export type RubySapphire = z.infer<typeof RubySapphireSchema>;
+export type BlackWhite = z.infer<typeof BlackWhiteSchema>;
+export type NameUrl = z.infer<typeof NameUrlSchema>;
+export type FrontDefaultFrontFemale = z.infer<typeof FrontDefaultFrontFemaleSchema>;
+export type RedBlueYellow = z.infer<typeof RedBlueYellowSchema>;
+export type AnimatedDiamondPearlHeartgoldSoulsilverPlatinum = z.infer<typeof AnimatedDiamondPearlHeartgoldSoulsilverPlatinumSchema>;
+export type OmegarubyAlphasapphireUltraSunUltraMoonXY = z.infer<typeof OmegarubyAlphasapphireUltraSunUltraMoonXYSchema>;
 "
 `;
 
@@ -1294,33 +1458,33 @@ exports[`#zod can emit migration for pokemon json, w/ dense fields 1`] = `
 
 export const PokemonSchema = z.object({
   abilities: z.lazy(() => PokemonAbilitiesSchema),
-  baseExperience: z.number().required().max(62),
+  baseExperience: z.number().required(),
   forms: z.lazy(() => PokemonFormsSchema),
   gameIndices: z.lazy(() => PokemonGameIndicesSchema),
-  height: z.number().required().max(6),
+  height: z.number().required(),
   heldItems: z.array().required(),
-  id: z.number().required().max(4),
+  id: z.number().required(),
   isDefault: z.boolean().required(),
   locationAreaEncounters: z.string().required(),
   moves: z.lazy(() => PokemonMovesSchema),
   name: z.string().required(),
-  order: z.number().required().max(5),
+  order: z.number().required(),
   species: z.lazy(() => PokemonSpeciesSchema),
   sprites: z.lazy(() => PokemonSpritesSchema),
   stats: z.lazy(() => PokemonStatsSchema),
   types: z.lazy(() => PokemonTypesSchema),
-  weight: z.number().required().max(85)
+  weight: z.number().required()
 });
 
 export const PokemonAbilitiesSchema = z.object({
   ability: z.lazy(() => NameUrlSchema),
   isHidden: z.boolean().required(),
-  slot: z.number().required().max(3)
+  slot: z.number().required()
 });
 
 
 export const PokemonGameIndicesSchema = z.object({
-  gameIndex: z.number().required().max(176),
+  gameIndex: z.number().required(),
   version: z.lazy(() => NameUrlSchema)
 });
 
@@ -1346,20 +1510,20 @@ export const PokemonSpritesSchema = z.object({
 
 
 export const PokemonStatsSchema = z.object({
-  baseStat: z.number().required().max(65),
-  effort: z.number().required().max(1),
+  baseStat: z.number().required(),
+  effort: z.number().required(),
   stat: z.lazy(() => NameUrlSchema)
 });
 
 
 export const PokemonTypesSchema = z.object({
-  slot: z.number().required().max(1),
+  slot: z.number().required(),
   type: z.lazy(() => NameUrlSchema)
 });
 
 
 export const PokemonMovesVersionGroupDetailsSchema = z.object({
-  levelLearnedAt: z.number().required().max(49),
+  levelLearnedAt: z.number().required(),
   moveLearnMethod: z.lazy(() => NameUrlSchema),
   versionGroup: z.lazy(() => NameUrlSchema)
 });
@@ -1571,7 +1735,40 @@ export const GenerationViiOmegarubyAlphasapphireUltraSunUltraMoonXYSchema = z.ob
   frontShinyFemale: z.any().required()
 });
 
-
+export type Pokemon = z.infer<typeof PokemonSchema>;
+export type PokemonAbilities = z.infer<typeof PokemonAbilitiesSchema>;
+export type PokemonGameIndices = z.infer<typeof PokemonGameIndicesSchema>;
+export type PokemonMoves = z.infer<typeof PokemonMovesSchema>;
+export type PokemonSprites = z.infer<typeof PokemonSpritesSchema>;
+export type PokemonStats = z.infer<typeof PokemonStatsSchema>;
+export type PokemonTypes = z.infer<typeof PokemonTypesSchema>;
+export type PokemonMovesVersionGroupDetails = z.infer<typeof PokemonMovesVersionGroupDetailsSchema>;
+export type PokemonSpritesOther = z.infer<typeof PokemonSpritesOtherSchema>;
+export type PokemonSpritesVersions = z.infer<typeof PokemonSpritesVersionsSchema>;
+export type PokemonSpritesOtherOfficialArtwork = z.infer<typeof PokemonSpritesOtherOfficialArtworkSchema>;
+export type PokemonSpritesVersionsGenerationI = z.infer<typeof PokemonSpritesVersionsGenerationISchema>;
+export type PokemonSpritesVersionsGenerationIi = z.infer<typeof PokemonSpritesVersionsGenerationIiSchema>;
+export type PokemonSpritesVersionsGenerationIii = z.infer<typeof PokemonSpritesVersionsGenerationIiiSchema>;
+export type PokemonSpritesVersionsGenerationIv = z.infer<typeof PokemonSpritesVersionsGenerationIvSchema>;
+export type PokemonSpritesVersionsGenerationV = z.infer<typeof PokemonSpritesVersionsGenerationVSchema>;
+export type PokemonSpritesVersionsGenerationVi = z.infer<typeof PokemonSpritesVersionsGenerationViSchema>;
+export type PokemonSpritesVersionsGenerationVii = z.infer<typeof PokemonSpritesVersionsGenerationViiSchema>;
+export type PokemonSpritesVersionsGenerationViii = z.infer<typeof PokemonSpritesVersionsGenerationViiiSchema>;
+export type PokemonSpritesVersionsGenerationIiCrystal = z.infer<typeof PokemonSpritesVersionsGenerationIiCrystalSchema>;
+export type PokemonSpritesVersionsGenerationIiGold = z.infer<typeof PokemonSpritesVersionsGenerationIiGoldSchema>;
+export type PokemonSpritesVersionsGenerationIiSilver = z.infer<typeof PokemonSpritesVersionsGenerationIiSilverSchema>;
+export type PokemonSpritesVersionsGenerationIiiEmerald = z.infer<typeof PokemonSpritesVersionsGenerationIiiEmeraldSchema>;
+export type PokemonSpritesVersionsGenerationIiiFireredLeafgreen = z.infer<typeof PokemonSpritesVersionsGenerationIiiFireredLeafgreenSchema>;
+export type PokemonSpritesVersionsGenerationIiiRubySapphire = z.infer<typeof PokemonSpritesVersionsGenerationIiiRubySapphireSchema>;
+export type PokemonSpritesVersionsGenerationIvDiamondPearl = z.infer<typeof PokemonSpritesVersionsGenerationIvDiamondPearlSchema>;
+export type PokemonSpritesVersionsGenerationIvHeartgoldSoulsilver = z.infer<typeof PokemonSpritesVersionsGenerationIvHeartgoldSoulsilverSchema>;
+export type PokemonSpritesVersionsGenerationIvPlatinum = z.infer<typeof PokemonSpritesVersionsGenerationIvPlatinumSchema>;
+export type PokemonSpritesVersionsGenerationVBlackWhite = z.infer<typeof PokemonSpritesVersionsGenerationVBlackWhiteSchema>;
+export type PokemonSpritesVersionsGenerationVBlackWhiteAnimated = z.infer<typeof PokemonSpritesVersionsGenerationVBlackWhiteAnimatedSchema>;
+export type NameUrl = z.infer<typeof NameUrlSchema>;
+export type FrontDefaultFrontFemale = z.infer<typeof FrontDefaultFrontFemaleSchema>;
+export type RedBlueYellow = z.infer<typeof RedBlueYellowSchema>;
+export type GenerationViiOmegarubyAlphasapphireUltraSunUltraMoonXY = z.infer<typeof GenerationViiOmegarubyAlphasapphireUltraSunUltraMoonXYSchema>;
 "
 `;
 
@@ -1581,28 +1778,28 @@ exports[`#zod can emit module exports correctly 1`] = `
 
 export const PokemonSchema = z.object({
   abilities: z.lazy(() => PokemonAbilitiesSchema),
-  baseExperience: z.number().required().max(62),
+  baseExperience: z.number().required(),
   forms: z.lazy(() => PokemonFormsSchema),
   gameIndices: z.lazy(() => PokemonGameIndicesSchema),
-  height: z.number().required().max(6),
+  height: z.number().required(),
   heldItems: z.array().required(),
-  id: z.number().required().max(4),
+  id: z.number().required(),
   isDefault: z.boolean().required(),
   locationAreaEncounters: z.string().required(),
   moves: z.lazy(() => PokemonMovesSchema),
   name: z.string().required(),
-  order: z.number().required().max(5),
+  order: z.number().required(),
   species: z.lazy(() => PokemonSpeciesSchema),
   sprites: z.lazy(() => PokemonSpritesSchema),
   stats: z.lazy(() => PokemonStatsSchema),
   types: z.lazy(() => PokemonTypesSchema),
-  weight: z.number().required().max(85)
+  weight: z.number().required()
 });
 
 export const PokemonAbilitiesSchema = z.object({
   ability: z.lazy(() => PokemonAbilitiesAbilitySchema),
   isHidden: z.boolean().required(),
-  slot: z.number().required().max(3)
+  slot: z.number().required()
 });
 
 
@@ -1613,7 +1810,7 @@ export const PokemonFormsSchema = z.object({
 
 
 export const PokemonGameIndicesSchema = z.object({
-  gameIndex: z.number().required().max(176),
+  gameIndex: z.number().required(),
   version: z.lazy(() => PokemonGameIndicesVersionSchema)
 });
 
@@ -1645,14 +1842,14 @@ export const PokemonSpritesSchema = z.object({
 
 
 export const PokemonStatsSchema = z.object({
-  baseStat: z.number().required().max(65),
-  effort: z.number().required().max(1),
+  baseStat: z.number().required(),
+  effort: z.number().required(),
   stat: z.lazy(() => PokemonStatsStatSchema)
 });
 
 
 export const PokemonTypesSchema = z.object({
-  slot: z.number().required().max(1),
+  slot: z.number().required(),
   type: z.lazy(() => PokemonTypesTypeSchema)
 });
 
@@ -1676,7 +1873,7 @@ export const PokemonMovesMoveSchema = z.object({
 
 
 export const PokemonMovesVersionGroupDetailsSchema = z.object({
-  levelLearnedAt: z.number().required().max(49),
+  levelLearnedAt: z.number().required(),
   moveLearnMethod: z.lazy(() => PokemonMovesVersionGroupDetailsMoveLearnMethodSchema),
   versionGroup: z.lazy(() => PokemonMovesVersionGroupDetailsVersionGroupSchema)
 });
@@ -1942,7 +2139,53 @@ export const PokemonTypesTypeSchema = z.object({
   url: z.string().required()
 });
 
-
+export type Pokemon = z.infer<typeof PokemonSchema>;
+export type PokemonAbilities = z.infer<typeof PokemonAbilitiesSchema>;
+export type PokemonForms = z.infer<typeof PokemonFormsSchema>;
+export type PokemonGameIndices = z.infer<typeof PokemonGameIndicesSchema>;
+export type PokemonMoves = z.infer<typeof PokemonMovesSchema>;
+export type PokemonSpecies = z.infer<typeof PokemonSpeciesSchema>;
+export type PokemonSprites = z.infer<typeof PokemonSpritesSchema>;
+export type PokemonStats = z.infer<typeof PokemonStatsSchema>;
+export type PokemonTypes = z.infer<typeof PokemonTypesSchema>;
+export type PokemonAbilitiesAbility = z.infer<typeof PokemonAbilitiesAbilitySchema>;
+export type PokemonGameIndicesVersion = z.infer<typeof PokemonGameIndicesVersionSchema>;
+export type PokemonMovesMove = z.infer<typeof PokemonMovesMoveSchema>;
+export type PokemonMovesVersionGroupDetails = z.infer<typeof PokemonMovesVersionGroupDetailsSchema>;
+export type PokemonMovesVersionGroupDetailsMoveLearnMethod = z.infer<typeof PokemonMovesVersionGroupDetailsMoveLearnMethodSchema>;
+export type PokemonMovesVersionGroupDetailsVersionGroup = z.infer<typeof PokemonMovesVersionGroupDetailsVersionGroupSchema>;
+export type PokemonSpritesOther = z.infer<typeof PokemonSpritesOtherSchema>;
+export type PokemonSpritesVersions = z.infer<typeof PokemonSpritesVersionsSchema>;
+export type PokemonSpritesOtherDreamWorld = z.infer<typeof PokemonSpritesOtherDreamWorldSchema>;
+export type PokemonSpritesOtherOfficialArtwork = z.infer<typeof PokemonSpritesOtherOfficialArtworkSchema>;
+export type PokemonSpritesVersionsGenerationI = z.infer<typeof PokemonSpritesVersionsGenerationISchema>;
+export type PokemonSpritesVersionsGenerationIi = z.infer<typeof PokemonSpritesVersionsGenerationIiSchema>;
+export type PokemonSpritesVersionsGenerationIii = z.infer<typeof PokemonSpritesVersionsGenerationIiiSchema>;
+export type PokemonSpritesVersionsGenerationIv = z.infer<typeof PokemonSpritesVersionsGenerationIvSchema>;
+export type PokemonSpritesVersionsGenerationV = z.infer<typeof PokemonSpritesVersionsGenerationVSchema>;
+export type PokemonSpritesVersionsGenerationVi = z.infer<typeof PokemonSpritesVersionsGenerationViSchema>;
+export type PokemonSpritesVersionsGenerationVii = z.infer<typeof PokemonSpritesVersionsGenerationViiSchema>;
+export type PokemonSpritesVersionsGenerationViii = z.infer<typeof PokemonSpritesVersionsGenerationViiiSchema>;
+export type PokemonSpritesVersionsGenerationIRedBlue = z.infer<typeof PokemonSpritesVersionsGenerationIRedBlueSchema>;
+export type PokemonSpritesVersionsGenerationIYellow = z.infer<typeof PokemonSpritesVersionsGenerationIYellowSchema>;
+export type PokemonSpritesVersionsGenerationIiCrystal = z.infer<typeof PokemonSpritesVersionsGenerationIiCrystalSchema>;
+export type PokemonSpritesVersionsGenerationIiGold = z.infer<typeof PokemonSpritesVersionsGenerationIiGoldSchema>;
+export type PokemonSpritesVersionsGenerationIiSilver = z.infer<typeof PokemonSpritesVersionsGenerationIiSilverSchema>;
+export type PokemonSpritesVersionsGenerationIiiEmerald = z.infer<typeof PokemonSpritesVersionsGenerationIiiEmeraldSchema>;
+export type PokemonSpritesVersionsGenerationIiiFireredLeafgreen = z.infer<typeof PokemonSpritesVersionsGenerationIiiFireredLeafgreenSchema>;
+export type PokemonSpritesVersionsGenerationIiiRubySapphire = z.infer<typeof PokemonSpritesVersionsGenerationIiiRubySapphireSchema>;
+export type PokemonSpritesVersionsGenerationIvDiamondPearl = z.infer<typeof PokemonSpritesVersionsGenerationIvDiamondPearlSchema>;
+export type PokemonSpritesVersionsGenerationIvHeartgoldSoulsilver = z.infer<typeof PokemonSpritesVersionsGenerationIvHeartgoldSoulsilverSchema>;
+export type PokemonSpritesVersionsGenerationIvPlatinum = z.infer<typeof PokemonSpritesVersionsGenerationIvPlatinumSchema>;
+export type PokemonSpritesVersionsGenerationVBlackWhite = z.infer<typeof PokemonSpritesVersionsGenerationVBlackWhiteSchema>;
+export type PokemonSpritesVersionsGenerationVBlackWhiteAnimated = z.infer<typeof PokemonSpritesVersionsGenerationVBlackWhiteAnimatedSchema>;
+export type PokemonSpritesVersionsGenerationViOmegarubyAlphasapphire = z.infer<typeof PokemonSpritesVersionsGenerationViOmegarubyAlphasapphireSchema>;
+export type PokemonSpritesVersionsGenerationViXY = z.infer<typeof PokemonSpritesVersionsGenerationViXYSchema>;
+export type PokemonSpritesVersionsGenerationViiIcons = z.infer<typeof PokemonSpritesVersionsGenerationViiIconsSchema>;
+export type PokemonSpritesVersionsGenerationViiUltraSunUltraMoon = z.infer<typeof PokemonSpritesVersionsGenerationViiUltraSunUltraMoonSchema>;
+export type PokemonSpritesVersionsGenerationViiiIcons = z.infer<typeof PokemonSpritesVersionsGenerationViiiIconsSchema>;
+export type PokemonStatsStat = z.infer<typeof PokemonStatsStatSchema>;
+export type PokemonTypesType = z.infer<typeof PokemonTypesTypeSchema>;
 "
 `;
 
@@ -1951,22 +2194,22 @@ exports[`#zod can emit schema 1`] = `
 
 
 export const UsersSchema = z.object({
-  id: z.string().uuid()).required(),
-  email: z.string().required(),
-  firstName: z.string().required(),
-  lastName: z.string().required(),
+  id: z.string().uuid().required(),
+  email: z.string().required().min(21).max(29),
+  firstName: z.string().required().min(3).max(10),
+  lastName: z.string().required().min(4).max(11),
   isActive: z.boolean().required(),
   createdAt: z.date().required(),
   modifiedAt: z.date().required(),
-  catchPhrase: z.string().required(),
-  companyName: z.string().required(),
-  credits: z.number().required().max(20).enum([\\"1\\", \\"15\\", \\"20\\", \\"10\\", \\"0\\", \\"11\\", \\"7\\", \\"9\\"]),
-  salesScore: z.number().required().max(20.9877865),
-  location: z.string().required().enum([\\"nyc\\", \\"remote\\", \\"denver\\"]),
-  profile: z.string()
+  catchPhrase: z.string().required().min(23).max(48),
+  companyName: z.string().required().min(9).max(20),
+  credits: z.number().required().min(1).max(20).enum([\\"1\\", \\"15\\", \\"20\\", \\"10\\", \\"0\\", \\"11\\", \\"7\\", \\"9\\"]),
+  salesScore: z.number().required().min(0.75129).max(20.9877865),
+  location: z.string().required().min(3).max(6).enum([\\"nyc\\", \\"remote\\", \\"denver\\"]),
+  profile: z.string().min(111).max(234)
 });
 
-
+export type Users = z.infer<typeof UsersSchema>;
 "
 `;
 
@@ -1975,25 +2218,25 @@ exports[`#zod can emit schema for people json 1`] = `
 
 
 export const PeopleSchema = z.object({
-  name: z.string().required(),
-  height: z.number().max(228),
-  mass: z.number().max(140),
-  hairColor: z.string().required(),
-  skinColor: z.string(),
-  eyeColor: z.string().required().enum([\\"blue\\", \\"yellow\\", \\"red\\", \\"brown\\", \\"blue-gray\\", \\"black\\", \\"orange\\", \\"hazel\\"]),
-  birthYear: z.string(),
-  homeworld: z.string().required(),
-  films: z.array().required(),
-  species: z.array().required(),
-  vehicles: z.array().required(),
-  starships: z.array().required(),
+  name: z.string().required().min(4).max(21),
+  height: z.number().min(66).max(228),
+  mass: z.number().min(17).max(140),
+  hairColor: z.string().required().min(3).max(13),
+  skinColor: z.string().min(4).max(16),
+  eyeColor: z.string().required().min(3).max(9).enum([\\"blue\\", \\"yellow\\", \\"red\\", \\"brown\\", \\"blue-gray\\", \\"black\\", \\"orange\\", \\"hazel\\"]),
+  birthYear: z.string().min(4).max(7),
+  homeworld: z.string().required().min(44).max(45),
+  films: z.array().required().min(1).max(7),
+  species: z.array().required().min(1).max(1).length(1, { message: \\"Exact length required: 1\\" }),
+  vehicles: z.array().required().min(1).max(2),
+  starships: z.array().required().min(1).max(5),
   created: z.date().required(),
   edited: z.date().required(),
-  url: z.string().required(),
-  id: z.number().required().max(42)
+  url: z.string().required().min(43).max(44),
+  id: z.number().required().min(1).max(42)
 });
 
-
+export type People = z.infer<typeof PeopleSchema>;
 "
 `;
 
@@ -2003,28 +2246,28 @@ exports[`#zod can emit schema with better names 1`] = `
 
 export const PokemonSchema = z.object({
   abilities: z.lazy(() => AbilitiesSchema),
-  baseExperience: z.number().required().max(62),
+  baseExperience: z.number().required(),
   forms: z.lazy(() => FormsSchema),
   gameIndices: z.lazy(() => GameIndicesSchema),
-  height: z.number().required().max(6),
+  height: z.number().required(),
   heldItems: z.array().required(),
-  id: z.number().required().max(4),
+  id: z.number().required(),
   isDefault: z.boolean().required(),
   locationAreaEncounters: z.string().required(),
   moves: z.lazy(() => MovesSchema),
   name: z.string().required(),
-  order: z.number().required().max(5),
+  order: z.number().required(),
   species: z.lazy(() => SpeciesSchema),
   sprites: z.lazy(() => SpritesSchema),
   stats: z.lazy(() => StatsSchema),
   types: z.lazy(() => TypesSchema),
-  weight: z.number().required().max(85)
+  weight: z.number().required()
 });
 
 export const AbilitiesSchema = z.object({
   ability: z.lazy(() => AbilitySchema),
   isHidden: z.boolean().required(),
-  slot: z.number().required().max(3)
+  slot: z.number().required()
 });
 
 
@@ -2035,7 +2278,7 @@ export const FormsSchema = z.object({
 
 
 export const GameIndicesSchema = z.object({
-  gameIndex: z.number().required().max(176),
+  gameIndex: z.number().required(),
   version: z.lazy(() => VersionSchema)
 });
 
@@ -2067,14 +2310,14 @@ export const SpritesSchema = z.object({
 
 
 export const StatsSchema = z.object({
-  baseStat: z.number().required().max(65),
-  effort: z.number().required().max(1),
+  baseStat: z.number().required(),
+  effort: z.number().required(),
   stat: z.lazy(() => StatSchema)
 });
 
 
 export const TypesSchema = z.object({
-  slot: z.number().required().max(1),
+  slot: z.number().required(),
   type: z.lazy(() => TypeSchema)
 });
 
@@ -2098,7 +2341,7 @@ export const MoveSchema = z.object({
 
 
 export const VersionGroupDetailsSchema = z.object({
-  levelLearnedAt: z.number().required().max(49),
+  levelLearnedAt: z.number().required(),
   moveLearnMethod: z.lazy(() => MoveLearnMethodSchema),
   versionGroup: z.lazy(() => VersionGroupSchema)
 });
@@ -2358,7 +2601,52 @@ export const TypeSchema = z.object({
   url: z.string().required()
 });
 
-
+export type Pokemon = z.infer<typeof PokemonSchema>;
+export type Abilities = z.infer<typeof AbilitiesSchema>;
+export type Forms = z.infer<typeof FormsSchema>;
+export type GameIndices = z.infer<typeof GameIndicesSchema>;
+export type Moves = z.infer<typeof MovesSchema>;
+export type Species = z.infer<typeof SpeciesSchema>;
+export type Sprites = z.infer<typeof SpritesSchema>;
+export type Stats = z.infer<typeof StatsSchema>;
+export type Types = z.infer<typeof TypesSchema>;
+export type Ability = z.infer<typeof AbilitySchema>;
+export type Version = z.infer<typeof VersionSchema>;
+export type Move = z.infer<typeof MoveSchema>;
+export type VersionGroupDetails = z.infer<typeof VersionGroupDetailsSchema>;
+export type MoveLearnMethod = z.infer<typeof MoveLearnMethodSchema>;
+export type VersionGroup = z.infer<typeof VersionGroupSchema>;
+export type Other = z.infer<typeof OtherSchema>;
+export type Versions = z.infer<typeof VersionsSchema>;
+export type DreamWorld = z.infer<typeof DreamWorldSchema>;
+export type OfficialArtwork = z.infer<typeof OfficialArtworkSchema>;
+export type GenerationI = z.infer<typeof GenerationISchema>;
+export type GenerationIi = z.infer<typeof GenerationIiSchema>;
+export type GenerationIii = z.infer<typeof GenerationIiiSchema>;
+export type GenerationIv = z.infer<typeof GenerationIvSchema>;
+export type GenerationV = z.infer<typeof GenerationVSchema>;
+export type GenerationVi = z.infer<typeof GenerationViSchema>;
+export type GenerationVii = z.infer<typeof GenerationViiSchema>;
+export type GenerationViii = z.infer<typeof GenerationViiiSchema>;
+export type RedBlue = z.infer<typeof RedBlueSchema>;
+export type Yellow = z.infer<typeof YellowSchema>;
+export type Crystal = z.infer<typeof CrystalSchema>;
+export type Gold = z.infer<typeof GoldSchema>;
+export type Silver = z.infer<typeof SilverSchema>;
+export type Emerald = z.infer<typeof EmeraldSchema>;
+export type FireredLeafgreen = z.infer<typeof FireredLeafgreenSchema>;
+export type RubySapphire = z.infer<typeof RubySapphireSchema>;
+export type DiamondPearl = z.infer<typeof DiamondPearlSchema>;
+export type HeartgoldSoulsilver = z.infer<typeof HeartgoldSoulsilverSchema>;
+export type Platinum = z.infer<typeof PlatinumSchema>;
+export type BlackWhite = z.infer<typeof BlackWhiteSchema>;
+export type Animated = z.infer<typeof AnimatedSchema>;
+export type OmegarubyAlphasapphire = z.infer<typeof OmegarubyAlphasapphireSchema>;
+export type XY = z.infer<typeof XYSchema>;
+export type Icons = z.infer<typeof IconsSchema>;
+export type UltraSunUltraMoon = z.infer<typeof UltraSunUltraMoonSchema>;
+export type Stat = z.infer<typeof StatSchema>;
+export type Type = z.infer<typeof TypeSchema>;
 "
 `;
 
@@ -2367,16 +2655,17 @@ exports[`#zod can emit schema with nested types 1`] = `
 
 
 export const UsersSchema = z.object({
-  id: z.number().required().max(12),
-  name: z.string().required(),
+  id: z.number().required().min(1).max(12),
+  name: z.string().required().min(3).max(3).length(3, { message: \\"Exact length required: 3\\" }),
   notes: z.lazy(() => UsersNotesSchema)
 });
 
 export const UsersNotesSchema = z.object({
-  id: z.number().required().max(2998),
-  text: z.string().required()
+  id: z.number().required().min(997).max(2998),
+  text: z.string().required().min(5).max(5).length(5, { message: \\"Exact length required: 5\\" })
 });
 
-
+export type Users = z.infer<typeof UsersSchema>;
+export type UsersNotes = z.infer<typeof UsersNotesSchema>;
 "
 `;

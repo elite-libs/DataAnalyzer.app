@@ -58,7 +58,7 @@ export const ${properCase(schemaName)}Schema = z.object({\n` +
                   camelCase(normalizedRefName).slice(1)
                 : undefined;
 
-            console.log(fieldName, fieldInfo.typeRef, refProperName, normalizedRefName);
+            // console.log(fieldName, fieldInfo.typeRef, refProperName, normalizedRefName);
 
             const {
               type,
