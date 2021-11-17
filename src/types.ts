@@ -45,7 +45,14 @@ export type TypeNameString =
 export type TypeNameStringComposite = 'String' | 'Email' | 'Array';
 
 export const TypeNameStringComposite = ['String', 'Email', 'Array'];
-export const TypeNameStringDecimal = ['Date', 'Timestamp', 'Currency', 'Float', 'Number', 'BigNumber'];
+export const TypeNameStringDecimal = [
+  'Date',
+  'Timestamp',
+  'Currency',
+  'Float',
+  'Number',
+  'BigNumber',
+];
 export type TypeNameStringDecimal =
   | 'Date'
   | 'Timestamp'
@@ -129,6 +136,7 @@ export type FieldInfo = {
 export type SimpleFieldInfo = {
   /** field stats organized by type */
   type: TypeNameString;
+  typeSummary: FieldTypeSummary;
   /** Should contain any $ref keys */
   typeRef?: string;
   typeRelationship?: 'one-to-one' | 'one-to-many';

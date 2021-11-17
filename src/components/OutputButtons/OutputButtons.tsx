@@ -9,6 +9,7 @@ import {
   KnexIcon,
   GoLangIcon,
   GetAppIcon,
+  ZodIcon,
 } from 'components/AppIcons';
 
 import { AdapterNames, render } from 'adapters/writers';
@@ -43,6 +44,7 @@ const outputOptions: OutputMode[] = [
   ['knex', 'Knex', 'typescript', <KnexIcon />],
   ['mongoose', 'Mongoose (MongoDB)', 'typescript', <MongoDbIcon />],
   ['sql', 'SQL "CREATE"', 'sql', <PostgresIcon />],
+  ['zod', 'Zod Schema', 'typescript', <ZodIcon />],
 ];
 
 type Props = {

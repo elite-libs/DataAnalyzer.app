@@ -3,6 +3,8 @@ import mongooseWriter from './writer.mongoose';
 import knexWriter from './writer.knex';
 import golangWriter from './writer.golang';
 import sqlWriter from './writer.sql';
+import zodWriter from './writer.zod';
+
 import pkg from '../../package.json';
 import type {
   ISchemaAnalyzerOptions,

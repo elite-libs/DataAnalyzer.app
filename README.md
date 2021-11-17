@@ -47,7 +47,8 @@ DataAnalyzer has 3 Powerful Features to Explore:
 - [x] Nested data structure & multi-table relational output.
 - [x] Browser-based (local, no server used.)
 - [x] Automatic type detection for:
-  - [x] ID - Identifier column, by name and unique Integer check (detects BigInteger)
+  - [x] ID - Identifier column, by name and unique Integer check
+  - [x] BigInt/BigNumber
   - [x] ObjectId (MongoDB's 96 bit/12 Byte ID. 32bit timestamp + 24bit MachineID + 16bit ProcessID + 24bit Counter)
   - [x] UUID/GUID (Common 128 bit/16 Byte ID. Stored as a hex string, dash delimited in parts: 8, 4, 4, 4, 12)
   - [x] Boolean (detects obvious strings `true`, `false`, `Y`, `N`)
@@ -55,11 +56,14 @@ DataAnalyzer has 3 Powerful Features to Explore:
   - [x] Timestamp (integer, number of milliseconds since unix epoch)
   - [x] Currency (62 currency symbols supported)
   - [x] Float (w/ scale & precision measurements)
-  - [x] Number (Integers)
+  - [x] Number
   - [x] Null (sparse column data helps w/ certain inferences)
   - [x] String (big text and variable character length awareness)
   - [x] Array (includes min/max/avg length)
   - [x] Object
+  - [ ] Url/String
+  - [ ] Latitude & Longitude (Coordinate pairs, GIS support)
+  - [ ] Phone number (international patterns? configuration?)
   - **Specialty Types**
   - [x] Email (falls back to string)
 - [x] Detects column size minimum, maximum and average
@@ -81,10 +85,6 @@ DataAnalyzer has 3 Powerful Features to Explore:
 **Bugs** by area/function
 
 - [ ] `Library.TypeMatcher('Timestamp')`: Aggregate calculations fail with only 1 match. Should fall back to the value.
-- [ ] `Mongoose.writer`: Nested types duplicate module imports.
-- [ ] `Mongoose.writer`: Nested types don't use actual nested table's PRIMARY KEY (the $ref Name.)
-- [ ] `Knex.writer`: Recursive nested table support (n-Depth.)
-- [ ] `SQL.writer`: Recursive nested table support (n-Depth.)
 - [ ] `SQL.writer`: Use actual nested table ID Column in FOREIGN KEY.
 - [ ] `SQL.writer`: Null/nullable fields emit correctly.
 
@@ -113,10 +113,6 @@ THEN
 
 **Type inference & detection**
 
-- [ ] BigInt/BigNumber
-- [ ] Url/String
-- [ ] Latitude & Longitude (Coordinate pairs, GIS support)
-- [ ] Phone number (international patterns? configuration?)
 - [ ] Range option for precise Timestamp detection.
 - [ ] Option to visit Hypermedia URLs to discover nested types?
 - [ ] Custom type matchers/regex patterns.
@@ -149,16 +145,15 @@ type NameUrl struct {
 - [ ] Add a "Schema Editor" table-like view to tune & view the results.
 - [ ] [Fix options & overall menu](https://material-ui.com/components/drawers/#mini-variant-drawer)
 - [ ] [Add App Bar](https://material-ui.com/components/app-bar/) for config, or use router, modal - anything to get away from z-index BS.
-- [ ] Make the Input and Output sections collapse/toggle-able.
-- [ ] Complete Web Worker for Background Processing.
-- [ ] Add confirmation for processing lots of data. (Rows and raw MB limit?)
+- [x] Complete Web Worker for Background Processing.
+- [x] Add confirmation for processing lots of data. (Rows and raw MB limit?)
 - [ ] Setup [plausible](https://plausible.io/docs/self-hosting) analytics.
 
 **Code Writers**
 
 - [ ] Add [TypeScript+Mongoose Support](http://thecodebarbarian.com/working-with-mongoose-in-typescript.html) (Possibly write all templates in TypeScript first, using `tsc` to emit JS code as needed?)
-- [ ] SQL `CREATE TABLE` - **Coming soon**
-- [ ] Code for Libraries like `Yup` or `Joi`
+- [x] SQL `CREATE TABLE`
+- [x] Added `Zod` support (like `Yup` or `Joi`)
 - [ ] JSON Schemas (for libraries like `ajv`)
 - [ ] Swagger yaml Reader/Writer
 - [ ] Binary Encoders (protocol buffers, thrift, avro)
@@ -186,6 +181,9 @@ The primary goal is to support any input JSON/CSV and infer as much as possible.
 - [x] Mongoose Schema definition - https://mongoosejs.com/
 - [x] Knex Migration scripts - https://knexjs.org
 - [x] TypeScript Types
+- [x] SQL Server (Postgres, mySql)
+- [x] GoLang Structs
+- [x] Zod Schema
 
 ## Tips & Notes
 
@@ -213,6 +211,7 @@ Some of these (`Email`) are aliases of a base type (`String`). See code for more
 - `Currency`
 - `Float`
 - `Number`
+- `BigNumber`
 - `Email`
 - `String`
 - `Array`
@@ -231,10 +230,11 @@ Some of these (`Email`) are aliases of a base type (`String`). See code for more
 [2]: https://github.com/justsml/DataAnalyzer.app/blob/main/src/components/SchemaTools/adapters/writer.knex.ts
 [3]: https://github.com/justsml/DataAnalyzer.app/blob/main/src/components/SchemaTools/adapters/writer.mongoose.ts
 
-##### Contribution Snippets
+<!-- ##### Contribution Snippets
 
 **Convert SVG to ICO**
 
 ```bash
 magick -density 256x256 -background transparent favicon.svg -define icon:auto-resize -colors 256 favicon.ico
-```
+
+``` -->

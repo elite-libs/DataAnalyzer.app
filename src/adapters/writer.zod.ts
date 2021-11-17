@@ -9,13 +9,13 @@ import { properCase, removeBlankLines } from 'helpers';
 import { KeyValPair } from 'types';
 import type { IDataAnalyzerWriter } from './writers';
 
-const getHeader = () => `const Joi = require("joi");\n\n`;
+const getHeader = () => `import { z } from "zod";\n\n`;
 
-const getJoiType = ({ type, ...data }: CombinedFieldInfo) => {
+const getZodType = ({ type, ...data }: CombinedFieldInfo) => {
   if (type === '$ref') return `object()`;
   if (type === 'Unknown') return `string()`;
   if (type === 'ObjectId') return `string()`;
-  if (type === 'UUID') return `string().guid())`;
+  if (type === 'UUID') return `string().uuid())`;
   if (type === 'Boolean') return `boolean()`;
   if (type === 'Date') return `date()`;
   if (type === 'Timestamp') return `date()`;
@@ -34,38 +34,52 @@ const getJoiType = ({ type, ...data }: CombinedFieldInfo) => {
 const writer: IDataAnalyzerWriter = {
   render(results) {
     const { options } = results;
+
     const typeSummary = results.flatTypeSummary;
     const hasNestedTypes =
       typeSummary.nestedTypes && Object.keys(typeSummary.nestedTypes!).length > 0;
     // const { fields } = typeSummary;
     const getSchema = (schemaName: string, fields: KeyValPair<CombinedFieldInfo>) => {
       return (
-        `export const ${properCase(schemaName)}Schema = Joi.object({\n` +
+        `\nexport const ${properCase(schemaName)}Schema = z.object({\n` +
         Object.entries(fields)
           .map(([fieldName, fieldInfo]) => {
+            const refProperName =
+              typeof fieldInfo.typeRef === 'string'
+                ? fieldInfo.typeRef![0]?.toUpperCase() +
+                  camelCase(fieldInfo.typeRef).slice(1)
+                : undefined;
+            // fieldInfo.typeSummary.value
             if (fieldInfo == null) return `// null field info !!!`;
-            return `  ${camelCase(fieldName)}: Joi.${getJoiType(fieldInfo)}
-${fieldInfo.nullable ? '' : '\n    .required()'}${
-              fieldInfo.value && TypeNameStringDecimal.includes(fieldInfo.type)
-                ? '\n    .max(' + (fieldInfo as NumericFieldInfo).value + ')'
+            if (fieldInfo.typeRef)
+              return `  ${camelCase(fieldName)}: z.lazy(() => ${refProperName}Schema)`;
+
+            return `  ${camelCase(fieldName)}: z.${getZodType(fieldInfo)}${
+              fieldInfo.nullable ? '' : '.required()'
+            }${
+              TypeNameStringDecimal.includes(fieldInfo.type) &&
+              typeof fieldInfo.typeSummary.value === 'object' &&
+              typeof fieldInfo.typeSummary.value.max === 'number'
+                ? '.max(' +
+                  (fieldInfo as NumericFieldInfo).typeSummary.value!['max'] +
+                  ')'
                 : ''
             }${
               fieldInfo.value && TypeNameStringDecimal.includes(fieldInfo.type)
-                ? '\n    .min(' + (fieldInfo as NumericFieldInfo).value + ')'
+                ? '.min(' + (fieldInfo as NumericFieldInfo).value + ')'
                 : ''
             }${
               fieldInfo.value && TypeNameStringComposite.includes(fieldInfo.type)
-                ? '\n    .length(' + fieldInfo.value + ')'
+                ? '.length(' + fieldInfo.value + ')'
                 : ''
             }${
               Array.isArray(fieldInfo.enum) && fieldInfo.enum.length > 0
-                ? '\n    .enum(["' + fieldInfo.enum.join('", "') + '"])'
+                ? '.enum(["' + fieldInfo.enum.join('", "') + '"])'
                 : ''
-            }
-  }\n`;
+            }`;
           })
           .join(',\n') +
-        `});\n`
+        `\n});\n`
       );
     };
 
@@ -83,7 +97,7 @@ ${fieldInfo.nullable ? '' : '\n    .required()'}${
     let code = moveModuleExports(
       getSchema(results.schemaName!, typeSummary.fields) + getRecursive(),
     );
-    return getHeader() + removeBlankLines(code);
+    return getHeader() + code;
   },
 };
 

@@ -234,9 +234,9 @@ export const DatabaseEditIcon = () => (
 export const ZodIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    fill-rule="evenodd"
-    stroke-miterlimit="5"
-    clip-rule="evenodd"
+    fillRule="evenodd"
+    strokeMiterlimit="5"
+    clipRule="evenodd"
     viewBox="0 0 1080 1080"
   >
     <path fill="#274d82" d="M334.61 662.1h406.94v64.29H334.61z" />
