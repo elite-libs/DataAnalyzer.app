@@ -11,7 +11,7 @@
     "url": "https://github.com/justsml/DataAnalyzer.app"
   },
   "engines": {
-    "node": "< 14"
+    "node": "<= 16"
   },
   "scripts": {
     "analyze": "npm run build && source-map-explorer 'build/static/js/*.js'",
