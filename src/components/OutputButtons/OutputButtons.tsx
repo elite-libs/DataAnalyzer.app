@@ -9,6 +9,7 @@ import {
   KnexIcon,
   GoLangIcon,
   GetAppIcon,
+  ZodIcon,
 } from 'components/AppIcons';
 
 import { AdapterNames, render } from 'adapters/writers';
@@ -43,6 +44,7 @@ const outputOptions: OutputMode[] = [
   ['knex', 'Knex', 'typescript', <KnexIcon />],
   ['mongoose', 'Mongoose (MongoDB)', 'typescript', <MongoDbIcon />],
   ['sql', 'SQL "CREATE"', 'sql', <PostgresIcon />],
+  ['zod', 'Zod Schema', 'typescript', <ZodIcon />],
 ];
 
 type Props = {
@@ -144,18 +146,20 @@ export const OutputButtons = ({ size = 'medium', className = '' }: Props) => {
         },
       );
     } catch (error) {
-      trackCustomEvent({
-        action: 'fail',
-        category: 'code.results',
-        value: error.message,
-      });
-      console.error(`Error: Couldn't process input data!`, error);
-      dispatch(setParserError(error.message));
-      dispatch(setSchema(null));
-      enqueueSnackbar(`Error: ${error.message}`, {
-        variant: 'error',
-        autoHideDuration: 6000,
-      });
+      if (error instanceof Error) {
+        trackCustomEvent({
+          action: 'fail',
+          category: 'code.results',
+          label: error.message,
+        });
+        console.error(`Error: Couldn't process input data!`, error);
+        dispatch(setParserError(error.message));
+        dispatch(setSchema(null));
+        enqueueSnackbar(`Error: ${error.message}`, {
+          variant: 'error',
+          autoHideDuration: 6000,
+        });
+      }
     }
     // console.timeEnd(`Processing:${adapter}`);
   }

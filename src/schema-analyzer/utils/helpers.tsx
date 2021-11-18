@@ -83,6 +83,7 @@ function _simplifyFieldInfo(
   // }
   // get the 'winning' type from sorted array
   let topType = arrayOfTypes[0]![0];
+  let topTypeInfo = arrayOfTypes[0]![1];
   let refTypeField = arrayOfTypes.slice(0).find((f) => f[0] === '$ref');
   let refFieldInfo = refTypeField ? refTypeField[1] : null;
 
@@ -111,6 +112,7 @@ function _simplifyFieldInfo(
 
   let result: CombinedFieldInfo = {
     type: topType as TypeNameString,
+    typeSummary: topTypeInfo!,
     typeRef: typeAliasRef,
     typeRelationship,
     identity: fieldInfo.identity || false,

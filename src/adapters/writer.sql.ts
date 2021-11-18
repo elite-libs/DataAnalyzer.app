@@ -1,7 +1,6 @@
 import snakecase from 'lodash.snakecase';
 import { CombinedFieldInfo } from 'types';
 import { IDataAnalyzerWriter } from './writers';
-// const log = debug('writer:knex');
 
 const BIG_INTEGER_MIN = BigInt('2147483647');
 
@@ -92,7 +91,7 @@ const writer: IDataAnalyzerWriter = {
             }) ${appendChain},`;
           }
           if (identity && type === 'Number') {
-            return `    ${name}    SERIAL ${appendChain},`;
+            return `    ${name}    BIGSERIAL ${appendChain},`;
           }
 
           // if (
@@ -115,7 +114,7 @@ const writer: IDataAnalyzerWriter = {
 
           if (typeRef)
             return `    ${name}  INT NOT NULL,
-            FOREIGN KEY (${name}) 
+            FOREIGN KEY (${name})
                 REFERENCES ${snakecase(typeRef)} (${snakecase(
               typeRef,
             )}_id), // TODO: Verify column names`;

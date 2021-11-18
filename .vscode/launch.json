@@ -5,6 +5,12 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "command": "npm start",
+      "name": "Run npm start",
+      "request": "launch",
+      "type": "node-terminal"
+    },
+    {
       "type": "node",
       "name": "jest-all-tests",
       "request": "launch",
@@ -26,7 +32,7 @@
         "--env=jsdom",
         "--runInBand",
         "--runTestsByPath",
-        "src/schema-analyzer/__tests__/nested-objects.test.tsx"
+        "src/adapters/writer.zod.test.ts"
       ],
       "cwd": "${workspaceFolder}",
       "console": "integratedTerminal",

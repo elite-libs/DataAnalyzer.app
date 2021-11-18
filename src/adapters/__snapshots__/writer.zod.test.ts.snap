@@ -1,0 +1,2091 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`#zod can emit migration for eventResults json 1`] = `
+"import { z } from \\"zod\\";
+
+
+export const EventResultsSchema = z.object({
+  links: z.lazy(() => EventResultsLinksSchema),
+  embedded: z.lazy(() => EventResultsEmbeddedSchema),
+  page: z.lazy(() => EventResultsPageSchema)
+});
+export const EventResultsLinksSchema = z.object({
+  self: z.lazy(() => EventResultsLinksSelfSchema),
+  next: z.lazy(() => EventResultsLinksNextSchema)
+});
+export const EventResultsEmbeddedSchema = z.object({
+  events: z.lazy(() => EventResultsEmbeddedEventsSchema)
+});
+export const EventResultsPageSchema = z.object({
+  size: z.number().required(),
+  totalElements: z.number().required(),
+  totalPages: z.number().required(),
+  number: z.number().required()
+});
+export const EventResultsLinksSelfSchema = z.object({
+  href: z.string().required(),
+  templated: z.boolean().required()
+});
+export const EventResultsLinksNextSchema = z.object({
+  href: z.string().required(),
+  templated: z.boolean().required()
+});
+export const EventResultsEmbeddedEventsSchema = z.object({
+  name: z.string().required(),
+  type: z.string().required(),
+  id: z.string().required(),
+  test: z.boolean().required(),
+  url: z.string().required(),
+  locale: z.string().required(),
+  images: z.lazy(() => EventResultsEmbeddedEventsImagesSchema),
+  sales: z.lazy(() => EventResultsEmbeddedEventsSalesSchema),
+  dates: z.lazy(() => EventResultsEmbeddedEventsDatesSchema),
+  classifications: z.lazy(() => EventResultsEmbeddedEventsClassificationsSchema),
+  promoter: z.lazy(() => EventResultsEmbeddedEventsPromoterSchema),
+  links: z.lazy(() => EventResultsEmbeddedEventsLinksSchema),
+  embedded: z.lazy(() => EventResultsEmbeddedEventsEmbeddedSchema)
+});
+export const EventResultsEmbeddedEventsImagesSchema = z.object({
+  ratio: z.string().required(),
+  url: z.string().required(),
+  width: z.number().required(),
+  height: z.number().required(),
+  fallback: z.boolean().required()
+});
+export const EventResultsEmbeddedEventsSalesSchema = z.object({
+  public: z.lazy(() => EventResultsEmbeddedEventsSalesPublicSchema)
+});
+export const EventResultsEmbeddedEventsDatesSchema = z.object({
+  start: z.lazy(() => EventResultsEmbeddedEventsDatesStartSchema),
+  timezone: z.string().required(),
+  status: z.lazy(() => EventResultsEmbeddedEventsDatesStatusSchema)
+});
+export const EventResultsEmbeddedEventsClassificationsSchema = z.object({
+  primary: z.boolean().required(),
+  segment: z.lazy(() => EventResultsEmbeddedEventsClassificationsSegmentSchema),
+  genre: z.lazy(() => EventResultsEmbeddedEventsClassificationsGenreSchema),
+  subGenre: z.lazy(() => EventResultsEmbeddedEventsClassificationsSubGenreSchema)
+});
+export const EventResultsEmbeddedEventsPromoterSchema = z.object({
+  id: z.number().required()
+});
+export const EventResultsEmbeddedEventsLinksSchema = z.object({
+  self: z.lazy(() => EventResultsEmbeddedEventsLinksSelfSchema),
+  attractions: z.lazy(() => EventResultsEmbeddedEventsLinksAttractionsSchema),
+  venues: z.lazy(() => EventResultsEmbeddedEventsLinksVenuesSchema)
+});
+export const EventResultsEmbeddedEventsEmbeddedSchema = z.object({
+  venues: z.lazy(() => EventResultsEmbeddedEventsEmbeddedVenuesSchema),
+  attractions: z.lazy(() => EventResultsEmbeddedEventsEmbeddedAttractionsSchema)
+});
+export const EventResultsEmbeddedEventsSalesPublicSchema = z.object({
+  startDateTime: z.date().required(),
+  startTbd: z.boolean().required(),
+  endDateTime: z.date().required()
+});
+export const EventResultsEmbeddedEventsDatesStartSchema = z.object({
+  localDate: z.date().required(),
+  dateTbd: z.boolean().required(),
+  dateTba: z.boolean().required(),
+  timeTba: z.boolean().required(),
+  noSpecificTime: z.boolean().required()
+});
+export const EventResultsEmbeddedEventsDatesStatusSchema = z.object({
+  code: z.string().required()
+});
+export const EventResultsEmbeddedEventsClassificationsSegmentSchema = z.object({
+  id: z.string().required(),
+  name: z.string().required()
+});
+export const EventResultsEmbeddedEventsClassificationsGenreSchema = z.object({
+  id: z.string().required(),
+  name: z.string().required()
+});
+export const EventResultsEmbeddedEventsClassificationsSubGenreSchema = z.object({
+  id: z.string().required(),
+  name: z.string().required()
+});
+export const EventResultsEmbeddedEventsLinksSelfSchema = z.object({
+  href: z.string().required()
+});
+export const EventResultsEmbeddedEventsLinksAttractionsSchema = z.object({
+  href: z.string().required()
+});
+export const EventResultsEmbeddedEventsLinksVenuesSchema = z.object({
+  href: z.string().required()
+});
+export const EventResultsEmbeddedEventsEmbeddedVenuesSchema = z.object({
+  name: z.string().required(),
+  type: z.string().required(),
+  id: z.string().required(),
+  test: z.boolean().required(),
+  locale: z.string().required(),
+  postalCode: z.number().required(),
+  timezone: z.string().required(),
+  city: z.lazy(() => EventResultsEmbeddedEventsEmbeddedVenuesCitySchema),
+  state: z.lazy(() => EventResultsEmbeddedEventsEmbeddedVenuesStateSchema),
+  country: z.lazy(() => EventResultsEmbeddedEventsEmbeddedVenuesCountrySchema),
+  address: z.lazy(() => EventResultsEmbeddedEventsEmbeddedVenuesAddressSchema),
+  location: z.lazy(() => EventResultsEmbeddedEventsEmbeddedVenuesLocationSchema),
+  markets: z.lazy(() => EventResultsEmbeddedEventsEmbeddedVenuesMarketsSchema),
+  links: z.lazy(() => EventResultsEmbeddedEventsEmbeddedVenuesLinksSchema)
+});
+export const EventResultsEmbeddedEventsEmbeddedAttractionsSchema = z.object({
+  name: z.string().required(),
+  type: z.string().required(),
+  id: z.string().required(),
+  test: z.boolean().required(),
+  locale: z.string().required(),
+  images: z.lazy(() => EventResultsEmbeddedEventsEmbeddedAttractionsImagesSchema),
+  classifications: z.lazy(() => EventResultsEmbeddedEventsEmbeddedAttractionsClassificationsSchema),
+  links: z.lazy(() => EventResultsEmbeddedEventsEmbeddedAttractionsLinksSchema)
+});
+export const EventResultsEmbeddedEventsEmbeddedVenuesCitySchema = z.object({
+  name: z.string().required()
+});
+export const EventResultsEmbeddedEventsEmbeddedVenuesStateSchema = z.object({
+  name: z.string().required(),
+  stateCode: z.string().required()
+});
+export const EventResultsEmbeddedEventsEmbeddedVenuesCountrySchema = z.object({
+  name: z.string().required(),
+  countryCode: z.string().required()
+});
+export const EventResultsEmbeddedEventsEmbeddedVenuesAddressSchema = z.object({
+  line1: z.string().required()
+});
+export const EventResultsEmbeddedEventsEmbeddedVenuesLocationSchema = z.object({
+  longitude: z.number().required(),
+  latitude: z.number().required()
+});
+export const EventResultsEmbeddedEventsEmbeddedVenuesMarketsSchema = z.object({
+  id: z.number().required()
+});
+export const EventResultsEmbeddedEventsEmbeddedVenuesLinksSchema = z.object({
+  self: z.lazy(() => EventResultsEmbeddedEventsEmbeddedVenuesLinksSelfSchema)
+});
+export const EventResultsEmbeddedEventsEmbeddedVenuesLinksSelfSchema = z.object({
+  href: z.string().required()
+});
+export const EventResultsEmbeddedEventsEmbeddedAttractionsImagesSchema = z.object({
+  ratio: z.string().required(),
+  url: z.string().required(),
+  width: z.number().required(),
+  height: z.number().required(),
+  fallback: z.boolean().required()
+});
+export const EventResultsEmbeddedEventsEmbeddedAttractionsClassificationsSchema = z.object({
+  primary: z.boolean().required(),
+  segment: z.lazy(() => EventResultsEmbeddedEventsEmbeddedAttractionsClassificationsSegmentSchema),
+  genre: z.lazy(() => EventResultsEmbeddedEventsEmbeddedAttractionsClassificationsGenreSchema),
+  subGenre: z.lazy(() => EventResultsEmbeddedEventsEmbeddedAttractionsClassificationsSubGenreSchema)
+});
+export const EventResultsEmbeddedEventsEmbeddedAttractionsLinksSchema = z.object({
+  self: z.lazy(() => EventResultsEmbeddedEventsEmbeddedAttractionsLinksSelfSchema)
+});
+export const EventResultsEmbeddedEventsEmbeddedAttractionsClassificationsSegmentSchema = z.object({
+  id: z.string().required(),
+  name: z.string().required()
+});
+export const EventResultsEmbeddedEventsEmbeddedAttractionsClassificationsGenreSchema = z.object({
+  id: z.string().required(),
+  name: z.string().required()
+});
+export const EventResultsEmbeddedEventsEmbeddedAttractionsClassificationsSubGenreSchema = z.object({
+  id: z.string().required(),
+  name: z.string().required()
+});
+export const EventResultsEmbeddedEventsEmbeddedAttractionsLinksSelfSchema = z.object({
+  href: z.string().required()
+});
+export type EventResults = z.infer<typeof EventResultsSchema>;
+export type EventResultsLinks = z.infer<typeof EventResultsLinksSchema>;
+export type EventResultsEmbedded = z.infer<typeof EventResultsEmbeddedSchema>;
+export type EventResultsPage = z.infer<typeof EventResultsPageSchema>;
+export type EventResultsLinksSelf = z.infer<typeof EventResultsLinksSelfSchema>;
+export type EventResultsLinksNext = z.infer<typeof EventResultsLinksNextSchema>;
+export type EventResultsEmbeddedEvents = z.infer<typeof EventResultsEmbeddedEventsSchema>;
+export type EventResultsEmbeddedEventsImages = z.infer<typeof EventResultsEmbeddedEventsImagesSchema>;
+export type EventResultsEmbeddedEventsSales = z.infer<typeof EventResultsEmbeddedEventsSalesSchema>;
+export type EventResultsEmbeddedEventsDates = z.infer<typeof EventResultsEmbeddedEventsDatesSchema>;
+export type EventResultsEmbeddedEventsClassifications = z.infer<typeof EventResultsEmbeddedEventsClassificationsSchema>;
+export type EventResultsEmbeddedEventsPromoter = z.infer<typeof EventResultsEmbeddedEventsPromoterSchema>;
+export type EventResultsEmbeddedEventsLinks = z.infer<typeof EventResultsEmbeddedEventsLinksSchema>;
+export type EventResultsEmbeddedEventsEmbedded = z.infer<typeof EventResultsEmbeddedEventsEmbeddedSchema>;
+export type EventResultsEmbeddedEventsSalesPublic = z.infer<typeof EventResultsEmbeddedEventsSalesPublicSchema>;
+export type EventResultsEmbeddedEventsDatesStart = z.infer<typeof EventResultsEmbeddedEventsDatesStartSchema>;
+export type EventResultsEmbeddedEventsDatesStatus = z.infer<typeof EventResultsEmbeddedEventsDatesStatusSchema>;
+export type EventResultsEmbeddedEventsClassificationsSegment = z.infer<typeof EventResultsEmbeddedEventsClassificationsSegmentSchema>;
+export type EventResultsEmbeddedEventsClassificationsGenre = z.infer<typeof EventResultsEmbeddedEventsClassificationsGenreSchema>;
+export type EventResultsEmbeddedEventsClassificationsSubGenre = z.infer<typeof EventResultsEmbeddedEventsClassificationsSubGenreSchema>;
+export type EventResultsEmbeddedEventsLinksSelf = z.infer<typeof EventResultsEmbeddedEventsLinksSelfSchema>;
+export type EventResultsEmbeddedEventsLinksAttractions = z.infer<typeof EventResultsEmbeddedEventsLinksAttractionsSchema>;
+export type EventResultsEmbeddedEventsLinksVenues = z.infer<typeof EventResultsEmbeddedEventsLinksVenuesSchema>;
+export type EventResultsEmbeddedEventsEmbeddedVenues = z.infer<typeof EventResultsEmbeddedEventsEmbeddedVenuesSchema>;
+export type EventResultsEmbeddedEventsEmbeddedAttractions = z.infer<typeof EventResultsEmbeddedEventsEmbeddedAttractionsSchema>;
+export type EventResultsEmbeddedEventsEmbeddedVenuesCity = z.infer<typeof EventResultsEmbeddedEventsEmbeddedVenuesCitySchema>;
+export type EventResultsEmbeddedEventsEmbeddedVenuesState = z.infer<typeof EventResultsEmbeddedEventsEmbeddedVenuesStateSchema>;
+export type EventResultsEmbeddedEventsEmbeddedVenuesCountry = z.infer<typeof EventResultsEmbeddedEventsEmbeddedVenuesCountrySchema>;
+export type EventResultsEmbeddedEventsEmbeddedVenuesAddress = z.infer<typeof EventResultsEmbeddedEventsEmbeddedVenuesAddressSchema>;
+export type EventResultsEmbeddedEventsEmbeddedVenuesLocation = z.infer<typeof EventResultsEmbeddedEventsEmbeddedVenuesLocationSchema>;
+export type EventResultsEmbeddedEventsEmbeddedVenuesMarkets = z.infer<typeof EventResultsEmbeddedEventsEmbeddedVenuesMarketsSchema>;
+export type EventResultsEmbeddedEventsEmbeddedVenuesLinks = z.infer<typeof EventResultsEmbeddedEventsEmbeddedVenuesLinksSchema>;
+export type EventResultsEmbeddedEventsEmbeddedVenuesLinksSelf = z.infer<typeof EventResultsEmbeddedEventsEmbeddedVenuesLinksSelfSchema>;
+export type EventResultsEmbeddedEventsEmbeddedAttractionsImages = z.infer<typeof EventResultsEmbeddedEventsEmbeddedAttractionsImagesSchema>;
+export type EventResultsEmbeddedEventsEmbeddedAttractionsClassifications = z.infer<typeof EventResultsEmbeddedEventsEmbeddedAttractionsClassificationsSchema>;
+export type EventResultsEmbeddedEventsEmbeddedAttractionsLinks = z.infer<typeof EventResultsEmbeddedEventsEmbeddedAttractionsLinksSchema>;
+export type EventResultsEmbeddedEventsEmbeddedAttractionsClassificationsSegment = z.infer<typeof EventResultsEmbeddedEventsEmbeddedAttractionsClassificationsSegmentSchema>;
+export type EventResultsEmbeddedEventsEmbeddedAttractionsClassificationsGenre = z.infer<typeof EventResultsEmbeddedEventsEmbeddedAttractionsClassificationsGenreSchema>;
+export type EventResultsEmbeddedEventsEmbeddedAttractionsClassificationsSubGenre = z.infer<typeof EventResultsEmbeddedEventsEmbeddedAttractionsClassificationsSubGenreSchema>;
+export type EventResultsEmbeddedEventsEmbeddedAttractionsLinksSelf = z.infer<typeof EventResultsEmbeddedEventsEmbeddedAttractionsLinksSelfSchema>;
+"
+`;
+
+exports[`#zod can emit migration for eventResults json, w/ dense & trim fields 1`] = `
+"import { z } from \\"zod\\";
+
+
+export const EventResultsSchema = z.object({
+  links: z.lazy(() => LinksSchema),
+  embedded: z.lazy(() => EmbeddedSchema),
+  page: z.lazy(() => PageSchema)
+});
+export const LinksSchema = z.object({
+  self: z.lazy(() => SelfSchema)
+});
+export const EmbeddedSchema = z.object({
+  venues: z.lazy(() => VenuesSchema),
+  attractions: z.lazy(() => AttractionsSchema)
+});
+export const PageSchema = z.object({
+  size: z.number().required(),
+  totalElements: z.number().required(),
+  totalPages: z.number().required(),
+  number: z.number().required()
+});
+export const SelfSchema = z.object({
+  href: z.string().required()
+});
+export const NextSchema = z.object({
+  href: z.string().required(),
+  templated: z.boolean().required()
+});
+export const EventsSchema = z.object({
+  name: z.string().required(),
+  type: z.string().required(),
+  id: z.string().required(),
+  test: z.boolean().required(),
+  url: z.string().required(),
+  locale: z.string().required(),
+  images: z.lazy(() => ImagesSchema),
+  sales: z.lazy(() => SalesSchema),
+  dates: z.lazy(() => DatesSchema),
+  classifications: z.lazy(() => ClassificationsSchema),
+  promoter: z.lazy(() => PromoterSchema),
+  links: z.lazy(() => LinksSchema),
+  embedded: z.lazy(() => EmbeddedSchema)
+});
+export const ImagesSchema = z.object({
+  ratio: z.string().required(),
+  url: z.string().required(),
+  width: z.number().required(),
+  height: z.number().required(),
+  fallback: z.boolean().required()
+});
+export const SalesSchema = z.object({
+  public: z.lazy(() => PublicSchema)
+});
+export const DatesSchema = z.object({
+  start: z.lazy(() => StartSchema),
+  timezone: z.string().required(),
+  status: z.lazy(() => StatusSchema)
+});
+export const ClassificationsSchema = z.object({
+  primary: z.boolean().required(),
+  segment: z.lazy(() => IdNameSchema),
+  genre: z.lazy(() => IdNameSchema),
+  subGenre: z.lazy(() => IdNameSchema)
+});
+export const PromoterSchema = z.object({
+  id: z.number().required()
+});
+export const PublicSchema = z.object({
+  startDateTime: z.date().required(),
+  startTbd: z.boolean().required(),
+  endDateTime: z.date().required()
+});
+export const StartSchema = z.object({
+  localDate: z.date().required(),
+  dateTbd: z.boolean().required(),
+  dateTba: z.boolean().required(),
+  timeTba: z.boolean().required(),
+  noSpecificTime: z.boolean().required()
+});
+export const StatusSchema = z.object({
+  code: z.string().required()
+});
+export const AttractionsSchema = z.object({
+  name: z.string().required(),
+  type: z.string().required(),
+  id: z.string().required(),
+  test: z.boolean().required(),
+  locale: z.string().required(),
+  images: z.lazy(() => ImagesSchema),
+  classifications: z.lazy(() => ClassificationsSchema),
+  links: z.lazy(() => LinksSchema)
+});
+export const VenuesSchema = z.object({
+  name: z.string().required(),
+  type: z.string().required(),
+  id: z.string().required(),
+  test: z.boolean().required(),
+  locale: z.string().required(),
+  postalCode: z.number().required(),
+  timezone: z.string().required(),
+  city: z.lazy(() => CitySchema),
+  state: z.lazy(() => StateSchema),
+  country: z.lazy(() => CountrySchema),
+  address: z.lazy(() => AddressSchema),
+  location: z.lazy(() => LocationSchema),
+  markets: z.lazy(() => MarketsSchema),
+  links: z.lazy(() => LinksSchema)
+});
+export const CitySchema = z.object({
+  name: z.string().required()
+});
+export const StateSchema = z.object({
+  name: z.string().required(),
+  stateCode: z.string().required()
+});
+export const CountrySchema = z.object({
+  name: z.string().required(),
+  countryCode: z.string().required()
+});
+export const AddressSchema = z.object({
+  line1: z.string().required()
+});
+export const LocationSchema = z.object({
+  longitude: z.number().required(),
+  latitude: z.number().required()
+});
+export const MarketsSchema = z.object({
+  id: z.number().required()
+});
+export const IdNameSchema = z.object({
+  id: z.string().required(),
+  name: z.string().required()
+});
+export type EventResults = z.infer<typeof EventResultsSchema>;
+export type Links = z.infer<typeof LinksSchema>;
+export type Embedded = z.infer<typeof EmbeddedSchema>;
+export type Page = z.infer<typeof PageSchema>;
+export type Self = z.infer<typeof SelfSchema>;
+export type Next = z.infer<typeof NextSchema>;
+export type Events = z.infer<typeof EventsSchema>;
+export type Images = z.infer<typeof ImagesSchema>;
+export type Sales = z.infer<typeof SalesSchema>;
+export type Dates = z.infer<typeof DatesSchema>;
+export type Classifications = z.infer<typeof ClassificationsSchema>;
+export type Promoter = z.infer<typeof PromoterSchema>;
+export type Public = z.infer<typeof PublicSchema>;
+export type Start = z.infer<typeof StartSchema>;
+export type Status = z.infer<typeof StatusSchema>;
+export type Attractions = z.infer<typeof AttractionsSchema>;
+export type Venues = z.infer<typeof VenuesSchema>;
+export type City = z.infer<typeof CitySchema>;
+export type State = z.infer<typeof StateSchema>;
+export type Country = z.infer<typeof CountrySchema>;
+export type Address = z.infer<typeof AddressSchema>;
+export type Location = z.infer<typeof LocationSchema>;
+export type Markets = z.infer<typeof MarketsSchema>;
+export type IdName = z.infer<typeof IdNameSchema>;
+"
+`;
+
+exports[`#zod can emit migration for eventResults json, w/ dense fields 1`] = `
+"import { z } from \\"zod\\";
+
+
+export const EventResultsSchema = z.object({
+  links: z.lazy(() => EventResultsLinksSchema),
+  embedded: z.lazy(() => EventResultsEmbeddedSchema),
+  page: z.lazy(() => EventResultsPageSchema)
+});
+export const EventResultsLinksSchema = z.object({
+  self: z.lazy(() => HrefTemplatedSchema),
+  next: z.lazy(() => HrefTemplatedSchema)
+});
+export const EventResultsEmbeddedSchema = z.object({
+  events: z.lazy(() => EventResultsEmbeddedEventsSchema)
+});
+export const EventResultsPageSchema = z.object({
+  size: z.number().required(),
+  totalElements: z.number().required(),
+  totalPages: z.number().required(),
+  number: z.number().required()
+});
+export const EventResultsEmbeddedEventsSchema = z.object({
+  name: z.string().required(),
+  type: z.string().required(),
+  id: z.string().required(),
+  test: z.boolean().required(),
+  url: z.string().required(),
+  locale: z.string().required(),
+  images: z.lazy(() => ImagesSchema),
+  sales: z.lazy(() => EventResultsEmbeddedEventsSalesSchema),
+  dates: z.lazy(() => EventResultsEmbeddedEventsDatesSchema),
+  classifications: z.lazy(() => ClassificationsSchema),
+  promoter: z.lazy(() => EventResultsEmbeddedEventsPromoterSchema),
+  links: z.lazy(() => EventResultsEmbeddedEventsLinksSchema),
+  embedded: z.lazy(() => EventResultsEmbeddedEventsEmbeddedSchema)
+});
+export const EventResultsEmbeddedEventsSalesSchema = z.object({
+  public: z.lazy(() => EventResultsEmbeddedEventsSalesPublicSchema)
+});
+export const EventResultsEmbeddedEventsDatesSchema = z.object({
+  start: z.lazy(() => EventResultsEmbeddedEventsDatesStartSchema),
+  timezone: z.string().required(),
+  status: z.lazy(() => EventResultsEmbeddedEventsDatesStatusSchema)
+});
+export const EventResultsEmbeddedEventsPromoterSchema = z.object({
+  id: z.number().required()
+});
+export const EventResultsEmbeddedEventsLinksSchema = z.object({
+  self: z.lazy(() => HrefSchema),
+  attractions: z.lazy(() => HrefSchema),
+  venues: z.lazy(() => HrefSchema)
+});
+export const EventResultsEmbeddedEventsEmbeddedSchema = z.object({
+  venues: z.lazy(() => EventResultsEmbeddedEventsEmbeddedVenuesSchema),
+  attractions: z.lazy(() => EventResultsEmbeddedEventsEmbeddedAttractionsSchema)
+});
+export const EventResultsEmbeddedEventsSalesPublicSchema = z.object({
+  startDateTime: z.date().required(),
+  startTbd: z.boolean().required(),
+  endDateTime: z.date().required()
+});
+export const EventResultsEmbeddedEventsDatesStartSchema = z.object({
+  localDate: z.date().required(),
+  dateTbd: z.boolean().required(),
+  dateTba: z.boolean().required(),
+  timeTba: z.boolean().required(),
+  noSpecificTime: z.boolean().required()
+});
+export const EventResultsEmbeddedEventsDatesStatusSchema = z.object({
+  code: z.string().required()
+});
+export const EventResultsEmbeddedEventsEmbeddedVenuesSchema = z.object({
+  name: z.string().required(),
+  type: z.string().required(),
+  id: z.string().required(),
+  test: z.boolean().required(),
+  locale: z.string().required(),
+  postalCode: z.number().required(),
+  timezone: z.string().required(),
+  city: z.lazy(() => EventResultsEmbeddedEventsEmbeddedVenuesCitySchema),
+  state: z.lazy(() => EventResultsEmbeddedEventsEmbeddedVenuesStateSchema),
+  country: z.lazy(() => EventResultsEmbeddedEventsEmbeddedVenuesCountrySchema),
+  address: z.lazy(() => EventResultsEmbeddedEventsEmbeddedVenuesAddressSchema),
+  location: z.lazy(() => EventResultsEmbeddedEventsEmbeddedVenuesLocationSchema),
+  markets: z.lazy(() => EventResultsEmbeddedEventsEmbeddedVenuesMarketsSchema),
+  links: z.lazy(() => LinksSchema)
+});
+export const EventResultsEmbeddedEventsEmbeddedAttractionsSchema = z.object({
+  name: z.string().required(),
+  type: z.string().required(),
+  id: z.string().required(),
+  test: z.boolean().required(),
+  locale: z.string().required(),
+  images: z.lazy(() => ImagesSchema),
+  classifications: z.lazy(() => ClassificationsSchema),
+  links: z.lazy(() => LinksSchema)
+});
+export const EventResultsEmbeddedEventsEmbeddedVenuesCitySchema = z.object({
+  name: z.string().required()
+});
+export const EventResultsEmbeddedEventsEmbeddedVenuesStateSchema = z.object({
+  name: z.string().required(),
+  stateCode: z.string().required()
+});
+export const EventResultsEmbeddedEventsEmbeddedVenuesCountrySchema = z.object({
+  name: z.string().required(),
+  countryCode: z.string().required()
+});
+export const EventResultsEmbeddedEventsEmbeddedVenuesAddressSchema = z.object({
+  line1: z.string().required()
+});
+export const EventResultsEmbeddedEventsEmbeddedVenuesLocationSchema = z.object({
+  longitude: z.number().required(),
+  latitude: z.number().required()
+});
+export const EventResultsEmbeddedEventsEmbeddedVenuesMarketsSchema = z.object({
+  id: z.number().required()
+});
+export const HrefTemplatedSchema = z.object({
+  href: z.string().required(),
+  templated: z.boolean().required()
+});
+export const ImagesSchema = z.object({
+  ratio: z.string().required(),
+  url: z.string().required(),
+  width: z.number().required(),
+  height: z.number().required(),
+  fallback: z.boolean().required()
+});
+export const ClassificationsSchema = z.object({
+  primary: z.boolean().required(),
+  segment: z.lazy(() => IdNameSchema),
+  genre: z.lazy(() => IdNameSchema),
+  subGenre: z.lazy(() => IdNameSchema)
+});
+export const IdNameSchema = z.object({
+  id: z.string().required(),
+  name: z.string().required()
+});
+export const HrefSchema = z.object({
+  href: z.string().required()
+});
+export const LinksSchema = z.object({
+  self: z.lazy(() => HrefSchema)
+});
+export type EventResults = z.infer<typeof EventResultsSchema>;
+export type EventResultsLinks = z.infer<typeof EventResultsLinksSchema>;
+export type EventResultsEmbedded = z.infer<typeof EventResultsEmbeddedSchema>;
+export type EventResultsPage = z.infer<typeof EventResultsPageSchema>;
+export type EventResultsEmbeddedEvents = z.infer<typeof EventResultsEmbeddedEventsSchema>;
+export type EventResultsEmbeddedEventsSales = z.infer<typeof EventResultsEmbeddedEventsSalesSchema>;
+export type EventResultsEmbeddedEventsDates = z.infer<typeof EventResultsEmbeddedEventsDatesSchema>;
+export type EventResultsEmbeddedEventsPromoter = z.infer<typeof EventResultsEmbeddedEventsPromoterSchema>;
+export type EventResultsEmbeddedEventsLinks = z.infer<typeof EventResultsEmbeddedEventsLinksSchema>;
+export type EventResultsEmbeddedEventsEmbedded = z.infer<typeof EventResultsEmbeddedEventsEmbeddedSchema>;
+export type EventResultsEmbeddedEventsSalesPublic = z.infer<typeof EventResultsEmbeddedEventsSalesPublicSchema>;
+export type EventResultsEmbeddedEventsDatesStart = z.infer<typeof EventResultsEmbeddedEventsDatesStartSchema>;
+export type EventResultsEmbeddedEventsDatesStatus = z.infer<typeof EventResultsEmbeddedEventsDatesStatusSchema>;
+export type EventResultsEmbeddedEventsEmbeddedVenues = z.infer<typeof EventResultsEmbeddedEventsEmbeddedVenuesSchema>;
+export type EventResultsEmbeddedEventsEmbeddedAttractions = z.infer<typeof EventResultsEmbeddedEventsEmbeddedAttractionsSchema>;
+export type EventResultsEmbeddedEventsEmbeddedVenuesCity = z.infer<typeof EventResultsEmbeddedEventsEmbeddedVenuesCitySchema>;
+export type EventResultsEmbeddedEventsEmbeddedVenuesState = z.infer<typeof EventResultsEmbeddedEventsEmbeddedVenuesStateSchema>;
+export type EventResultsEmbeddedEventsEmbeddedVenuesCountry = z.infer<typeof EventResultsEmbeddedEventsEmbeddedVenuesCountrySchema>;
+export type EventResultsEmbeddedEventsEmbeddedVenuesAddress = z.infer<typeof EventResultsEmbeddedEventsEmbeddedVenuesAddressSchema>;
+export type EventResultsEmbeddedEventsEmbeddedVenuesLocation = z.infer<typeof EventResultsEmbeddedEventsEmbeddedVenuesLocationSchema>;
+export type EventResultsEmbeddedEventsEmbeddedVenuesMarkets = z.infer<typeof EventResultsEmbeddedEventsEmbeddedVenuesMarketsSchema>;
+export type HrefTemplated = z.infer<typeof HrefTemplatedSchema>;
+export type Images = z.infer<typeof ImagesSchema>;
+export type Classifications = z.infer<typeof ClassificationsSchema>;
+export type IdName = z.infer<typeof IdNameSchema>;
+export type Href = z.infer<typeof HrefSchema>;
+export type Links = z.infer<typeof LinksSchema>;
+"
+`;
+
+exports[`#zod can emit migration for pokemon json 1`] = `
+"import { z } from \\"zod\\";
+
+
+export const PokemonSchema = z.object({
+  abilities: z.lazy(() => PokemonAbilitiesSchema),
+  baseExperience: z.number().required(),
+  forms: z.lazy(() => PokemonFormsSchema),
+  gameIndices: z.lazy(() => PokemonGameIndicesSchema),
+  height: z.number().required(),
+  heldItems: z.array().required(),
+  id: z.number().required(),
+  isDefault: z.boolean().required(),
+  locationAreaEncounters: z.string().required(),
+  moves: z.lazy(() => PokemonMovesSchema),
+  name: z.string().required(),
+  order: z.number().required(),
+  species: z.lazy(() => PokemonSpeciesSchema),
+  sprites: z.lazy(() => PokemonSpritesSchema),
+  stats: z.lazy(() => PokemonStatsSchema),
+  types: z.lazy(() => PokemonTypesSchema),
+  weight: z.number().required()
+});
+export const PokemonAbilitiesSchema = z.object({
+  ability: z.lazy(() => PokemonAbilitiesAbilitySchema),
+  isHidden: z.boolean().required(),
+  slot: z.number().required()
+});
+export const PokemonFormsSchema = z.object({
+  name: z.string().required(),
+  url: z.string().required()
+});
+export const PokemonGameIndicesSchema = z.object({
+  gameIndex: z.number().required(),
+  version: z.lazy(() => PokemonGameIndicesVersionSchema)
+});
+export const PokemonMovesSchema = z.object({
+  move: z.lazy(() => PokemonMovesMoveSchema),
+  versionGroupDetails: z.lazy(() => PokemonMovesVersionGroupDetailsSchema)
+});
+export const PokemonSpeciesSchema = z.object({
+  name: z.string().required(),
+  url: z.string().required()
+});
+export const PokemonSpritesSchema = z.object({
+  backDefault: z.string().required(),
+  backFemale: z.any().required(),
+  backShiny: z.string().required(),
+  backShinyFemale: z.any().required(),
+  frontDefault: z.string().required(),
+  frontFemale: z.any().required(),
+  frontShiny: z.string().required(),
+  frontShinyFemale: z.any().required(),
+  other: z.lazy(() => PokemonSpritesOtherSchema),
+  versions: z.lazy(() => PokemonSpritesVersionsSchema)
+});
+export const PokemonStatsSchema = z.object({
+  baseStat: z.number().required(),
+  effort: z.number().required(),
+  stat: z.lazy(() => PokemonStatsStatSchema)
+});
+export const PokemonTypesSchema = z.object({
+  slot: z.number().required(),
+  type: z.lazy(() => PokemonTypesTypeSchema)
+});
+export const PokemonAbilitiesAbilitySchema = z.object({
+  name: z.string().required(),
+  url: z.string().required()
+});
+export const PokemonGameIndicesVersionSchema = z.object({
+  name: z.string().required(),
+  url: z.string().required()
+});
+export const PokemonMovesMoveSchema = z.object({
+  name: z.string().required(),
+  url: z.string().required()
+});
+export const PokemonMovesVersionGroupDetailsSchema = z.object({
+  levelLearnedAt: z.number().required(),
+  moveLearnMethod: z.lazy(() => PokemonMovesVersionGroupDetailsMoveLearnMethodSchema),
+  versionGroup: z.lazy(() => PokemonMovesVersionGroupDetailsVersionGroupSchema)
+});
+export const PokemonMovesVersionGroupDetailsMoveLearnMethodSchema = z.object({
+  name: z.string().required().enum([\\"machine\\", \\"tutor\\", \\"level-up\\", \\"egg\\"]),
+  url: z.string().required().enum([\\"https://pokeapi.co/api/v2/move-learn-method/4/\\", \\"https://pokeapi.co/api/v2/move-learn-method/3/\\", \\"https://pokeapi.co/api/v2/move-learn-method/1/\\", \\"https://pokeapi.co/api/v2/move-learn-method/2/\\"])
+});
+export const PokemonMovesVersionGroupDetailsVersionGroupSchema = z.object({
+  name: z.string().required(),
+  url: z.string().required()
+});
+export const PokemonSpritesOtherSchema = z.object({
+  dreamWorld: z.lazy(() => PokemonSpritesOtherDreamWorldSchema),
+  officialArtwork: z.lazy(() => PokemonSpritesOtherOfficialArtworkSchema)
+});
+export const PokemonSpritesVersionsSchema = z.object({
+  generationI: z.lazy(() => PokemonSpritesVersionsGenerationISchema),
+  generationIi: z.lazy(() => PokemonSpritesVersionsGenerationIiSchema),
+  generationIii: z.lazy(() => PokemonSpritesVersionsGenerationIiiSchema),
+  generationIv: z.lazy(() => PokemonSpritesVersionsGenerationIvSchema),
+  generationV: z.lazy(() => PokemonSpritesVersionsGenerationVSchema),
+  generationVi: z.lazy(() => PokemonSpritesVersionsGenerationViSchema),
+  generationVii: z.lazy(() => PokemonSpritesVersionsGenerationViiSchema),
+  generationViii: z.lazy(() => PokemonSpritesVersionsGenerationViiiSchema)
+});
+export const PokemonSpritesOtherDreamWorldSchema = z.object({
+  frontDefault: z.string().required(),
+  frontFemale: z.any().required()
+});
+export const PokemonSpritesOtherOfficialArtworkSchema = z.object({
+  frontDefault: z.string().required()
+});
+export const PokemonSpritesVersionsGenerationISchema = z.object({
+  redBlue: z.lazy(() => PokemonSpritesVersionsGenerationIRedBlueSchema),
+  yellow: z.lazy(() => PokemonSpritesVersionsGenerationIYellowSchema)
+});
+export const PokemonSpritesVersionsGenerationIiSchema = z.object({
+  crystal: z.lazy(() => PokemonSpritesVersionsGenerationIiCrystalSchema),
+  gold: z.lazy(() => PokemonSpritesVersionsGenerationIiGoldSchema),
+  silver: z.lazy(() => PokemonSpritesVersionsGenerationIiSilverSchema)
+});
+export const PokemonSpritesVersionsGenerationIiiSchema = z.object({
+  emerald: z.lazy(() => PokemonSpritesVersionsGenerationIiiEmeraldSchema),
+  fireredLeafgreen: z.lazy(() => PokemonSpritesVersionsGenerationIiiFireredLeafgreenSchema),
+  rubySapphire: z.lazy(() => PokemonSpritesVersionsGenerationIiiRubySapphireSchema)
+});
+export const PokemonSpritesVersionsGenerationIvSchema = z.object({
+  diamondPearl: z.lazy(() => PokemonSpritesVersionsGenerationIvDiamondPearlSchema),
+  heartgoldSoulsilver: z.lazy(() => PokemonSpritesVersionsGenerationIvHeartgoldSoulsilverSchema),
+  platinum: z.lazy(() => PokemonSpritesVersionsGenerationIvPlatinumSchema)
+});
+export const PokemonSpritesVersionsGenerationVSchema = z.object({
+  blackWhite: z.lazy(() => PokemonSpritesVersionsGenerationVBlackWhiteSchema)
+});
+export const PokemonSpritesVersionsGenerationViSchema = z.object({
+  omegarubyAlphasapphire: z.lazy(() => PokemonSpritesVersionsGenerationViOmegarubyAlphasapphireSchema),
+  xY: z.lazy(() => PokemonSpritesVersionsGenerationViXYSchema)
+});
+export const PokemonSpritesVersionsGenerationViiSchema = z.object({
+  icons: z.lazy(() => PokemonSpritesVersionsGenerationViiIconsSchema),
+  ultraSunUltraMoon: z.lazy(() => PokemonSpritesVersionsGenerationViiUltraSunUltraMoonSchema)
+});
+export const PokemonSpritesVersionsGenerationViiiSchema = z.object({
+  icons: z.lazy(() => PokemonSpritesVersionsGenerationViiiIconsSchema)
+});
+export const PokemonSpritesVersionsGenerationIRedBlueSchema = z.object({
+  backDefault: z.string().required(),
+  backGray: z.string().required(),
+  frontDefault: z.string().required(),
+  frontGray: z.string().required()
+});
+export const PokemonSpritesVersionsGenerationIYellowSchema = z.object({
+  backDefault: z.string().required(),
+  backGray: z.string().required(),
+  frontDefault: z.string().required(),
+  frontGray: z.string().required()
+});
+export const PokemonSpritesVersionsGenerationIiCrystalSchema = z.object({
+  backDefault: z.string().required(),
+  backShiny: z.string().required(),
+  frontDefault: z.string().required(),
+  frontShiny: z.string().required()
+});
+export const PokemonSpritesVersionsGenerationIiGoldSchema = z.object({
+  backDefault: z.string().required(),
+  backShiny: z.string().required(),
+  frontDefault: z.string().required(),
+  frontShiny: z.string().required()
+});
+export const PokemonSpritesVersionsGenerationIiSilverSchema = z.object({
+  backDefault: z.string().required(),
+  backShiny: z.string().required(),
+  frontDefault: z.string().required(),
+  frontShiny: z.string().required()
+});
+export const PokemonSpritesVersionsGenerationIiiEmeraldSchema = z.object({
+  frontDefault: z.string().required(),
+  frontShiny: z.string().required()
+});
+export const PokemonSpritesVersionsGenerationIiiFireredLeafgreenSchema = z.object({
+  backDefault: z.string().required(),
+  backShiny: z.string().required(),
+  frontDefault: z.string().required(),
+  frontShiny: z.string().required()
+});
+export const PokemonSpritesVersionsGenerationIiiRubySapphireSchema = z.object({
+  backDefault: z.string().required(),
+  backShiny: z.string().required(),
+  frontDefault: z.string().required(),
+  frontShiny: z.string().required()
+});
+export const PokemonSpritesVersionsGenerationIvDiamondPearlSchema = z.object({
+  backDefault: z.string().required(),
+  backFemale: z.any().required(),
+  backShiny: z.string().required(),
+  backShinyFemale: z.any().required(),
+  frontDefault: z.string().required(),
+  frontFemale: z.any().required(),
+  frontShiny: z.string().required(),
+  frontShinyFemale: z.any().required()
+});
+export const PokemonSpritesVersionsGenerationIvHeartgoldSoulsilverSchema = z.object({
+  backDefault: z.string().required(),
+  backFemale: z.any().required(),
+  backShiny: z.string().required(),
+  backShinyFemale: z.any().required(),
+  frontDefault: z.string().required(),
+  frontFemale: z.any().required(),
+  frontShiny: z.string().required(),
+  frontShinyFemale: z.any().required()
+});
+export const PokemonSpritesVersionsGenerationIvPlatinumSchema = z.object({
+  backDefault: z.string().required(),
+  backFemale: z.any().required(),
+  backShiny: z.string().required(),
+  backShinyFemale: z.any().required(),
+  frontDefault: z.string().required(),
+  frontFemale: z.any().required(),
+  frontShiny: z.string().required(),
+  frontShinyFemale: z.any().required()
+});
+export const PokemonSpritesVersionsGenerationVBlackWhiteSchema = z.object({
+  animated: z.lazy(() => PokemonSpritesVersionsGenerationVBlackWhiteAnimatedSchema),
+  backDefault: z.string().required(),
+  backFemale: z.any().required(),
+  backShiny: z.string().required(),
+  backShinyFemale: z.any().required(),
+  frontDefault: z.string().required(),
+  frontFemale: z.any().required(),
+  frontShiny: z.string().required(),
+  frontShinyFemale: z.any().required()
+});
+export const PokemonSpritesVersionsGenerationVBlackWhiteAnimatedSchema = z.object({
+  backDefault: z.string().required(),
+  backFemale: z.any().required(),
+  backShiny: z.string().required(),
+  backShinyFemale: z.any().required(),
+  frontDefault: z.string().required(),
+  frontFemale: z.any().required(),
+  frontShiny: z.string().required(),
+  frontShinyFemale: z.any().required()
+});
+export const PokemonSpritesVersionsGenerationViOmegarubyAlphasapphireSchema = z.object({
+  frontDefault: z.string().required(),
+  frontFemale: z.any().required(),
+  frontShiny: z.string().required(),
+  frontShinyFemale: z.any().required()
+});
+export const PokemonSpritesVersionsGenerationViXYSchema = z.object({
+  frontDefault: z.string().required(),
+  frontFemale: z.any().required(),
+  frontShiny: z.string().required(),
+  frontShinyFemale: z.any().required()
+});
+export const PokemonSpritesVersionsGenerationViiIconsSchema = z.object({
+  frontDefault: z.string().required(),
+  frontFemale: z.any().required()
+});
+export const PokemonSpritesVersionsGenerationViiUltraSunUltraMoonSchema = z.object({
+  frontDefault: z.string().required(),
+  frontFemale: z.any().required(),
+  frontShiny: z.string().required(),
+  frontShinyFemale: z.any().required()
+});
+export const PokemonSpritesVersionsGenerationViiiIconsSchema = z.object({
+  frontDefault: z.string().required(),
+  frontFemale: z.any().required()
+});
+export const PokemonStatsStatSchema = z.object({
+  name: z.string().required(),
+  url: z.string().required()
+});
+export const PokemonTypesTypeSchema = z.object({
+  name: z.string().required(),
+  url: z.string().required()
+});
+export type Pokemon = z.infer<typeof PokemonSchema>;
+export type PokemonAbilities = z.infer<typeof PokemonAbilitiesSchema>;
+export type PokemonForms = z.infer<typeof PokemonFormsSchema>;
+export type PokemonGameIndices = z.infer<typeof PokemonGameIndicesSchema>;
+export type PokemonMoves = z.infer<typeof PokemonMovesSchema>;
+export type PokemonSpecies = z.infer<typeof PokemonSpeciesSchema>;
+export type PokemonSprites = z.infer<typeof PokemonSpritesSchema>;
+export type PokemonStats = z.infer<typeof PokemonStatsSchema>;
+export type PokemonTypes = z.infer<typeof PokemonTypesSchema>;
+export type PokemonAbilitiesAbility = z.infer<typeof PokemonAbilitiesAbilitySchema>;
+export type PokemonGameIndicesVersion = z.infer<typeof PokemonGameIndicesVersionSchema>;
+export type PokemonMovesMove = z.infer<typeof PokemonMovesMoveSchema>;
+export type PokemonMovesVersionGroupDetails = z.infer<typeof PokemonMovesVersionGroupDetailsSchema>;
+export type PokemonMovesVersionGroupDetailsMoveLearnMethod = z.infer<typeof PokemonMovesVersionGroupDetailsMoveLearnMethodSchema>;
+export type PokemonMovesVersionGroupDetailsVersionGroup = z.infer<typeof PokemonMovesVersionGroupDetailsVersionGroupSchema>;
+export type PokemonSpritesOther = z.infer<typeof PokemonSpritesOtherSchema>;
+export type PokemonSpritesVersions = z.infer<typeof PokemonSpritesVersionsSchema>;
+export type PokemonSpritesOtherDreamWorld = z.infer<typeof PokemonSpritesOtherDreamWorldSchema>;
+export type PokemonSpritesOtherOfficialArtwork = z.infer<typeof PokemonSpritesOtherOfficialArtworkSchema>;
+export type PokemonSpritesVersionsGenerationI = z.infer<typeof PokemonSpritesVersionsGenerationISchema>;
+export type PokemonSpritesVersionsGenerationIi = z.infer<typeof PokemonSpritesVersionsGenerationIiSchema>;
+export type PokemonSpritesVersionsGenerationIii = z.infer<typeof PokemonSpritesVersionsGenerationIiiSchema>;
+export type PokemonSpritesVersionsGenerationIv = z.infer<typeof PokemonSpritesVersionsGenerationIvSchema>;
+export type PokemonSpritesVersionsGenerationV = z.infer<typeof PokemonSpritesVersionsGenerationVSchema>;
+export type PokemonSpritesVersionsGenerationVi = z.infer<typeof PokemonSpritesVersionsGenerationViSchema>;
+export type PokemonSpritesVersionsGenerationVii = z.infer<typeof PokemonSpritesVersionsGenerationViiSchema>;
+export type PokemonSpritesVersionsGenerationViii = z.infer<typeof PokemonSpritesVersionsGenerationViiiSchema>;
+export type PokemonSpritesVersionsGenerationIRedBlue = z.infer<typeof PokemonSpritesVersionsGenerationIRedBlueSchema>;
+export type PokemonSpritesVersionsGenerationIYellow = z.infer<typeof PokemonSpritesVersionsGenerationIYellowSchema>;
+export type PokemonSpritesVersionsGenerationIiCrystal = z.infer<typeof PokemonSpritesVersionsGenerationIiCrystalSchema>;
+export type PokemonSpritesVersionsGenerationIiGold = z.infer<typeof PokemonSpritesVersionsGenerationIiGoldSchema>;
+export type PokemonSpritesVersionsGenerationIiSilver = z.infer<typeof PokemonSpritesVersionsGenerationIiSilverSchema>;
+export type PokemonSpritesVersionsGenerationIiiEmerald = z.infer<typeof PokemonSpritesVersionsGenerationIiiEmeraldSchema>;
+export type PokemonSpritesVersionsGenerationIiiFireredLeafgreen = z.infer<typeof PokemonSpritesVersionsGenerationIiiFireredLeafgreenSchema>;
+export type PokemonSpritesVersionsGenerationIiiRubySapphire = z.infer<typeof PokemonSpritesVersionsGenerationIiiRubySapphireSchema>;
+export type PokemonSpritesVersionsGenerationIvDiamondPearl = z.infer<typeof PokemonSpritesVersionsGenerationIvDiamondPearlSchema>;
+export type PokemonSpritesVersionsGenerationIvHeartgoldSoulsilver = z.infer<typeof PokemonSpritesVersionsGenerationIvHeartgoldSoulsilverSchema>;
+export type PokemonSpritesVersionsGenerationIvPlatinum = z.infer<typeof PokemonSpritesVersionsGenerationIvPlatinumSchema>;
+export type PokemonSpritesVersionsGenerationVBlackWhite = z.infer<typeof PokemonSpritesVersionsGenerationVBlackWhiteSchema>;
+export type PokemonSpritesVersionsGenerationVBlackWhiteAnimated = z.infer<typeof PokemonSpritesVersionsGenerationVBlackWhiteAnimatedSchema>;
+export type PokemonSpritesVersionsGenerationViOmegarubyAlphasapphire = z.infer<typeof PokemonSpritesVersionsGenerationViOmegarubyAlphasapphireSchema>;
+export type PokemonSpritesVersionsGenerationViXY = z.infer<typeof PokemonSpritesVersionsGenerationViXYSchema>;
+export type PokemonSpritesVersionsGenerationViiIcons = z.infer<typeof PokemonSpritesVersionsGenerationViiIconsSchema>;
+export type PokemonSpritesVersionsGenerationViiUltraSunUltraMoon = z.infer<typeof PokemonSpritesVersionsGenerationViiUltraSunUltraMoonSchema>;
+export type PokemonSpritesVersionsGenerationViiiIcons = z.infer<typeof PokemonSpritesVersionsGenerationViiiIconsSchema>;
+export type PokemonStatsStat = z.infer<typeof PokemonStatsStatSchema>;
+export type PokemonTypesType = z.infer<typeof PokemonTypesTypeSchema>;
+"
+`;
+
+exports[`#zod can emit migration for pokemon json, w/ dense & trim fields 1`] = `
+"import { z } from \\"zod\\";
+
+
+export const PokemonSchema = z.object({
+  abilities: z.lazy(() => AbilitiesSchema),
+  baseExperience: z.number().required(),
+  forms: z.lazy(() => FormsSchema),
+  gameIndices: z.lazy(() => GameIndicesSchema),
+  height: z.number().required(),
+  heldItems: z.array().required(),
+  id: z.number().required(),
+  isDefault: z.boolean().required(),
+  locationAreaEncounters: z.string().required(),
+  moves: z.lazy(() => MovesSchema),
+  name: z.string().required(),
+  order: z.number().required(),
+  species: z.lazy(() => SpeciesSchema),
+  sprites: z.lazy(() => SpritesSchema),
+  stats: z.lazy(() => StatsSchema),
+  types: z.lazy(() => TypesSchema),
+  weight: z.number().required()
+});
+export const AbilitiesSchema = z.object({
+  ability: z.lazy(() => NameUrlSchema),
+  isHidden: z.boolean().required(),
+  slot: z.number().required()
+});
+export const GameIndicesSchema = z.object({
+  gameIndex: z.number().required(),
+  version: z.lazy(() => NameUrlSchema)
+});
+export const MovesSchema = z.object({
+  move: z.lazy(() => NameUrlSchema),
+  versionGroupDetails: z.lazy(() => VersionGroupDetailsSchema)
+});
+export const SpritesSchema = z.object({
+  backDefault: z.string().required(),
+  backFemale: z.any().required(),
+  backShiny: z.string().required(),
+  backShinyFemale: z.any().required(),
+  frontDefault: z.string().required(),
+  frontFemale: z.any().required(),
+  frontShiny: z.string().required(),
+  frontShinyFemale: z.any().required(),
+  other: z.lazy(() => OtherSchema),
+  versions: z.lazy(() => VersionsSchema)
+});
+export const StatsSchema = z.object({
+  baseStat: z.number().required(),
+  effort: z.number().required(),
+  stat: z.lazy(() => NameUrlSchema)
+});
+export const TypesSchema = z.object({
+  slot: z.number().required(),
+  type: z.lazy(() => NameUrlSchema)
+});
+export const VersionGroupDetailsSchema = z.object({
+  levelLearnedAt: z.number().required(),
+  moveLearnMethod: z.lazy(() => NameUrlSchema),
+  versionGroup: z.lazy(() => NameUrlSchema)
+});
+export const OtherSchema = z.object({
+  dreamWorld: z.lazy(() => FrontDefaultFrontFemaleSchema),
+  officialArtwork: z.lazy(() => OfficialArtworkSchema)
+});
+export const VersionsSchema = z.object({
+  generationI: z.lazy(() => GenerationISchema),
+  generationIi: z.lazy(() => GenerationIiSchema),
+  generationIii: z.lazy(() => GenerationIiiSchema),
+  generationIv: z.lazy(() => GenerationIvSchema),
+  generationV: z.lazy(() => GenerationVSchema),
+  generationVi: z.lazy(() => GenerationViSchema),
+  generationVii: z.lazy(() => GenerationViiSchema),
+  generationViii: z.lazy(() => GenerationViiiSchema)
+});
+export const OfficialArtworkSchema = z.object({
+  frontDefault: z.string().required()
+});
+export const GenerationISchema = z.object({
+  redBlue: z.lazy(() => RedBlueYellowSchema),
+  yellow: z.lazy(() => RedBlueYellowSchema)
+});
+export const GenerationIiSchema = z.object({
+  crystal: z.lazy(() => CrystalSchema),
+  gold: z.lazy(() => GoldSchema),
+  silver: z.lazy(() => SilverSchema)
+});
+export const GenerationIiiSchema = z.object({
+  emerald: z.lazy(() => EmeraldSchema),
+  fireredLeafgreen: z.lazy(() => FireredLeafgreenSchema),
+  rubySapphire: z.lazy(() => RubySapphireSchema)
+});
+export const GenerationIvSchema = z.object({
+  diamondPearl: z.lazy(() => AnimatedDiamondPearlHeartgoldSoulsilverPlatinumSchema),
+  heartgoldSoulsilver: z.lazy(() => AnimatedDiamondPearlHeartgoldSoulsilverPlatinumSchema),
+  platinum: z.lazy(() => AnimatedDiamondPearlHeartgoldSoulsilverPlatinumSchema)
+});
+export const GenerationVSchema = z.object({
+  blackWhite: z.lazy(() => BlackWhiteSchema)
+});
+export const GenerationViSchema = z.object({
+  omegarubyAlphasapphire: z.lazy(() => OmegarubyAlphasapphireUltraSunUltraMoonXYSchema),
+  xY: z.lazy(() => OmegarubyAlphasapphireUltraSunUltraMoonXYSchema)
+});
+export const GenerationViiSchema = z.object({
+  icons: z.lazy(() => FrontDefaultFrontFemaleSchema),
+  ultraSunUltraMoon: z.lazy(() => OmegarubyAlphasapphireUltraSunUltraMoonXYSchema)
+});
+export const GenerationViiiSchema = z.object({
+  icons: z.lazy(() => FrontDefaultFrontFemaleSchema)
+});
+export const CrystalSchema = z.object({
+  backDefault: z.string().required(),
+  backShiny: z.string().required(),
+  frontDefault: z.string().required(),
+  frontShiny: z.string().required()
+});
+export const GoldSchema = z.object({
+  backDefault: z.string().required(),
+  backShiny: z.string().required(),
+  frontDefault: z.string().required(),
+  frontShiny: z.string().required()
+});
+export const SilverSchema = z.object({
+  backDefault: z.string().required(),
+  backShiny: z.string().required(),
+  frontDefault: z.string().required(),
+  frontShiny: z.string().required()
+});
+export const EmeraldSchema = z.object({
+  frontDefault: z.string().required(),
+  frontShiny: z.string().required()
+});
+export const FireredLeafgreenSchema = z.object({
+  backDefault: z.string().required(),
+  backShiny: z.string().required(),
+  frontDefault: z.string().required(),
+  frontShiny: z.string().required()
+});
+export const RubySapphireSchema = z.object({
+  backDefault: z.string().required(),
+  backShiny: z.string().required(),
+  frontDefault: z.string().required(),
+  frontShiny: z.string().required()
+});
+export const BlackWhiteSchema = z.object({
+  animated: z.lazy(() => AnimatedDiamondPearlHeartgoldSoulsilverPlatinumSchema),
+  backDefault: z.string().required(),
+  backFemale: z.any().required(),
+  backShiny: z.string().required(),
+  backShinyFemale: z.any().required(),
+  frontDefault: z.string().required(),
+  frontFemale: z.any().required(),
+  frontShiny: z.string().required(),
+  frontShinyFemale: z.any().required()
+});
+export const NameUrlSchema = z.object({
+  name: z.string().required(),
+  url: z.string().required()
+});
+export const FrontDefaultFrontFemaleSchema = z.object({
+  frontDefault: z.string().required(),
+  frontFemale: z.any().required()
+});
+export const RedBlueYellowSchema = z.object({
+  backDefault: z.string().required(),
+  backGray: z.string().required(),
+  frontDefault: z.string().required(),
+  frontGray: z.string().required()
+});
+export const AnimatedDiamondPearlHeartgoldSoulsilverPlatinumSchema = z.object({
+  backDefault: z.string().required(),
+  backFemale: z.any().required(),
+  backShiny: z.string().required(),
+  backShinyFemale: z.any().required(),
+  frontDefault: z.string().required(),
+  frontFemale: z.any().required(),
+  frontShiny: z.string().required(),
+  frontShinyFemale: z.any().required()
+});
+export const OmegarubyAlphasapphireUltraSunUltraMoonXYSchema = z.object({
+  frontDefault: z.string().required(),
+  frontFemale: z.any().required(),
+  frontShiny: z.string().required(),
+  frontShinyFemale: z.any().required()
+});
+export type Pokemon = z.infer<typeof PokemonSchema>;
+export type Abilities = z.infer<typeof AbilitiesSchema>;
+export type GameIndices = z.infer<typeof GameIndicesSchema>;
+export type Moves = z.infer<typeof MovesSchema>;
+export type Sprites = z.infer<typeof SpritesSchema>;
+export type Stats = z.infer<typeof StatsSchema>;
+export type Types = z.infer<typeof TypesSchema>;
+export type VersionGroupDetails = z.infer<typeof VersionGroupDetailsSchema>;
+export type Other = z.infer<typeof OtherSchema>;
+export type Versions = z.infer<typeof VersionsSchema>;
+export type OfficialArtwork = z.infer<typeof OfficialArtworkSchema>;
+export type GenerationI = z.infer<typeof GenerationISchema>;
+export type GenerationIi = z.infer<typeof GenerationIiSchema>;
+export type GenerationIii = z.infer<typeof GenerationIiiSchema>;
+export type GenerationIv = z.infer<typeof GenerationIvSchema>;
+export type GenerationV = z.infer<typeof GenerationVSchema>;
+export type GenerationVi = z.infer<typeof GenerationViSchema>;
+export type GenerationVii = z.infer<typeof GenerationViiSchema>;
+export type GenerationViii = z.infer<typeof GenerationViiiSchema>;
+export type Crystal = z.infer<typeof CrystalSchema>;
+export type Gold = z.infer<typeof GoldSchema>;
+export type Silver = z.infer<typeof SilverSchema>;
+export type Emerald = z.infer<typeof EmeraldSchema>;
+export type FireredLeafgreen = z.infer<typeof FireredLeafgreenSchema>;
+export type RubySapphire = z.infer<typeof RubySapphireSchema>;
+export type BlackWhite = z.infer<typeof BlackWhiteSchema>;
+export type NameUrl = z.infer<typeof NameUrlSchema>;
+export type FrontDefaultFrontFemale = z.infer<typeof FrontDefaultFrontFemaleSchema>;
+export type RedBlueYellow = z.infer<typeof RedBlueYellowSchema>;
+export type AnimatedDiamondPearlHeartgoldSoulsilverPlatinum = z.infer<typeof AnimatedDiamondPearlHeartgoldSoulsilverPlatinumSchema>;
+export type OmegarubyAlphasapphireUltraSunUltraMoonXY = z.infer<typeof OmegarubyAlphasapphireUltraSunUltraMoonXYSchema>;
+"
+`;
+
+exports[`#zod can emit migration for pokemon json, w/ dense fields 1`] = `
+"import { z } from \\"zod\\";
+
+
+export const PokemonSchema = z.object({
+  abilities: z.lazy(() => PokemonAbilitiesSchema),
+  baseExperience: z.number().required(),
+  forms: z.lazy(() => PokemonFormsSchema),
+  gameIndices: z.lazy(() => PokemonGameIndicesSchema),
+  height: z.number().required(),
+  heldItems: z.array().required(),
+  id: z.number().required(),
+  isDefault: z.boolean().required(),
+  locationAreaEncounters: z.string().required(),
+  moves: z.lazy(() => PokemonMovesSchema),
+  name: z.string().required(),
+  order: z.number().required(),
+  species: z.lazy(() => PokemonSpeciesSchema),
+  sprites: z.lazy(() => PokemonSpritesSchema),
+  stats: z.lazy(() => PokemonStatsSchema),
+  types: z.lazy(() => PokemonTypesSchema),
+  weight: z.number().required()
+});
+export const PokemonAbilitiesSchema = z.object({
+  ability: z.lazy(() => NameUrlSchema),
+  isHidden: z.boolean().required(),
+  slot: z.number().required()
+});
+export const PokemonGameIndicesSchema = z.object({
+  gameIndex: z.number().required(),
+  version: z.lazy(() => NameUrlSchema)
+});
+export const PokemonMovesSchema = z.object({
+  move: z.lazy(() => NameUrlSchema),
+  versionGroupDetails: z.lazy(() => PokemonMovesVersionGroupDetailsSchema)
+});
+export const PokemonSpritesSchema = z.object({
+  backDefault: z.string().required(),
+  backFemale: z.any().required(),
+  backShiny: z.string().required(),
+  backShinyFemale: z.any().required(),
+  frontDefault: z.string().required(),
+  frontFemale: z.any().required(),
+  frontShiny: z.string().required(),
+  frontShinyFemale: z.any().required(),
+  other: z.lazy(() => PokemonSpritesOtherSchema),
+  versions: z.lazy(() => PokemonSpritesVersionsSchema)
+});
+export const PokemonStatsSchema = z.object({
+  baseStat: z.number().required(),
+  effort: z.number().required(),
+  stat: z.lazy(() => NameUrlSchema)
+});
+export const PokemonTypesSchema = z.object({
+  slot: z.number().required(),
+  type: z.lazy(() => NameUrlSchema)
+});
+export const PokemonMovesVersionGroupDetailsSchema = z.object({
+  levelLearnedAt: z.number().required(),
+  moveLearnMethod: z.lazy(() => NameUrlSchema),
+  versionGroup: z.lazy(() => NameUrlSchema)
+});
+export const PokemonSpritesOtherSchema = z.object({
+  dreamWorld: z.lazy(() => FrontDefaultFrontFemaleSchema),
+  officialArtwork: z.lazy(() => PokemonSpritesOtherOfficialArtworkSchema)
+});
+export const PokemonSpritesVersionsSchema = z.object({
+  generationI: z.lazy(() => PokemonSpritesVersionsGenerationISchema),
+  generationIi: z.lazy(() => PokemonSpritesVersionsGenerationIiSchema),
+  generationIii: z.lazy(() => PokemonSpritesVersionsGenerationIiiSchema),
+  generationIv: z.lazy(() => PokemonSpritesVersionsGenerationIvSchema),
+  generationV: z.lazy(() => PokemonSpritesVersionsGenerationVSchema),
+  generationVi: z.lazy(() => PokemonSpritesVersionsGenerationViSchema),
+  generationVii: z.lazy(() => PokemonSpritesVersionsGenerationViiSchema),
+  generationViii: z.lazy(() => PokemonSpritesVersionsGenerationViiiSchema)
+});
+export const PokemonSpritesOtherOfficialArtworkSchema = z.object({
+  frontDefault: z.string().required()
+});
+export const PokemonSpritesVersionsGenerationISchema = z.object({
+  redBlue: z.lazy(() => RedBlueYellowSchema),
+  yellow: z.lazy(() => RedBlueYellowSchema)
+});
+export const PokemonSpritesVersionsGenerationIiSchema = z.object({
+  crystal: z.lazy(() => PokemonSpritesVersionsGenerationIiCrystalSchema),
+  gold: z.lazy(() => PokemonSpritesVersionsGenerationIiGoldSchema),
+  silver: z.lazy(() => PokemonSpritesVersionsGenerationIiSilverSchema)
+});
+export const PokemonSpritesVersionsGenerationIiiSchema = z.object({
+  emerald: z.lazy(() => PokemonSpritesVersionsGenerationIiiEmeraldSchema),
+  fireredLeafgreen: z.lazy(() => PokemonSpritesVersionsGenerationIiiFireredLeafgreenSchema),
+  rubySapphire: z.lazy(() => PokemonSpritesVersionsGenerationIiiRubySapphireSchema)
+});
+export const PokemonSpritesVersionsGenerationIvSchema = z.object({
+  diamondPearl: z.lazy(() => PokemonSpritesVersionsGenerationIvDiamondPearlSchema),
+  heartgoldSoulsilver: z.lazy(() => PokemonSpritesVersionsGenerationIvHeartgoldSoulsilverSchema),
+  platinum: z.lazy(() => PokemonSpritesVersionsGenerationIvPlatinumSchema)
+});
+export const PokemonSpritesVersionsGenerationVSchema = z.object({
+  blackWhite: z.lazy(() => PokemonSpritesVersionsGenerationVBlackWhiteSchema)
+});
+export const PokemonSpritesVersionsGenerationViSchema = z.object({
+  omegarubyAlphasapphire: z.lazy(() => GenerationViiOmegarubyAlphasapphireUltraSunUltraMoonXYSchema),
+  xY: z.lazy(() => GenerationViiOmegarubyAlphasapphireUltraSunUltraMoonXYSchema)
+});
+export const PokemonSpritesVersionsGenerationViiSchema = z.object({
+  icons: z.lazy(() => FrontDefaultFrontFemaleSchema),
+  ultraSunUltraMoon: z.lazy(() => GenerationViiOmegarubyAlphasapphireUltraSunUltraMoonXYSchema)
+});
+export const PokemonSpritesVersionsGenerationViiiSchema = z.object({
+  icons: z.lazy(() => FrontDefaultFrontFemaleSchema)
+});
+export const PokemonSpritesVersionsGenerationIiCrystalSchema = z.object({
+  backDefault: z.string().required(),
+  backShiny: z.string().required(),
+  frontDefault: z.string().required(),
+  frontShiny: z.string().required()
+});
+export const PokemonSpritesVersionsGenerationIiGoldSchema = z.object({
+  backDefault: z.string().required(),
+  backShiny: z.string().required(),
+  frontDefault: z.string().required(),
+  frontShiny: z.string().required()
+});
+export const PokemonSpritesVersionsGenerationIiSilverSchema = z.object({
+  backDefault: z.string().required(),
+  backShiny: z.string().required(),
+  frontDefault: z.string().required(),
+  frontShiny: z.string().required()
+});
+export const PokemonSpritesVersionsGenerationIiiEmeraldSchema = z.object({
+  frontDefault: z.string().required(),
+  frontShiny: z.string().required()
+});
+export const PokemonSpritesVersionsGenerationIiiFireredLeafgreenSchema = z.object({
+  backDefault: z.string().required(),
+  backShiny: z.string().required(),
+  frontDefault: z.string().required(),
+  frontShiny: z.string().required()
+});
+export const PokemonSpritesVersionsGenerationIiiRubySapphireSchema = z.object({
+  backDefault: z.string().required(),
+  backShiny: z.string().required(),
+  frontDefault: z.string().required(),
+  frontShiny: z.string().required()
+});
+export const PokemonSpritesVersionsGenerationIvDiamondPearlSchema = z.object({
+  backDefault: z.string().required(),
+  backFemale: z.any().required(),
+  backShiny: z.string().required(),
+  backShinyFemale: z.any().required(),
+  frontDefault: z.string().required(),
+  frontFemale: z.any().required(),
+  frontShiny: z.string().required(),
+  frontShinyFemale: z.any().required()
+});
+export const PokemonSpritesVersionsGenerationIvHeartgoldSoulsilverSchema = z.object({
+  backDefault: z.string().required(),
+  backFemale: z.any().required(),
+  backShiny: z.string().required(),
+  backShinyFemale: z.any().required(),
+  frontDefault: z.string().required(),
+  frontFemale: z.any().required(),
+  frontShiny: z.string().required(),
+  frontShinyFemale: z.any().required()
+});
+export const PokemonSpritesVersionsGenerationIvPlatinumSchema = z.object({
+  backDefault: z.string().required(),
+  backFemale: z.any().required(),
+  backShiny: z.string().required(),
+  backShinyFemale: z.any().required(),
+  frontDefault: z.string().required(),
+  frontFemale: z.any().required(),
+  frontShiny: z.string().required(),
+  frontShinyFemale: z.any().required()
+});
+export const PokemonSpritesVersionsGenerationVBlackWhiteSchema = z.object({
+  animated: z.lazy(() => PokemonSpritesVersionsGenerationVBlackWhiteAnimatedSchema),
+  backDefault: z.string().required(),
+  backFemale: z.any().required(),
+  backShiny: z.string().required(),
+  backShinyFemale: z.any().required(),
+  frontDefault: z.string().required(),
+  frontFemale: z.any().required(),
+  frontShiny: z.string().required(),
+  frontShinyFemale: z.any().required()
+});
+export const PokemonSpritesVersionsGenerationVBlackWhiteAnimatedSchema = z.object({
+  backDefault: z.string().required(),
+  backFemale: z.any().required(),
+  backShiny: z.string().required(),
+  backShinyFemale: z.any().required(),
+  frontDefault: z.string().required(),
+  frontFemale: z.any().required(),
+  frontShiny: z.string().required(),
+  frontShinyFemale: z.any().required()
+});
+export const NameUrlSchema = z.object({
+  name: z.string().required(),
+  url: z.string().required()
+});
+export const FrontDefaultFrontFemaleSchema = z.object({
+  frontDefault: z.string().required(),
+  frontFemale: z.any().required()
+});
+export const RedBlueYellowSchema = z.object({
+  backDefault: z.string().required(),
+  backGray: z.string().required(),
+  frontDefault: z.string().required(),
+  frontGray: z.string().required()
+});
+export const GenerationViiOmegarubyAlphasapphireUltraSunUltraMoonXYSchema = z.object({
+  frontDefault: z.string().required(),
+  frontFemale: z.any().required(),
+  frontShiny: z.string().required(),
+  frontShinyFemale: z.any().required()
+});
+export type Pokemon = z.infer<typeof PokemonSchema>;
+export type PokemonAbilities = z.infer<typeof PokemonAbilitiesSchema>;
+export type PokemonGameIndices = z.infer<typeof PokemonGameIndicesSchema>;
+export type PokemonMoves = z.infer<typeof PokemonMovesSchema>;
+export type PokemonSprites = z.infer<typeof PokemonSpritesSchema>;
+export type PokemonStats = z.infer<typeof PokemonStatsSchema>;
+export type PokemonTypes = z.infer<typeof PokemonTypesSchema>;
+export type PokemonMovesVersionGroupDetails = z.infer<typeof PokemonMovesVersionGroupDetailsSchema>;
+export type PokemonSpritesOther = z.infer<typeof PokemonSpritesOtherSchema>;
+export type PokemonSpritesVersions = z.infer<typeof PokemonSpritesVersionsSchema>;
+export type PokemonSpritesOtherOfficialArtwork = z.infer<typeof PokemonSpritesOtherOfficialArtworkSchema>;
+export type PokemonSpritesVersionsGenerationI = z.infer<typeof PokemonSpritesVersionsGenerationISchema>;
+export type PokemonSpritesVersionsGenerationIi = z.infer<typeof PokemonSpritesVersionsGenerationIiSchema>;
+export type PokemonSpritesVersionsGenerationIii = z.infer<typeof PokemonSpritesVersionsGenerationIiiSchema>;
+export type PokemonSpritesVersionsGenerationIv = z.infer<typeof PokemonSpritesVersionsGenerationIvSchema>;
+export type PokemonSpritesVersionsGenerationV = z.infer<typeof PokemonSpritesVersionsGenerationVSchema>;
+export type PokemonSpritesVersionsGenerationVi = z.infer<typeof PokemonSpritesVersionsGenerationViSchema>;
+export type PokemonSpritesVersionsGenerationVii = z.infer<typeof PokemonSpritesVersionsGenerationViiSchema>;
+export type PokemonSpritesVersionsGenerationViii = z.infer<typeof PokemonSpritesVersionsGenerationViiiSchema>;
+export type PokemonSpritesVersionsGenerationIiCrystal = z.infer<typeof PokemonSpritesVersionsGenerationIiCrystalSchema>;
+export type PokemonSpritesVersionsGenerationIiGold = z.infer<typeof PokemonSpritesVersionsGenerationIiGoldSchema>;
+export type PokemonSpritesVersionsGenerationIiSilver = z.infer<typeof PokemonSpritesVersionsGenerationIiSilverSchema>;
+export type PokemonSpritesVersionsGenerationIiiEmerald = z.infer<typeof PokemonSpritesVersionsGenerationIiiEmeraldSchema>;
+export type PokemonSpritesVersionsGenerationIiiFireredLeafgreen = z.infer<typeof PokemonSpritesVersionsGenerationIiiFireredLeafgreenSchema>;
+export type PokemonSpritesVersionsGenerationIiiRubySapphire = z.infer<typeof PokemonSpritesVersionsGenerationIiiRubySapphireSchema>;
+export type PokemonSpritesVersionsGenerationIvDiamondPearl = z.infer<typeof PokemonSpritesVersionsGenerationIvDiamondPearlSchema>;
+export type PokemonSpritesVersionsGenerationIvHeartgoldSoulsilver = z.infer<typeof PokemonSpritesVersionsGenerationIvHeartgoldSoulsilverSchema>;
+export type PokemonSpritesVersionsGenerationIvPlatinum = z.infer<typeof PokemonSpritesVersionsGenerationIvPlatinumSchema>;
+export type PokemonSpritesVersionsGenerationVBlackWhite = z.infer<typeof PokemonSpritesVersionsGenerationVBlackWhiteSchema>;
+export type PokemonSpritesVersionsGenerationVBlackWhiteAnimated = z.infer<typeof PokemonSpritesVersionsGenerationVBlackWhiteAnimatedSchema>;
+export type NameUrl = z.infer<typeof NameUrlSchema>;
+export type FrontDefaultFrontFemale = z.infer<typeof FrontDefaultFrontFemaleSchema>;
+export type RedBlueYellow = z.infer<typeof RedBlueYellowSchema>;
+export type GenerationViiOmegarubyAlphasapphireUltraSunUltraMoonXY = z.infer<typeof GenerationViiOmegarubyAlphasapphireUltraSunUltraMoonXYSchema>;
+"
+`;
+
+exports[`#zod can emit module exports correctly 1`] = `
+"import { z } from \\"zod\\";
+
+
+export const PokemonSchema = z.object({
+  abilities: z.lazy(() => PokemonAbilitiesSchema),
+  baseExperience: z.number().required(),
+  forms: z.lazy(() => PokemonFormsSchema),
+  gameIndices: z.lazy(() => PokemonGameIndicesSchema),
+  height: z.number().required(),
+  heldItems: z.array().required(),
+  id: z.number().required(),
+  isDefault: z.boolean().required(),
+  locationAreaEncounters: z.string().required(),
+  moves: z.lazy(() => PokemonMovesSchema),
+  name: z.string().required(),
+  order: z.number().required(),
+  species: z.lazy(() => PokemonSpeciesSchema),
+  sprites: z.lazy(() => PokemonSpritesSchema),
+  stats: z.lazy(() => PokemonStatsSchema),
+  types: z.lazy(() => PokemonTypesSchema),
+  weight: z.number().required()
+});
+export const PokemonAbilitiesSchema = z.object({
+  ability: z.lazy(() => PokemonAbilitiesAbilitySchema),
+  isHidden: z.boolean().required(),
+  slot: z.number().required()
+});
+export const PokemonFormsSchema = z.object({
+  name: z.string().required(),
+  url: z.string().required()
+});
+export const PokemonGameIndicesSchema = z.object({
+  gameIndex: z.number().required(),
+  version: z.lazy(() => PokemonGameIndicesVersionSchema)
+});
+export const PokemonMovesSchema = z.object({
+  move: z.lazy(() => PokemonMovesMoveSchema),
+  versionGroupDetails: z.lazy(() => PokemonMovesVersionGroupDetailsSchema)
+});
+export const PokemonSpeciesSchema = z.object({
+  name: z.string().required(),
+  url: z.string().required()
+});
+export const PokemonSpritesSchema = z.object({
+  backDefault: z.string().required(),
+  backFemale: z.any().required(),
+  backShiny: z.string().required(),
+  backShinyFemale: z.any().required(),
+  frontDefault: z.string().required(),
+  frontFemale: z.any().required(),
+  frontShiny: z.string().required(),
+  frontShinyFemale: z.any().required(),
+  other: z.lazy(() => PokemonSpritesOtherSchema),
+  versions: z.lazy(() => PokemonSpritesVersionsSchema)
+});
+export const PokemonStatsSchema = z.object({
+  baseStat: z.number().required(),
+  effort: z.number().required(),
+  stat: z.lazy(() => PokemonStatsStatSchema)
+});
+export const PokemonTypesSchema = z.object({
+  slot: z.number().required(),
+  type: z.lazy(() => PokemonTypesTypeSchema)
+});
+export const PokemonAbilitiesAbilitySchema = z.object({
+  name: z.string().required(),
+  url: z.string().required()
+});
+export const PokemonGameIndicesVersionSchema = z.object({
+  name: z.string().required(),
+  url: z.string().required()
+});
+export const PokemonMovesMoveSchema = z.object({
+  name: z.string().required(),
+  url: z.string().required()
+});
+export const PokemonMovesVersionGroupDetailsSchema = z.object({
+  levelLearnedAt: z.number().required(),
+  moveLearnMethod: z.lazy(() => PokemonMovesVersionGroupDetailsMoveLearnMethodSchema),
+  versionGroup: z.lazy(() => PokemonMovesVersionGroupDetailsVersionGroupSchema)
+});
+export const PokemonMovesVersionGroupDetailsMoveLearnMethodSchema = z.object({
+  name: z.string().required().enum([\\"machine\\", \\"tutor\\", \\"level-up\\", \\"egg\\"]),
+  url: z.string().required().enum([\\"https://pokeapi.co/api/v2/move-learn-method/4/\\", \\"https://pokeapi.co/api/v2/move-learn-method/3/\\", \\"https://pokeapi.co/api/v2/move-learn-method/1/\\", \\"https://pokeapi.co/api/v2/move-learn-method/2/\\"])
+});
+export const PokemonMovesVersionGroupDetailsVersionGroupSchema = z.object({
+  name: z.string().required(),
+  url: z.string().required()
+});
+export const PokemonSpritesOtherSchema = z.object({
+  dreamWorld: z.lazy(() => PokemonSpritesOtherDreamWorldSchema),
+  officialArtwork: z.lazy(() => PokemonSpritesOtherOfficialArtworkSchema)
+});
+export const PokemonSpritesVersionsSchema = z.object({
+  generationI: z.lazy(() => PokemonSpritesVersionsGenerationISchema),
+  generationIi: z.lazy(() => PokemonSpritesVersionsGenerationIiSchema),
+  generationIii: z.lazy(() => PokemonSpritesVersionsGenerationIiiSchema),
+  generationIv: z.lazy(() => PokemonSpritesVersionsGenerationIvSchema),
+  generationV: z.lazy(() => PokemonSpritesVersionsGenerationVSchema),
+  generationVi: z.lazy(() => PokemonSpritesVersionsGenerationViSchema),
+  generationVii: z.lazy(() => PokemonSpritesVersionsGenerationViiSchema),
+  generationViii: z.lazy(() => PokemonSpritesVersionsGenerationViiiSchema)
+});
+export const PokemonSpritesOtherDreamWorldSchema = z.object({
+  frontDefault: z.string().required(),
+  frontFemale: z.any().required()
+});
+export const PokemonSpritesOtherOfficialArtworkSchema = z.object({
+  frontDefault: z.string().required()
+});
+export const PokemonSpritesVersionsGenerationISchema = z.object({
+  redBlue: z.lazy(() => PokemonSpritesVersionsGenerationIRedBlueSchema),
+  yellow: z.lazy(() => PokemonSpritesVersionsGenerationIYellowSchema)
+});
+export const PokemonSpritesVersionsGenerationIiSchema = z.object({
+  crystal: z.lazy(() => PokemonSpritesVersionsGenerationIiCrystalSchema),
+  gold: z.lazy(() => PokemonSpritesVersionsGenerationIiGoldSchema),
+  silver: z.lazy(() => PokemonSpritesVersionsGenerationIiSilverSchema)
+});
+export const PokemonSpritesVersionsGenerationIiiSchema = z.object({
+  emerald: z.lazy(() => PokemonSpritesVersionsGenerationIiiEmeraldSchema),
+  fireredLeafgreen: z.lazy(() => PokemonSpritesVersionsGenerationIiiFireredLeafgreenSchema),
+  rubySapphire: z.lazy(() => PokemonSpritesVersionsGenerationIiiRubySapphireSchema)
+});
+export const PokemonSpritesVersionsGenerationIvSchema = z.object({
+  diamondPearl: z.lazy(() => PokemonSpritesVersionsGenerationIvDiamondPearlSchema),
+  heartgoldSoulsilver: z.lazy(() => PokemonSpritesVersionsGenerationIvHeartgoldSoulsilverSchema),
+  platinum: z.lazy(() => PokemonSpritesVersionsGenerationIvPlatinumSchema)
+});
+export const PokemonSpritesVersionsGenerationVSchema = z.object({
+  blackWhite: z.lazy(() => PokemonSpritesVersionsGenerationVBlackWhiteSchema)
+});
+export const PokemonSpritesVersionsGenerationViSchema = z.object({
+  omegarubyAlphasapphire: z.lazy(() => PokemonSpritesVersionsGenerationViOmegarubyAlphasapphireSchema),
+  xY: z.lazy(() => PokemonSpritesVersionsGenerationViXYSchema)
+});
+export const PokemonSpritesVersionsGenerationViiSchema = z.object({
+  icons: z.lazy(() => PokemonSpritesVersionsGenerationViiIconsSchema),
+  ultraSunUltraMoon: z.lazy(() => PokemonSpritesVersionsGenerationViiUltraSunUltraMoonSchema)
+});
+export const PokemonSpritesVersionsGenerationViiiSchema = z.object({
+  icons: z.lazy(() => PokemonSpritesVersionsGenerationViiiIconsSchema)
+});
+export const PokemonSpritesVersionsGenerationIRedBlueSchema = z.object({
+  backDefault: z.string().required(),
+  backGray: z.string().required(),
+  frontDefault: z.string().required(),
+  frontGray: z.string().required()
+});
+export const PokemonSpritesVersionsGenerationIYellowSchema = z.object({
+  backDefault: z.string().required(),
+  backGray: z.string().required(),
+  frontDefault: z.string().required(),
+  frontGray: z.string().required()
+});
+export const PokemonSpritesVersionsGenerationIiCrystalSchema = z.object({
+  backDefault: z.string().required(),
+  backShiny: z.string().required(),
+  frontDefault: z.string().required(),
+  frontShiny: z.string().required()
+});
+export const PokemonSpritesVersionsGenerationIiGoldSchema = z.object({
+  backDefault: z.string().required(),
+  backShiny: z.string().required(),
+  frontDefault: z.string().required(),
+  frontShiny: z.string().required()
+});
+export const PokemonSpritesVersionsGenerationIiSilverSchema = z.object({
+  backDefault: z.string().required(),
+  backShiny: z.string().required(),
+  frontDefault: z.string().required(),
+  frontShiny: z.string().required()
+});
+export const PokemonSpritesVersionsGenerationIiiEmeraldSchema = z.object({
+  frontDefault: z.string().required(),
+  frontShiny: z.string().required()
+});
+export const PokemonSpritesVersionsGenerationIiiFireredLeafgreenSchema = z.object({
+  backDefault: z.string().required(),
+  backShiny: z.string().required(),
+  frontDefault: z.string().required(),
+  frontShiny: z.string().required()
+});
+export const PokemonSpritesVersionsGenerationIiiRubySapphireSchema = z.object({
+  backDefault: z.string().required(),
+  backShiny: z.string().required(),
+  frontDefault: z.string().required(),
+  frontShiny: z.string().required()
+});
+export const PokemonSpritesVersionsGenerationIvDiamondPearlSchema = z.object({
+  backDefault: z.string().required(),
+  backFemale: z.any().required(),
+  backShiny: z.string().required(),
+  backShinyFemale: z.any().required(),
+  frontDefault: z.string().required(),
+  frontFemale: z.any().required(),
+  frontShiny: z.string().required(),
+  frontShinyFemale: z.any().required()
+});
+export const PokemonSpritesVersionsGenerationIvHeartgoldSoulsilverSchema = z.object({
+  backDefault: z.string().required(),
+  backFemale: z.any().required(),
+  backShiny: z.string().required(),
+  backShinyFemale: z.any().required(),
+  frontDefault: z.string().required(),
+  frontFemale: z.any().required(),
+  frontShiny: z.string().required(),
+  frontShinyFemale: z.any().required()
+});
+export const PokemonSpritesVersionsGenerationIvPlatinumSchema = z.object({
+  backDefault: z.string().required(),
+  backFemale: z.any().required(),
+  backShiny: z.string().required(),
+  backShinyFemale: z.any().required(),
+  frontDefault: z.string().required(),
+  frontFemale: z.any().required(),
+  frontShiny: z.string().required(),
+  frontShinyFemale: z.any().required()
+});
+export const PokemonSpritesVersionsGenerationVBlackWhiteSchema = z.object({
+  animated: z.lazy(() => PokemonSpritesVersionsGenerationVBlackWhiteAnimatedSchema),
+  backDefault: z.string().required(),
+  backFemale: z.any().required(),
+  backShiny: z.string().required(),
+  backShinyFemale: z.any().required(),
+  frontDefault: z.string().required(),
+  frontFemale: z.any().required(),
+  frontShiny: z.string().required(),
+  frontShinyFemale: z.any().required()
+});
+export const PokemonSpritesVersionsGenerationVBlackWhiteAnimatedSchema = z.object({
+  backDefault: z.string().required(),
+  backFemale: z.any().required(),
+  backShiny: z.string().required(),
+  backShinyFemale: z.any().required(),
+  frontDefault: z.string().required(),
+  frontFemale: z.any().required(),
+  frontShiny: z.string().required(),
+  frontShinyFemale: z.any().required()
+});
+export const PokemonSpritesVersionsGenerationViOmegarubyAlphasapphireSchema = z.object({
+  frontDefault: z.string().required(),
+  frontFemale: z.any().required(),
+  frontShiny: z.string().required(),
+  frontShinyFemale: z.any().required()
+});
+export const PokemonSpritesVersionsGenerationViXYSchema = z.object({
+  frontDefault: z.string().required(),
+  frontFemale: z.any().required(),
+  frontShiny: z.string().required(),
+  frontShinyFemale: z.any().required()
+});
+export const PokemonSpritesVersionsGenerationViiIconsSchema = z.object({
+  frontDefault: z.string().required(),
+  frontFemale: z.any().required()
+});
+export const PokemonSpritesVersionsGenerationViiUltraSunUltraMoonSchema = z.object({
+  frontDefault: z.string().required(),
+  frontFemale: z.any().required(),
+  frontShiny: z.string().required(),
+  frontShinyFemale: z.any().required()
+});
+export const PokemonSpritesVersionsGenerationViiiIconsSchema = z.object({
+  frontDefault: z.string().required(),
+  frontFemale: z.any().required()
+});
+export const PokemonStatsStatSchema = z.object({
+  name: z.string().required(),
+  url: z.string().required()
+});
+export const PokemonTypesTypeSchema = z.object({
+  name: z.string().required(),
+  url: z.string().required()
+});
+export type Pokemon = z.infer<typeof PokemonSchema>;
+export type PokemonAbilities = z.infer<typeof PokemonAbilitiesSchema>;
+export type PokemonForms = z.infer<typeof PokemonFormsSchema>;
+export type PokemonGameIndices = z.infer<typeof PokemonGameIndicesSchema>;
+export type PokemonMoves = z.infer<typeof PokemonMovesSchema>;
+export type PokemonSpecies = z.infer<typeof PokemonSpeciesSchema>;
+export type PokemonSprites = z.infer<typeof PokemonSpritesSchema>;
+export type PokemonStats = z.infer<typeof PokemonStatsSchema>;
+export type PokemonTypes = z.infer<typeof PokemonTypesSchema>;
+export type PokemonAbilitiesAbility = z.infer<typeof PokemonAbilitiesAbilitySchema>;
+export type PokemonGameIndicesVersion = z.infer<typeof PokemonGameIndicesVersionSchema>;
+export type PokemonMovesMove = z.infer<typeof PokemonMovesMoveSchema>;
+export type PokemonMovesVersionGroupDetails = z.infer<typeof PokemonMovesVersionGroupDetailsSchema>;
+export type PokemonMovesVersionGroupDetailsMoveLearnMethod = z.infer<typeof PokemonMovesVersionGroupDetailsMoveLearnMethodSchema>;
+export type PokemonMovesVersionGroupDetailsVersionGroup = z.infer<typeof PokemonMovesVersionGroupDetailsVersionGroupSchema>;
+export type PokemonSpritesOther = z.infer<typeof PokemonSpritesOtherSchema>;
+export type PokemonSpritesVersions = z.infer<typeof PokemonSpritesVersionsSchema>;
+export type PokemonSpritesOtherDreamWorld = z.infer<typeof PokemonSpritesOtherDreamWorldSchema>;
+export type PokemonSpritesOtherOfficialArtwork = z.infer<typeof PokemonSpritesOtherOfficialArtworkSchema>;
+export type PokemonSpritesVersionsGenerationI = z.infer<typeof PokemonSpritesVersionsGenerationISchema>;
+export type PokemonSpritesVersionsGenerationIi = z.infer<typeof PokemonSpritesVersionsGenerationIiSchema>;
+export type PokemonSpritesVersionsGenerationIii = z.infer<typeof PokemonSpritesVersionsGenerationIiiSchema>;
+export type PokemonSpritesVersionsGenerationIv = z.infer<typeof PokemonSpritesVersionsGenerationIvSchema>;
+export type PokemonSpritesVersionsGenerationV = z.infer<typeof PokemonSpritesVersionsGenerationVSchema>;
+export type PokemonSpritesVersionsGenerationVi = z.infer<typeof PokemonSpritesVersionsGenerationViSchema>;
+export type PokemonSpritesVersionsGenerationVii = z.infer<typeof PokemonSpritesVersionsGenerationViiSchema>;
+export type PokemonSpritesVersionsGenerationViii = z.infer<typeof PokemonSpritesVersionsGenerationViiiSchema>;
+export type PokemonSpritesVersionsGenerationIRedBlue = z.infer<typeof PokemonSpritesVersionsGenerationIRedBlueSchema>;
+export type PokemonSpritesVersionsGenerationIYellow = z.infer<typeof PokemonSpritesVersionsGenerationIYellowSchema>;
+export type PokemonSpritesVersionsGenerationIiCrystal = z.infer<typeof PokemonSpritesVersionsGenerationIiCrystalSchema>;
+export type PokemonSpritesVersionsGenerationIiGold = z.infer<typeof PokemonSpritesVersionsGenerationIiGoldSchema>;
+export type PokemonSpritesVersionsGenerationIiSilver = z.infer<typeof PokemonSpritesVersionsGenerationIiSilverSchema>;
+export type PokemonSpritesVersionsGenerationIiiEmerald = z.infer<typeof PokemonSpritesVersionsGenerationIiiEmeraldSchema>;
+export type PokemonSpritesVersionsGenerationIiiFireredLeafgreen = z.infer<typeof PokemonSpritesVersionsGenerationIiiFireredLeafgreenSchema>;
+export type PokemonSpritesVersionsGenerationIiiRubySapphire = z.infer<typeof PokemonSpritesVersionsGenerationIiiRubySapphireSchema>;
+export type PokemonSpritesVersionsGenerationIvDiamondPearl = z.infer<typeof PokemonSpritesVersionsGenerationIvDiamondPearlSchema>;
+export type PokemonSpritesVersionsGenerationIvHeartgoldSoulsilver = z.infer<typeof PokemonSpritesVersionsGenerationIvHeartgoldSoulsilverSchema>;
+export type PokemonSpritesVersionsGenerationIvPlatinum = z.infer<typeof PokemonSpritesVersionsGenerationIvPlatinumSchema>;
+export type PokemonSpritesVersionsGenerationVBlackWhite = z.infer<typeof PokemonSpritesVersionsGenerationVBlackWhiteSchema>;
+export type PokemonSpritesVersionsGenerationVBlackWhiteAnimated = z.infer<typeof PokemonSpritesVersionsGenerationVBlackWhiteAnimatedSchema>;
+export type PokemonSpritesVersionsGenerationViOmegarubyAlphasapphire = z.infer<typeof PokemonSpritesVersionsGenerationViOmegarubyAlphasapphireSchema>;
+export type PokemonSpritesVersionsGenerationViXY = z.infer<typeof PokemonSpritesVersionsGenerationViXYSchema>;
+export type PokemonSpritesVersionsGenerationViiIcons = z.infer<typeof PokemonSpritesVersionsGenerationViiIconsSchema>;
+export type PokemonSpritesVersionsGenerationViiUltraSunUltraMoon = z.infer<typeof PokemonSpritesVersionsGenerationViiUltraSunUltraMoonSchema>;
+export type PokemonSpritesVersionsGenerationViiiIcons = z.infer<typeof PokemonSpritesVersionsGenerationViiiIconsSchema>;
+export type PokemonStatsStat = z.infer<typeof PokemonStatsStatSchema>;
+export type PokemonTypesType = z.infer<typeof PokemonTypesTypeSchema>;
+"
+`;
+
+exports[`#zod can emit schema 1`] = `
+"import { z } from \\"zod\\";
+
+
+export const UsersSchema = z.object({
+  id: z.string().uuid().required(),
+  email: z.string().required().min(21).max(29),
+  firstName: z.string().required().min(3).max(10),
+  lastName: z.string().required().min(4).max(11),
+  isActive: z.boolean().required(),
+  createdAt: z.date().required(),
+  modifiedAt: z.date().required(),
+  catchPhrase: z.string().required().min(23).max(48),
+  companyName: z.string().required().min(9).max(20),
+  credits: z.number().required().min(1).max(20).enum([\\"1\\", \\"15\\", \\"20\\", \\"10\\", \\"0\\", \\"11\\", \\"7\\", \\"9\\"]),
+  salesScore: z.number().required().min(0.75129).max(20.9877865),
+  location: z.string().required().min(3).max(6).enum([\\"nyc\\", \\"remote\\", \\"denver\\"]),
+  profile: z.string().min(111).max(234)
+});
+export type Users = z.infer<typeof UsersSchema>;
+"
+`;
+
+exports[`#zod can emit schema for people json 1`] = `
+"import { z } from \\"zod\\";
+
+
+export const PeopleSchema = z.object({
+  name: z.string().required().min(4).max(21),
+  height: z.number().min(66).max(228),
+  mass: z.number().min(17).max(140),
+  hairColor: z.string().required().min(3).max(13),
+  skinColor: z.string().min(4).max(16),
+  eyeColor: z.string().required().min(3).max(9).enum([\\"blue\\", \\"yellow\\", \\"red\\", \\"brown\\", \\"blue-gray\\", \\"black\\", \\"orange\\", \\"hazel\\"]),
+  birthYear: z.string().min(4).max(7),
+  homeworld: z.string().required().min(44).max(45),
+  films: z.array().required().min(1).max(7),
+  species: z.array().required().min(1).max(1).length(1, { message: \\"Exact length required: 1\\" }),
+  vehicles: z.array().required().min(1).max(2),
+  starships: z.array().required().min(1).max(5),
+  created: z.date().required(),
+  edited: z.date().required(),
+  url: z.string().required().min(43).max(44),
+  id: z.number().required().min(1).max(42)
+});
+export type People = z.infer<typeof PeopleSchema>;
+"
+`;
+
+exports[`#zod can emit schema with better names 1`] = `
+"import { z } from \\"zod\\";
+
+
+export const PokemonSchema = z.object({
+  abilities: z.lazy(() => AbilitiesSchema),
+  baseExperience: z.number().required(),
+  forms: z.lazy(() => FormsSchema),
+  gameIndices: z.lazy(() => GameIndicesSchema),
+  height: z.number().required(),
+  heldItems: z.array().required(),
+  id: z.number().required(),
+  isDefault: z.boolean().required(),
+  locationAreaEncounters: z.string().required(),
+  moves: z.lazy(() => MovesSchema),
+  name: z.string().required(),
+  order: z.number().required(),
+  species: z.lazy(() => SpeciesSchema),
+  sprites: z.lazy(() => SpritesSchema),
+  stats: z.lazy(() => StatsSchema),
+  types: z.lazy(() => TypesSchema),
+  weight: z.number().required()
+});
+export const AbilitiesSchema = z.object({
+  ability: z.lazy(() => AbilitySchema),
+  isHidden: z.boolean().required(),
+  slot: z.number().required()
+});
+export const FormsSchema = z.object({
+  name: z.string().required(),
+  url: z.string().required()
+});
+export const GameIndicesSchema = z.object({
+  gameIndex: z.number().required(),
+  version: z.lazy(() => VersionSchema)
+});
+export const MovesSchema = z.object({
+  move: z.lazy(() => MoveSchema),
+  versionGroupDetails: z.lazy(() => VersionGroupDetailsSchema)
+});
+export const SpeciesSchema = z.object({
+  name: z.string().required(),
+  url: z.string().required()
+});
+export const SpritesSchema = z.object({
+  backDefault: z.string().required(),
+  backFemale: z.any().required(),
+  backShiny: z.string().required(),
+  backShinyFemale: z.any().required(),
+  frontDefault: z.string().required(),
+  frontFemale: z.any().required(),
+  frontShiny: z.string().required(),
+  frontShinyFemale: z.any().required(),
+  other: z.lazy(() => OtherSchema),
+  versions: z.lazy(() => VersionsSchema)
+});
+export const StatsSchema = z.object({
+  baseStat: z.number().required(),
+  effort: z.number().required(),
+  stat: z.lazy(() => StatSchema)
+});
+export const TypesSchema = z.object({
+  slot: z.number().required(),
+  type: z.lazy(() => TypeSchema)
+});
+export const AbilitySchema = z.object({
+  name: z.string().required(),
+  url: z.string().required()
+});
+export const VersionSchema = z.object({
+  name: z.string().required(),
+  url: z.string().required()
+});
+export const MoveSchema = z.object({
+  name: z.string().required(),
+  url: z.string().required()
+});
+export const VersionGroupDetailsSchema = z.object({
+  levelLearnedAt: z.number().required(),
+  moveLearnMethod: z.lazy(() => MoveLearnMethodSchema),
+  versionGroup: z.lazy(() => VersionGroupSchema)
+});
+export const MoveLearnMethodSchema = z.object({
+  name: z.string().required().enum([\\"machine\\", \\"tutor\\", \\"level-up\\", \\"egg\\"]),
+  url: z.string().required().enum([\\"https://pokeapi.co/api/v2/move-learn-method/4/\\", \\"https://pokeapi.co/api/v2/move-learn-method/3/\\", \\"https://pokeapi.co/api/v2/move-learn-method/1/\\", \\"https://pokeapi.co/api/v2/move-learn-method/2/\\"])
+});
+export const VersionGroupSchema = z.object({
+  name: z.string().required(),
+  url: z.string().required()
+});
+export const OtherSchema = z.object({
+  dreamWorld: z.lazy(() => DreamWorldSchema),
+  officialArtwork: z.lazy(() => OfficialArtworkSchema)
+});
+export const VersionsSchema = z.object({
+  generationI: z.lazy(() => GenerationISchema),
+  generationIi: z.lazy(() => GenerationIiSchema),
+  generationIii: z.lazy(() => GenerationIiiSchema),
+  generationIv: z.lazy(() => GenerationIvSchema),
+  generationV: z.lazy(() => GenerationVSchema),
+  generationVi: z.lazy(() => GenerationViSchema),
+  generationVii: z.lazy(() => GenerationViiSchema),
+  generationViii: z.lazy(() => GenerationViiiSchema)
+});
+export const DreamWorldSchema = z.object({
+  frontDefault: z.string().required(),
+  frontFemale: z.any().required()
+});
+export const OfficialArtworkSchema = z.object({
+  frontDefault: z.string().required()
+});
+export const GenerationISchema = z.object({
+  redBlue: z.lazy(() => RedBlueSchema),
+  yellow: z.lazy(() => YellowSchema)
+});
+export const GenerationIiSchema = z.object({
+  crystal: z.lazy(() => CrystalSchema),
+  gold: z.lazy(() => GoldSchema),
+  silver: z.lazy(() => SilverSchema)
+});
+export const GenerationIiiSchema = z.object({
+  emerald: z.lazy(() => EmeraldSchema),
+  fireredLeafgreen: z.lazy(() => FireredLeafgreenSchema),
+  rubySapphire: z.lazy(() => RubySapphireSchema)
+});
+export const GenerationIvSchema = z.object({
+  diamondPearl: z.lazy(() => DiamondPearlSchema),
+  heartgoldSoulsilver: z.lazy(() => HeartgoldSoulsilverSchema),
+  platinum: z.lazy(() => PlatinumSchema)
+});
+export const GenerationVSchema = z.object({
+  blackWhite: z.lazy(() => BlackWhiteSchema)
+});
+export const GenerationViSchema = z.object({
+  omegarubyAlphasapphire: z.lazy(() => OmegarubyAlphasapphireSchema),
+  xY: z.lazy(() => XYSchema)
+});
+export const GenerationViiSchema = z.object({
+  icons: z.lazy(() => IconsSchema),
+  ultraSunUltraMoon: z.lazy(() => UltraSunUltraMoonSchema)
+});
+export const GenerationViiiSchema = z.object({
+  icons: z.lazy(() => IconsSchema)
+});
+export const RedBlueSchema = z.object({
+  backDefault: z.string().required(),
+  backGray: z.string().required(),
+  frontDefault: z.string().required(),
+  frontGray: z.string().required()
+});
+export const YellowSchema = z.object({
+  backDefault: z.string().required(),
+  backGray: z.string().required(),
+  frontDefault: z.string().required(),
+  frontGray: z.string().required()
+});
+export const CrystalSchema = z.object({
+  backDefault: z.string().required(),
+  backShiny: z.string().required(),
+  frontDefault: z.string().required(),
+  frontShiny: z.string().required()
+});
+export const GoldSchema = z.object({
+  backDefault: z.string().required(),
+  backShiny: z.string().required(),
+  frontDefault: z.string().required(),
+  frontShiny: z.string().required()
+});
+export const SilverSchema = z.object({
+  backDefault: z.string().required(),
+  backShiny: z.string().required(),
+  frontDefault: z.string().required(),
+  frontShiny: z.string().required()
+});
+export const EmeraldSchema = z.object({
+  frontDefault: z.string().required(),
+  frontShiny: z.string().required()
+});
+export const FireredLeafgreenSchema = z.object({
+  backDefault: z.string().required(),
+  backShiny: z.string().required(),
+  frontDefault: z.string().required(),
+  frontShiny: z.string().required()
+});
+export const RubySapphireSchema = z.object({
+  backDefault: z.string().required(),
+  backShiny: z.string().required(),
+  frontDefault: z.string().required(),
+  frontShiny: z.string().required()
+});
+export const DiamondPearlSchema = z.object({
+  backDefault: z.string().required(),
+  backFemale: z.any().required(),
+  backShiny: z.string().required(),
+  backShinyFemale: z.any().required(),
+  frontDefault: z.string().required(),
+  frontFemale: z.any().required(),
+  frontShiny: z.string().required(),
+  frontShinyFemale: z.any().required()
+});
+export const HeartgoldSoulsilverSchema = z.object({
+  backDefault: z.string().required(),
+  backFemale: z.any().required(),
+  backShiny: z.string().required(),
+  backShinyFemale: z.any().required(),
+  frontDefault: z.string().required(),
+  frontFemale: z.any().required(),
+  frontShiny: z.string().required(),
+  frontShinyFemale: z.any().required()
+});
+export const PlatinumSchema = z.object({
+  backDefault: z.string().required(),
+  backFemale: z.any().required(),
+  backShiny: z.string().required(),
+  backShinyFemale: z.any().required(),
+  frontDefault: z.string().required(),
+  frontFemale: z.any().required(),
+  frontShiny: z.string().required(),
+  frontShinyFemale: z.any().required()
+});
+export const BlackWhiteSchema = z.object({
+  animated: z.lazy(() => AnimatedSchema),
+  backDefault: z.string().required(),
+  backFemale: z.any().required(),
+  backShiny: z.string().required(),
+  backShinyFemale: z.any().required(),
+  frontDefault: z.string().required(),
+  frontFemale: z.any().required(),
+  frontShiny: z.string().required(),
+  frontShinyFemale: z.any().required()
+});
+export const AnimatedSchema = z.object({
+  backDefault: z.string().required(),
+  backFemale: z.any().required(),
+  backShiny: z.string().required(),
+  backShinyFemale: z.any().required(),
+  frontDefault: z.string().required(),
+  frontFemale: z.any().required(),
+  frontShiny: z.string().required(),
+  frontShinyFemale: z.any().required()
+});
+export const OmegarubyAlphasapphireSchema = z.object({
+  frontDefault: z.string().required(),
+  frontFemale: z.any().required(),
+  frontShiny: z.string().required(),
+  frontShinyFemale: z.any().required()
+});
+export const XYSchema = z.object({
+  frontDefault: z.string().required(),
+  frontFemale: z.any().required(),
+  frontShiny: z.string().required(),
+  frontShinyFemale: z.any().required()
+});
+export const IconsSchema = z.object({
+  frontDefault: z.string().required(),
+  frontFemale: z.any().required()
+});
+export const UltraSunUltraMoonSchema = z.object({
+  frontDefault: z.string().required(),
+  frontFemale: z.any().required(),
+  frontShiny: z.string().required(),
+  frontShinyFemale: z.any().required()
+});
+export const StatSchema = z.object({
+  name: z.string().required(),
+  url: z.string().required()
+});
+export const TypeSchema = z.object({
+  name: z.string().required(),
+  url: z.string().required()
+});
+export type Pokemon = z.infer<typeof PokemonSchema>;
+export type Abilities = z.infer<typeof AbilitiesSchema>;
+export type Forms = z.infer<typeof FormsSchema>;
+export type GameIndices = z.infer<typeof GameIndicesSchema>;
+export type Moves = z.infer<typeof MovesSchema>;
+export type Species = z.infer<typeof SpeciesSchema>;
+export type Sprites = z.infer<typeof SpritesSchema>;
+export type Stats = z.infer<typeof StatsSchema>;
+export type Types = z.infer<typeof TypesSchema>;
+export type Ability = z.infer<typeof AbilitySchema>;
+export type Version = z.infer<typeof VersionSchema>;
+export type Move = z.infer<typeof MoveSchema>;
+export type VersionGroupDetails = z.infer<typeof VersionGroupDetailsSchema>;
+export type MoveLearnMethod = z.infer<typeof MoveLearnMethodSchema>;
+export type VersionGroup = z.infer<typeof VersionGroupSchema>;
+export type Other = z.infer<typeof OtherSchema>;
+export type Versions = z.infer<typeof VersionsSchema>;
+export type DreamWorld = z.infer<typeof DreamWorldSchema>;
+export type OfficialArtwork = z.infer<typeof OfficialArtworkSchema>;
+export type GenerationI = z.infer<typeof GenerationISchema>;
+export type GenerationIi = z.infer<typeof GenerationIiSchema>;
+export type GenerationIii = z.infer<typeof GenerationIiiSchema>;
+export type GenerationIv = z.infer<typeof GenerationIvSchema>;
+export type GenerationV = z.infer<typeof GenerationVSchema>;
+export type GenerationVi = z.infer<typeof GenerationViSchema>;
+export type GenerationVii = z.infer<typeof GenerationViiSchema>;
+export type GenerationViii = z.infer<typeof GenerationViiiSchema>;
+export type RedBlue = z.infer<typeof RedBlueSchema>;
+export type Yellow = z.infer<typeof YellowSchema>;
+export type Crystal = z.infer<typeof CrystalSchema>;
+export type Gold = z.infer<typeof GoldSchema>;
+export type Silver = z.infer<typeof SilverSchema>;
+export type Emerald = z.infer<typeof EmeraldSchema>;
+export type FireredLeafgreen = z.infer<typeof FireredLeafgreenSchema>;
+export type RubySapphire = z.infer<typeof RubySapphireSchema>;
+export type DiamondPearl = z.infer<typeof DiamondPearlSchema>;
+export type HeartgoldSoulsilver = z.infer<typeof HeartgoldSoulsilverSchema>;
+export type Platinum = z.infer<typeof PlatinumSchema>;
+export type BlackWhite = z.infer<typeof BlackWhiteSchema>;
+export type Animated = z.infer<typeof AnimatedSchema>;
+export type OmegarubyAlphasapphire = z.infer<typeof OmegarubyAlphasapphireSchema>;
+export type XY = z.infer<typeof XYSchema>;
+export type Icons = z.infer<typeof IconsSchema>;
+export type UltraSunUltraMoon = z.infer<typeof UltraSunUltraMoonSchema>;
+export type Stat = z.infer<typeof StatSchema>;
+export type Type = z.infer<typeof TypeSchema>;
+"
+`;
+
+exports[`#zod can emit schema with nested types 1`] = `
+"import { z } from \\"zod\\";
+
+
+export const UsersSchema = z.object({
+  id: z.number().required().min(1).max(12),
+  name: z.string().required().min(3).max(3).length(3, { message: \\"Exact length required: 3\\" }),
+  notes: z.lazy(() => UsersNotesSchema)
+});
+export const UsersNotesSchema = z.object({
+  id: z.number().required().min(997).max(2998),
+  text: z.string().required().min(5).max(5).length(5, { message: \\"Exact length required: 5\\" })
+});
+export type Users = z.infer<typeof UsersSchema>;
+export type UsersNotes = z.infer<typeof UsersNotesSchema>;
+"
+`;
