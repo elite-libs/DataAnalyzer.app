@@ -5,11 +5,11 @@ exports[`#mongoose can emit migration for eventResults json 1`] = `
 const {Schema, Model, Types} = mongoose;
 
 const EventResults = new Schema({
-  links: {
+  _links: {
     type: \\"eventResults._links\\",
     required: true,
   },
-  embedded: {
+  _embedded: {
     type: \\"eventResults._embedded\\",
     required: true,
   },
@@ -122,11 +122,11 @@ const EventResultsEmbeddedEvents = new Schema({
     type: \\"eventResults._embedded.events.promoter\\",
     required: true,
   },
-  links: {
+  _links: {
     type: \\"eventResults._embedded.events._links\\",
     required: true,
   },
-  embedded: {
+  _embedded: {
     type: \\"eventResults._embedded.events._embedded\\",
     required: true,
   }});
@@ -223,7 +223,7 @@ const EventResultsEmbeddedEventsSalesPublic = new Schema({
     unique: true,
     required: true,
   },
-  startTbd: {
+  startTBD: {
     type: \\"Boolean\\",
     required: true,
   },
@@ -238,15 +238,15 @@ const EventResultsEmbeddedEventsDatesStart = new Schema({
     unique: true,
     required: true,
   },
-  dateTbd: {
+  dateTBD: {
     type: \\"Boolean\\",
     required: true,
   },
-  dateTba: {
+  dateTBA: {
     type: \\"Boolean\\",
     required: true,
   },
-  timeTba: {
+  timeTBA: {
     type: \\"Boolean\\",
     required: true,
   },
@@ -370,7 +370,7 @@ const EventResultsEmbeddedEventsEmbeddedVenues = new Schema({
     type: \\"eventResults._embedded.events._embedded.venues.markets\\",
     required: true,
   },
-  links: {
+  _links: {
     type: \\"eventResults._embedded.events._embedded.venues._links\\",
     required: true,
   }});
@@ -407,7 +407,7 @@ const EventResultsEmbeddedEventsEmbeddedAttractions = new Schema({
     type: \\"eventResults._embedded.events._embedded.attractions.classifications\\",
     required: true,
   },
-  links: {
+  _links: {
     type: \\"eventResults._embedded.events._embedded.attractions._links\\",
     required: true,
   }});
@@ -644,11 +644,11 @@ exports[`#mongoose can emit migration for eventResults json, w/ dense & trim fie
 const {Schema, Model, Types} = mongoose;
 
 const EventResults = new Schema({
-  links: {
+  _links: {
     type: \\"_links\\",
     required: true,
   },
-  embedded: {
+  _embedded: {
     type: \\"_embedded\\",
     required: true,
   },
@@ -757,11 +757,11 @@ const Events = new Schema({
     type: \\"promoter\\",
     required: true,
   },
-  links: {
+  _links: {
     type: \\"_links\\",
     required: true,
   },
-  embedded: {
+  _embedded: {
     type: \\"_embedded\\",
     required: true,
   }});
@@ -836,7 +836,7 @@ const Public = new Schema({
     unique: true,
     required: true,
   },
-  startTbd: {
+  startTBD: {
     type: \\"Boolean\\",
     required: true,
   },
@@ -851,15 +851,15 @@ const Start = new Schema({
     unique: true,
     required: true,
   },
-  dateTbd: {
+  dateTBD: {
     type: \\"Boolean\\",
     required: true,
   },
-  dateTba: {
+  dateTBA: {
     type: \\"Boolean\\",
     required: true,
   },
-  timeTba: {
+  timeTBA: {
     type: \\"Boolean\\",
     required: true,
   },
@@ -906,7 +906,7 @@ const Attractions = new Schema({
     type: \\"classifications\\",
     required: true,
   },
-  links: {
+  _links: {
     type: \\"_links\\",
     required: true,
   }});
@@ -969,7 +969,7 @@ const Venues = new Schema({
     type: \\"markets\\",
     required: true,
   },
-  links: {
+  _links: {
     type: \\"_links\\",
     required: true,
   }});
@@ -1090,11 +1090,11 @@ exports[`#mongoose can emit migration for eventResults json, w/ dense fields 1`]
 const {Schema, Model, Types} = mongoose;
 
 const EventResults = new Schema({
-  links: {
+  _links: {
     type: \\"eventResults._links\\",
     required: true,
   },
-  embedded: {
+  _embedded: {
     type: \\"eventResults._embedded\\",
     required: true,
   },
@@ -1187,11 +1187,11 @@ const EventResultsEmbeddedEvents = new Schema({
     type: \\"eventResults._embedded.events.promoter\\",
     required: true,
   },
-  links: {
+  _links: {
     type: \\"eventResults._embedded.events._links\\",
     required: true,
   },
-  embedded: {
+  _embedded: {
     type: \\"eventResults._embedded.events._embedded\\",
     required: true,
   }});
@@ -1248,7 +1248,7 @@ const EventResultsEmbeddedEventsSalesPublic = new Schema({
     unique: true,
     required: true,
   },
-  startTbd: {
+  startTBD: {
     type: \\"Boolean\\",
     required: true,
   },
@@ -1263,15 +1263,15 @@ const EventResultsEmbeddedEventsDatesStart = new Schema({
     unique: true,
     required: true,
   },
-  dateTbd: {
+  dateTBD: {
     type: \\"Boolean\\",
     required: true,
   },
-  dateTba: {
+  dateTBA: {
     type: \\"Boolean\\",
     required: true,
   },
-  timeTba: {
+  timeTBA: {
     type: \\"Boolean\\",
     required: true,
   },
@@ -1344,7 +1344,7 @@ const EventResultsEmbeddedEventsEmbeddedVenues = new Schema({
     type: \\"eventResults._embedded.events._embedded.venues.markets\\",
     required: true,
   },
-  links: {
+  _links: {
     type: \\"_links\\",
     required: true,
   }});
@@ -1381,7 +1381,7 @@ const EventResultsEmbeddedEventsEmbeddedAttractions = new Schema({
     type: \\"classifications\\",
     required: true,
   },
-  links: {
+  _links: {
     type: \\"_links\\",
     required: true,
   }});
@@ -1573,7 +1573,7 @@ const Pokemon = new Schema({
     type: \\"pokemon.abilities\\",
     required: true,
   },
-  baseExperience: {
+  base_experience: {
     type: \\"Number\\",
     unique: true,
     required: true,
@@ -1582,7 +1582,7 @@ const Pokemon = new Schema({
     type: \\"pokemon.forms\\",
     required: true,
   },
-  gameIndices: {
+  game_indices: {
     type: \\"pokemon.game_indices\\",
     required: true,
   },
@@ -1591,7 +1591,7 @@ const Pokemon = new Schema({
     unique: true,
     required: true,
   },
-  heldItems: {
+  held_items: {
     type: \\"Array\\",
     required: true,
   },
@@ -1600,11 +1600,11 @@ const Pokemon = new Schema({
     unique: true,
     required: true,
   },
-  isDefault: {
+  is_default: {
     type: \\"Boolean\\",
     required: true,
   },
-  locationAreaEncounters: {
+  location_area_encounters: {
     type: \\"String\\",
     unique: true,
     required: true,
@@ -1649,7 +1649,7 @@ const PokemonAbilities = new Schema({
     type: \\"pokemon.abilities.ability\\",
     required: true,
   },
-  isHidden: {
+  is_hidden: {
     type: \\"Boolean\\",
     required: true,
   },
@@ -1670,7 +1670,7 @@ const PokemonForms = new Schema({
     required: true,
   }});
 const PokemonGameIndices = new Schema({
-  gameIndex: {
+  game_index: {
     type: \\"Number\\",
     required: true,
   },
@@ -1683,7 +1683,7 @@ const PokemonMoves = new Schema({
     type: \\"pokemon.moves.move\\",
     required: true,
   },
-  versionGroupDetails: {
+  version_group_details: {
     type: \\"pokemon.moves.version_group_details\\",
     required: true,
   }});
@@ -1699,39 +1699,39 @@ const PokemonSpecies = new Schema({
     required: true,
   }});
 const PokemonSprites = new Schema({
-  backDefault: {
+  back_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backFemale: {
+  back_female: {
     type: \\"Null\\",
     required: true,
   },
-  backShiny: {
+  back_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backShinyFemale: {
+  back_shiny_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontFemale: {
+  front_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShinyFemale: {
+  front_shiny_female: {
     type: \\"Null\\",
     required: true,
   },
@@ -1744,7 +1744,7 @@ const PokemonSprites = new Schema({
     required: true,
   }});
 const PokemonStats = new Schema({
-  baseStat: {
+  base_stat: {
     type: \\"Number\\",
     unique: true,
     required: true,
@@ -1801,15 +1801,15 @@ const PokemonMovesMove = new Schema({
     required: true,
   }});
 const PokemonMovesVersionGroupDetails = new Schema({
-  levelLearnedAt: {
+  level_learned_at: {
     type: \\"Number\\",
     required: true,
   },
-  moveLearnMethod: {
+  move_learn_method: {
     type: \\"pokemon.moves.version_group_details.move_learn_method\\",
     required: true,
   },
-  versionGroup: {
+  version_group: {
     type: \\"pokemon.moves.version_group_details.version_group\\",
     required: true,
   }});
@@ -1834,65 +1834,65 @@ const PokemonMovesVersionGroupDetailsVersionGroup = new Schema({
     required: true,
   }});
 const PokemonSpritesOther = new Schema({
-  dreamWorld: {
+  dream_world: {
     type: \\"pokemon.sprites.other.dream_world\\",
     required: true,
   },
-  officialArtwork: {
+  officialartwork: {
     type: \\"pokemon.sprites.other.official-artwork\\",
     required: true,
   }});
 const PokemonSpritesVersions = new Schema({
-  generationI: {
+  generationi: {
     type: \\"pokemon.sprites.versions.generation-i\\",
     required: true,
   },
-  generationIi: {
+  generationii: {
     type: \\"pokemon.sprites.versions.generation-ii\\",
     required: true,
   },
-  generationIii: {
+  generationiii: {
     type: \\"pokemon.sprites.versions.generation-iii\\",
     required: true,
   },
-  generationIv: {
+  generationiv: {
     type: \\"pokemon.sprites.versions.generation-iv\\",
     required: true,
   },
-  generationV: {
+  generationv: {
     type: \\"pokemon.sprites.versions.generation-v\\",
     required: true,
   },
-  generationVi: {
+  generationvi: {
     type: \\"pokemon.sprites.versions.generation-vi\\",
     required: true,
   },
-  generationVii: {
+  generationvii: {
     type: \\"pokemon.sprites.versions.generation-vii\\",
     required: true,
   },
-  generationViii: {
+  generationviii: {
     type: \\"pokemon.sprites.versions.generation-viii\\",
     required: true,
   }});
 const PokemonSpritesOtherDreamWorld = new Schema({
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontFemale: {
+  front_female: {
     type: \\"Null\\",
     required: true,
   }});
 const PokemonSpritesOtherOfficialArtwork = new Schema({
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   }});
 const PokemonSpritesVersionsGenerationI = new Schema({
-  redBlue: {
+  redblue: {
     type: \\"pokemon.sprites.versions.generation-i.red-blue\\",
     required: true,
   },
@@ -1918,20 +1918,20 @@ const PokemonSpritesVersionsGenerationIii = new Schema({
     type: \\"pokemon.sprites.versions.generation-iii.emerald\\",
     required: true,
   },
-  fireredLeafgreen: {
+  fireredleafgreen: {
     type: \\"pokemon.sprites.versions.generation-iii.firered-leafgreen\\",
     required: true,
   },
-  rubySapphire: {
+  rubysapphire: {
     type: \\"pokemon.sprites.versions.generation-iii.ruby-sapphire\\",
     required: true,
   }});
 const PokemonSpritesVersionsGenerationIv = new Schema({
-  diamondPearl: {
+  diamondpearl: {
     type: \\"pokemon.sprites.versions.generation-iv.diamond-pearl\\",
     required: true,
   },
-  heartgoldSoulsilver: {
+  heartgoldsoulsilver: {
     type: \\"pokemon.sprites.versions.generation-iv.heartgold-soulsilver\\",
     required: true,
   },
@@ -1940,16 +1940,16 @@ const PokemonSpritesVersionsGenerationIv = new Schema({
     required: true,
   }});
 const PokemonSpritesVersionsGenerationV = new Schema({
-  blackWhite: {
+  blackwhite: {
     type: \\"pokemon.sprites.versions.generation-v.black-white\\",
     required: true,
   }});
 const PokemonSpritesVersionsGenerationVi = new Schema({
-  omegarubyAlphasapphire: {
+  omegarubyalphasapphire: {
     type: \\"pokemon.sprites.versions.generation-vi.omegaruby-alphasapphire\\",
     required: true,
   },
-  xY: {
+  xy: {
     type: \\"pokemon.sprites.versions.generation-vi.x-y\\",
     required: true,
   }});
@@ -1958,7 +1958,7 @@ const PokemonSpritesVersionsGenerationVii = new Schema({
     type: \\"pokemon.sprites.versions.generation-vii.icons\\",
     required: true,
   },
-  ultraSunUltraMoon: {
+  ultrasunultramoon: {
     type: \\"pokemon.sprites.versions.generation-vii.ultra-sun-ultra-moon\\",
     required: true,
   }});
@@ -1968,271 +1968,271 @@ const PokemonSpritesVersionsGenerationViii = new Schema({
     required: true,
   }});
 const PokemonSpritesVersionsGenerationIRedBlue = new Schema({
-  backDefault: {
+  back_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backGray: {
+  back_gray: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontGray: {
+  front_gray: {
     type: \\"String\\",
     unique: true,
     required: true,
   }});
 const PokemonSpritesVersionsGenerationIYellow = new Schema({
-  backDefault: {
+  back_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backGray: {
+  back_gray: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontGray: {
+  front_gray: {
     type: \\"String\\",
     unique: true,
     required: true,
   }});
 const PokemonSpritesVersionsGenerationIiCrystal = new Schema({
-  backDefault: {
+  back_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backShiny: {
+  back_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   }});
 const PokemonSpritesVersionsGenerationIiGold = new Schema({
-  backDefault: {
+  back_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backShiny: {
+  back_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   }});
 const PokemonSpritesVersionsGenerationIiSilver = new Schema({
-  backDefault: {
+  back_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backShiny: {
+  back_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   }});
 const PokemonSpritesVersionsGenerationIiiEmerald = new Schema({
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   }});
 const PokemonSpritesVersionsGenerationIiiFireredLeafgreen = new Schema({
-  backDefault: {
+  back_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backShiny: {
+  back_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   }});
 const PokemonSpritesVersionsGenerationIiiRubySapphire = new Schema({
-  backDefault: {
+  back_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backShiny: {
+  back_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   }});
 const PokemonSpritesVersionsGenerationIvDiamondPearl = new Schema({
-  backDefault: {
+  back_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backFemale: {
+  back_female: {
     type: \\"Null\\",
     required: true,
   },
-  backShiny: {
+  back_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backShinyFemale: {
+  back_shiny_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontFemale: {
+  front_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShinyFemale: {
+  front_shiny_female: {
     type: \\"Null\\",
     required: true,
   }});
 const PokemonSpritesVersionsGenerationIvHeartgoldSoulsilver = new Schema({
-  backDefault: {
+  back_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backFemale: {
+  back_female: {
     type: \\"Null\\",
     required: true,
   },
-  backShiny: {
+  back_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backShinyFemale: {
+  back_shiny_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontFemale: {
+  front_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShinyFemale: {
+  front_shiny_female: {
     type: \\"Null\\",
     required: true,
   }});
 const PokemonSpritesVersionsGenerationIvPlatinum = new Schema({
-  backDefault: {
+  back_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backFemale: {
+  back_female: {
     type: \\"Null\\",
     required: true,
   },
-  backShiny: {
+  back_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backShinyFemale: {
+  back_shiny_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontFemale: {
+  front_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShinyFemale: {
+  front_shiny_female: {
     type: \\"Null\\",
     required: true,
   }});
@@ -2241,153 +2241,153 @@ const PokemonSpritesVersionsGenerationVBlackWhite = new Schema({
     type: \\"pokemon.sprites.versions.generation-v.black-white.animated\\",
     required: true,
   },
-  backDefault: {
+  back_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backFemale: {
+  back_female: {
     type: \\"Null\\",
     required: true,
   },
-  backShiny: {
+  back_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backShinyFemale: {
+  back_shiny_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontFemale: {
+  front_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShinyFemale: {
+  front_shiny_female: {
     type: \\"Null\\",
     required: true,
   }});
 const PokemonSpritesVersionsGenerationVBlackWhiteAnimated = new Schema({
-  backDefault: {
+  back_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backFemale: {
+  back_female: {
     type: \\"Null\\",
     required: true,
   },
-  backShiny: {
+  back_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backShinyFemale: {
+  back_shiny_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontFemale: {
+  front_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShinyFemale: {
+  front_shiny_female: {
     type: \\"Null\\",
     required: true,
   }});
 const PokemonSpritesVersionsGenerationViOmegarubyAlphasapphire = new Schema({
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontFemale: {
+  front_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShinyFemale: {
+  front_shiny_female: {
     type: \\"Null\\",
     required: true,
   }});
 const PokemonSpritesVersionsGenerationViXY = new Schema({
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontFemale: {
+  front_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShinyFemale: {
+  front_shiny_female: {
     type: \\"Null\\",
     required: true,
   }});
 const PokemonSpritesVersionsGenerationViiIcons = new Schema({
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontFemale: {
+  front_female: {
     type: \\"Null\\",
     required: true,
   }});
 const PokemonSpritesVersionsGenerationViiUltraSunUltraMoon = new Schema({
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontFemale: {
+  front_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShinyFemale: {
+  front_shiny_female: {
     type: \\"Null\\",
     required: true,
   }});
 const PokemonSpritesVersionsGenerationViiiIcons = new Schema({
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontFemale: {
+  front_female: {
     type: \\"Null\\",
     required: true,
   }});
@@ -2518,7 +2518,7 @@ const Pokemon = new Schema({
     type: \\"abilities\\",
     required: true,
   },
-  baseExperience: {
+  base_experience: {
     type: \\"Number\\",
     unique: true,
     required: true,
@@ -2527,7 +2527,7 @@ const Pokemon = new Schema({
     type: \\"forms\\",
     required: true,
   },
-  gameIndices: {
+  game_indices: {
     type: \\"game_indices\\",
     required: true,
   },
@@ -2536,7 +2536,7 @@ const Pokemon = new Schema({
     unique: true,
     required: true,
   },
-  heldItems: {
+  held_items: {
     type: \\"Array\\",
     required: true,
   },
@@ -2545,11 +2545,11 @@ const Pokemon = new Schema({
     unique: true,
     required: true,
   },
-  isDefault: {
+  is_default: {
     type: \\"Boolean\\",
     required: true,
   },
-  locationAreaEncounters: {
+  location_area_encounters: {
     type: \\"String\\",
     unique: true,
     required: true,
@@ -2594,7 +2594,7 @@ const Abilities = new Schema({
     type: \\"name.url\\",
     required: true,
   },
-  isHidden: {
+  is_hidden: {
     type: \\"Boolean\\",
     required: true,
   },
@@ -2604,7 +2604,7 @@ const Abilities = new Schema({
     required: true,
   }});
 const GameIndices = new Schema({
-  gameIndex: {
+  game_index: {
     type: \\"Number\\",
     required: true,
   },
@@ -2617,44 +2617,44 @@ const Moves = new Schema({
     type: \\"name.url\\",
     required: true,
   },
-  versionGroupDetails: {
+  version_group_details: {
     type: \\"version_group_details\\",
     required: true,
   }});
 const Sprites = new Schema({
-  backDefault: {
+  back_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backFemale: {
+  back_female: {
     type: \\"Null\\",
     required: true,
   },
-  backShiny: {
+  back_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backShinyFemale: {
+  back_shiny_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontFemale: {
+  front_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShinyFemale: {
+  front_shiny_female: {
     type: \\"Null\\",
     required: true,
   },
@@ -2667,7 +2667,7 @@ const Sprites = new Schema({
     required: true,
   }});
 const Stats = new Schema({
-  baseStat: {
+  base_stat: {
     type: \\"Number\\",
     unique: true,
     required: true,
@@ -2691,68 +2691,68 @@ const Types = new Schema({
     required: true,
   }});
 const VersionGroupDetails = new Schema({
-  levelLearnedAt: {
+  level_learned_at: {
     type: \\"Number\\",
     required: true,
   },
-  moveLearnMethod: {
+  move_learn_method: {
     type: \\"name.url\\",
     required: true,
   },
-  versionGroup: {
+  version_group: {
     type: \\"name.url\\",
     required: true,
   }});
 const Other = new Schema({
-  dreamWorld: {
+  dream_world: {
     type: \\"front_default.front_female\\",
     required: true,
   },
-  officialArtwork: {
+  officialartwork: {
     type: \\"official-artwork\\",
     required: true,
   }});
 const Versions = new Schema({
-  generationI: {
+  generationi: {
     type: \\"generation-i\\",
     required: true,
   },
-  generationIi: {
+  generationii: {
     type: \\"generation-ii\\",
     required: true,
   },
-  generationIii: {
+  generationiii: {
     type: \\"generation-iii\\",
     required: true,
   },
-  generationIv: {
+  generationiv: {
     type: \\"generation-iv\\",
     required: true,
   },
-  generationV: {
+  generationv: {
     type: \\"generation-v\\",
     required: true,
   },
-  generationVi: {
+  generationvi: {
     type: \\"generation-vi\\",
     required: true,
   },
-  generationVii: {
+  generationvii: {
     type: \\"generation-vii\\",
     required: true,
   },
-  generationViii: {
+  generationviii: {
     type: \\"generation-viii\\",
     required: true,
   }});
 const OfficialArtwork = new Schema({
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   }});
 const GenerationI = new Schema({
-  redBlue: {
+  redblue: {
     type: \\"red-blue.yellow\\",
     required: true,
   },
@@ -2778,20 +2778,20 @@ const GenerationIii = new Schema({
     type: \\"emerald\\",
     required: true,
   },
-  fireredLeafgreen: {
+  fireredleafgreen: {
     type: \\"firered-leafgreen\\",
     required: true,
   },
-  rubySapphire: {
+  rubysapphire: {
     type: \\"ruby-sapphire\\",
     required: true,
   }});
 const GenerationIv = new Schema({
-  diamondPearl: {
+  diamondpearl: {
     type: \\"animated.diamond-pearl.heartgold-soulsilver.platinum\\",
     required: true,
   },
-  heartgoldSoulsilver: {
+  heartgoldsoulsilver: {
     type: \\"animated.diamond-pearl.heartgold-soulsilver.platinum\\",
     required: true,
   },
@@ -2800,16 +2800,16 @@ const GenerationIv = new Schema({
     required: true,
   }});
 const GenerationV = new Schema({
-  blackWhite: {
+  blackwhite: {
     type: \\"black-white\\",
     required: true,
   }});
 const GenerationVi = new Schema({
-  omegarubyAlphasapphire: {
+  omegarubyalphasapphire: {
     type: \\"omegaruby-alphasapphire.ultra-sun-ultra-moon.x-y\\",
     required: true,
   },
-  xY: {
+  xy: {
     type: \\"omegaruby-alphasapphire.ultra-sun-ultra-moon.x-y\\",
     required: true,
   }});
@@ -2818,7 +2818,7 @@ const GenerationVii = new Schema({
     type: \\"front_default.front_female\\",
     required: true,
   },
-  ultraSunUltraMoon: {
+  ultrasunultramoon: {
     type: \\"omegaruby-alphasapphire.ultra-sun-ultra-moon.x-y\\",
     required: true,
   }});
@@ -2828,117 +2828,117 @@ const GenerationViii = new Schema({
     required: true,
   }});
 const Crystal = new Schema({
-  backDefault: {
+  back_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backShiny: {
+  back_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   }});
 const Gold = new Schema({
-  backDefault: {
+  back_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backShiny: {
+  back_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   }});
 const Silver = new Schema({
-  backDefault: {
+  back_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backShiny: {
+  back_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   }});
 const Emerald = new Schema({
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   }});
 const FireredLeafgreen = new Schema({
-  backDefault: {
+  back_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backShiny: {
+  back_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   }});
 const RubySapphire = new Schema({
-  backDefault: {
+  back_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backShiny: {
+  back_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
@@ -2948,39 +2948,39 @@ const BlackWhite = new Schema({
     type: \\"animated.diamond-pearl.heartgold-soulsilver.platinum\\",
     required: true,
   },
-  backDefault: {
+  back_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backFemale: {
+  back_female: {
     type: \\"Null\\",
     required: true,
   },
-  backShiny: {
+  back_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backShinyFemale: {
+  back_shiny_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontFemale: {
+  front_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShinyFemale: {
+  front_shiny_female: {
     type: \\"Null\\",
     required: true,
   }});
@@ -2996,89 +2996,89 @@ const NameUrl = new Schema({
     required: true,
   }});
 const FrontDefaultFrontFemale = new Schema({
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontFemale: {
+  front_female: {
     type: \\"Null\\",
     required: true,
   }});
 const RedBlueYellow = new Schema({
-  backDefault: {
+  back_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backGray: {
+  back_gray: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontGray: {
+  front_gray: {
     type: \\"String\\",
     unique: true,
     required: true,
   }});
 const AnimatedDiamondPearlHeartgoldSoulsilverPlatinum = new Schema({
-  backDefault: {
+  back_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backFemale: {
+  back_female: {
     type: \\"Null\\",
     required: true,
   },
-  backShiny: {
+  back_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backShinyFemale: {
+  back_shiny_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontFemale: {
+  front_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShinyFemale: {
+  front_shiny_female: {
     type: \\"Null\\",
     required: true,
   }});
 const OmegarubyAlphasapphireUltraSunUltraMoonXY = new Schema({
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontFemale: {
+  front_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShinyFemale: {
+  front_shiny_female: {
     type: \\"Null\\",
     required: true,
   }});
@@ -3155,7 +3155,7 @@ const Pokemon = new Schema({
     type: \\"pokemon.abilities\\",
     required: true,
   },
-  baseExperience: {
+  base_experience: {
     type: \\"Number\\",
     unique: true,
     required: true,
@@ -3164,7 +3164,7 @@ const Pokemon = new Schema({
     type: \\"pokemon.forms\\",
     required: true,
   },
-  gameIndices: {
+  game_indices: {
     type: \\"pokemon.game_indices\\",
     required: true,
   },
@@ -3173,7 +3173,7 @@ const Pokemon = new Schema({
     unique: true,
     required: true,
   },
-  heldItems: {
+  held_items: {
     type: \\"Array\\",
     required: true,
   },
@@ -3182,11 +3182,11 @@ const Pokemon = new Schema({
     unique: true,
     required: true,
   },
-  isDefault: {
+  is_default: {
     type: \\"Boolean\\",
     required: true,
   },
-  locationAreaEncounters: {
+  location_area_encounters: {
     type: \\"String\\",
     unique: true,
     required: true,
@@ -3231,7 +3231,7 @@ const PokemonAbilities = new Schema({
     type: \\"name.url\\",
     required: true,
   },
-  isHidden: {
+  is_hidden: {
     type: \\"Boolean\\",
     required: true,
   },
@@ -3241,7 +3241,7 @@ const PokemonAbilities = new Schema({
     required: true,
   }});
 const PokemonGameIndices = new Schema({
-  gameIndex: {
+  game_index: {
     type: \\"Number\\",
     required: true,
   },
@@ -3254,44 +3254,44 @@ const PokemonMoves = new Schema({
     type: \\"name.url\\",
     required: true,
   },
-  versionGroupDetails: {
+  version_group_details: {
     type: \\"pokemon.moves.version_group_details\\",
     required: true,
   }});
 const PokemonSprites = new Schema({
-  backDefault: {
+  back_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backFemale: {
+  back_female: {
     type: \\"Null\\",
     required: true,
   },
-  backShiny: {
+  back_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backShinyFemale: {
+  back_shiny_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontFemale: {
+  front_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShinyFemale: {
+  front_shiny_female: {
     type: \\"Null\\",
     required: true,
   },
@@ -3304,7 +3304,7 @@ const PokemonSprites = new Schema({
     required: true,
   }});
 const PokemonStats = new Schema({
-  baseStat: {
+  base_stat: {
     type: \\"Number\\",
     unique: true,
     required: true,
@@ -3328,68 +3328,68 @@ const PokemonTypes = new Schema({
     required: true,
   }});
 const PokemonMovesVersionGroupDetails = new Schema({
-  levelLearnedAt: {
+  level_learned_at: {
     type: \\"Number\\",
     required: true,
   },
-  moveLearnMethod: {
+  move_learn_method: {
     type: \\"name.url\\",
     required: true,
   },
-  versionGroup: {
+  version_group: {
     type: \\"name.url\\",
     required: true,
   }});
 const PokemonSpritesOther = new Schema({
-  dreamWorld: {
+  dream_world: {
     type: \\"front_default.front_female\\",
     required: true,
   },
-  officialArtwork: {
+  officialartwork: {
     type: \\"pokemon.sprites.other.official-artwork\\",
     required: true,
   }});
 const PokemonSpritesVersions = new Schema({
-  generationI: {
+  generationi: {
     type: \\"pokemon.sprites.versions.generation-i\\",
     required: true,
   },
-  generationIi: {
+  generationii: {
     type: \\"pokemon.sprites.versions.generation-ii\\",
     required: true,
   },
-  generationIii: {
+  generationiii: {
     type: \\"pokemon.sprites.versions.generation-iii\\",
     required: true,
   },
-  generationIv: {
+  generationiv: {
     type: \\"pokemon.sprites.versions.generation-iv\\",
     required: true,
   },
-  generationV: {
+  generationv: {
     type: \\"pokemon.sprites.versions.generation-v\\",
     required: true,
   },
-  generationVi: {
+  generationvi: {
     type: \\"pokemon.sprites.versions.generation-vi\\",
     required: true,
   },
-  generationVii: {
+  generationvii: {
     type: \\"pokemon.sprites.versions.generation-vii\\",
     required: true,
   },
-  generationViii: {
+  generationviii: {
     type: \\"pokemon.sprites.versions.generation-viii\\",
     required: true,
   }});
 const PokemonSpritesOtherOfficialArtwork = new Schema({
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   }});
 const PokemonSpritesVersionsGenerationI = new Schema({
-  redBlue: {
+  redblue: {
     type: \\"red-blue.yellow\\",
     required: true,
   },
@@ -3415,20 +3415,20 @@ const PokemonSpritesVersionsGenerationIii = new Schema({
     type: \\"pokemon.sprites.versions.generation-iii.emerald\\",
     required: true,
   },
-  fireredLeafgreen: {
+  fireredleafgreen: {
     type: \\"pokemon.sprites.versions.generation-iii.firered-leafgreen\\",
     required: true,
   },
-  rubySapphire: {
+  rubysapphire: {
     type: \\"pokemon.sprites.versions.generation-iii.ruby-sapphire\\",
     required: true,
   }});
 const PokemonSpritesVersionsGenerationIv = new Schema({
-  diamondPearl: {
+  diamondpearl: {
     type: \\"pokemon.sprites.versions.generation-iv.diamond-pearl\\",
     required: true,
   },
-  heartgoldSoulsilver: {
+  heartgoldsoulsilver: {
     type: \\"pokemon.sprites.versions.generation-iv.heartgold-soulsilver\\",
     required: true,
   },
@@ -3437,16 +3437,16 @@ const PokemonSpritesVersionsGenerationIv = new Schema({
     required: true,
   }});
 const PokemonSpritesVersionsGenerationV = new Schema({
-  blackWhite: {
+  blackwhite: {
     type: \\"pokemon.sprites.versions.generation-v.black-white\\",
     required: true,
   }});
 const PokemonSpritesVersionsGenerationVi = new Schema({
-  omegarubyAlphasapphire: {
+  omegarubyalphasapphire: {
     type: \\"generation-vii.omegaruby-alphasapphire.ultra-sun-ultra-moon.x-y\\",
     required: true,
   },
-  xY: {
+  xy: {
     type: \\"generation-vii.omegaruby-alphasapphire.ultra-sun-ultra-moon.x-y\\",
     required: true,
   }});
@@ -3455,7 +3455,7 @@ const PokemonSpritesVersionsGenerationVii = new Schema({
     type: \\"front_default.front_female\\",
     required: true,
   },
-  ultraSunUltraMoon: {
+  ultrasunultramoon: {
     type: \\"generation-vii.omegaruby-alphasapphire.ultra-sun-ultra-moon.x-y\\",
     required: true,
   }});
@@ -3465,229 +3465,229 @@ const PokemonSpritesVersionsGenerationViii = new Schema({
     required: true,
   }});
 const PokemonSpritesVersionsGenerationIiCrystal = new Schema({
-  backDefault: {
+  back_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backShiny: {
+  back_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   }});
 const PokemonSpritesVersionsGenerationIiGold = new Schema({
-  backDefault: {
+  back_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backShiny: {
+  back_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   }});
 const PokemonSpritesVersionsGenerationIiSilver = new Schema({
-  backDefault: {
+  back_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backShiny: {
+  back_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   }});
 const PokemonSpritesVersionsGenerationIiiEmerald = new Schema({
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   }});
 const PokemonSpritesVersionsGenerationIiiFireredLeafgreen = new Schema({
-  backDefault: {
+  back_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backShiny: {
+  back_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   }});
 const PokemonSpritesVersionsGenerationIiiRubySapphire = new Schema({
-  backDefault: {
+  back_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backShiny: {
+  back_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   }});
 const PokemonSpritesVersionsGenerationIvDiamondPearl = new Schema({
-  backDefault: {
+  back_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backFemale: {
+  back_female: {
     type: \\"Null\\",
     required: true,
   },
-  backShiny: {
+  back_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backShinyFemale: {
+  back_shiny_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontFemale: {
+  front_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShinyFemale: {
+  front_shiny_female: {
     type: \\"Null\\",
     required: true,
   }});
 const PokemonSpritesVersionsGenerationIvHeartgoldSoulsilver = new Schema({
-  backDefault: {
+  back_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backFemale: {
+  back_female: {
     type: \\"Null\\",
     required: true,
   },
-  backShiny: {
+  back_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backShinyFemale: {
+  back_shiny_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontFemale: {
+  front_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShinyFemale: {
+  front_shiny_female: {
     type: \\"Null\\",
     required: true,
   }});
 const PokemonSpritesVersionsGenerationIvPlatinum = new Schema({
-  backDefault: {
+  back_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backFemale: {
+  back_female: {
     type: \\"Null\\",
     required: true,
   },
-  backShiny: {
+  back_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backShinyFemale: {
+  back_shiny_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontFemale: {
+  front_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShinyFemale: {
+  front_shiny_female: {
     type: \\"Null\\",
     required: true,
   }});
@@ -3696,76 +3696,76 @@ const PokemonSpritesVersionsGenerationVBlackWhite = new Schema({
     type: \\"pokemon.sprites.versions.generation-v.black-white.animated\\",
     required: true,
   },
-  backDefault: {
+  back_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backFemale: {
+  back_female: {
     type: \\"Null\\",
     required: true,
   },
-  backShiny: {
+  back_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backShinyFemale: {
+  back_shiny_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontFemale: {
+  front_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShinyFemale: {
+  front_shiny_female: {
     type: \\"Null\\",
     required: true,
   }});
 const PokemonSpritesVersionsGenerationVBlackWhiteAnimated = new Schema({
-  backDefault: {
+  back_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backFemale: {
+  back_female: {
     type: \\"Null\\",
     required: true,
   },
-  backShiny: {
+  back_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backShinyFemale: {
+  back_shiny_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontFemale: {
+  front_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShinyFemale: {
+  front_shiny_female: {
     type: \\"Null\\",
     required: true,
   }});
@@ -3781,52 +3781,52 @@ const NameUrl = new Schema({
     required: true,
   }});
 const FrontDefaultFrontFemale = new Schema({
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontFemale: {
+  front_female: {
     type: \\"Null\\",
     required: true,
   }});
 const RedBlueYellow = new Schema({
-  backDefault: {
+  back_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backGray: {
+  back_gray: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontGray: {
+  front_gray: {
     type: \\"String\\",
     unique: true,
     required: true,
   }});
 const GenerationViiOmegarubyAlphasapphireUltraSunUltraMoonXY = new Schema({
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontFemale: {
+  front_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShinyFemale: {
+  front_shiny_female: {
     type: \\"Null\\",
     required: true,
   }});
@@ -3909,7 +3909,7 @@ const Pokemon = new Schema({
     type: \\"pokemon.abilities\\",
     required: true,
   },
-  baseExperience: {
+  base_experience: {
     type: \\"Number\\",
     unique: true,
     required: true,
@@ -3918,7 +3918,7 @@ const Pokemon = new Schema({
     type: \\"pokemon.forms\\",
     required: true,
   },
-  gameIndices: {
+  game_indices: {
     type: \\"pokemon.game_indices\\",
     required: true,
   },
@@ -3927,7 +3927,7 @@ const Pokemon = new Schema({
     unique: true,
     required: true,
   },
-  heldItems: {
+  held_items: {
     type: \\"Array\\",
     required: true,
   },
@@ -3936,11 +3936,11 @@ const Pokemon = new Schema({
     unique: true,
     required: true,
   },
-  isDefault: {
+  is_default: {
     type: \\"Boolean\\",
     required: true,
   },
-  locationAreaEncounters: {
+  location_area_encounters: {
     type: \\"String\\",
     unique: true,
     required: true,
@@ -3985,7 +3985,7 @@ const PokemonAbilities = new Schema({
     type: \\"pokemon.abilities.ability\\",
     required: true,
   },
-  isHidden: {
+  is_hidden: {
     type: \\"Boolean\\",
     required: true,
   },
@@ -4006,7 +4006,7 @@ const PokemonForms = new Schema({
     required: true,
   }});
 const PokemonGameIndices = new Schema({
-  gameIndex: {
+  game_index: {
     type: \\"Number\\",
     required: true,
   },
@@ -4019,7 +4019,7 @@ const PokemonMoves = new Schema({
     type: \\"pokemon.moves.move\\",
     required: true,
   },
-  versionGroupDetails: {
+  version_group_details: {
     type: \\"pokemon.moves.version_group_details\\",
     required: true,
   }});
@@ -4035,39 +4035,39 @@ const PokemonSpecies = new Schema({
     required: true,
   }});
 const PokemonSprites = new Schema({
-  backDefault: {
+  back_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backFemale: {
+  back_female: {
     type: \\"Null\\",
     required: true,
   },
-  backShiny: {
+  back_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backShinyFemale: {
+  back_shiny_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontFemale: {
+  front_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShinyFemale: {
+  front_shiny_female: {
     type: \\"Null\\",
     required: true,
   },
@@ -4080,7 +4080,7 @@ const PokemonSprites = new Schema({
     required: true,
   }});
 const PokemonStats = new Schema({
-  baseStat: {
+  base_stat: {
     type: \\"Number\\",
     unique: true,
     required: true,
@@ -4137,15 +4137,15 @@ const PokemonMovesMove = new Schema({
     required: true,
   }});
 const PokemonMovesVersionGroupDetails = new Schema({
-  levelLearnedAt: {
+  level_learned_at: {
     type: \\"Number\\",
     required: true,
   },
-  moveLearnMethod: {
+  move_learn_method: {
     type: \\"pokemon.moves.version_group_details.move_learn_method\\",
     required: true,
   },
-  versionGroup: {
+  version_group: {
     type: \\"pokemon.moves.version_group_details.version_group\\",
     required: true,
   }});
@@ -4170,65 +4170,65 @@ const PokemonMovesVersionGroupDetailsVersionGroup = new Schema({
     required: true,
   }});
 const PokemonSpritesOther = new Schema({
-  dreamWorld: {
+  dream_world: {
     type: \\"pokemon.sprites.other.dream_world\\",
     required: true,
   },
-  officialArtwork: {
+  officialartwork: {
     type: \\"pokemon.sprites.other.official-artwork\\",
     required: true,
   }});
 const PokemonSpritesVersions = new Schema({
-  generationI: {
+  generationi: {
     type: \\"pokemon.sprites.versions.generation-i\\",
     required: true,
   },
-  generationIi: {
+  generationii: {
     type: \\"pokemon.sprites.versions.generation-ii\\",
     required: true,
   },
-  generationIii: {
+  generationiii: {
     type: \\"pokemon.sprites.versions.generation-iii\\",
     required: true,
   },
-  generationIv: {
+  generationiv: {
     type: \\"pokemon.sprites.versions.generation-iv\\",
     required: true,
   },
-  generationV: {
+  generationv: {
     type: \\"pokemon.sprites.versions.generation-v\\",
     required: true,
   },
-  generationVi: {
+  generationvi: {
     type: \\"pokemon.sprites.versions.generation-vi\\",
     required: true,
   },
-  generationVii: {
+  generationvii: {
     type: \\"pokemon.sprites.versions.generation-vii\\",
     required: true,
   },
-  generationViii: {
+  generationviii: {
     type: \\"pokemon.sprites.versions.generation-viii\\",
     required: true,
   }});
 const PokemonSpritesOtherDreamWorld = new Schema({
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontFemale: {
+  front_female: {
     type: \\"Null\\",
     required: true,
   }});
 const PokemonSpritesOtherOfficialArtwork = new Schema({
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   }});
 const PokemonSpritesVersionsGenerationI = new Schema({
-  redBlue: {
+  redblue: {
     type: \\"pokemon.sprites.versions.generation-i.red-blue\\",
     required: true,
   },
@@ -4254,20 +4254,20 @@ const PokemonSpritesVersionsGenerationIii = new Schema({
     type: \\"pokemon.sprites.versions.generation-iii.emerald\\",
     required: true,
   },
-  fireredLeafgreen: {
+  fireredleafgreen: {
     type: \\"pokemon.sprites.versions.generation-iii.firered-leafgreen\\",
     required: true,
   },
-  rubySapphire: {
+  rubysapphire: {
     type: \\"pokemon.sprites.versions.generation-iii.ruby-sapphire\\",
     required: true,
   }});
 const PokemonSpritesVersionsGenerationIv = new Schema({
-  diamondPearl: {
+  diamondpearl: {
     type: \\"pokemon.sprites.versions.generation-iv.diamond-pearl\\",
     required: true,
   },
-  heartgoldSoulsilver: {
+  heartgoldsoulsilver: {
     type: \\"pokemon.sprites.versions.generation-iv.heartgold-soulsilver\\",
     required: true,
   },
@@ -4276,16 +4276,16 @@ const PokemonSpritesVersionsGenerationIv = new Schema({
     required: true,
   }});
 const PokemonSpritesVersionsGenerationV = new Schema({
-  blackWhite: {
+  blackwhite: {
     type: \\"pokemon.sprites.versions.generation-v.black-white\\",
     required: true,
   }});
 const PokemonSpritesVersionsGenerationVi = new Schema({
-  omegarubyAlphasapphire: {
+  omegarubyalphasapphire: {
     type: \\"pokemon.sprites.versions.generation-vi.omegaruby-alphasapphire\\",
     required: true,
   },
-  xY: {
+  xy: {
     type: \\"pokemon.sprites.versions.generation-vi.x-y\\",
     required: true,
   }});
@@ -4294,7 +4294,7 @@ const PokemonSpritesVersionsGenerationVii = new Schema({
     type: \\"pokemon.sprites.versions.generation-vii.icons\\",
     required: true,
   },
-  ultraSunUltraMoon: {
+  ultrasunultramoon: {
     type: \\"pokemon.sprites.versions.generation-vii.ultra-sun-ultra-moon\\",
     required: true,
   }});
@@ -4304,271 +4304,271 @@ const PokemonSpritesVersionsGenerationViii = new Schema({
     required: true,
   }});
 const PokemonSpritesVersionsGenerationIRedBlue = new Schema({
-  backDefault: {
+  back_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backGray: {
+  back_gray: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontGray: {
+  front_gray: {
     type: \\"String\\",
     unique: true,
     required: true,
   }});
 const PokemonSpritesVersionsGenerationIYellow = new Schema({
-  backDefault: {
+  back_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backGray: {
+  back_gray: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontGray: {
+  front_gray: {
     type: \\"String\\",
     unique: true,
     required: true,
   }});
 const PokemonSpritesVersionsGenerationIiCrystal = new Schema({
-  backDefault: {
+  back_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backShiny: {
+  back_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   }});
 const PokemonSpritesVersionsGenerationIiGold = new Schema({
-  backDefault: {
+  back_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backShiny: {
+  back_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   }});
 const PokemonSpritesVersionsGenerationIiSilver = new Schema({
-  backDefault: {
+  back_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backShiny: {
+  back_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   }});
 const PokemonSpritesVersionsGenerationIiiEmerald = new Schema({
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   }});
 const PokemonSpritesVersionsGenerationIiiFireredLeafgreen = new Schema({
-  backDefault: {
+  back_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backShiny: {
+  back_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   }});
 const PokemonSpritesVersionsGenerationIiiRubySapphire = new Schema({
-  backDefault: {
+  back_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backShiny: {
+  back_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   }});
 const PokemonSpritesVersionsGenerationIvDiamondPearl = new Schema({
-  backDefault: {
+  back_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backFemale: {
+  back_female: {
     type: \\"Null\\",
     required: true,
   },
-  backShiny: {
+  back_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backShinyFemale: {
+  back_shiny_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontFemale: {
+  front_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShinyFemale: {
+  front_shiny_female: {
     type: \\"Null\\",
     required: true,
   }});
 const PokemonSpritesVersionsGenerationIvHeartgoldSoulsilver = new Schema({
-  backDefault: {
+  back_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backFemale: {
+  back_female: {
     type: \\"Null\\",
     required: true,
   },
-  backShiny: {
+  back_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backShinyFemale: {
+  back_shiny_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontFemale: {
+  front_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShinyFemale: {
+  front_shiny_female: {
     type: \\"Null\\",
     required: true,
   }});
 const PokemonSpritesVersionsGenerationIvPlatinum = new Schema({
-  backDefault: {
+  back_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backFemale: {
+  back_female: {
     type: \\"Null\\",
     required: true,
   },
-  backShiny: {
+  back_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backShinyFemale: {
+  back_shiny_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontFemale: {
+  front_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShinyFemale: {
+  front_shiny_female: {
     type: \\"Null\\",
     required: true,
   }});
@@ -4577,153 +4577,153 @@ const PokemonSpritesVersionsGenerationVBlackWhite = new Schema({
     type: \\"pokemon.sprites.versions.generation-v.black-white.animated\\",
     required: true,
   },
-  backDefault: {
+  back_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backFemale: {
+  back_female: {
     type: \\"Null\\",
     required: true,
   },
-  backShiny: {
+  back_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backShinyFemale: {
+  back_shiny_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontFemale: {
+  front_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShinyFemale: {
+  front_shiny_female: {
     type: \\"Null\\",
     required: true,
   }});
 const PokemonSpritesVersionsGenerationVBlackWhiteAnimated = new Schema({
-  backDefault: {
+  back_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backFemale: {
+  back_female: {
     type: \\"Null\\",
     required: true,
   },
-  backShiny: {
+  back_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backShinyFemale: {
+  back_shiny_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontFemale: {
+  front_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShinyFemale: {
+  front_shiny_female: {
     type: \\"Null\\",
     required: true,
   }});
 const PokemonSpritesVersionsGenerationViOmegarubyAlphasapphire = new Schema({
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontFemale: {
+  front_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShinyFemale: {
+  front_shiny_female: {
     type: \\"Null\\",
     required: true,
   }});
 const PokemonSpritesVersionsGenerationViXY = new Schema({
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontFemale: {
+  front_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShinyFemale: {
+  front_shiny_female: {
     type: \\"Null\\",
     required: true,
   }});
 const PokemonSpritesVersionsGenerationViiIcons = new Schema({
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontFemale: {
+  front_female: {
     type: \\"Null\\",
     required: true,
   }});
 const PokemonSpritesVersionsGenerationViiUltraSunUltraMoon = new Schema({
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontFemale: {
+  front_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShinyFemale: {
+  front_shiny_female: {
     type: \\"Null\\",
     required: true,
   }});
 const PokemonSpritesVersionsGenerationViiiIcons = new Schema({
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontFemale: {
+  front_female: {
     type: \\"Null\\",
     required: true,
   }});
@@ -4925,19 +4925,19 @@ const People = new Schema({
   mass: {
     type: \\"Number\\",
   },
-  hairColor: {
+  hair_color: {
     type: \\"String\\",
     required: true,
   },
-  skinColor: {
+  skin_color: {
     type: \\"String\\",
   },
-  eyeColor: {
+  eye_color: {
     type: \\"String\\",
     required: true,
     enum: [\\"blue\\", \\"yellow\\", \\"red\\", \\"brown\\", \\"blue-gray\\", \\"black\\", \\"orange\\", \\"hazel\\"],
   },
-  birthYear: {
+  birth_year: {
     type: \\"String\\",
   },
   homeworld: {
@@ -4993,7 +4993,7 @@ const Pokemon = new Schema({
     type: \\"abilities\\",
     required: true,
   },
-  baseExperience: {
+  base_experience: {
     type: \\"Number\\",
     unique: true,
     required: true,
@@ -5002,7 +5002,7 @@ const Pokemon = new Schema({
     type: \\"forms\\",
     required: true,
   },
-  gameIndices: {
+  game_indices: {
     type: \\"game_indices\\",
     required: true,
   },
@@ -5011,7 +5011,7 @@ const Pokemon = new Schema({
     unique: true,
     required: true,
   },
-  heldItems: {
+  held_items: {
     type: \\"Array\\",
     required: true,
   },
@@ -5020,11 +5020,11 @@ const Pokemon = new Schema({
     unique: true,
     required: true,
   },
-  isDefault: {
+  is_default: {
     type: \\"Boolean\\",
     required: true,
   },
-  locationAreaEncounters: {
+  location_area_encounters: {
     type: \\"String\\",
     unique: true,
     required: true,
@@ -5069,7 +5069,7 @@ const Abilities = new Schema({
     type: \\"ability\\",
     required: true,
   },
-  isHidden: {
+  is_hidden: {
     type: \\"Boolean\\",
     required: true,
   },
@@ -5090,7 +5090,7 @@ const Forms = new Schema({
     required: true,
   }});
 const GameIndices = new Schema({
-  gameIndex: {
+  game_index: {
     type: \\"Number\\",
     required: true,
   },
@@ -5103,7 +5103,7 @@ const Moves = new Schema({
     type: \\"move\\",
     required: true,
   },
-  versionGroupDetails: {
+  version_group_details: {
     type: \\"version_group_details\\",
     required: true,
   }});
@@ -5119,39 +5119,39 @@ const Species = new Schema({
     required: true,
   }});
 const Sprites = new Schema({
-  backDefault: {
+  back_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backFemale: {
+  back_female: {
     type: \\"Null\\",
     required: true,
   },
-  backShiny: {
+  back_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backShinyFemale: {
+  back_shiny_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontFemale: {
+  front_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShinyFemale: {
+  front_shiny_female: {
     type: \\"Null\\",
     required: true,
   },
@@ -5164,7 +5164,7 @@ const Sprites = new Schema({
     required: true,
   }});
 const Stats = new Schema({
-  baseStat: {
+  base_stat: {
     type: \\"Number\\",
     unique: true,
     required: true,
@@ -5221,15 +5221,15 @@ const Move = new Schema({
     required: true,
   }});
 const VersionGroupDetails = new Schema({
-  levelLearnedAt: {
+  level_learned_at: {
     type: \\"Number\\",
     required: true,
   },
-  moveLearnMethod: {
+  move_learn_method: {
     type: \\"move_learn_method\\",
     required: true,
   },
-  versionGroup: {
+  version_group: {
     type: \\"version_group\\",
     required: true,
   }});
@@ -5254,65 +5254,65 @@ const VersionGroup = new Schema({
     required: true,
   }});
 const Other = new Schema({
-  dreamWorld: {
+  dream_world: {
     type: \\"dream_world\\",
     required: true,
   },
-  officialArtwork: {
+  officialartwork: {
     type: \\"official-artwork\\",
     required: true,
   }});
 const Versions = new Schema({
-  generationI: {
+  generationi: {
     type: \\"generation-i\\",
     required: true,
   },
-  generationIi: {
+  generationii: {
     type: \\"generation-ii\\",
     required: true,
   },
-  generationIii: {
+  generationiii: {
     type: \\"generation-iii\\",
     required: true,
   },
-  generationIv: {
+  generationiv: {
     type: \\"generation-iv\\",
     required: true,
   },
-  generationV: {
+  generationv: {
     type: \\"generation-v\\",
     required: true,
   },
-  generationVi: {
+  generationvi: {
     type: \\"generation-vi\\",
     required: true,
   },
-  generationVii: {
+  generationvii: {
     type: \\"generation-vii\\",
     required: true,
   },
-  generationViii: {
+  generationviii: {
     type: \\"generation-viii\\",
     required: true,
   }});
 const DreamWorld = new Schema({
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontFemale: {
+  front_female: {
     type: \\"Null\\",
     required: true,
   }});
 const OfficialArtwork = new Schema({
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   }});
 const GenerationI = new Schema({
-  redBlue: {
+  redblue: {
     type: \\"red-blue\\",
     required: true,
   },
@@ -5338,20 +5338,20 @@ const GenerationIii = new Schema({
     type: \\"emerald\\",
     required: true,
   },
-  fireredLeafgreen: {
+  fireredleafgreen: {
     type: \\"firered-leafgreen\\",
     required: true,
   },
-  rubySapphire: {
+  rubysapphire: {
     type: \\"ruby-sapphire\\",
     required: true,
   }});
 const GenerationIv = new Schema({
-  diamondPearl: {
+  diamondpearl: {
     type: \\"diamond-pearl\\",
     required: true,
   },
-  heartgoldSoulsilver: {
+  heartgoldsoulsilver: {
     type: \\"heartgold-soulsilver\\",
     required: true,
   },
@@ -5360,16 +5360,16 @@ const GenerationIv = new Schema({
     required: true,
   }});
 const GenerationV = new Schema({
-  blackWhite: {
+  blackwhite: {
     type: \\"black-white\\",
     required: true,
   }});
 const GenerationVi = new Schema({
-  omegarubyAlphasapphire: {
+  omegarubyalphasapphire: {
     type: \\"omegaruby-alphasapphire\\",
     required: true,
   },
-  xY: {
+  xy: {
     type: \\"x-y\\",
     required: true,
   }});
@@ -5378,7 +5378,7 @@ const GenerationVii = new Schema({
     type: \\"icons\\",
     required: true,
   },
-  ultraSunUltraMoon: {
+  ultrasunultramoon: {
     type: \\"ultra-sun-ultra-moon\\",
     required: true,
   }});
@@ -5388,271 +5388,271 @@ const GenerationViii = new Schema({
     required: true,
   }});
 const RedBlue = new Schema({
-  backDefault: {
+  back_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backGray: {
+  back_gray: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontGray: {
+  front_gray: {
     type: \\"String\\",
     unique: true,
     required: true,
   }});
 const Yellow = new Schema({
-  backDefault: {
+  back_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backGray: {
+  back_gray: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontGray: {
+  front_gray: {
     type: \\"String\\",
     unique: true,
     required: true,
   }});
 const Crystal = new Schema({
-  backDefault: {
+  back_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backShiny: {
+  back_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   }});
 const Gold = new Schema({
-  backDefault: {
+  back_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backShiny: {
+  back_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   }});
 const Silver = new Schema({
-  backDefault: {
+  back_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backShiny: {
+  back_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   }});
 const Emerald = new Schema({
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   }});
 const FireredLeafgreen = new Schema({
-  backDefault: {
+  back_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backShiny: {
+  back_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   }});
 const RubySapphire = new Schema({
-  backDefault: {
+  back_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backShiny: {
+  back_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   }});
 const DiamondPearl = new Schema({
-  backDefault: {
+  back_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backFemale: {
+  back_female: {
     type: \\"Null\\",
     required: true,
   },
-  backShiny: {
+  back_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backShinyFemale: {
+  back_shiny_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontFemale: {
+  front_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShinyFemale: {
+  front_shiny_female: {
     type: \\"Null\\",
     required: true,
   }});
 const HeartgoldSoulsilver = new Schema({
-  backDefault: {
+  back_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backFemale: {
+  back_female: {
     type: \\"Null\\",
     required: true,
   },
-  backShiny: {
+  back_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backShinyFemale: {
+  back_shiny_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontFemale: {
+  front_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShinyFemale: {
+  front_shiny_female: {
     type: \\"Null\\",
     required: true,
   }});
 const Platinum = new Schema({
-  backDefault: {
+  back_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backFemale: {
+  back_female: {
     type: \\"Null\\",
     required: true,
   },
-  backShiny: {
+  back_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backShinyFemale: {
+  back_shiny_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontFemale: {
+  front_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShinyFemale: {
+  front_shiny_female: {
     type: \\"Null\\",
     required: true,
   }});
@@ -5661,143 +5661,143 @@ const BlackWhite = new Schema({
     type: \\"animated\\",
     required: true,
   },
-  backDefault: {
+  back_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backFemale: {
+  back_female: {
     type: \\"Null\\",
     required: true,
   },
-  backShiny: {
+  back_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backShinyFemale: {
+  back_shiny_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontFemale: {
+  front_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShinyFemale: {
+  front_shiny_female: {
     type: \\"Null\\",
     required: true,
   }});
 const Animated = new Schema({
-  backDefault: {
+  back_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backFemale: {
+  back_female: {
     type: \\"Null\\",
     required: true,
   },
-  backShiny: {
+  back_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  backShinyFemale: {
+  back_shiny_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontFemale: {
+  front_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShinyFemale: {
+  front_shiny_female: {
     type: \\"Null\\",
     required: true,
   }});
 const OmegarubyAlphasapphire = new Schema({
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontFemale: {
+  front_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShinyFemale: {
+  front_shiny_female: {
     type: \\"Null\\",
     required: true,
   }});
 const XY = new Schema({
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontFemale: {
+  front_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShinyFemale: {
+  front_shiny_female: {
     type: \\"Null\\",
     required: true,
   }});
 const Icons = new Schema({
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontFemale: {
+  front_female: {
     type: \\"Null\\",
     required: true,
   }});
 const UltraSunUltraMoon = new Schema({
-  frontDefault: {
+  front_default: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontFemale: {
+  front_female: {
     type: \\"Null\\",
     required: true,
   },
-  frontShiny: {
+  front_shiny: {
     type: \\"String\\",
     unique: true,
     required: true,
   },
-  frontShinyFemale: {
+  front_shiny_female: {
     type: \\"Null\\",
     required: true,
   }});

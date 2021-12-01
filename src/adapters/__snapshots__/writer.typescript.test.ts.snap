@@ -18,10 +18,10 @@ exports[`#typescript can emit interface for people json 1`] = `
   name: string;
   height?: number  | null;
   mass?: number  | null;
-  hairColor: string;
-  skinColor?: string  | null;
-  eyeColor: \\"blue\\" | \\"yellow\\" | \\"red\\" | \\"brown\\" | \\"blue-gray\\" | \\"black\\" | \\"orange\\" | \\"hazel\\";
-  birthYear?: string  | null;
+  hair_color: string;
+  skin_color?: string  | null;
+  eye_color: \\"blue\\" | \\"yellow\\" | \\"red\\" | \\"brown\\" | \\"blue-gray\\" | \\"black\\" | \\"orange\\" | \\"hazel\\";
+  birth_year?: string  | null;
   homeworld: string;
   films: any[];
   species: any[];
@@ -56,8 +56,8 @@ exports[`#typescript can emit interface(s) 1`] = `
 
 exports[`#typescript can emit migration for eventResults json 1`] = `
 "export interface EventResults {
-  links: EventResultsLinks;
-  embedded: EventResultsEmbedded;
+  _links: EventResultsLinks;
+  _embedded: EventResultsEmbedded;
   page: EventResultsPage;
 };
 export interface EventResultsLinks {
@@ -93,8 +93,8 @@ export interface EventResultsEmbeddedEvents {
   dates: EventResultsEmbeddedEventsDates;
   classifications: EventResultsEmbeddedEventsClassifications[];
   promoter: EventResultsEmbeddedEventsPromoter;
-  links: EventResultsEmbeddedEventsLinks;
-  embedded: EventResultsEmbeddedEventsEmbedded;
+  _links: EventResultsEmbeddedEventsLinks;
+  _embedded: EventResultsEmbeddedEventsEmbedded;
 };
 export interface EventResultsEmbeddedEventsImages {
   ratio: string;
@@ -131,14 +131,14 @@ export interface EventResultsEmbeddedEventsEmbedded {
 };
 export interface EventResultsEmbeddedEventsSalesPublic {
   startDateTime: Date;
-  startTbd: boolean;
+  startTBD: boolean;
   endDateTime: Date;
 };
 export interface EventResultsEmbeddedEventsDatesStart {
   localDate: Date;
-  dateTbd: boolean;
-  dateTba: boolean;
-  timeTba: boolean;
+  dateTBD: boolean;
+  dateTBA: boolean;
+  timeTBA: boolean;
   noSpecificTime: boolean;
 };
 export interface EventResultsEmbeddedEventsDatesStatus {
@@ -179,7 +179,7 @@ export interface EventResultsEmbeddedEventsEmbeddedVenues {
   address: EventResultsEmbeddedEventsEmbeddedVenuesAddress;
   location: EventResultsEmbeddedEventsEmbeddedVenuesLocation;
   markets: EventResultsEmbeddedEventsEmbeddedVenuesMarkets[];
-  links: EventResultsEmbeddedEventsEmbeddedVenuesLinks;
+  _links: EventResultsEmbeddedEventsEmbeddedVenuesLinks;
 };
 export interface EventResultsEmbeddedEventsEmbeddedAttractions {
   name: string;
@@ -189,7 +189,7 @@ export interface EventResultsEmbeddedEventsEmbeddedAttractions {
   locale: string;
   images: EventResultsEmbeddedEventsEmbeddedAttractionsImages[];
   classifications: EventResultsEmbeddedEventsEmbeddedAttractionsClassifications[];
-  links: EventResultsEmbeddedEventsEmbeddedAttractionsLinks;
+  _links: EventResultsEmbeddedEventsEmbeddedAttractionsLinks;
 };
 export interface EventResultsEmbeddedEventsEmbeddedVenuesCity {
   name: string;
@@ -254,8 +254,8 @@ export interface EventResultsEmbeddedEventsEmbeddedAttractionsLinksSelf {
 
 exports[`#typescript can emit migration for eventResults json, w/ dense & trim fields 1`] = `
 "export interface EventResults {
-  links: Links;
-  embedded: Embedded;
+  _links: Links;
+  _embedded: Embedded;
   page: Page;
 };
 export interface Links {
@@ -290,8 +290,8 @@ export interface Events {
   dates: Dates;
   classifications: Classifications[];
   promoter: Promoter;
-  links: Links;
-  embedded: Embedded;
+  _links: Links;
+  _embedded: Embedded;
 };
 export interface Images {
   ratio: string;
@@ -319,14 +319,14 @@ export interface Promoter {
 };
 export interface Public {
   startDateTime: Date;
-  startTbd: boolean;
+  startTBD: boolean;
   endDateTime: Date;
 };
 export interface Start {
   localDate: Date;
-  dateTbd: boolean;
-  dateTba: boolean;
-  timeTba: boolean;
+  dateTBD: boolean;
+  dateTBA: boolean;
+  timeTBA: boolean;
   noSpecificTime: boolean;
 };
 export interface Status {
@@ -340,7 +340,7 @@ export interface Attractions {
   locale: string;
   images: Images[];
   classifications: Classifications[];
-  links: Links;
+  _links: Links;
 };
 export interface Venues {
   name: string;
@@ -356,7 +356,7 @@ export interface Venues {
   address: Address;
   location: Location;
   markets: Markets[];
-  links: Links;
+  _links: Links;
 };
 export interface City {
   name: string;
@@ -388,8 +388,8 @@ export interface IdName {
 
 exports[`#typescript can emit migration for eventResults json, w/ dense fields 1`] = `
 "export interface EventResults {
-  links: EventResultsLinks;
-  embedded: EventResultsEmbedded;
+  _links: EventResultsLinks;
+  _embedded: EventResultsEmbedded;
   page: EventResultsPage;
 };
 export interface EventResultsLinks {
@@ -417,8 +417,8 @@ export interface EventResultsEmbeddedEvents {
   dates: EventResultsEmbeddedEventsDates;
   classifications: Classifications[];
   promoter: EventResultsEmbeddedEventsPromoter;
-  links: EventResultsEmbeddedEventsLinks;
-  embedded: EventResultsEmbeddedEventsEmbedded;
+  _links: EventResultsEmbeddedEventsLinks;
+  _embedded: EventResultsEmbeddedEventsEmbedded;
 };
 export interface EventResultsEmbeddedEventsSales {
   public: EventResultsEmbeddedEventsSalesPublic;
@@ -442,14 +442,14 @@ export interface EventResultsEmbeddedEventsEmbedded {
 };
 export interface EventResultsEmbeddedEventsSalesPublic {
   startDateTime: Date;
-  startTbd: boolean;
+  startTBD: boolean;
   endDateTime: Date;
 };
 export interface EventResultsEmbeddedEventsDatesStart {
   localDate: Date;
-  dateTbd: boolean;
-  dateTba: boolean;
-  timeTba: boolean;
+  dateTBD: boolean;
+  dateTBA: boolean;
+  timeTBA: boolean;
   noSpecificTime: boolean;
 };
 export interface EventResultsEmbeddedEventsDatesStatus {
@@ -469,7 +469,7 @@ export interface EventResultsEmbeddedEventsEmbeddedVenues {
   address: EventResultsEmbeddedEventsEmbeddedVenuesAddress;
   location: EventResultsEmbeddedEventsEmbeddedVenuesLocation;
   markets: EventResultsEmbeddedEventsEmbeddedVenuesMarkets[];
-  links: Links;
+  _links: Links;
 };
 export interface EventResultsEmbeddedEventsEmbeddedAttractions {
   name: string;
@@ -479,7 +479,7 @@ export interface EventResultsEmbeddedEventsEmbeddedAttractions {
   locale: string;
   images: Images[];
   classifications: Classifications[];
-  links: Links;
+  _links: Links;
 };
 export interface EventResultsEmbeddedEventsEmbeddedVenuesCity {
   name: string;
@@ -535,14 +535,14 @@ export interface Links {
 exports[`#typescript can emit migration for pokemon json 1`] = `
 "export interface Pokemon {
   abilities: PokemonAbilities[];
-  baseExperience: number;
+  base_experience: number;
   forms: PokemonForms[];
-  gameIndices: PokemonGameIndices[];
+  game_indices: PokemonGameIndices[];
   height: number;
-  heldItems: any[];
+  held_items: any[];
   id: number;
-  isDefault: boolean;
-  locationAreaEncounters: string;
+  is_default: boolean;
+  location_area_encounters: string;
   moves: PokemonMoves[];
   name: string;
   order: number;
@@ -554,7 +554,7 @@ exports[`#typescript can emit migration for pokemon json 1`] = `
 };
 export interface PokemonAbilities {
   ability: PokemonAbilitiesAbility;
-  isHidden: boolean;
+  is_hidden: boolean;
   slot: number;
 };
 export interface PokemonForms {
@@ -562,31 +562,31 @@ export interface PokemonForms {
   url: string;
 };
 export interface PokemonGameIndices {
-  gameIndex: number;
+  game_index: number;
   version: PokemonGameIndicesVersion;
 };
 export interface PokemonMoves {
   move: PokemonMovesMove;
-  versionGroupDetails: PokemonMovesVersionGroupDetails[];
+  version_group_details: PokemonMovesVersionGroupDetails[];
 };
 export interface PokemonSpecies {
   name: string;
   url: string;
 };
 export interface PokemonSprites {
-  backDefault: string;
-  backFemale: string;
-  backShiny: string;
-  backShinyFemale: string;
-  frontDefault: string;
-  frontFemale: string;
-  frontShiny: string;
-  frontShinyFemale: string;
+  back_default: string;
+  back_female: string;
+  back_shiny: string;
+  back_shiny_female: string;
+  front_default: string;
+  front_female: string;
+  front_shiny: string;
+  front_shiny_female: string;
   other: PokemonSpritesOther;
   versions: PokemonSpritesVersions;
 };
 export interface PokemonStats {
-  baseStat: number;
+  base_stat: number;
   effort: number;
   stat: PokemonStatsStat;
 };
@@ -607,9 +607,9 @@ export interface PokemonMovesMove {
   url: string;
 };
 export interface PokemonMovesVersionGroupDetails {
-  levelLearnedAt: number;
-  moveLearnMethod: PokemonMovesVersionGroupDetailsMoveLearnMethod;
-  versionGroup: PokemonMovesVersionGroupDetailsVersionGroup;
+  level_learned_at: number;
+  move_learn_method: PokemonMovesVersionGroupDetailsMoveLearnMethod;
+  version_group: PokemonMovesVersionGroupDetailsVersionGroup;
 };
 export interface PokemonMovesVersionGroupDetailsMoveLearnMethod {
   name: \\"machine\\" | \\"tutor\\" | \\"level-up\\" | \\"egg\\";
@@ -620,28 +620,28 @@ export interface PokemonMovesVersionGroupDetailsVersionGroup {
   url: string;
 };
 export interface PokemonSpritesOther {
-  dreamWorld: PokemonSpritesOtherDreamWorld;
-  officialArtwork: PokemonSpritesOtherOfficialArtwork;
+  dream_world: PokemonSpritesOtherDreamWorld;
+  official-artwork: PokemonSpritesOtherOfficialArtwork;
 };
 export interface PokemonSpritesVersions {
-  generationI: PokemonSpritesVersionsGenerationI;
-  generationIi: PokemonSpritesVersionsGenerationIi;
-  generationIii: PokemonSpritesVersionsGenerationIii;
-  generationIv: PokemonSpritesVersionsGenerationIv;
-  generationV: PokemonSpritesVersionsGenerationV;
-  generationVi: PokemonSpritesVersionsGenerationVi;
-  generationVii: PokemonSpritesVersionsGenerationVii;
-  generationViii: PokemonSpritesVersionsGenerationViii;
+  generation-i: PokemonSpritesVersionsGenerationI;
+  generation-ii: PokemonSpritesVersionsGenerationIi;
+  generation-iii: PokemonSpritesVersionsGenerationIii;
+  generation-iv: PokemonSpritesVersionsGenerationIv;
+  generation-v: PokemonSpritesVersionsGenerationV;
+  generation-vi: PokemonSpritesVersionsGenerationVi;
+  generation-vii: PokemonSpritesVersionsGenerationVii;
+  generation-viii: PokemonSpritesVersionsGenerationViii;
 };
 export interface PokemonSpritesOtherDreamWorld {
-  frontDefault: string;
-  frontFemale: string;
+  front_default: string;
+  front_female: string;
 };
 export interface PokemonSpritesOtherOfficialArtwork {
-  frontDefault: string;
+  front_default: string;
 };
 export interface PokemonSpritesVersionsGenerationI {
-  redBlue: PokemonSpritesVersionsGenerationIRedBlue;
+  red-blue: PokemonSpritesVersionsGenerationIRedBlue;
   yellow: PokemonSpritesVersionsGenerationIYellow;
 };
 export interface PokemonSpritesVersionsGenerationIi {
@@ -651,150 +651,150 @@ export interface PokemonSpritesVersionsGenerationIi {
 };
 export interface PokemonSpritesVersionsGenerationIii {
   emerald: PokemonSpritesVersionsGenerationIiiEmerald;
-  fireredLeafgreen: PokemonSpritesVersionsGenerationIiiFireredLeafgreen;
-  rubySapphire: PokemonSpritesVersionsGenerationIiiRubySapphire;
+  firered-leafgreen: PokemonSpritesVersionsGenerationIiiFireredLeafgreen;
+  ruby-sapphire: PokemonSpritesVersionsGenerationIiiRubySapphire;
 };
 export interface PokemonSpritesVersionsGenerationIv {
-  diamondPearl: PokemonSpritesVersionsGenerationIvDiamondPearl;
-  heartgoldSoulsilver: PokemonSpritesVersionsGenerationIvHeartgoldSoulsilver;
+  diamond-pearl: PokemonSpritesVersionsGenerationIvDiamondPearl;
+  heartgold-soulsilver: PokemonSpritesVersionsGenerationIvHeartgoldSoulsilver;
   platinum: PokemonSpritesVersionsGenerationIvPlatinum;
 };
 export interface PokemonSpritesVersionsGenerationV {
-  blackWhite: PokemonSpritesVersionsGenerationVBlackWhite;
+  black-white: PokemonSpritesVersionsGenerationVBlackWhite;
 };
 export interface PokemonSpritesVersionsGenerationVi {
-  omegarubyAlphasapphire: PokemonSpritesVersionsGenerationViOmegarubyAlphasapphire;
-  xY: PokemonSpritesVersionsGenerationViXY;
+  omegaruby-alphasapphire: PokemonSpritesVersionsGenerationViOmegarubyAlphasapphire;
+  x-y: PokemonSpritesVersionsGenerationViXY;
 };
 export interface PokemonSpritesVersionsGenerationVii {
   icons: PokemonSpritesVersionsGenerationViiIcons;
-  ultraSunUltraMoon: PokemonSpritesVersionsGenerationViiUltraSunUltraMoon;
+  ultra-sun-ultra-moon: PokemonSpritesVersionsGenerationViiUltraSunUltraMoon;
 };
 export interface PokemonSpritesVersionsGenerationViii {
   icons: PokemonSpritesVersionsGenerationViiiIcons;
 };
 export interface PokemonSpritesVersionsGenerationIRedBlue {
-  backDefault: string;
-  backGray: string;
-  frontDefault: string;
-  frontGray: string;
+  back_default: string;
+  back_gray: string;
+  front_default: string;
+  front_gray: string;
 };
 export interface PokemonSpritesVersionsGenerationIYellow {
-  backDefault: string;
-  backGray: string;
-  frontDefault: string;
-  frontGray: string;
+  back_default: string;
+  back_gray: string;
+  front_default: string;
+  front_gray: string;
 };
 export interface PokemonSpritesVersionsGenerationIiCrystal {
-  backDefault: string;
-  backShiny: string;
-  frontDefault: string;
-  frontShiny: string;
+  back_default: string;
+  back_shiny: string;
+  front_default: string;
+  front_shiny: string;
 };
 export interface PokemonSpritesVersionsGenerationIiGold {
-  backDefault: string;
-  backShiny: string;
-  frontDefault: string;
-  frontShiny: string;
+  back_default: string;
+  back_shiny: string;
+  front_default: string;
+  front_shiny: string;
 };
 export interface PokemonSpritesVersionsGenerationIiSilver {
-  backDefault: string;
-  backShiny: string;
-  frontDefault: string;
-  frontShiny: string;
+  back_default: string;
+  back_shiny: string;
+  front_default: string;
+  front_shiny: string;
 };
 export interface PokemonSpritesVersionsGenerationIiiEmerald {
-  frontDefault: string;
-  frontShiny: string;
+  front_default: string;
+  front_shiny: string;
 };
 export interface PokemonSpritesVersionsGenerationIiiFireredLeafgreen {
-  backDefault: string;
-  backShiny: string;
-  frontDefault: string;
-  frontShiny: string;
+  back_default: string;
+  back_shiny: string;
+  front_default: string;
+  front_shiny: string;
 };
 export interface PokemonSpritesVersionsGenerationIiiRubySapphire {
-  backDefault: string;
-  backShiny: string;
-  frontDefault: string;
-  frontShiny: string;
+  back_default: string;
+  back_shiny: string;
+  front_default: string;
+  front_shiny: string;
 };
 export interface PokemonSpritesVersionsGenerationIvDiamondPearl {
-  backDefault: string;
-  backFemale: string;
-  backShiny: string;
-  backShinyFemale: string;
-  frontDefault: string;
-  frontFemale: string;
-  frontShiny: string;
-  frontShinyFemale: string;
+  back_default: string;
+  back_female: string;
+  back_shiny: string;
+  back_shiny_female: string;
+  front_default: string;
+  front_female: string;
+  front_shiny: string;
+  front_shiny_female: string;
 };
 export interface PokemonSpritesVersionsGenerationIvHeartgoldSoulsilver {
-  backDefault: string;
-  backFemale: string;
-  backShiny: string;
-  backShinyFemale: string;
-  frontDefault: string;
-  frontFemale: string;
-  frontShiny: string;
-  frontShinyFemale: string;
+  back_default: string;
+  back_female: string;
+  back_shiny: string;
+  back_shiny_female: string;
+  front_default: string;
+  front_female: string;
+  front_shiny: string;
+  front_shiny_female: string;
 };
 export interface PokemonSpritesVersionsGenerationIvPlatinum {
-  backDefault: string;
-  backFemale: string;
-  backShiny: string;
-  backShinyFemale: string;
-  frontDefault: string;
-  frontFemale: string;
-  frontShiny: string;
-  frontShinyFemale: string;
+  back_default: string;
+  back_female: string;
+  back_shiny: string;
+  back_shiny_female: string;
+  front_default: string;
+  front_female: string;
+  front_shiny: string;
+  front_shiny_female: string;
 };
 export interface PokemonSpritesVersionsGenerationVBlackWhite {
   animated: PokemonSpritesVersionsGenerationVBlackWhiteAnimated;
-  backDefault: string;
-  backFemale: string;
-  backShiny: string;
-  backShinyFemale: string;
-  frontDefault: string;
-  frontFemale: string;
-  frontShiny: string;
-  frontShinyFemale: string;
+  back_default: string;
+  back_female: string;
+  back_shiny: string;
+  back_shiny_female: string;
+  front_default: string;
+  front_female: string;
+  front_shiny: string;
+  front_shiny_female: string;
 };
 export interface PokemonSpritesVersionsGenerationVBlackWhiteAnimated {
-  backDefault: string;
-  backFemale: string;
-  backShiny: string;
-  backShinyFemale: string;
-  frontDefault: string;
-  frontFemale: string;
-  frontShiny: string;
-  frontShinyFemale: string;
+  back_default: string;
+  back_female: string;
+  back_shiny: string;
+  back_shiny_female: string;
+  front_default: string;
+  front_female: string;
+  front_shiny: string;
+  front_shiny_female: string;
 };
 export interface PokemonSpritesVersionsGenerationViOmegarubyAlphasapphire {
-  frontDefault: string;
-  frontFemale: string;
-  frontShiny: string;
-  frontShinyFemale: string;
+  front_default: string;
+  front_female: string;
+  front_shiny: string;
+  front_shiny_female: string;
 };
 export interface PokemonSpritesVersionsGenerationViXY {
-  frontDefault: string;
-  frontFemale: string;
-  frontShiny: string;
-  frontShinyFemale: string;
+  front_default: string;
+  front_female: string;
+  front_shiny: string;
+  front_shiny_female: string;
 };
 export interface PokemonSpritesVersionsGenerationViiIcons {
-  frontDefault: string;
-  frontFemale: string;
+  front_default: string;
+  front_female: string;
 };
 export interface PokemonSpritesVersionsGenerationViiUltraSunUltraMoon {
-  frontDefault: string;
-  frontFemale: string;
-  frontShiny: string;
-  frontShinyFemale: string;
+  front_default: string;
+  front_female: string;
+  front_shiny: string;
+  front_shiny_female: string;
 };
 export interface PokemonSpritesVersionsGenerationViiiIcons {
-  frontDefault: string;
-  frontFemale: string;
+  front_default: string;
+  front_female: string;
 };
 export interface PokemonStatsStat {
   name: string;
@@ -810,14 +810,14 @@ export interface PokemonTypesType {
 exports[`#typescript can emit migration for pokemon json, w/ dense & trim fields 1`] = `
 "export interface Pokemon {
   abilities: Abilities[];
-  baseExperience: number;
+  base_experience: number;
   forms: Forms[];
-  gameIndices: GameIndices[];
+  game_indices: GameIndices[];
   height: number;
-  heldItems: any[];
+  held_items: any[];
   id: number;
-  isDefault: boolean;
-  locationAreaEncounters: string;
+  is_default: boolean;
+  location_area_encounters: string;
   moves: Moves[];
   name: string;
   order: number;
@@ -829,31 +829,31 @@ exports[`#typescript can emit migration for pokemon json, w/ dense & trim fields
 };
 export interface Abilities {
   ability: NameUrl;
-  isHidden: boolean;
+  is_hidden: boolean;
   slot: number;
 };
 export interface GameIndices {
-  gameIndex: number;
+  game_index: number;
   version: NameUrl;
 };
 export interface Moves {
   move: NameUrl;
-  versionGroupDetails: VersionGroupDetails[];
+  version_group_details: VersionGroupDetails[];
 };
 export interface Sprites {
-  backDefault: string;
-  backFemale: string;
-  backShiny: string;
-  backShinyFemale: string;
-  frontDefault: string;
-  frontFemale: string;
-  frontShiny: string;
-  frontShinyFemale: string;
+  back_default: string;
+  back_female: string;
+  back_shiny: string;
+  back_shiny_female: string;
+  front_default: string;
+  front_female: string;
+  front_shiny: string;
+  front_shiny_female: string;
   other: Other;
   versions: Versions;
 };
 export interface Stats {
-  baseStat: number;
+  base_stat: number;
   effort: number;
   stat: NameUrl;
 };
@@ -862,29 +862,29 @@ export interface Types {
   type: NameUrl;
 };
 export interface VersionGroupDetails {
-  levelLearnedAt: number;
-  moveLearnMethod: NameUrl;
-  versionGroup: NameUrl;
+  level_learned_at: number;
+  move_learn_method: NameUrl;
+  version_group: NameUrl;
 };
 export interface Other {
-  dreamWorld: FrontDefaultFrontFemale;
-  officialArtwork: OfficialArtwork;
+  dream_world: FrontDefaultFrontFemale;
+  official-artwork: OfficialArtwork;
 };
 export interface Versions {
-  generationI: GenerationI;
-  generationIi: GenerationIi;
-  generationIii: GenerationIii;
-  generationIv: GenerationIv;
-  generationV: GenerationV;
-  generationVi: GenerationVi;
-  generationVii: GenerationVii;
-  generationViii: GenerationViii;
+  generation-i: GenerationI;
+  generation-ii: GenerationIi;
+  generation-iii: GenerationIii;
+  generation-iv: GenerationIv;
+  generation-v: GenerationV;
+  generation-vi: GenerationVi;
+  generation-vii: GenerationVii;
+  generation-viii: GenerationViii;
 };
 export interface OfficialArtwork {
-  frontDefault: string;
+  front_default: string;
 };
 export interface GenerationI {
-  redBlue: RedBlueYellow;
+  red-blue: RedBlueYellow;
   yellow: RedBlueYellow;
 };
 export interface GenerationIi {
@@ -894,102 +894,102 @@ export interface GenerationIi {
 };
 export interface GenerationIii {
   emerald: Emerald;
-  fireredLeafgreen: FireredLeafgreen;
-  rubySapphire: RubySapphire;
+  firered-leafgreen: FireredLeafgreen;
+  ruby-sapphire: RubySapphire;
 };
 export interface GenerationIv {
-  diamondPearl: AnimatedDiamondPearlHeartgoldSoulsilverPlatinum;
-  heartgoldSoulsilver: AnimatedDiamondPearlHeartgoldSoulsilverPlatinum;
+  diamond-pearl: AnimatedDiamondPearlHeartgoldSoulsilverPlatinum;
+  heartgold-soulsilver: AnimatedDiamondPearlHeartgoldSoulsilverPlatinum;
   platinum: AnimatedDiamondPearlHeartgoldSoulsilverPlatinum;
 };
 export interface GenerationV {
-  blackWhite: BlackWhite;
+  black-white: BlackWhite;
 };
 export interface GenerationVi {
-  omegarubyAlphasapphire: OmegarubyAlphasapphireUltraSunUltraMoonXY;
-  xY: OmegarubyAlphasapphireUltraSunUltraMoonXY;
+  omegaruby-alphasapphire: OmegarubyAlphasapphireUltraSunUltraMoonXY;
+  x-y: OmegarubyAlphasapphireUltraSunUltraMoonXY;
 };
 export interface GenerationVii {
   icons: FrontDefaultFrontFemale;
-  ultraSunUltraMoon: OmegarubyAlphasapphireUltraSunUltraMoonXY;
+  ultra-sun-ultra-moon: OmegarubyAlphasapphireUltraSunUltraMoonXY;
 };
 export interface GenerationViii {
   icons: FrontDefaultFrontFemale;
 };
 export interface Crystal {
-  backDefault: string;
-  backShiny: string;
-  frontDefault: string;
-  frontShiny: string;
+  back_default: string;
+  back_shiny: string;
+  front_default: string;
+  front_shiny: string;
 };
 export interface Gold {
-  backDefault: string;
-  backShiny: string;
-  frontDefault: string;
-  frontShiny: string;
+  back_default: string;
+  back_shiny: string;
+  front_default: string;
+  front_shiny: string;
 };
 export interface Silver {
-  backDefault: string;
-  backShiny: string;
-  frontDefault: string;
-  frontShiny: string;
+  back_default: string;
+  back_shiny: string;
+  front_default: string;
+  front_shiny: string;
 };
 export interface Emerald {
-  frontDefault: string;
-  frontShiny: string;
+  front_default: string;
+  front_shiny: string;
 };
 export interface FireredLeafgreen {
-  backDefault: string;
-  backShiny: string;
-  frontDefault: string;
-  frontShiny: string;
+  back_default: string;
+  back_shiny: string;
+  front_default: string;
+  front_shiny: string;
 };
 export interface RubySapphire {
-  backDefault: string;
-  backShiny: string;
-  frontDefault: string;
-  frontShiny: string;
+  back_default: string;
+  back_shiny: string;
+  front_default: string;
+  front_shiny: string;
 };
 export interface BlackWhite {
   animated: AnimatedDiamondPearlHeartgoldSoulsilverPlatinum;
-  backDefault: string;
-  backFemale: string;
-  backShiny: string;
-  backShinyFemale: string;
-  frontDefault: string;
-  frontFemale: string;
-  frontShiny: string;
-  frontShinyFemale: string;
+  back_default: string;
+  back_female: string;
+  back_shiny: string;
+  back_shiny_female: string;
+  front_default: string;
+  front_female: string;
+  front_shiny: string;
+  front_shiny_female: string;
 };
 export interface NameUrl {
   name: string;
   url: string;
 };
 export interface FrontDefaultFrontFemale {
-  frontDefault: string;
-  frontFemale: string;
+  front_default: string;
+  front_female: string;
 };
 export interface RedBlueYellow {
-  backDefault: string;
-  backGray: string;
-  frontDefault: string;
-  frontGray: string;
+  back_default: string;
+  back_gray: string;
+  front_default: string;
+  front_gray: string;
 };
 export interface AnimatedDiamondPearlHeartgoldSoulsilverPlatinum {
-  backDefault: string;
-  backFemale: string;
-  backShiny: string;
-  backShinyFemale: string;
-  frontDefault: string;
-  frontFemale: string;
-  frontShiny: string;
-  frontShinyFemale: string;
+  back_default: string;
+  back_female: string;
+  back_shiny: string;
+  back_shiny_female: string;
+  front_default: string;
+  front_female: string;
+  front_shiny: string;
+  front_shiny_female: string;
 };
 export interface OmegarubyAlphasapphireUltraSunUltraMoonXY {
-  frontDefault: string;
-  frontFemale: string;
-  frontShiny: string;
-  frontShinyFemale: string;
+  front_default: string;
+  front_female: string;
+  front_shiny: string;
+  front_shiny_female: string;
 };
 "
 `;
@@ -997,14 +997,14 @@ export interface OmegarubyAlphasapphireUltraSunUltraMoonXY {
 exports[`#typescript can emit migration for pokemon json, w/ dense fields 1`] = `
 "export interface Pokemon {
   abilities: PokemonAbilities[];
-  baseExperience: number;
+  base_experience: number;
   forms: PokemonForms[];
-  gameIndices: PokemonGameIndices[];
+  game_indices: PokemonGameIndices[];
   height: number;
-  heldItems: any[];
+  held_items: any[];
   id: number;
-  isDefault: boolean;
-  locationAreaEncounters: string;
+  is_default: boolean;
+  location_area_encounters: string;
   moves: PokemonMoves[];
   name: string;
   order: number;
@@ -1016,31 +1016,31 @@ exports[`#typescript can emit migration for pokemon json, w/ dense fields 1`] = 
 };
 export interface PokemonAbilities {
   ability: NameUrl;
-  isHidden: boolean;
+  is_hidden: boolean;
   slot: number;
 };
 export interface PokemonGameIndices {
-  gameIndex: number;
+  game_index: number;
   version: NameUrl;
 };
 export interface PokemonMoves {
   move: NameUrl;
-  versionGroupDetails: PokemonMovesVersionGroupDetails[];
+  version_group_details: PokemonMovesVersionGroupDetails[];
 };
 export interface PokemonSprites {
-  backDefault: string;
-  backFemale: string;
-  backShiny: string;
-  backShinyFemale: string;
-  frontDefault: string;
-  frontFemale: string;
-  frontShiny: string;
-  frontShinyFemale: string;
+  back_default: string;
+  back_female: string;
+  back_shiny: string;
+  back_shiny_female: string;
+  front_default: string;
+  front_female: string;
+  front_shiny: string;
+  front_shiny_female: string;
   other: PokemonSpritesOther;
   versions: PokemonSpritesVersions;
 };
 export interface PokemonStats {
-  baseStat: number;
+  base_stat: number;
   effort: number;
   stat: NameUrl;
 };
@@ -1049,29 +1049,29 @@ export interface PokemonTypes {
   type: NameUrl;
 };
 export interface PokemonMovesVersionGroupDetails {
-  levelLearnedAt: number;
-  moveLearnMethod: NameUrl;
-  versionGroup: NameUrl;
+  level_learned_at: number;
+  move_learn_method: NameUrl;
+  version_group: NameUrl;
 };
 export interface PokemonSpritesOther {
-  dreamWorld: FrontDefaultFrontFemale;
-  officialArtwork: PokemonSpritesOtherOfficialArtwork;
+  dream_world: FrontDefaultFrontFemale;
+  official-artwork: PokemonSpritesOtherOfficialArtwork;
 };
 export interface PokemonSpritesVersions {
-  generationI: PokemonSpritesVersionsGenerationI;
-  generationIi: PokemonSpritesVersionsGenerationIi;
-  generationIii: PokemonSpritesVersionsGenerationIii;
-  generationIv: PokemonSpritesVersionsGenerationIv;
-  generationV: PokemonSpritesVersionsGenerationV;
-  generationVi: PokemonSpritesVersionsGenerationVi;
-  generationVii: PokemonSpritesVersionsGenerationVii;
-  generationViii: PokemonSpritesVersionsGenerationViii;
+  generation-i: PokemonSpritesVersionsGenerationI;
+  generation-ii: PokemonSpritesVersionsGenerationIi;
+  generation-iii: PokemonSpritesVersionsGenerationIii;
+  generation-iv: PokemonSpritesVersionsGenerationIv;
+  generation-v: PokemonSpritesVersionsGenerationV;
+  generation-vi: PokemonSpritesVersionsGenerationVi;
+  generation-vii: PokemonSpritesVersionsGenerationVii;
+  generation-viii: PokemonSpritesVersionsGenerationViii;
 };
 export interface PokemonSpritesOtherOfficialArtwork {
-  frontDefault: string;
+  front_default: string;
 };
 export interface PokemonSpritesVersionsGenerationI {
-  redBlue: RedBlueYellow;
+  red-blue: RedBlueYellow;
   yellow: RedBlueYellow;
 };
 export interface PokemonSpritesVersionsGenerationIi {
@@ -1081,132 +1081,132 @@ export interface PokemonSpritesVersionsGenerationIi {
 };
 export interface PokemonSpritesVersionsGenerationIii {
   emerald: PokemonSpritesVersionsGenerationIiiEmerald;
-  fireredLeafgreen: PokemonSpritesVersionsGenerationIiiFireredLeafgreen;
-  rubySapphire: PokemonSpritesVersionsGenerationIiiRubySapphire;
+  firered-leafgreen: PokemonSpritesVersionsGenerationIiiFireredLeafgreen;
+  ruby-sapphire: PokemonSpritesVersionsGenerationIiiRubySapphire;
 };
 export interface PokemonSpritesVersionsGenerationIv {
-  diamondPearl: PokemonSpritesVersionsGenerationIvDiamondPearl;
-  heartgoldSoulsilver: PokemonSpritesVersionsGenerationIvHeartgoldSoulsilver;
+  diamond-pearl: PokemonSpritesVersionsGenerationIvDiamondPearl;
+  heartgold-soulsilver: PokemonSpritesVersionsGenerationIvHeartgoldSoulsilver;
   platinum: PokemonSpritesVersionsGenerationIvPlatinum;
 };
 export interface PokemonSpritesVersionsGenerationV {
-  blackWhite: PokemonSpritesVersionsGenerationVBlackWhite;
+  black-white: PokemonSpritesVersionsGenerationVBlackWhite;
 };
 export interface PokemonSpritesVersionsGenerationVi {
-  omegarubyAlphasapphire: GenerationViiOmegarubyAlphasapphireUltraSunUltraMoonXY;
-  xY: GenerationViiOmegarubyAlphasapphireUltraSunUltraMoonXY;
+  omegaruby-alphasapphire: GenerationViiOmegarubyAlphasapphireUltraSunUltraMoonXY;
+  x-y: GenerationViiOmegarubyAlphasapphireUltraSunUltraMoonXY;
 };
 export interface PokemonSpritesVersionsGenerationVii {
   icons: FrontDefaultFrontFemale;
-  ultraSunUltraMoon: GenerationViiOmegarubyAlphasapphireUltraSunUltraMoonXY;
+  ultra-sun-ultra-moon: GenerationViiOmegarubyAlphasapphireUltraSunUltraMoonXY;
 };
 export interface PokemonSpritesVersionsGenerationViii {
   icons: FrontDefaultFrontFemale;
 };
 export interface PokemonSpritesVersionsGenerationIiCrystal {
-  backDefault: string;
-  backShiny: string;
-  frontDefault: string;
-  frontShiny: string;
+  back_default: string;
+  back_shiny: string;
+  front_default: string;
+  front_shiny: string;
 };
 export interface PokemonSpritesVersionsGenerationIiGold {
-  backDefault: string;
-  backShiny: string;
-  frontDefault: string;
-  frontShiny: string;
+  back_default: string;
+  back_shiny: string;
+  front_default: string;
+  front_shiny: string;
 };
 export interface PokemonSpritesVersionsGenerationIiSilver {
-  backDefault: string;
-  backShiny: string;
-  frontDefault: string;
-  frontShiny: string;
+  back_default: string;
+  back_shiny: string;
+  front_default: string;
+  front_shiny: string;
 };
 export interface PokemonSpritesVersionsGenerationIiiEmerald {
-  frontDefault: string;
-  frontShiny: string;
+  front_default: string;
+  front_shiny: string;
 };
 export interface PokemonSpritesVersionsGenerationIiiFireredLeafgreen {
-  backDefault: string;
-  backShiny: string;
-  frontDefault: string;
-  frontShiny: string;
+  back_default: string;
+  back_shiny: string;
+  front_default: string;
+  front_shiny: string;
 };
 export interface PokemonSpritesVersionsGenerationIiiRubySapphire {
-  backDefault: string;
-  backShiny: string;
-  frontDefault: string;
-  frontShiny: string;
+  back_default: string;
+  back_shiny: string;
+  front_default: string;
+  front_shiny: string;
 };
 export interface PokemonSpritesVersionsGenerationIvDiamondPearl {
-  backDefault: string;
-  backFemale: string;
-  backShiny: string;
-  backShinyFemale: string;
-  frontDefault: string;
-  frontFemale: string;
-  frontShiny: string;
-  frontShinyFemale: string;
+  back_default: string;
+  back_female: string;
+  back_shiny: string;
+  back_shiny_female: string;
+  front_default: string;
+  front_female: string;
+  front_shiny: string;
+  front_shiny_female: string;
 };
 export interface PokemonSpritesVersionsGenerationIvHeartgoldSoulsilver {
-  backDefault: string;
-  backFemale: string;
-  backShiny: string;
-  backShinyFemale: string;
-  frontDefault: string;
-  frontFemale: string;
-  frontShiny: string;
-  frontShinyFemale: string;
+  back_default: string;
+  back_female: string;
+  back_shiny: string;
+  back_shiny_female: string;
+  front_default: string;
+  front_female: string;
+  front_shiny: string;
+  front_shiny_female: string;
 };
 export interface PokemonSpritesVersionsGenerationIvPlatinum {
-  backDefault: string;
-  backFemale: string;
-  backShiny: string;
-  backShinyFemale: string;
-  frontDefault: string;
-  frontFemale: string;
-  frontShiny: string;
-  frontShinyFemale: string;
+  back_default: string;
+  back_female: string;
+  back_shiny: string;
+  back_shiny_female: string;
+  front_default: string;
+  front_female: string;
+  front_shiny: string;
+  front_shiny_female: string;
 };
 export interface PokemonSpritesVersionsGenerationVBlackWhite {
   animated: PokemonSpritesVersionsGenerationVBlackWhiteAnimated;
-  backDefault: string;
-  backFemale: string;
-  backShiny: string;
-  backShinyFemale: string;
-  frontDefault: string;
-  frontFemale: string;
-  frontShiny: string;
-  frontShinyFemale: string;
+  back_default: string;
+  back_female: string;
+  back_shiny: string;
+  back_shiny_female: string;
+  front_default: string;
+  front_female: string;
+  front_shiny: string;
+  front_shiny_female: string;
 };
 export interface PokemonSpritesVersionsGenerationVBlackWhiteAnimated {
-  backDefault: string;
-  backFemale: string;
-  backShiny: string;
-  backShinyFemale: string;
-  frontDefault: string;
-  frontFemale: string;
-  frontShiny: string;
-  frontShinyFemale: string;
+  back_default: string;
+  back_female: string;
+  back_shiny: string;
+  back_shiny_female: string;
+  front_default: string;
+  front_female: string;
+  front_shiny: string;
+  front_shiny_female: string;
 };
 export interface NameUrl {
   name: string;
   url: string;
 };
 export interface FrontDefaultFrontFemale {
-  frontDefault: string;
-  frontFemale: string;
+  front_default: string;
+  front_female: string;
 };
 export interface RedBlueYellow {
-  backDefault: string;
-  backGray: string;
-  frontDefault: string;
-  frontGray: string;
+  back_default: string;
+  back_gray: string;
+  front_default: string;
+  front_gray: string;
 };
 export interface GenerationViiOmegarubyAlphasapphireUltraSunUltraMoonXY {
-  frontDefault: string;
-  frontFemale: string;
-  frontShiny: string;
-  frontShinyFemale: string;
+  front_default: string;
+  front_female: string;
+  front_shiny: string;
+  front_shiny_female: string;
 };
 "
 `;

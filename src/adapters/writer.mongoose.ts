@@ -1,4 +1,5 @@
 import camelCase from 'lodash/camelCase';
+import snakeCase from 'lodash/snakeCase';
 import {
   CombinedFieldInfo,
   NumericFieldInfo,
@@ -9,20 +10,36 @@ import { properCase, removeBlankLines } from 'helpers';
 import { KeyValPair } from 'types';
 import type { IDataAnalyzerWriter } from './writers';
 
-const writer: IDataAnalyzerWriter = {
-  render(results) {
+interface IRenderOptions {
+  nameTransformer: 'default' | 'camelCase' | 'snakeCase';
+}
+
+const illegalVariableChar = /[^a-zA-Z0-9$_]*/gm;
+function removeIllegalVariableChar(name: string): string {
+  return name.replace(illegalVariableChar, '');
+}
+
+const writer: IDataAnalyzerWriter<IRenderOptions> = {
+  render(results, { nameTransformer = 'default' } = { nameTransformer: 'default' }) {
     const { options } = results;
     const typeSummary = results.flatTypeSummary;
     const hasNestedTypes =
       typeSummary.nestedTypes && Object.keys(typeSummary.nestedTypes!).length > 0;
-    // const { fields } = typeSummary;
+
+    const fieldNameTransformer =
+      nameTransformer === 'default'
+        ? removeIllegalVariableChar
+        : nameTransformer === 'camelCase'
+        ? camelCase
+        : snakeCase;
+
     const getSchema = (schemaName: string, fields: KeyValPair<CombinedFieldInfo>) => {
       return (
         `const ${properCase(schemaName)} = new Schema({\n` +
         Object.entries(fields)
           .map(([fieldName, fieldInfo]) => {
             if (fieldInfo == null) return `// null field info !!!`;
-            return `  ${camelCase(fieldName)}: {
+            return `  ${fieldNameTransformer(fieldName)}: {
     type: "${fieldInfo.typeRef || fieldInfo.type.replace('BigNumber', 'Decimal128')}",
     ${fieldInfo.unique ? 'unique: true,' : ''}
     ${fieldInfo.nullable ? '' : 'required: true,'}
