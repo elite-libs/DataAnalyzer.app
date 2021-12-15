@@ -1,4 +1,5 @@
 import camelCase from 'lodash/camelCase';
+import snakeCase from 'lodash/snakeCase';
 import { properCase, removeBlankLines } from 'helpers';
 import { IDataAnalyzerWriter } from './writers';
 import { CombinedFieldInfo, KeyValPair, TypeNameString } from 'types';
@@ -38,19 +39,29 @@ const getTSTypeExpression = (fieldInfo: CombinedFieldInfo, schemaName: string) =
   return `${tsType} ${fieldInfo.nullable ? ' | null' : ''}`;
 };
 
-const typescriptWriter: IDataAnalyzerWriter = {
-  render(results) {
+interface IRenderOptions {
+  nameTransformer: 'default' | 'camelCase' | 'snakeCase';
+}
+
+const typescriptWriter: IDataAnalyzerWriter<IRenderOptions> = {
+  render(results, { nameTransformer = 'default' } = { nameTransformer: 'default' }) {
     const { options } = results;
     const typeSummary = results.flatTypeSummary;
     const hasNestedTypes =
       typeSummary.nestedTypes && Object.keys(typeSummary.nestedTypes!).length > 0;
 
+    const fieldNameTransformer =
+      nameTransformer === 'default'
+        ? (name: string) => name
+        : nameTransformer === 'camelCase'
+        ? camelCase
+        : snakeCase;
     const getFields = (schemaName: string, fields: KeyValPair<CombinedFieldInfo>) => {
       return (
         `export interface ${properCase(schemaName)} {\n` +
         Object.entries(fields)
           .map(([fieldName, fieldInfo]) => {
-            return `  ${camelCase(fieldName)}${
+            return `  ${fieldNameTransformer(fieldName)}${
               fieldInfo.nullable ? '?' : ''
             }: ${getTSTypeExpression(fieldInfo, schemaName).trim()};`;
           })

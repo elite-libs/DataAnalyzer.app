@@ -1,4 +1,5 @@
 import camelCase from 'lodash/camelCase';
+import snakeCase from 'lodash/snakeCase';
 import trim from 'lodash/trim';
 import {
   CombinedFieldInfo,
@@ -10,6 +11,11 @@ import {
 import { properCase, removeBlankLines } from 'helpers';
 import { KeyValPair } from 'types';
 import type { IDataAnalyzerWriter } from './writers';
+
+interface IRenderOptions {
+  minRowsForTypeConstraints: number;
+  nameTransformer: 'default' | 'camelCase' | 'snakeCase';
+}
 
 const getHeader = () => `import { z } from "zod";\n\n`;
 
@@ -33,15 +39,33 @@ const getZodType = ({ type, ...data }: CombinedFieldInfo) => {
   console.error('failed to map type ', type, data);
   return `any()`;
 };
-const writer: IDataAnalyzerWriter = {
-  render(results, { MIN_ROWS_FOR_TYPE_CONSTRAINTS = 10 } = {}) {
+
+const illegalVariableChar = /[^a-zA-Z0-9$_]*/gm;
+function removeIllegalVariableChar(name: string): string {
+  return name.replace(illegalVariableChar, '');
+}
+
+const writer: IDataAnalyzerWriter<IRenderOptions> = {
+  render(
+    results,
+    { minRowsForTypeConstraints = 10, nameTransformer = 'default' } = {
+      minRowsForTypeConstraints: 10,
+      nameTransformer: 'default',
+    },
+  ) {
     const { options } = results;
 
     const typeSummary = results.flatTypeSummary;
     const hasNestedTypes =
       typeSummary.nestedTypes && Object.keys(typeSummary.nestedTypes!).length > 0;
     // const { fields } = typeSummary;
-    const enableConstraints = results.totalRows >= MIN_ROWS_FOR_TYPE_CONSTRAINTS;
+    const enableConstraints = results.totalRows >= minRowsForTypeConstraints;
+    const fieldNameTransformer =
+      nameTransformer === 'default'
+        ? removeIllegalVariableChar
+        : nameTransformer === 'camelCase'
+        ? camelCase
+        : snakeCase;
 
     const getSchema = (schemaName: string, fields: KeyValPair<CombinedFieldInfo>) => {
       return (
@@ -91,9 +115,11 @@ export const ${properCase(schemaName)}Schema = z.object({\n` +
 
             if (fieldInfo == null) return `// null field info !!!`;
             if (fieldInfo.typeRef)
-              return `  ${camelCase(fieldName)}: z.lazy(() => ${refProperName}Schema)`;
+              return `  ${fieldNameTransformer(
+                fieldName,
+              )}: z.lazy(() => ${refProperName}Schema)`;
 
-            return `  ${camelCase(fieldName)}: z.${getZodType(fieldInfo)}${
+            return `  ${fieldNameTransformer(fieldName)}: z.${getZodType(fieldInfo)}${
               fieldInfo.nullable ? '' : '.required()'
             }${
               enableConstraints && (minValue || minLength)
