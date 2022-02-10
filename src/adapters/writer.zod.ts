@@ -120,7 +120,7 @@ export const ${properCase(schemaName)}Schema = z.object({\n` +
               )}: z.lazy(() => ${refProperName}Schema)`;
 
             return `  ${fieldNameTransformer(fieldName)}: z.${getZodType(fieldInfo)}${
-              fieldInfo.nullable ? '' : '.required()'
+              fieldInfo.nullable ? '.optional()' : ''
             }${
               enableConstraints && (minValue || minLength)
                 ? `.min(${minValue || minLength}${bigNumSuffix})`

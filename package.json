@@ -1,7 +1,7 @@
 {
   "name": "data-analyzer",
   "description": "Generate data-smart code using any JSON/CSV!",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "type": "commonjs",
   "private": false,
   "homepage": "/",
