@@ -191,9 +191,9 @@ const writer: IDataAnalyzerWriter<IRenderOptions> = {
           if (type === 'String')
             return `    table.string("${name}"${sizePart})${appendChain};`;
           if (type === 'Array')
-            return `    table.json("${name}"${sizePart})${appendChain};`;
+            return `    table.jsonb("${name}"${sizePart})${appendChain};`;
           if (type === 'Object')
-            return `    table.json("${name}"${sizePart})${appendChain};`;
+            return `    table.jsonb("${name}"${sizePart})${appendChain};`;
           if (type === 'Null') return `    table.text("${name}")${appendChain};`;
 
           return (
