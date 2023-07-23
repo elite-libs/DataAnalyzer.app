@@ -244,10 +244,15 @@ function _schemaAnalyzer(
         // const nameParts = fullTypeName.split('.');
         // const nameSuffix = nameParts[nameParts.length - 1];
 
-        return _schemaAnalyzer(fullTypeName!, data, options).then((result): [
-          string,
-          TypeSummary<FieldInfo>,
-        ] => [fullTypeName, result]);
+        return _schemaAnalyzer(
+          fullTypeName!,
+          data,
+          { ...options },
+          () => {},
+        ).then((result): [string, TypeSummary<FieldInfo>] => [
+          fullTypeName,
+          result,
+        ]);
       }),
     ).then((resultPairs) => {
       return fromPairs(resultPairs);
